@@ -1,26 +1,253 @@
 @import "tailwindcss";
 
+/* ─────────────────────────────────────────────
+   CROW6 ESPORTS — Design System Tokens
+   Única fuente de verdad para todos los colores.
+   Uso:  bg-brand / text-brand / border-brand
+         bg-surface / bg-surface-raised
+         text-muted / text-subtle
+   ───────────────────────────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Brand palette — extraída del logo */
+  --brand:           #F5B800;   /* Dorado CROW6         */
+  --brand-hover:     #FFD040;   /* Dorado claro (hover) */
+  --brand-dark:      #C99700;   /* Dorado oscuro        */
+  --brand-fg:        #0A0A0A;   /* Texto sobre dorado   */
+
+  /* Fondos */
+  --bg-base:         #0A0A0A;   /* Negro profundo        */
+  --bg-surface:      #141414;   /* Tarjetas / secciones  */
+  --bg-raised:       #1E1E1E;   /* Elementos elevados    */
+  --bg-overlay:      rgba(10, 10, 10, 0.80); /* Navbar backdrop */
+
+  /* Bordes */
+  --border:          rgba(245, 184, 0, 0.15); /* Gold tenue    */
+  --border-strong:   rgba(245, 184, 0, 0.40); /* Gold visible  */
+
+  /* Textos */
+  --text-primary:    #FFFFFF;
+  --text-secondary:  rgba(255, 255, 255, 0.70);
+  --text-muted:      rgba(255, 255, 255, 0.40);
+
+  /* Layout */
+  --navbar-h:        68px;   /* Alto de la navbar — sync con Navbar.tsx */
+  --container:       1280px;
+  --radius:          0.5rem;
 }
 
+/* ─── Tailwind v4: registrar tokens como utilidades ─────────── */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Fuentes — mapeo a las vars inyectadas por next/font/google en layout.tsx */
+  --font-display: var(--font-display); /* Bebas Neue    — hero, h1, números  */
+  --font-ui:      var(--font-ui);      /* Barlow Cond.  — nav, labels, stats */
+  --font-body:    var(--font-body);    /* Barlow        — párrafos, cuerpo   */
+  --font-mono:    var(--font-geist-mono);
+
+  /* Colores brand */
+  --color-brand:          var(--brand);
+  --color-brand-hover:    var(--brand-hover);
+  --color-brand-dark:     var(--brand-dark);
+  --color-brand-fg:       var(--brand-fg);
+
+  /* Colores de fondo */
+  --color-base:           var(--bg-base);
+  --color-surface:        var(--bg-surface);
+  --color-raised:         var(--bg-raised);
+
+  /* Colores de texto */
+  --color-primary:        var(--text-primary);
+  --color-secondary:      var(--text-secondary);
+  --color-muted:          var(--text-muted);
+
+  /* Bordes */
+  --color-border:         var(--border);
+  --color-border-strong:  var(--border-strong);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ─── Reset & base ─────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  /* Barlow como fuente de cuerpo base */
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
 }
+
+/* Aplica Barlow Condensed a todos los elementos de UI */
+nav, header, button, label, th,
+[role="menuitem"], [role="tab"] {
+  font-family: var(--font-ui), system-ui, sans-serif;
+}
+
+/* Aplica Bebas Neue a todos los títulos */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display), sans-serif;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+/* Scrollbar con acento dorado */
+::-webkit-scrollbar        { width: 6px; }
+::-webkit-scrollbar-track  { background: var(--bg-surface); }
+::-webkit-scrollbar-thumb  { background: var(--brand-dark); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--brand); }
+
+/* Selección de texto */
+::selection {
+  background: var(--brand);
+  color: var(--brand-fg);
+}
+
+/* ─── Utilidades globales custom ───────────────────────────── */
+.container-site {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+/* Empuja el contenido bajo la navbar fija */
+.content-offset {
+  padding-top: var(--navbar-h);
+}
+
+/* ─── Componentes de navegación ────────────────────────────── */
+
+/* Link de la navbar — uppercase, font-ui */
+.nav-link {
+  font-family: var(--font-ui), sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+.nav-link:hover { color: var(--text-primary); }
+
+/* CTA outlined (border dorado) */
+.nav-cta {
+  font-family: var(--font-ui), sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--brand);
+  border: 1.5px solid var(--brand);
+  border-radius: 3px;
+  padding: 0.4rem 1.1rem;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.nav-cta:hover { background: var(--brand); color: var(--brand-fg); }
+
+/* Logo / wordmark */
+.nav-brand {
+  text-decoration: none;
+  transition: opacity 0.15s ease;
+}
+.nav-brand:hover { opacity: 0.8; }
+
+/* Links del footer */
+.footer-link {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.15s ease;
+  text-transform: capitalize;
+}
+.footer-link:hover { color: var(--brand); }
+
+/* ─── Botones genéricos ─────────────────────────────────────── */
+.btn-primary {
+  font-family: var(--font-ui), sans-serif;
+  font-weight: 700;
+  font-size: 0.8125rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: var(--brand);
+  color: var(--brand-fg);
+  border-radius: 3px;
+  padding: 0.75rem 2rem;
+  transition: background 0.15s ease;
+}
+.btn-primary:hover { background: var(--brand-hover); }
+
+.btn-outline {
+  font-family: var(--font-ui), sans-serif;
+  font-weight: 700;
+  font-size: 0.8125rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1.5px solid var(--border-strong);
+  color: var(--text-primary);
+  border-radius: 3px;
+  padding: 0.75rem 2rem;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.btn-outline:hover { border-color: var(--brand); background: rgba(245,184,0,0.08); }
+
+/* ─── Tipografía especial ───────────────────────────────────── */
+
+/* Texto con trazo dorado (para "CROW" en el hero) */
+.text-stroke-brand {
+  -webkit-text-stroke: 3px var(--brand);
+  color: transparent;
+  line-height: 0.9;
+}
+
+/* Eyebrow — pequeña etiqueta dorada sobre un título */
+.eyebrow {
+  font-family: var(--font-ui), sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--brand);
+}
+
+/* Etiqueta de sección con línea prefix (— ROSTER OFICIAL) */
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  font-family: var(--font-ui), sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--brand);
+}
+.section-label::before {
+  content: "";
+  display: inline-block;
+  width: 1.75rem;
+  height: 2px;
+  background: var(--brand);
+}
+
+/* ─── Utilidades ────────────────────────────────────────────── */
+.container-site {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+

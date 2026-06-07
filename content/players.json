@@ -1,0 +1,22 @@
+[
+  {
+    "id": "player-1",
+    "name": "Alejandro García",
+    "gamertag": "Cr0wKing",
+    "role": "mid",
+    "photo": "/images/players/cr0wking.jpg",
+    "stats": { "mmr": 2850, "winRate": 63, "kda": 4.2 },
+    "socials": { "twitter": "https://twitter.com/cr0wking", "twitch": "https://twitch.tv/cr0wking" },
+    "isStarter": true
+  },
+  {
+    "id": "player-2",
+    "name": "Carlos Méndez",
+    "gamertag": "NightHawk",
+    "role": "adc",
+    "photo": "/images/players/nighthawk.jpg",
+    "stats": { "mmr": 2720, "winRate": 58, "kda": 3.8 },
+    "socials": { "twitter": "https://twitter.com/nighthawk_gg" },
+    "isStarter": true
+  }
+]

@@ -1,0 +1,19 @@
+[
+  {
+    "id": "prod-1",
+    "slug": "crow6-jersey-2025",
+    "name": "Jersey CROW6 2025",
+    "description": "Jersey oficial de la temporada 2025. Tejido técnico transpirable.",
+    "price": 59.99,
+    "currency": "EUR",
+    "images": ["/images/store/jersey-front.jpg", "/images/store/jersey-back.jpg"],
+    "stock": [
+      { "size": "S", "quantity": 10 },
+      { "size": "M", "quantity": 25 },
+      { "size": "L", "quantity": 18 },
+      { "size": "XL", "quantity": 8 }
+    ],
+    "category": "jersey",
+    "featured": true
+  }
+]
