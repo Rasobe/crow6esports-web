@@ -9,63 +9,65 @@
    ───────────────────────────────────────────── */
 :root {
   /* Brand palette — extraída del logo */
-  --brand:           #F5B800;   /* Dorado CROW6         */
-  --brand-hover:     #FFD040;   /* Dorado claro (hover) */
-  --brand-dark:      #C99700;   /* Dorado oscuro        */
-  --brand-fg:        #0A0A0A;   /* Texto sobre dorado   */
+  --brand: #f5b800; /* Dorado CROW6         */
+  --brand-hover: #ffd040; /* Dorado claro (hover) */
+  --brand-dark: #c99700; /* Dorado oscuro        */
+  --brand-fg: #0a0a0a; /* Texto sobre dorado   */
 
   /* Fondos */
-  --bg-base:         #0A0A0A;   /* Negro profundo        */
-  --bg-surface:      #141414;   /* Tarjetas / secciones  */
-  --bg-raised:       #1E1E1E;   /* Elementos elevados    */
-  --bg-overlay:      rgba(10, 10, 10, 0.80); /* Navbar backdrop */
+  --bg-base: #0a0a0a; /* Negro profundo        */
+  --bg-surface: #141414; /* Tarjetas / secciones  */
+  --bg-raised: #1e1e1e; /* Elementos elevados    */
+  --bg-overlay: rgba(10, 10, 10, 0.8); /* Navbar backdrop */
 
   /* Bordes */
-  --border:          rgba(245, 184, 0, 0.15); /* Gold tenue    */
-  --border-strong:   rgba(245, 184, 0, 0.40); /* Gold visible  */
+  --border: rgba(245, 184, 0, 0.15); /* Gold tenue    */
+  --border-strong: rgba(245, 184, 0, 0.4); /* Gold visible  */
 
   /* Textos */
-  --text-primary:    #FFFFFF;
-  --text-secondary:  rgba(255, 255, 255, 0.70);
-  --text-muted:      rgba(255, 255, 255, 0.40);
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.7);
+  --text-muted: rgba(255, 255, 255, 0.4);
 
   /* Layout */
-  --navbar-h:        68px;   /* Alto de la navbar — sync con Navbar.tsx */
-  --container:       1280px;
-  --radius:          0.5rem;
+  --navbar-h: 68px; /* Alto de la navbar — sync con Navbar.tsx */
+  --container: 1280px;
+  --radius: 0.5rem;
 }
 
 /* ─── Tailwind v4: registrar tokens como utilidades ─────────── */
 @theme inline {
   /* Fuentes — mapeo a las vars inyectadas por next/font/google en layout.tsx */
   --font-display: var(--font-display); /* Bebas Neue    — hero, h1, números  */
-  --font-ui:      var(--font-ui);      /* Barlow Cond.  — nav, labels, stats */
-  --font-body:    var(--font-body);    /* Barlow        — párrafos, cuerpo   */
-  --font-mono:    var(--font-geist-mono);
+  --font-ui: var(--font-ui); /* Barlow Cond.  — nav, labels, stats */
+  --font-body: var(--font-body); /* Barlow        — párrafos, cuerpo   */
+  --font-mono: var(--font-geist-mono);
 
   /* Colores brand */
-  --color-brand:          var(--brand);
-  --color-brand-hover:    var(--brand-hover);
-  --color-brand-dark:     var(--brand-dark);
-  --color-brand-fg:       var(--brand-fg);
+  --color-brand: var(--brand);
+  --color-brand-hover: var(--brand-hover);
+  --color-brand-dark: var(--brand-dark);
+  --color-brand-fg: var(--brand-fg);
 
   /* Colores de fondo */
-  --color-base:           var(--bg-base);
-  --color-surface:        var(--bg-surface);
-  --color-raised:         var(--bg-raised);
+  --color-base: var(--bg-base);
+  --color-surface: var(--bg-surface);
+  --color-raised: var(--bg-raised);
 
   /* Colores de texto */
-  --color-primary:        var(--text-primary);
-  --color-secondary:      var(--text-secondary);
-  --color-muted:          var(--text-muted);
+  --color-primary: var(--text-primary);
+  --color-secondary: var(--text-secondary);
+  --color-muted: var(--text-muted);
 
   /* Bordes */
-  --color-border:         var(--border);
-  --color-border-strong:  var(--border-strong);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
 }
 
 /* ─── Reset & base ─────────────────────────────────────────── */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -88,23 +90,42 @@ body {
 }
 
 /* Aplica Barlow Condensed a todos los elementos de UI */
-nav, header, button, label, th,
-[role="menuitem"], [role="tab"] {
+nav,
+header,
+button,
+label,
+th,
+[role="menuitem"],
+[role="tab"] {
   font-family: var(--font-ui), system-ui, sans-serif;
 }
 
 /* Aplica Bebas Neue a todos los títulos */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-display), sans-serif;
   letter-spacing: 0.04em;
   line-height: 1;
 }
 
 /* Scrollbar con acento dorado */
-::-webkit-scrollbar        { width: 6px; }
-::-webkit-scrollbar-track  { background: var(--bg-surface); }
-::-webkit-scrollbar-thumb  { background: var(--brand-dark); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--brand); }
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-surface);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--brand-dark);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--brand);
+}
 
 /* Selección de texto */
 ::selection {
@@ -130,7 +151,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Link de la navbar — uppercase, font-ui */
 .nav-link {
   font-family: var(--font-ui), sans-serif;
-  font-size: 0.8125rem;
+  font-size: 1.2rem;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -138,7 +159,9 @@ h1, h2, h3, h4, h5, h6 {
   text-decoration: none;
   transition: color 0.15s ease;
 }
-.nav-link:hover { color: var(--text-primary); }
+.nav-link:hover {
+  color: var(--text-primary);
+}
 
 /* CTA outlined (border dorado) */
 .nav-cta {
@@ -152,16 +175,23 @@ h1, h2, h3, h4, h5, h6 {
   border: 1.5px solid var(--brand);
   border-radius: 3px;
   padding: 0.4rem 1.1rem;
-  transition: background 0.15s ease, color 0.15s ease;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
 }
-.nav-cta:hover { background: var(--brand); color: var(--brand-fg); }
+.nav-cta:hover {
+  background: var(--brand);
+  color: var(--brand-fg);
+}
 
 /* Logo / wordmark */
 .nav-brand {
   text-decoration: none;
   transition: opacity 0.15s ease;
 }
-.nav-brand:hover { opacity: 0.8; }
+.nav-brand:hover {
+  opacity: 0.8;
+}
 
 /* Links del footer */
 .footer-link {
@@ -170,7 +200,9 @@ h1, h2, h3, h4, h5, h6 {
   transition: color 0.15s ease;
   text-transform: capitalize;
 }
-.footer-link:hover { color: var(--brand); }
+.footer-link:hover {
+  color: var(--brand);
+}
 
 /* ─── Botones genéricos ─────────────────────────────────────── */
 .btn-primary {
@@ -186,7 +218,9 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0.75rem 2rem;
   transition: background 0.15s ease;
 }
-.btn-primary:hover { background: var(--brand-hover); }
+.btn-primary:hover {
+  background: var(--brand-hover);
+}
 
 .btn-outline {
   font-family: var(--font-ui), sans-serif;
@@ -199,9 +233,14 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--text-primary);
   border-radius: 3px;
   padding: 0.75rem 2rem;
-  transition: border-color 0.15s ease, background 0.15s ease;
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease;
 }
-.btn-outline:hover { border-color: var(--brand); background: rgba(245,184,0,0.08); }
+.btn-outline:hover {
+  border-color: var(--brand);
+  background: rgba(245, 184, 0, 0.08);
+}
 
 /* ─── Tipografía especial ───────────────────────────────────── */
 
@@ -249,5 +288,3 @@ h1, h2, h3, h4, h5, h6 {
   margin-inline: auto;
   padding-inline: 1.5rem;
 }
-
-

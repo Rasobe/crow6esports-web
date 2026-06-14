@@ -1,13 +1,12 @@
 import Link from "next/link";
 import { Bird } from "lucide-react";
-import { siteConfig } from "@config/site";
 
 const NAV_LINKS = [
-  { href: "/team",    label: "Plantilla" },
-  { href: "/news",    label: "Noticias"  },
-  { href: "/store",   label: "Tienda"    },
-  { href: "/tryouts", label: "Tryouts"   },
-  { href: "/about",   label: "Nosotros"  },
+  { href: "/team", label: "Plantilla" },
+  { href: "/news", label: "Noticias" },
+  { href: "/store", label: "Tienda" },
+  { href: "/tryouts", label: "Tryouts" },
+  { href: "/about", label: "Nosotros" },
 ] as const;
 
 export function Navbar() {
