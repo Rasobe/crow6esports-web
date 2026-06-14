@@ -1,12 +1,13 @@
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, getLocale } from "next-intl/server";
 import { LocaleSwitcher } from "./LocaleSwitcher";
 import { MobileMenu } from "./MobileMenu";
 import { NavLinks } from "./NavLinks";
 
 export async function Navbar() {
-  const t = await getTranslations("nav");
+  const locale = await getLocale();
+  const t = await getTranslations({ locale, namespace: "nav" });
 
   const links = [
     { href: "/team", label: t("team") },
@@ -18,7 +19,11 @@ export async function Navbar() {
   return (
     <header className="navbar">
       <nav className="navbar__inner">
-        <Link href="/" className="navbar__brand" aria-label="Crow 6 Esports — Inicio">
+        <Link
+          href="/"
+          className="navbar__brand"
+          aria-label="Crow 6 Esports — Inicio"
+        >
           <Image
             src="/images/brand/crow6-wordmark.svg"
             alt="Crow 6 Esports"

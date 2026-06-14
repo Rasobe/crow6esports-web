@@ -11,7 +11,7 @@ interface NavLinksProps {
 
 export function NavLinks({ links }: NavLinksProps) {
   return (
-    <ul className="navbar__links" role="list">
+    <ul className="navbar__links">
       {links.map(({ href, label }) => (
         <li key={href}>
           <Link href={href} className="navbar__link">

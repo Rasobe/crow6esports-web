@@ -17,7 +17,7 @@ interface MobileMenuProps {
 export function MobileMenu({ links, joinLabel }: MobileMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
-  const menuRef = useRef<HTMLDivElement>(null);
+  const menuRef = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
     setIsOpen(false);
@@ -62,12 +62,10 @@ export function MobileMenu({ links, joinLabel }: MobileMenuProps) {
         />
       )}
 
-      <div
+      <dialog
         id="mobile-menu"
         ref={menuRef}
         className={`mobile-menu__drawer ${isOpen ? "mobile-menu__drawer--open" : ""}`}
-        role="dialog"
-        aria-modal="true"
         aria-label="Menú de navegación"
       >
         <nav>
@@ -92,7 +90,7 @@ export function MobileMenu({ links, joinLabel }: MobileMenuProps) {
             {joinLabel}
           </Link>
         </nav>
-      </div>
+      </dialog>
     </>
   );
 }
