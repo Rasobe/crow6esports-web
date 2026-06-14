@@ -1,10 +1,16 @@
+import { NextRequest } from "next/server";
 import createMiddleware from "next-intl/middleware";
 import { routing } from "./src/i18n/routing";
 
-export const proxy = createMiddleware(routing);
+const handleRequest = createMiddleware(routing);
+
+export function proxy(request: NextRequest) {
+  request.headers.set("x-pathname", request.nextUrl.pathname);
+  const response = handleRequest(request);
+  response.headers.set("x-pathname", request.nextUrl.pathname);
+  return response;
+}
 
 export const config = {
-  // Match all pathnames except for
-  // - API routes, trpc, _next, _vercel, and static files
   matcher: String.raw`/((?!api|trpc|_next|_vercel|.*\..*).*)`,
 };

@@ -1,8 +1,7 @@
-// components/layout/LocaleSwitcher.tsx
 "use client";
 
 import { useLocale } from "next-intl";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter, usePathname } from "@/i18n/navigation";
 import { useTransition } from "react";
 
 const LOCALES = [
@@ -18,19 +17,13 @@ export function LocaleSwitcher() {
 
   const switchLocale = (newLocale: string) => {
     if (newLocale === locale) return;
-    // Reemplaza el segmento de locale en la URL actual
-    // /es/team → /en/team
-    const newPath = pathname.replace(`/${locale}`, `/${newLocale}`);
     startTransition(() => {
-      router.push(newPath);
+      router.push(pathname, { locale: newLocale });
     });
   };
 
   return (
-    <fieldset
-      className="locale-switcher"
-      aria-label="Seleccionar idioma"
-    >
+    <fieldset className="locale-switcher" aria-label="Seleccionar idioma">
       {LOCALES.map(({ code, label }, i) => (
         <span key={code} className="locale-switcher__item">
           <button

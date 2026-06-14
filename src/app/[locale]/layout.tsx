@@ -1,4 +1,3 @@
-// src/app/[locale]/layout.tsx
 import type { Metadata } from "next";
 import { Anton_SC, Barlow_Condensed, Barlow } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";

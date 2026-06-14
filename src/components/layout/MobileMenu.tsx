@@ -1,4 +1,3 @@
-// components/layout/MobileMenu.tsx
 "use client";
 
 import { useState, useEffect, useRef } from "react";
@@ -20,12 +19,10 @@ export function MobileMenu({ links, joinLabel }: MobileMenuProps) {
   const pathname = usePathname();
   const menuRef = useRef<HTMLDivElement>(null);
 
-  // Cierra al navegar
   useEffect(() => {
     setIsOpen(false);
   }, [pathname]);
 
-  // Cierra con Escape
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") setIsOpen(false);
@@ -34,7 +31,6 @@ export function MobileMenu({ links, joinLabel }: MobileMenuProps) {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, []);
 
-  // Bloquea scroll cuando está abierto
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "";
     return () => {
@@ -44,7 +40,6 @@ export function MobileMenu({ links, joinLabel }: MobileMenuProps) {
 
   return (
     <>
-      {/* Botón hamburguesa — solo visible en móvil */}
       <button
         className="mobile-menu__trigger md:hidden"
         onClick={() => setIsOpen((prev) => !prev)}
@@ -59,7 +54,6 @@ export function MobileMenu({ links, joinLabel }: MobileMenuProps) {
         )}
       </button>
 
-      {/* Overlay */}
       {isOpen && (
         <div
           className="mobile-menu__overlay"
@@ -68,7 +62,6 @@ export function MobileMenu({ links, joinLabel }: MobileMenuProps) {
         />
       )}
 
-      {/* Drawer */}
       <div
         id="mobile-menu"
         ref={menuRef}
