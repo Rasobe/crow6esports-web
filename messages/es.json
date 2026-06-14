@@ -1,0 +1,88 @@
+{
+  "nav": {
+    "team": "Plantilla",
+    "news": "Noticias",
+    "store": "Tienda",
+    "tryouts": "Tryouts",
+    "join": "Únete"
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "Organización de esports",
+      "tagline": "Domina · Compite · Conquista",
+      "cta_team": "Ver equipo",
+      "cta_join": "Únete al equipo"
+    },
+    "stats": {
+      "wins": "Victorias",
+      "tournaments": "Torneos",
+      "players": "Jugadores",
+      "championships": "Campeonatos"
+    }
+  },
+  "team": {
+    "title": "Plantilla",
+    "eyebrow": "Roster oficial",
+    "roles": {
+      "first": "1st Man",
+      "second": "2nd Man",
+      "third": "3rd Man",
+      "flex": "Flexible"
+    }
+  },
+  "news": {
+    "title": "Noticias",
+    "eyebrow": "Últimas noticias",
+    "read_more": "Leer más"
+  },
+  "store": {
+    "title": "Tienda",
+    "eyebrow": "Merchandise oficial",
+    "sold_out": "Agotado",
+    "add_to_cart": "Añadir al carrito",
+    "size": "Talla"
+  },
+  "tryouts": {
+    "open": {
+      "eyebrow": "Proceso de selección",
+      "title": "Únete a",
+      "desc": "Buscamos jugadores comprometidos con ganas de competir al más alto nivel. El proceso es serio — si no estás dispuesto a trabajar, este no es tu equipo.",
+      "req_1": "Disponibilidad horaria confirmada",
+      "req_2": "Compromiso real con el equipo",
+      "req_3": "Cero toxicidad",
+      "step1_title": "Perfil básico",
+      "step1_sub": "Información personal y de contacto",
+      "step2_title": "Datos técnicos",
+      "step2_sub": "Tu nivel de juego actual en Rocket League",
+      "step3_title": "Mentalidad y equipo",
+      "step3_sub": "Lo más importante para nosotros",
+      "next": "Siguiente",
+      "back": "Atrás",
+      "submit": "Enviar solicitud",
+      "step_of": "Paso {current} de {total}",
+      "success_label": "#GOCROWS",
+      "success_title": "Solicitud enviada",
+      "success_desc": "Revisamos cada candidatura personalmente. Si encajas con lo que buscamos, te contactaremos por Discord en un plazo de 7 días.",
+      "success_note": "Si no recibes respuesta en 7 días, tu candidatura no ha sido seleccionada para esta convocatoria."
+    },
+    "closed": {
+      "label": "Proceso cerrado",
+      "title": "Tryouts cerrados",
+      "desc": "Actualmente no estamos buscando jugadores. Déjanos tu Discord y te avisamos cuando abramos el siguiente proceso.",
+      "notify_placeholder": "Tu usuario de Discord",
+      "notify_btn": "Avísame"
+    }
+  },
+  "coaching": {
+    "eyebrow": "Entrenamiento profesional",
+    "title": "Coaching",
+    "individual": "Individual",
+    "group": "Grupal",
+    "book": "Reservar sesión",
+    "contact": "Contactar"
+  },
+  "footer": {
+    "rights": "Todos los derechos reservados",
+    "founded": "Fundado en 2020 · Huesca, España"
+  }
+}

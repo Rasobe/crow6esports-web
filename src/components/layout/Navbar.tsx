@@ -1,77 +1,51 @@
-import Link from "next/link";
-import { Bird } from "lucide-react";
+import { Link } from "@/i18n/navigation";
+import Image from "next/image";
+import { getTranslations } from "next-intl/server";
 
-const NAV_LINKS = [
-  { href: "/team", label: "Plantilla" },
-  { href: "/news", label: "Noticias" },
-  { href: "/store", label: "Tienda" },
-  { href: "/tryouts", label: "Tryouts" },
-  { href: "/about", label: "Nosotros" },
-] as const;
+import { LocaleSwitcher } from "./LocaleSwitcher";
+import { MobileMenu } from "./MobileMenu";
+import { NavLinks } from "./NavLinks";
 
-export function Navbar() {
+export async function Navbar() {
+  const t = await getTranslations("nav");
+
+  const links = [
+    { href: "/team", label: t("team") },
+    { href: "/news", label: t("news") },
+    { href: "/store", label: t("store") },
+    { href: "/tryouts", label: t("tryouts") },
+  ] as const;
+
   return (
-    <header
-      className="fixed inset-x-0 top-0 z-50"
-      style={{
-        height: "var(--navbar-h)",
-        background: "var(--bg-overlay)",
-        borderBottom: "1px solid var(--border)",
-        backdropFilter: "blur(14px)",
-        WebkitBackdropFilter: "blur(14px)",
-      }}
-    >
-      <nav
-        className="mx-auto flex h-full items-center justify-between px-6"
-        style={{ maxWidth: "var(--container)" }}
-      >
-        {/* Logo */}
-        <Link href="/" className="nav-brand flex items-center gap-2.5">
-          <Bird
-            size={26}
-            strokeWidth={1.5}
-            style={{ color: "var(--brand)", flexShrink: 0 }}
+    <header className="navbar">
+      <nav className="navbar__inner">
+        {/* ── Logo ── */}
+        <Link
+          href="/"
+          className="navbar__brand"
+          aria-label="Crow 6 Esports — Inicio"
+        >
+          <Image
+            src="/images/brand/crow6-wordmark.svg"
+            alt="Crow 6 Esports"
+            width={80}
+            height={28}
+            priority
           />
-          <div className="flex flex-col leading-none">
-            <span
-              style={{
-                fontFamily: "var(--font-display)",
-                fontSize: "1.25rem",
-                letterSpacing: "0.06em",
-                color: "var(--text-primary)",
-              }}
-            >
-              CROW <span style={{ color: "var(--brand)" }}>6</span>
-            </span>
-            <span
-              style={{
-                fontFamily: "var(--font-ui)",
-                fontSize: "0.55rem",
-                letterSpacing: "0.2em",
-                color: "var(--brand)",
-                marginTop: "1px",
-              }}
-            >
-              ESPORTS ORGANIZATION
-            </span>
-          </div>
         </Link>
 
-        {/* Nav links */}
-        <ul className="hidden items-center gap-7 md:flex">
-          {NAV_LINKS.map(({ href, label }) => (
-            <li key={href}>
-              <Link href={href} className="nav-link">
-                {label}
-              </Link>
-            </li>
-          ))}
-        </ul>
+        {/* ── Links desktop ── */}
+        <NavLinks links={links} />
 
-        {/* CTA */}
-        <Link href="/tryouts" className="nav-cta hidden md:inline-flex">
-          Únete
-        </Link>
+        {/* ── Acciones derecha ── */}
+        <div className="navbar__actions">
+          <LocaleSwitcher />
+          <Link href="/tryouts" className="navbar__cta">
+            {t("join")}
+          </Link>
+          {/* Menú móvil — Client Component */}
+          <MobileMenu links={links} joinLabel={t("join")} />
+        </div>
       </nav>
     </header>
   );
