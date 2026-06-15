@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Anton_SC, Barlow_Condensed, Barlow } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
+import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -53,21 +53,17 @@ export default async function LocaleLayout({
     notFound();
   }
 
+  setRequestLocale(locale);
+
   const messages = await getMessages();
 
   return (
-    <html lang={locale}>
-      <body>
-        <NextIntlClientProvider locale={locale} messages={messages}>
-          <Navbar locale={locale} />
-          <div
-            className={`${antonSC.variable} ${barlowCondensed.variable} ${barlow.variable} content-offset flex flex-1 flex-col`}
-          >
-            {children}
-          </div>
-          <Footer />
-        </NextIntlClientProvider>
-      </body>
-    </html>
+    <NextIntlClientProvider locale={locale} messages={messages}>
+      <Navbar />
+      <div className={`${antonSC.variable} ${barlowCondensed.variable} ${barlow.variable} content-offset flex flex-1 flex-col`}>
+        {children}
+      </div>
+      <Footer />
+    </NextIntlClientProvider>
   );
 }
