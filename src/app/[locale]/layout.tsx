@@ -10,7 +10,7 @@ import { Footer, Navbar } from "@/components/layout/_components";
 export const metadata: Metadata = {
   title: {
     default: siteConfig.name,
-    template: `%s — ${siteConfig.name}`,
+    template: `%s`,
   },
   description: siteConfig.description,
   metadataBase: new URL(siteConfig.url),
