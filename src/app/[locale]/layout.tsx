@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
-import { Anton_SC, Barlow_Condensed, Barlow } from "next/font/google";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
-import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
 import { siteConfig } from "@config/site";
 import "../globals.css";
 import { routing } from "@/i18n/routing";
+import { Footer, Navbar } from "@/components/layout/_components";
 
 export const metadata: Metadata = {
   title: {

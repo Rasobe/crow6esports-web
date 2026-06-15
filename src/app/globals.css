@@ -566,6 +566,7 @@ th,
   /* ─────────────────────────────────────────────
      11. COMPONENTS — FOOTER
      ───────────────────────────────────────────── */
+
   .footer-link {
     font-family: var(--font-ui), sans-serif;
     font-size: 0.8125rem;

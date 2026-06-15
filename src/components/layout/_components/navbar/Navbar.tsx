@@ -1,9 +1,7 @@
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
-import { LocaleSwitcher } from "./LocaleSwitcher";
-import { MobileMenu } from "./MobileMenu";
-import { NavLinks } from "./NavLinks";
+import { LocaleSwitcher, MobileMenu, NavLinks } from "./_components";
 
 export async function Navbar() {
   const t = await getTranslations("nav");
