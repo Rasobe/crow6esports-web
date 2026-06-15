@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
 import { Anton_SC, Barlow_Condensed, Barlow } from "next/font/google";
-import { NextIntlClientProvider } from "next-intl";
+import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { siteConfig } from "@config/site";
 import "../globals.css";
-
-const locales = ["es", "en"] as const;
+import { routing } from "@/i18n/routing";
 
 const antonSC = Anton_SC({
   variable: "--font-display",
@@ -49,12 +48,11 @@ export default async function LocaleLayout({
 }) {
   const { locale } = await params;
 
-  if (!locales.includes(locale as (typeof locales)[number])) {
+  if (!hasLocale(routing.locales, locale)) {
     notFound();
   }
 
   setRequestLocale(locale);
-
   const messages = await getMessages();
 
   return (

@@ -1,13 +1,12 @@
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
-import { getLocale, getTranslations } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import { LocaleSwitcher } from "./LocaleSwitcher";
 import { MobileMenu } from "./MobileMenu";
 import { NavLinks } from "./NavLinks";
 
 export async function Navbar() {
-  const locale = await getLocale();
-  const t = await getTranslations({ locale, namespace: "nav" });
+  const t = await getTranslations("nav");
 
   const links = [
     { href: "/team", label: t("team") },
