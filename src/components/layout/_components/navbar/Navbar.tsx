@@ -1,18 +1,16 @@
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
+import { navigationConfig } from "@config/navigation";
 import { LocaleSwitcher, MobileMenu, NavLinks } from "./_components";
 
 export async function Navbar() {
   const t = await getTranslations("nav");
 
-  const links = [
-    { href: "/team", label: t("team") },
-    { href: "/news", label: t("news") },
-    { href: "/store", label: t("store") },
-    { href: "/coaching", label: t("coaching") },
-    { href: "/about-us", label: t("about-us") },
-  ] as const;
+  const links = navigationConfig.mainNav.map((link) => ({
+    href: link.href,
+    label: t(link.labelKey),
+  }));
 
   return (
     <header className="navbar">
