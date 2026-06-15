@@ -8,6 +8,10 @@
     "join": "Join us"
   },
   "home": {
+    "meta": {
+      "title": "Home",
+      "description": "Competitive Rocket League organization."
+    },
     "hero": {
       "eyebrow": "Esports organization",
       "tagline": "Dominate · Compete · Conquer",
@@ -22,7 +26,10 @@
     }
   },
   "team": {
-    "title": "Team",
+     "meta": {
+      "title": "Team",
+      "description": "The official roster of Crow 6 Esports."
+    },
     "eyebrow": "Official roster",
     "roles": {
       "first": "1st Man",
