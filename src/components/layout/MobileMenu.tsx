@@ -17,7 +17,7 @@ interface MobileMenuProps {
 export function MobileMenu({ links, joinLabel }: MobileMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
-  const menuRef = useRef<HTMLDialogElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setIsOpen(false);
@@ -41,7 +41,7 @@ export function MobileMenu({ links, joinLabel }: MobileMenuProps) {
   return (
     <>
       <button
-        className="mobile-menu__trigger md:hidden"
+        className="mobile-menu__trigger"
         onClick={() => setIsOpen((prev) => !prev)}
         aria-expanded={isOpen}
         aria-controls="mobile-menu"
@@ -62,14 +62,16 @@ export function MobileMenu({ links, joinLabel }: MobileMenuProps) {
         />
       )}
 
-      <dialog
+      <div
         id="mobile-menu"
         ref={menuRef}
         className={`mobile-menu__drawer ${isOpen ? "mobile-menu__drawer--open" : ""}`}
         aria-label="Menú de navegación"
+        role="dialog"
+        aria-modal="true"
       >
         <nav>
-          <ul className="mobile-menu__links" role="list">
+          <ul className="mobile-menu__links">
             {links.map(({ href, label }) => {
               const isActive = pathname.includes(href);
               return (
@@ -90,7 +92,7 @@ export function MobileMenu({ links, joinLabel }: MobileMenuProps) {
             {joinLabel}
           </Link>
         </nav>
-      </dialog>
+      </div>
     </>
   );
 }

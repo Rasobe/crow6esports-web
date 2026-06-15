@@ -9,8 +9,10 @@ const LOCALES = [
   { code: "en", label: "EN" },
 ] as const;
 
+type LocaleCode = (typeof LOCALES)[number]["code"];
+
 export function LocaleSwitcher() {
-  const locale = useLocale();
+  const locale = useLocale() as LocaleCode;
   const router = useRouter();
   const pathname = usePathname();
   const [isPending, startTransition] = useTransition();
@@ -23,26 +25,22 @@ export function LocaleSwitcher() {
   };
 
   return (
-    <fieldset className="locale-switcher" aria-label="Seleccionar idioma">
+    <div className="locale-switcher" aria-label="Seleccionar idioma">
       {LOCALES.map(({ code, label }, i) => (
         <span key={code} className="locale-switcher__item">
           <button
             onClick={() => switchLocale(code)}
             disabled={isPending}
             aria-pressed={locale === code}
-            className={`locale-switcher__btn ${
-              locale === code ? "locale-switcher__btn--active" : ""
-            }`}
+            className={`locale-switcher__btn ${locale === code ? "locale-switcher__btn--active" : ""}`}
           >
             {label}
           </button>
           {i < LOCALES.length - 1 && (
-            <span className="locale-switcher__sep" aria-hidden>
-              |
-            </span>
+            <span className="locale-switcher__sep" aria-hidden />
           )}
         </span>
       ))}
-    </fieldset>
+    </div>
   );
 }
