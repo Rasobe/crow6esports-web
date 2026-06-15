@@ -18,7 +18,7 @@ export function buildMetadata({
   locale = "es",
 }: BuildMetadataParams = {}): Metadata {
   const pageTitle = title
-    ? `${title} | ${siteConfig.name}`
+    ? `${title} - ${siteConfig.name}`
     : siteConfig.name;
 
   const canonical = `${siteConfig.url}/${locale}${path}`;
