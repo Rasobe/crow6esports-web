@@ -9,27 +9,6 @@ import { siteConfig } from "@config/site";
 import "../globals.css";
 import { routing } from "@/i18n/routing";
 
-const antonSC = Anton_SC({
-  variable: "--font-display",
-  weight: "400",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const barlowCondensed = Barlow_Condensed({
-  variable: "--font-ui",
-  weight: ["400", "500", "600", "700"],
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const barlow = Barlow({
-  variable: "--font-body",
-  weight: ["300", "400", "500", "600", "700"],
-  subsets: ["latin"],
-  display: "swap",
-});
-
 export const metadata: Metadata = {
   title: {
     default: siteConfig.name,
@@ -58,7 +37,7 @@ export default async function LocaleLayout({
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
       <Navbar />
-      <div className={`${antonSC.variable} ${barlowCondensed.variable} ${barlow.variable} content-offset flex flex-1 flex-col`}>
+      <div className="content-offset flex flex-1 flex-col">
         {children}
       </div>
       <Footer />
