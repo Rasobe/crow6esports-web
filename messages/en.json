@@ -1,0 +1,96 @@
+{
+  "nav": {
+    "team": "Team",
+    "news": "News",
+    "store": "Store",
+    "coaching": "Coaching",
+    "about-us": "About us",
+    "join": "Join us"
+  },
+  "home": {
+    "meta": {
+      "title": "Home",
+      "description": "Competitive Rocket League organization."
+    },
+    "hero": {
+      "eyebrow": "Esports organization",
+      "tagline": "Dominate · Compete · Conquer",
+      "cta_team": "Meet the team",
+      "cta_join": "Join the team"
+    },
+    "stats": {
+      "wins": "Wins",
+      "tournaments": "Tournaments",
+      "players": "Players",
+      "championships": "Championships"
+    }
+  },
+  "team": {
+     "meta": {
+      "title": "Team",
+      "description": "The official roster of Crow 6 Esports."
+    },
+    "eyebrow": "Official roster",
+    "roles": {
+      "first": "1st Man",
+      "second": "2nd Man",
+      "third": "3rd Man",
+      "flex": "Flexible"
+    }
+  },
+  "news": {
+    "title": "News",
+    "eyebrow": "Latest news",
+    "read_more": "Read more"
+  },
+  "store": {
+    "title": "Store",
+    "eyebrow": "Official merchandise",
+    "sold_out": "Sold out",
+    "add_to_cart": "Add to cart",
+    "size": "Size"
+  },
+  "tryouts": {
+    "open": {
+      "eyebrow": "Selection process",
+      "title": "Join",
+      "desc": "We are looking for committed players who want to compete at the highest level. The process is serious — if you are not willing to put in the work, this is not your team.",
+      "req_1": "Confirmed availability",
+      "req_2": "Real commitment to the team",
+      "req_3": "Zero toxicity",
+      "step1_title": "Basic profile",
+      "step1_sub": "Personal and contact information",
+      "step2_title": "Technical data",
+      "step2_sub": "Your current Rocket League level",
+      "step3_title": "Mindset and team",
+      "step3_sub": "The most important part for us",
+      "next": "Next",
+      "back": "Back",
+      "submit": "Submit application",
+      "step_of": "Step {current} of {total}",
+      "success_label": "#GOCROWS",
+      "success_title": "Application sent",
+      "success_desc": "We review every application personally. If you are a fit, we will contact you on Discord within 7 days.",
+      "success_note": "If you do not hear back within 7 days, your application was not selected for this round."
+    },
+    "closed": {
+      "label": "Process closed",
+      "title": "Tryouts closed",
+      "desc": "We are not currently looking for players. Leave your Discord and we will notify you when the next selection process opens.",
+      "notify_placeholder": "Your Discord username",
+      "notify_btn": "Notify me"
+    }
+  },
+  "coaching": {
+    "eyebrow": "Professional training",
+    "title": "Coaching",
+    "individual": "Individual",
+    "group": "Group",
+    "book": "Book a session",
+    "contact": "Contact"
+  },
+  "footer": {
+    "rights": "All rights reserved",
+    "founded": "Founded in 2020 · Huesca, Spain"
+  }
+}

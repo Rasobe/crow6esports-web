@@ -1,5 +1,7 @@
-// app/page.tsx
 import { HeroSection, TeamHighlight, LatestNews } from "@/features/home";
+import { createGenerateMetadata } from "@/components/seo/MetaTags";
+
+export const generateMetadata = createGenerateMetadata("home", "");
 
 export default function HomePage() {
   return (
