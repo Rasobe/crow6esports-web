@@ -12,7 +12,8 @@ export async function Navbar() {
     { href: "/team", label: t("team") },
     { href: "/news", label: t("news") },
     { href: "/store", label: t("store") },
-    { href: "/tryouts", label: t("tryouts") },
+    { href: "/coaching", label: t("coaching") },
+    { href: "/about-us", label: t("about-us") },
   ] as const;
 
   return (

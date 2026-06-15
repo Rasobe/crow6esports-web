@@ -3,10 +3,15 @@
     "team": "Plantilla",
     "news": "Noticias",
     "store": "Tienda",
-    "tryouts": "Tryouts",
+    "coaching": "Coaching",
+    "about-us": "Sobre nosotros",
     "join": "Únete"
   },
   "home": {
+    "meta": {
+      "title": "Inicio",
+      "description": "Organización competitiva de Rocket League. Domina. Compite. Conquista."
+    },
     "hero": {
       "eyebrow": "Organización de esports",
       "tagline": "Domina · Compite · Conquista",
@@ -21,7 +26,10 @@
     }
   },
   "team": {
-    "title": "Plantilla",
+    "meta": {
+      "title": "Plantilla",
+      "description": "El roster oficial de Crow 6 Esports."
+    },
     "eyebrow": "Roster oficial",
     "roles": {
       "first": "1st Man",
