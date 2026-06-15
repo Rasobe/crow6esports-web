@@ -19,6 +19,7 @@ export function LocaleSwitcher() {
     if (newLocale === locale) return;
     startTransition(() => {
       router.push(pathname, { locale: newLocale });
+      router.refresh();
     });
   };
 

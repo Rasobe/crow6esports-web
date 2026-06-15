@@ -5,8 +5,11 @@ import { LocaleSwitcher } from "./LocaleSwitcher";
 import { MobileMenu } from "./MobileMenu";
 import { NavLinks } from "./NavLinks";
 
-export async function Navbar() {
-  const locale = await getLocale();
+interface NavbarProps {
+  locale: string;
+}
+
+export async function Navbar({ locale }: NavbarProps) {
   const t = await getTranslations({ locale, namespace: "nav" });
 
   const links = [

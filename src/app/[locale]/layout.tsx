@@ -56,14 +56,18 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <NextIntlClientProvider locale={locale} messages={messages}>
-      <Navbar />
-      <div
-        className={`${antonSC.variable} ${barlowCondensed.variable} ${barlow.variable} content-offset flex flex-1 flex-col`}
-      >
-        {children}
-      </div>
-      <Footer />
-    </NextIntlClientProvider>
+    <html lang={locale}>
+      <body>
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          <Navbar locale={locale} />
+          <div
+            className={`${antonSC.variable} ${barlowCondensed.variable} ${barlow.variable} content-offset flex flex-1 flex-col`}
+          >
+            {children}
+          </div>
+          <Footer />
+        </NextIntlClientProvider>
+      </body>
+    </html>
   );
 }
