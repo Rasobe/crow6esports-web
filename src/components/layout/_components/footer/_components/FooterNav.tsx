@@ -1,15 +1,15 @@
 import { navigationConfig } from "@config/navigation"
 import { getTranslations } from "next-intl/server";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
+import { FooterSectionTitle } from "./FooterSectionTitle";
 
 export async function FooterNav() {
     const t = await getTranslations("footer");
 
     return (
         <div className="flex flex-col gap-4">
-            <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--text-muted)" }}>
-                {t("nav.title")}
-            </span>
+            <FooterSectionTitle value="nav.title" />
+
             <ul className="flex flex-col gap-2">
                 {navigationConfig.mainNav.map((link) => (
                     <li key={link.href}>

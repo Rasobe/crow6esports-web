@@ -99,7 +99,9 @@
       "about_us": "Sobre nosotros"
     },
     "contact": {
-      "title": "Contacto"
+      "title": "Contacto",
+      "email": "crow6esports@gmail.com",
+      "location": "Huesca, España"
     },
     "brand_description": "Organización competitiva de Rocket League.",
     "rights": "Todos los derechos reservados",

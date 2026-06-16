@@ -13,10 +13,10 @@ export function Footer() {
         className="mx-auto flex flex-col gap-12"
         style={{ maxWidth: "var(--container)" }}
       >
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-[2fr_1fr_1fr]">
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-3">
           <FooterBrand />
-          <FooterContact />
           <FooterNav />
+          <FooterContact />
         </div>
         <FooterBottom />
       </div>

@@ -25,6 +25,7 @@ export async function Navbar() {
             alt="Crow 6 Esports"
             width={80}
             height={28}
+            style={{ height: "auto" }}
             priority
           />
         </Link>

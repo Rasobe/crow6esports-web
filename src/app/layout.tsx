@@ -28,7 +28,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html className={`${antonSC.variable} ${barlowCondensed.variable} ${barlow.variable}`}>
+    <html 
+      className={`${antonSC.variable} ${barlowCondensed.variable} ${barlow.variable}`}
+      data-scroll-behavior="smooth"
+    >
       <body>{children}</body>
     </html>
   );
