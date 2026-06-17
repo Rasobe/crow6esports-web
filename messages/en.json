@@ -4,7 +4,7 @@
     "news": "News",
     "store": "Store",
     "coaching": "Coaching",
-    "about-us": "About us",
+    "about_us": "About us",
     "join": "Join us"
   },
   "home": {
@@ -26,7 +26,7 @@
     }
   },
   "team": {
-     "meta": {
+    "meta": {
       "title": "Team",
       "description": "The official roster of Crow 6 Esports."
     },
@@ -90,7 +90,27 @@
     "contact": "Contact"
   },
   "footer": {
+    "nav": {
+      "title": "Navigation",
+      "team": "Team",
+      "news": "News",
+      "store": "Store",
+      "coaching": "Coaching",
+      "about_us": "About us"
+    },
+    "contact": {
+      "title": "Contact",
+      "email": "crow6esports@gmail.com",
+      "location": "Huesca, Spain"
+    },
+    "brand_description": "Competitive Rocket League organization.",
     "rights": "All rights reserved",
     "founded": "Founded in 2020 · Huesca, Spain"
+  },
+  "notFound": {
+    "eyebrow": "Page not found",
+    "title": "PAGE <span>NOT</span><br>FOUND",
+    "desc": "The page you are looking for does not exist or has been moved. Go back and keep competing.",
+    "cta": "Back to home"
   }
 }

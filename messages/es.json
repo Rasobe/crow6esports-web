@@ -4,7 +4,7 @@
     "news": "Noticias",
     "store": "Tienda",
     "coaching": "Coaching",
-    "about-us": "Sobre nosotros",
+    "about_us": "Sobre nosotros",
     "join": "Únete"
   },
   "home": {
@@ -90,7 +90,27 @@
     "contact": "Contactar"
   },
   "footer": {
+    "nav": {
+      "title": "Navegación",
+      "team": "Plantilla",
+      "news": "Noticias",
+      "store": "Tienda",
+      "coaching": "Coaching",
+      "about_us": "Sobre nosotros"
+    },
+    "contact": {
+      "title": "Contacto",
+      "email": "crow6esports@gmail.com",
+      "location": "Huesca, España"
+    },
+    "brand_description": "Organización competitiva de Rocket League.",
     "rights": "Todos los derechos reservados",
     "founded": "Fundado en 2020 · Huesca, España"
+  },
+  "notFound": {
+    "eyebrow": "Página no encontrada",
+    "title": "PÁGINA <span>NO</span><br>ENCONTRADA",
+    "desc": "La página que buscas no existe o ha sido movida. Vuelve al inicio y sigue compitiendo.",
+    "cta": "Volver al inicio"
   }
 }

@@ -4,7 +4,7 @@ export const navigationConfig = {
     { href: "/news", labelKey: "news" },
     { href: "/coaching", labelKey: "coaching" },
     { href: "/store", labelKey: "store" },
-    { href: "/about-us", labelKey: "about-us" },
+    { href: "/about-us", labelKey: "about_us" },
   ] as const,
 } as const;
 

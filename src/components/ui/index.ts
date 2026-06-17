@@ -1,2 +1,4 @@
-export { Button } from "./Button";
-export { Badge } from "./Badge";
+export * from './icons';
+export * from './Badge';
+export * from './Button';
+export * from './CTAButton';
