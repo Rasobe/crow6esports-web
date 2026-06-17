@@ -1,4 +1,4 @@
-export * from './LocaleSwitcher'
+export * from './locale-switcher'
 export * from './NavLinks'
-export * from './MobileMenu'
+export * from './mobile-menu'
 export * from './PageWrapper'

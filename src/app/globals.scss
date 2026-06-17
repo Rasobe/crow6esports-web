@@ -8,17 +8,17 @@
 ═══════════════════════════════════════════════════════════════ */
 
 /* ── Global ── */
-@import "../../src/styles/tokens";
-@import "../../src/styles/tailwind-theme";
-@import "../../src/styles/reset";
-@import "../../src/styles/typography";
-@import "../../src/styles/scrollbar";
-@import "../../src/styles/utilities";
+@import "styles/tokens";
+@import "styles/tailwind-theme";
+@import "styles/reset";
+@import "styles/typography";
+@import "styles/scrollbar";
+@import "styles/utilities";
 
 /* ── Components ── */
-@import "../../src/styles/components/buttons";
-@import "../../src/components/layout/_components/navbar/navbar";
-@import "../../src/components/layout/_components/navbar/_components/locale-switcher";
-@import "../../src/components/layout/_components/navbar/_components/mobile-menu";
-@import "../../src/components/layout/_components/footer/footer";
+@import "styles/components/buttons";
+@import "components/layout/_components/navbar/navbar";
+@import "components/layout/_components/navbar/_components/locale-switcher/locale-switcher";
+@import "components/layout/_components/navbar/_components/mobile-menu/mobile-menu";
+@import "components/layout/_components/footer/footer";
 @import "./not-found";
