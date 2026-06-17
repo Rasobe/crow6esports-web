@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+/* ═══════════════════════════════════════════════════════════════
+   CROW 6 ESPORTS — Global Styles
+   
+   Punto de entrada central de estilos.
+   Importa todos los parciales globales y de componentes.
+═══════════════════════════════════════════════════════════════ */
+
+/* ── Global ── */
+@import "../../src/styles/tokens";
+@import "../../src/styles/tailwind-theme";
+@import "../../src/styles/reset";
+@import "../../src/styles/typography";
+@import "../../src/styles/scrollbar";
+@import "../../src/styles/utilities";
+
+/* ── Components ── */
+@import "../../src/styles/components/buttons";
+@import "../../src/components/layout/_components/navbar/navbar";
+@import "../../src/components/layout/_components/navbar/_components/locale-switcher";
+@import "../../src/components/layout/_components/navbar/_components/mobile-menu";
+@import "../../src/components/layout/_components/footer/footer";
+@import "./not-found";

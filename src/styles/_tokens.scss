@@ -1,0 +1,30 @@
+/* ─────────────────────────────────────────────
+   DESIGN TOKENS
+   ───────────────────────────────────────────── */
+:root {
+  /* Brand */
+  --brand: #f5b800;
+  --brand-hover: #ffd040;
+  --brand-dark: #c99700;
+  --brand-fg: #0a0a0a;
+
+  /* Backgrounds */
+  --bg-base: #0a0a0a;
+  --bg-surface: #141414;
+  --bg-raised: #1e1e1e;
+  --bg-overlay: rgba(10, 10, 10, 0.85);
+
+  /* Borders */
+  --border: rgba(245, 184, 0, 0.15);
+  --border-strong: rgba(245, 184, 0, 0.4);
+  --border-subtle: rgba(255, 255, 255, 0.06);
+
+  /* Text */
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.6);
+  --text-muted: rgba(255, 255, 255, 0.35);
+
+  /* Layout */
+  --navbar-h: 68px;
+  --container: 1280px;
+}

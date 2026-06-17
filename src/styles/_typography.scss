@@ -1,0 +1,64 @@
+/* ─────────────────────────────────────────────
+   TYPOGRAPHY
+   ───────────────────────────────────────────── */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display), sans-serif;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+nav,
+header,
+button,
+label,
+th,
+[role="menuitem"],
+[role="tab"] {
+  font-family: var(--font-ui), system-ui, sans-serif;
+}
+
+.eyebrow {
+  font-family: var(--font-ui), sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--brand);
+}
+
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  font-family: var(--font-ui), sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--brand);
+}
+
+.section-label::before {
+  content: "";
+  display: inline-block;
+  width: 1.75rem;
+  height: 2px;
+  background: var(--brand);
+  flex-shrink: 0;
+}
+
+.text-stroke-brand {
+  -webkit-text-stroke: 3px var(--brand);
+  color: transparent;
+  line-height: 0.9;
+}
+
+::selection {
+  background: var(--brand);
+  color: var(--brand-fg);
+}
