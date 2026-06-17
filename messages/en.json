@@ -106,5 +106,11 @@
     "brand_description": "Competitive Rocket League organization.",
     "rights": "All rights reserved",
     "founded": "Founded in 2020 · Huesca, Spain"
+  },
+  "notFound": {
+    "eyebrow": "Page not found",
+    "title": "PAGE <span>NOT</span><br>FOUND",
+    "desc": "The page you are looking for does not exist or has been moved. Go back and keep competing.",
+    "cta": "Back to home"
   }
 }

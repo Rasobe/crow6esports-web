@@ -1,3 +1,4 @@
+export * from './IconArrowLeft';
 export * from './IconDiscord';
 export * from './IconInstagram';
 export * from './IconTikTok';
