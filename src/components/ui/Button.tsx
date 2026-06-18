@@ -1,45 +1,72 @@
-import { type ButtonHTMLAttributes, forwardRef } from "react";
+import { Link } from "@/i18n/navigation";
+import {
+  type ButtonHTMLAttributes,
+  type ComponentPropsWithoutRef,
+  type ReactNode,
+} from "react";
 import clsx from "clsx";
 
-type Variant = "primary" | "secondary" | "ghost";
-type Size = "sm" | "md" | "lg";
+export type ButtonVariant = "primary" | "outline" | "ghost" | "brand-outline";
+export type ButtonSize = "sm" | "md" | "lg";
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: Variant;
-  size?: Size;
+interface ButtonBase {
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  /** Icono opcional mostrado antes del texto */
+  icon?: ReactNode;
+  className?: string;
+  children: ReactNode;
 }
 
-const sizeClasses: Record<Size, string> = {
-  sm: "px-3 py-1.5 text-sm",
-  md: "px-5 py-2.5 text-base",
-  lg: "px-7 py-3.5 text-lg",
-};
+type ButtonAsButton = ButtonBase &
+  Omit<ButtonHTMLAttributes<HTMLButtonElement>, keyof ButtonBase> & {
+    href?: never;
+  };
 
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ variant = "primary", size = "md", className, style, children, ...props }, ref) => {
-    const variantStyle: React.CSSProperties =
-      variant === "primary"
-        ? { background: "var(--brand)", color: "var(--brand-fg)" }
-        : variant === "secondary"
-        ? { border: "1px solid var(--border-strong)", color: "var(--text-primary)" }
-        : { color: "var(--text-secondary)" };
+type ButtonAsLink = ButtonBase &
+  Omit<ComponentPropsWithoutRef<"a">, keyof ButtonBase | "href"> & {
+    href: string;
+  };
 
+export type ButtonProps = ButtonAsButton | ButtonAsLink;
+
+export function Button({
+  variant = "primary",
+  size = "md",
+  icon,
+  className,
+  children,
+  href,
+  ...props
+}: ButtonProps) {
+  const classes = clsx("btn", `btn--${variant}`, `btn--${size}`, className);
+
+  const content = (
+    <>
+      {icon && <span className="btn__icon" aria-hidden>{icon}</span>}
+      {children}
+    </>
+  );
+
+  if (href !== undefined) {
     return (
-      <button
-        ref={ref}
-        className={clsx(
-          "inline-flex cursor-pointer items-center justify-center rounded-full font-semibold transition-all focus-visible:outline-none focus-visible:ring-2",
-          "disabled:cursor-not-allowed disabled:opacity-40",
-          sizeClasses[size],
-          className
-        )}
-        style={{ ...variantStyle, ...style }}
-        {...props}
+      <Link
+        href={href}
+        className={classes}
+        {...(props as ComponentPropsWithoutRef<"a">)}
       >
-        {children}
-      </button>
+        {content}
+      </Link>
     );
   }
-);
 
-Button.displayName = "Button";
+  return (
+    <button
+      type="button"
+      className={classes}
+      {...(props as ButtonHTMLAttributes<HTMLButtonElement>)}
+    >
+      {content}
+    </button>
+  );
+}

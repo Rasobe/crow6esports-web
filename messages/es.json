@@ -16,13 +16,13 @@
       "eyebrow": "Organización de esports",
       "tagline": "Domina · Compite · Conquista",
       "cta_team": "Ver equipo",
-      "cta_join": "Únete al equipo"
-    },
-    "stats": {
-      "wins": "Victorias",
-      "tournaments": "Torneos",
-      "players": "Jugadores",
-      "championships": "Campeonatos"
+      "cta_join": "Únete al equipo",
+      "stats": {
+        "wins": "Victorias",
+        "tournaments": "Torneos",
+        "players": "Jugadores",
+        "championships": "Campeonatos"
+      }
     }
   },
   "team": {

@@ -16,13 +16,13 @@
       "eyebrow": "Esports organization",
       "tagline": "Dominate · Compete · Conquer",
       "cta_team": "Meet the team",
-      "cta_join": "Join the team"
-    },
-    "stats": {
-      "wins": "Wins",
-      "tournaments": "Tournaments",
-      "players": "Players",
-      "championships": "Championships"
+      "cta_join": "Join the team",
+      "stats": {
+        "wins": "Wins",
+        "tournaments": "Tournaments",
+        "players": "Players",
+        "championships": "Championships"
+      }
     }
   },
   "team": {

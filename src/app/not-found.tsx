@@ -1,5 +1,6 @@
 import { getTranslations } from "next-intl/server";
-import { CTAButton, IconArrowLeft } from "@/components/ui";
+import { CTAButton } from "@/components/ui";
+import { IconArrowLeft,  } from "@/components/ui";
 
 export default async function NotFound() {
   const t = await getTranslations("notFound");
