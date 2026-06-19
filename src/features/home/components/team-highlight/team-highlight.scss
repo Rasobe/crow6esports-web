@@ -26,37 +26,9 @@
     max-width: var(--container);
     margin-inline: auto;
     padding-inline: 1.5rem;
-  }
-
-  /* ─── Header ─── */
-  .team-highlight__header {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    margin-bottom: 56px;
-  }
-
-  .team-highlight__title {
-    font-family: var(--font-display), sans-serif;
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    line-height: 1;
-    color: var(--text-primary);
-    text-transform: uppercase;
-
-    span {
-      color: var(--brand);
-    }
-  }
-
-  .team-highlight__subtitle {
-    font-family: var(--font-ui), sans-serif;
-    font-size: 0.875rem;
-    color: var(--text-muted);
-    max-width: 480px;
-    line-height: 1.6;
-    letter-spacing: 0.02em;
+    gap: 56px;
   }
 
   /* ─── Cards grid (left → right) ─── */
@@ -78,8 +50,8 @@
       padding: 64px 0;
     }
 
-    .team-highlight__header {
-      margin-bottom: 36px;
+    .team-highlight__inner {
+      gap: 36px;
     }
 
     .team-highlight__grid {

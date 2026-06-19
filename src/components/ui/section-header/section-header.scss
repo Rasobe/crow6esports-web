@@ -1,0 +1,26 @@
+@layer components {
+  .section-header {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .section-header__title {
+    font-family: var(--font-display), sans-serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 1;
+    color: var(--text-primary);
+    text-transform: uppercase;
+  }
+
+  .section-header__subtitle {
+    font-family: var(--font-ui), sans-serif;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    max-width: 480px;
+    line-height: 1.6;
+    letter-spacing: 0.02em;
+  }
+}
