@@ -10,8 +10,8 @@
     height: var(--navbar-h);
     background: var(--bg-overlay);
     border-bottom: 1px solid var(--border);
-    backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
   }
 
   .navbar__inner {

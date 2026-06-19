@@ -23,6 +23,24 @@
         "players": "Jugadores",
         "championships": "Campeonatos"
       }
+    },
+    "teamHighlight": {
+      "eyebrow": "El Equipo",
+      "title": "Conoce a nuestros jugadores",
+      "subtitle": "Profesionales dedicados que representan a Crow6 en la arena competitiva."
+    },
+    "playerCard": {
+      "stat_mmr": "MMR",
+      "stat_peak": "PICO",
+      "stat_age": "EDAD",
+      "no_socials": "Sin redes",
+      "role_player": "Jugador",
+      "role_coach": "Entrenador",
+      "role_analyst": "Analista",
+      "role_manager": "Manager",
+      "status_substitute": "Suplente",
+      "status_retired": "Retirado",
+      "status_former": "Ex-miembro"
     }
   },
   "team": {

@@ -1,22 +1,132 @@
 [
   {
-    "id": "player-1",
-    "name": "Alejandro García",
-    "gamertag": "Cr0wKing",
-    "role": "mid",
-    "photo": "/images/players/cr0wking.jpg",
-    "stats": { "mmr": 2850, "winRate": 63, "kda": 4.2 },
-    "socials": { "twitter": "https://twitter.com/cr0wking", "twitch": "https://twitch.tv/cr0wking" },
-    "isStarter": true
+    "id": "blazeon",
+    "nickname": "Blazeon",
+    "realName": "Raúl",
+    "birthYear": 2000,
+    "anonymous": false,
+    "country": "ES",
+    "type": "player",
+    "status": "active",
+    "game": "rocket-league",
+    "joinedYear": 2023,
+    "stats": {
+      "mmr": 1847,
+      "peak": 1900,
+      "rank": "Grand Champion IF"
+    },
+    "socials": {
+      "twitter": "https://x.com/blazeon_rl",
+      "instagram": null,
+      "twitch": "https://twitch.tv/blazeon_rl",
+      "tiktok": null,
+      "youtube": null,
+      "rltracker": "https://rocketleague.tracker.network/rocket-league/profile/epic/Blazeon/overview"
+    },
+    "image": null
   },
   {
-    "id": "player-2",
-    "name": "Carlos Méndez",
-    "gamertag": "NightHawk",
-    "role": "adc",
-    "photo": "/images/players/nighthawk.jpg",
-    "stats": { "mmr": 2720, "winRate": 58, "kda": 3.8 },
-    "socials": { "twitter": "https://twitter.com/nighthawk_gg" },
-    "isStarter": true
+    "id": "vortex",
+    "nickname": "Vortex",
+    "realName": "Adrián",
+    "birthYear": 2002,
+    "anonymous": false,
+    "country": "ES",
+    "type": "player",
+    "status": "active",
+    "game": "rocket-league",
+    "joinedYear": 2024,
+    "stats": {
+      "mmr": 1792,
+      "peak": 1855,
+      "rank": "Grand Champion II"
+    },
+    "socials": {
+      "twitter": "https://x.com/vortex_rl",
+      "instagram": "https://instagram.com/vortex.rl",
+      "twitch": null,
+      "tiktok": null,
+      "youtube": null,
+      "rltracker": "https://rocketleague.tracker.network/rocket-league/profile/epic/Vortex/overview"
+    },
+    "image": null
+  },
+  {
+    "id": "nxvak",
+    "nickname": "Nxvak",
+    "realName": "Marcos",
+    "birthYear": 2003,
+    "anonymous": false,
+    "country": "ES",
+    "type": "player",
+    "status": "active",
+    "game": "rocket-league",
+    "joinedYear": 2024,
+    "stats": {
+      "mmr": 1763,
+      "peak": 1820,
+      "rank": "Grand Champion I"
+    },
+    "socials": {
+      "twitter": "https://x.com/nxvak_rl",
+      "instagram": null,
+      "twitch": "https://twitch.tv/nxvak",
+      "tiktok": "https://tiktok.com/@nxvak",
+      "youtube": null,
+      "rltracker": "https://rocketleague.tracker.network/rocket-league/profile/epic/Nxvak/overview"
+    },
+    "image": null
+  },
+  {
+    "id": "eclipse",
+    "nickname": "Eclipse",
+    "realName": "David",
+    "birthYear": 2001,
+    "anonymous": false,
+    "country": "ES",
+    "type": "player",
+    "status": "substitute",
+    "game": "rocket-league",
+    "joinedYear": 2025,
+    "stats": {
+      "mmr": 1711,
+      "peak": 1760,
+      "rank": "Champion III"
+    },
+    "socials": {
+      "twitter": null,
+      "instagram": "https://instagram.com/eclipse.rl",
+      "twitch": null,
+      "tiktok": null,
+      "youtube": null,
+      "rltracker": "https://rocketleague.tracker.network/rocket-league/profile/epic/Eclipse/overview"
+    },
+    "image": null
+  },
+  {
+    "id": "kronos",
+    "nickname": "Kronos",
+    "realName": "Jorge",
+    "birthYear": 1997,
+    "anonymous": false,
+    "country": "ES",
+    "type": "coach",
+    "status": "active",
+    "game": "rocket-league",
+    "joinedYear": 2023,
+    "stats": {
+      "mmr": 1920,
+      "peak": 2010,
+      "rank": "Supersonic Legend"
+    },
+    "socials": {
+      "twitter": "https://x.com/kronos_coach",
+      "instagram": null,
+      "twitch": "https://twitch.tv/kronos_rl",
+      "tiktok": null,
+      "youtube": "https://youtube.com/@kronosrl",
+      "rltracker": "https://rocketleague.tracker.network/rocket-league/profile/epic/Kronos/overview"
+    },
+    "image": null
   }
 ]
