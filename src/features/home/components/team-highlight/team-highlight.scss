@@ -33,15 +33,12 @@
 
   /* ─── Cards grid (left → right) ─── */
   .team-highlight__grid {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    /* Shared column tracks keep every row's cards the same width,
+       even when the last row has fewer items. */
+    grid-template-columns: repeat(auto-fit, minmax(260px, 320px));
+    justify-content: center;
     gap: 20px;
-
-    /* Each card takes equal space but never exceeds 320px */
-    > * {
-      flex: 1 1 260px;
-      max-width: 320px;
-    }
   }
 
   /* ─── Responsive ─── */
@@ -55,7 +52,22 @@
     }
 
     .team-highlight__grid {
-      justify-content: center;
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      > * {
+        flex: 0 0 75%;
+        max-width: 280px;
+        scroll-snap-align: start;
+      }
     }
   }
 }
