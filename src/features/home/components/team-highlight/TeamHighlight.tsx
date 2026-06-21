@@ -19,7 +19,7 @@ export function TeamHighlight() {
         <SectionHeader namespace="home.teamHighlight" />
 
         <div className="team-highlight__grid">
-          {players.slice(0, 3).map((player) => (
+          {players.slice(0, 4).map((player) => (
             <PlayerCard key={player.id} player={player} />
           ))}
         </div>

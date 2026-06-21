@@ -34,10 +34,7 @@
   /* ─── Cards grid (left → right) ─── */
   .team-highlight__grid {
     display: grid;
-    /* Shared column tracks keep every row's cards the same width,
-       even when the last row has fewer items. */
-    grid-template-columns: repeat(auto-fit, minmax(260px, 320px));
-    justify-content: center;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 20px;
   }
 
