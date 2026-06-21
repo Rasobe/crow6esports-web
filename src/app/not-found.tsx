@@ -1,29 +1,20 @@
 import { headers } from "next/headers";
 import Link from "next/link";
 import { IconArrowLeft } from "@/components/ui";
+import esMessages from "../../messages/es.json";
+import enMessages from "../../messages/en.json";
 
-const COPY = {
-  es: {
-    eyebrow: "Página no encontrada",
-    title: "PÁGINA <span>NO</span><br>ENCONTRADA",
-    desc: "La página que buscas no existe o ha sido movida. Vuelve al inicio y sigue compitiendo.",
-    cta: "Volver al inicio",
-  },
-  en: {
-    eyebrow: "Page not found",
-    title: "PAGE <span>NOT</span><br>FOUND",
-    desc: "The page you are looking for does not exist or has been moved. Go back and keep competing.",
-    cta: "Back to home",
-  },
-} as const;
+const MESSAGES_BY_LOCALE = { es: esMessages, en: enMessages } as const;
 
 // This boundary renders for routes outside the [locale] segment (e.g. no
 // locale could be resolved yet), so it can't rely on next-intl's request
 // context — see src/app/[locale]/not-found.tsx for the locale-aware 404.
+// Copy still comes from the shared messages files, read directly instead
+// of through next-intl, so there's a single source of truth for the text.
 export default async function NotFound() {
   const acceptLanguage = (await headers()).get("accept-language") ?? "";
   const locale = acceptLanguage.startsWith("es") ? "es" : "en";
-  const t = COPY[locale];
+  const t = MESSAGES_BY_LOCALE[locale].notFound;
 
   return (
     <main className="not-found">

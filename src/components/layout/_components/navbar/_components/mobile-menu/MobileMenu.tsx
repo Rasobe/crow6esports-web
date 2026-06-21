@@ -12,9 +12,18 @@ interface NavLink {
 interface MobileMenuProps {
   links: readonly NavLink[];
   joinLabel: string;
+  menuAriaLabel: string;
+  openLabel: string;
+  closeLabel: string;
 }
 
-export function MobileMenu({ links, joinLabel }: MobileMenuProps) {
+export function MobileMenu({
+  links,
+  joinLabel,
+  menuAriaLabel,
+  openLabel,
+  closeLabel,
+}: MobileMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   const menuRef = useRef<HTMLDivElement>(null);
@@ -45,7 +54,7 @@ export function MobileMenu({ links, joinLabel }: MobileMenuProps) {
         onClick={() => setIsOpen((prev) => !prev)}
         aria-expanded={isOpen}
         aria-controls="mobile-menu"
-        aria-label={isOpen ? "Cerrar menú" : "Abrir menú"}
+        aria-label={isOpen ? closeLabel : openLabel}
       >
         {isOpen ? (
           <X size={22} strokeWidth={1.5} />
@@ -66,7 +75,7 @@ export function MobileMenu({ links, joinLabel }: MobileMenuProps) {
         id="mobile-menu"
         ref={menuRef}
         className={`mobile-menu__drawer ${isOpen ? "mobile-menu__drawer--open" : ""}`}
-        aria-label="Menú de navegación"
+        aria-label={menuAriaLabel}
         role="dialog"
         aria-modal="true"
       >

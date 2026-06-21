@@ -20,7 +20,7 @@ export async function Navbar() {
         <Link
           href="/"
           className="navbar__brand"
-          aria-label="Crow 6 Esports — Inicio"
+          aria-label={t("home_aria")}
         >
           <Image
             src="/images/brand/crow6-wordmark.svg"
@@ -44,7 +44,13 @@ export async function Navbar() {
           >
             {t("join")}
           </Button>
-          <MobileMenu links={links} joinLabel={t("join")} />
+          <MobileMenu
+            links={links}
+            joinLabel={t("join")}
+            menuAriaLabel={t("menu_aria")}
+            openLabel={t("menu_open_aria")}
+            closeLabel={t("menu_close_aria")}
+          />
         </div>
       </nav>
     </header>

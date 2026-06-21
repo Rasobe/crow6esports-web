@@ -5,7 +5,12 @@
     "store": "Store",
     "coaching": "Coaching",
     "about_us": "About us",
-    "join": "Join us"
+    "join": "Join us",
+    "home_aria": "Crow 6 Esports — Home",
+    "locale_switcher_aria": "Select language",
+    "menu_aria": "Navigation menu",
+    "menu_open_aria": "Open menu",
+    "menu_close_aria": "Close menu"
   },
   "home": {
     "meta": {
