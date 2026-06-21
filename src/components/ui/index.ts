@@ -1,5 +1,5 @@
-export * from "./Badge";
+export * from "./badge";
 export * from "./button";
-export * from "./CTAButton";
+export * from "./cta-button";
 export * from "./icons";
 export * from "./section-header";

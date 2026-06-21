@@ -1,6 +1,7 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import type { ReactNode } from "react";
 import clsx from "clsx";
+import "./cta-button.scss";
 
 interface CTAButtonBase {
   children: ReactNode;
