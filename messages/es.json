@@ -1,4 +1,7 @@
 {
+  "site": {
+    "description": "Organización competitiva de Rocket League con sede en Huesca, España."
+  },
   "nav": {
     "team": "Plantilla",
     "news": "Noticias",

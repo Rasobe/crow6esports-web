@@ -1,4 +1,7 @@
 {
+  "site": {
+    "description": "Competitive Rocket League organization based in Huesca, Spain."
+  },
   "nav": {
     "team": "Team",
     "news": "News",
