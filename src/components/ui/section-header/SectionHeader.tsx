@@ -1,3 +1,5 @@
+"use client";
+
 import { useTranslations } from "next-intl";
 import "./section-header.scss";
 
@@ -5,7 +7,7 @@ interface SectionHeaderProps {
   namespace: string;
 }
 
-export function SectionHeader({ namespace }: SectionHeaderProps) {
+export function SectionHeader({ namespace }: Readonly<SectionHeaderProps>) {
   const t = useTranslations(namespace);
 
   return (
