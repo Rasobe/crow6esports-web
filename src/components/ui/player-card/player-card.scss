@@ -27,10 +27,6 @@
       .player-card__img {
         transform: scale(1.06);
       }
-
-      .player-card__corner {
-        opacity: 1;
-      }
     }
   }
 
@@ -260,20 +256,5 @@
       border-color: var(--border);
       transform: translateY(-2px);
     }
-  }
-
-  /* ─── Decorative corner accent ─── */
-  .player-card__corner {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 0 32px 32px 0;
-    border-color: transparent var(--brand) transparent transparent;
-    opacity: 0;
-    transition: opacity 0.25s ease;
-    z-index: 4;
   }
 }
