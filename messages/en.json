@@ -66,6 +66,12 @@
       "pack_3_feature_4": "Monthly session with the analyst team",
       "cta_reserve": "Book a session"
     },
+    "storeHighlight": {
+      "eyebrow": "The Store",
+      "title": "Wear the Crow6 colors",
+      "subtitle": "Official gear designed for the team and the fans.",
+      "cta_view_more": "View more"
+    },
     "playerCard": {
       "stat_mmr": "MMR",
       "stat_peak": "PEAK",
@@ -77,6 +83,13 @@
       "status_substitute": "Substitute",
       "status_retired": "Retired",
       "status_former": "Former"
+    },
+    "productCard": {
+      "category_jersey": "Jersey",
+      "category_hoodie": "Hoodie",
+      "category_cap": "Cap",
+      "category_accessory": "Accessory",
+      "featured_badge": "Featured"
     }
   },
   "team": {

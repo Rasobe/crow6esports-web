@@ -66,6 +66,12 @@
       "pack_3_feature_4": "Sesión mensual con el equipo de analistas",
       "cta_reserve": "Reservar sesión"
     },
+    "storeHighlight": {
+      "eyebrow": "La Tienda",
+      "title": "Viste los colores de Crow6",
+      "subtitle": "Equipación oficial pensada para el equipo y la afición.",
+      "cta_view_more": "Ver más"
+    },
     "playerCard": {
       "stat_mmr": "MMR",
       "stat_peak": "PEAK",
@@ -77,6 +83,13 @@
       "status_substitute": "Suplente",
       "status_retired": "Retirado",
       "status_former": "Ex-miembro"
+    },
+    "productCard": {
+      "category_jersey": "Camiseta",
+      "category_hoodie": "Sudadera",
+      "category_cap": "Gorra",
+      "category_accessory": "Accesorio",
+      "featured_badge": "Destacado"
     }
   },
   "team": {
