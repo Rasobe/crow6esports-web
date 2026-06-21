@@ -41,6 +41,11 @@
     gap: 20px;
   }
 
+  .team-highlight__footer {
+    display: flex;
+    justify-content: flex-end;
+  }
+
   /* ─── Responsive ─── */
   @media (max-width: 640px) {
     .team-highlight {

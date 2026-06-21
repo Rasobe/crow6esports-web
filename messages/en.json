@@ -35,7 +35,8 @@
     "teamHighlight": {
       "eyebrow": "The Team",
       "title": "Meet our players",
-      "subtitle": "Dedicated professionals representing Crow6 in the competitive arena."
+      "subtitle": "Dedicated professionals representing Crow6 in the competitive arena.",
+      "cta_view_more": "View more"
     },
     "coachingBanner": {
       "eyebrow": "Professional training",
