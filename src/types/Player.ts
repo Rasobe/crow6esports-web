@@ -16,7 +16,7 @@ export interface PlayerSocials {
 export interface PlayerStats {
   mmr: number;
   peak: number;
-  rank?: string;
+  rank: string;
 }
 
 export interface Player {
