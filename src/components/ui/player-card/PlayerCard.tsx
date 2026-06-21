@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Player, PlayerType, PlayerStatus } from "@/types/Player";
 import {
   IconX,
@@ -9,16 +9,13 @@ import {
   IconTwitch,
   IconTikTok,
   IconYouTube,
+  IconRLTracker,
 } from "@/components/ui/icons";
+import { getAge, getActiveSocialLinks, SocialPlatform } from "./player-card.utils";
 import "./player-card.scss";
 
 interface PlayerCardProps {
   player: Player;
-}
-
-function getAge(birthYear: number | null): number | null {
-  if (!birthYear) return null;
-  return new Date().getFullYear() - birthYear;
 }
 
 const ROLE_KEY: Record<PlayerType, string> = {
@@ -35,29 +32,24 @@ const STATUS_KEY: Record<PlayerStatus, string | null> = {
   former: "status_former",
 };
 
+const SOCIAL_ICONS: Record<SocialPlatform, typeof IconX> = {
+  twitter: IconX,
+  instagram: IconInstagram,
+  twitch: IconTwitch,
+  tiktok: IconTikTok,
+  youtube: IconYouTube,
+  rltracker: IconRLTracker,
+};
+
 export function PlayerCard({ player }: PlayerCardProps) {
   const t = useTranslations("home.playerCard");
+  const locale = useLocale();
   const age = getAge(player.birthYear);
-  const { socials, stats } = player;
+  const { stats } = player;
 
   const roleLabel = t(ROLE_KEY[player.type]);
   const statusKey = STATUS_KEY[player.status];
-
-  const socialLinks = [
-    { href: socials.twitter, icon: <IconX size={16} />, label: "Twitter / X" },
-    {
-      href: socials.instagram,
-      icon: <IconInstagram size={16} />,
-      label: "Instagram",
-    },
-    { href: socials.twitch, icon: <IconTwitch size={16} />, label: "Twitch" },
-    { href: socials.tiktok, icon: <IconTikTok size={16} />, label: "TikTok" },
-    {
-      href: socials.youtube,
-      icon: <IconYouTube size={16} />,
-      label: "YouTube",
-    },
-  ].filter((s) => s.href && !s.href.includes("..."));
+  const socialLinks = getActiveSocialLinks(player.socials);
 
   return (
     <article className="player-card">
@@ -83,6 +75,10 @@ export function PlayerCard({ player }: PlayerCardProps) {
       {/* ── Top badges ── */}
       <div className="player-card__top">
         <span className="player-card__role">{roleLabel}</span>
+        <span className="player-card__rank">
+          <span className="player-card__rank-dot" aria-hidden="true" />
+          {stats.rank}
+        </span>
         {statusKey && (
           <span className="player-card__status">{t(statusKey)}</span>
         )}
@@ -101,14 +97,14 @@ export function PlayerCard({ player }: PlayerCardProps) {
         <div className="player-card__stats">
           <div className="player-card__stat">
             <span className="player-card__stat-value">
-              {stats.mmr.toLocaleString("en-US")}
+              {stats.mmr.toLocaleString(locale)}
             </span>
             <span className="player-card__stat-label">{t("stat_mmr")}</span>
           </div>
           <div className="player-card__stat-divider" />
           <div className="player-card__stat">
             <span className="player-card__stat-value">
-              {stats.peak.toLocaleString("en-US")}
+              {stats.peak.toLocaleString(locale)}
             </span>
             <span className="player-card__stat-label">{t("stat_peak")}</span>
           </div>
@@ -126,19 +122,22 @@ export function PlayerCard({ player }: PlayerCardProps) {
         {/* Social links */}
         {socialLinks.length > 0 && (
           <div className="player-card__socials">
-            {socialLinks.map((s) => (
-              <a
-                key={s.label}
-                href={s.href ?? undefined}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="player-card__social-link"
-                aria-label={s.label}
-                title={s.label}
-              >
-                {s.icon}
-              </a>
-            ))}
+            {socialLinks.map((s) => {
+              const Icon = SOCIAL_ICONS[s.platform];
+              return (
+                <a
+                  key={s.platform}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="player-card__social-link"
+                  aria-label={s.label}
+                  title={s.label}
+                >
+                  <Icon size={16} />
+                </a>
+              );
+            })}
           </div>
         )}
       </div>
