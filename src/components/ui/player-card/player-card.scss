@@ -92,6 +92,7 @@
     display: flex;
     align-items: center;
     gap: 6px;
+    flex-wrap: wrap;
   }
 
   .player-card__role {
@@ -203,26 +204,26 @@
     align-items: center;
     gap: 6px;
     font-family: var(--font-ui), sans-serif;
-    font-size: 0.8rem;
-    font-weight: 600;
+    font-size: 0.72rem;
+    font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--text-secondary);
+    color: var(--text-muted);
+    background: var(--bg-overlay);
     border: 1px solid var(--border-subtle);
+    padding: 4px 10px;
     border-radius: 2px;
-    padding: 5px 10px;
-    background: rgba(10, 10, 10, 0.5);
-    width: fit-content;
-    backdrop-filter: blur(6px);
+    line-height: 1.5;
+    backdrop-filter: blur(8px);
   }
 
   .player-card__rank-dot {
-    width: 6px;
-    height: 6px;
+    width: 5px;
+    height: 5px;
     border-radius: 50%;
     background: var(--brand);
     flex-shrink: 0;
-    box-shadow: 0 0 6px var(--brand);
+    box-shadow: 0 0 5px var(--brand);
   }
 
   /* Social links */
