@@ -17,7 +17,7 @@ const CATEGORY_KEY: Record<ProductCategory, string> = {
   accessory: "category_accessory",
 };
 
-export function ProductCard({ product }: ProductCardProps) {
+export function ProductCard({ product }: Readonly<ProductCardProps>) {
   const t = useTranslations("home.productCard");
   const format = useFormatter();
   const image = product.images[0];
