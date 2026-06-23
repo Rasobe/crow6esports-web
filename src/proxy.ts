@@ -1,11 +1,11 @@
-import { NextResponse, type NextRequest } from "next/server";
 import createMiddleware from "next-intl/middleware";
-import { routing } from "./src/i18n/routing";
+import { type NextRequest, NextResponse } from "next/server";
+import { routing } from "./i18n/routing";
 
 const intlMiddleware = createMiddleware(routing);
 
-export default function middleware(request: NextRequest) {
-  const isMaintenanceMode = process.env.MAINTENANCE_MODE === "true";
+export function proxy(request: NextRequest) {
+  const isMaintenanceMode = process.env.NEXT_PUBLIC_MAINTENANCE_MODE === "true";
   const isComingSoonPath = request.nextUrl.pathname === "/coming-soon";
 
   if (isMaintenanceMode && !isComingSoonPath) {
@@ -16,5 +16,5 @@ export default function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [String.raw`/((?!api|_next|_vercel|.*\..*).*)`],
+  matcher: ["/((?!_next/static|_next/image|favicon\\.ico|.*\\..*).*)"],
 };

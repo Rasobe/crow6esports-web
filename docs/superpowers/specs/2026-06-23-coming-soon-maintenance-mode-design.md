@@ -12,9 +12,9 @@ borrar páginas existentes.
 
 ## Mecanismo de bloqueo
 
-- Variable de entorno `MAINTENANCE_MODE` (`"true"` / `"false"`).
+- Variable de entorno `NEXT_PUBLIC_MAINTENANCE_MODE` (`"true"` / `"false"`).
 - En `proxy.ts`, antes de delegar en `createMiddleware(routing)` (next-intl):
-  - Si `process.env.MAINTENANCE_MODE === "true"` y la ruta solicitada no es
+  - Si `process.env.NEXT_PUBLIC_MAINTENANCE_MODE === "true"` y la ruta solicitada no es
     `/coming-soon`, se hace `NextResponse.rewrite` hacia `/coming-soon`. La
     URL visible para el usuario no cambia.
   - Si la variable no está activa, el comportamiento es exactamente el
@@ -53,7 +53,7 @@ borrar páginas existentes.
 ## Fuera de alcance
 
 - No se modifica ni crea ningún archivo `.env`. El usuario debe añadir
-  `MAINTENANCE_MODE=true` manualmente en su entorno local y/o en el panel de
+  `NEXT_PUBLIC_MAINTENANCE_MODE=true` manualmente en su entorno local y/o en el panel de
   variables de entorno de despliegue (Vercel) cuando quiera activar el modo.
 - No se borra ni reestructura ninguna página existente.
 - No se añade soporte bilingüe a la pantalla de mantenimiento.

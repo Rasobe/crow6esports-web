@@ -2,15 +2,15 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Add a `MAINTENANCE_MODE` env-var-gated rewrite so every route except `/coming-soon` serves an isolated "coming soon" screen with the Crow 6 Esports logo and visual identity, without deleting or restructuring any existing page.
+**Goal:** Add a `NEXT_PUBLIC_MAINTENANCE_MODE` env-var-gated rewrite so every route except `/coming-soon` serves an isolated "coming soon" screen with the Crow 6 Esports logo and visual identity, without deleting or restructuring any existing page.
 
-**Architecture:** `proxy.ts` checks `process.env.MAINTENANCE_MODE` before delegating to the existing `next-intl` middleware; when active it rewrites every non-`/coming-soon` request to a new root-level `/coming-soon` page that lives outside the `[locale]` segment (so it never inherits `Navbar`/`Footer`). The page renders a new `ComingSoonPage` feature component with fixed Spanish copy and project design tokens.
+**Architecture:** `proxy.ts` checks `process.env.NEXT_PUBLIC_MAINTENANCE_MODE` before delegating to the existing `next-intl` middleware; when active it rewrites every non-`/coming-soon` request to a new root-level `/coming-soon` page that lives outside the `[locale]` segment (so it never inherits `Navbar`/`Footer`). The page renders a new `ComingSoonPage` feature component with fixed Spanish copy and project design tokens.
 
 **Tech Stack:** Next.js 16 App Router, `next/server` (`NextRequest`/`NextResponse`), Vitest + React Testing Library (existing setup in `vitest.config.ts`).
 
 ## Global Constraints
 
-- Do not modify, create, or read any `.env*` file. `MAINTENANCE_MODE` is documented for the user to set manually (spec: "Fuera de alcance").
+- Do not modify, create, or read any `.env*` file. `NEXT_PUBLIC_MAINTENANCE_MODE` is documented for the user to set manually (spec: "Fuera de alcance").
 - Do not delete or restructure any existing page/route.
 - Coming-soon page copy is fixed Spanish text, no `next-intl` (spec: explicit decision, page lives outside `[locale]`).
 - Follow existing component folder convention: kebab-case folder, PascalCase component file, colocated `kebab-case.scss`, barrel `index.ts` (see `src/features/team`).
@@ -258,15 +258,15 @@ vi.mock("next-intl/middleware", () => ({
 import middleware from "./proxy";
 
 describe("middleware", () => {
-  const originalEnv = process.env.MAINTENANCE_MODE;
+  const originalEnv = process.env.NEXT_PUBLIC_MAINTENANCE_MODE;
 
   afterEach(() => {
-    process.env.MAINTENANCE_MODE = originalEnv;
+    process.env.NEXT_PUBLIC_MAINTENANCE_MODE = originalEnv;
     intlMiddlewareMock.mockClear();
   });
 
   it("delegates to the next-intl middleware when maintenance mode is off", () => {
-    process.env.MAINTENANCE_MODE = "false";
+    process.env.NEXT_PUBLIC_MAINTENANCE_MODE = "false";
     const request = new NextRequest(new URL("https://example.com/es/team"));
 
     middleware(request);
@@ -274,8 +274,8 @@ describe("middleware", () => {
     expect(intlMiddlewareMock).toHaveBeenCalledWith(request);
   });
 
-  it("delegates to the next-intl middleware when MAINTENANCE_MODE is unset", () => {
-    delete process.env.MAINTENANCE_MODE;
+  it("delegates to the next-intl middleware when NEXT_PUBLIC_MAINTENANCE_MODE is unset", () => {
+    delete process.env.NEXT_PUBLIC_MAINTENANCE_MODE;
     const request = new NextRequest(new URL("https://example.com/"));
 
     middleware(request);
@@ -284,7 +284,7 @@ describe("middleware", () => {
   });
 
   it("rewrites to /coming-soon when maintenance mode is on", () => {
-    process.env.MAINTENANCE_MODE = "true";
+    process.env.NEXT_PUBLIC_MAINTENANCE_MODE = "true";
     const request = new NextRequest(new URL("https://example.com/es/team"));
 
     const response = middleware(request);
@@ -294,7 +294,7 @@ describe("middleware", () => {
   });
 
   it("does not rewrite the /coming-soon path itself, even in maintenance mode", () => {
-    process.env.MAINTENANCE_MODE = "true";
+    process.env.NEXT_PUBLIC_MAINTENANCE_MODE = "true";
     const request = new NextRequest(new URL("https://example.com/coming-soon"));
 
     middleware(request);
@@ -321,7 +321,7 @@ import { routing } from "./src/i18n/routing";
 const intlMiddleware = createMiddleware(routing);
 
 export default function middleware(request: NextRequest) {
-  const isMaintenanceMode = process.env.MAINTENANCE_MODE === "true";
+  const isMaintenanceMode = process.env.NEXT_PUBLIC_MAINTENANCE_MODE === "true";
   const isComingSoonPath = request.nextUrl.pathname === "/coming-soon";
 
   if (isMaintenanceMode && !isComingSoonPath) {
@@ -345,7 +345,7 @@ Expected: PASS (4 tests)
 
 ```bash
 git add proxy.ts proxy.test.ts
-git commit -m "feat(maintenance): rewrite to /coming-soon when MAINTENANCE_MODE is on"
+git commit -m "feat(maintenance): rewrite to /coming-soon when NEXT_PUBLIC_MAINTENANCE_MODE is on"
 ```
 
 ---
@@ -386,7 +386,7 @@ Expected: `200`, and visiting `http://localhost:3000/es/team` in the browser sho
 Stop the server, then run:
 
 ```bash
-MAINTENANCE_MODE=true npm run build && MAINTENANCE_MODE=true npm run start
+NEXT_PUBLIC_MAINTENANCE_MODE=true npm run build && NEXT_PUBLIC_MAINTENANCE_MODE=true npm run start
 ```
 
 In another terminal:
@@ -401,4 +401,4 @@ Expected: all three commands print `Próximamente`. Visiting `http://localhost:3
 
 - [ ] **Step 6: Report env var requirement to the user**
 
-No code step — confirm with the user that `MAINTENANCE_MODE=true` must be set manually in their local `.env` and/or in the Vercel project's environment variables to activate maintenance mode in that environment, since this plan does not touch any `.env` file.
+No code step — confirm with the user that `NEXT_PUBLIC_MAINTENANCE_MODE=true` must be set manually in their local `.env` and/or in the Vercel project's environment variables to activate maintenance mode in that environment, since this plan does not touch any `.env` file.
