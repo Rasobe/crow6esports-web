@@ -1,20 +1,8 @@
-import {
-  CoachingBanner,
-  HeroSection,
-  StoreHighlight,
-  TeamHighlight,
-} from "@/features/home";
+import { HomePage } from "@/features/home";
 import { createGenerateMetadata } from "@/components/seo/MetaTags";
 
 export const generateMetadata = createGenerateMetadata("home", "");
 
-export default function HomePage() {
-  return (
-    <>
-      <HeroSection />
-      <TeamHighlight />
-      <CoachingBanner />
-      <StoreHighlight />
-    </>
-  );
+export default function Page() {
+  return <HomePage />;
 }

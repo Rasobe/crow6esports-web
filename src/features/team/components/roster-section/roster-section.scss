@@ -1,0 +1,65 @@
+@layer components {
+    .roster-section {
+        position: relative;
+        padding: 48px 0;
+        background: var(--bg-surface);
+
+        &:last-of-type {
+            border-bottom: none;
+        }
+    }
+
+    .roster-section__inner {
+        position: relative;
+        max-width: var(--container);
+        margin-inline: auto;
+        padding-inline: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+    }
+
+    // Cabecera de sección — título pequeño con línea
+    .roster-section__title {
+        font-family: var(--font-ui), sans-serif;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        color: var(--brand);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        &::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: var(--border-subtle);
+        }
+    }
+
+    // Grid de cards — auto-fill para adaptarse al número de items
+    .roster-section__list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 16px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .roster-section__list-item {
+        display: flex;
+    }
+
+    @media (max-width: 640px) {
+        .roster-section {
+            padding: 32px 0;
+        }
+
+        .roster-section__list {
+            grid-template-columns: 1fr;
+        }
+    }
+}

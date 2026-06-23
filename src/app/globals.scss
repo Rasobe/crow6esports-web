@@ -1,5 +1,3 @@
-@import "tailwindcss";
-
 /* ═══════════════════════════════════════════════════════════════
    CROW 6 ESPORTS — Global Styles
    
@@ -8,20 +6,9 @@
 ═══════════════════════════════════════════════════════════════ */
 
 /* ── Global ── */
-@import "styles/tokens";
-@import "styles/tailwind-theme";
-@import "styles/reset";
-@import "styles/typography";
-@import "styles/scrollbar";
-@import "styles/utilities";
-
-/* ── Components ── */
-@import "components/ui/button/button";
-@import "components/layout/_components/navbar/navbar";
-@import "components/layout/_components/navbar/_components/locale-switcher/locale-switcher";
-@import "components/layout/_components/navbar/_components/mobile-menu/mobile-menu";
-@import "components/layout/_components/footer/footer";
-@import "./not-found";
-
-/* ── Features ── */
-@import "features/home/components/hero-section/hero-section";
+@use "styles/tokens";
+@use "styles/tailwind-theme";
+@use "styles/reset";
+@use "styles/typography";
+@use "styles/scrollbar";
+@use "styles/utilities";

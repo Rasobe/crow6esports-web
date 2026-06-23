@@ -1,5 +1,6 @@
 "use client"
 
+import "./hero-section.scss";
 import { Button } from "@/components/ui";
 import { ROUTES } from "@config/routes";
 import { useTranslations } from "next-intl";

@@ -65,9 +65,15 @@ export function PlayerCard({ player }: PlayerCardProps) {
             priority={false}
           />
         ) : (
-          <div className="player-card__no-image" aria-hidden="true">
-            <span className="player-card__no-image-icon">?</span>
-          </div>
+          <Image
+            src="/images/players/anonymous-player-silhouette.jpg"
+            alt=""
+            fill
+            sizes="(max-width: 768px) 100vw, 320px"
+            className="player-card__img player-card__img--anonymous"
+            priority={false}
+            aria-hidden="true"
+          />
         )}
         <div className="player-card__overlay" />
       </div>
@@ -75,10 +81,6 @@ export function PlayerCard({ player }: PlayerCardProps) {
       {/* ── Top badges ── */}
       <div className="player-card__top">
         <span className="player-card__role">{roleLabel}</span>
-        <span className="player-card__rank">
-          <span className="player-card__rank-dot" aria-hidden="true" />
-          {stats.rank}
-        </span>
         {statusKey && (
           <span className="player-card__status">{t(statusKey)}</span>
         )}

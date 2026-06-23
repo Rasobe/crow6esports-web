@@ -1,5 +1,6 @@
 "use client";
 
+import "./locale-switcher.scss";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter, usePathname } from "@/i18n/navigation";
 import { useTransition } from "react";
