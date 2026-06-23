@@ -30,7 +30,6 @@ export default function RootLayout({
 }) {
   return (
     <html
-      lang="es"
       className={`${antonSC.variable} ${barlowCondensed.variable} ${barlow.variable}`}
       data-scroll-behavior="smooth"
     >
