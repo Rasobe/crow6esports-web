@@ -1,7 +1,6 @@
 export const siteConfig = {
   name: "Crow 6 eSports",
   url: "https://crow6esports.com",
-  description: "Equipo competitivo de Rocket League",
 } as const;
 
 export const socialLinks = [

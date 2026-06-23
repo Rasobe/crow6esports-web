@@ -1,11 +1,19 @@
 {
+  "site": {
+    "description": "Competitive Rocket League organization based in Huesca, Spain."
+  },
   "nav": {
     "team": "Team",
     "news": "News",
     "store": "Store",
     "coaching": "Coaching",
     "about_us": "About us",
-    "join": "Join us"
+    "join": "Join us",
+    "home_aria": "Crow 6 Esports — Home",
+    "locale_switcher_aria": "Select language",
+    "menu_aria": "Navigation menu",
+    "menu_open_aria": "Open menu",
+    "menu_close_aria": "Close menu"
   },
   "home": {
     "meta": {
@@ -16,13 +24,72 @@
       "eyebrow": "Esports organization",
       "tagline": "Dominate · Compete · Conquer",
       "cta_team": "Meet the team",
-      "cta_join": "Join the team"
+      "cta_join": "Join the team",
+      "stats": {
+        "wins": "Wins",
+        "tournaments": "Tournaments",
+        "players": "Players",
+        "championships": "Championships"
+      }
     },
-    "stats": {
-      "wins": "Wins",
-      "tournaments": "Tournaments",
-      "players": "Players",
-      "championships": "Championships"
+    "teamHighlight": {
+      "eyebrow": "The Team",
+      "title": "Meet our players",
+      "subtitle": "Dedicated professionals representing Crow6 in the competitive arena.",
+      "cta_view_more": "View more"
+    },
+    "coachingBanner": {
+      "eyebrow": "Professional training",
+      "title": "Take your game to the next level",
+      "subtitle": "Personalized training to improve your performance in Rocket League in team or individually.",
+      "credibility": "6 years training players with up to 2000+ MMR",
+      "pack_1_title": "Basic Pack",
+      "pack_1_price": "€28/month",
+      "pack_1_description": "Ideal for starting to sharpen your mechanics and in-game decisions.",
+      "pack_1_feature_1": "1 weekly session (60 min)",
+      "pack_1_feature_2": "Feedback on your latest ranked match",
+      "pack_1_feature_3": "Access to the academy Discord",
+      "pack_2_badge": "Most popular",
+      "pack_2_title": "Featured Pack",
+      "pack_2_price": "€55/month",
+      "pack_2_description": "The perfect balance between consistent coaching and price.",
+      "pack_2_feature_1": "2 weekly sessions (60 min)",
+      "pack_2_feature_2": "Personalized replay analysis",
+      "pack_2_feature_3": "Monthly improvement plan",
+      "pack_2_feature_4": "Priority scheduling access",
+      "pack_3_title": "Premium Pack",
+      "pack_3_price": "€78/month",
+      "pack_3_description": "Intensive training for those competing at the highest level.",
+      "pack_3_feature_1": "3 weekly sessions (60 min)",
+      "pack_3_feature_2": "Unlimited VOD analysis",
+      "pack_3_feature_3": "1-on-1 follow-up on Discord",
+      "pack_3_feature_4": "Monthly session with the analyst team",
+      "cta_reserve": "Book a session"
+    },
+    "storeHighlight": {
+      "eyebrow": "The Store",
+      "title": "Wear the Crow6 colors",
+      "subtitle": "Official gear designed for the team and the fans.",
+      "cta_view_more": "View more"
+    },
+    "playerCard": {
+      "stat_mmr": "MMR",
+      "stat_peak": "PEAK",
+      "stat_age": "AGE",
+      "role_player": "Player",
+      "role_coach": "Coach",
+      "role_analyst": "Analyst",
+      "role_manager": "Manager",
+      "status_substitute": "Substitute",
+      "status_retired": "Retired",
+      "status_former": "Former"
+    },
+    "productCard": {
+      "category_jersey": "Jersey",
+      "category_hoodie": "Hoodie",
+      "category_cap": "Cap",
+      "category_accessory": "Accessory",
+      "featured_badge": "Featured"
     }
   },
   "team": {

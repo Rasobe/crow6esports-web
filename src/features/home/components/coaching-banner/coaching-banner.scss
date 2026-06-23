@@ -1,0 +1,150 @@
+@layer components {
+  .coaching-banner {
+    position: relative;
+    padding: 100px 0;
+    overflow: hidden;
+  }
+
+  .coaching-banner__inner {
+    max-width: var(--container);
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+  }
+
+  .coaching-banner__credibility {
+    align-self: center;
+    padding: 0.5rem 1.25rem;
+    border: 1px solid var(--border-strong);
+    color: var(--text-secondary);
+    font-size: 0.8125rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .coaching-banner__packs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    gap: 24px;
+  }
+
+  .coaching-pack,
+  .coaching-pack--featured {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 2rem;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+  }
+
+  .coaching-pack--featured {
+    background: var(--grad-surface);
+    border-color: var(--brand);
+    padding: 2.5rem 2rem;
+    transform: scale(1.05);
+    z-index: 1;
+  }
+
+  .coaching-pack__badge {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.25rem 1rem;
+    background: var(--brand);
+    color: var(--brand-fg);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .coaching-pack__title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .coaching-pack__price {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--brand);
+  }
+
+  .coaching-pack__description {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    font-style: italic;
+  }
+
+  .coaching-pack__features {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 8px;
+    list-style: none;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+
+    li {
+      padding-left: 1.25rem;
+      position: relative;
+
+      &::before {
+        content: "—";
+        position: absolute;
+        left: 0;
+        color: var(--brand);
+      }
+    }
+  }
+
+  .coaching-banner__footer {
+    display: flex;
+    justify-content: center;
+  }
+
+  /* ─── Responsive ─── */
+  @media (max-width: 640px) {
+    .coaching-banner {
+      padding: 64px 0;
+    }
+
+    .coaching-banner__inner {
+      gap: 36px;
+    }
+
+    .coaching-banner__credibility {
+      margin-top: 0;
+    }
+
+    .coaching-banner__packs {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      > * {
+        flex: 0 0 80%;
+        max-width: 300px;
+        scroll-snap-align: start;
+      }
+    }
+
+    .coaching-pack--featured {
+      order: -1;
+      transform: none;
+    }
+  }
+}

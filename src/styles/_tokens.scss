@@ -27,4 +27,22 @@
   /* Layout */
   --navbar-h: 68px;
   --container: 1280px;
+
+  /* ─────────────────────────────────────────────
+     GRADIENTS (Nuevos)
+     ───────────────────────────────────────────── */
+  /* Degradado principal de la marca (ej. para botones o textos destacados) */
+  --grad-brand: linear-gradient(135deg, var(--brand), var(--brand-dark));
+
+  /* Degradado sutil para fondos de tarjetas o secciones */
+  --grad-surface: linear-gradient(to bottom, var(--bg-surface), var(--bg-base));
+
+  /* Degradado tipo "brillo" superior usando tu borde sutil y transparente */
+  --grad-glow: radial-gradient(circle at top center, var(--border), transparent 70%);
+
+  /* Degradado con el truco moderno de color-mix que vimos antes */
+  --grad-fade: linear-gradient(to bottom,
+      transparent,
+      color-mix(in srgb, var(--brand) 40%, transparent),
+      var(--bg-base));
 }

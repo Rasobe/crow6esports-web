@@ -4,7 +4,7 @@ import { getTranslations } from "next-intl/server";
 
 interface BuildMetadataParams {
   title?: string;
-  description?: string;
+  description: string;
   image?: string;
   path?: string;
   locale?: string;
@@ -12,11 +12,11 @@ interface BuildMetadataParams {
 
 export function buildMetadata({
   title,
-  description = siteConfig.description,
+  description,
   image = "/images/og-default.jpg",
   path = "",
   locale = "es",
-}: BuildMetadataParams = {}): Metadata {
+}: BuildMetadataParams): Metadata {
   const pageTitle = title
     ? `${title} - ${siteConfig.name}`
     : siteConfig.name;

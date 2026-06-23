@@ -5,6 +5,8 @@ export type StockItem = {
   quantity: number;
 };
 
+export type ProductCategory = "jersey" | "hoodie" | "cap" | "accessory";
+
 export type Product = {
   id: string;
   slug: string;
@@ -14,6 +16,6 @@ export type Product = {
   currency: "EUR" | "USD";
   images: string[];
   stock: StockItem[];
-  category: "jersey" | "hoodie" | "cap" | "accessory";
+  category: ProductCategory;
   featured: boolean;
 };
