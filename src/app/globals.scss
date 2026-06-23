@@ -1,0 +1,14 @@
+/* ═══════════════════════════════════════════════════════════════
+   CROW 6 ESPORTS — Global Styles
+   
+   Punto de entrada central de estilos.
+   Importa todos los parciales globales y de componentes.
+═══════════════════════════════════════════════════════════════ */
+
+/* ── Global ── */
+@use "styles/tokens";
+@use "styles/tailwind-theme";
+@use "styles/reset";
+@use "styles/typography";
+@use "styles/scrollbar";
+@use "styles/utilities";

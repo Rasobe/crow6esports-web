@@ -1,12 +1,9 @@
-// app/page.tsx
-import { HeroSection, TeamHighlight, LatestNews } from "@/features/home";
+import { redirect } from "next/navigation";
+import { headers } from "next/headers";
 
-export default function HomePage() {
-  return (
-    <>
-      <HeroSection />
-      <TeamHighlight />
-      <LatestNews />
-    </>
-  );
+export default async function RootPage() {
+  const headersList = await headers();
+  const acceptLanguage = headersList.get("accept-language") ?? "";
+  const locale = acceptLanguage.startsWith("es") ? "es" : "en";
+  redirect(`/${locale}`);
 }

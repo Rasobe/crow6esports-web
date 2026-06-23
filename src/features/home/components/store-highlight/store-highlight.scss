@@ -1,0 +1,60 @@
+@layer components {
+  .store-highlight {
+    position: relative;
+    padding: 100px 0;
+    overflow: hidden;
+    background: var(--bg-surface);
+  }
+
+  .store-highlight__inner {
+    max-width: var(--container);
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+  }
+
+  /* ─── Cards grid (centered, doesn't stretch with few items) ─── */
+  .store-highlight__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 320px));
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .store-highlight__footer {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  /* ─── Responsive ─── */
+  @media (max-width: 640px) {
+    .store-highlight {
+      padding: 64px 0;
+    }
+
+    .store-highlight__inner {
+      gap: 36px;
+    }
+
+    .store-highlight__grid {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      > * {
+        flex: 0 0 75%;
+        max-width: 280px;
+        scroll-snap-align: start;
+      }
+    }
+  }
+}

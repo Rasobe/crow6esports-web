@@ -1,0 +1,19 @@
+/* ─────────────────────────────────────────────
+   FOOTER
+   ───────────────────────────────────────────── */
+@layer components {
+  .footer-link {
+    font-family: var(--font-ui), sans-serif;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .footer-link:hover {
+    color: var(--brand);
+  }
+}

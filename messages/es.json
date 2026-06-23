@@ -1,0 +1,188 @@
+{
+  "site": {
+    "description": "Organización competitiva de Rocket League con sede en Huesca, España."
+  },
+  "nav": {
+    "team": "Plantilla",
+    "news": "Noticias",
+    "store": "Tienda",
+    "coaching": "Coaching",
+    "about_us": "Sobre nosotros",
+    "join": "Únete",
+    "home_aria": "Crow 6 Esports — Inicio",
+    "locale_switcher_aria": "Seleccionar idioma",
+    "menu_aria": "Menú de navegación",
+    "menu_open_aria": "Abrir menú",
+    "menu_close_aria": "Cerrar menú"
+  },
+  "home": {
+    "meta": {
+      "title": "Inicio",
+      "description": "Organización competitiva de Rocket League."
+    },
+    "hero": {
+      "eyebrow": "Organización de esports",
+      "tagline": "Domina · Compite · Conquista",
+      "cta_team": "Ver equipo",
+      "cta_join": "Únete al equipo",
+      "stats": {
+        "wins": "Victorias",
+        "tournaments": "Torneos",
+        "players": "Jugadores",
+        "championships": "Campeonatos"
+      }
+    },
+    "teamHighlight": {
+      "eyebrow": "El Equipo",
+      "title": "Conoce a nuestros jugadores",
+      "subtitle": "Profesionales dedicados que representan a Crow6 en la arena competitiva.",
+      "cta_view_more": "Ver más"
+    },
+    "coachingBanner": {
+      "eyebrow": "Entrenamiento profesional",
+      "title": "Lleva tu juego al siguiente nivel",
+      "subtitle": "Entrenamiento personalizado para mejorar tu rendimiento en Rocket League en equipo o individualmente.",
+      "credibility": "6 años formando jugadores con hasta 2000+ MMR",
+      "pack_1_title": "Pack Básico",
+      "pack_1_price": "28€/mes",
+      "pack_1_description": "Ideal para empezar a pulir tu mecánica y tus decisiones en partido.",
+      "pack_1_feature_1": "1 sesión semanal (60 min)",
+      "pack_1_feature_2": "Feedback de tu última partida ranked",
+      "pack_1_feature_3": "Acceso al Discord de la academia",
+      "pack_2_badge": "Más elegido",
+      "pack_2_title": "Pack Destacado",
+      "pack_2_price": "55€/mes",
+      "pack_2_description": "El equilibrio perfecto entre seguimiento constante y precio.",
+      "pack_2_feature_1": "2 sesiones semanales (60 min)",
+      "pack_2_feature_2": "Análisis de replays personalizado",
+      "pack_2_feature_3": "Plan de mejora mensual",
+      "pack_2_feature_4": "Acceso prioritario a horarios",
+      "pack_3_title": "Pack Premium",
+      "pack_3_price": "78€/mes",
+      "pack_3_description": "Entrenamiento intensivo para quien compite al máximo nivel.",
+      "pack_3_feature_1": "3 sesiones semanales (60 min)",
+      "pack_3_feature_2": "Análisis de VOD ilimitado",
+      "pack_3_feature_3": "Seguimiento 1 a 1 por Discord",
+      "pack_3_feature_4": "Sesión mensual con el equipo de analistas",
+      "cta_reserve": "Reservar sesión"
+    },
+    "storeHighlight": {
+      "eyebrow": "La Tienda",
+      "title": "Viste los colores de Crow6",
+      "subtitle": "Equipación oficial pensada para el equipo y la afición.",
+      "cta_view_more": "Ver más"
+    },
+    "playerCard": {
+      "stat_mmr": "MMR",
+      "stat_peak": "PEAK",
+      "stat_age": "EDAD",
+      "role_player": "Jugador",
+      "role_coach": "Entrenador",
+      "role_analyst": "Analista",
+      "role_manager": "Manager",
+      "status_substitute": "Suplente",
+      "status_retired": "Retirado",
+      "status_former": "Ex-miembro"
+    },
+    "productCard": {
+      "category_jersey": "Camiseta",
+      "category_hoodie": "Sudadera",
+      "category_cap": "Gorra",
+      "category_accessory": "Accesorio",
+      "featured_badge": "Destacado"
+    }
+  },
+  "team": {
+    "meta": {
+      "title": "Plantilla",
+      "description": "El roster oficial de Crow 6 Esports."
+    },
+    "eyebrow": "Roster oficial",
+    "sections": {
+      "active": "Jugadores activos",
+      "substitutes": "Suplentes",
+      "staff": "Staff"
+    },
+    "cta": {
+      "eyebrow": "Únete al equipo",
+      "title": "¿LISTO PARA COMPETIR?",
+      "description": "Buscamos jugadores comprometidos con ganas de llevar su juego al siguiente nivel.",
+      "join": "Aplicar ahora"
+    }
+  },
+  "news": {
+    "title": "Noticias",
+    "eyebrow": "Últimas noticias",
+    "read_more": "Leer más"
+  },
+  "store": {
+    "title": "Tienda",
+    "eyebrow": "Merchandise oficial",
+    "sold_out": "Agotado",
+    "add_to_cart": "Añadir al carrito",
+    "size": "Talla"
+  },
+  "tryouts": {
+    "open": {
+      "eyebrow": "Proceso de selección",
+      "title": "Únete a",
+      "desc": "Buscamos jugadores comprometidos con ganas de competir al más alto nivel. El proceso es serio — si no estás dispuesto a trabajar, este no es tu equipo.",
+      "req_1": "Disponibilidad horaria confirmada",
+      "req_2": "Compromiso real con el equipo",
+      "req_3": "Cero toxicidad",
+      "step1_title": "Perfil básico",
+      "step1_sub": "Información personal y de contacto",
+      "step2_title": "Datos técnicos",
+      "step2_sub": "Tu nivel de juego actual en Rocket League",
+      "step3_title": "Mentalidad y equipo",
+      "step3_sub": "Lo más importante para nosotros",
+      "next": "Siguiente",
+      "back": "Atrás",
+      "submit": "Enviar solicitud",
+      "step_of": "Paso {current} de {total}",
+      "success_label": "#GOCROWS",
+      "success_title": "Solicitud enviada",
+      "success_desc": "Revisamos cada candidatura personalmente. Si encajas con lo que buscamos, te contactaremos por Discord en un plazo de 7 días.",
+      "success_note": "Si no recibes respuesta en 7 días, tu candidatura no ha sido seleccionada para esta convocatoria."
+    },
+    "closed": {
+      "label": "Proceso cerrado",
+      "title": "Tryouts cerrados",
+      "desc": "Actualmente no estamos buscando jugadores. Déjanos tu Discord y te avisamos cuando abramos el siguiente proceso.",
+      "notify_placeholder": "Tu usuario de Discord",
+      "notify_btn": "Avísame"
+    }
+  },
+  "coaching": {
+    "eyebrow": "Entrenamiento profesional",
+    "title": "Coaching",
+    "individual": "Individual",
+    "group": "Grupal",
+    "book": "Reservar sesión",
+    "contact": "Contactar"
+  },
+  "footer": {
+    "nav": {
+      "title": "Navegación",
+      "team": "Plantilla",
+      "news": "Noticias",
+      "store": "Tienda",
+      "coaching": "Coaching",
+      "about_us": "Sobre nosotros"
+    },
+    "contact": {
+      "title": "Contacto",
+      "email": "crow6esports@gmail.com",
+      "location": "Huesca, España"
+    },
+    "brand_description": "Organización competitiva de Rocket League.",
+    "rights": "Todos los derechos reservados",
+    "founded": "Fundado en 2020 · Huesca, España"
+  },
+  "notFound": {
+    "eyebrow": "Página no encontrada",
+    "title": "PÁGINA <span>NO</span><br>ENCONTRADA",
+    "desc": "La página que buscas no existe o ha sido movida. Vuelve al inicio y sigue compitiendo.",
+    "cta": "Volver al inicio"
+  }
+}

@@ -1,0 +1,107 @@
+/* ─────────────────────────────────────────────
+   NOT FOUND
+   ───────────────────────────────────────────── */
+@layer components {
+  .not-found {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100dvh - var(--navbar-h));
+    padding: 2rem;
+    overflow: hidden;
+  }
+
+  .not-found__bg-number {
+    font-family: var(--font-display), sans-serif;
+    font-size: clamp(200px, 35vw, 360px);
+    line-height: 1;
+    letter-spacing: -8px;
+    color: rgba(245, 184, 0, 0.06);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .not-found__inner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0;
+  }
+
+  .not-found__eyebrow {
+    font-family: var(--font-ui), sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--brand);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+
+  .not-found__eyebrow span {
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: rgba(245, 184, 0, 0.4);
+  }
+
+  .not-found__title {
+    font-family: var(--font-display), sans-serif;
+    font-size: clamp(48px, 10vw, 80px);
+    line-height: 1;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+  }
+
+  .not-found__title span {
+    color: var(--brand);
+  }
+
+  .not-found__divider {
+    width: 2px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--brand), transparent);
+    margin: 0 auto 24px;
+  }
+
+  .not-found__desc {
+    font-family: var(--font-body), sans-serif;
+    font-size: 15px;
+    color: var(--text-secondary);
+    max-width: 400px;
+    line-height: 1.7;
+    margin-bottom: 40px;
+  }
+
+  .not-found__cta {
+    font-family: var(--font-ui), sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--brand);
+    background: transparent;
+    border: 1.5px solid var(--brand);
+    padding: 12px 32px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  .not-found__cta:hover {
+    background: var(--brand);
+    color: var(--brand-fg);
+  }
+}
