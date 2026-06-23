@@ -103,7 +103,12 @@
       "substitutes": "Suplentes",
       "staff": "Staff"
     },
-    "cta_join": "Únete al equipo"
+    "cta": {
+      "eyebrow": "Únete al equipo",
+      "title": "¿LISTO PARA COMPETIR?",
+      "description": "Buscamos jugadores comprometidos con ganas de llevar su juego al siguiente nivel.",
+      "join": "Aplicar ahora"
+    }
   },
   "news": {
     "title": "Noticias",

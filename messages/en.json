@@ -102,6 +102,12 @@
       "active": "Active players",
       "substitutes": "Substitutes",
       "staff": "Staff"
+    },
+    "cta": {
+      "eyebrow": "Join the team",
+      "title": "READY TO COMPETE?",
+      "description": "We are looking for committed players who want to take their game to the next level.",
+      "join": "Apply now"
     }
   },
   "news": {
