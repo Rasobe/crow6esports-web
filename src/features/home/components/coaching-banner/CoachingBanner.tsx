@@ -1,3 +1,4 @@
+import "./coaching-banner.scss";
 import { Button, SectionHeader } from "@/components/ui";
 import { ROUTES } from "@config/routes";
 import { useTranslations } from "next-intl";

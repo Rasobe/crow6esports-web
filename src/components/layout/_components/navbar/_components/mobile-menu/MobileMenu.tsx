@@ -1,5 +1,6 @@
 "use client";
 
+import "./mobile-menu.scss";
 import { useState, useEffect, useRef } from "react";
 import { Link, usePathname } from "@/i18n/navigation";
 import { Menu, X } from "lucide-react";

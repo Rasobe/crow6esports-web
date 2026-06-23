@@ -1,3 +1,4 @@
+import "./footer.scss";
 import { FooterBottom, FooterBrand, FooterContact, FooterNav } from "./_components";
 
 export function Footer() {

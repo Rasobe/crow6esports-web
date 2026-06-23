@@ -1,5 +1,6 @@
 import { Anton_SC, Barlow_Condensed, Barlow } from "next/font/google";
 import "./globals.scss";
+import "./globals.css";
 
 const antonSC = Anton_SC({
   variable: "--font-display",

@@ -7,8 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "vitest run",
-    "sass": "sass --watch src/app/globals.scss:src/styles/globals.css"
+    "test": "vitest run"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.1",

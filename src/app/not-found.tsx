@@ -1,3 +1,4 @@
+import "./not-found.scss";
 import { headers } from "next/headers";
 import Link from "next/link";
 import { IconArrowLeft } from "@/components/ui";
