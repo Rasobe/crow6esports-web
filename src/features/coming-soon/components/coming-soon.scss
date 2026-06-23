@@ -1,0 +1,168 @@
+@layer components {
+    .coming-soon {
+      position: relative;
+      min-height: 100dvh;
+      background: var(--bg-base);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+  
+    // Número decorativo de fondo
+    .coming-soon__bg-text {
+      position: fixed;
+      font-family: var(--font-display), sans-serif;
+      font-size: clamp(180px, 35vw, 340px);
+      line-height: 1;
+      color: rgba(245, 184, 0, 0.03);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      user-select: none;
+      letter-spacing: -8px;
+      white-space: nowrap;
+    }
+  
+    // Esquinas decorativas
+    .coming-soon__corner {
+      position: fixed;
+      width: 32px;
+      height: 32px;
+  
+      &--tl { top: 32px;    left: 64px;   border-top: 1px solid rgba(245,184,0,0.3); border-left: 1px solid rgba(245,184,0,0.3); }
+      &--tr { top: 32px;    right: 64px;  border-top: 1px solid rgba(245,184,0,0.3); border-right: 1px solid rgba(245,184,0,0.3); }
+      &--bl { bottom: 32px; left: 64px;   border-bottom: 1px solid rgba(245,184,0,0.3); border-left: 1px solid rgba(245,184,0,0.3); }
+      &--br { bottom: 32px; right: 64px;  border-bottom: 1px solid rgba(245,184,0,0.3); border-right: 1px solid rgba(245,184,0,0.3); }
+    }
+  
+    // Contenido central
+    .coming-soon__inner {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 40px 24px;
+      max-width: 640px;
+      width: 100%;
+      gap: 0;
+    }
+  
+    // Logo
+    .coming-soon__logo {
+      margin-bottom: 48px;
+      opacity: 0.9;
+    }
+  
+    // Eyebrow
+    .coming-soon__eyebrow {
+      font-family: var(--font-ui), sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--brand);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+  
+      span {
+        display: block;
+        width: 40px;
+        height: 1px;
+        background: rgba(245, 184, 0, 0.4);
+      }
+    }
+  
+    // Título
+    .coming-soon__title {
+      font-family: var(--font-display), sans-serif;
+      font-size: clamp(56px, 12vw, 100px);
+      line-height: 0.9;
+      letter-spacing: -1px;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+  
+      span { color: var(--brand); }
+    }
+  
+    // Divisor
+    .coming-soon__divider {
+      width: 2px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--brand), transparent);
+      margin: 0 auto 24px;
+    }
+  
+    // Descripción
+    .coming-soon__description {
+      font-family: var(--font-body), sans-serif;
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      max-width: 400px;
+      margin-bottom: 40px;
+    }
+  
+    // Redes sociales
+    .coming-soon__socials {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 48px;
+    }
+  
+    .coming-soon__social {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.4);
+      text-decoration: none;
+      clip-path: polygon(4px 0%, 100% 0%, calc(100% - 4px) 100%, 0% 100%);
+      transition: border-color 0.2s ease, color 0.2s ease;
+  
+      &:hover {
+        border-color: rgba(245, 184, 0, 0.5);
+        color: var(--brand);
+      }
+    }
+  
+    // Meta info
+    .coming-soon__meta {
+      font-family: var(--font-ui), sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.15);
+    }
+  
+    // Hashtag anclado abajo
+    .coming-soon__hashtag {
+      position: fixed;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-ui), sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: rgba(245, 184, 0, 0.3);
+      white-space: nowrap;
+    }
+  
+    // Responsive
+    @media (max-width: 640px) {
+      .coming-soon__corner { display: none; }
+  
+      .coming-soon__title {
+        font-size: clamp(48px, 15vw, 72px);
+      }
+    }
+  }

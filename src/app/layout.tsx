@@ -1,6 +1,6 @@
 import { Anton_SC, Barlow_Condensed, Barlow } from "next/font/google";
-import "./globals.scss";
 import "./globals.css";
+import "./globals.scss";
 
 const antonSC = Anton_SC({
   variable: "--font-display",
@@ -25,11 +25,11 @@ const barlow = Barlow({
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
-    <html 
+    <html
       className={`${antonSC.variable} ${barlowCondensed.variable} ${barlow.variable}`}
       data-scroll-behavior="smooth"
     >

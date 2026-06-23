@@ -106,9 +106,12 @@ Crea un archivo `.env.local` en la raíz:
 STRIPE_SECRET_KEY=sk_...
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_...
 RESEND_API_KEY=re_...
+NEXT_PUBLIC_MAINTENANCE_MODE=true
 ```
 
 Nunca subas `.env.local` al repositorio. Está incluido en `.gitignore` por defecto con `create-next-app`.
+
+**`NEXT_PUBLIC_MAINTENANCE_MODE`:** Si se define como `true`, todas las rutas se reescriben a `/coming-soon` excepto la propia página de mantenimiento. Útil para desactivar el sitio temporalmente sin desplegar. Para restaurar el comportamiento normal, desactívalo o asígnale cualquier otro valor. Configurable tanto en `.env.local` como en el panel de Vercel.
 
 ## Despliegue
 
