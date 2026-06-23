@@ -1,0 +1,57 @@
+@layer components {
+    .coming-soon {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--bg-base);
+        padding: 24px;
+    }
+
+    .coming-soon__inner {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+        max-width: 480px;
+        text-align: center;
+        padding-top: 32px;
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 64px;
+            height: 3px;
+            background: linear-gradient(to right, transparent, var(--brand), transparent);
+        }
+    }
+
+    .coming-soon__eyebrow {
+        font-family: var(--font-ui), sans-serif;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        color: var(--brand);
+    }
+
+    .coming-soon__title {
+        font-family: var(--font-display), sans-serif;
+        font-size: clamp(40px, 9vw, 72px);
+        line-height: 0.95;
+        letter-spacing: 0.02em;
+        color: var(--text-primary);
+        text-transform: uppercase;
+    }
+
+    .coming-soon__description {
+        font-family: var(--font-body), sans-serif;
+        font-size: 15px;
+        color: var(--text-secondary);
+        line-height: 1.7;
+    }
+}
