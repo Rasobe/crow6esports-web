@@ -98,11 +98,10 @@
       "description": "El roster oficial de Crow 6 Esports."
     },
     "eyebrow": "Roster oficial",
-    "roles": {
-      "first": "1st Man",
-      "second": "2nd Man",
-      "third": "3rd Man",
-      "flex": "Flexible"
+    "sections": {
+      "active": "Jugadores activos",
+      "substitutes": "Suplentes",
+      "staff": "Staff"
     }
   },
   "news": {
