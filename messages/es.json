@@ -102,7 +102,8 @@
       "active": "Jugadores activos",
       "substitutes": "Suplentes",
       "staff": "Staff"
-    }
+    },
+    "cta_join": "Únete al equipo"
   },
   "news": {
     "title": "Noticias",
