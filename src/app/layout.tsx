@@ -1,4 +1,5 @@
 import { Anton_SC, Barlow_Condensed, Barlow } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import "./globals.scss";
 
@@ -30,10 +31,13 @@ export default function RootLayout({
 }>) {
   return (
     <html
+      lang="es"
       className={`${antonSC.variable} ${barlowCondensed.variable} ${barlow.variable}`}
-      data-scroll-behavior="smooth"
     >
-      <body>{children}</body>
+      <body>
+        <Analytics />
+        {children}
+      </body>
     </html>
   );
 }
