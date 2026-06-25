@@ -4,11 +4,21 @@ import { useTranslations } from "next-intl";
 import { useTryoutsForm } from "./useTryoutsForm";
 import { FormProvider } from "react-hook-form";
 import { StepMindset, StepProfile, StepTechnical } from "../steps";
+import { Button } from "@/components/ui";
+import clsx from "clsx";
+import "./tryouts-form.scss";
 
 export function TryoutsForm() {
-    const t = useTranslations("tryouts.open");
-
-    const { form, currentStep, goNext, goPrev, isLoading, onSubmit, totalSteps, isError, isSubmitted } = useTryoutsForm();
+    const t = useTranslations("tryouts.open.form");
+    const {
+        form,
+        currentStep,
+        isLoading,
+        totalSteps,
+        goNext,
+        goPrev,
+        onSubmit
+    } = useTryoutsForm();
 
     return (
         <FormProvider {...form}>
@@ -19,52 +29,41 @@ export function TryoutsForm() {
                     {Array.from({ length: totalSteps }).map((_, i) => (
                         <div
                             key={i}
-                            className={[
-                                "tryouts-progress__step",
-                                i < currentStep && "tryouts-progress__step--done",
-                                i === currentStep && "tryouts-progress__step--active",
-                            ].filter(Boolean).join(" ")}
+                            className={clsx("tryouts-progress__step", {
+                                "tryouts-progress__step--done": i < currentStep,
+                                "tryouts-progress__step--active": i === currentStep,
+                            })}
                         />
                     ))}
                 </div>
 
                 {/* Steps */}
-                {currentStep === 0 && <StepProfile />}
-                {currentStep === 1 && <StepTechnical />}
-                {currentStep === 2 && <StepMindset />}
+                <div key={currentStep} className="tryouts-step-wrapper">
+                    {currentStep === 0 && <StepProfile />}
+                    {currentStep === 1 && <StepTechnical />}
+                    {currentStep === 2 && <StepMindset />}
+                </div>
 
                 {/* Navegación */}
                 <div className="tryouts-form__nav">
                     {currentStep > 0 && (
-                        <button
-                            type="button"
-                            className="btn btn--ghost btn--md"
-                            onClick={goPrev}
-                        >
+                        <Button variant="ghost" onClick={goPrev} type="button">
                             {t("back")}
-                        </button>
+                        </Button>
                     )}
 
                     {currentStep < totalSteps - 1 ? (
-                        <button
-                            type="button"
-                            className="btn btn--primary btn--md"
-                            onClick={goNext}
-                        >
+                        <Button variant="primary" onClick={goNext} type="button">
                             {t("next")}
-                        </button>
+                        </Button>
                     ) : (
-                        <button
-                            type="submit"
-                            className="btn btn--primary btn--md"
-                            disabled={isLoading}
-                        >
+                        <Button variant="primary" type="submit" disabled={isLoading}>
                             {isLoading ? t("submitting") : t("submit")}
-                        </button>
+                        </Button>
                     )}
                 </div>
 
             </form>
         </FormProvider>
-    )
+    );
 }

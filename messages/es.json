@@ -185,6 +185,7 @@
           },
           "playstyle": {
             "label": "Estilo de juego predominante",
+            "placeholder": "Selecciona un estilo de juego",
             "options": {
               "calm": "Calma y posicionamiento",
               "intermediate": "Equilibrado",
@@ -240,6 +241,7 @@
           "availability_weekdays_required": "La disponibilidad entre semana es obligatoria",
           "availability_weekends_required": "La disponibilidad en fines de semana es obligatoria",
           "availability_scrims_required": "La disponibilidad para scrims es obligatoria",
+          "rltracker_required": "El enlace de RLTracker es obligatorio",
           "rltracker_invalid": "Introduce una URL válida de RLTracker",
           "rank_required": "El rango es obligatorio",
           "peak_required": "El peak MMR es obligatorio",
