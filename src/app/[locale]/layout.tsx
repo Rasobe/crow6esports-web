@@ -4,8 +4,9 @@ import { getMessages, getTranslations, setRequestLocale } from "next-intl/server
 import { notFound } from "next/navigation";
 import { siteConfig } from "@config/site";
 import { routing } from "@/i18n/routing";
-import { Footer, Navbar } from "@/components/layout/_components";
-import { buildMetadata } from "@/components/seo/MetaTags";
+import { Footer, Navbar } from "@/components/layout";
+import { buildMetadata } from "@/components/seo";
+import { QueryProvider } from "@/components/providers";
 
 export async function generateMetadata({
   params,
@@ -43,11 +44,13 @@ export default async function LocaleLayout({
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
-      <Navbar />
-      <div className="content-offset flex flex-1 flex-col">
-        {children}
-      </div>
-      <Footer />
+      <QueryProvider>
+        <Navbar />
+        <div className="content-offset flex flex-1 flex-col">
+          {children}
+        </div>
+        <Footer />
+      </QueryProvider>
     </NextIntlClientProvider>
   );
 }

@@ -1,4 +1,4 @@
-import { TryoutsForm } from "./_components";
+import { TryoutsForm } from "./components";
 
 export function TryoutsOpen() {
     return (
