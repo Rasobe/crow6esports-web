@@ -129,25 +129,130 @@
     },
     "open": {
       "eyebrow": "Proceso de selección",
-      "title": "Únete a",
-      "desc": "Buscamos jugadores comprometidos con ganas de competir al más alto nivel. El proceso es serio — si no estás dispuesto a trabajar, este no es tu equipo.",
-      "req_1": "Disponibilidad horaria confirmada",
-      "req_2": "Compromiso real con el equipo",
-      "req_3": "Cero toxicidad",
-      "step1_title": "Perfil básico",
-      "step1_sub": "Información personal y de contacto",
-      "step2_title": "Datos técnicos",
-      "step2_sub": "Tu nivel de juego actual en Rocket League",
-      "step3_title": "Mentalidad y equipo",
-      "step3_sub": "Lo más importante para nosotros",
-      "next": "Siguiente",
-      "back": "Atrás",
-      "submit": "Enviar solicitud",
-      "step_of": "Paso {current} de {total}",
-      "success_label": "#GOCROWS",
-      "success_title": "Solicitud enviada",
-      "success_desc": "Revisamos cada candidatura personalmente. Si encajas con lo que buscamos, te contactaremos por Discord en un plazo de 7 días.",
-      "success_note": "Si no recibes respuesta en 7 días, tu candidatura no ha sido seleccionada para esta convocatoria."
+      "title": "ÚNETE A CROW 6",
+      "desc": "Buscamos jugadores comprometidos con ganas de competir al más alto nivel.",
+      "form": {
+        "back": "Atrás",
+        "next": "Siguiente",
+        "submit": "Enviar solicitud",
+        "submitting": "Enviando...",
+        "steps": {
+          "profile": "Perfil",
+          "technical": "Técnico",
+          "mindset": "Mentalidad"
+        },
+        "fields": {
+          "discord": {
+            "label": "Discord ID",
+            "placeholder": "usuario#0000",
+            "hint": "Principal método de contacto"
+          },
+          "birth_date": {
+            "label": "Fecha de nacimiento",
+            "placeholder": "DD/MM/AAAA"
+          },
+          "country": {
+            "label": "País / Región",
+            "placeholder": "España"
+          },
+          "availability_weekdays": {
+            "label": "Disponibilidad entre semana",
+            "placeholder": "Ej: L-V 18:00 a 22:00"
+          },
+          "availability_weekends": {
+            "label": "Disponibilidad fines de semana",
+            "placeholder": "Ej: S-D 10:00 a 23:00"
+          },
+          "availability_scrims": {
+            "label": "Disponibilidad para scrims",
+            "placeholder": "Ej: Miércoles y viernes 20:00"
+          },
+          "rltracker": {
+            "label": "Enlace RLTracker",
+            "placeholder": "https://rocketleague.tracker.network/..."
+          },
+          "rank": {
+            "label": "Rango actual 2v2 (MMR)",
+            "placeholder": "Ej: 1830"
+          },
+          "peak": {
+            "label": "Peak 2v2 (MMR)",
+            "placeholder": "Ej: 2120"
+          },
+          "hours_played": {
+            "label": "Horas jugadas totales",
+            "placeholder": "Ej: 5000"
+          },
+          "playstyle": {
+            "label": "Estilo de juego predominante",
+            "options": {
+              "calm": "Calma y posicionamiento",
+              "intermediate": "Equilibrado",
+              "mechanical": "Mecánicas",
+              "aggressive": "Agresividad"
+            }
+          },
+          "highlights": {
+            "label": "Clip o highlights",
+            "placeholder": "YouTube, Medal, Twitch...",
+            "hint": "Opcional"
+          },
+          "competitive_exp": {
+            "label": "¿Tienes experiencia en equipos competitivos?",
+            "options": {
+              "yes": "Sí",
+              "no": "No"
+            }
+          },
+          "previous_teams": {
+            "label": "¿En qué equipos?",
+            "placeholder": "Nombre del equipo, liga, temporada..."
+          },
+          "reaction_mistakes": {
+            "label": "¿Cómo reaccionas cuando un compañero comete un error repetido?",
+            "placeholder": "Sé honesto..."
+          },
+          "reaction_losses": {
+            "label": "¿Cómo reaccionas frente a una racha de derrotas?",
+            "options": {
+              "encourage": "Animo a mis compañeros",
+              "down": "Me vengo abajo",
+              "calm": "Sigo adelante con calma"
+            }
+          },
+          "looking_for": {
+            "label": "¿Qué buscas en Crow 6 Esports?",
+            "placeholder": "¿Qué esperas del equipo?"
+          },
+          "open_to_coaching": {
+            "label": "¿Estás dispuesto a recibir coaching o hacer VOD reviews?",
+            "options": {
+              "yes": "Sí",
+              "no": "No",
+              "maybe": "Tal vez"
+            }
+          }
+        },
+        "validation": {
+          "discord_required": "El Discord ID es obligatorio",
+          "birth_date_required": "La fecha de nacimiento es obligatoria",
+          "country_required": "El país es obligatorio",
+          "availability_weekdays_required": "La disponibilidad entre semana es obligatoria",
+          "availability_weekends_required": "La disponibilidad en fines de semana es obligatoria",
+          "availability_scrims_required": "La disponibilidad para scrims es obligatoria",
+          "rltracker_invalid": "Introduce una URL válida de RLTracker",
+          "rank_required": "El rango es obligatorio",
+          "peak_required": "El peak MMR es obligatorio",
+          "hours_required": "Las horas jugadas son obligatorias",
+          "playstyle_required": "Selecciona un estilo de juego",
+          "highlights_invalid": "Introduce una URL válida",
+          "competitive_exp_required": "Este campo es obligatorio",
+          "reaction_mistakes_required": "Respuesta demasiado corta — mínimo 10 caracteres",
+          "reaction_losses_required": "Este campo es obligatorio",
+          "looking_for_required": "Respuesta demasiado corta — mínimo 10 caracteres",
+          "coaching_required": "Este campo es obligatorio"
+        }
+      }
     },
     "closed": {
       "label": "Proceso cerrado",
