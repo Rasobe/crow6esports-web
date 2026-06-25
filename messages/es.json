@@ -123,6 +123,10 @@
     "size": "Talla"
   },
   "tryouts": {
+    "meta": {
+      "title": "Tryouts",
+      "description": "Proceso de selección de jugadores para Crow 6 Esports."
+    },
     "open": {
       "eyebrow": "Proceso de selección",
       "title": "Únete a",
@@ -147,10 +151,13 @@
     },
     "closed": {
       "label": "Proceso cerrado",
-      "title": "Tryouts cerrados",
-      "desc": "Actualmente no estamos buscando jugadores. Déjanos tu Discord y te avisamos cuando abramos el siguiente proceso.",
+      "eyebrow": "Proceso de selección",
+      "title": "TRYOUTS CERRADOS",
+      "subtitle": "",
+      "desc": "Déjanos tu Discord y te avisamos cuando abramos el siguiente proceso.",
+      "notify_label": "Déjanos tu Discord",
       "notify_placeholder": "Tu usuario de Discord",
-      "notify_btn": "Avísame"
+      "notify_button": "Avísame"
     }
   },
   "coaching": {

@@ -123,6 +123,10 @@
     "size": "Size"
   },
   "tryouts": {
+    "meta": {
+      "title": "Tryouts",
+      "description": "Player selection process for Crow 6 Esports."
+    },
     "open": {
       "eyebrow": "Selection process",
       "title": "Join",
@@ -146,11 +150,14 @@
       "success_note": "If you do not hear back within 7 days, your application was not selected for this round."
     },
     "closed": {
-      "label": "Process closed",
-      "title": "Tryouts closed",
-      "desc": "We are not currently looking for players. Leave your Discord and we will notify you when the next selection process opens.",
+      "label": "",
+      "eyebrow": "Selection process",
+      "title": "TRYOUTS CLOSED",
+      "subtitle": "",
+      "desc": "Leave your Discord and we will notify you when the next process opens.",
+      "notify_label": "Leave your Discord",
       "notify_placeholder": "Your Discord username",
-      "notify_btn": "Notify me"
+      "notify_button": "Notify me"
     }
   },
   "coaching": {
