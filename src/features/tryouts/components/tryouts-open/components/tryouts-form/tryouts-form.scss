@@ -4,7 +4,7 @@
     flex-direction: column;
     gap: 32px;
     width: 100%;
-    max-width: 640px;
+    max-width: var(--container);
     margin-inline: auto;
     padding: 32px 0;
   }
@@ -13,20 +13,43 @@
   .tryouts-progress {
     display: flex;
     gap: 6px;
-    align-items: center;
+    align-items: stretch;
   }
 
   .tryouts-progress__step {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .tryouts-progress__label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    transition: color 0.3s ease;
+
+    .tryouts-progress__step--active & {
+      color: var(--brand);
+    }
+
+    .tryouts-progress__step--done & {
+      color: var(--text-subtle);
+    }
+  }
+
+  .tryouts-progress__bar {
     height: 3px;
     background: var(--border-subtle);
     transition: background 0.3s ease;
 
-    &--active {
+    .tryouts-progress__step--active & {
       background: var(--brand);
     }
 
-    &--done {
+    .tryouts-progress__step--done & {
       background: var(--brand);
       opacity: 0.5;
     }
@@ -61,5 +84,15 @@
     justify-content: flex-end;
     gap: 12px;
     padding-top: 8px;
+  }
+
+  .tryouts-step__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+
+    @media (max-width: 640px) {
+      grid-template-columns: 1fr;
+    }
   }
 }

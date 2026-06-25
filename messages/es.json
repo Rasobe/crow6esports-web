@@ -130,7 +130,7 @@
     "open": {
       "eyebrow": "Proceso de selección",
       "title": "ÚNETE A CROW 6",
-      "desc": "Buscamos jugadores comprometidos con ganas de competir al más alto nivel.",
+      "desc": "Buscamos jugadores comprometidos que quieran competir al más alto nivel. El proceso es serio; si no estás dispuesto a esforzarte, este no es tu equipo.",
       "form": {
         "back": "Atrás",
         "next": "Siguiente",
@@ -254,6 +254,12 @@
           "looking_for_required": "Respuesta demasiado corta — mínimo 10 caracteres",
           "coaching_required": "Este campo es obligatorio"
         }
+      },
+      "success": {
+        "eyebrow": "#GOCROWS",
+        "title": "SOLICITUD ENVIADA",
+        "desc": "Hemos recibido tu solicitud. Revisamos cada candidatura personalmente. Si encajas con lo que buscamos, te contactaremos por Discord en un plazo de 7 días.",
+        "note": "Si no recibes respuesta en 7 días, tu candidatura no ha sido seleccionada para esta convocatoria."
       }
     },
     "closed": {

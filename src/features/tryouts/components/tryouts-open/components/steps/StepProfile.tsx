@@ -14,23 +14,25 @@ export function StepProfile() {
 
     return (
         <div className="tryouts-step">
-            <TextField
-                label={t("fields.discord.label")}
-                placeholder={t("fields.discord.placeholder")}
-                hint={t("fields.discord.hint")}
-                error={err("discord")}
-                required
-                {...register("discord")}
-            />
+            <div className="tryouts-step__row">
+                <TextField
+                    label={t("fields.discord.label")}
+                    placeholder={t("fields.discord.placeholder")}
+                    hint={t("fields.discord.hint")}
+                    error={err("discord")}
+                    required
+                    {...register("discord")}
+                />
 
-            <TextField
-                label={t("fields.birth_date.label")}
-                placeholder={t("fields.birth_date.placeholder")}
-                type="date"
-                error={err("birthDate")}
-                required
-                {...register("birthDate")}
-            />
+                <TextField
+                    label={t("fields.birth_date.label")}
+                    placeholder={t("fields.birth_date.placeholder")}
+                    type="date"
+                    error={err("birthDate")}
+                    required
+                    {...register("birthDate")}
+                />
+            </div>
 
             <TextField
                 label={t("fields.country.label")}
@@ -40,21 +42,23 @@ export function StepProfile() {
                 {...register("country")}
             />
 
-            <TextField
-                label={t("fields.availability_weekdays.label")}
-                placeholder={t("fields.availability_weekdays.placeholder")}
-                error={err("availabilityWeekdays")}
-                required
-                {...register("availabilityWeekdays")}
-            />
-
-            <TextField
-                label={t("fields.availability_weekends.label")}
-                placeholder={t("fields.availability_weekends.placeholder")}
-                error={err("availabilityWeekends")}
-                required
-                {...register("availabilityWeekends")}
-            />
+            <div className="tryouts-step__row">
+                <TextField
+                    label={t("fields.availability_weekdays.label")}
+                    placeholder={t("fields.availability_weekdays.placeholder")}
+                    error={err("availabilityWeekdays")}
+                    required
+                    {...register("availabilityWeekdays")}
+                />
+                
+                <TextField
+                    label={t("fields.availability_weekends.label")}
+                    placeholder={t("fields.availability_weekends.placeholder")}
+                    error={err("availabilityWeekends")}
+                    required
+                    {...register("availabilityWeekends")}
+                />
+            </div>
 
             <TextField
                 label={t("fields.availability_scrims.label")}

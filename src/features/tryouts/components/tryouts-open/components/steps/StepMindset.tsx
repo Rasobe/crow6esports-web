@@ -22,26 +22,27 @@ export function StepMindset() {
     return (
         <div className="tryouts-step">
 
-            <SelectField
-                label={t("fields.competitive_exp.label")}
-                options={COMPETITIVE_EXP_VALUES.map(value => ({
-                    value,
-                    label: t(`fields.competitive_exp.options.${value}`),
-                }))}
-                error={err("hasCompetitiveExp")}
-                required
-                {...register("hasCompetitiveExp")}
-            />
-
-            {/* Solo visible si tiene experiencia competitiva */}
-            {hasCompetitiveExp === "yes" && (
-                <TextField
-                    label={t("fields.previous_teams.label")}
-                    placeholder={t("fields.previous_teams.placeholder")}
-                    error={err("previousTeams")}
-                    {...register("previousTeams")}
+            <div className="tryouts-step__row">
+                <SelectField
+                    label={t("fields.competitive_exp.label")}
+                    options={COMPETITIVE_EXP_VALUES.map(value => ({
+                        value,
+                        label: t(`fields.competitive_exp.options.${value}`),
+                    }))}
+                    error={err("hasCompetitiveExp")}
+                    required
+                    {...register("hasCompetitiveExp")}
                 />
-            )}
+
+                {hasCompetitiveExp === "yes" && (
+                    <TextField
+                        label={t("fields.previous_teams.label")}
+                        placeholder={t("fields.previous_teams.placeholder")}
+                        error={err("previousTeams")}
+                        {...register("previousTeams")}
+                    />
+                )}
+            </div>
 
             <TextField
                 label={t("fields.reaction_mistakes.label")}
@@ -51,16 +52,29 @@ export function StepMindset() {
                 {...register("reactionToMistakes")}
             />
 
-            <SelectField
-                label={t("fields.reaction_losses.label")}
-                options={REACTION_TO_LOSSES_VALUES.map(value => ({
-                    value,
-                    label: t(`fields.reaction_losses.options.${value}`),
-                }))}
-                error={err("reactionToLosses")}
-                required
-                {...register("reactionToLosses")}
-            />
+            <div className="tryouts-step__row">
+                <SelectField
+                    label={t("fields.reaction_losses.label")}
+                    options={REACTION_TO_LOSSES_VALUES.map(value => ({
+                        value,
+                        label: t(`fields.reaction_losses.options.${value}`),
+                    }))}
+                    error={err("reactionToLosses")}
+                    required
+                    {...register("reactionToLosses")}
+                />
+                
+                <SelectField
+                    label={t("fields.open_to_coaching.label")}
+                    options={OPEN_TO_COACHING_VALUES.map(value => ({
+                        value,
+                        label: t(`fields.open_to_coaching.options.${value}`),
+                    }))}
+                    error={err("openToCoaching")}
+                    required
+                    {...register("openToCoaching")}
+                />
+            </div>
 
             <TextField
                 label={t("fields.looking_for.label")}
@@ -68,17 +82,6 @@ export function StepMindset() {
                 error={err("lookingFor")}
                 required
                 {...register("lookingFor")}
-            />
-
-            <SelectField
-                label={t("fields.open_to_coaching.label")}
-                options={OPEN_TO_COACHING_VALUES.map(value => ({
-                    value,
-                    label: t(`fields.open_to_coaching.options.${value}`),
-                }))}
-                error={err("openToCoaching")}
-                required
-                {...register("openToCoaching")}
             />
 
         </div>

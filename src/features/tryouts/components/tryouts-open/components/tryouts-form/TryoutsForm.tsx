@@ -26,14 +26,17 @@ export function TryoutsForm() {
 
                 {/* Barra de progreso */}
                 <div className="tryouts-progress" role="progressbar" aria-valuenow={currentStep + 1} aria-valuemax={totalSteps}>
-                    {Array.from({ length: totalSteps }).map((_, i) => (
+                    {(["steps.profile", "steps.technical", "steps.mindset"] as const).map((key, i) => (
                         <div
                             key={i}
                             className={clsx("tryouts-progress__step", {
                                 "tryouts-progress__step--done": i < currentStep,
                                 "tryouts-progress__step--active": i === currentStep,
                             })}
-                        />
+                        >
+                            <span className="tryouts-progress__label">{t(key)}</span>
+                            <div className="tryouts-progress__bar" />
+                        </div>
                     ))}
                 </div>
 
