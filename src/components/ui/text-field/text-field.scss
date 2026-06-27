@@ -1,0 +1,144 @@
+@layer components {
+    .text-field {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        width: 100%;
+    }
+
+    // ── Label ──
+    .text-field__label {
+        font-family: var(--font-ui), sans-serif;
+        font-size: 0.6875rem; // 11px
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--text-secondary);
+        display: flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .text-field__required {
+        color: var(--brand);
+        font-size: 0.75rem;
+    }
+
+    // ── Wrapper (input + icon) ──
+    .text-field__wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    .text-field__icon {
+        position: absolute;
+        left: 12px;
+        display: flex;
+        align-items: center;
+        color: var(--text-muted);
+        pointer-events: none;
+
+        svg {
+            width: 16px;
+            height: 16px;
+        }
+    }
+
+    // ── Input ──
+    .text-field__input {
+        width: 100%;
+        background: var(--bg-surface);
+        border: 1px solid var(--border-subtle);
+        color: var(--text-primary);
+        font-family: var(--font-body), sans-serif;
+        font-size: 0.9375rem; // 15px
+        line-height: 1.5;
+        outline: none;
+        transition:
+            border-color 0.2s ease,
+            background 0.2s ease;
+
+        &::placeholder {
+            color: var(--text-muted);
+        }
+
+        &:hover:not(:disabled) {
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        &:focus {
+            border-color: var(--brand);
+            background: var(--bg-raised);
+        }
+
+        &:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+        }
+    }
+
+    // ── Hint ──
+    .text-field__hint {
+        font-family: var(--font-body), sans-serif;
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        line-height: 1.4;
+    }
+
+    // ── Error ──
+    .text-field__error {
+        font-family: var(--font-ui), sans-serif;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        color: #ef4444;
+        line-height: 1.4;
+    }
+
+    // ── Estado error ──
+    .text-field--error {
+        .text-field__input {
+            border-color: #ef4444;
+
+            &:focus {
+                border-color: #ef4444;
+            }
+        }
+    }
+
+    // ── Estado disabled ──
+    .text-field--disabled {
+        .text-field__label {
+            opacity: 0.45;
+        }
+    }
+
+    // ── Tamaños ──
+    .text-field--sm .text-field__input {
+        padding: 8px 12px;
+        font-size: 0.8125rem;
+    }
+
+    .text-field--sm .text-field__wrapper:has(.text-field__icon) .text-field__input {
+        padding-left: 36px;
+    }
+
+    .text-field--md .text-field__input {
+        padding: 10px 14px;
+        font-size: 0.9375rem;
+    }
+
+    .text-field--md .text-field__wrapper:has(.text-field__icon) .text-field__input {
+        padding-left: 40px;
+    }
+
+    .text-field--lg .text-field__input {
+        padding: 14px 16px;
+        font-size: 1rem;
+    }
+
+    .text-field--lg .text-field__wrapper:has(.text-field__icon) .text-field__input {
+        padding-left: 44px;
+    }
+}

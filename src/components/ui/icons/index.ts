@@ -1,5 +1,6 @@
 export * from './IconArrowLeft';
 export * from './IconDiscord';
+export * from './IconLock';
 export * from './IconInstagram';
 export * from './IconRLTracker';
 export * from './IconTikTok';

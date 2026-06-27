@@ -1,0 +1,95 @@
+@layer components {
+    .tryouts-closed {
+        position: relative;
+        min-height: calc(100dvh - var(--navbar-h));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        padding: 80px 24px;
+
+        // Glow de fondo
+        &::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 400px;
+            background: radial-gradient(ellipse, rgba(245, 184, 0, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+    }
+
+    .tryouts-closed__inner {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 20px;
+        max-width: 480px;
+        width: 100%;
+    }
+
+    // Icono candado
+    .tryouts-closed__icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 64px;
+        height: 64px;
+        background: rgba(245, 184, 0, 0.06);
+        border: 1px solid rgba(245, 184, 0, 0.2);
+        color: var(--brand);
+        margin-bottom: 8px;
+
+        svg {
+            width: 28px;
+            height: 28px;
+        }
+    }
+
+    // Descripción
+    .tryouts-closed__desc {
+        font-family: var(--font-body), sans-serif;
+        font-size: 15px;
+        color: var(--text-secondary);
+        line-height: 1.7;
+        max-width: 400px;
+    }
+
+    // Fila de notificación
+    .tryouts-closed__notify {
+        display: flex;
+        gap: 8px;
+        width: 100%;
+        margin-top: 8px;
+
+        // El TextField ocupa todo el espacio disponible
+        .text-field {
+            flex: 1;
+        }
+
+        // El botón no crece
+        .btn {
+            flex-shrink: 0;
+        }
+    }
+
+    // Ajuste del input para alinearse visualmente con el botón
+    .tryouts-closed__input {
+        // El label del TextField queda arriba — lo ocultamos
+        // para que quede como un campo inline sin label visible
+        .text-field__label {
+            display: none;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .tryouts-closed__notify {
+            flex-direction: column;
+        }
+    }
+}

@@ -123,34 +123,144 @@
     "size": "Size"
   },
   "tryouts": {
+    "meta": {
+      "title": "Tryouts",
+      "description": "Apply to join Crow 6 Esports."
+    },
     "open": {
       "eyebrow": "Selection process",
-      "title": "Join",
-      "desc": "We are looking for committed players who want to compete at the highest level. The process is serious — if you are not willing to put in the work, this is not your team.",
-      "req_1": "Confirmed availability",
-      "req_2": "Real commitment to the team",
-      "req_3": "Zero toxicity",
-      "step1_title": "Basic profile",
-      "step1_sub": "Personal and contact information",
-      "step2_title": "Technical data",
-      "step2_sub": "Your current Rocket League level",
-      "step3_title": "Mindset and team",
-      "step3_sub": "The most important part for us",
-      "next": "Next",
-      "back": "Back",
-      "submit": "Submit application",
-      "step_of": "Step {current} of {total}",
-      "success_label": "#GOCROWS",
-      "success_title": "Application sent",
-      "success_desc": "We review every application personally. If you are a fit, we will contact you on Discord within 7 days.",
-      "success_note": "If you do not hear back within 7 days, your application was not selected for this round."
-    },
-    "closed": {
-      "label": "Process closed",
-      "title": "Tryouts closed",
-      "desc": "We are not currently looking for players. Leave your Discord and we will notify you when the next selection process opens.",
-      "notify_placeholder": "Your Discord username",
-      "notify_btn": "Notify me"
+      "title": "JOIN CROW 6",
+      "desc": "We are looking for committed players who want to compete at the highest level. The process is serious; if you are not willing to put in the effort, this is not your team.",
+      "form": {
+        "back": "Back",
+        "next": "Next",
+        "submit": "Submit application",
+        "submitting": "Submitting...",
+        "steps": {
+          "profile": "Profile",
+          "technical": "Technical",
+          "mindset": "Mindset"
+        },
+        "fields": {
+          "discord": {
+            "label": "Discord ID",
+            "placeholder": "usuario#0000",
+            "hint": "Main contact method"
+          },
+          "birth_date": {
+            "label": "Date of birth",
+            "placeholder": "DD/MM/YYYY"
+          },
+          "country": {
+            "label": "Country / Region",
+            "placeholder": "Spain"
+          },
+          "availability_weekdays": {
+            "label": "Weekday availability",
+            "placeholder": "E.g.: Mon-Fri 18:00 to 22:00"
+          },
+          "availability_weekends": {
+            "label": "Weekend availability",
+            "placeholder": "E.g.: Sat-Sun 10:00 to 23:00"
+          },
+          "availability_scrims": {
+            "label": "Scrims availability",
+            "placeholder": "E.g.: Wednesday and Friday 20:00"
+          },
+          "rltracker": {
+            "label": "RLTracker link",
+            "placeholder": "https://rocketleague.tracker.network/..."
+          },
+          "rank": {
+            "label": "Current 2v2 rank (MMR)",
+            "placeholder": "E.g.: 1830"
+          },
+          "peak": {
+            "label": "Peak 2v2 (MMR)",
+            "placeholder": "E.g.: 2120"
+          },
+          "hours_played": {
+            "label": "Total hours played",
+            "placeholder": "E.g.: 5000"
+          },
+          "playstyle": {
+            "label": "Predominant playstyle",
+            "placeholder": "Select a playstyle",
+            "options": {
+              "calm": "Calm and positioning",
+              "intermediate": "Balanced",
+              "mechanical": "Mechanical",
+              "aggressive": "Aggressive"
+            }
+          },
+          "highlights": {
+            "label": "Clip or highlights",
+            "placeholder": "YouTube, Medal, Twitch...",
+            "hint": "Optional — share a clip or highlight of your gameplay"
+          },
+          "competitive_exp": {
+            "label": "Do you have experience in competitive teams?",
+            "options": {
+              "yes": "Yes",
+              "no": "No"
+            }
+          },
+          "previous_teams": {
+            "label": "Which teams have you been in?",
+            "placeholder": "Team name, league, season..."
+          },
+          "reaction_mistakes": {
+            "label": "How do you react when a teammate makes a repeated mistake?",
+            "placeholder": "Be honest..."
+          },
+          "reaction_losses": {
+            "label": "How do you react to a losing streak?",
+            "options": {
+              "encourage": "I encourage my teammates",
+              "down": "I get down",
+              "calm": "I stay calm and keep going"
+            }
+          },
+          "looking_for": {
+            "label": "What are you looking for in Crow 6 Esports?",
+            "placeholder": "What do you expect from the team?"
+          },
+          "open_to_coaching": {
+            "label": "Are you open to receiving coaching or doing VOD reviews?",
+            "options": {
+              "yes": "Yes",
+              "no": "No",
+              "maybe": "Maybe"
+            }
+          }
+        },
+        "validation": {
+          "discord_required": "Discord ID is required",
+          "birth_date_required": "Birth date is required",
+          "country_required": "Country is required",
+          "availability_weekdays_required": "Weekday availability is required",
+          "availability_weekends_required": "Weekend availability is required",
+          "availability_scrims_required": "Scrim availability is required",
+          "rltracker_required": "RLTracker link is required",
+          "rltracker_invalid": "Enter a valid RLTracker URL",
+          "rank_required": "Rank is required",
+          "peak_required": "Peak MMR is required",
+          "hours_required": "Hours played are required",
+          "playstyle_required": "Select a playstyle",
+          "highlights_invalid": "Enter a valid URL",
+          "competitive_exp_required": "This field is required",
+          "reaction_mistakes_required": "Response too short — minimum 10 characters",
+          "reaction_losses_required": "This field is required",
+          "looking_for_required": "Response too short — minimum 10 characters",
+          "coaching_required": "This field is required"
+        }
+      },
+      "success": {
+        "eyebrow": "#GOCROWS",
+        "title": "APPLICATION SENT",
+        "desc": "We have received your application. We review each application personally. If you fit what we are looking for, we will contact you via Discord within 7 days.",
+        "note": "If you do not receive a response within 7 days, your application has not been selected for this call."
+      }
     }
   },
   "coaching": {
