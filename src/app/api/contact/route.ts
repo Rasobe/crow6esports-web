@@ -10,8 +10,8 @@ export async function POST(request: NextRequest) {
         const data: TryoutsFormData = await request.json();
 
         await resend.emails.send({
-            from: "onboarding@resend.dev",
-            to: "rasoberdiel3@gmail.com",
+            from: "noreply@crow6esports.com",
+            to: "crow6esports@gmail.com",
             subject: `Tryout — ${data.discord}`,
             html: buildTryoutEmail(data),
         });
