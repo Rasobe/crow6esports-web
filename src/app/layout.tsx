@@ -1,5 +1,6 @@
 import { Anton_SC, Barlow_Condensed, Barlow } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import "./globals.css";
 import "./globals.scss";
 
@@ -36,6 +37,7 @@ export default function RootLayout({
     >
       <body>
         <Analytics />
+        <SpeedInsights />
         {children}
       </body>
     </html>
