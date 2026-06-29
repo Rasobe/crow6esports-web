@@ -304,7 +304,19 @@
         { "value": "6000+", "label": "Horas en RL" },
         { "value": "5", "label": "Años como coach" },
         { "value": "2000+", "label": "MMR alcanzado" }
-      ]
+      ],
+      "achievements": {
+        "case": {
+          "eyebrow": "Caso reciente · Verificable",
+          "from": "1700",
+          "to": "2000 MMR",
+          "description": "Un jugador llevado de 1700 a 2000+ MMR con sesiones constantes y un plan de mejora a medida."
+        },
+        "orgs": {
+          "label": "Ha trabajado con",
+          "list": ["Crow 6 Esports", "Ventucorp Esports", "Prodigy Five", "Moonlab Gaming"]
+        }
+      }
     },
     "individual": "Individual",
     "group": "Grupal",

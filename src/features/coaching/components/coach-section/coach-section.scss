@@ -2,7 +2,6 @@
     .coach-section {
         position: relative;
         padding: 48px 0;
-        background: var(--bg-surface);
     }
 
     .coach-section__inner {
@@ -11,8 +10,17 @@
         margin-inline: auto;
         padding-inline: 1.5rem;
         display: flex;
-        flex-direction: row;
-        gap: 32px;
         flex-wrap: wrap;
+        gap: 32px;
+    }
+
+    .coach-section__bio {
+        flex: 2 1 360px;
+        min-width: 0;
+    }
+
+    .achievements-section {
+        flex: 1 1 300px;
+        min-width: 0;
     }
 }
