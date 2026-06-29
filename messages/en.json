@@ -3,12 +3,12 @@
     "description": "Competitive Rocket League organization based in Huesca, Spain."
   },
   "nav": {
-    "team": "Team",
+    "team": "Roster",
     "news": "News",
     "store": "Store",
     "coaching": "Coaching",
-    "about_us": "About us",
-    "join": "Join us",
+    "about_us": "About Us",
+    "join": "Join",
     "home_aria": "Crow 6 Esports — Home",
     "locale_switcher_aria": "Select language",
     "menu_aria": "Navigation menu",
@@ -21,10 +21,10 @@
       "description": "Competitive Rocket League organization."
     },
     "hero": {
-      "eyebrow": "Esports organization",
+      "eyebrow": "Esports Organization",
       "tagline": "Dominate · Compete · Conquer",
-      "cta_team": "Meet the team",
-      "cta_join": "Join the team",
+      "cta_team": "View Team",
+      "cta_join": "Join the Team",
       "stats": {
         "wins": "Wins",
         "tournaments": "Tournaments",
@@ -39,30 +39,30 @@
       "cta_view_more": "View more"
     },
     "coachingBanner": {
-      "eyebrow": "Professional training",
+      "eyebrow": "Professional coaching",
       "title": "Take your game to the next level",
-      "subtitle": "Personalized training to improve your performance in Rocket League in team or individually.",
-      "credibility": "6 years training players with up to 2000+ MMR",
+      "subtitle": "Personalized coaching to improve your Rocket League performance as a team or individually.",
+      "credibility": "6 years training players up to 2000+ MMR",
       "pack_1_title": "Basic Pack",
       "pack_1_price": "€28/month",
-      "pack_1_description": "Ideal for starting to sharpen your mechanics and in-game decisions.",
+      "pack_1_description": "Ideal to start polishing your mechanics and in-game decisions.",
       "pack_1_feature_1": "1 weekly session (60 min)",
-      "pack_1_feature_2": "Feedback on your latest ranked match",
+      "pack_1_feature_2": "Feedback on your last ranked match",
       "pack_1_feature_3": "Access to the academy Discord",
       "pack_2_badge": "Most popular",
       "pack_2_title": "Featured Pack",
       "pack_2_price": "€55/month",
-      "pack_2_description": "The perfect balance between consistent coaching and price.",
+      "pack_2_description": "The perfect balance between constant tracking and price.",
       "pack_2_feature_1": "2 weekly sessions (60 min)",
       "pack_2_feature_2": "Personalized replay analysis",
       "pack_2_feature_3": "Monthly improvement plan",
-      "pack_2_feature_4": "Priority scheduling access",
+      "pack_2_feature_4": "Priority access to schedules",
       "pack_3_title": "Premium Pack",
       "pack_3_price": "€78/month",
       "pack_3_description": "Intensive training for those competing at the highest level.",
       "pack_3_feature_1": "3 weekly sessions (60 min)",
       "pack_3_feature_2": "Unlimited VOD analysis",
-      "pack_3_feature_3": "1-on-1 follow-up on Discord",
+      "pack_3_feature_3": "1-on-1 tracking via Discord",
       "pack_3_feature_4": "Monthly session with the analyst team",
       "cta_reserve": "Book a session"
     },
@@ -82,7 +82,7 @@
       "role_manager": "Manager",
       "status_substitute": "Substitute",
       "status_retired": "Retired",
-      "status_former": "Former"
+      "status_former": "Former member"
     },
     "productCard": {
       "category_jersey": "Jersey",
@@ -94,19 +94,19 @@
   },
   "team": {
     "meta": {
-      "eyebrow": "Official roster",
-      "title": "Team",
+      "eyebrow": "Official Roster",
+      "title": "Roster",
       "description": "The official roster of Crow 6 Esports."
     },
     "sections": {
-      "active": "Active players",
+      "active": "Active Players",
       "substitutes": "Substitutes",
       "staff": "Staff"
     },
     "cta": {
       "eyebrow": "Join the team",
       "title": "READY TO COMPETE?",
-      "description": "We are looking for committed players who want to take their game to the next level.",
+      "description": "We are looking for committed players eager to take their game to the next level.",
       "join": "Apply now"
     }
   },
@@ -117,7 +117,7 @@
   },
   "store": {
     "title": "Store",
-    "eyebrow": "Official merchandise",
+    "eyebrow": "Official Merchandise",
     "sold_out": "Sold out",
     "add_to_cart": "Add to cart",
     "size": "Size"
@@ -125,7 +125,7 @@
   "tryouts": {
     "meta": {
       "title": "Tryouts",
-      "description": "Apply to join Crow 6 Esports."
+      "description": "Player selection process for Crow 6 Esports."
     },
     "open": {
       "meta": {
@@ -146,7 +146,7 @@
         "fields": {
           "discord": {
             "label": "Discord ID",
-            "placeholder": "usuario#0000",
+            "placeholder": "user#0000",
             "hint": "Main contact method"
           },
           "birth_date": {
@@ -159,31 +159,31 @@
           },
           "availability_weekdays": {
             "label": "Weekday availability",
-            "placeholder": "E.g.: Mon-Fri 18:00 to 22:00"
+            "placeholder": "Ex: Mon-Fri 6:00 PM to 10:00 PM"
           },
           "availability_weekends": {
             "label": "Weekend availability",
-            "placeholder": "E.g.: Sat-Sun 10:00 to 23:00"
+            "placeholder": "Ex: Sat-Sun 10:00 AM to 11:00 PM"
           },
           "availability_scrims": {
-            "label": "Scrims availability",
-            "placeholder": "E.g.: Wednesday and Friday 20:00"
+            "label": "Scrim availability",
+            "placeholder": "Ex: Wednesday and Friday 8:00 PM"
           },
           "rltracker": {
             "label": "RLTracker link",
             "placeholder": "https://rocketleague.tracker.network/..."
           },
           "rank": {
-            "label": "Current 2v2 rank (MMR)",
-            "placeholder": "E.g.: 1830"
+            "label": "Current 2v2 Rank (MMR)",
+            "placeholder": "Ex: 1830"
           },
           "peak": {
             "label": "Peak 2v2 (MMR)",
-            "placeholder": "E.g.: 2120"
+            "placeholder": "Ex: 2120"
           },
           "hours_played": {
             "label": "Total hours played",
-            "placeholder": "E.g.: 5000"
+            "placeholder": "Ex: 5000"
           },
           "playstyle": {
             "label": "Predominant playstyle",
@@ -191,24 +191,24 @@
             "options": {
               "calm": "Calm and positioning",
               "intermediate": "Balanced",
-              "mechanical": "Mechanical",
-              "aggressive": "Aggressive"
+              "mechanical": "Mechanics",
+              "aggressive": "Aggressiveness"
             }
           },
           "highlights": {
             "label": "Clip or highlights",
             "placeholder": "YouTube, Medal, Twitch...",
-            "hint": "Optional — share a clip or highlight of your gameplay"
+            "hint": "Optional"
           },
           "competitive_exp": {
-            "label": "Do you have experience in competitive teams?",
+            "label": "Do you have competitive team experience?",
             "options": {
               "yes": "Yes",
               "no": "No"
             }
           },
           "previous_teams": {
-            "label": "Which teams have you been in?",
+            "label": "Which teams?",
             "placeholder": "Team name, league, season..."
           },
           "reaction_mistakes": {
@@ -220,7 +220,7 @@
             "options": {
               "encourage": "I encourage my teammates",
               "down": "I get down",
-              "calm": "I stay calm and keep going"
+              "calm": "I move forward calmly"
             }
           },
           "looking_for": {
@@ -238,7 +238,7 @@
         },
         "validation": {
           "discord_required": "Discord ID is required",
-          "birth_date_required": "Birth date is required",
+          "birth_date_required": "Date of birth is required",
           "country_required": "Country is required",
           "availability_weekdays_required": "Weekday availability is required",
           "availability_weekends_required": "Weekend availability is required",
@@ -247,29 +247,39 @@
           "rltracker_invalid": "Enter a valid RLTracker URL",
           "rank_required": "Rank is required",
           "peak_required": "Peak MMR is required",
-          "hours_required": "Hours played are required",
+          "hours_required": "Hours played is required",
           "playstyle_required": "Select a playstyle",
           "highlights_invalid": "Enter a valid URL",
           "competitive_exp_required": "This field is required",
-          "reaction_mistakes_required": "Response too short — minimum 10 characters",
+          "reaction_mistakes_required": "Answer too short — minimum 10 characters",
           "reaction_losses_required": "This field is required",
-          "looking_for_required": "Response too short — minimum 10 characters",
+          "looking_for_required": "Answer too short — minimum 10 characters",
           "coaching_required": "This field is required"
         }
       },
       "success": {
         "eyebrow": "#GOCROWS",
-        "title": "APPLICATION SENT",
-        "desc": "We have received your application. We review each application personally. If you fit what we are looking for, we will contact you via Discord within 7 days.",
+        "title": "APPLICATION SUBMITTED",
+        "desc": "We have received your application. We review each application personally. If you fit what we are looking for, we will contact you on Discord within 7 days.",
         "note": "If you do not receive a response within 7 days, your application has not been selected for this call."
       }
+    },
+    "closed": {
+      "label": "Process closed",
+      "eyebrow": "Selection process",
+      "title": "TRYOUTS CLOSED",
+      "subtitle": "",
+      "desc": "Leave us your Discord and we'll let you know when we open the next process.",
+      "notify_label": "Leave us your Discord",
+      "notify_placeholder": "Your Discord username",
+      "notify_button": "Notify me"
     }
   },
   "coaching": {
     "meta": {
       "eyebrow": "Coaching · Rocket League",
       "title": "Level Up",
-      "description": "Individual and team coaching by Crow 6's head coach. Match analysis, improvement plan, and consistent follow-up to raise your MMR."
+      "description": "1-on-1 and team coaching with the Crow 6 head coach. Match analysis, improvement plan, and constant tracking to raise your MMR."
     },
     "header": {
       "actions": {
@@ -286,9 +296,9 @@
       "bio": {
         "meta": {
           "location": "Huesca, Spain",
-          "languages": "Spanish (native), English (intermediate)"
+          "languages": "Spanish (Native), English (Intermediate)"
         },
-        "p1": "CEO and head coach of Crow 6 eSports. Over 6000 hours in Rocket League and five years training players and teams — from those starting in ranked play to competitive players above 2000 MMR. Direct coaching, no filler: analysis of your matches, decisions, and mechanics, with a clear plan for each session."
+        "p1": "CEO and head coach of Crow 6 eSports. Over 6000 hours in Rocket League and five years training players and teams — from beginners in ranked to competitive players above 2000 MMR. Direct coaching, no filler: analysis of your matches, decisions, and mechanics, with a clear plan for each session."
       },
       "stats": [
         {
@@ -297,7 +307,7 @@
         },
         {
           "value": "5",
-          "label": "Years as coach"
+          "label": "Years coaching"
         },
         {
           "value": "2000+",
@@ -330,40 +340,45 @@
       "items": [
         {
           "icon": "crosshair",
-          "title": "1on1 Coaching",
+          "title": "1-on-1 Coaching",
           "features": [
             "Live or recorded match analysis",
-            "Personalized strategies for your level",
-            "Mechanics and decision-making"
+            "Customized strategies based on your level",
+            "Mechanics and decision making"
           ]
         },
         {
           "icon": "users",
-          "title": "Group Training",
+          "title": "Group training",
           "features": [
             "Coaching for full teams",
-            "Team synergy and strategy analysis",
+            "Synergy and team strategy analysis",
             "Optimal plays and rotations"
           ]
         },
         {
           "icon": "trending-up",
-          "title": "Improvement Plan",
+          "title": "Improvement plan",
           "features": [
             "Based on your strengths and weaknesses",
-            "Drills for speed and precision",
+            "Exercises for speed and precision",
             "Daily routine adapted to your availability"
           ]
         }
       ]
     },
+    "individual": "Individual",
+    "group": "Group",
+    "book": "Book a session",
+    "contact": "Contact"
+  },
+  "footer": {
     "nav": {
       "title": "Navigation",
-      "team": "Team",
-      "news": "News",
+      "team": "Roster",
       "store": "Store",
       "coaching": "Coaching",
-      "about_us": "About us"
+      "about_us": "About Us"
     },
     "contact": {
       "title": "Contact",
@@ -377,7 +392,7 @@
   "notFound": {
     "eyebrow": "Page not found",
     "title": "PAGE <span>NOT</span><br>FOUND",
-    "desc": "The page you are looking for does not exist or has been moved. Go back and keep competing.",
-    "cta": "Back to home"
+    "desc": "The page you are looking for does not exist or has been moved. Return to the home page and keep competing.",
+    "cta": "Return to home"
   }
 }
