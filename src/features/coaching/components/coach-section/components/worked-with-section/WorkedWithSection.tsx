@@ -12,14 +12,17 @@ export function WorkedWithSection() {
     const renderSet = (suffix: string) => (
         <div key={suffix} className="worked-with__set" aria-hidden={suffix !== "a" ? "true" : undefined}>
             {orgs.map((org) => (
-                <div key={`${org.slug}-${suffix}`} className="worked-with__item" title={org.name}>
-                    <Image
-                        src={`/images/orgs/${org.slug}.png`}
-                        alt={org.name}
-                        width={100}
-                        height={100}
-                        style={{ objectFit: "contain", width: "100%", height: "auto" }}
-                    />
+                <div key={`${org.slug}-${suffix}`} className="worked-with__item">
+                    <div className="worked-with__item-img">
+                        <Image
+                            src={`/images/orgs/${org.slug}.png`}
+                            alt={org.name}
+                            width={100}
+                            height={100}
+                            style={{ objectFit: "contain", width: "100%", height: "auto" }}
+                        />
+                    </div>
+                    <span className="worked-with__item-name" aria-hidden="true">{org.name}</span>
                 </div>
             ))}
         </div>
