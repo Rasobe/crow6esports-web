@@ -6,9 +6,7 @@ export function CoachSection() {
         <section className="coach-section">
             <div className="coach-section__inner">
                 <BioSection />
-                <div className="coach-section__achievements">
-
-                </div>
+                {/* <AchievementsSection /> */}
             </div>
         </section>
     )

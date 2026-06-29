@@ -1,0 +1,12 @@
+@layer components {
+    .coach-section__bio {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .coach-section__bio-text {
+        color: var(--text-secondary);
+    }
+}
