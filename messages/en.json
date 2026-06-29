@@ -9,7 +9,7 @@
     "coaching": "Coaching",
     "about_us": "About Us",
     "join": "Join",
-    "home_aria": "Crow 6 Esports — Home",
+    "home_aria": "Crow 6 eSports — Home",
     "locale_switcher_aria": "Select language",
     "menu_aria": "Navigation menu",
     "menu_open_aria": "Open menu",
@@ -21,7 +21,7 @@
       "description": "Competitive Rocket League organization."
     },
     "hero": {
-      "eyebrow": "Esports Organization",
+      "eyebrow": "eSports Organization",
       "tagline": "Dominate · Compete · Conquer",
       "cta_team": "View Team",
       "cta_join": "Join the Team",
@@ -96,7 +96,7 @@
     "meta": {
       "eyebrow": "Official Roster",
       "title": "Roster",
-      "description": "The official roster of Crow 6 Esports."
+      "description": "The official roster of Crow 6 eSports."
     },
     "sections": {
       "active": "Active Players",
@@ -125,7 +125,7 @@
   "tryouts": {
     "meta": {
       "title": "Tryouts",
-      "description": "Player selection process for Crow 6 Esports."
+      "description": "Player selection process for Crow 6 eSports."
     },
     "open": {
       "meta": {
@@ -224,7 +224,7 @@
             }
           },
           "looking_for": {
-            "label": "What are you looking for in Crow 6 Esports?",
+            "label": "What are you looking for in Crow 6 eSports?",
             "placeholder": "What do you expect from the team?"
           },
           "open_to_coaching": {
@@ -324,8 +324,8 @@
         "orgs": {
           "label": "Has worked with",
           "list": [
-            { "name": "Crow 6 Esports", "slug": "crow6" },
-            { "name": "Ventucorp Esports", "slug": "ventucorp" },
+            { "name": "Crow 6 eSports", "slug": "crow6" },
+            { "name": "Ventucorp eSports", "slug": "ventucorp" },
             { "name": "Prodigy Five", "slug": "prodigy-five" }
           ]
         }

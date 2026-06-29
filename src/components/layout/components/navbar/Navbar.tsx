@@ -25,7 +25,7 @@ export async function Navbar() {
         >
           <Image
             src="/images/brand/crow6-wordmark.svg"
-            alt="Crow 6 Esports"
+            alt="Crow 6 eSports"
             width={80}
             height={28}
             style={{ height: "auto" }}

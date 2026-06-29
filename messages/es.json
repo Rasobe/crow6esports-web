@@ -9,7 +9,7 @@
     "coaching": "Coaching",
     "about_us": "Sobre nosotros",
     "join": "Únete",
-    "home_aria": "Crow 6 Esports — Inicio",
+    "home_aria": "Crow 6 eSports — Inicio",
     "locale_switcher_aria": "Seleccionar idioma",
     "menu_aria": "Menú de navegación",
     "menu_open_aria": "Abrir menú",
@@ -96,7 +96,7 @@
     "meta": {
       "eyebrow": "Roster oficial",
       "title": "Plantilla",
-      "description": "El roster oficial de Crow 6 Esports."
+      "description": "El roster oficial de Crow 6 eSports."
     },
     "sections": {
       "active": "Jugadores activos",
@@ -125,7 +125,7 @@
   "tryouts": {
     "meta": {
       "title": "Tryouts",
-      "description": "Proceso de selección de jugadores para Crow 6 Esports."
+      "description": "Proceso de selección de jugadores para Crow 6 eSports."
     },
     "open": {
       "meta": {
@@ -224,7 +224,7 @@
             }
           },
           "looking_for": {
-            "label": "¿Qué buscas en Crow 6 Esports?",
+            "label": "¿Qué buscas en Crow 6 eSports?",
             "placeholder": "¿Qué esperas del equipo?"
           },
           "open_to_coaching": {
@@ -324,8 +324,8 @@
         "orgs": {
           "label": "Ha trabajado con",
           "list": [
-            { "name": "Crow 6 Esports", "slug": "crow6" },
-            { "name": "Ventucorp Esports", "slug": "ventucorp" },
+            { "name": "Crow 6 eSports", "slug": "crow6" },
+            { "name": "Ventucorp eSports", "slug": "ventucorp" },
             { "name": "Prodigy Five", "slug": "prodigy-five" }
           ]
         }

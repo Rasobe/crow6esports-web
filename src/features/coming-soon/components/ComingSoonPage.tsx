@@ -27,7 +27,7 @@ export function ComingSoonPage() {
         <div className="coming-soon__logo">
           <Image
             src="/images/brand/crow6-mascot-full.svg"
-            alt="Crow 6 Esports"
+            alt="Crow 6 eSports"
             width={160}
             height={48}
             priority
@@ -47,7 +47,7 @@ export function ComingSoonPage() {
         <div className="coming-soon__divider" aria-hidden />
 
         <p className="coming-soon__description">
-          Estamos trabajando en una nueva experiencia para Crow 6 Esports. Vuelve pronto.
+          Estamos trabajando en una nueva experiencia para Crow 6 eSports. Vuelve pronto.
         </p>
 
         <div className="coming-soon__socials">

@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Add a `NEXT_PUBLIC_MAINTENANCE_MODE` env-var-gated rewrite so every route except `/coming-soon` serves an isolated "coming soon" screen with the Crow 6 Esports logo and visual identity, without deleting or restructuring any existing page.
+**Goal:** Add a `NEXT_PUBLIC_MAINTENANCE_MODE` env-var-gated rewrite so every route except `/coming-soon` serves an isolated "coming soon" screen with the Crow 6 eSports logo and visual identity, without deleting or restructuring any existing page.
 
 **Architecture:** `proxy.ts` checks `process.env.NEXT_PUBLIC_MAINTENANCE_MODE` before delegating to the existing `next-intl` middleware; when active it rewrites every non-`/coming-soon` request to a new root-level `/coming-soon` page that lives outside the `[locale]` segment (so it never inherits `Navbar`/`Footer`). The page renders a new `ComingSoonPage` feature component with fixed Spanish copy and project design tokens.
 
@@ -45,9 +45,9 @@ vi.mock("next/image", () => ({
 }));
 
 describe("ComingSoonPage", () => {
-  it("renders the Crow 6 Esports logo", () => {
+  it("renders the Crow 6 eSports logo", () => {
     render(<ComingSoonPage />);
-    const logo = screen.getByAltText("Crow 6 Esports");
+    const logo = screen.getByAltText("Crow 6 eSports");
     expect(logo).toHaveAttribute("src", "/images/brand/crow6-wordmark.svg");
   });
 
@@ -57,7 +57,7 @@ describe("ComingSoonPage", () => {
     expect(screen.getByText("Próximamente")).toBeInTheDocument();
     expect(
       screen.getByText(
-        "Estamos trabajando en una nueva experiencia para Crow 6 Esports. Vuelve pronto.",
+        "Estamos trabajando en una nueva experiencia para Crow 6 eSports. Vuelve pronto.",
       ),
     ).toBeInTheDocument();
   });
@@ -145,7 +145,7 @@ export function ComingSoonPage() {
       <div className="coming-soon__inner">
         <Image
           src="/images/brand/crow6-wordmark.svg"
-          alt="Crow 6 Esports"
+          alt="Crow 6 eSports"
           width={200}
           height={70}
           priority
@@ -153,7 +153,7 @@ export function ComingSoonPage() {
         <span className="coming-soon__eyebrow">Estamos preparando algo</span>
         <h1 className="coming-soon__title">Próximamente</h1>
         <p className="coming-soon__description">
-          Estamos trabajando en una nueva experiencia para Crow 6 Esports. Vuelve pronto.
+          Estamos trabajando en una nueva experiencia para Crow 6 eSports. Vuelve pronto.
         </p>
       </div>
     </div>
@@ -205,7 +205,7 @@ import type { Metadata } from "next";
 import { ComingSoonPage } from "@/features/coming-soon";
 
 export const metadata: Metadata = {
-  title: "Crow 6 Esports — Próximamente",
+  title: "Crow 6 eSports — Próximamente",
   robots: {
     index: false,
     follow: false,

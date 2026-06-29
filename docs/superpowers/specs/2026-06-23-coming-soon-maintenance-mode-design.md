@@ -7,7 +7,7 @@
 
 Permitir bloquear el acceso a todas las páginas del sitio (excepto la propia
 pantalla de mantenimiento) mostrando una pantalla "coming soon" con el logo y
-la identidad visual de Crow 6 Esports, activable/desactivable sin tocar ni
+la identidad visual de Crow 6 eSports, activable/desactivable sin tocar ni
 borrar páginas existentes.
 
 ## Mecanismo de bloqueo

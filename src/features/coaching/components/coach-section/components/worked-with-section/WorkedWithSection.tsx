@@ -15,10 +15,10 @@ export function WorkedWithSection() {
                 <div key={`${org.slug}-${suffix}`} className="worked-with__item" title={org.name}>
                     <Image
                         src={`/images/orgs/${org.slug}.png`}
-                        alt={suffix === "a" ? org.name : ""}
+                        alt={org.name}
                         width={100}
                         height={100}
-                        style={{ objectFit: "contain" }}
+                        style={{ objectFit: "contain", width: "100%", height: "auto" }}
                     />
                 </div>
             ))}

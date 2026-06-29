@@ -8,9 +8,9 @@ vi.mock("next/image", () => ({
 }));
 
 describe("ComingSoonPage", () => {
-  it("renders the Crow 6 Esports logo", () => {
+  it("renders the Crow 6 eSports logo", () => {
     render(<ComingSoonPage />);
-    const logo = screen.getByAltText("Crow 6 Esports");
+    const logo = screen.getByAltText("Crow 6 eSports");
     expect(logo).toHaveAttribute("src", "/images/brand/crow6-wordmark.svg");
   });
 
@@ -22,7 +22,7 @@ describe("ComingSoonPage", () => {
     ).toBe("PRÓXIMAMENTE");
     expect(
       screen.getByText(
-        "Estamos trabajando en una nueva experiencia para Crow 6 Esports. Vuelve pronto.",
+        "Estamos trabajando en una nueva experiencia para Crow 6 eSports. Vuelve pronto.",
       ),
     ).toBeInTheDocument();
   });
