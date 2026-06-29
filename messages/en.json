@@ -94,10 +94,10 @@
   },
   "team": {
     "meta": {
+      "eyebrow": "Official roster",
       "title": "Team",
       "description": "The official roster of Crow 6 Esports."
     },
-    "eyebrow": "Official roster",
     "sections": {
       "active": "Active players",
       "substitutes": "Substitutes",
@@ -128,9 +128,11 @@
       "description": "Apply to join Crow 6 Esports."
     },
     "open": {
-      "eyebrow": "Selection process",
-      "title": "JOIN CROW 6",
-      "desc": "We are looking for committed players who want to compete at the highest level. The process is serious; if you are not willing to put in the effort, this is not your team.",
+      "meta": {
+        "eyebrow": "Selection process",
+        "title": "JOIN CROW 6",
+        "description": "We are looking for committed players who want to compete at the highest level. The process is serious; if you are not willing to put in the effort, this is not your team."
+      },
       "form": {
         "back": "Back",
         "next": "Next",
@@ -265,7 +267,11 @@
   },
   "coaching": {
     "eyebrow": "Professional training",
-    "title": "Coaching",
+    "meta": {
+      "eyebrow": "Professional training",
+      "title": "Coaching",
+      "description": "Personalized training to improve your performance in Rocket League, either as a team or individually."
+    },
     "individual": "Individual",
     "group": "Group",
     "book": "Book a session",

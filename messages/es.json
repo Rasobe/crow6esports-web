@@ -94,10 +94,10 @@
   },
   "team": {
     "meta": {
+      "eyebrow": "Roster oficial",
       "title": "Plantilla",
       "description": "El roster oficial de Crow 6 Esports."
     },
-    "eyebrow": "Roster oficial",
     "sections": {
       "active": "Jugadores activos",
       "substitutes": "Suplentes",
@@ -128,9 +128,11 @@
       "description": "Proceso de selección de jugadores para Crow 6 Esports."
     },
     "open": {
-      "eyebrow": "Proceso de selección",
-      "title": "ÚNETE A CROW 6",
-      "desc": "Buscamos jugadores comprometidos que quieran competir al más alto nivel. El proceso es serio; si no estás dispuesto a esforzarte, este no es tu equipo.",
+      "meta": {
+        "eyebrow": "Proceso de selección",
+        "title": "ÚNETE A CROW 6",
+        "description": "Buscamos jugadores comprometidos que quieran competir al más alto nivel. El proceso es serio; si no estás dispuesto a esforzarte, este no es tu equipo."
+      },
       "form": {
         "back": "Atrás",
         "next": "Siguiente",
@@ -275,7 +277,11 @@
   },
   "coaching": {
     "eyebrow": "Entrenamiento profesional",
-    "title": "Coaching",
+    "meta": {
+      "eyebrow": "Entrenamiento profesional",
+      "title": "Coaching",
+      "description": "Entrenamiento personalizado para mejorar tu rendimiento en Rocket League en equipo o individualmente."
+    },
     "individual": "Individual",
     "group": "Grupal",
     "book": "Reservar sesión",

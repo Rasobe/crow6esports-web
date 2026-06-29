@@ -15,11 +15,7 @@ export function TeamPage() {
 
     return (
         <>
-            <PageHeader
-                eyebrow={t("eyebrow")}
-                title={t("meta.title")}
-                description={t("meta.description")}
-            />
+            <PageHeader namespace="team" />
 
             <RosterSection title={t("sections.active")} players={activePlayers} />
             <RosterSection title={t("sections.substitutes")} players={substitutePlayers} />
