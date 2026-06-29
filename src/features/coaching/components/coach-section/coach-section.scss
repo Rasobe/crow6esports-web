@@ -1,0 +1,34 @@
+@layer components {
+    .coach-section {
+        position: relative;
+        padding: 48px 0;
+        background: var(--bg-surface);
+    }
+
+    .coach-section__inner {
+        position: relative;
+        max-width: var(--container);
+        margin-inline: auto;
+        padding-inline: 1.5rem;
+        display: flex;
+        flex-direction: row;
+        gap: 32px;
+        flex-wrap: wrap;
+    }
+
+    .coach-section__bio {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .coach-section__bio-meta {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        gap: 16px;
+        flex-wrap: wrap;
+    }
+
+}

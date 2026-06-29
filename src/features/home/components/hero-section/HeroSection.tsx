@@ -16,7 +16,7 @@ export function HeroSection() {
       <div className="hero__line hero__line--left" aria-hidden />
       <div className="hero__line hero__line--right" aria-hidden />
 
-      <div className="hero__content">
+      <div className="hero__inner">
         <p className="hero__eyebrow">
           <span aria-hidden />
           {t("eyebrow")}

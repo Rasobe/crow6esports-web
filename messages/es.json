@@ -278,9 +278,29 @@
   "coaching": {
     "eyebrow": "Entrenamiento profesional",
     "meta": {
-      "eyebrow": "Entrenamiento profesional",
-      "title": "Coaching",
-      "description": "Entrenamiento personalizado para mejorar tu rendimiento en Rocket League en equipo o individualmente."
+      "eyebrow": "Coaching · Rocket League",
+      "title": "Sube de nivel",
+      "description": "Entrenamiento individual y de equipo dirigido por el head coach de Crow 6. Análisis real de tus partidas, plan de mejora y horario fijo para subir tu MMR de forma constante."
+    },
+    "header": {
+      "actions": {
+        "book": "Ver packs y precios",
+        "contact": "Hablar con el coach"
+      }
+    },
+    "coach": {
+      "meta": {
+        "eyebrow": "El coach",
+        "title": "Rasobe",
+        "subtitle": "Raúl Solano · CEO & Head Coach"
+      },
+      "bio": {
+        "meta": {
+          "location": "Huesca, España",
+          "languages": "Español (nativo), Inglés (intermedio)"
+        },
+        "p1": "CEO y head coach de Crow 6 eSports. Más de 6000 horas en Rocket League y cinco años formando jugadores y equipos — desde quienes empiezan en clasificatoria hasta competitivos por encima de 2000 MMR. Coaching directo, sin relleno: análisis de tus partidas, decisiones y mecánicas, con un plan claro para cada sesión."
+      }
     },
     "individual": "Individual",
     "group": "Grupal",

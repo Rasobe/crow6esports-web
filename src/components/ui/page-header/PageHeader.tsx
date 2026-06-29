@@ -5,9 +5,10 @@ import "./page-header.scss";
 
 interface PageHeaderProps {
   namespace: string;
+  children?: React.ReactNode;
 }
 
-export function PageHeader({ namespace }: PageHeaderProps) {
+export function PageHeader({ namespace, children }: PageHeaderProps) {
   const t = useTranslations(namespace);
 
   const title = namespace ? t("meta.title") : "";
@@ -24,6 +25,7 @@ export function PageHeader({ namespace }: PageHeaderProps) {
         {description && (
           <p className="page-header__description">{description}</p>
         )}
+        {children}
       </div>
     </div>
   );

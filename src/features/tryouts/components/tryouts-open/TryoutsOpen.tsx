@@ -5,7 +5,8 @@ export async function TryoutsOpen() {
     return (
         <main className="tryouts-open">
             <PageHeader namespace="tryouts.open" />
-            <div className="tryouts-open__content">
+
+            <div className="tryouts-open__inner">
                 <TryoutsForm />
             </div>
         </main>
