@@ -1,12 +1,12 @@
 import "./coach-section.scss";
-import { AchievementsSection, BioSection } from "./components";
+import { WorkedWithSection, BioSection } from "./components";
 
 export function CoachSection() {
     return (
         <section className="coach-section">
             <div className="coach-section__inner">
                 <BioSection />
-                <AchievementsSection />
+                <WorkedWithSection />
             </div>
         </section>
     )

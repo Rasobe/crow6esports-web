@@ -324,9 +324,9 @@
         "orgs": {
           "label": "Ha trabajado con",
           "list": [
-            "Crow 6 Esports",
-            "Ventucorp Esports",
-            "Prodigy Five"
+            { "name": "Crow 6 Esports", "slug": "crow6" },
+            { "name": "Ventucorp Esports", "slug": "ventucorp" },
+            { "name": "Prodigy Five", "slug": "prodigy-five" }
           ]
         }
       }

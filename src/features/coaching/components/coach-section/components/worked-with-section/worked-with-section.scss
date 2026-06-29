@@ -1,0 +1,126 @@
+@layer components {
+    .worked-with {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    /* Case card */
+    .worked-with__case {
+        padding: 1.25rem 1.5rem;
+        border: 1px solid var(--border-strong);
+        background: var(--bg-raised);
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        box-shadow: 0 0 24px -6px color-mix(in srgb, var(--brand) 25%, transparent),
+                    inset 0 1px 0 color-mix(in srgb, var(--brand) 15%, transparent);
+    }
+
+    .worked-with__case-eyebrow {
+        font-size: 0.6875rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--text-secondary);
+    }
+
+    .worked-with__case-mmr {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .worked-with__mmr-from {
+        font-family: var(--font-display);
+        font-size: clamp(1.5rem, 3vw, 2rem);
+        line-height: 1;
+        color: var(--text-primary);
+    }
+
+    .worked-with__mmr-arrow {
+        color: var(--text-secondary);
+        flex-shrink: 0;
+    }
+
+    .worked-with__mmr-to {
+        font-family: var(--font-display);
+        font-size: clamp(1.5rem, 3vw, 2rem);
+        line-height: 1;
+        color: var(--brand);
+    }
+
+    .worked-with__case-desc {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        line-height: 1.6;
+        margin: 0;
+    }
+
+    /* Orgs marquee */
+    .worked-with__orgs {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        padding: 1.25rem 0;
+        border: 1px solid var(--border-subtle);
+        background: var(--bg-raised);
+    }
+
+    .worked-with__label {
+        font-size: 0.6875rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--text-secondary);
+        padding-inline: 1.5rem;
+    }
+
+    .worked-with__track-wrapper {
+        overflow: hidden;
+        mask-image: linear-gradient(
+            to right,
+            transparent,
+            black 15%,
+            black 85%,
+            transparent
+        );
+
+        &:hover .worked-with__track {
+            animation-play-state: paused;
+        }
+    }
+
+    .worked-with__track {
+        display: flex;
+        align-items: center;
+        width: max-content;
+        animation: marquee 14s linear infinite;
+    }
+
+    .worked-with__set {
+        display: flex;
+        align-items: center;
+        gap: 2.5rem;
+        padding-right: 2.5rem;
+    }
+
+    .worked-with__item {
+        flex-shrink: 0;
+        opacity: 0.55;
+        transition: opacity 0.25s ease;
+
+        &:hover {
+            opacity: 1;
+        }
+
+        img {
+            display: block;
+        }
+    }
+
+    @keyframes marquee {
+        from { transform: translateX(0); }
+        to   { transform: translateX(-25%); }
+    }
+}
