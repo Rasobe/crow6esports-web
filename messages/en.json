@@ -266,7 +266,6 @@
     }
   },
   "coaching": {
-    "eyebrow": "Professional training",
     "meta": {
       "eyebrow": "Coaching · Rocket League",
       "title": "Level Up",
@@ -282,7 +281,7 @@
       "meta": {
         "eyebrow": "The coach",
         "title": "Rasobe",
-        "description": "Raúl Solano · CEO & Head Coach"
+        "subtitle": "Raúl Solano · CEO & Head Coach"
       },
       "bio": {
         "meta": {
@@ -290,7 +289,12 @@
           "languages": "Spanish (native), English (intermediate)"
         },
         "p1": "CEO and head coach of Crow 6 eSports. Over 6000 hours in Rocket League and five years training players and teams — from those starting in ranked play to competitive players above 2000 MMR. Direct coaching, no filler: analysis of your matches, decisions, and mechanics, with a clear plan for each session."
-      }
+      },
+      "stats": [
+        { "value": "6000+", "label": "Hours in RL" },
+        { "value": "5", "label": "Years as coach" },
+        { "value": "2000+", "label": "MMR reached" }
+      ]
     },
     "individual": "Individual",
     "group": "Group",

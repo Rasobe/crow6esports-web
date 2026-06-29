@@ -276,7 +276,6 @@
     }
   },
   "coaching": {
-    "eyebrow": "Entrenamiento profesional",
     "meta": {
       "eyebrow": "Coaching · Rocket League",
       "title": "Sube de nivel",
@@ -300,7 +299,12 @@
           "languages": "Español (nativo), Inglés (intermedio)"
         },
         "p1": "CEO y head coach de Crow 6 eSports. Más de 6000 horas en Rocket League y cinco años formando jugadores y equipos — desde quienes empiezan en clasificatoria hasta competitivos por encima de 2000 MMR. Coaching directo, sin relleno: análisis de tus partidas, decisiones y mecánicas, con un plan claro para cada sesión."
-      }
+      },
+      "stats": [
+        { "value": "6000+", "label": "Horas en RL" },
+        { "value": "5", "label": "Años como coach" },
+        { "value": "2000+", "label": "MMR alcanzado" }
+      ]
     },
     "individual": "Individual",
     "group": "Grupal",

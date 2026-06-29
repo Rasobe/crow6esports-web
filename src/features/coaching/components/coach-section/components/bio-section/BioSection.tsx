@@ -1,6 +1,6 @@
 import { SectionHeader } from "@/components/ui";
 import { useTranslations } from "next-intl";
-import { CoachMeta } from "./components";
+import { CoachMeta, CoachStats } from "./components";
 
 export function BioSection() {
     const t = useTranslations("coaching.coach.bio");
@@ -14,6 +14,8 @@ export function BioSection() {
             <p className="coach-section__bio-text">
                 {t("p1")}
             </p>
+
+            <CoachStats />
         </section>
     )
 }
