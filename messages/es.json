@@ -298,7 +298,7 @@
           "location": "Huesca, España",
           "languages": "Español (nativo), Inglés (intermedio)"
         },
-        "p1": "CEO y head coach de Crow 6 eSports. Más de 6000 horas en Rocket League y cinco años formando jugadores y equipos — desde quienes empiezan en clasificatoria hasta competitivos por encima de 2000 MMR. Coaching directo, sin relleno: análisis de tus partidas, decisiones y mecánicas, con un plan claro para cada sesión."
+        "p1": "5 años formando jugadores desde clasificatoria hasta 2000+ MMR. Sin relleno — solo análisis y resultados."
       },
       "stats": [
         {
@@ -314,12 +314,16 @@
           "label": "MMR alcanzado"
         }
       ],
+      "availability": {
+        "eyebrow": "Disponibilidad",
+        "schedule": "L–S · 16:00–22:00 CEST"
+      },
       "achievements": {
         "case": {
           "eyebrow": "Caso reciente · Verificable",
           "from": "1700",
           "to": "2000 MMR",
-          "description": "Un jugador llevado de 1700 a 2000+ MMR con sesiones constantes y un plan de mejora a medida."
+          "description": "De 1700 a 2000+ MMR con análisis constante y plan de mejora a medida."
         },
         "orgs": {
           "label": "Ha trabajado con",
