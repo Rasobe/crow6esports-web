@@ -10,7 +10,7 @@ export function WorkedWithSection() {
     const orgs = t.raw("orgs.list") as Org[];
 
     const renderSet = (suffix: string) => (
-        <div key={suffix} className="worked-with__set" aria-hidden={suffix !== "a" ? "true" : undefined}>
+        <div key={suffix} className="worked-with__set" aria-hidden={suffix === "a" ? undefined : "true"}>
             {orgs.map((org) => (
                 <div key={`${org.slug}-${suffix}`} className="worked-with__item">
                     <div className="worked-with__item-img">
