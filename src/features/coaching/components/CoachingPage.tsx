@@ -2,6 +2,7 @@ import { Button, PageHeader } from "@/components/ui";
 import { useTranslations } from "next-intl";
 import "./coaching-page.scss";
 import { CoachSection } from "./coach-section";
+import { ServicesSection } from "./services-section";
 
 export function CoachingPage() {
     const t = useTranslations("coaching.header.actions");
@@ -20,6 +21,8 @@ export function CoachingPage() {
             </PageHeader>
 
             <CoachSection />
+
+            <ServicesSection />
         </>
     )
 }

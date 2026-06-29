@@ -291,9 +291,18 @@
         "p1": "CEO and head coach of Crow 6 eSports. Over 6000 hours in Rocket League and five years training players and teams — from those starting in ranked play to competitive players above 2000 MMR. Direct coaching, no filler: analysis of your matches, decisions, and mechanics, with a clear plan for each session."
       },
       "stats": [
-        { "value": "6000+", "label": "Hours in RL" },
-        { "value": "5", "label": "Years as coach" },
-        { "value": "2000+", "label": "MMR reached" }
+        {
+          "value": "6000+",
+          "label": "Hours in RL"
+        },
+        {
+          "value": "5",
+          "label": "Years as coach"
+        },
+        {
+          "value": "2000+",
+          "label": "MMR reached"
+        }
       ],
       "achievements": {
         "case": {
@@ -304,16 +313,50 @@
         },
         "orgs": {
           "label": "Has worked with",
-          "list": ["Crow 6 Esports", "Ventucorp Esports", "Prodigy Five"]
+          "list": [
+            "Crow 6 Esports",
+            "Ventucorp Esports",
+            "Prodigy Five"
+          ]
         }
       }
     },
-    "individual": "Individual",
-    "group": "Group",
-    "book": "Book a session",
-    "contact": "Contact"
-  },
-  "footer": {
+    "services": {
+      "meta": {
+        "eyebrow": "What I offer",
+        "title": "Services",
+        "subtitle": ""
+      },
+      "items": [
+        {
+          "icon": "crosshair",
+          "title": "1on1 Coaching",
+          "features": [
+            "Live or recorded match analysis",
+            "Personalized strategies for your level",
+            "Mechanics and decision-making"
+          ]
+        },
+        {
+          "icon": "users",
+          "title": "Group Training",
+          "features": [
+            "Coaching for full teams",
+            "Team synergy and strategy analysis",
+            "Optimal plays and rotations"
+          ]
+        },
+        {
+          "icon": "trending-up",
+          "title": "Improvement Plan",
+          "features": [
+            "Based on your strengths and weaknesses",
+            "Drills for speed and precision",
+            "Daily routine adapted to your availability"
+          ]
+        }
+      ]
+    },
     "nav": {
       "title": "Navigation",
       "team": "Team",

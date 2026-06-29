@@ -301,9 +301,18 @@
         "p1": "CEO y head coach de Crow 6 eSports. Más de 6000 horas en Rocket League y cinco años formando jugadores y equipos — desde quienes empiezan en clasificatoria hasta competitivos por encima de 2000 MMR. Coaching directo, sin relleno: análisis de tus partidas, decisiones y mecánicas, con un plan claro para cada sesión."
       },
       "stats": [
-        { "value": "6000+", "label": "Horas en RL" },
-        { "value": "5", "label": "Años como coach" },
-        { "value": "2000+", "label": "MMR alcanzado" }
+        {
+          "value": "6000+",
+          "label": "Horas en RL"
+        },
+        {
+          "value": "5",
+          "label": "Años como coach"
+        },
+        {
+          "value": "2000+",
+          "label": "MMR alcanzado"
+        }
       ],
       "achievements": {
         "case": {
@@ -314,9 +323,49 @@
         },
         "orgs": {
           "label": "Ha trabajado con",
-          "list": ["Crow 6 Esports", "Ventucorp Esports", "Prodigy Five"]
+          "list": [
+            "Crow 6 Esports",
+            "Ventucorp Esports",
+            "Prodigy Five"
+          ]
         }
       }
+    },
+    "services": {
+      "meta": {
+        "eyebrow": "Qué ofrezco",
+        "title": "Servicios",
+        "subtitle": ""
+      },
+      "items": [
+        {
+          "icon": "crosshair",
+          "title": "Coaching 1a1",
+          "features": [
+            "Análisis de partidas en vivo o grabadas",
+            "Estrategias personalizadas según tu nivel",
+            "Mecánicas y toma de decisiones"
+          ]
+        },
+        {
+          "icon": "users",
+          "title": "Entrenamiento en grupo",
+          "features": [
+            "Coaching para equipos completos",
+            "Análisis de sinergia y estrategia de equipo",
+            "Jugadas y rotaciones óptimas"
+          ]
+        },
+        {
+          "icon": "trending-up",
+          "title": "Plan de mejora",
+          "features": [
+            "Basado en tus puntos fuertes y débiles",
+            "Ejercicios para rapidez y precisión",
+            "Rutina diaria adaptada a tu disponibilidad"
+          ]
+        }
+      ]
     },
     "individual": "Individual",
     "group": "Grupal",
