@@ -19,7 +19,6 @@ export function WorkedWithSection() {
                             alt={org.name}
                             width={100}
                             height={100}
-                            style={{ objectFit: "contain", width: "100%", height: "auto" }}
                         />
                     </div>
                     <span className="worked-with__item-name" aria-hidden="true">{org.name}</span>
