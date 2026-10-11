@@ -1,7 +1,7 @@
 ---
 import { TRYOUTS_OPEN } from "astro:env/server";
-import TryoutsClosed from "./tryouts-closed/TryoutsClosed.astro";
-import TryoutsOpen from "./tryouts-open/TryoutsOpen.astro";
+import { TryoutsClosed } from "./tryouts-closed";
+import { TryoutsOpen } from "./tryouts-open";
 ---
 
 {TRYOUTS_OPEN ? <TryoutsOpen /> : <TryoutsClosed />}

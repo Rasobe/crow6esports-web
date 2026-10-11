@@ -5,8 +5,8 @@ import {
   LOSS_REACTIONS,
 } from "@/domain/tryouts/tryout-application";
 import type { Translate } from "@/ui/i18n";
-import { SelectField } from "@/ui/shared/components/select-field/SelectField";
-import { TextField } from "@/ui/shared/components/text-field/TextField";
+import { SelectField } from "@/ui/shared/components/select-field";
+import { TextField } from "@/ui/shared/components/text-field";
 import { getFieldError } from "@/ui/features/tryouts/lib/field-error";
 import type { TryoutsFormValues } from "@/ui/features/tryouts/schemas/tryouts-form.schema";
 

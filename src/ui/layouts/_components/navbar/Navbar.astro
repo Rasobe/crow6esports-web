@@ -4,8 +4,8 @@ import { navigationConfig } from "@config/navigation";
 import { ROUTES } from "@config/routes";
 import { Button } from "@/ui/shared/components";
 import { createTranslator, localizePath, stripLocale } from "@/ui/i18n";
-import LocaleSwitcher from "./_components/locale-switcher/LocaleSwitcher.astro";
-import MobileMenu from "./_components/mobile-menu/MobileMenu.astro";
+import { LocaleSwitcher } from "./_components/locale-switcher";
+import { MobileMenu } from "./_components/mobile-menu";
 
 const { locale } = Astro.locals;
 const t = createTranslator(locale, "nav");
