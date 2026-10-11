@@ -1,0 +1,60 @@
+---
+import "./news-ticker.scss";
+
+interface Props {
+  items: readonly string[];
+  label: string;
+  pauseLabel: string;
+  duration?: number;
+}
+
+const SETS_PER_GROUP = 4;
+
+const { items, label, pauseLabel, duration = 40 } = Astro.props;
+const sets = Array.from({ length: SETS_PER_GROUP });
+const groups = Array.from({ length: 2 });
+---
+
+<news-ticker class="news-ticker" style={`--ticker-duration: ${duration}s`}>
+  <ul class="news-ticker__sr-only" aria-label={label}>
+    {items.map((item) => (
+      <li>{item}</li>
+    ))}
+  </ul>
+
+  <div class="news-ticker__viewport" aria-hidden="true">
+    <div class="news-ticker__track">
+      {groups.map(() => (
+        <div class="news-ticker__group">
+          {sets.map(() => items.map((item) => <span class="news-ticker__item">{item}</span>))}
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <button type="button" class="news-ticker__toggle" aria-pressed="false" aria-label={pauseLabel}>
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true">
+      <path class="news-ticker__icon-pause" d="M3 2h2.5v10H3zM8.5 2H11v10H8.5z" />
+      <path class="news-ticker__icon-play" d="M3.5 2l8 5-8 5z" />
+    </svg>
+  </button>
+</news-ticker>
+
+<script>
+  class NewsTicker extends HTMLElement {
+    connectedCallback() {
+      const toggle = this.querySelector<HTMLButtonElement>(".news-ticker__toggle");
+      if (!toggle) return;
+
+      toggle.addEventListener("click", () => {
+        const isPaused = toggle.getAttribute("aria-pressed") !== "true";
+        toggle.setAttribute("aria-pressed", String(isPaused));
+        this.toggleAttribute("data-paused", isPaused);
+      });
+    }
+  }
+
+  if (!customElements.get("news-ticker")) {
+    customElements.define("news-ticker", NewsTicker);
+  }
+</script>

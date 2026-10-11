@@ -2,6 +2,7 @@ export * from "./badge";
 export * from "./button";
 export * from "./cta-button";
 export * from "./icons";
+export * from "./news-ticker";
 export * from "./not-found";
 export * from "./page-header";
 export * from "./player-card";
