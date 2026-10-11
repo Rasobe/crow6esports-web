@@ -307,5 +307,16 @@
     "title": "PÁGINA <span>NO</span><br>ENCONTRADA",
     "desc": "La página que buscas no existe o ha sido movida. Vuelve al inicio y sigue compitiendo.",
     "cta": "Volver al inicio"
+  },
+  "comingSoon": {
+    "pageTitle": "Próximamente",
+    "pageDescription": "Estamos preparando la nueva web de Crow 6 Esports. Vuelve pronto.",
+    "eyebrow": "Estamos preparando algo",
+    "title": "Próximamente",
+    "description": "Estamos trabajando en una nueva experiencia para Crow 6 Esports. Vuelve pronto.",
+    "socialsLabel": "Redes sociales",
+    "newTab": "se abre en una pestaña nueva",
+    "meta": "Desde 2020 · Huesca, España · Rocket League",
+    "hashtag": "#GoCrows"
   }
 }

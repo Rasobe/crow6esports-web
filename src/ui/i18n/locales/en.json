@@ -297,5 +297,16 @@
     "title": "PAGE <span>NOT</span><br>FOUND",
     "desc": "The page you are looking for does not exist or has been moved. Go back and keep competing.",
     "cta": "Back to home"
+  },
+  "comingSoon": {
+    "pageTitle": "Coming soon",
+    "pageDescription": "We are getting the new Crow 6 Esports website ready. Check back soon.",
+    "eyebrow": "Something is on the way",
+    "title": "Coming soon",
+    "description": "We are building a new experience for Crow 6 Esports. Check back soon.",
+    "socialsLabel": "Social media",
+    "newTab": "opens in a new tab",
+    "meta": "Since 2020 · Huesca, Spain · Rocket League",
+    "hashtag": "#GoCrows"
   }
 }
