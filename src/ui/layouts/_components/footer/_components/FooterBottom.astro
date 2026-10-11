@@ -1,0 +1,11 @@
+---
+import { siteConfig } from "@config/site";
+import { createTranslator } from "@/ui/i18n";
+
+const t = createTranslator(Astro.locals.locale, "footer");
+const year = new Date().getFullYear();
+---
+
+<div class="footer__bottom">
+  © {year} {siteConfig.name} — {t("rights")}
+</div>

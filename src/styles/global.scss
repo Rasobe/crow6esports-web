@@ -1,0 +1,11 @@
+/* ═══════════════════════════════════════════════════════════════
+   CROW 6 ESPORTS — Global Styles
+
+   Punto de entrada central de estilos globales.
+═══════════════════════════════════════════════════════════════ */
+@use "styles/layers";
+@use "styles/tokens";
+@use "styles/reset";
+@use "styles/typography";
+@use "styles/scrollbar";
+@use "styles/utilities";

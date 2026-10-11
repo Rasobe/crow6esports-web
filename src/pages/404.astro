@@ -1,0 +1,15 @@
+---
+import BaseLayout from "@/ui/layouts/BaseLayout.astro";
+import Navbar from "@/ui/layouts/_components/navbar/Navbar.astro";
+import { NotFound } from "@/ui/shared/components";
+import { createTranslator } from "@/ui/i18n";
+
+const t = createTranslator(Astro.locals.locale, "notFound");
+---
+
+<BaseLayout title={t("eyebrow")} description={t("desc")} noindex>
+  <Navbar />
+  <div class="content-offset">
+    <NotFound />
+  </div>
+</BaseLayout>

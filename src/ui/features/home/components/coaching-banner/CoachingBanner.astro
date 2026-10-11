@@ -1,0 +1,50 @@
+---
+import "./coaching-banner.scss";
+import { ROUTES } from "@config/routes";
+import { createTranslator } from "@/ui/i18n";
+import { Button, SectionHeader } from "@/ui/shared/components";
+
+interface CoachingPack {
+  id: "pack_1" | "pack_2" | "pack_3";
+  featured: boolean;
+  featureCount: number;
+}
+
+const PACKS: CoachingPack[] = [
+  { id: "pack_1", featured: false, featureCount: 3 },
+  { id: "pack_2", featured: true, featureCount: 4 },
+  { id: "pack_3", featured: false, featureCount: 4 },
+];
+
+const t = createTranslator(Astro.locals.locale, "home.coachingBanner");
+---
+
+<section class="coaching-banner">
+  <div class="coaching-banner__inner">
+    <SectionHeader namespace="home.coachingBanner" />
+
+    <p class="coaching-banner__credibility">{t("credibility")}</p>
+
+    <div class="coaching-banner__packs">
+      {PACKS.map(({ id, featured, featureCount }) => (
+        <div class={featured ? "coaching-pack--featured" : "coaching-pack"}>
+          {featured && <span class="coaching-pack__badge">{t("pack_2_badge")}</span>}
+          <h3 class="coaching-pack__title">{t(`${id}_title`)}</h3>
+          <p class="coaching-pack__price">{t(`${id}_price`)}</p>
+          <p class="coaching-pack__description">{t(`${id}_description`)}</p>
+          <ul class="coaching-pack__features">
+            {Array.from({ length: featureCount }, (_, index) => (
+              <li>{t(`${id}_feature_${index + 1}`)}</li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+    <div class="coaching-banner__footer">
+      <Button href={ROUTES.coaching} variant="primary">
+        {t("cta_reserve")}
+      </Button>
+    </div>
+  </div>
+</section>

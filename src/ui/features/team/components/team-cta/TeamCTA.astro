@@ -1,0 +1,17 @@
+---
+import "./team-cta.scss";
+import { ROUTES } from "@config/routes";
+import { createTranslator } from "@/ui/i18n";
+import { Button } from "@/ui/shared/components";
+
+const t = createTranslator(Astro.locals.locale, "team.cta");
+---
+
+<section class="team-cta">
+  <div class="team-cta__inner">
+    <p class="section-label">{t("eyebrow")}</p>
+    <h2 class="team-cta__title">{t("title")}</h2>
+    <p class="team-cta__description">{t("description")}</p>
+    <Button href={ROUTES.tryouts}>{t("join")}</Button>
+  </div>
+</section>
