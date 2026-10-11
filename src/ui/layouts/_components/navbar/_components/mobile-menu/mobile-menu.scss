@@ -55,16 +55,20 @@
     padding: 1.5rem;
     transform: translateY(-8px);
     opacity: 0;
+    visibility: hidden;
     pointer-events: none;
     transition:
       transform 0.2s ease,
-      opacity 0.2s ease;
+      opacity 0.2s ease,
+      visibility 0s linear 0.2s;
   }
 
   .mobile-menu__drawer--open {
     transform: translateY(0);
     opacity: 1;
+    visibility: visible;
     pointer-events: auto;
+    transition-delay: 0s;
   }
 
   .mobile-menu__links {

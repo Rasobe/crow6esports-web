@@ -15,44 +15,43 @@ const stats = [
 ];
 ---
 
-<section class="hero">
-  <div class="hero__bg-number" aria-hidden="true">
-    C6
-  </div>
-  <div class="hero__line hero__line--left" aria-hidden="true"></div>
-  <div class="hero__line hero__line--right" aria-hidden="true"></div>
+<section class="hero" aria-labelledby="hero-heading">
+  <img
+    class="hero__bg"
+    src="/images/hero-bg.jpg"
+    alt=""
+    width="1920"
+    height="1080"
+    fetchpriority="high"
+    decoding="async"
+    aria-hidden="true"
+  />
+  <div class="hero__shade" aria-hidden="true"></div>
 
-  <div class="hero__content">
-    <p class="hero__eyebrow">
-      <span aria-hidden="true"></span>
-      {t("eyebrow")}
-      <span aria-hidden="true"></span>
-    </p>
+  <div class="hero__inner">
+    <div class="hero__content">
+      <h1 id="hero-heading" class="hero-title">
+        <span class="hero-title__line">
+          {t("title.name")} <span class="hero-title__accent">{t("title.number")}</span>
+        </span>
+        <span class="hero-title__line text-stroke-brand">{t("title.sector")}</span>
+      </h1>
 
-    <h1 class="hero__title">
-      CROW<span>6</span>
-    </h1>
+      <p class="hero-subtitle">{t("subtitle")}</p>
 
-    <div class="hero__divider" aria-hidden="true"></div>
-
-    <p class="hero__tagline">{t("tagline")}</p>
-
-    <div class="hero__ctas">
-      <Button href={ROUTES.team} variant="primary">
-        {t("cta_team")}
-      </Button>
-      <Button href={ROUTES.tryouts} variant="ghost">
-        {t("cta_join")}
-      </Button>
-    </div>
-  </div>
-
-  <div class="hero__stats">
-    {stats.map(({ value, label }) => (
-      <div class="hero__stat">
-        <span class="hero__stat-num">{value}</span>
-        <span class="hero__stat-label">{label}</span>
+      <div class="hero__ctas">
+        <Button href={ROUTES.tryouts} size="lg">{t("cta_join")}</Button>
+        <Button href={ROUTES.team} variant="brand-outline" size="lg">{t("cta_team")}</Button>
       </div>
-    ))}
+    </div>
+
+    <dl class="hero__stats" aria-label={t("stats.label")}>
+      {stats.map((stat, index) => (
+        <div class:list={["hero__stat", { "hero__stat--brand": index === 0 }]}>
+          <dt class="hero__stat-label">{stat.label}</dt>
+          <dd class="hero__stat-value">{stat.value}</dd>
+        </div>
+      ))}
+    </dl>
   </div>
 </section>

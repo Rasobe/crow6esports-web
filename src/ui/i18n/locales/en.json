@@ -9,10 +9,11 @@
     "coaching": "Coaching",
     "about_us": "About us",
     "join": "Join us",
-    "home_aria": "Crow 6 Esports — Home",
+    "home_aria": "Crow 6 Esports, Home",
     "locale_switcher_aria": "Select language",
     "menu_aria": "Navigation menu",
     "menu_open_aria": "Open menu",
+    "skip_to_content": "Skip to content",
     "menu_close_aria": "Close menu"
   },
   "home": {
@@ -21,11 +22,18 @@
       "description": "Competitive Rocket League organization."
     },
     "hero": {
+      "title": {
+        "name": "Crow",
+        "number": "6",
+        "sector": "Esports"
+      },
+      "subtitle": "Competitive Rocket League organization",
       "eyebrow": "Esports organization",
       "tagline": "Dominate · Compete · Conquer",
       "cta_team": "Meet the team",
       "cta_join": "Join the team",
       "stats": {
+        "label": "Team figures",
         "wins": "Wins",
         "tournaments": "Tournaments",
         "players": "Players",
@@ -196,7 +204,7 @@
           "highlights": {
             "label": "Clip or highlights",
             "placeholder": "YouTube, Medal, Twitch...",
-            "hint": "Optional — share a clip or highlight of your gameplay"
+            "hint": "Optional: share a clip or highlight of your gameplay"
           },
           "competitive_exp": {
             "label": "Do you have experience in competitive teams?",
@@ -249,9 +257,9 @@
           "playstyle_required": "Select a playstyle",
           "highlights_invalid": "Enter a valid URL",
           "competitive_exp_required": "This field is required",
-          "reaction_mistakes_required": "Response too short — minimum 10 characters",
+          "reaction_mistakes_required": "Response too short, minimum 10 characters",
           "reaction_losses_required": "This field is required",
-          "looking_for_required": "Response too short — minimum 10 characters",
+          "looking_for_required": "Response too short, minimum 10 characters",
           "coaching_required": "This field is required"
         },
         "error": {

@@ -8,9 +8,9 @@ const { locale } = Astro.locals;
 const t = createTranslator(locale, "tryouts.open");
 ---
 
-<main class="tryouts-open">
+<div class="tryouts-open">
   <PageHeader eyebrow={t("eyebrow")} title={t("title")} description={t("desc")} />
   <div class="tryouts-open__content">
     <TryoutsForm client:load messages={getMessages(locale, "tryouts.open")} />
   </div>
-</main>
+</div>
