@@ -1,5 +1,3 @@
-<!-- BEGIN:nextjs-agent-rules -->
-# This is NOT the Next.js you know
+# Astro 7
 
-This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
-<!-- END:nextjs-agent-rules -->
+Este proyecto usa Astro 7 (Vite 8, compilador Rust). Antes de usar una API de Astro, consulta la documentación oficial (https://docs.astro.build) en lugar de asumir el comportamiento de versiones anteriores. Ojo: `src/fetch.ts` está reservado por el enrutado avanzado.
