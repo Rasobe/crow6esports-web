@@ -40,6 +40,12 @@
         "championships": "Championships"
       }
     },
+    "ticker": {
+      "label": "Team news",
+      "pause": "Pause news animation",
+      "roster": "Official roster",
+      "tryouts": "Tryouts 2026 open"
+    },
     "teamHighlight": {
       "eyebrow": "The Team",
       "title": "Meet our players",

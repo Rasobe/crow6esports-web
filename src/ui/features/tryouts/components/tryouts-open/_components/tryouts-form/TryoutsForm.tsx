@@ -4,7 +4,7 @@ import { createMessageTranslator, type Messages } from "@/ui/i18n";
 import { FormButton } from "@/ui/shared/components/button/FormButton";
 import { classNames } from "@/ui/shared/lib/class-names";
 import { StepMindset, StepProfile, StepTechnical } from "../steps";
-import { TryoutsSuccess } from "../tryouts-success/TryoutsSuccess";
+import { TryoutsSuccess } from "../tryouts-success";
 import { useTryoutsForm } from "./use-tryouts-form";
 
 interface TryoutsFormProps {

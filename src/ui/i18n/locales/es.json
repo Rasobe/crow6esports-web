@@ -40,6 +40,12 @@
         "championships": "Campeonatos"
       }
     },
+    "ticker": {
+      "label": "Novedades del equipo",
+      "pause": "Pausar animación de novedades",
+      "roster": "Roster oficial",
+      "tryouts": "Tryouts 2026 abiertos"
+    },
     "teamHighlight": {
       "eyebrow": "El Equipo",
       "title": "Conoce a nuestros jugadores",

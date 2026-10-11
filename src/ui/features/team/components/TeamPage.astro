@@ -7,8 +7,8 @@ import {
 import { container } from "@/infrastructure/container";
 import { createTranslator } from "@/ui/i18n";
 import { PageHeader } from "@/ui/shared/components";
-import RosterSection from "./roster-section/RosterSection.astro";
-import TeamCTA from "./team-cta/TeamCTA.astro";
+import { RosterSection } from "./roster-section";
+import { TeamCTA } from "./team-cta";
 
 const t = createTranslator(Astro.locals.locale, "team");
 const { playerRepository } = container;

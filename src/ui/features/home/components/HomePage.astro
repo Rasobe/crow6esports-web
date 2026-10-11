@@ -1,11 +1,17 @@
 ---
-import CoachingBanner from "./coaching-banner/CoachingBanner.astro";
-import HeroSection from "./hero-section/HeroSection.astro";
-import StoreHighlight from "./store-highlight/StoreHighlight.astro";
-import TeamHighlight from "./team-highlight/TeamHighlight.astro";
+import { createTranslator } from "@/ui/i18n";
+import { NewsTicker } from "@/ui/shared/components";
+import { CoachingBanner } from "./coaching-banner";
+import { HeroSection } from "./hero-section";
+import { StoreHighlight } from "./store-highlight";
+import { TeamHighlight } from "./team-highlight";
+
+const t = createTranslator(Astro.locals.locale, "home.ticker");
+const tickerItems = [t("roster"), t("tryouts")];
 ---
 
 <HeroSection />
+<NewsTicker items={tickerItems} label={t("label")} pauseLabel={t("pause")} />
 <TeamHighlight />
 <CoachingBanner />
 <StoreHighlight />

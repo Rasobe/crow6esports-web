@@ -1,6 +1,6 @@
 import { useFormContext } from "react-hook-form";
 import type { Translate } from "@/ui/i18n";
-import { TextField } from "@/ui/shared/components/text-field/TextField";
+import { TextField } from "@/ui/shared/components/text-field";
 import { getFieldError } from "@/ui/features/tryouts/lib/field-error";
 import type { TryoutsFormValues } from "@/ui/features/tryouts/schemas/tryouts-form.schema";
 

@@ -1,6 +1,6 @@
 ---
-import HomePage from "@/ui/features/home/components/HomePage.astro";
-import LocaleLayout from "@/ui/layouts/LocaleLayout.astro";
+import { HomePage } from "@/ui/features/home/components";
+import { LocaleLayout } from "@/ui/layouts";
 import { createTranslator } from "@/ui/i18n";
 
 const t = createTranslator(Astro.locals.locale, "home.meta");

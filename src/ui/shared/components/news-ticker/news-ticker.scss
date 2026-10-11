@@ -1,0 +1,108 @@
+@use "styles/layers";
+@layer components {
+  .news-ticker {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    background: var(--brand);
+    color: var(--brand-fg);
+  }
+
+  .news-ticker__sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    list-style: none;
+  }
+
+  .news-ticker__viewport {
+    overflow: hidden;
+  }
+
+  .news-ticker__track {
+    display: flex;
+  }
+
+  .news-ticker__group {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    min-width: 100%;
+    animation: news-ticker-scroll var(--ticker-duration, 40s) linear infinite;
+    will-change: transform;
+  }
+
+  .news-ticker__item {
+    display: inline-flex;
+    align-items: center;
+    padding-block: 0.75rem;
+    font-family: var(--font-display), sans-serif;
+    font-size: 1.125rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    white-space: nowrap;
+
+    &::after {
+      content: "/";
+      padding-inline: 1.5rem;
+      opacity: 0.55;
+    }
+  }
+
+  .news-ticker__toggle {
+    position: absolute;
+    inset-block: 0;
+    right: 0;
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    background: var(--brand);
+    color: var(--brand-fg);
+    border: 0;
+    border-left: 1px solid color-mix(in srgb, var(--brand-fg) 25%, transparent);
+    cursor: pointer;
+
+    &:focus-visible {
+      outline: 2px solid var(--brand-fg);
+      outline-offset: -4px;
+    }
+
+    &[aria-pressed="false"] .news-ticker__icon-play,
+    &[aria-pressed="true"] .news-ticker__icon-pause {
+      display: none;
+    }
+  }
+
+  .news-ticker:hover .news-ticker__group,
+  .news-ticker[data-paused] .news-ticker__group {
+    animation-play-state: paused;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .news-ticker__group {
+      animation: none;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .news-ticker__group:nth-child(n + 2),
+    .news-ticker__item:nth-child(n + 3) {
+      display: none;
+    }
+
+    .news-ticker__toggle {
+      display: none;
+    }
+  }
+
+  @keyframes news-ticker-scroll {
+    to {
+      transform: translateX(-100%);
+    }
+  }
+}
