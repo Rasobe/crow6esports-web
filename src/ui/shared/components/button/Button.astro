@@ -1,0 +1,50 @@
+---
+import "./button.scss";
+import { localizePath } from "@/ui/i18n";
+
+type ButtonVariant = "primary" | "outline" | "ghost" | "brand-outline";
+type ButtonSize = "sm" | "md" | "lg";
+
+interface Props {
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  href?: string;
+  class?: string;
+  type?: "button" | "submit" | "reset";
+  disabled?: boolean;
+}
+
+const {
+  variant = "primary",
+  size = "md",
+  href,
+  class: className,
+  type = "button",
+  disabled,
+  ...attrs
+} = Astro.props;
+
+const hasIcon = Astro.slots.has("icon");
+const classes = ["btn", `btn--${variant}`, `btn--${size}`, className];
+const localizedHref = href === undefined ? undefined : localizePath(Astro.locals.locale, href);
+---
+
+{localizedHref !== undefined ? (
+  <a href={localizedHref} class:list={classes} {...attrs}>
+    {hasIcon && (
+      <span class="btn__icon" aria-hidden="true">
+        <slot name="icon" />
+      </span>
+    )}
+    <slot />
+  </a>
+) : (
+  <button type={type} disabled={disabled} class:list={classes} {...attrs}>
+    {hasIcon && (
+      <span class="btn__icon" aria-hidden="true">
+        <slot name="icon" />
+      </span>
+    )}
+    <slot />
+  </button>
+)}

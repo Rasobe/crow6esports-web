@@ -1,0 +1,8 @@
+---
+import LocaleLayout from "@/ui/layouts/LocaleLayout.astro";
+import { ROUTES } from "@config/routes";
+
+const { product } = Astro.params;
+---
+
+<LocaleLayout path={`${ROUTES.store}/${product}`} />

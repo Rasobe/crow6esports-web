@@ -1,0 +1,33 @@
+---
+import "./not-found.scss";
+import { createTranslator } from "@/ui/i18n";
+import CTAButton from "../cta-button/CTAButton.astro";
+import { Icon } from "../icons";
+
+const t = createTranslator(Astro.locals.locale, "notFound");
+---
+
+<main class="not-found">
+  <div class="not-found__bg-number" aria-hidden="true">
+    404
+  </div>
+
+  <div class="not-found__inner">
+    <p class="not-found__eyebrow">
+      <span></span>
+      {t("eyebrow")}
+      <span></span>
+    </p>
+
+    <h1 class="not-found__title" set:html={t("title")} />
+
+    <div class="not-found__divider" aria-hidden="true"></div>
+
+    <p class="not-found__desc">{t("desc")}</p>
+
+    <CTAButton href="/" class="not-found__cta">
+      <Icon slot="icon" name="arrow-left" size={14} />
+      {t("cta")}
+    </CTAButton>
+  </div>
+</main>

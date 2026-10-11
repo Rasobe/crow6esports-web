@@ -1,0 +1,130 @@
+---
+import "./mobile-menu.scss";
+import { createTranslator, localizePath, stripLocale } from "@/ui/i18n";
+import { ROUTES } from "@config/routes";
+
+interface NavLink {
+  href: string;
+  label: string;
+}
+
+interface Props {
+  links: readonly NavLink[];
+}
+
+const { links } = Astro.props;
+const { locale } = Astro.locals;
+const t = createTranslator(locale, "nav");
+const currentPath = stripLocale(Astro.url.pathname);
+---
+
+<mobile-menu>
+  <button
+    type="button"
+    class="mobile-menu__trigger"
+    aria-expanded="false"
+    aria-controls="mobile-menu"
+    aria-label={t("menu_open_aria")}
+    data-open-label={t("menu_open_aria")}
+    data-close-label={t("menu_close_aria")}
+  >
+    <svg
+      class="mobile-menu__icon-open"
+      width="22"
+      height="22"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      aria-hidden="true"
+    >
+      <path d="M4 6h16M4 12h16M4 18h16" />
+    </svg>
+    <svg
+      class="mobile-menu__icon-close"
+      width="22"
+      height="22"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      aria-hidden="true"
+      style="display: none"
+    >
+      <path d="M18 6 6 18M6 6l12 12" />
+    </svg>
+  </button>
+
+  <div class="mobile-menu__overlay" aria-hidden="true" hidden></div>
+
+  <div
+    id="mobile-menu"
+    class="mobile-menu__drawer"
+    role="dialog"
+    aria-modal="true"
+    aria-label={t("menu_aria")}
+  >
+    <nav>
+      <ul class="mobile-menu__links">
+        {links.map(({ href, label }) => {
+          const isActive = currentPath.startsWith(href);
+          return (
+            <li>
+              <a
+                href={localizePath(locale, href)}
+                class:list={["mobile-menu__link", { "mobile-menu__link--active": isActive }]}
+                aria-current={isActive ? "page" : undefined}
+              >
+                {label}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+
+      <a href={localizePath(locale, ROUTES.tryouts)} class="mobile-menu__cta">
+        {t("join")}
+      </a>
+    </nav>
+  </div>
+</mobile-menu>
+
+<script>
+  class MobileMenu extends HTMLElement {
+    connectedCallback() {
+      const trigger = this.querySelector<HTMLButtonElement>(".mobile-menu__trigger");
+      const drawer = this.querySelector<HTMLElement>(".mobile-menu__drawer");
+      const overlay = this.querySelector<HTMLElement>(".mobile-menu__overlay");
+      const iconOpen = this.querySelector<SVGElement>(".mobile-menu__icon-open");
+      const iconClose = this.querySelector<SVGElement>(".mobile-menu__icon-close");
+      if (!trigger || !drawer || !overlay || !iconOpen || !iconClose) return;
+
+      const setOpen = (isOpen: boolean) => {
+        trigger.setAttribute("aria-expanded", String(isOpen));
+        trigger.setAttribute(
+          "aria-label",
+          (isOpen ? trigger.dataset.closeLabel : trigger.dataset.openLabel) ?? "",
+        );
+        drawer.classList.toggle("mobile-menu__drawer--open", isOpen);
+        overlay.hidden = !isOpen;
+        iconOpen.style.display = isOpen ? "none" : "";
+        iconClose.style.display = isOpen ? "" : "none";
+        document.body.style.overflow = isOpen ? "hidden" : "";
+      };
+
+      trigger.addEventListener("click", () => {
+        setOpen(trigger.getAttribute("aria-expanded") !== "true");
+      });
+      overlay.addEventListener("click", () => setOpen(false));
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") setOpen(false);
+      });
+    }
+  }
+
+  if (!customElements.get("mobile-menu")) {
+    customElements.define("mobile-menu", MobileMenu);
+  }
+</script>

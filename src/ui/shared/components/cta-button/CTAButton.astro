@@ -1,0 +1,21 @@
+---
+import "./cta-button.scss";
+import { localizePath } from "@/ui/i18n";
+
+interface Props {
+  href: string;
+  class?: string;
+}
+
+const { href, class: className } = Astro.props;
+const hasIcon = Astro.slots.has("icon");
+---
+
+<a href={localizePath(Astro.locals.locale, href)} class:list={["cta-button", className]}>
+  {hasIcon && (
+    <span class="cta-button__icon" aria-hidden="true">
+      <slot name="icon" />
+    </span>
+  )}
+  <slot />
+</a>

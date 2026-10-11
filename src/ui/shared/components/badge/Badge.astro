@@ -1,0 +1,15 @@
+---
+import "./badge.scss";
+
+type BadgeVariant = "default" | "brand" | "success" | "warning" | "danger";
+
+interface Props {
+  label: string;
+  variant?: BadgeVariant;
+  class?: string;
+}
+
+const { label, variant = "default", class: className } = Astro.props;
+---
+
+<span class:list={["badge", `badge--${variant}`, className]}>{label}</span>

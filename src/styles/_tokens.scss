@@ -16,13 +16,13 @@
 
   /* Borders */
   --border: rgba(245, 184, 0, 0.15);
-  --border-strong: rgba(245, 184, 0, 0.4);
+  --border-strong: rgba(245, 184, 0, 0.55);
   --border-subtle: rgba(255, 255, 255, 0.06);
 
   /* Text */
   --text-primary: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.6);
-  --text-muted: rgba(255, 255, 255, 0.35);
+  --text-secondary: rgba(255, 255, 255, 0.75);
+  --text-muted: rgba(255, 255, 255, 0.58);
 
   /* Layout */
   --navbar-h: 68px;
@@ -41,8 +41,10 @@
   --grad-glow: radial-gradient(circle at top center, var(--border), transparent 70%);
 
   /* Degradado con el truco moderno de color-mix que vimos antes */
-  --grad-fade: linear-gradient(to bottom,
-      transparent,
-      color-mix(in srgb, var(--brand) 40%, transparent),
-      var(--bg-base));
+  --grad-fade: linear-gradient(
+    to bottom,
+    transparent,
+    color-mix(in srgb, var(--brand) 40%, transparent),
+    var(--bg-base)
+  );
 }

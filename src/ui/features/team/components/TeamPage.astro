@@ -1,0 +1,23 @@
+---
+import {
+  getActivePlayers,
+  getStaffMembers,
+  getSubstitutePlayers,
+} from "@/application/team/get-players";
+import { container } from "@/infrastructure/container";
+import { createTranslator } from "@/ui/i18n";
+import { PageHeader } from "@/ui/shared/components";
+import RosterSection from "./roster-section/RosterSection.astro";
+import TeamCTA from "./team-cta/TeamCTA.astro";
+
+const t = createTranslator(Astro.locals.locale, "team");
+const { playerRepository } = container;
+---
+
+<PageHeader eyebrow={t("eyebrow")} title={t("meta.title")} description={t("meta.description")} />
+
+<RosterSection title={t("sections.active")} players={getActivePlayers(playerRepository)} />
+<RosterSection title={t("sections.substitutes")} players={getSubstitutePlayers(playerRepository)} />
+<RosterSection title={t("sections.staff")} players={getStaffMembers(playerRepository)} />
+
+<TeamCTA />

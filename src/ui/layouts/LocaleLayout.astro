@@ -1,0 +1,23 @@
+---
+import { createTranslator } from "@/ui/i18n";
+import BaseLayout from "./BaseLayout.astro";
+import Footer from "./_components/footer/Footer.astro";
+import Navbar from "./_components/navbar/Navbar.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+  path?: string;
+}
+
+const { title, description, path } = Astro.props;
+const tSite = createTranslator(Astro.locals.locale, "site");
+---
+
+<BaseLayout title={title} description={description ?? tSite("description")} path={path}>
+  <Navbar />
+  <div class="content-offset">
+    <slot />
+  </div>
+  <Footer />
+</BaseLayout>
