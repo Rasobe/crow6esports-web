@@ -6,6 +6,7 @@ export const DEFAULT_LOCALE = "es";
 
 export type Locale = (typeof LOCALES)[number];
 export type TranslationParams = Record<string, string | number>;
+export type Messages = { [key: string]: string | Messages };
 export type Translate = (key: string, params?: TranslationParams) => string;
 
 const MESSAGES: Record<Locale, unknown> = { es, en };
@@ -18,15 +19,13 @@ export function detectLocale(acceptLanguage: string | null): Locale {
   return acceptLanguage?.toLowerCase().startsWith("es") ? "es" : "en";
 }
 
-function resolveMessage(messages: unknown, path: string): string {
-  const value = path
+function lookup(messages: unknown, path: string): unknown {
+  return path
     .split(".")
     .reduce<unknown>(
       (node, segment) => (node as Record<string, unknown> | undefined)?.[segment],
       messages,
     );
-
-  return typeof value === "string" ? value : path;
 }
 
 function interpolate(message: string, params?: TranslationParams): string {
@@ -34,11 +33,21 @@ function interpolate(message: string, params?: TranslationParams): string {
   return message.replace(/\{(\w+)\}/g, (_, name: string) => String(params[name] ?? `{${name}}`));
 }
 
-export function createTranslator(locale: Locale, namespace?: string): Translate {
+export function createMessageTranslator(messages: unknown, namespace?: string): Translate {
   return (key, params) => {
     const path = namespace ? `${namespace}.${key}` : key;
-    return interpolate(resolveMessage(MESSAGES[locale], path), params);
+    const value = lookup(messages, path);
+    return interpolate(typeof value === "string" ? value : path, params);
   };
+}
+
+export function createTranslator(locale: Locale, namespace?: string): Translate {
+  return createMessageTranslator(MESSAGES[locale], namespace);
+}
+
+/** Serializable slice of the messages, meant to be passed as a prop to client islands. */
+export function getMessages(locale: Locale, namespace: string): Messages {
+  return lookup(MESSAGES[locale], namespace) as Messages;
 }
 
 export function localizePath(locale: Locale, path: string): string {

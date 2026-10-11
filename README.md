@@ -7,6 +7,7 @@ Sitio web oficial de [Crow 6 Esports](https://crow6esports.com) — organizació
 | Capa      | Tecnología                           | Motivo                                                  |
 | --------- | ------------------------------------ | ------------------------------------------------------- |
 | Framework | Astro 7 (SSR en Vercel)              | HTML por defecto sin JS, SEO, endpoints como backend    |
+| Islas     | React (solo formularios)             | Interactividad donde hace falta, el resto es HTML       |
 | Estilos   | SCSS por componente + tokens CSS     | Estilos colocados junto al componente, sin runtime      |
 | CMS       | Keystatic                            | Panel visual sobre el propio repo, sin servidor externo |
 | Pagos     | Stripe                               | Gestión de pedidos de tienda                            |
@@ -88,10 +89,13 @@ STRIPE_SECRET_KEY=sk_...
 PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_...
 RESEND_API_KEY=re_...
 MAINTENANCE_MODE=true
+TRYOUTS_OPEN=true
 SITE_URL=https://crow6esports.com
 ```
 
 Nunca subas `.env.local` al repositorio. Está incluido en `.gitignore`.
+
+**`TRYOUTS_OPEN`:** Con `true` la página `/tryouts` muestra el formulario de solicitud; en cualquier otro caso muestra el estado cerrado. Las solicitudes se validan en `/api/contact` y se envían por email con Resend (`RESEND_API_KEY`, `TRYOUT_EMAIL_FROM`, `TRYOUT_EMAIL_TO`).
 
 **`MAINTENANCE_MODE`:** Si se define como `true`, todas las rutas se reescriben a `/coming-soon` excepto la propia página de mantenimiento. Útil para desactivar el sitio temporalmente sin desplegar. Para restaurar el comportamiento normal, desactívalo o asígnale cualquier otro valor. Configurable tanto en `.env.local` como en el panel de Vercel.
 

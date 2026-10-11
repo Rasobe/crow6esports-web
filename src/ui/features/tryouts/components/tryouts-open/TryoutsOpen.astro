@@ -1,0 +1,16 @@
+---
+import "./tryouts-open.scss";
+import { createTranslator, getMessages } from "@/ui/i18n";
+import { PageHeader } from "@/ui/shared/components";
+import { TryoutsForm } from "./_components/tryouts-form";
+
+const { locale } = Astro.locals;
+const t = createTranslator(locale, "tryouts.open");
+---
+
+<main class="tryouts-open">
+  <PageHeader eyebrow={t("eyebrow")} title={t("title")} description={t("desc")} />
+  <div class="tryouts-open__content">
+    <TryoutsForm client:load messages={getMessages(locale, "tryouts.open")} />
+  </div>
+</main>

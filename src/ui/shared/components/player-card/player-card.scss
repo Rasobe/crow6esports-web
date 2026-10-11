@@ -60,11 +60,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(
-      160deg,
-      var(--bg-raised) 0%,
-      var(--bg-surface) 100%
-    );
+    background: linear-gradient(160deg, var(--bg-raised) 0%, var(--bg-surface) 100%);
   }
 
   .player-card__no-image-icon {

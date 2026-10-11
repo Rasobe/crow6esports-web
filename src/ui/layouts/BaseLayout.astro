@@ -1,6 +1,7 @@
 ---
 import "@/styles/global.scss";
 import { Font } from "astro:assets";
+import SpeedInsights from "@vercel/speed-insights/astro";
 import Seo from "@/ui/shared/components/seo/Seo.astro";
 
 interface Props {
@@ -26,6 +27,7 @@ const { locale } = Astro.locals;
     <Seo title={title} description={description} locale={locale} path={path} noindex={noindex} />
   </head>
   <body>
+    <SpeedInsights />
     <slot />
   </body>
 </html>

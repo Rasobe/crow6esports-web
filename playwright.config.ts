@@ -18,5 +18,6 @@ export default defineConfig({
     command: "pnpm dev --ignore-lock",
     url: `http://localhost:${PORT}`,
     reuseExistingServer: !process.env.CI,
+    env: { TRYOUTS_OPEN: "true" },
   },
 });

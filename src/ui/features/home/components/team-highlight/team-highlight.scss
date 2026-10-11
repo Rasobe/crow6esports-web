@@ -14,12 +14,7 @@
       transform: translateX(-50%);
       width: 600px;
       height: 1px;
-      background: linear-gradient(
-        to right,
-        transparent,
-        var(--border-strong),
-        transparent
-      );
+      background: linear-gradient(to right, transparent, var(--border-strong), transparent);
     }
   }
 

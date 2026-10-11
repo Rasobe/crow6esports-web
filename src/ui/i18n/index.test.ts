@@ -1,5 +1,13 @@
 import { describe, expect, it } from "vitest";
-import { createTranslator, detectLocale, isLocale, localizePath, stripLocale } from "./index";
+import {
+  createMessageTranslator,
+  createTranslator,
+  detectLocale,
+  getMessages,
+  isLocale,
+  localizePath,
+  stripLocale,
+} from "./index";
 
 describe("isLocale", () => {
   it("accepts supported locales only", () => {
@@ -45,7 +53,15 @@ describe("createTranslator", () => {
   });
 
   it("interpolates params", () => {
-    const t = createTranslator("es", "tryouts.open");
-    expect(t("step_of", { current: 1, total: 3 })).toBe("Paso 1 de 3");
+    const t = createMessageTranslator({ step_of: "Step {current} of {total}" });
+    expect(t("step_of", { current: 1, total: 3 })).toBe("Step 1 of 3");
+    expect(t("step_of", { current: 1 })).toBe("Step 1 of {total}");
+  });
+});
+
+describe("getMessages", () => {
+  it("returns a namespace slice usable by client translators", () => {
+    const t = createMessageTranslator(getMessages("en", "tryouts.open"), "form");
+    expect(t("back")).toBe("Back");
   });
 });

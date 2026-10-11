@@ -43,7 +43,7 @@ El rol va en el sufijo del fichero (`.repository`, `.json-repository`, `.content
 
 ### Internacionalización
 
-Rutas bajo `src/pages/[locale]/…` con locales `es` (default) y `en`. `src/middleware.ts` resuelve el locale (prefijo de la URL o `accept-language`), lo expone en `Astro.locals.locale`, aplica el modo mantenimiento (`MAINTENANCE_MODE` → rewrite a `/coming-soon`) y reescribe a `/404` los locales inválidos. Los textos están en `src/ui/i18n/locales/{es,en}.json`; se usan con `createTranslator(locale, namespace)`. Enlaces con `localizePath(locale, path)`. Variables de entorno tipadas con `astro:env` (ver `astro.config.ts`).
+Rutas bajo `src/pages/[locale]/…` con locales `es` (default) y `en`. `src/middleware.ts` resuelve el locale (prefijo de la URL o `accept-language`), lo expone en `Astro.locals.locale`, aplica el modo mantenimiento (`MAINTENANCE_MODE` → rewrite a `/coming-soon`) y reescribe a `/404` los locales inválidos. Los textos están en `src/ui/i18n/locales/{es,en}.json`; se usan con `createTranslator(locale, namespace)`. Enlaces con `localizePath(locale, path)`. Variables de entorno tipadas con `astro:env` (ver `astro.config.ts` y `.env.example`).
 
 ### Alias de imports (tsconfig paths)
 
@@ -56,7 +56,7 @@ Rutas bajo `src/pages/[locale]/…` con locales `es` (default) y `en`. `src/midd
 - Carpeta en `kebab-case`, archivo en `PascalCase.astro`, estilos colocados como `kebab-case.scss` e importados en el frontmatter.
 - Compartidos en `ui/shared/components/` (se exportan desde su `index.ts`); lo que usa una sola feature en `ui/features/<x>/components/`.
 - Subcomponentes privados en `_components/`.
-- JS de cliente solo cuando hace falta, como custom element con `<script>` (ver `MobileMenu.astro`).
+- JS de cliente solo cuando hace falta: custom element con `<script>` para cosas simples (ver `MobileMenu.astro`) o isla React (`client:load`) para formularios complejos (ver `ui/features/tryouts`). Las islas no pueden importar componentes `.astro` ni el barrel `ui/shared/components`: importa los `.tsx` directamente. Reciben sus textos como prop (`getMessages(locale, namespace)` + `createMessageTranslator`).
 - `Button`, `CTAButton` y `PlayerCard` leen el locale de `Astro.locals`: no hace falta pasarlo por props.
 
 ### Contenido como fuente de verdad
@@ -69,4 +69,4 @@ SCSS por componente + tokens CSS globales en `src/styles/` (`_tokens`, `_reset`,
 
 ### Integraciones externas
 
-Stripe y Resend (dependencias instaladas) se implementarán como endpoints en `src/pages/api/` con sus adaptadores en `infrastructure/`. No hay servidor backend separado.
+Los endpoints viven en `src/pages/api/` y solo orquestan: validan con zod (esquemas en `infrastructure/`), llaman a un caso de uso y devuelven JSON. Tryouts: `POST /api/contact` → `submitTryoutApplication` → puerto `TryoutNotifier` → adaptador Resend (`infrastructure/tryouts`). Los emails escapan siempre el contenido del usuario. Stripe está instalado pero sin implementar. No hay servidor backend separado.
