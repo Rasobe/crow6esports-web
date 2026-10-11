@@ -4,19 +4,6 @@
     position: relative;
     padding: 100px 0;
     overflow: hidden;
-    background: var(--bg-surface);
-
-    /* Subtle top glow line */
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 600px;
-      height: 1px;
-      background: linear-gradient(to right, transparent, var(--border-strong), transparent);
-    }
   }
 
   .team-highlight__inner {

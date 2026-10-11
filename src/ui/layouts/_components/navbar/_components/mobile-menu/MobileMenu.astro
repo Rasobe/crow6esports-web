@@ -59,14 +59,8 @@ const currentPath = stripLocale(Astro.url.pathname);
 
   <div class="mobile-menu__overlay" aria-hidden="true" hidden></div>
 
-  <div
-    id="mobile-menu"
-    class="mobile-menu__drawer"
-    role="dialog"
-    aria-modal="true"
-    aria-label={t("menu_aria")}
-  >
-    <nav>
+  <div id="mobile-menu" class="mobile-menu__drawer">
+    <nav aria-label={t("menu_aria")}>
       <ul class="mobile-menu__links">
         {links.map(({ href, label }) => {
           const isActive = currentPath.startsWith(href);
@@ -119,7 +113,9 @@ const currentPath = stripLocale(Astro.url.pathname);
       });
       overlay.addEventListener("click", () => setOpen(false));
       document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape") setOpen(false);
+        if (event.key !== "Escape" || trigger.getAttribute("aria-expanded") !== "true") return;
+        setOpen(false);
+        trigger.focus();
       });
     }
   }

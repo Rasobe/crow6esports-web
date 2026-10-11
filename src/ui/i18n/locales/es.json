@@ -9,10 +9,11 @@
     "coaching": "Coaching",
     "about_us": "Sobre nosotros",
     "join": "Únete",
-    "home_aria": "Crow 6 Esports — Inicio",
+    "home_aria": "Crow 6 Esports, Inicio",
     "locale_switcher_aria": "Seleccionar idioma",
     "menu_aria": "Menú de navegación",
     "menu_open_aria": "Abrir menú",
+    "skip_to_content": "Saltar al contenido",
     "menu_close_aria": "Cerrar menú"
   },
   "home": {
@@ -21,11 +22,18 @@
       "description": "Organización competitiva de Rocket League."
     },
     "hero": {
+      "title": {
+        "name": "Crow",
+        "number": "6",
+        "sector": "Esports"
+      },
+      "subtitle": "Organización competitiva de Rocket League",
       "eyebrow": "Organización de esports",
       "tagline": "Domina · Compite · Conquista",
       "cta_team": "Ver equipo",
       "cta_join": "Únete al equipo",
       "stats": {
+        "label": "Cifras del equipo",
         "wins": "Victorias",
         "tournaments": "Torneos",
         "players": "Jugadores",
@@ -249,9 +257,9 @@
           "playstyle_required": "Selecciona un estilo de juego",
           "highlights_invalid": "Introduce una URL válida",
           "competitive_exp_required": "Este campo es obligatorio",
-          "reaction_mistakes_required": "Respuesta demasiado corta — mínimo 10 caracteres",
+          "reaction_mistakes_required": "Respuesta demasiado corta, mínimo 10 caracteres",
           "reaction_losses_required": "Este campo es obligatorio",
-          "looking_for_required": "Respuesta demasiado corta — mínimo 10 caracteres",
+          "looking_for_required": "Respuesta demasiado corta, mínimo 10 caracteres",
           "coaching_required": "Este campo es obligatorio"
         },
         "error": {

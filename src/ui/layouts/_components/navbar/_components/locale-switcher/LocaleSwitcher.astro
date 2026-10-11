@@ -13,6 +13,7 @@ const currentPath = stripLocale(Astro.url.pathname);
       <a
         href={localizePath(code, currentPath)}
         hreflang={code}
+        lang={code}
         aria-current={code === locale ? "true" : undefined}
         class:list={["locale-switcher__btn", { "locale-switcher__btn--active": code === locale }]}
       >
