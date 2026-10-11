@@ -2,194 +2,217 @@
 @layer components {
   .coming-soon {
     position: relative;
+    flex: 1;
     min-height: 100dvh;
-    background: var(--bg-base);
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
+    overflow-x: clip;
+    padding: 4rem 1.5rem;
+    background: var(--bg-base);
   }
 
-  // Número decorativo de fondo
-  .coming-soon__bg-text {
-    position: fixed;
-    font-family: var(--font-display), sans-serif;
-    font-size: clamp(180px, 35vw, 340px);
-    line-height: 1;
-    color: rgba(245, 184, 0, 0.03);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    user-select: none;
-    letter-spacing: -8px;
+  .coming-soon__sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
     white-space: nowrap;
   }
 
-  // Esquinas decorativas
+  // Capa decorativa: absoluta y dentro del main, nunca se solapa con el contenido al hacer zoom
+  .coming-soon__decor {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  // Pseudo-elemento: es decoración pura y así no cuenta como texto en las auditorías de contraste
+  .coming-soon__decor::before {
+    content: "C6";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--font-display), sans-serif;
+    font-size: clamp(11rem, 35vw, 21rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: color-mix(in srgb, var(--brand) 5%, transparent);
+    white-space: nowrap;
+  }
+
   .coming-soon__corner {
-    position: fixed;
-    width: 32px;
-    height: 32px;
+    --corner-line: 1px solid color-mix(in srgb, var(--brand) 45%, transparent);
+
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
 
     &--tl {
-      top: 32px;
-      left: 64px;
-      border-top: 1px solid rgba(245, 184, 0, 0.3);
-      border-left: 1px solid rgba(245, 184, 0, 0.3);
+      top: 2rem;
+      left: 2rem;
+      border-top: var(--corner-line);
+      border-left: var(--corner-line);
     }
     &--tr {
-      top: 32px;
-      right: 64px;
-      border-top: 1px solid rgba(245, 184, 0, 0.3);
-      border-right: 1px solid rgba(245, 184, 0, 0.3);
+      top: 2rem;
+      right: 2rem;
+      border-top: var(--corner-line);
+      border-right: var(--corner-line);
     }
     &--bl {
-      bottom: 32px;
-      left: 64px;
-      border-bottom: 1px solid rgba(245, 184, 0, 0.3);
-      border-left: 1px solid rgba(245, 184, 0, 0.3);
+      bottom: 2rem;
+      left: 2rem;
+      border-bottom: var(--corner-line);
+      border-left: var(--corner-line);
     }
     &--br {
-      bottom: 32px;
-      right: 64px;
-      border-bottom: 1px solid rgba(245, 184, 0, 0.3);
-      border-right: 1px solid rgba(245, 184, 0, 0.3);
+      right: 2rem;
+      bottom: 2rem;
+      border-right: var(--corner-line);
+      border-bottom: var(--corner-line);
     }
   }
 
-  // Contenido central
   .coming-soon__inner {
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
-    padding: 40px 24px;
-    max-width: 640px;
     width: 100%;
-    gap: 0;
+    max-width: 40rem;
+    text-align: center;
   }
 
-  // Logo
   .coming-soon__logo {
-    margin-bottom: 48px;
-    opacity: 0.9;
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 3rem;
   }
 
-  // Eyebrow
   .coming-soon__eyebrow {
+    margin-bottom: 1.5rem;
     font-family: var(--font-ui), sans-serif;
-    font-size: 11px;
+    font-size: 0.875rem;
     font-weight: 700;
-    letter-spacing: 5px;
+    letter-spacing: 0.25em;
     text-transform: uppercase;
     color: var(--brand);
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 24px;
-
-    span {
-      display: block;
-      width: 40px;
-      height: 1px;
-      background: rgba(245, 184, 0, 0.4);
-    }
   }
 
-  // Título
   .coming-soon__title {
+    position: relative;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
     font-family: var(--font-display), sans-serif;
-    font-size: clamp(56px, 12vw, 100px);
-    line-height: 0.9;
-    letter-spacing: -1px;
+    font-size: clamp(3rem, 12vw, 6.25rem);
+    line-height: 0.95;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    overflow-wrap: anywhere;
     color: var(--text-primary);
-    margin-bottom: 16px;
 
-    span {
-      color: var(--brand);
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 4rem;
+      height: 0.25rem;
+      transform: translateX(-50%);
+      background: var(--brand);
     }
   }
 
-  // Divisor
-  .coming-soon__divider {
-    width: 2px;
-    height: 40px;
-    background: linear-gradient(to bottom, var(--brand), transparent);
-    margin: 0 auto 24px;
-  }
-
-  // Descripción
   .coming-soon__description {
+    max-width: 28rem;
+    margin-bottom: 2.5rem;
     font-family: var(--font-body), sans-serif;
-    font-size: 15px;
-    color: var(--text-muted);
+    font-size: 1rem;
     line-height: 1.7;
-    max-width: 400px;
-    margin-bottom: 40px;
+    color: var(--text-secondary);
   }
 
-  // Redes sociales
   .coming-soon__socials {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 48px;
+    margin-bottom: 3rem;
   }
 
+  .coming-soon__socials-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+    list-style: none;
+  }
+
+  // Objetivo táctil de 44px (WCAG 2.5.5) y borde con contraste no textual 3:1 (WCAG 1.4.11)
   .coming-soon__social {
-    width: 40px;
-    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: rgba(255, 255, 255, 0.4);
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    color: var(--text-secondary);
     text-decoration: none;
-    clip-path: polygon(4px 0%, 100% 0%, calc(100% - 4px) 100%, 0% 100%);
-    transition:
-      border-color 0.2s ease,
-      color 0.2s ease;
+    clip-path: polygon(0.25rem 0%, 100% 0%, calc(100% - 0.25rem) 100%, 0% 100%);
 
     &:hover {
-      border-color: rgba(245, 184, 0, 0.5);
+      border-color: var(--brand);
       color: var(--brand);
     }
-  }
 
-  // Meta info
-  .coming-soon__meta {
-    font-family: var(--font-ui), sans-serif;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.15);
-  }
-
-  // Hashtag anclado abajo
-  .coming-soon__hashtag {
-    position: fixed;
-    bottom: 32px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-family: var(--font-ui), sans-serif;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: rgba(245, 184, 0, 0.3);
-    white-space: nowrap;
-  }
-
-  // Responsive
-  @media (max-width: 640px) {
-    .coming-soon__corner {
-      display: none;
+    // clip-path recortaría el outline, por eso se anula mientras hay foco
+    &:focus-visible {
+      clip-path: none;
+      outline: 3px solid var(--brand);
+      outline-offset: 3px;
+      color: var(--brand);
     }
 
-    .coming-soon__title {
-      font-size: clamp(48px, 15vw, 72px);
+    @media (prefers-reduced-motion: no-preference) {
+      transition:
+        border-color 0.2s ease,
+        color 0.2s ease;
+    }
+
+    @media (forced-colors: active) {
+      border-color: ButtonText;
+
+      &:hover,
+      &:focus-visible {
+        border-color: Highlight;
+        color: Highlight;
+      }
+    }
+  }
+
+  .coming-soon__meta {
+    margin-bottom: 1rem;
+    font-family: var(--font-ui), sans-serif;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .coming-soon__hashtag {
+    font-family: var(--font-ui), sans-serif;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--brand);
+  }
+
+  @media (max-width: 40rem) {
+    .coming-soon__corner {
+      display: none;
     }
   }
 }

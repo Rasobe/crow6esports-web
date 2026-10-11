@@ -1,8 +1,11 @@
 ---
 import BaseLayout from "@/ui/layouts/BaseLayout.astro";
 import ComingSoon from "@/ui/features/coming-soon/components/ComingSoon.astro";
+import { createTranslator } from "@/ui/i18n";
+
+const t = createTranslator(Astro.locals.locale, "comingSoon");
 ---
 
-<BaseLayout title="Próximamente" description="Crow 6 Esports — Próximamente" noindex>
+<BaseLayout title={t("pageTitle")} description={t("pageDescription")} noindex>
   <ComingSoon />
 </BaseLayout>
