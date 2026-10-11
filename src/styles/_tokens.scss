@@ -41,8 +41,10 @@
   --grad-glow: radial-gradient(circle at top center, var(--border), transparent 70%);
 
   /* Degradado con el truco moderno de color-mix que vimos antes */
-  --grad-fade: linear-gradient(to bottom,
-      transparent,
-      color-mix(in srgb, var(--brand) 40%, transparent),
-      var(--bg-base));
+  --grad-fade: linear-gradient(
+    to bottom,
+    transparent,
+    color-mix(in srgb, var(--brand) 40%, transparent),
+    var(--bg-base)
+  );
 }

@@ -1,0 +1,11 @@
+---
+import HomePage from "@/ui/features/home/components/HomePage.astro";
+import LocaleLayout from "@/ui/layouts/LocaleLayout.astro";
+import { createTranslator } from "@/ui/i18n";
+
+const t = createTranslator(Astro.locals.locale, "home.meta");
+---
+
+<LocaleLayout title={t("title")} description={t("description")}>
+  <HomePage />
+</LocaleLayout>

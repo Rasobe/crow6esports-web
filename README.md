@@ -6,56 +6,39 @@ Sitio web oficial de [Crow 6 Esports](https://crow6esports.com) — organizació
 
 | Capa      | Tecnología                           | Motivo                                                  |
 | --------- | ------------------------------------ | ------------------------------------------------------- |
-| Framework | Next.js 14 (App Router)              | SSR/SSG nativo, SEO, Route Handlers como backend        |
-| Estilos   | Tailwind CSS                         | Utilidad, consistencia, sin overhead de runtime         |
+| Framework | Astro 7 (SSR en Vercel)              | HTML por defecto sin JS, SEO, endpoints como backend    |
+| Islas     | React (solo formularios)             | Interactividad donde hace falta, el resto es HTML       |
+| Estilos   | SCSS por componente + tokens CSS     | Estilos colocados junto al componente, sin runtime      |
 | CMS       | Keystatic                            | Panel visual sobre el propio repo, sin servidor externo |
 | Pagos     | Stripe                               | Gestión de pedidos de tienda                            |
 | Email     | Resend                               | Notificaciones de tryouts y pedidos                     |
-| Hosting   | Vercel                               | Integración nativa con Next.js, free tier suficiente    |
-| Fuentes   | Anton SC · Barlow Condensed · Barlow | Google Fonts, optimizadas con next/font                 |
+| Hosting   | Vercel                               | Adaptador oficial de Astro, free tier suficiente        |
+| Fuentes   | Anton SC · Barlow Condensed · Barlow | Google Fonts vía la Fonts API de Astro                 |
 
 ## Estructura del proyecto
 
 ```
 crow6esports-web/
-├── app/                    # Next.js App Router — solo routing y layouts
-│   ├── layout.tsx
-│   ├── page.tsx
-│   ├── team/page.tsx
-│   ├── news/
-│   │   ├── page.tsx
-│   │   └── [slug]/page.tsx
-│   ├── store/
-│   │   ├── page.tsx
-│   │   └── [product]/page.tsx
-│   ├── tryouts/page.tsx
-│   └── api/
-│       ├── checkout/route.ts
-│       └── contact/route.ts
-├── features/               # Lógica por dominio
-│   ├── home/
-│   ├── team/
-│   ├── news/
-│   └── store/
-├── components/             # Componentes globales reutilizables
+├── src/
+│   ├── domain/<contexto>/          # Modelos y puertos (team, store, news). TS puro
+│   ├── application/<contexto>/     # Casos de uso, uno por fichero. Solo importa domain
+│   ├── infrastructure/             # Adaptadores (JSON, content collections) y container.ts
 │   ├── ui/
-│   ├── layout/
-│   └── seo/
-├── lib/                    # Clientes de servicios externos
-│   ├── stripe.ts
-│   ├── email.ts
-│   └── keystatic.ts
-├── content/                # Fuente de verdad — datos estáticos
-│   ├── news/               # Archivos .mdx
-│   ├── players.json
-│   └── stock.json
-├── public/
-├── styles/
-│   └── globals.css
-└── config/
-    ├── site.ts             # Nombre, URL, handles de redes sociales
-    └── design-tokens.ts    # Colores y tipografía como constantes TS
+│   │   ├── features/<x>/components # Componentes .astro de una sola feature
+│   │   ├── shared/components/      # Button, PlayerCard, Icon, Seo…
+│   │   ├── layouts/                # BaseLayout, LocaleLayout, navbar, footer
+│   │   └── i18n/                   # Traductor, locales/{es,en}.json
+│   ├── pages/                      # Solo routing: [locale]/…, 404, coming-soon, robots, sitemap
+│   ├── styles/                     # Tokens y estilos globales (SCSS)
+│   ├── middleware.ts               # Locale, modo mantenimiento y 404 de locales inválidos
+│   └── content.config.ts           # Content collection de noticias (MDX)
+├── content/                        # Fuente de verdad — players.json, stock.json, news/*.mdx
+├── config/                         # site, routes, navigation, stats
+├── e2e/                            # Tests Playwright
+└── public/
 ```
+
+Las dependencias van `ui → application → domain` e `infrastructure → domain`. `ui` nunca instancia repositorios: los consume a través de `infrastructure/container.ts`.
 
 ## Decisiones técnicas relevantes
 
@@ -67,7 +50,7 @@ crow6esports-web/
 
 **Sin scraping de RLTracker.** La API pública de RLTracker no es oficial y puede romperse sin aviso. Los datos de jugadores se actualizan manualmente en `content/players.json`.
 
-**Next.js como backend.** Los Route Handlers en `app/api/` cubren pagos y email sin necesidad de un servidor separado. Si en el futuro se necesita un backend independiente, esos handlers se mueven a Express/Fastify y las llamadas en cliente pasan de `/api/checkout` a `https://api.crow6esports.com/checkout`.
+**Astro como backend.** Los endpoints en `src/pages/api/` (SSR en Vercel) cubrirán pagos y email sin necesidad de un servidor separado. Si en el futuro se necesita un backend independiente, esos handlers se mueven a Express/Fastify y las llamadas en cliente pasan de `/api/checkout` a `https://api.crow6esports.com/checkout`.
 
 ## Identidad visual
 
@@ -86,17 +69,16 @@ Estilo: alto contraste, anguloso, sin border-radius generoso. Los botones usan `
 ## Desarrollo local
 
 ```bash
-# Instalar dependencias
-npm install
-
-# Servidor de desarrollo
-npm run dev
-
-# Build de producción
-npm run build
+pnpm install
+pnpm dev          # servidor de desarrollo (usa --ignore-lock para ejecutarlo en primer plano)
+pnpm build        # build de producción
+pnpm lint         # ESLint
+pnpm typecheck    # astro check
+pnpm test         # Vitest
+pnpm e2e          # Playwright
 ```
 
-Requiere Node.js 18+.
+Requiere Node.js 22+ y pnpm.
 
 ## Variables de entorno
 
@@ -104,14 +86,18 @@ Crea un archivo `.env.local` en la raíz:
 
 ```env
 STRIPE_SECRET_KEY=sk_...
-NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_...
+PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_...
 RESEND_API_KEY=re_...
-NEXT_PUBLIC_MAINTENANCE_MODE=true
+MAINTENANCE_MODE=true
+TRYOUTS_OPEN=true
+SITE_URL=https://crow6esports.com
 ```
 
-Nunca subas `.env.local` al repositorio. Está incluido en `.gitignore` por defecto con `create-next-app`.
+Nunca subas `.env.local` al repositorio. Está incluido en `.gitignore`.
 
-**`NEXT_PUBLIC_MAINTENANCE_MODE`:** Si se define como `true`, todas las rutas se reescriben a `/coming-soon` excepto la propia página de mantenimiento. Útil para desactivar el sitio temporalmente sin desplegar. Para restaurar el comportamiento normal, desactívalo o asígnale cualquier otro valor. Configurable tanto en `.env.local` como en el panel de Vercel.
+**`TRYOUTS_OPEN`:** Con `true` la página `/tryouts` muestra el formulario de solicitud; en cualquier otro caso muestra el estado cerrado. Las solicitudes se validan en `/api/contact` y se envían por email con Resend (`RESEND_API_KEY`, `TRYOUT_EMAIL_FROM`, `TRYOUT_EMAIL_TO`).
+
+**`MAINTENANCE_MODE`:** Si se define como `true`, todas las rutas se reescriben a `/coming-soon` excepto la propia página de mantenimiento. Útil para desactivar el sitio temporalmente sin desplegar. Para restaurar el comportamiento normal, desactívalo o asígnale cualquier otro valor. Configurable tanto en `.env.local` como en el panel de Vercel.
 
 ## Despliegue
 

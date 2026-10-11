@@ -1,0 +1,3 @@
+gitleaks protect --staged --verbose
+pnpm exec lint-staged
+pnpm typecheck

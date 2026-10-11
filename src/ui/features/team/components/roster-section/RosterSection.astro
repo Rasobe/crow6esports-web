@@ -1,0 +1,28 @@
+---
+import "./roster-section.scss";
+import type { Player } from "@/domain/team/player";
+import { PlayerCard } from "@/ui/shared/components";
+
+interface Props {
+  title: string;
+  players: Player[];
+}
+
+const { title, players } = Astro.props;
+---
+
+{players.length > 0 && (
+  <section class="roster-section">
+    <div class="roster-section__inner">
+      <h2 class="roster-section__title">{title}</h2>
+
+      <ul class="roster-section__list">
+        {players.map((player) => (
+          <li class="roster-section__list-item">
+            <PlayerCard player={player} />
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+)}

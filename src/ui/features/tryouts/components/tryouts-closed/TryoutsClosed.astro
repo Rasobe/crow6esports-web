@@ -1,0 +1,26 @@
+---
+import "./tryouts-closed.scss";
+import { createTranslator } from "@/ui/i18n";
+import { Button, Icon, SectionHeader } from "@/ui/shared/components";
+import { TextField } from "@/ui/shared/components/text-field/TextField";
+
+const t = createTranslator(Astro.locals.locale, "tryouts.closed");
+---
+
+<div class="tryouts-closed">
+  <div class="tryouts-closed__inner">
+    <span class="tryouts-closed__icon">
+      <Icon name="lock" size={24} />
+    </span>
+    <SectionHeader namespace="tryouts.closed" />
+    <p class="tryouts-closed__desc">{t("desc")}</p>
+    <div class="tryouts-closed__notify">
+      <TextField
+        label={t("notify_label")}
+        placeholder={t("notify_placeholder")}
+        className="tryouts-closed__input"
+      />
+      <Button>{t("notify_button")}</Button>
+    </div>
+  </div>
+</div>

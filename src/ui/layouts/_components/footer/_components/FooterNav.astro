@@ -1,0 +1,21 @@
+---
+import { navigationConfig } from "@config/navigation";
+import { createTranslator, localizePath } from "@/ui/i18n";
+
+const { locale } = Astro.locals;
+const t = createTranslator(locale, "footer");
+---
+
+<div class="footer__column">
+  <span class="footer__title">{t("nav.title")}</span>
+
+  <ul class="footer__list">
+    {navigationConfig.mainNav.map(({ href, labelKey }) => (
+      <li>
+        <a href={localizePath(locale, href)} class="footer__nav-link">
+          {t(`nav.${labelKey}`)}
+        </a>
+      </li>
+    ))}
+  </ul>
+</div>

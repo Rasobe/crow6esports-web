@@ -1,0 +1,50 @@
+---
+import {
+  FILLED_ICON_PATHS,
+  STROKED_ICONS,
+  type FilledIconName,
+  type IconName,
+  type StrokedIconName,
+} from "./icon-paths";
+
+interface Props {
+  name: IconName;
+  size?: number;
+  class?: string;
+}
+
+const { name, size = 20, class: className } = Astro.props;
+const stroked = name in STROKED_ICONS ? STROKED_ICONS[name as StrokedIconName] : undefined;
+---
+
+{stroked ? (
+  <svg
+    viewBox="0 0 24 24"
+    width={size}
+    height={size}
+    fill="none"
+    stroke="currentColor"
+    stroke-width={stroked.strokeWidth}
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    class={className}
+    aria-hidden="true"
+  >
+    {stroked.paths.map((d) => (
+      <path d={d} />
+    ))}
+  </svg>
+) : (
+  <svg
+    viewBox="0 0 16 16"
+    width={size}
+    height={size}
+    fill="currentColor"
+    class={className}
+    aria-hidden="true"
+  >
+    {FILLED_ICON_PATHS[name as FilledIconName].map((d) => (
+      <path d={d} />
+    ))}
+  </svg>
+)}

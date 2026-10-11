@@ -1,0 +1,115 @@
+---
+import "./player-card.scss";
+import type { Player, PlayerStatus, PlayerType } from "@/domain/team/player";
+import { createTranslator } from "@/ui/i18n";
+import { Icon, type IconName } from "../icons";
+import { getActiveSocialLinks, getAge, type SocialPlatform } from "./player-card.utils";
+
+interface Props {
+  player: Player;
+}
+
+const ROLE_KEY: Record<PlayerType, string> = {
+  player: "role_player",
+  coach: "role_coach",
+  analyst: "role_analyst",
+  manager: "role_manager",
+};
+
+const STATUS_KEY: Record<PlayerStatus, string | null> = {
+  active: null,
+  substitute: "status_substitute",
+  retired: "status_retired",
+  former: "status_former",
+};
+
+const SOCIAL_ICONS: Record<SocialPlatform, IconName> = {
+  twitter: "x",
+  instagram: "instagram",
+  twitch: "twitch",
+  tiktok: "tiktok",
+  youtube: "youtube",
+  rltracker: "rltracker",
+};
+
+const ANONYMOUS_IMAGE = "/images/players/anonymous-player-silhouette.jpg";
+
+const { player } = Astro.props;
+const { locale } = Astro.locals;
+const t = createTranslator(locale, "home.playerCard");
+
+const { stats } = player;
+const age = getAge(player.birthYear);
+const statusKey = STATUS_KEY[player.status];
+const socialLinks = getActiveSocialLinks(player.socials);
+const formatNumber = (value: number) => value.toLocaleString(locale);
+---
+
+<article class="player-card">
+  <div class="player-card__bg">
+    {player.image ? (
+      <img src={player.image} alt={player.nickname} loading="lazy" class="player-card__img" />
+    ) : (
+      <img
+        src={ANONYMOUS_IMAGE}
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+        class="player-card__img player-card__img--anonymous"
+      />
+    )}
+    <div class="player-card__overlay"></div>
+  </div>
+
+  <div class="player-card__top">
+    <span class="player-card__role">{t(ROLE_KEY[player.type])}</span>
+    {statusKey && <span class="player-card__status">{t(statusKey)}</span>}
+  </div>
+
+  <div class="player-card__body">
+    <div class="player-card__identity">
+      <h3 class="player-card__nickname">{player.nickname}</h3>
+      {!player.anonymous && <p class="player-card__realname">{player.realName}</p>}
+    </div>
+
+    <div class="player-card__stats">
+      <div class="player-card__stat">
+        <span class="player-card__stat-value">{formatNumber(stats.mmr)}</span>
+        <span class="player-card__stat-label">{t("stat_mmr")}</span>
+      </div>
+      <div class="player-card__stat-divider"></div>
+      <div class="player-card__stat">
+        <span class="player-card__stat-value">{formatNumber(stats.peak)}</span>
+        <span class="player-card__stat-label">{t("stat_peak")}</span>
+      </div>
+      {!!age && (
+        <>
+          <div class="player-card__stat-divider" />
+          <div class="player-card__stat">
+            <span class="player-card__stat-value">{age}</span>
+            <span class="player-card__stat-label">{t("stat_age")}</span>
+          </div>
+        </>
+      )}
+    </div>
+
+    {socialLinks.length > 0 && (
+      <div class="player-card__socials">
+        {socialLinks.map(({ platform, href, label }) => (
+          <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="player-card__social-link"
+            aria-label={label}
+            title={label}
+          >
+            <Icon name={SOCIAL_ICONS[platform]} size={16} />
+          </a>
+        ))}
+      </div>
+    )}
+  </div>
+
+  <div class="player-card__corner" aria-hidden="true"></div>
+</article>

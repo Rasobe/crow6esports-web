@@ -1,0 +1,24 @@
+---
+import "./locale-switcher.scss";
+import { LOCALES, createTranslator, localizePath, stripLocale } from "@/ui/i18n";
+
+const { locale } = Astro.locals;
+const t = createTranslator(locale, "nav");
+const currentPath = stripLocale(Astro.url.pathname);
+---
+
+<div class="locale-switcher" role="group" aria-label={t("locale_switcher_aria")}>
+  {LOCALES.map((code, index) => (
+    <span class="locale-switcher__item">
+      <a
+        href={localizePath(code, currentPath)}
+        hreflang={code}
+        aria-current={code === locale ? "true" : undefined}
+        class:list={["locale-switcher__btn", { "locale-switcher__btn--active": code === locale }]}
+      >
+        {code.toUpperCase()}
+      </a>
+      {index < LOCALES.length - 1 && <span class="locale-switcher__sep" aria-hidden="true" />}
+    </span>
+  ))}
+</div>

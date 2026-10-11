@@ -1,0 +1,58 @@
+---
+import "./hero-section.scss";
+import { ROUTES } from "@config/routes";
+import { TEAM_STATS } from "@config/stats";
+import { createTranslator } from "@/ui/i18n";
+import { Button } from "@/ui/shared/components";
+
+const t = createTranslator(Astro.locals.locale, "home.hero");
+
+const stats = [
+  { value: TEAM_STATS.wins, label: t("stats.wins") },
+  { value: TEAM_STATS.tournaments, label: t("stats.tournaments") },
+  { value: TEAM_STATS.players, label: t("stats.players") },
+  { value: TEAM_STATS.championships, label: t("stats.championships") },
+];
+---
+
+<section class="hero">
+  <div class="hero__bg-number" aria-hidden="true">
+    C6
+  </div>
+  <div class="hero__line hero__line--left" aria-hidden="true"></div>
+  <div class="hero__line hero__line--right" aria-hidden="true"></div>
+
+  <div class="hero__content">
+    <p class="hero__eyebrow">
+      <span aria-hidden="true"></span>
+      {t("eyebrow")}
+      <span aria-hidden="true"></span>
+    </p>
+
+    <h1 class="hero__title">
+      CROW<span>6</span>
+    </h1>
+
+    <div class="hero__divider" aria-hidden="true"></div>
+
+    <p class="hero__tagline">{t("tagline")}</p>
+
+    <div class="hero__ctas">
+      <Button href={ROUTES.team} variant="primary">
+        {t("cta_team")}
+      </Button>
+      <Button href={ROUTES.tryouts} variant="ghost">
+        {t("cta_join")}
+      </Button>
+    </div>
+  </div>
+
+  <div class="hero__stats">
+    {stats.map(({ value, label }) => (
+      <div class="hero__stat">
+        <span class="hero__stat-num">{value}</span>
+        <span class="hero__stat-label">{label}</span>
+      </div>
+    ))}
+  </div>
+</section>
