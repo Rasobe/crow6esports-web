@@ -1,0 +1,13 @@
+---
+import "./skip-link.scss";
+import { createTranslator } from "@/ui/i18n";
+
+interface Props {
+  targetId: string;
+}
+
+const { targetId } = Astro.props;
+const t = createTranslator(Astro.locals.locale, "nav");
+---
+
+<a class="skip-link" href={`#${targetId}`}>{t("skip_to_content")}</a>
