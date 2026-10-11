@@ -208,10 +208,10 @@ importers:
     devDependencies:
       '@astrojs/check':
         specifier: ^0.9.10
-        version: 0.9.10(@emnapi/runtime@1.11.3)(prettier-plugin-astro@1.1.1(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(prettier@3.9.10))(prettier@3.9.10)(typescript@5.9.3)
+        version: 0.9.10(@emnapi/runtime@1.11.3)(prettier-plugin-astro@1.1.1(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(prettier@3.9.10))(prettier@3.9.10)(typescript@6.0.3)
       '@commitlint/cli':
         specifier: ^21.2.3
-        version: 21.2.3(@types/node@20.19.42)(conventional-commits-parser@7.1.3)(typescript@5.9.3)
+        version: 21.2.3(@types/node@20.19.42)(conventional-commits-parser@7.1.3)(typescript@6.0.3)
       '@commitlint/config-conventional':
         specifier: ^21.2.3
         version: 21.2.3
@@ -235,7 +235,7 @@ importers:
         version: 9.39.4(jiti@2.6.1)(supports-color@7.2.0)
       eslint-plugin-astro:
         specifier: ^3.2.1
-        version: 3.2.1(@typescript-eslint/parser@8.71.1(eslint@9.39.4(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@5.9.3))(eslint@9.39.4(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript-eslint@8.71.1(eslint@9.39.4(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@5.9.3))
+        version: 3.2.1(@typescript-eslint/parser@8.71.1(eslint@9.39.4(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3))(eslint@9.39.4(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript-eslint@8.71.1(eslint@9.39.4(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3))
       husky:
         specifier: ^9.1.7
         version: 9.1.7
@@ -252,11 +252,11 @@ importers:
         specifier: ^1.101.0
         version: 1.101.0
       typescript:
-        specifier: ^5
-        version: 5.9.3
+        specifier: ^6
+        version: 6.0.3
       typescript-eslint:
         specifier: ^8.71.1
-        version: 8.71.1(eslint@9.39.4(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@5.9.3)
+        version: 8.71.1(eslint@9.39.4(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3)
       vitest:
         specifier: ^4.1.9
         version: 4.1.9(@types/node@20.19.42)(jsdom@29.1.1)(vite@8.3.4(@types/node@20.19.42)(jiti@2.6.1)(sass@1.101.0)(yaml@2.9.1))
@@ -3195,6 +3195,10 @@ packages:
   sisteransi@1.0.5:
     resolution: {integrity: sha512-bLGGlR1QxBcynn2d5YmDX4MGjlZvy2MRBDRNHLJ8VI6l6+9FUiyTFNJ0IveOSP0bcXgVDPRcfGqA0pjaqUpfVg==}
 
+  smol-toml@1.9.0:
+    resolution: {integrity: sha512-hpd+HLON7HdZXqYchMM/+LaTTbdK0AU3NngIJ4KVyWbY9bfQqdL9cD+4yf6dUoU2Ap4VsU0JkQi6FxAI1B2mXQ==}
+    engines: {node: '>= 18'}
+
   smol-toml@1.9.1:
     resolution: {integrity: sha512-j7WyPdf0CJoutMzMoPLF/bVXHtKZIT9Rb4eGeEbWw8X2t5oirjPgpL+OpaENZrILYaXqYwnVH+qgUwVbl+pUJQ==}
     engines: {node: '>= 18'}
@@ -3367,8 +3371,8 @@ packages:
       eslint: ^8.57.0 || ^9.0.0 || ^10.0.0
       typescript: '>=4.8.4 <6.1.0'
 
-  typescript@5.9.3:
-    resolution: {integrity: sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==}
+  typescript@6.0.3:
+    resolution: {integrity: sha512-y2TvuxSZPDyQakkFRPZHKFm+KKVqIisdg9/CZwm9ftvKXLP8NRWj38/ODjNbr43SsoXqNuAisEf1GdCxqWcdBw==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -3838,12 +3842,12 @@ snapshots:
     transitivePeerDependencies:
       - '@emnapi/runtime'
 
-  '@astrojs/check@0.9.10(@emnapi/runtime@1.11.3)(prettier-plugin-astro@1.1.1(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(prettier@3.9.10))(prettier@3.9.10)(typescript@5.9.3)':
+  '@astrojs/check@0.9.10(@emnapi/runtime@1.11.3)(prettier-plugin-astro@1.1.1(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(prettier@3.9.10))(prettier@3.9.10)(typescript@6.0.3)':
     dependencies:
-      '@astrojs/language-server': 2.17.2(@emnapi/runtime@1.11.3)(prettier-plugin-astro@1.1.1(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(prettier@3.9.10))(prettier@3.9.10)(typescript@5.9.3)
+      '@astrojs/language-server': 2.17.2(@emnapi/runtime@1.11.3)(prettier-plugin-astro@1.1.1(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(prettier@3.9.10))(prettier@3.9.10)(typescript@6.0.3)
       chokidar: 4.0.3
       kleur: 4.1.5
-      typescript: 5.9.3
+      typescript: 6.0.3
       yargs: 18.2.0
     transitivePeerDependencies:
       - '@emnapi/runtime'
@@ -3961,32 +3965,32 @@ snapshots:
 
   '@astrojs/internal-helpers@0.12.0':
     dependencies:
-      '@types/hast': 3.0.4
+      '@types/hast': 3.0.5
       '@types/mdast': 4.0.4
-      picomatch: 4.0.4
+      picomatch: 4.0.7
       retext-smartypants: 6.2.0
       shiki: 4.5.0
-      smol-toml: 1.9.1
+      smol-toml: 1.9.0
       unified: 11.0.5
       yaml: 2.9.1
 
-  '@astrojs/language-server@2.17.2(@emnapi/runtime@1.11.3)(prettier-plugin-astro@1.1.1(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(prettier@3.9.10))(prettier@3.9.10)(typescript@5.9.3)':
+  '@astrojs/language-server@2.17.2(@emnapi/runtime@1.11.3)(prettier-plugin-astro@1.1.1(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(prettier@3.9.10))(prettier@3.9.10)(typescript@6.0.3)':
     dependencies:
       '@astrojs/astro2tsx': 0.1.2(@emnapi/runtime@1.11.3)
       '@astrojs/yaml2ts': 0.2.4
-      '@volar/kit': 2.4.28(typescript@5.9.3)
+      '@volar/kit': 2.4.28(typescript@6.0.3)
       '@volar/language-core': 2.4.28
-      '@volar/language-server': 2.4.28(typescript@5.9.3)
-      '@volar/language-service': 2.4.28(typescript@5.9.3)
+      '@volar/language-server': 2.4.28(typescript@6.0.3)
+      '@volar/language-service': 2.4.28(typescript@6.0.3)
       muggle-string: 0.4.1
       tinyglobby: 0.2.17
-      volar-service-css: 0.0.71(@volar/language-service@2.4.28(typescript@5.9.3))
-      volar-service-emmet: 0.0.71(@volar/language-service@2.4.28(typescript@5.9.3))
-      volar-service-html: 0.0.71(@volar/language-service@2.4.28(typescript@5.9.3))
-      volar-service-prettier: 0.0.71(@volar/language-service@2.4.28(typescript@5.9.3))(prettier@3.9.10)
-      volar-service-typescript: 0.0.71(@volar/language-service@2.4.28(typescript@5.9.3))(typescript@5.9.3)
-      volar-service-typescript-twoslash-queries: 0.0.71(@volar/language-service@2.4.28(typescript@5.9.3))(typescript@5.9.3)
-      volar-service-yaml: 0.0.71(@volar/language-service@2.4.28(typescript@5.9.3))
+      volar-service-css: 0.0.71(@volar/language-service@2.4.28(typescript@6.0.3))
+      volar-service-emmet: 0.0.71(@volar/language-service@2.4.28(typescript@6.0.3))
+      volar-service-html: 0.0.71(@volar/language-service@2.4.28(typescript@6.0.3))
+      volar-service-prettier: 0.0.71(@volar/language-service@2.4.28(typescript@6.0.3))(prettier@3.9.10)
+      volar-service-typescript: 0.0.71(@volar/language-service@2.4.28(typescript@6.0.3))(typescript@6.0.3)
+      volar-service-typescript-twoslash-queries: 0.0.71(@volar/language-service@2.4.28(typescript@6.0.3))(typescript@6.0.3)
+      volar-service-yaml: 0.0.71(@volar/language-service@2.4.28(typescript@6.0.3))
       vscode-html-languageservice: 5.6.2
       vscode-uri: 3.2.0
     optionalDependencies:
@@ -4240,12 +4244,12 @@ snapshots:
       fast-wrap-ansi: 0.2.2
       sisteransi: 1.0.5
 
-  '@commitlint/cli@21.2.3(@types/node@20.19.42)(conventional-commits-parser@7.1.3)(typescript@5.9.3)':
+  '@commitlint/cli@21.2.3(@types/node@20.19.42)(conventional-commits-parser@7.1.3)(typescript@6.0.3)':
     dependencies:
       '@commitlint/config-conventional': 21.2.3
       '@commitlint/format': 21.2.3
       '@commitlint/lint': 21.2.3
-      '@commitlint/load': 21.2.3(@types/node@20.19.42)(typescript@5.9.3)
+      '@commitlint/load': 21.2.3(@types/node@20.19.42)(typescript@6.0.3)
       '@commitlint/read': 21.2.3(conventional-commits-parser@7.1.3)
       '@commitlint/types': 21.2.3
       tinyexec: 1.3.1
@@ -4290,14 +4294,14 @@ snapshots:
       '@commitlint/rules': 21.2.3
       '@commitlint/types': 21.2.3
 
-  '@commitlint/load@21.2.3(@types/node@20.19.42)(typescript@5.9.3)':
+  '@commitlint/load@21.2.3(@types/node@20.19.42)(typescript@6.0.3)':
     dependencies:
       '@commitlint/config-validator': 21.2.3
       '@commitlint/execute-rule': 21.0.1
       '@commitlint/resolve-extends': 21.2.3
       '@commitlint/types': 21.2.3
-      cosmiconfig: 9.0.2(typescript@5.9.3)
-      cosmiconfig-typescript-loader: 6.3.0(@types/node@20.19.42)(cosmiconfig@9.0.2(typescript@5.9.3))(typescript@5.9.3)
+      cosmiconfig: 9.0.2(typescript@6.0.3)
+      cosmiconfig-typescript-loader: 6.3.0(@types/node@20.19.42)(cosmiconfig@9.0.2(typescript@6.0.3))(typescript@6.0.3)
       es-toolkit: 1.52.0
       is-plain-obj: 4.1.0
       picocolors: 1.1.1
@@ -5045,40 +5049,40 @@ snapshots:
 
   '@types/unist@3.0.3': {}
 
-  '@typescript-eslint/eslint-plugin@8.71.1(@typescript-eslint/parser@8.71.1(eslint@9.39.4(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@5.9.3))(eslint@9.39.4(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@5.9.3)':
+  '@typescript-eslint/eslint-plugin@8.71.1(@typescript-eslint/parser@8.71.1(eslint@9.39.4(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3))(eslint@9.39.4(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3)':
     dependencies:
       '@eslint-community/regexpp': 4.12.2
-      '@typescript-eslint/parser': 8.71.1(eslint@9.39.4(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@5.9.3)
+      '@typescript-eslint/parser': 8.71.1(eslint@9.39.4(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3)
       '@typescript-eslint/scope-manager': 8.71.1
-      '@typescript-eslint/type-utils': 8.71.1(eslint@9.39.4(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@5.9.3)
-      '@typescript-eslint/utils': 8.71.1(eslint@9.39.4(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@5.9.3)
+      '@typescript-eslint/type-utils': 8.71.1(eslint@9.39.4(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3)
+      '@typescript-eslint/utils': 8.71.1(eslint@9.39.4(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3)
       '@typescript-eslint/visitor-keys': 8.71.1
       eslint: 9.39.4(jiti@2.6.1)(supports-color@7.2.0)
       ignore: 7.0.12
       natural-compare: 1.4.0
-      ts-api-utils: 2.5.0(typescript@5.9.3)
-      typescript: 5.9.3
+      ts-api-utils: 2.5.0(typescript@6.0.3)
+      typescript: 6.0.3
     transitivePeerDependencies:
       - supports-color
 
-  '@typescript-eslint/parser@8.71.1(eslint@9.39.4(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@5.9.3)':
+  '@typescript-eslint/parser@8.71.1(eslint@9.39.4(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3)':
     dependencies:
       '@typescript-eslint/scope-manager': 8.71.1
       '@typescript-eslint/types': 8.71.1
-      '@typescript-eslint/typescript-estree': 8.71.1(supports-color@7.2.0)(typescript@5.9.3)
+      '@typescript-eslint/typescript-estree': 8.71.1(supports-color@7.2.0)(typescript@6.0.3)
       '@typescript-eslint/visitor-keys': 8.71.1
       debug: 4.4.3(supports-color@7.2.0)
       eslint: 9.39.4(jiti@2.6.1)(supports-color@7.2.0)
-      typescript: 5.9.3
+      typescript: 6.0.3
     transitivePeerDependencies:
       - supports-color
 
-  '@typescript-eslint/project-service@8.71.1(supports-color@7.2.0)(typescript@5.9.3)':
+  '@typescript-eslint/project-service@8.71.1(supports-color@7.2.0)(typescript@6.0.3)':
     dependencies:
-      '@typescript-eslint/tsconfig-utils': 8.71.1(typescript@5.9.3)
+      '@typescript-eslint/tsconfig-utils': 8.71.1(typescript@6.0.3)
       '@typescript-eslint/types': 8.71.1
       debug: 4.4.3(supports-color@7.2.0)
-      typescript: 5.9.3
+      typescript: 6.0.3
     transitivePeerDependencies:
       - supports-color
 
@@ -5087,47 +5091,47 @@ snapshots:
       '@typescript-eslint/types': 8.71.1
       '@typescript-eslint/visitor-keys': 8.71.1
 
-  '@typescript-eslint/tsconfig-utils@8.71.1(typescript@5.9.3)':
+  '@typescript-eslint/tsconfig-utils@8.71.1(typescript@6.0.3)':
     dependencies:
-      typescript: 5.9.3
+      typescript: 6.0.3
 
-  '@typescript-eslint/type-utils@8.71.1(eslint@9.39.4(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@5.9.3)':
+  '@typescript-eslint/type-utils@8.71.1(eslint@9.39.4(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3)':
     dependencies:
       '@typescript-eslint/types': 8.71.1
-      '@typescript-eslint/typescript-estree': 8.71.1(supports-color@7.2.0)(typescript@5.9.3)
-      '@typescript-eslint/utils': 8.71.1(eslint@9.39.4(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@5.9.3)
+      '@typescript-eslint/typescript-estree': 8.71.1(supports-color@7.2.0)(typescript@6.0.3)
+      '@typescript-eslint/utils': 8.71.1(eslint@9.39.4(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3)
       debug: 4.4.3(supports-color@7.2.0)
       eslint: 9.39.4(jiti@2.6.1)(supports-color@7.2.0)
-      ts-api-utils: 2.5.0(typescript@5.9.3)
-      typescript: 5.9.3
+      ts-api-utils: 2.5.0(typescript@6.0.3)
+      typescript: 6.0.3
     transitivePeerDependencies:
       - supports-color
 
   '@typescript-eslint/types@8.71.1': {}
 
-  '@typescript-eslint/typescript-estree@8.71.1(supports-color@7.2.0)(typescript@5.9.3)':
+  '@typescript-eslint/typescript-estree@8.71.1(supports-color@7.2.0)(typescript@6.0.3)':
     dependencies:
-      '@typescript-eslint/project-service': 8.71.1(supports-color@7.2.0)(typescript@5.9.3)
-      '@typescript-eslint/tsconfig-utils': 8.71.1(typescript@5.9.3)
+      '@typescript-eslint/project-service': 8.71.1(supports-color@7.2.0)(typescript@6.0.3)
+      '@typescript-eslint/tsconfig-utils': 8.71.1(typescript@6.0.3)
       '@typescript-eslint/types': 8.71.1
       '@typescript-eslint/visitor-keys': 8.71.1
       debug: 4.4.3(supports-color@7.2.0)
       minimatch: 10.2.5
       semver: 7.8.5
       tinyglobby: 0.2.17
-      ts-api-utils: 2.5.0(typescript@5.9.3)
-      typescript: 5.9.3
+      ts-api-utils: 2.5.0(typescript@6.0.3)
+      typescript: 6.0.3
     transitivePeerDependencies:
       - supports-color
 
-  '@typescript-eslint/utils@8.71.1(eslint@9.39.4(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@5.9.3)':
+  '@typescript-eslint/utils@8.71.1(eslint@9.39.4(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3)':
     dependencies:
       '@eslint-community/eslint-utils': 4.9.1(eslint@9.39.4(jiti@2.6.1)(supports-color@7.2.0))
       '@typescript-eslint/scope-manager': 8.71.1
       '@typescript-eslint/types': 8.71.1
-      '@typescript-eslint/typescript-estree': 8.71.1(supports-color@7.2.0)(typescript@5.9.3)
+      '@typescript-eslint/typescript-estree': 8.71.1(supports-color@7.2.0)(typescript@6.0.3)
       eslint: 9.39.4(jiti@2.6.1)(supports-color@7.2.0)
-      typescript: 5.9.3
+      typescript: 6.0.3
     transitivePeerDependencies:
       - supports-color
 
@@ -5239,12 +5243,12 @@ snapshots:
       convert-source-map: 2.0.0
       tinyrainbow: 3.1.0
 
-  '@volar/kit@2.4.28(typescript@5.9.3)':
+  '@volar/kit@2.4.28(typescript@6.0.3)':
     dependencies:
-      '@volar/language-service': 2.4.28(typescript@5.9.3)
-      '@volar/typescript': 2.4.28(typescript@5.9.3)
+      '@volar/language-service': 2.4.28(typescript@6.0.3)
+      '@volar/typescript': 2.4.28(typescript@6.0.3)
       typesafe-path: 0.2.2
-      typescript: 5.9.3
+      typescript: 6.0.3
       vscode-languageserver-textdocument: 1.0.15
       vscode-uri: 3.2.0
 
@@ -5252,11 +5256,11 @@ snapshots:
     dependencies:
       '@volar/source-map': 2.4.28
 
-  '@volar/language-server@2.4.28(typescript@5.9.3)':
+  '@volar/language-server@2.4.28(typescript@6.0.3)':
     dependencies:
       '@volar/language-core': 2.4.28
-      '@volar/language-service': 2.4.28(typescript@5.9.3)
-      '@volar/typescript': 2.4.28(typescript@5.9.3)
+      '@volar/language-service': 2.4.28(typescript@6.0.3)
+      '@volar/typescript': 2.4.28(typescript@6.0.3)
       path-browserify: 1.0.1
       request-light: 0.7.0
       vscode-languageserver: 9.0.1
@@ -5264,26 +5268,26 @@ snapshots:
       vscode-languageserver-textdocument: 1.0.15
       vscode-uri: 3.2.0
     optionalDependencies:
-      typescript: 5.9.3
+      typescript: 6.0.3
 
-  '@volar/language-service@2.4.28(typescript@5.9.3)':
+  '@volar/language-service@2.4.28(typescript@6.0.3)':
     dependencies:
       '@volar/language-core': 2.4.28
       vscode-languageserver-protocol: 3.18.4
       vscode-languageserver-textdocument: 1.0.15
       vscode-uri: 3.2.0
     optionalDependencies:
-      typescript: 5.9.3
+      typescript: 6.0.3
 
   '@volar/source-map@2.4.28': {}
 
-  '@volar/typescript@2.4.28(typescript@5.9.3)':
+  '@volar/typescript@2.4.28(typescript@6.0.3)':
     dependencies:
       '@volar/language-core': 2.4.28
       path-browserify: 1.0.1
       vscode-uri: 3.2.0
     optionalDependencies:
-      typescript: 5.9.3
+      typescript: 6.0.3
 
   '@vscode/emmet-helper@2.11.0':
     dependencies:
@@ -5577,21 +5581,21 @@ snapshots:
 
   cookie@2.0.1: {}
 
-  cosmiconfig-typescript-loader@6.3.0(@types/node@20.19.42)(cosmiconfig@9.0.2(typescript@5.9.3))(typescript@5.9.3):
+  cosmiconfig-typescript-loader@6.3.0(@types/node@20.19.42)(cosmiconfig@9.0.2(typescript@6.0.3))(typescript@6.0.3):
     dependencies:
       '@types/node': 20.19.42
-      cosmiconfig: 9.0.2(typescript@5.9.3)
+      cosmiconfig: 9.0.2(typescript@6.0.3)
       jiti: 2.6.1
-      typescript: 5.9.3
+      typescript: 6.0.3
 
-  cosmiconfig@9.0.2(typescript@5.9.3):
+  cosmiconfig@9.0.2(typescript@6.0.3):
     dependencies:
       env-paths: 2.2.1
       import-fresh: 3.3.1
       js-yaml: 4.2.0
       parse-json: 5.2.0
     optionalDependencies:
-      typescript: 5.9.3
+      typescript: 6.0.3
 
   cross-spawn@7.0.6:
     dependencies:
@@ -5619,7 +5623,7 @@ snapshots:
   css-tree@3.2.1:
     dependencies:
       mdn-data: 2.27.1
-      source-map-js: 1.2.1
+      source-map-js: 1.2.2
 
   css-what@7.0.0: {}
 
@@ -5717,7 +5721,7 @@ snapshots:
 
   escape-string-regexp@4.0.0: {}
 
-  eslint-plugin-astro@3.2.1(@typescript-eslint/parser@8.71.1(eslint@9.39.4(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@5.9.3))(eslint@9.39.4(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript-eslint@8.71.1(eslint@9.39.4(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@5.9.3)):
+  eslint-plugin-astro@3.2.1(@typescript-eslint/parser@8.71.1(eslint@9.39.4(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3))(eslint@9.39.4(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript-eslint@8.71.1(eslint@9.39.4(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3)):
     dependencies:
       '@eslint-community/eslint-utils': 4.9.1(eslint@9.39.4(jiti@2.6.1)(supports-color@7.2.0))
       '@jridgewell/sourcemap-codec': 1.6.0
@@ -5730,8 +5734,8 @@ snapshots:
       postcss-selector-parser: 7.1.6
       synckit: 0.11.13
     optionalDependencies:
-      '@typescript-eslint/parser': 8.71.1(eslint@9.39.4(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@5.9.3)
-      typescript-eslint: 8.71.1(eslint@9.39.4(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@5.9.3)
+      '@typescript-eslint/parser': 8.71.1(eslint@9.39.4(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3)
+      typescript-eslint: 8.71.1(eslint@9.39.4(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3)
     transitivePeerDependencies:
       - supports-color
 
@@ -6660,6 +6664,8 @@ snapshots:
 
   sisteransi@1.0.5: {}
 
+  smol-toml@1.9.0: {}
+
   smol-toml@1.9.1: {}
 
   source-map-js@1.2.1: {}
@@ -6789,9 +6795,9 @@ snapshots:
 
   trough@2.2.0: {}
 
-  ts-api-utils@2.5.0(typescript@5.9.3):
+  ts-api-utils@2.5.0(typescript@6.0.3):
     dependencies:
-      typescript: 5.9.3
+      typescript: 6.0.3
 
   tslib@2.8.1: {}
 
@@ -6805,18 +6811,18 @@ snapshots:
     dependencies:
       semver: 7.8.5
 
-  typescript-eslint@8.71.1(eslint@9.39.4(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@5.9.3):
+  typescript-eslint@8.71.1(eslint@9.39.4(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3):
     dependencies:
-      '@typescript-eslint/eslint-plugin': 8.71.1(@typescript-eslint/parser@8.71.1(eslint@9.39.4(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@5.9.3))(eslint@9.39.4(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@5.9.3)
-      '@typescript-eslint/parser': 8.71.1(eslint@9.39.4(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@5.9.3)
-      '@typescript-eslint/typescript-estree': 8.71.1(supports-color@7.2.0)(typescript@5.9.3)
-      '@typescript-eslint/utils': 8.71.1(eslint@9.39.4(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@5.9.3)
+      '@typescript-eslint/eslint-plugin': 8.71.1(@typescript-eslint/parser@8.71.1(eslint@9.39.4(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3))(eslint@9.39.4(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3)
+      '@typescript-eslint/parser': 8.71.1(eslint@9.39.4(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3)
+      '@typescript-eslint/typescript-estree': 8.71.1(supports-color@7.2.0)(typescript@6.0.3)
+      '@typescript-eslint/utils': 8.71.1(eslint@9.39.4(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3)
       eslint: 9.39.4(jiti@2.6.1)(supports-color@7.2.0)
-      typescript: 5.9.3
+      typescript: 6.0.3
     transitivePeerDependencies:
       - supports-color
 
-  typescript@5.9.3: {}
+  typescript@6.0.3: {}
 
   ufo@1.6.4: {}
 
@@ -6954,46 +6960,46 @@ snapshots:
     transitivePeerDependencies:
       - msw
 
-  volar-service-css@0.0.71(@volar/language-service@2.4.28(typescript@5.9.3)):
+  volar-service-css@0.0.71(@volar/language-service@2.4.28(typescript@6.0.3)):
     dependencies:
       vscode-css-languageservice: 6.3.10
       vscode-languageserver-textdocument: 1.0.15
       vscode-uri: 3.2.0
     optionalDependencies:
-      '@volar/language-service': 2.4.28(typescript@5.9.3)
+      '@volar/language-service': 2.4.28(typescript@6.0.3)
 
-  volar-service-emmet@0.0.71(@volar/language-service@2.4.28(typescript@5.9.3)):
+  volar-service-emmet@0.0.71(@volar/language-service@2.4.28(typescript@6.0.3)):
     dependencies:
       '@emmetio/css-parser': 0.4.1
       '@emmetio/html-matcher': 1.3.0
       '@vscode/emmet-helper': 2.11.0
       vscode-uri: 3.2.0
     optionalDependencies:
-      '@volar/language-service': 2.4.28(typescript@5.9.3)
+      '@volar/language-service': 2.4.28(typescript@6.0.3)
 
-  volar-service-html@0.0.71(@volar/language-service@2.4.28(typescript@5.9.3)):
+  volar-service-html@0.0.71(@volar/language-service@2.4.28(typescript@6.0.3)):
     dependencies:
       vscode-html-languageservice: 5.6.2
       vscode-languageserver-textdocument: 1.0.15
       vscode-uri: 3.2.0
     optionalDependencies:
-      '@volar/language-service': 2.4.28(typescript@5.9.3)
+      '@volar/language-service': 2.4.28(typescript@6.0.3)
 
-  volar-service-prettier@0.0.71(@volar/language-service@2.4.28(typescript@5.9.3))(prettier@3.9.10):
+  volar-service-prettier@0.0.71(@volar/language-service@2.4.28(typescript@6.0.3))(prettier@3.9.10):
     dependencies:
       vscode-uri: 3.2.0
     optionalDependencies:
-      '@volar/language-service': 2.4.28(typescript@5.9.3)
+      '@volar/language-service': 2.4.28(typescript@6.0.3)
       prettier: 3.9.10
 
-  volar-service-typescript-twoslash-queries@0.0.71(@volar/language-service@2.4.28(typescript@5.9.3))(typescript@5.9.3):
+  volar-service-typescript-twoslash-queries@0.0.71(@volar/language-service@2.4.28(typescript@6.0.3))(typescript@6.0.3):
     dependencies:
       vscode-uri: 3.2.0
     optionalDependencies:
-      '@volar/language-service': 2.4.28(typescript@5.9.3)
-      typescript: 5.9.3
+      '@volar/language-service': 2.4.28(typescript@6.0.3)
+      typescript: 6.0.3
 
-  volar-service-typescript@0.0.71(@volar/language-service@2.4.28(typescript@5.9.3))(typescript@5.9.3):
+  volar-service-typescript@0.0.71(@volar/language-service@2.4.28(typescript@6.0.3))(typescript@6.0.3):
     dependencies:
       path-browserify: 1.0.1
       semver: 7.8.5
@@ -7002,15 +7008,15 @@ snapshots:
       vscode-nls: 5.2.0
       vscode-uri: 3.2.0
     optionalDependencies:
-      '@volar/language-service': 2.4.28(typescript@5.9.3)
-      typescript: 5.9.3
+      '@volar/language-service': 2.4.28(typescript@6.0.3)
+      typescript: 6.0.3
 
-  volar-service-yaml@0.0.71(@volar/language-service@2.4.28(typescript@5.9.3)):
+  volar-service-yaml@0.0.71(@volar/language-service@2.4.28(typescript@6.0.3)):
     dependencies:
       vscode-uri: 3.2.0
       yaml-language-server: 1.23.0
     optionalDependencies:
-      '@volar/language-service': 2.4.28(typescript@5.9.3)
+      '@volar/language-service': 2.4.28(typescript@6.0.3)
 
   vscode-css-languageservice@6.3.10:
     dependencies:
