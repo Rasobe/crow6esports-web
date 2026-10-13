@@ -3,30 +3,31 @@ import "./store-highlight.scss";
 import { ROUTES } from "@config/routes";
 import { getProducts } from "@/application/store/get-products";
 import { container } from "@/infrastructure/container";
-import { createTranslator } from "@/ui/i18n";
-import { Button, SectionHeader } from "@/ui/shared/components";
+import { createTranslator, localizePath } from "@/ui/i18n";
+import { SectionHeading } from "@/ui/shared/components";
 import { ProductCard } from "@/ui/features/store/components";
 
-const HIGHLIGHTED_PRODUCTS = 3;
+const HIGHLIGHTED_PRODUCTS = 4;
 
-const t = createTranslator(Astro.locals.locale, "home.storeHighlight");
+const { locale } = Astro.locals;
+const t = createTranslator(locale, "home.storeHighlight");
 const products = getProducts(container.productRepository).slice(0, HIGHLIGHTED_PRODUCTS);
 ---
 
-<section class="store-highlight">
+<section class="store-highlight" aria-labelledby="store-highlight-title">
   <div class="store-highlight__inner">
-    <SectionHeader namespace="home.storeHighlight" />
+    <SectionHeading
+      id="store-highlight-title"
+      eyebrow={t("eyebrow")}
+      title={t("title")}
+      href={localizePath(locale, ROUTES.store)}
+      linkLabel={t("cta_view_more")}
+    />
 
     <div class="store-highlight__grid">
       {products.map((product) => (
         <ProductCard product={product} />
       ))}
-    </div>
-
-    <div class="store-highlight__footer">
-      <Button href={ROUTES.store} variant="outline">
-        {t("cta_view_more")}
-      </Button>
     </div>
   </div>
 </section>

@@ -1,0 +1,22 @@
+@use "styles/layers";
+@use "styles/mixins" as *;
+@layer components {
+  .store-catalog {
+    padding: var(--space-12) 0 var(--section-py);
+    background: var(--bg-surface);
+  }
+
+  .store-catalog__inner {
+    @include container;
+  }
+
+  .store-catalog__grid {
+    @include joined-grid(15rem);
+    margin: 0;
+    list-style: none;
+  }
+
+  .store-catalog__item {
+    display: flex;
+  }
+}

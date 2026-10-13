@@ -4,7 +4,7 @@ import { ROUTES } from "@config/routes";
 import { getAllPlayers } from "@/application/team/get-players";
 import { container } from "@/infrastructure/container";
 import { createTranslator, localizePath } from "@/ui/i18n";
-import { PlayerCard } from "@/ui/shared/components";
+import { PlayerCard, SectionHeading } from "@/ui/shared/components";
 
 const HIGHLIGHTED_PLAYERS = 4;
 
@@ -15,18 +15,14 @@ const players = getAllPlayers(container.playerRepository).slice(0, HIGHLIGHTED_P
 
 <section class="team-highlight" aria-labelledby="team-highlight-title">
   <div class="team-highlight__inner">
-    <header class="team-highlight__header">
-      <div class="team-highlight__heading">
-        <span class="section-label">{t("eyebrow")}</span>
-        <h2 id="team-highlight-title" class="team-highlight__title">
-          {t("title_lead")} <span class="team-highlight__title-accent">{t("title_accent")}</span>
-        </h2>
-      </div>
-
-      <a class="team-highlight__link" href={localizePath(locale, ROUTES.team)}>
-        {t("cta_view_more")}
-      </a>
-    </header>
+    <SectionHeading
+      id="team-highlight-title"
+      eyebrow={t("eyebrow")}
+      title={t("title_lead")}
+      accent={t("title_accent")}
+      href={localizePath(locale, ROUTES.team)}
+      linkLabel={t("cta_view_more")}
+    />
 
     <div class="team-highlight__grid">
       {players.map((player, index) => (

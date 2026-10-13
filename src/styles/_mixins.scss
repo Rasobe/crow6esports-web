@@ -37,3 +37,32 @@ $breakpoints: (
 @mixin angular-cut($cut) {
   clip-path: polygon($cut 0%, 100% 0%, calc(100% - #{$cut}) 100%, 0% 100%);
 }
+
+/* Cuadrícula de cards con bordes compartidos: cada hijo solapa 1px con el vecino
+   para que la línea entre dos cards no se duplique. */
+@mixin joined-grid($min: 16rem) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax($min, 1fr));
+  padding: 1px 0 0 1px;
+
+  > * {
+    margin: -1px 0 0 -1px;
+  }
+}
+
+/* Convierte un grid o flex en un carrusel horizontal con snap (móvil) */
+@mixin snap-scroller($basis: 78%) {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  > * {
+    flex: 0 0 $basis;
+    scroll-snap-align: start;
+  }
+}

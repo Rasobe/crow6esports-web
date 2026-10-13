@@ -8,12 +8,70 @@
     "currency": "EUR",
     "images": ["/images/store/jersey-front.png", "/images/store/jersey-back.png"],
     "stock": [
-      { "size": "S", "quantity": 10 },
-      { "size": "M", "quantity": 25 },
-      { "size": "L", "quantity": 18 },
-      { "size": "XL", "quantity": 8 }
+      {
+        "size": "S",
+        "quantity": 10
+      },
+      {
+        "size": "M",
+        "quantity": 25
+      },
+      {
+        "size": "L",
+        "quantity": 18
+      },
+      {
+        "size": "XL",
+        "quantity": 8
+      }
     ],
     "category": "jersey",
     "featured": true
+  },
+  {
+    "id": "prod-2",
+    "slug": "crow6-hoodie-gold-crest",
+    "name": "Sudadera Gold Crest",
+    "description": "Sudadera con capucha de algodón pesado y escudo dorado bordado en el pecho.",
+    "price": 49.99,
+    "currency": "EUR",
+    "images": [],
+    "stock": [
+      {
+        "size": "S",
+        "quantity": 6
+      },
+      {
+        "size": "M",
+        "quantity": 14
+      },
+      {
+        "size": "L",
+        "quantity": 12
+      },
+      {
+        "size": "XL",
+        "quantity": 5
+      }
+    ],
+    "category": "hoodie",
+    "featured": false
+  },
+  {
+    "id": "prod-3",
+    "slug": "crow6-sticker-pack",
+    "name": "Pack de pegatinas Crow 6",
+    "description": "Pack de pegatinas de vinilo resistentes al agua con el logo y la mascota de Crow 6.",
+    "price": 4.99,
+    "currency": "EUR",
+    "images": [],
+    "stock": [
+      {
+        "size": "ONE",
+        "quantity": 100
+      }
+    ],
+    "category": "sticker",
+    "featured": false
   }
 ]
