@@ -96,6 +96,14 @@
       "category_hoodie": "Sudadera",
       "category_sticker": "Pegatina",
       "featured_badge": "Destacado"
+    },
+    "tryoutsBanner": {
+      "eyebrow": "Tryouts temporada 2026",
+      "title_line_1": "Únete a",
+      "title_line_2": "la bandada.",
+      "description": "Buscamos talento en la región ibérica. Envía tu rango, rol y replays, y demuestra tu nivel sobre el campo.",
+      "cta": "Inscribirme",
+      "watermark": "Tryouts"
     }
   },
   "team": {

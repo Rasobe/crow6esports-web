@@ -96,6 +96,14 @@
       "category_hoodie": "Hoodie",
       "category_sticker": "Sticker",
       "featured_badge": "Featured"
+    },
+    "tryoutsBanner": {
+      "eyebrow": "Tryouts season 2026",
+      "title_line_1": "Join",
+      "title_line_2": "the flock.",
+      "description": "We are looking for talent across the Iberian region. Send your rank, role and replays, and prove your level on the pitch.",
+      "cta": "Apply now",
+      "watermark": "Tryouts"
     }
   },
   "team": {
