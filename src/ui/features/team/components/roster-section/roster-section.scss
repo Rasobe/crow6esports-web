@@ -43,8 +43,8 @@
   // Grid de cards — auto-fill para adaptarse al número de items
   .roster-section__list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 16px;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    padding: 1px 0 0 1px;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -52,6 +52,7 @@
 
   .roster-section__list-item {
     display: flex;
+    margin: -1px 0 0 -1px;
   }
 
   @media (max-width: 640px) {

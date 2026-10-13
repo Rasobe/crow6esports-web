@@ -12,46 +12,89 @@
     padding-inline: 1.5rem;
     display: flex;
     flex-direction: column;
-    gap: 56px;
+    gap: 48px;
   }
 
-  /* ─── Cards grid (left → right) ─── */
+  .team-highlight__header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+
+  .team-highlight__heading {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .team-highlight__title {
+    font-size: clamp(3rem, 8vw, 6rem);
+    line-height: 0.9;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    color: var(--text-primary);
+  }
+
+  .team-highlight__title-accent {
+    color: transparent;
+    -webkit-text-stroke: clamp(1.5px, 0.02em, 3px) var(--brand);
+  }
+
+  .team-highlight__link {
+    padding-bottom: 0.5rem;
+    font-family: var(--font-ui), sans-serif;
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--text-primary);
+    border-bottom: 2px solid var(--brand);
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: var(--brand);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--brand);
+      outline-offset: 4px;
+    }
+  }
+
   .team-highlight__grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 20px;
+    padding: 1px 0 0 1px;
+
+    > * {
+      margin: -1px 0 0 -1px;
+    }
   }
 
-  .team-highlight__footer {
-    display: flex;
-    justify-content: flex-end;
-  }
-
-  /* ─── Responsive ─── */
   @media (max-width: 640px) {
     .team-highlight {
       padding: 64px 0;
     }
 
     .team-highlight__inner {
-      gap: 36px;
+      gap: 32px;
     }
 
     .team-highlight__grid {
       display: flex;
-      flex-wrap: nowrap;
       overflow-x: auto;
       scroll-snap-type: x mandatory;
       scrollbar-width: none;
-      -webkit-overflow-scrolling: touch;
 
       &::-webkit-scrollbar {
         display: none;
       }
 
       > * {
-        flex: 0 0 75%;
-        max-width: 280px;
+        flex: 0 0 78%;
         scroll-snap-align: start;
       }
     }
