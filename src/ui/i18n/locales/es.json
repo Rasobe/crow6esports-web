@@ -28,8 +28,6 @@
         "sector": "Esports"
       },
       "subtitle": "Organización competitiva de Rocket League",
-      "eyebrow": "Organización de esports",
-      "tagline": "Domina · Compite · Conquista",
       "cta_team": "Ver equipo",
       "cta_join": "Únete al equipo",
       "stats": {
@@ -48,43 +46,38 @@
     },
     "teamHighlight": {
       "eyebrow": "Roster oficial",
-      "title_lead": "La",
-      "title_accent": "bandada",
+      "title_lead": "Los",
+      "title_accent": "cuervos",
       "cta_view_more": "Plantilla completa"
     },
     "coachingBanner": {
-      "eyebrow": "Entrenamiento profesional",
-      "title": "Lleva tu juego al siguiente nivel",
-      "subtitle": "Entrenamiento personalizado para mejorar tu rendimiento en Rocket League en equipo o individualmente.",
-      "credibility": "6 años formando jugadores con hasta 2000+ MMR",
-      "pack_1_title": "Pack Básico",
-      "pack_1_price": "28€/mes",
-      "pack_1_description": "Ideal para empezar a pulir tu mecánica y tus decisiones en partido.",
-      "pack_1_feature_1": "1 sesión semanal (60 min)",
-      "pack_1_feature_2": "Feedback de tu última partida ranked",
-      "pack_1_feature_3": "Acceso al Discord de la academia",
-      "pack_2_badge": "Más elegido",
-      "pack_2_title": "Pack Destacado",
-      "pack_2_price": "55€/mes",
-      "pack_2_description": "El equilibrio perfecto entre seguimiento constante y precio.",
-      "pack_2_feature_1": "2 sesiones semanales (60 min)",
-      "pack_2_feature_2": "Análisis de replays personalizado",
-      "pack_2_feature_3": "Plan de mejora mensual",
-      "pack_2_feature_4": "Acceso prioritario a horarios",
-      "pack_3_title": "Pack Premium",
-      "pack_3_price": "78€/mes",
-      "pack_3_description": "Entrenamiento intensivo para quien compite al máximo nivel.",
-      "pack_3_feature_1": "3 sesiones semanales (60 min)",
-      "pack_3_feature_2": "Análisis de VOD ilimitado",
-      "pack_3_feature_3": "Seguimiento 1 a 1 por Discord",
-      "pack_3_feature_4": "Sesión mensual con el equipo de analistas",
-      "cta_reserve": "Reservar sesión"
+      "title_lead": "Sube de rango con el",
+      "title_accent": "Head Coach",
+      "title_tail": "de Crow 6.",
+      "description": "Cinco años formando jugadores y equipos. Revisión de tus replays, objetivos claros en cada sesión y un plan semanal que encaja con tu horario.",
+      "coach_role": "Head Coach",
+      "hours_label": "Horas de juego",
+      "photo_soon": "Foto próximamente",
+      "progress_label": "Progreso del alumno",
+      "progress_start": "Alumno · inicio",
+      "progress_current": "Actual · MMR",
+      "service_one_to_one_title": "Coaching 1a1",
+      "service_one_to_one_description": "Análisis de replays y mecánicas",
+      "service_teams_title": "Equipos completos",
+      "service_teams_description": "Sinergia, rotaciones y estrategia",
+      "service_weekly_plan_title": "Plan semanal",
+      "service_weekly_plan_description": "Objetivos claros y seguimiento diario",
+      "price_individual": "Individual desde",
+      "price_teams": "Equipos desde",
+      "price_unit": "/ mes",
+      "price_before": "Precio anterior",
+      "schedule": "Lun a Sáb · 16:00 a 22:00",
+      "cta_reserve": "Reserva tu plaza"
     },
     "storeHighlight": {
-      "eyebrow": "La Tienda",
-      "title": "Viste los colores de Crow6",
-      "subtitle": "Equipación oficial pensada para el equipo y la afición.",
-      "cta_view_more": "Ver más"
+      "eyebrow": "Tienda oficial",
+      "title": "Viste los colores",
+      "cta_view_more": "Ir a la tienda"
     },
     "playerCard": {
       "stat_mmr": "MMR",
@@ -101,9 +94,16 @@
     "productCard": {
       "category_jersey": "Camiseta",
       "category_hoodie": "Sudadera",
-      "category_cap": "Gorra",
-      "category_accessory": "Accesorio",
+      "category_sticker": "Pegatina",
       "featured_badge": "Destacado"
+    },
+    "tryoutsBanner": {
+      "eyebrow": "Tryouts temporada 2026",
+      "title_line_1": "Únete a",
+      "title_line_2": "los cuervos.",
+      "description": "Buscamos jugadores comprometidos con ganas de competir. Rellena el formulario y te contactamos.",
+      "cta": "Inscribirme",
+      "watermark": "Tryouts"
     }
   },
   "team": {
@@ -130,6 +130,11 @@
     "read_more": "Leer más"
   },
   "store": {
+    "meta": {
+      "title": "Tienda",
+      "description": "Merchandising oficial de Crow 6 Esports: camisetas, sudaderas y pegatinas."
+    },
+    "catalog_label": "Catálogo de productos",
     "title": "Tienda",
     "eyebrow": "Merchandise oficial",
     "sold_out": "Agotado",
@@ -332,5 +337,30 @@
     "newTab": "se abre en una pestaña nueva",
     "meta": "Desde 2020 · Huesca, España · Rocket League",
     "hashtag": "#GoCrows"
+  },
+  "underConstruction": {
+    "eyebrow": "En construcción",
+    "back_home": "Volver al inicio",
+    "follow_us": "Mientras tanto, síguenos",
+    "socials_label": "Redes sociales",
+    "new_tab": "se abre en una pestaña nueva",
+    "pages": {
+      "team": {
+        "title": "Plantilla",
+        "description": "Estamos preparando la nueva plantilla, con los jugadores, el staff y las estadísticas del roster completo."
+      },
+      "coaching": {
+        "title": "Coaching",
+        "description": "Muy pronto podrás reservar tu plaza y conocer todos los servicios de coaching, tanto individual como para equipos."
+      },
+      "store": {
+        "title": "Tienda",
+        "description": "Estamos preparando la tienda oficial con camisetas, sudaderas y pegatinas de Crow 6."
+      },
+      "aboutUs": {
+        "title": "Sobre nosotros",
+        "description": "Pronto contaremos la historia de Crow 6 Esports, quiénes somos y lo que nos mueve."
+      }
+    }
   }
 }

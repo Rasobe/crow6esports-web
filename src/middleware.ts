@@ -1,11 +1,14 @@
 import { MAINTENANCE_MODE } from "astro:env/server";
 import { defineMiddleware } from "astro:middleware";
-import { detectLocale, isLocale } from "@/ui/i18n";
+import { PAGES } from "@config/pages";
+import { findPage } from "@/domain/site/page-status";
+import { detectLocale, isLocale, stripLocale } from "@/ui/i18n";
 
 const COMING_SOON_PATH = "/coming-soon";
 const NOT_FOUND_PATH = "/404";
 const FILE_EXTENSION_PATTERN = /\.[^/]+$/;
 const API_PREFIX = "/api/";
+const UNDER_CONSTRUCTION_SEGMENT = "under-construction";
 
 export const onRequest = defineMiddleware((context, next) => {
   const { pathname } = context.url;
@@ -24,6 +27,14 @@ export const onRequest = defineMiddleware((context, next) => {
   const { locale: localeParam } = context.params;
   if (localeParam !== undefined && !isLocale(localeParam)) {
     return context.rewrite(NOT_FOUND_PATH);
+  }
+
+  if (isLocale(firstSegment)) {
+    const page = findPage(PAGES, stripLocale(pathname));
+    if (page?.status === "soon") {
+      context.locals.underConstruction = page.key;
+      return context.rewrite(`/${firstSegment}/${UNDER_CONSTRUCTION_SEGMENT}`);
+    }
   }
 
   return next();

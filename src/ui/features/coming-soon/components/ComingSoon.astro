@@ -2,16 +2,7 @@
 import "./coming-soon.scss";
 import { socialLinks } from "@config/site";
 import { createTranslator } from "@/ui/i18n";
-import { Icon, type IconName } from "@/ui/shared/components";
-
-const SOCIAL_ICONS: Record<(typeof socialLinks)[number]["platform"], IconName> = {
-  x: "x",
-  instagram: "instagram",
-  discord: "discord",
-  twitch: "twitch",
-  tiktok: "tiktok",
-  youtube: "youtube",
-};
+import { Icon } from "@/ui/shared/components";
 
 const t = createTranslator(Astro.locals.locale, "comingSoon");
 ---
@@ -49,7 +40,7 @@ const t = createTranslator(Astro.locals.locale, "comingSoon");
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Icon name={SOCIAL_ICONS[social.platform]} size={20} />
+              <Icon name={social.platform} size={20} />
               <span class="coming-soon__sr-only">
                 {social.label} ({t("newTab")})
               </span>

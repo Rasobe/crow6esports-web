@@ -102,15 +102,6 @@
     color: var(--brand);
   }
 
-  .mobile-menu__locale {
-    padding: var(--space-4) 0;
-    border-bottom: var(--line-subtle);
-  }
-
-  .mobile-menu__locale .locale-switcher {
-    display: flex;
-  }
-
   .mobile-menu__cta {
     display: block;
     margin-top: var(--space-5);

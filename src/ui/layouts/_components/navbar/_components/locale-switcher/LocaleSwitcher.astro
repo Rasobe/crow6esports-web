@@ -4,7 +4,7 @@ import { LOCALES, createTranslator, localizePath, stripLocale } from "@/ui/i18n"
 
 const { locale } = Astro.locals;
 const t = createTranslator(locale, "nav");
-const currentPath = stripLocale(Astro.url.pathname);
+const currentPath = stripLocale(Astro.originPathname);
 ---
 
 <div class="locale-switcher" role="group" aria-label={t("locale_switcher_aria")}>

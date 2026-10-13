@@ -9,7 +9,7 @@ import { MobileMenu } from "./_components/mobile-menu";
 
 const { locale } = Astro.locals;
 const t = createTranslator(locale, "nav");
-const currentPath = stripLocale(Astro.url.pathname);
+const currentPath = stripLocale(Astro.originPathname);
 
 const links = navigationConfig.mainNav.map(({ href, labelKey }) => ({
   href,

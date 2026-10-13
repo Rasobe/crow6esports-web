@@ -1,0 +1,32 @@
+---
+import "./tryouts-banner.scss";
+import { ROUTES } from "@config/routes";
+import { createTranslator } from "@/ui/i18n";
+import { Button, Icon } from "@/ui/shared/components";
+
+const t = createTranslator(Astro.locals.locale, "home.tryoutsBanner");
+---
+
+<section class="tryouts-banner" aria-labelledby="tryouts-banner-title">
+  <span class="tryouts-banner__watermark" aria-hidden="true">
+    {t("watermark")}
+  </span>
+
+  <div class="tryouts-banner__inner">
+    <div class="tryouts-banner__heading">
+      <span class="tryouts-banner__eyebrow">{t("eyebrow")}</span>
+      <h2 id="tryouts-banner-title" class="tryouts-banner__title">
+        <span class="tryouts-banner__title-line">{t("title_line_1")}</span>
+        <span class="tryouts-banner__title-line">{t("title_line_2")}</span>
+      </h2>
+    </div>
+
+    <div class="tryouts-banner__content">
+      <p class="tryouts-banner__description">{t("description")}</p>
+      <Button href={ROUTES.tryouts} size="lg" class="tryouts-banner__cta">
+        {t("cta")}
+        <Icon name="arrow-right" size={18} />
+      </Button>
+    </div>
+  </div>
+</section>

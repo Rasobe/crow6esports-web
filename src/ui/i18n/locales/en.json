@@ -28,8 +28,6 @@
         "sector": "Esports"
       },
       "subtitle": "Competitive Rocket League organization",
-      "eyebrow": "Esports organization",
-      "tagline": "Dominate · Compete · Conquer",
       "cta_team": "Meet the team",
       "cta_join": "Join the team",
       "stats": {
@@ -53,38 +51,33 @@
       "cta_view_more": "Full roster"
     },
     "coachingBanner": {
-      "eyebrow": "Professional training",
-      "title": "Take your game to the next level",
-      "subtitle": "Personalized training to improve your performance in Rocket League in team or individually.",
-      "credibility": "6 years training players with up to 2000+ MMR",
-      "pack_1_title": "Basic Pack",
-      "pack_1_price": "€28/month",
-      "pack_1_description": "Ideal for starting to sharpen your mechanics and in-game decisions.",
-      "pack_1_feature_1": "1 weekly session (60 min)",
-      "pack_1_feature_2": "Feedback on your latest ranked match",
-      "pack_1_feature_3": "Access to the academy Discord",
-      "pack_2_badge": "Most popular",
-      "pack_2_title": "Featured Pack",
-      "pack_2_price": "€55/month",
-      "pack_2_description": "The perfect balance between consistent coaching and price.",
-      "pack_2_feature_1": "2 weekly sessions (60 min)",
-      "pack_2_feature_2": "Personalized replay analysis",
-      "pack_2_feature_3": "Monthly improvement plan",
-      "pack_2_feature_4": "Priority scheduling access",
-      "pack_3_title": "Premium Pack",
-      "pack_3_price": "€78/month",
-      "pack_3_description": "Intensive training for those competing at the highest level.",
-      "pack_3_feature_1": "3 weekly sessions (60 min)",
-      "pack_3_feature_2": "Unlimited VOD analysis",
-      "pack_3_feature_3": "1-on-1 follow-up on Discord",
-      "pack_3_feature_4": "Monthly session with the analyst team",
-      "cta_reserve": "Book a session"
+      "title_lead": "Rank up with the",
+      "title_accent": "Head Coach",
+      "title_tail": "of Crow 6.",
+      "description": "Five years training players and teams. Replay reviews, clear goals every session and a weekly plan that fits your schedule.",
+      "coach_role": "Head Coach",
+      "hours_label": "Hours played",
+      "photo_soon": "Photo coming soon",
+      "progress_label": "Student progress",
+      "progress_start": "Student · start",
+      "progress_current": "Now · MMR",
+      "service_one_to_one_title": "1on1 coaching",
+      "service_one_to_one_description": "Replay and mechanics analysis",
+      "service_teams_title": "Full teams",
+      "service_teams_description": "Synergy, rotations and strategy",
+      "service_weekly_plan_title": "Weekly plan",
+      "service_weekly_plan_description": "Clear goals and daily follow-up",
+      "price_individual": "Solo from",
+      "price_teams": "Teams from",
+      "price_unit": "/ month",
+      "price_before": "Previous price",
+      "schedule": "Mon to Sat · 4:00 pm to 10:00 pm",
+      "cta_reserve": "Book your spot"
     },
     "storeHighlight": {
-      "eyebrow": "The Store",
-      "title": "Wear the Crow6 colors",
-      "subtitle": "Official gear designed for the team and the fans.",
-      "cta_view_more": "View more"
+      "eyebrow": "Official store",
+      "title": "Wear the colors",
+      "cta_view_more": "Go to the store"
     },
     "playerCard": {
       "stat_mmr": "MMR",
@@ -101,9 +94,16 @@
     "productCard": {
       "category_jersey": "Jersey",
       "category_hoodie": "Hoodie",
-      "category_cap": "Cap",
-      "category_accessory": "Accessory",
+      "category_sticker": "Sticker",
       "featured_badge": "Featured"
+    },
+    "tryoutsBanner": {
+      "eyebrow": "Tryouts season 2026",
+      "title_line_1": "Join",
+      "title_line_2": "the flock.",
+      "description": "We are looking for committed players ready to compete. Fill in the form and we will contact you.",
+      "cta": "Apply now",
+      "watermark": "Tryouts"
     }
   },
   "team": {
@@ -130,6 +130,11 @@
     "read_more": "Read more"
   },
   "store": {
+    "meta": {
+      "title": "Store",
+      "description": "Official Crow 6 Esports merchandise: jerseys, hoodies and stickers."
+    },
+    "catalog_label": "Product catalog",
     "title": "Store",
     "eyebrow": "Official merchandise",
     "sold_out": "Sold out",
@@ -278,6 +283,16 @@
         "desc": "We have received your application. We review each application personally. If you fit what we are looking for, we will contact you via Discord within 7 days.",
         "note": "If you do not receive a response within 7 days, your application has not been selected for this call."
       }
+    },
+    "closed": {
+      "label": "Process closed",
+      "eyebrow": "Selection process",
+      "title": "TRYOUTS CLOSED",
+      "subtitle": "",
+      "desc": "Leave us your Discord and we will let you know when the next process opens.",
+      "notify_label": "Leave us your Discord",
+      "notify_placeholder": "Your Discord username",
+      "notify_button": "Notify me"
     }
   },
   "coaching": {
@@ -322,5 +337,30 @@
     "newTab": "opens in a new tab",
     "meta": "Since 2020 · Huesca, Spain · Rocket League",
     "hashtag": "#GoCrows"
+  },
+  "underConstruction": {
+    "eyebrow": "Under construction",
+    "back_home": "Back to home",
+    "follow_us": "In the meantime, follow us",
+    "socials_label": "Social media",
+    "new_tab": "opens in a new tab",
+    "pages": {
+      "team": {
+        "title": "Roster",
+        "description": "We are building the new roster page, with the players, the staff and the stats of the full team."
+      },
+      "coaching": {
+        "title": "Coaching",
+        "description": "Very soon you will be able to book your spot and discover every coaching service, for individuals and for teams."
+      },
+      "store": {
+        "title": "Store",
+        "description": "We are getting the official store ready with Crow 6 jerseys, hoodies and stickers."
+      },
+      "aboutUs": {
+        "title": "About us",
+        "description": "Soon we will tell the story of Crow 6 Esports, who we are and what drives us."
+      }
+    }
   }
 }

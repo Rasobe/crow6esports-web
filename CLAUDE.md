@@ -48,7 +48,7 @@ Rutas bajo `src/pages/[locale]/…` con locales `es` (default) y `en`. `src/midd
 ### Alias de imports (tsconfig paths)
 
 - `@/*` → `src/*`
-- `@config/*` → `config/*` (config de negocio: `site.ts`, `routes.ts`, `navigation.ts`, `stats.ts`)
+- `@config/*` → `config/*` (config de negocio: `site.ts`, `routes.ts`, `navigation.ts`, `stats.ts`, `coaching.ts`, `pages.ts`)
 - `@content/*` → `content/*` (datos estáticos: `players.json`, `stock.json`, MDX de noticias)
 
 ### Componentes
@@ -58,6 +58,10 @@ Rutas bajo `src/pages/[locale]/…` con locales `es` (default) y `en`. `src/midd
 - Subcomponentes privados en `_components/`.
 - JS de cliente solo cuando hace falta: custom element con `<script>` para cosas simples (ver `MobileMenu.astro`) o isla React (`client:load`) para formularios complejos (ver `ui/features/tryouts`). Las islas no pueden importar componentes `.astro` ni el barrel `ui/shared/components`: importa los `.tsx` directamente. Reciben sus textos como prop (`getMessages(locale, namespace)` + `createMessageTranslator`).
 - `Button`, `CTAButton` y `PlayerCard` leen el locale de `Astro.locals`: no hace falta pasarlo por props.
+
+### Estado de las páginas
+
+`config/pages.ts` define si cada ruta está `live` o `soon`. El middleware reescribe las rutas en `soon` (y sus subrutas) a `src/pages/[locale]/under-construction.astro`, que muestra el aviso "en construcción" con `noindex`; el sitemap solo incluye las `live`. La URL no cambia y la implementación de la página se conserva, así que publicar una página es cambiar su estado a `live`. Hoy están en `soon` plantilla, coaching, tienda y sobre nosotros; `coaching` y `about-us` aún no tienen contenido propio. Dentro de componentes usa `Astro.originPathname` (no `Astro.url.pathname`) para conocer la ruta pedida, porque tras un `rewrite` la segunda apunta a la ruta interna.
 
 ### Contenido como fuente de verdad
 

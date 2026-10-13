@@ -1,0 +1,55 @@
+---
+import "./under-construction.scss";
+import type { PageKey } from "@config/pages";
+import { ROUTES } from "@config/routes";
+import { socialLinks } from "@config/site";
+import { createTranslator } from "@/ui/i18n";
+import { Button, Icon } from "@/ui/shared/components";
+
+interface Props {
+  pageKey: PageKey;
+}
+
+const { pageKey } = Astro.props;
+const { locale } = Astro.locals;
+const t = createTranslator(locale, "underConstruction");
+const tPage = createTranslator(locale, `underConstruction.pages.${pageKey}`);
+---
+
+<section class="under-construction" aria-labelledby="under-construction-title">
+  <div class="under-construction__inner">
+    <span class="under-construction__badge">{t("eyebrow")}</span>
+
+    <h1 id="under-construction-title" class="under-construction__title">
+      {tPage("title")}
+    </h1>
+    <p class="under-construction__description">{tPage("description")}</p>
+
+    <div class="under-construction__actions">
+      <Button href={ROUTES.home} size="lg">
+        {t("back_home")}
+      </Button>
+    </div>
+
+    <div class="under-construction__follow">
+      <p class="under-construction__follow-label">{t("follow_us")}</p>
+      <ul class="under-construction__socials" aria-label={t("socials_label")}>
+        {socialLinks.map(({ platform, href, label }) => (
+          <li>
+            <a
+              class="under-construction__social"
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Icon name={platform} size={20} />
+              <span class="under-construction__sr-only">
+                {label} ({t("new_tab")})
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>

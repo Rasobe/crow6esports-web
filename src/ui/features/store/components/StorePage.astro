@@ -1,0 +1,25 @@
+---
+import "./store-page.scss";
+import { getProducts } from "@/application/store/get-products";
+import { container } from "@/infrastructure/container";
+import { createTranslator } from "@/ui/i18n";
+import { PageHeader } from "@/ui/shared/components";
+import ProductCard from "./ProductCard.astro";
+
+const t = createTranslator(Astro.locals.locale, "store");
+const products = getProducts(container.productRepository);
+---
+
+<PageHeader eyebrow={t("eyebrow")} title={t("title")} description={t("meta.description")} />
+
+<section class="store-catalog" aria-label={t("catalog_label")}>
+  <div class="store-catalog__inner">
+    <ul class="store-catalog__grid">
+      {products.map((product) => (
+        <li class="store-catalog__item">
+          <ProductCard product={product} />
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

@@ -15,7 +15,7 @@ interface Props {
 const { links } = Astro.props;
 const { locale } = Astro.locals;
 const t = createTranslator(locale, "nav");
-const currentPath = stripLocale(Astro.url.pathname);
+const currentPath = stripLocale(Astro.originPathname);
 ---
 
 <mobile-menu>

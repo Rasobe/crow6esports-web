@@ -5,6 +5,7 @@ import { CoachingBanner } from "./coaching-banner";
 import { HeroSection } from "./hero-section";
 import { StoreHighlight } from "./store-highlight";
 import { TeamHighlight } from "./team-highlight";
+import { TryoutsBanner } from "./tryouts-banner";
 
 const t = createTranslator(Astro.locals.locale, "home.ticker");
 const tickerItems = [t("roster"), t("tryouts")];
@@ -15,3 +16,4 @@ const tickerItems = [t("roster"), t("tryouts")];
 <TeamHighlight />
 <CoachingBanner />
 <StoreHighlight />
+<TryoutsBanner />

@@ -5,51 +5,28 @@
     position: relative;
     padding: var(--section-py) 0;
     overflow: hidden;
+    background: var(--bg-surface);
+    border-top: var(--line-subtle);
   }
 
   .store-highlight__inner {
     @include container;
     display: flex;
     flex-direction: column;
-    gap: var(--space-14);
+    gap: var(--space-12);
   }
 
-  /* ─── Cards grid (centered, doesn't stretch with few items) ─── */
   .store-highlight__grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 320px));
-    justify-content: center;
-    gap: var(--space-5);
+    @include joined-grid(15rem);
   }
 
-  .store-highlight__footer {
-    display: flex;
-    justify-content: flex-end;
-  }
-
-  /* ─── Responsive ─── */
   @include below(sm) {
     .store-highlight__inner {
-      gap: var(--space-9);
+      gap: var(--space-8);
     }
 
     .store-highlight__grid {
-      display: flex;
-      flex-wrap: nowrap;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      scrollbar-width: none;
-      -webkit-overflow-scrolling: touch;
-
-      &::-webkit-scrollbar {
-        display: none;
-      }
-
-      > * {
-        flex: 0 0 75%;
-        max-width: 280px;
-        scroll-snap-align: start;
-      }
+      @include snap-scroller;
     }
   }
 }

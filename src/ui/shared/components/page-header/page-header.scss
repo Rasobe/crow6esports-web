@@ -92,34 +92,6 @@
     line-height: 1.7;
   }
 
-  .page-header__meta {
-    display: flex;
-    align-items: center;
-    gap: var(--space-5);
-    margin-top: var(--space-1);
-  }
-
-  .page-header__meta-item {
-    font-family: var(--ff-ui);
-    font-size: var(--fs-2xs);
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    display: flex;
-    align-items: center;
-    gap: var(--space-1-5);
-
-    &::before {
-      content: "";
-      display: block;
-      width: 4px;
-      height: 4px;
-      background: var(--brand);
-      @include angular-cut(2px);
-    }
-  }
-
   @include below(sm) {
     .page-header {
       padding: var(--space-12) 0 var(--space-10);
