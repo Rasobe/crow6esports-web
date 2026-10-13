@@ -1,19 +1,19 @@
 [
   {
-    "id": "blazeon",
-    "nickname": "Blazeon",
-    "realName": "Raúl",
-    "birthYear": 2000,
+    "id": "diaxz",
+    "nickname": "Diaxz",
+    "realName": "Aleix",
+    "birthYear": 2005,
     "anonymous": false,
     "country": "ES",
     "type": "player",
     "status": "active",
     "game": "rocket-league",
-    "joinedYear": 2023,
+    "joinedYear": 2025,
     "stats": {
-      "mmr": 1847,
-      "peak": 1900,
-      "rank": "Grand Champion IF"
+      "mmr": 1721,
+      "peak": 1932,
+      "rank": "Supersonic Legend"
     },
     "socials": {
       "twitter": "https://x.com/blazeon_rl",
@@ -21,13 +21,13 @@
       "twitch": "https://twitch.tv/blazeon_rl",
       "tiktok": null,
       "youtube": null,
-      "rltracker": "https://rocketleague.tracker.network/rocket-league/profile/epic/Blazeon/overview"
+      "rltracker": "https://rocketleague.tracker.network/rocket-league/profile/steam/76561198128479304/overview"
     },
     "image": null
   },
   {
-    "id": "vortex",
-    "nickname": "Vortex",
+    "id": "94s",
+    "nickname": "94s",
     "realName": "Adrián",
     "birthYear": 2002,
     "anonymous": false,
@@ -52,8 +52,8 @@
     "image": null
   },
   {
-    "id": "nxvak",
-    "nickname": "Nxvak",
+    "id": "k94",
+    "nickname": "K94",
     "realName": "Marcos",
     "birthYear": 2003,
     "anonymous": false,
@@ -78,8 +78,8 @@
     "image": null
   },
   {
-    "id": "eclipse",
-    "nickname": "Eclipse",
+    "id": "blackito",
+    "nickname": "Blackito",
     "realName": "David",
     "birthYear": 2001,
     "anonymous": false,
