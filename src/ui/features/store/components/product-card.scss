@@ -7,8 +7,8 @@
     background: var(--bg-surface);
     border: 2px solid var(--border-subtle);
     transition:
-      transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
-      border-color 0.25s ease;
+      transform var(--duration-slow) var(--ease-spring),
+      border-color var(--duration-base) var(--ease-standard);
 
     &:hover {
       transform: translateY(-6px);
@@ -40,7 +40,7 @@
     height: 100%;
     object-fit: contain;
     object-position: center;
-    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: transform var(--duration-slower) var(--ease-smooth);
   }
 
   .product-card__no-image {
@@ -53,7 +53,7 @@
   }
 
   .product-card__no-image-icon {
-    font-family: var(--font-display), sans-serif;
+    font-family: var(--ff-display);
     font-size: 6rem;
     color: var(--border-strong);
     line-height: 1;
@@ -68,53 +68,53 @@
     z-index: 2;
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: var(--space-1-5);
     flex-wrap: wrap;
   }
 
   .product-card__category {
-    font-family: var(--font-ui), sans-serif;
-    font-size: 0.72rem;
+    font-family: var(--ff-ui);
+    font-size: var(--fs-xs);
     font-weight: 700;
-    letter-spacing: 0.16em;
+    letter-spacing: var(--tracking-wider);
     text-transform: uppercase;
     color: var(--text-muted);
     background: var(--bg-overlay);
-    border: 1px solid var(--border-subtle);
-    padding: 4px 10px;
+    border: var(--line-subtle);
+    padding: var(--space-1) 10px;
     backdrop-filter: blur(8px);
   }
 
   .product-card__featured {
-    font-family: var(--font-ui), sans-serif;
-    font-size: 0.72rem;
+    font-family: var(--ff-ui);
+    font-size: var(--fs-xs);
     font-weight: 700;
-    letter-spacing: 0.16em;
+    letter-spacing: var(--tracking-wider);
     text-transform: uppercase;
     color: var(--brand-fg);
     background: var(--brand);
-    padding: 4px 10px;
+    padding: var(--space-1) 10px;
   }
 
   .product-card__body {
     display: flex;
     flex-direction: column;
-    gap: 6px;
-    padding: 16px;
+    gap: var(--space-1-5);
+    padding: var(--space-4);
   }
 
   .product-card__name {
-    font-family: var(--font-display), sans-serif;
-    font-size: 1.25rem;
+    font-family: var(--ff-display);
+    font-size: var(--fs-xl);
     font-weight: 700;
-    letter-spacing: 0.02em;
+    letter-spacing: var(--tracking-tight);
     color: var(--text-primary);
     text-transform: uppercase;
   }
 
   .product-card__price {
-    font-family: var(--font-ui), sans-serif;
-    font-size: 1.125rem;
+    font-family: var(--ff-ui);
+    font-size: var(--fs-lg);
     font-weight: 700;
     color: var(--brand);
   }

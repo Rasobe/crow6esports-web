@@ -1,4 +1,5 @@
 @use "styles/layers";
+@use "styles/mixins" as *;
 @layer components {
   .hero {
     position: relative;
@@ -28,7 +29,7 @@
         color-mix(in srgb, var(--bg-base) 62%, transparent)
       );
 
-    @media (min-width: 48rem) {
+    @include above(md) {
       background:
         linear-gradient(to top, var(--bg-base) 0%, transparent 30%),
         linear-gradient(
@@ -43,19 +44,18 @@
   .hero__inner {
     position: relative;
     width: 100%;
-    max-width: var(--container);
-    margin-inline: auto;
-    padding: 2rem 1.5rem;
+    @include container-bounds;
+    padding: var(--space-8) var(--space-6);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 3rem;
+    gap: var(--space-12);
   }
 
   .hero__content {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: var(--space-6);
     margin-block: auto;
   }
 
@@ -89,17 +89,17 @@
   .hero__ctas {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem;
+    gap: var(--space-3);
   }
 
   .hero__stats {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-    border-top: 1px solid var(--border-strong);
-    padding-top: 2rem;
+    gap: var(--space-6);
+    border-top: var(--line-strong);
+    padding-top: var(--space-8);
 
-    @media (min-width: 48rem) {
+    @include above(md) {
       grid-template-columns: repeat(4, 1fr);
     }
   }
@@ -107,11 +107,11 @@
   .hero__stat {
     display: flex;
     flex-direction: column-reverse;
-    gap: 0.25rem;
+    gap: var(--space-1);
   }
 
   .hero__stat-value {
-    font-family: var(--font-display), sans-serif;
+    font-family: var(--ff-display);
     font-size: clamp(2.5rem, 6vw, 3.5rem);
     line-height: 1;
     font-weight: 700;
@@ -123,9 +123,9 @@
   }
 
   .hero__stat-label {
-    font-size: 0.875rem;
+    font-size: var(--fs-md);
     font-weight: 700;
-    letter-spacing: 0.08em;
+    letter-spacing: var(--tracking-normal);
     text-transform: uppercase;
     color: var(--text-secondary);
   }

@@ -1,18 +1,17 @@
 @use "styles/layers";
+@use "styles/mixins" as *;
 @layer components {
   .team-highlight {
     position: relative;
-    padding: 100px 0;
+    padding: var(--section-py) 0;
     overflow: hidden;
   }
 
   .team-highlight__inner {
-    max-width: var(--container);
-    margin-inline: auto;
-    padding-inline: 1.5rem;
+    @include container;
     display: flex;
     flex-direction: column;
-    gap: 48px;
+    gap: var(--space-12);
   }
 
   .team-highlight__header {
@@ -20,13 +19,13 @@
     flex-wrap: wrap;
     align-items: flex-end;
     justify-content: space-between;
-    gap: 1.5rem;
+    gap: var(--space-6);
   }
 
   .team-highlight__heading {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: var(--space-4);
   }
 
   .team-highlight__title {
@@ -43,16 +42,16 @@
   }
 
   .team-highlight__link {
-    padding-bottom: 0.5rem;
-    font-family: var(--font-ui), sans-serif;
-    font-size: 0.875rem;
+    padding-bottom: var(--space-2);
+    font-family: var(--ff-ui);
+    font-size: var(--fs-md);
     font-weight: 700;
-    letter-spacing: 0.2em;
+    letter-spacing: var(--tracking-widest);
     text-transform: uppercase;
     text-decoration: none;
     color: var(--text-primary);
     border-bottom: 2px solid var(--brand);
-    transition: color 0.2s ease;
+    transition: color var(--duration-base) var(--ease-standard);
 
     &:hover {
       color: var(--brand);
@@ -74,13 +73,9 @@
     }
   }
 
-  @media (max-width: 640px) {
-    .team-highlight {
-      padding: 64px 0;
-    }
-
+  @include below(sm) {
     .team-highlight__inner {
-      gap: 32px;
+      gap: var(--space-8);
     }
 
     .team-highlight__grid {

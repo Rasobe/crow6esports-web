@@ -8,8 +8,8 @@
   h4,
   h5,
   h6 {
-    font-family: var(--font-display), sans-serif;
-    letter-spacing: 0.04em;
+    font-family: var(--ff-display);
+    letter-spacing: var(--tracking-display);
     line-height: 1;
   }
 }
@@ -25,10 +25,10 @@ th,
 }
 
 .eyebrow {
-  font-family: var(--font-ui), sans-serif;
-  font-size: 0.7rem;
+  font-family: var(--ff-ui);
+  font-size: var(--fs-xs);
   font-weight: 600;
-  letter-spacing: 0.3em;
+  letter-spacing: var(--tracking-ultra);
   text-transform: uppercase;
   color: var(--brand);
 }
@@ -36,10 +36,10 @@ th,
 .section-label {
   display: inline-flex;
   align-items: center;
-  font-family: var(--font-ui), sans-serif;
-  font-size: 0.75rem;
+  font-family: var(--ff-ui);
+  font-size: var(--fs-xs);
   font-weight: 700;
-  letter-spacing: 0.25em;
+  letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
   color: var(--brand);
 }
