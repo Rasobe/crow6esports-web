@@ -1,25 +1,25 @@
 @use "styles/layers";
+@use "styles/mixins" as *;
 @layer components {
   .tryouts-form {
     display: flex;
     flex-direction: column;
-    gap: 32px;
+    gap: var(--space-8);
     width: 100%;
-    max-width: var(--container);
-    margin-inline: auto;
-    padding: 32px 0;
+    @include container-bounds;
+    padding: var(--space-8) 0;
   }
 
-  @media only screen and (max-width: 1340px) {
+  @include below(container) {
     .tryouts-form {
-      padding: 32px;
+      padding: var(--space-8);
     }
   }
 
   // ── Barra de progreso ──
   .tryouts-progress {
     display: flex;
-    gap: 6px;
+    gap: var(--space-1-5);
     align-items: stretch;
   }
 
@@ -27,16 +27,16 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: var(--space-1-5);
   }
 
   .tryouts-progress__label {
-    font-size: 0.7rem;
+    font-size: var(--fs-xs);
     font-weight: 600;
-    letter-spacing: 0.05em;
+    letter-spacing: var(--tracking-snug);
     text-transform: uppercase;
     color: var(--text-muted);
-    transition: color 0.3s ease;
+    transition: color var(--duration-slow) var(--ease-standard);
 
     .tryouts-progress__step--active & {
       color: var(--brand);
@@ -50,7 +50,7 @@
   .tryouts-progress__bar {
     height: 3px;
     background: var(--border-subtle);
-    transition: background 0.3s ease;
+    transition: background var(--duration-slow) var(--ease-standard);
 
     .tryouts-progress__step--active & {
       background: var(--brand);
@@ -66,7 +66,7 @@
   .tryouts-step {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: var(--space-5);
   }
 
   // ── Step animation ──
@@ -82,14 +82,14 @@
   }
 
   .tryouts-step-wrapper {
-    animation: step-in 0.25s ease forwards;
+    animation: step-in var(--duration-base) var(--ease-standard) forwards;
   }
 
   .tryouts-form__error {
-    padding: 12px 16px;
-    border-left: 2px solid #ef4444;
-    background: rgba(239, 68, 68, 0.08);
-    font-size: 0.875rem;
+    padding: var(--space-3) var(--space-4);
+    border-left: 2px solid var(--danger);
+    background: var(--danger-bg-subtle);
+    font-size: var(--fs-md);
     color: var(--text-primary);
   }
 
@@ -97,16 +97,16 @@
   .tryouts-form__nav {
     display: flex;
     justify-content: flex-end;
-    gap: 12px;
-    padding-top: 8px;
+    gap: var(--space-3);
+    padding-top: var(--space-2);
   }
 
   .tryouts-step__row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 16px;
+    gap: var(--space-4);
 
-    @media (max-width: 640px) {
+    @include below(sm) {
       grid-template-columns: 1fr;
     }
   }

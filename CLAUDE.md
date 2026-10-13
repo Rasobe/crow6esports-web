@@ -65,7 +65,11 @@ No hay base de datos. `content/players.json` y `content/stock.json` son los dato
 
 ### Estilos
 
-SCSS por componente + tokens CSS globales en `src/styles/` (`_tokens`, `_reset`, `_typography`, `_scrollbar`, `_utilities`), importados desde `src/styles/global.scss`. Orden de capas: `@layer base, components` (`_layers.scss`); los estilos de componente van dentro de `@layer components`. No hay Tailwind. Identidad visual: alto contraste, anguloso, sin border-radius generoso; botones con `clip-path` diagonal. Fuentes vía la Fonts API de Astro (`--font-display`, `--font-ui`, `--font-body`).
+SCSS por componente + tokens CSS globales en `src/styles/` (`_tokens`, `_reset`, `_typography`, `_scrollbar`, `_utilities`), importados desde `src/styles/global.scss`. Orden de capas: `@layer base, components` (`_layers.scss`); los estilos de componente van dentro de `@layer components`. No hay Tailwind.
+
+**Tokens y mixins (única fuente de verdad):** `src/styles/_tokens.scss` define colores (incluidos los canales `--brand-rgb`, `--white-rgb`, `--bg-base-rgb`, `--danger-rgb` para componer alfas con `rgb(var(--brand-rgb) / 0.2)`), estados, familias (`--ff-*`), tamaños (`--fs-*`), tracking (`--tracking-*`), espaciado (`--space-*`), líneas (`--line*`), capas (`--z-*`), movimiento (`--duration-*`, `--ease-*`) y layout (`--gutter`, `--section-py`). `src/styles/_mixins.scss` aporta `below()/above()` para breakpoints (en rem), `container` y `angular-cut()`. Importar con `@use "styles/mixins" as *;`. Los componentes no declaran colores, tamaños, tiempos ni capas globales a mano: si falta un valor, se añade el token primero. Valores puntuales (marcas de agua decorativas, ópticos) pueden quedar locales.
+
+Identidad visual: alto contraste, anguloso, sin border-radius generoso; botones con `clip-path` diagonal. Fuentes vía la Fonts API de Astro (`--font-display`, `--font-ui`, `--font-body`).
 
 ### Integraciones externas
 

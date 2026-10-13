@@ -40,16 +40,16 @@
   .news-ticker__item {
     display: inline-flex;
     align-items: center;
-    padding-block: 0.75rem;
-    font-family: var(--font-display), sans-serif;
-    font-size: 1.125rem;
-    letter-spacing: 0.12em;
+    padding-block: var(--space-3);
+    font-family: var(--ff-display);
+    font-size: var(--fs-lg);
+    letter-spacing: var(--tracking-wide);
     text-transform: uppercase;
     white-space: nowrap;
 
     &::after {
       content: "/";
-      padding-inline: 1.5rem;
+      padding-inline: var(--gutter);
       opacity: 0.55;
     }
   }

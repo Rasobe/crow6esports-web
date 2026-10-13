@@ -1,4 +1,5 @@
 @use "styles/layers";
+@use "styles/mixins" as *;
 @layer components {
   .tryouts-closed {
     position: relative;
@@ -7,7 +8,7 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    padding: 80px 24px;
+    padding: var(--space-20) var(--space-6);
 
     // Glow de fondo
     &::before {
@@ -18,7 +19,7 @@
       transform: translate(-50%, -50%);
       width: 600px;
       height: 400px;
-      background: radial-gradient(ellipse, rgba(245, 184, 0, 0.05) 0%, transparent 70%);
+      background: radial-gradient(ellipse, rgb(var(--brand-rgb) / 0.05) 0%, transparent 70%);
       pointer-events: none;
     }
   }
@@ -29,7 +30,7 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 20px;
+    gap: var(--space-5);
     max-width: 480px;
     width: 100%;
   }
@@ -41,10 +42,10 @@
     justify-content: center;
     width: 64px;
     height: 64px;
-    background: rgba(245, 184, 0, 0.06);
-    border: 1px solid rgba(245, 184, 0, 0.2);
+    background: var(--brand-wash);
+    border: 1px solid rgb(var(--brand-rgb) / 0.2);
     color: var(--brand);
-    margin-bottom: 8px;
+    margin-bottom: var(--space-2);
 
     svg {
       width: 28px;
@@ -54,8 +55,8 @@
 
   // Descripción
   .tryouts-closed__desc {
-    font-family: var(--font-body), sans-serif;
-    font-size: 15px;
+    font-family: var(--ff-body);
+    font-size: var(--fs-body);
     color: var(--text-secondary);
     line-height: 1.7;
     max-width: 400px;
@@ -64,9 +65,9 @@
   // Fila de notificación
   .tryouts-closed__notify {
     display: flex;
-    gap: 8px;
+    gap: var(--space-2);
     width: 100%;
-    margin-top: 8px;
+    margin-top: var(--space-2);
 
     // El TextField ocupa todo el espacio disponible
     .text-field {
@@ -88,7 +89,7 @@
     }
   }
 
-  @media (max-width: 480px) {
+  @include below(xs) {
     .tryouts-closed__notify {
       flex-direction: column;
     }

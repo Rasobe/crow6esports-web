@@ -7,19 +7,19 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
-    font-family: var(--font-ui), sans-serif;
+    gap: var(--space-2);
+    font-family: var(--ff-ui);
     font-weight: 700;
-    letter-spacing: 0.12em;
+    letter-spacing: var(--tracking-wide);
     text-transform: uppercase;
     text-decoration: none;
     border: 1.5px solid transparent;
     cursor: pointer;
     white-space: nowrap;
     transition:
-      background 0.15s ease,
-      border-color 0.15s ease,
-      color 0.15s ease;
+      background var(--duration-fast) var(--ease-standard),
+      border-color var(--duration-fast) var(--ease-standard),
+      color var(--duration-fast) var(--ease-standard);
 
     &:disabled {
       cursor: not-allowed;
@@ -34,18 +34,18 @@
 
   // ── Sizes ──────────────────────────────────
   .btn--sm {
-    font-size: 0.75rem;
-    padding: 0.5rem 1.25rem;
+    font-size: var(--fs-xs);
+    padding: var(--space-2) var(--space-5);
   }
 
   .btn--md {
-    font-size: 0.8125rem;
-    padding: 0.75rem 2rem;
+    font-size: var(--fs-sm);
+    padding: var(--space-3) var(--space-8);
   }
 
   .btn--lg {
-    font-size: 0.875rem;
-    padding: 1rem 2.5rem;
+    font-size: var(--fs-md);
+    padding: var(--space-4) var(--space-10);
   }
 
   // ── Variants ───────────────────────────────
@@ -68,18 +68,18 @@
 
     &:hover {
       border-color: var(--brand);
-      background: rgba(245, 184, 0, 0.08);
+      background: var(--brand-tint);
     }
   }
 
   // Borde blanco semitransparente — para fondos oscuros
   .btn--ghost {
     background: transparent;
-    color: rgba(255, 255, 255, 0.6);
-    border-color: rgba(255, 255, 255, 0.15);
+    color: rgb(var(--white-rgb) / 0.6);
+    border-color: var(--border-soft);
 
     &:hover {
-      border-color: rgba(255, 255, 255, 0.4);
+      border-color: var(--border-hover);
       color: var(--text-primary);
     }
   }

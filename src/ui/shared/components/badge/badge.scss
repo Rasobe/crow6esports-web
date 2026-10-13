@@ -3,37 +3,37 @@
   .badge {
     display: inline-flex;
     align-items: center;
-    border-radius: 9999px;
-    padding: 0.125rem 0.625rem;
-    font-family: var(--font-ui), sans-serif;
-    font-size: 0.75rem;
+    border-radius: var(--radius-pill);
+    padding: 0.125rem var(--space-2-5);
+    font-family: var(--ff-ui);
+    font-size: var(--fs-xs);
     font-weight: 600;
-    letter-spacing: 0.05em;
+    letter-spacing: var(--tracking-snug);
     text-transform: uppercase;
   }
 
   .badge--default {
-    background: rgba(255, 255, 255, 0.08);
+    background: rgb(var(--white-rgb) / 0.08);
     color: var(--text-secondary);
   }
 
   .badge--brand {
-    background: rgba(245, 184, 0, 0.15);
+    background: rgb(var(--brand-rgb) / 0.15);
     color: var(--brand);
   }
 
   .badge--success {
-    background: rgba(52, 211, 153, 0.15);
-    color: #6ee7b7;
+    background: var(--success-bg);
+    color: var(--success);
   }
 
   .badge--warning {
-    background: rgba(251, 191, 36, 0.15);
-    color: #fcd34d;
+    background: var(--warning-bg);
+    color: var(--warning);
   }
 
   .badge--danger {
-    background: rgba(239, 68, 68, 0.15);
-    color: #fca5a5;
+    background: var(--danger-bg);
+    color: var(--danger-soft);
   }
 }

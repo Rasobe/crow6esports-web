@@ -3,26 +3,26 @@
   .select-field {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: var(--space-1-5);
     width: 100%;
   }
 
   // ── Label ──
   .select-field__label {
-    font-family: var(--font-ui), sans-serif;
-    font-size: 0.6875rem;
+    font-family: var(--ff-ui);
+    font-size: var(--fs-2xs);
     font-weight: 700;
-    letter-spacing: 0.15em;
+    letter-spacing: var(--tracking-wider);
     text-transform: uppercase;
     color: var(--text-secondary);
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: var(--space-1);
   }
 
   .select-field__required {
     color: var(--brand);
-    font-size: 0.75rem;
+    font-size: var(--fs-xs);
   }
 
   // ── Wrapper ──
@@ -38,16 +38,16 @@
     appearance: none;
     -webkit-appearance: none;
     background: var(--bg-surface);
-    border: 1px solid var(--border-subtle);
+    border: var(--line-subtle);
     color: var(--text-primary);
-    font-family: var(--font-body), sans-serif;
-    font-size: 0.9375rem;
+    font-family: var(--ff-body);
+    font-size: var(--fs-body);
     line-height: 1.5;
     outline: none;
     cursor: pointer;
     transition:
-      border-color 0.2s ease,
-      background 0.2s ease;
+      border-color var(--duration-base) var(--ease-standard),
+      background var(--duration-base) var(--ease-standard);
 
     // Quita el fondo por defecto en las opciones
     option {
@@ -56,7 +56,7 @@
     }
 
     &:hover:not(:disabled) {
-      border-color: rgba(255, 255, 255, 0.15);
+      border-color: var(--border-soft);
     }
 
     &:focus {
@@ -78,7 +78,7 @@
     align-items: center;
     color: var(--text-muted);
     pointer-events: none;
-    transition: color 0.2s ease;
+    transition: color var(--duration-base) var(--ease-standard);
   }
 
   .select-field__wrapper:has(.select-field__input:focus) .select-field__chevron {
@@ -87,29 +87,29 @@
 
   // ── Hint ──
   .select-field__hint {
-    font-family: var(--font-body), sans-serif;
-    font-size: 0.75rem;
+    font-family: var(--ff-body);
+    font-size: var(--fs-xs);
     color: var(--text-muted);
     line-height: 1.4;
   }
 
   // ── Error ──
   .select-field__error {
-    font-family: var(--font-ui), sans-serif;
-    font-size: 0.75rem;
+    font-family: var(--ff-ui);
+    font-size: var(--fs-xs);
     font-weight: 600;
-    letter-spacing: 0.05em;
-    color: #ef4444;
+    letter-spacing: var(--tracking-snug);
+    color: var(--danger);
     line-height: 1.4;
   }
 
   // ── Estado error ──
   .select-field--error {
     .select-field__input {
-      border-color: #ef4444;
+      border-color: var(--danger);
 
       &:focus {
-        border-color: #ef4444;
+        border-color: var(--danger);
       }
     }
   }
@@ -123,17 +123,17 @@
 
   // ── Tamaños ──
   .select-field--sm .select-field__input {
-    padding: 8px 36px 8px 12px;
-    font-size: 0.8125rem;
+    padding: var(--space-2) 36px var(--space-2) var(--space-3);
+    font-size: var(--fs-sm);
   }
 
   .select-field--md .select-field__input {
-    padding: 10px 40px 10px 14px;
-    font-size: 0.9375rem;
+    padding: 10px var(--space-10) 10px 14px;
+    font-size: var(--fs-body);
   }
 
   .select-field--lg .select-field__input {
-    padding: 14px 44px 14px 16px;
-    font-size: 1rem;
+    padding: 14px 44px 14px var(--space-4);
+    font-size: var(--fs-base);
   }
 }

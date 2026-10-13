@@ -1,0 +1,39 @@
+@use "sass:map";
+
+/* Breakpoints en rem: respetan el tamaño de fuente que elige el usuario.
+   Las media queries no admiten custom properties, por eso viven en Sass. */
+$breakpoints: (
+  xs: 30rem,
+  sm: 40rem,
+  md: 48rem,
+  container: 83.75rem,
+);
+
+@mixin below($name) {
+  @media (max-width: map.get($breakpoints, $name)) {
+    @content;
+  }
+}
+
+@mixin above($name) {
+  @media (min-width: map.get($breakpoints, $name)) {
+    @content;
+  }
+}
+
+/* Ancho máximo centrado del sitio */
+@mixin container-bounds {
+  max-width: var(--container);
+  margin-inline: auto;
+}
+
+/* Ancho máximo centrado con el gutter lateral estándar */
+@mixin container {
+  @include container-bounds;
+  padding-inline: var(--gutter);
+}
+
+/* Corte diagonal de la identidad visual (botones, badges, pestañas) */
+@mixin angular-cut($cut) {
+  clip-path: polygon($cut 0%, 100% 0%, calc(100% - #{$cut}) 100%, 0% 100%);
+}
