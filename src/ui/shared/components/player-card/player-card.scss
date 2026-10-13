@@ -7,6 +7,7 @@
     flex-direction: column;
     width: 100%;
     min-width: 0;
+    container-type: inline-size;
     background: var(--bg-base);
     border: var(--line-subtle);
 
@@ -145,7 +146,7 @@
   .player-card__stats {
     display: grid;
     grid-auto-flow: column;
-    grid-auto-columns: 1fr;
+    grid-auto-columns: minmax(0, 1fr);
     margin-top: auto;
     border-top: var(--line-subtle);
     border-bottom: var(--line-subtle);
@@ -155,7 +156,7 @@
     display: flex;
     flex-direction: column-reverse;
     gap: var(--space-1);
-    padding: 0.875rem var(--space-5);
+    padding: 0.875rem clamp(var(--space-2), 6.5cqw, var(--space-5));
 
     & + & {
       border-left: var(--line-subtle);
@@ -164,7 +165,7 @@
 
   .player-card__stat-value {
     font-family: var(--ff-display);
-    font-size: var(--fs-2xl);
+    font-size: clamp(1.4rem, 9.1cqw, var(--fs-2xl));
     font-weight: 700;
     line-height: 1;
     letter-spacing: var(--tracking-tight);
@@ -172,7 +173,7 @@
   }
 
   .player-card__stat--primary .player-card__stat-value {
-    font-size: 2.1rem;
+    font-size: clamp(1.6rem, 11cqw, 2.1rem);
     color: var(--brand);
   }
 
