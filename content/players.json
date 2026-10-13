@@ -35,10 +35,10 @@
     "type": "player",
     "status": "active",
     "game": "rocket-league",
-    "joinedYear": 2024,
+    "joinedYear": 2026,
     "stats": {
-      "mmr": 1792,
-      "peak": 1855,
+      "mmr": 1710,
+      "peak": 1922,
       "rank": "Supersonic Legend"
     },
     "socials": {
@@ -47,7 +47,7 @@
       "twitch": null,
       "tiktok": null,
       "youtube": null,
-      "rltracker": "https://rocketleague.tracker.network/rocket-league/profile/epic/Vortex/overview"
+      "rltracker": "https://rocketleague.tracker.network/rocket-league/profile/epic/94s%C7%83/overview"
     },
     "image": null
   },
@@ -61,11 +61,11 @@
     "type": "player",
     "status": "active",
     "game": "rocket-league",
-    "joinedYear": 2024,
+    "joinedYear": 2026,
     "stats": {
       "mmr": 1645,
       "peak": 1926,
-      "rank": "Grand Champion I"
+      "rank": "Supersonic Legend"
     },
     "socials": {
       "twitter": "https://x.com/Pychake",
