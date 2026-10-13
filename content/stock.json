@@ -6,7 +6,7 @@
     "description": "Jersey oficial de la temporada 2025. Tejido técnico transpirable.",
     "price": 59.99,
     "currency": "EUR",
-    "images": ["/images/store/jersey-front.png", "/images/store/jersey-back.png"],
+    "images": ["/images/store/jersey-front.webp", "/images/store/jersey-back.webp"],
     "stock": [
       {
         "size": "S",

@@ -18,7 +18,7 @@ El home (`src/app/[locale]/page.tsx`) tiene `HeroSection`, `TeamHighlight` y `Co
 
 - `SizeSelector` y `CheckoutButton` siguen sin implementar — no se tocan en esta tarea.
 - `/store` sigue vacío; el botón "Ver más" y la card enlazan ahí igualmente, sin contenido todavía (gap aceptado, igual que con `/team`).
-- No se sube ninguna imagen real a `public/images/store/` — las rutas del JSON (`/images/store/jersey-front.jpg`) no resuelven a un archivo existente; se trata como "imagen rota" graceful (ver más abajo), no se soluciona aquí.
+- No se sube ninguna imagen real a `public/images/store/` — las rutas del JSON (`/images/store/jersey-front.webp`) no resuelven a un archivo existente; se trata como "imagen rota" graceful (ver más abajo), no se soluciona aquí.
 - No se modifica `lib/inventory.ts` ni `content/stock.json`.
 
 ## Componente: `StoreHighlight`
@@ -47,12 +47,14 @@ Ubicación: `src/features/store/components/ProductCard.tsx` (ya existe, se reesc
 ## Copy (es / en)
 
 Nuevo namespace `home.storeHighlight` en `messages/es.json` y `messages/en.json` (mismo nivel que `teamHighlight`/`coachingBanner`):
+
 - `eyebrow`: "La Tienda" / "The Store"
 - `title`: "Viste los colores de Crow6" / "Wear the Crow6 colors"
 - `subtitle`: "Equipación oficial pensada para el equipo y la afición." / "Official gear designed for the team and the fans."
 - `cta_view_more`: "Ver más" / "View more"
 
 Nuevo namespace `home.productCard`:
+
 - `category_jersey`: "Camiseta" / "Jersey"
 - `category_hoodie`: "Sudadera" / "Hoodie"
 - `category_cap`: "Gorra" / "Cap"
@@ -62,6 +64,7 @@ Nuevo namespace `home.productCard`:
 ## Estilos
 
 `src/features/home/components/store-highlight/store-highlight.scss`: mismo esqueleto que `team-highlight.scss` (sección + inner + responsive scroll-snap en mobile), con estas diferencias:
+
 - `.store-highlight { background: var(--bg-surface); }` (fondo continuando la alternancia).
 - `.store-highlight__grid`: `grid-template-columns: repeat(auto-fit, minmax(260px, 320px)); justify-content: center;` (centrado, no estira con pocos productos — el patrón que `team-highlight` tenía antes del ajuste de hoy).
 - `.store-highlight__footer`: igual que `team-highlight__footer` (`display: flex; justify-content: flex-end;`).
