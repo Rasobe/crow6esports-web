@@ -8,6 +8,8 @@ import {
   localizePath,
   stripLocale,
 } from "./index";
+import en from "./locales/en.json";
+import es from "./locales/es.json";
 
 describe("isLocale", () => {
   it("accepts supported locales only", () => {
@@ -40,6 +42,11 @@ describe("localizePath / stripLocale", () => {
     expect(stripLocale("/en/team")).toBe("/team");
     expect(stripLocale("/team")).toBe("/team");
   });
+
+  it("ignores trailing slashes", () => {
+    expect(stripLocale("/es/team/")).toBe("/team");
+    expect(stripLocale("/es/")).toBe("/");
+  });
 });
 
 describe("createTranslator", () => {
@@ -63,5 +70,23 @@ describe("getMessages", () => {
   it("returns a namespace slice usable by client translators", () => {
     const t = createMessageTranslator(getMessages("en", "tryouts.open"), "form");
     expect(t("back")).toBe("Back");
+  });
+});
+
+type MessageTree = { [key: string]: string | MessageTree };
+
+function collectKeys(tree: MessageTree, prefix = ""): string[] {
+  return Object.entries(tree).flatMap(([key, value]) => {
+    const path = prefix ? `${prefix}.${key}` : key;
+    return typeof value === "string" ? [path] : collectKeys(value, path);
+  });
+}
+
+describe("locales", () => {
+  it("expose exactly the same keys in es and en", () => {
+    const esKeys = collectKeys(es).sort();
+    const enKeys = collectKeys(en).sort();
+
+    expect(enKeys).toEqual(esKeys);
   });
 });

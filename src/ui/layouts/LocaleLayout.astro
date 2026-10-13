@@ -8,13 +8,19 @@ interface Props {
   title?: string;
   description?: string;
   path?: string;
+  noindex?: boolean;
 }
 
-const { title, description, path } = Astro.props;
+const { title, description, path, noindex } = Astro.props;
 const tSite = createTranslator(Astro.locals.locale, "site");
 ---
 
-<BaseLayout title={title} description={description ?? tSite("description")} path={path}>
+<BaseLayout
+  title={title}
+  description={description ?? tSite("description")}
+  path={path}
+  noindex={noindex}
+>
   <SkipLink targetId="main-content" />
   <Navbar />
   <main id="main-content" class="content-offset" tabindex="-1">

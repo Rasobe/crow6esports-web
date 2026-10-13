@@ -55,7 +55,9 @@ export function localizePath(locale: Locale, path: string): string {
 }
 
 export function stripLocale(pathname: string): string {
-  const stripped = pathname.replace(new RegExp(`^/(${LOCALES.join("|")})(?=/|$)`), "");
+  const stripped = pathname
+    .replace(new RegExp(`^/(${LOCALES.join("|")})(?=/|$)`), "")
+    .replace(/\/+$/, "");
   return stripped === "" ? "/" : stripped;
 }
 

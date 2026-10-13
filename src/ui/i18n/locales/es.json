@@ -28,8 +28,6 @@
         "sector": "Esports"
       },
       "subtitle": "Organización competitiva de Rocket League",
-      "eyebrow": "Organización de esports",
-      "tagline": "Domina · Compite · Conquista",
       "cta_team": "Ver equipo",
       "cta_join": "Únete al equipo",
       "stats": {
@@ -331,5 +329,30 @@
     "newTab": "se abre en una pestaña nueva",
     "meta": "Desde 2020 · Huesca, España · Rocket League",
     "hashtag": "#GoCrows"
+  },
+  "underConstruction": {
+    "eyebrow": "En construcción",
+    "back_home": "Volver al inicio",
+    "follow_us": "Mientras tanto, síguenos",
+    "socials_label": "Redes sociales",
+    "new_tab": "se abre en una pestaña nueva",
+    "pages": {
+      "team": {
+        "title": "Plantilla",
+        "description": "Estamos preparando la nueva plantilla, con los jugadores, el staff y las estadísticas del roster completo."
+      },
+      "coaching": {
+        "title": "Coaching",
+        "description": "Muy pronto podrás reservar tu plaza y conocer todos los servicios de coaching, tanto individual como para equipos."
+      },
+      "store": {
+        "title": "Tienda",
+        "description": "Estamos preparando la tienda oficial con camisetas, sudaderas y pegatinas de Crow 6."
+      },
+      "aboutUs": {
+        "title": "Sobre nosotros",
+        "description": "Pronto contaremos la historia de Crow 6 Esports, quiénes somos y lo que nos mueve."
+      }
+    }
   }
 }

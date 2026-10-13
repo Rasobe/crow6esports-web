@@ -28,8 +28,6 @@
         "sector": "Esports"
       },
       "subtitle": "Competitive Rocket League organization",
-      "eyebrow": "Esports organization",
-      "tagline": "Dominate · Compete · Conquer",
       "cta_team": "Meet the team",
       "cta_join": "Join the team",
       "stats": {
@@ -277,6 +275,16 @@
         "desc": "We have received your application. We review each application personally. If you fit what we are looking for, we will contact you via Discord within 7 days.",
         "note": "If you do not receive a response within 7 days, your application has not been selected for this call."
       }
+    },
+    "closed": {
+      "label": "Process closed",
+      "eyebrow": "Selection process",
+      "title": "TRYOUTS CLOSED",
+      "subtitle": "",
+      "desc": "Leave us your Discord and we will let you know when the next process opens.",
+      "notify_label": "Leave us your Discord",
+      "notify_placeholder": "Your Discord username",
+      "notify_button": "Notify me"
     }
   },
   "coaching": {
@@ -321,5 +329,30 @@
     "newTab": "opens in a new tab",
     "meta": "Since 2020 · Huesca, Spain · Rocket League",
     "hashtag": "#GoCrows"
+  },
+  "underConstruction": {
+    "eyebrow": "Under construction",
+    "back_home": "Back to home",
+    "follow_us": "In the meantime, follow us",
+    "socials_label": "Social media",
+    "new_tab": "opens in a new tab",
+    "pages": {
+      "team": {
+        "title": "Roster",
+        "description": "We are building the new roster page, with the players, the staff and the stats of the full team."
+      },
+      "coaching": {
+        "title": "Coaching",
+        "description": "Very soon you will be able to book your spot and discover every coaching service, for individuals and for teams."
+      },
+      "store": {
+        "title": "Store",
+        "description": "We are getting the official store ready with Crow 6 jerseys, hoodies and stickers."
+      },
+      "aboutUs": {
+        "title": "About us",
+        "description": "Soon we will tell the story of Crow 6 Esports, who we are and what drives us."
+      }
+    }
   }
 }
