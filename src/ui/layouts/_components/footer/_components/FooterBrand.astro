@@ -1,16 +1,7 @@
 ---
 import { socialLinks } from "@config/site";
 import { createTranslator } from "@/ui/i18n";
-import { Icon, type IconName } from "@/ui/shared/components";
-
-const SOCIAL_ICONS: Record<(typeof socialLinks)[number]["platform"], IconName> = {
-  x: "x",
-  instagram: "instagram",
-  discord: "discord",
-  twitch: "twitch",
-  tiktok: "tiktok",
-  youtube: "youtube",
-};
+import { Icon } from "@/ui/shared/components";
 
 const t = createTranslator(Astro.locals.locale, "footer");
 ---
@@ -18,7 +9,8 @@ const t = createTranslator(Astro.locals.locale, "footer");
 <div class="footer__column">
   <img
     src="/images/brand/crow6-mascot-full.svg"
-    alt="Crow6 mascot"
+    alt=""
+    aria-hidden="true"
     width="72"
     height="72"
     class="footer__logo"
@@ -39,7 +31,7 @@ const t = createTranslator(Astro.locals.locale, "footer");
           aria-label={social.label}
           class="footer__social"
         >
-          <Icon name={SOCIAL_ICONS[social.platform]} size={20} />
+          <Icon name={social.platform} size={20} />
         </a>
       </li>
     ))}

@@ -38,7 +38,7 @@ export function buildTryoutEmail(data: TryoutApplication): string {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nueva solicitud de tryout — Crow 6 Esports</title>
+  <title>Nueva solicitud de tryout: Crow 6 Esports</title>
 </head>
 <body style="margin:0;padding:0;background:#0a0a0a;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">
 
@@ -57,7 +57,7 @@ export function buildTryoutEmail(data: TryoutApplication): string {
                 NUEVA SOLICITUD
               </h1>
               <p style="margin:8px 0 0;font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.3);">
-                PROCESO DE SELECCIÓN — ROCKET LEAGUE
+                PROCESO DE SELECCIÓN · ROCKET LEAGUE
               </p>
             </td>
           </tr>

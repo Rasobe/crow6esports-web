@@ -19,7 +19,7 @@
     gap: var(--space-8);
   }
 
-  // Cabecera de sección — título pequeño con línea
+  // Cabecera de sección: título pequeño con línea
   .roster-section__title {
     font-family: var(--ff-ui);
     font-size: var(--fs-2xs);
@@ -39,7 +39,7 @@
     }
   }
 
-  // Grid de cards — auto-fill para adaptarse al número de items
+  // Grid de cards: auto-fill para adaptarse al número de items
   .roster-section__list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));

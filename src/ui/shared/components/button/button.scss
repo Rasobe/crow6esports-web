@@ -72,7 +72,7 @@
     }
   }
 
-  // Borde blanco semitransparente — para fondos oscuros
+  // Borde blanco semitransparente, para fondos oscuros
   .btn--ghost {
     background: transparent;
     color: rgb(var(--white-rgb) / 0.6);
@@ -84,7 +84,7 @@
     }
   }
 
-  // Borde brand, relleno brand en hover — navbar, badges
+  // Borde brand, relleno brand en hover, para navbar y badges
   .btn--brand-outline {
     background: transparent;
     color: var(--brand);

@@ -20,7 +20,7 @@ export function createResendTryoutNotifier({
       const { error } = await resend.emails.send({
         from,
         to,
-        subject: `Tryout — ${application.discord}`,
+        subject: `Tryout: ${application.discord}`,
         html: buildTryoutEmail(application),
       });
 

@@ -75,19 +75,6 @@
     );
   }
 
-  .player-card__number {
-    position: absolute;
-    top: 0.25rem;
-    right: 0.75rem;
-    font-family: var(--ff-display);
-    font-size: clamp(4rem, 6vw, 5.5rem);
-    line-height: 1;
-    color: transparent;
-    -webkit-text-stroke: 1px rgb(var(--white-rgb) / 0.4);
-    pointer-events: none;
-    user-select: none;
-  }
-
   .player-card__status {
     position: absolute;
     top: 0;
@@ -116,15 +103,6 @@
     padding: var(--space-2) var(--space-5) var(--space-5);
   }
 
-  .player-card__role {
-    font-family: var(--ff-ui);
-    font-size: var(--fs-xs);
-    font-weight: 700;
-    letter-spacing: var(--tracking-ultra);
-    text-transform: uppercase;
-    color: var(--text-muted);
-  }
-
   .player-card__nickname {
     font-family: var(--ff-display);
     font-size: clamp(2rem, 3vw, 2.5rem);
@@ -134,12 +112,6 @@
     text-transform: uppercase;
     color: var(--text-primary);
     overflow-wrap: anywhere;
-  }
-
-  .player-card__real-name {
-    font-family: var(--ff-body);
-    font-size: var(--fs-base);
-    color: var(--text-secondary);
   }
 
   /* ─── Stats strip ─── */
