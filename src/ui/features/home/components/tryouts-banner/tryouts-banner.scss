@@ -11,7 +11,7 @@
 
   .tryouts-banner__watermark {
     position: absolute;
-    bottom: -0.15em;
+    bottom: -0.3em;
     left: 50%;
     transform: translateX(-50%);
     font-family: var(--ff-display);
@@ -49,13 +49,6 @@
     font-weight: 700;
     letter-spacing: var(--tracking-eyebrow);
     text-transform: uppercase;
-
-    &::before {
-      content: "";
-      width: var(--space-8);
-      height: 2px;
-      background: currentColor;
-    }
   }
 
   .tryouts-banner__title {

@@ -26,6 +26,7 @@
     cursor: pointer;
     color: var(--text-muted);
     transition: color var(--duration-fast) var(--ease-standard);
+    align-content: center;
   }
 
   .locale-switcher__btn:hover:not(:disabled) {

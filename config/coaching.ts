@@ -15,6 +15,6 @@ export const COACHING: CoachingConfig = {
   progress: { start: 1550, current: 2000 },
   pricing: [
     { id: "individual", from: 28, original: 55 },
-    { id: "teams", from: 26, original: 45 },
+    { id: "teams", from: 50, original: 68 },
   ],
 };
