@@ -1,50 +1,117 @@
 ---
 import "./coaching-banner.scss";
+import { COACHING } from "@config/coaching";
 import { ROUTES } from "@config/routes";
 import { createTranslator } from "@/ui/i18n";
-import { Button, SectionHeader } from "@/ui/shared/components";
+import { Button, Icon } from "@/ui/shared/components";
 
-interface CoachingPack {
-  id: "pack_1" | "pack_2" | "pack_3";
-  featured: boolean;
-  featureCount: number;
-}
+const SERVICES = ["one_to_one", "teams", "weekly_plan"] as const;
 
-const PACKS: CoachingPack[] = [
-  { id: "pack_1", featured: false, featureCount: 3 },
-  { id: "pack_2", featured: true, featureCount: 4 },
-  { id: "pack_3", featured: false, featureCount: 4 },
-];
+const { locale } = Astro.locals;
+const t = createTranslator(locale, "home.coachingBanner");
 
-const t = createTranslator(Astro.locals.locale, "home.coachingBanner");
+const { coach, progress, pricing } = COACHING;
+const formatNumber = (value: number) => value.toLocaleString(locale);
 ---
 
-<section class="coaching-banner">
+<section class="coaching-banner" aria-labelledby="coaching-banner-title">
   <div class="coaching-banner__inner">
-    <SectionHeader namespace="home.coachingBanner" />
+    <figure class="coaching-banner__coach">
+      <div class="coaching-banner__photo">
+        {coach.photo ? (
+          <img
+            class="coaching-banner__image"
+            src={coach.photo}
+            alt={coach.name}
+            loading="lazy"
+            decoding="async"
+          />
+        ) : (
+          <>
+            <img
+              class="coaching-banner__placeholder"
+              src="/images/brand/crow6-mascot-full.svg"
+              alt=""
+              aria-hidden="true"
+              loading="lazy"
+              decoding="async"
+              width="2163"
+              height="1525"
+            />
+            <span class="coaching-banner__soon">{t("photo_soon")}</span>
+          </>
+        )}
 
-    <p class="coaching-banner__credibility">{t("credibility")}</p>
+        <figcaption class="coaching-banner__caption">
+          <div class="coaching-banner__identity">
+            <span class="coaching-banner__role">{t("coach_role")}</span>
+            <span class="coaching-banner__name">{coach.name}</span>
+          </div>
+          <div class="coaching-banner__hours">
+            <span class="coaching-banner__hours-value">{formatNumber(coach.hoursPlayed)}+</span>
+            <span class="coaching-banner__hours-label">{t("hours_label")}</span>
+          </div>
+        </figcaption>
+      </div>
+    </figure>
 
-    <div class="coaching-banner__packs">
-      {PACKS.map(({ id, featured, featureCount }) => (
-        <div class={featured ? "coaching-pack--featured" : "coaching-pack"}>
-          {featured && <span class="coaching-pack__badge">{t("pack_2_badge")}</span>}
-          <h3 class="coaching-pack__title">{t(`${id}_title`)}</h3>
-          <p class="coaching-pack__price">{t(`${id}_price`)}</p>
-          <p class="coaching-pack__description">{t(`${id}_description`)}</p>
-          <ul class="coaching-pack__features">
-            {Array.from({ length: featureCount }, (_, index) => (
-              <li>{t(`${id}_feature_${index + 1}`)}</li>
-            ))}
-          </ul>
+    <div class="coaching-banner__content">
+      <h2 id="coaching-banner-title" class="coaching-banner__title">
+        {t("title_lead")} <span class="coaching-banner__title-accent">{t("title_accent")}</span>{" "}
+        {t("title_tail")}
+      </h2>
+
+      <p class="coaching-banner__description">{t("description")}</p>
+
+      <dl class="coaching-banner__progress" aria-label={t("progress_label")}>
+        <div class="coaching-banner__progress-item">
+          <dt class="coaching-banner__progress-label">{t("progress_start")}</dt>
+          <dd class="coaching-banner__progress-value">{formatNumber(progress.start)}</dd>
         </div>
-      ))}
-    </div>
+        <Icon name="arrow-right" size={40} class="coaching-banner__progress-arrow" />
+        <div class="coaching-banner__progress-item coaching-banner__progress-item--current">
+          <dt class="coaching-banner__progress-label">{t("progress_current")}</dt>
+          <dd class="coaching-banner__progress-value">{formatNumber(progress.current)}</dd>
+        </div>
+      </dl>
 
-    <div class="coaching-banner__footer">
-      <Button href={ROUTES.coaching} variant="primary">
-        {t("cta_reserve")}
-      </Button>
+      <ol class="coaching-banner__services">
+        {SERVICES.map((service, index) => (
+          <li class="coaching-banner__service">
+            <span class="coaching-banner__service-number" aria-hidden="true">
+              {String(index + 1).padStart(2, "0")}
+            </span>
+            <h3 class="coaching-banner__service-title">{t(`service_${service}_title`)}</h3>
+            <p class="coaching-banner__service-description">
+              {t(`service_${service}_description`)}
+            </p>
+          </li>
+        ))}
+      </ol>
+
+      <dl class="coaching-banner__pricing">
+        {pricing.map(({ id, from, original }) => (
+          <div class="coaching-banner__price">
+            <dt class="coaching-banner__price-label">{t(`price_${id}`)}</dt>
+            <dd class="coaching-banner__price-value">
+              <span class="coaching-banner__price-amount">{from}€</span>
+              <span class="coaching-banner__price-unit">{t("price_unit")}</span>
+              <span class="coaching-banner__price-before">
+                <span class="coaching-banner__visually-hidden">{t("price_before")}:</span>
+                <s>{original}€</s>
+              </span>
+            </dd>
+          </div>
+        ))}
+      </dl>
+
+      <div class="coaching-banner__booking">
+        <p class="coaching-banner__schedule">{t("schedule")}</p>
+        <Button href={ROUTES.coaching} size="lg" class="coaching-banner__cta">
+          {t("cta_reserve")}
+          <Icon name="arrow-right" size={18} />
+        </Button>
+      </div>
     </div>
   </div>
 </section>

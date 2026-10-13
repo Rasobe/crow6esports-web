@@ -7,11 +7,12 @@ export type IconName =
   | "youtube"
   | "rltracker"
   | "arrow-left"
+  | "arrow-right"
   | "mail"
   | "map-pin"
   | "lock";
 
-export type StrokedIconName = "arrow-left" | "mail" | "map-pin" | "lock";
+export type StrokedIconName = "arrow-left" | "arrow-right" | "mail" | "map-pin" | "lock";
 export type FilledIconName = Exclude<IconName, StrokedIconName>;
 
 /** Filled 16x16 glyphs rendered with currentColor. */
@@ -43,6 +44,7 @@ export const FILLED_ICON_PATHS: Record<FilledIconName, string[]> = {
 /** Outlined 24x24 glyphs rendered with currentColor strokes. */
 export const STROKED_ICONS: Record<StrokedIconName, { strokeWidth: number; paths: string[] }> = {
   "arrow-left": { strokeWidth: 2.5, paths: ["M19 12H5M12 5l-7 7 7 7"] },
+  "arrow-right": { strokeWidth: 2.5, paths: ["M5 12h14M12 5l7 7-7 7"] },
   mail: {
     strokeWidth: 2,
     paths: [
