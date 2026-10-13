@@ -39,11 +39,11 @@
     "stats": {
       "mmr": 1792,
       "peak": 1855,
-      "rank": "Grand Champion II"
+      "rank": "Supersonic Legend"
     },
     "socials": {
-      "twitter": "https://x.com/vortex_rl",
-      "instagram": "https://instagram.com/vortex.rl",
+      "twitter": null,
+      "instagram": null,
       "twitch": null,
       "tiktok": null,
       "youtube": null,
@@ -54,7 +54,7 @@
   {
     "id": "k94",
     "nickname": "K94",
-    "realName": "Marcos",
+    "realName": "Lorenzo",
     "birthYear": 2003,
     "anonymous": false,
     "country": "ES",
@@ -63,24 +63,24 @@
     "game": "rocket-league",
     "joinedYear": 2024,
     "stats": {
-      "mmr": 1763,
-      "peak": 1820,
+      "mmr": 1645,
+      "peak": 1926,
       "rank": "Grand Champion I"
     },
     "socials": {
-      "twitter": "https://x.com/nxvak_rl",
-      "instagram": null,
-      "twitch": "https://twitch.tv/nxvak",
-      "tiktok": "https://tiktok.com/@nxvak",
+      "twitter": "https://x.com/Pychake",
+      "instagram": "https://www.instagram.com/lorenzo07_vc_/",
+      "twitch": "https://www.twitch.tv/pychake",
+      "tiktok": "https://www.tiktok.com/@pychake109",
       "youtube": null,
-      "rltracker": "https://rocketleague.tracker.network/rocket-league/profile/epic/Nxvak/overview"
+      "rltracker": "https://rocketleague.tracker.network/rocket-league/profile/epic/K%E3%83%8494./overview"
     },
     "image": null
   },
   {
     "id": "blackito",
     "nickname": "Blackito",
-    "realName": "David",
+    "realName": "Sergio",
     "birthYear": 2001,
     "anonymous": false,
     "country": "ES",
@@ -89,17 +89,17 @@
     "game": "rocket-league",
     "joinedYear": 2025,
     "stats": {
-      "mmr": 1711,
-      "peak": 1760,
-      "rank": "Champion III"
+      "mmr": 1562,
+      "peak": 1763,
+      "rank": "Grand Champion III"
     },
     "socials": {
-      "twitter": null,
-      "instagram": "https://instagram.com/eclipse.rl",
-      "twitch": null,
-      "tiktok": null,
-      "youtube": null,
-      "rltracker": "https://rocketleague.tracker.network/rocket-league/profile/epic/Eclipse/overview"
+      "twitter": "https://x.com/BlackitoV4",
+      "instagram": "https://instagram.com/sergioommnz?mdxt=MXQ1MDQwOHZyZXI3Mw%3D%3D",
+      "twitch": "https://www.twitch.tv/blackitov4",
+      "tiktok": "https://vm.tiktok.com/ZN9ULbWRrQBoq-epjMk/",
+      "youtube": "https://youtube.com/@blackitov?si=TZR23a4PmT0FhVHI",
+      "rltracker": "https://rocketleague.tracker.network/rocket-league/profile/steam/76561198326299506/overview"
     },
     "image": null
   },
