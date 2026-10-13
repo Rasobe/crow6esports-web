@@ -17,8 +17,8 @@ const players = getAllPlayers(container.playerRepository).slice(0, HIGHLIGHTED_P
     <SectionHeader namespace="home.teamHighlight" />
 
     <div class="team-highlight__grid">
-      {players.map((player) => (
-        <PlayerCard player={player} />
+      {players.map((player, index) => (
+        <PlayerCard player={player} index={index} />
       ))}
     </div>
 

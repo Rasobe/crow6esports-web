@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { getAge, getActiveSocialLinks } from "./player-card.utils";
+import { formatStat, getAge, getActiveSocialLinks } from "./player-card.utils";
 import type { PlayerSocials } from "@/domain/team/player";
 
 describe("getAge", () => {
@@ -44,5 +44,12 @@ describe("getActiveSocialLinks", () => {
         label: "RLTracker",
       },
     ]);
+  });
+});
+
+describe("formatStat", () => {
+  it("formats the number with the given locale", () => {
+    expect(formatStat(1234, "en")).toBe("1,234");
+    expect(formatStat(1234567, "es")).toBe("1.234.567");
   });
 });

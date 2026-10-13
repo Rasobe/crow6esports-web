@@ -1,40 +1,25 @@
 ---
 import "./player-card.scss";
-import type { Player, PlayerStatus, PlayerType } from "@/domain/team/player";
+import type { Player } from "@/domain/team/player";
 import { createTranslator } from "@/ui/i18n";
-import { Icon, type IconName } from "../icons";
-import { getActiveSocialLinks, getAge, type SocialPlatform } from "./player-card.utils";
+import { Icon } from "../icons";
+import {
+  ROLE_KEY,
+  SOCIAL_ICONS,
+  STATUS_KEY,
+  formatStat,
+  getActiveSocialLinks,
+  getAge,
+} from "./player-card.utils";
 
 interface Props {
   player: Player;
+  index: number;
 }
-
-const ROLE_KEY: Record<PlayerType, string> = {
-  player: "role_player",
-  coach: "role_coach",
-  analyst: "role_analyst",
-  manager: "role_manager",
-};
-
-const STATUS_KEY: Record<PlayerStatus, string | null> = {
-  active: null,
-  substitute: "status_substitute",
-  retired: "status_retired",
-  former: "status_former",
-};
-
-const SOCIAL_ICONS: Record<SocialPlatform, IconName> = {
-  twitter: "x",
-  instagram: "instagram",
-  twitch: "twitch",
-  tiktok: "tiktok",
-  youtube: "youtube",
-  rltracker: "rltracker",
-};
 
 const ANONYMOUS_IMAGE = "/images/players/anonymous-player-silhouette.jpg";
 
-const { player } = Astro.props;
+const { player, index } = Astro.props;
 const { locale } = Astro.locals;
 const t = createTranslator(locale, "home.playerCard");
 
@@ -42,22 +27,31 @@ const { stats } = player;
 const age = getAge(player.birthYear);
 const statusKey = STATUS_KEY[player.status];
 const socialLinks = getActiveSocialLinks(player.socials);
-const formatNumber = (value: number) => value.toLocaleString(locale);
 ---
 
 <article class="player-card">
   <div class="player-card__bg">
     {player.image ? (
-      <img src={player.image} alt={player.nickname} loading="lazy" class="player-card__img" />
+      <img
+        src={player.image}
+        alt={player.nickname}
+        loading="lazy"
+        decoding="async"
+        class="player-card__img"
+      />
     ) : (
       <img
         src={ANONYMOUS_IMAGE}
         alt=""
         aria-hidden="true"
         loading="lazy"
+        decoding="async"
         class="player-card__img player-card__img--anonymous"
       />
     )}
+    <span class="player-card__number" aria-hidden="true">
+      {String(index + 1).padStart(2, "0")}
+    </span>
     <div class="player-card__overlay"></div>
   </div>
 
@@ -74,12 +68,12 @@ const formatNumber = (value: number) => value.toLocaleString(locale);
 
     <div class="player-card__stats">
       <div class="player-card__stat">
-        <span class="player-card__stat-value">{formatNumber(stats.mmr)}</span>
+        <span class="player-card__stat-value">{formatStat(stats.mmr, locale)}</span>
         <span class="player-card__stat-label">{t("stat_mmr")}</span>
       </div>
       <div class="player-card__stat-divider"></div>
       <div class="player-card__stat">
-        <span class="player-card__stat-value">{formatNumber(stats.peak)}</span>
+        <span class="player-card__stat-value">{formatStat(stats.peak, locale)}</span>
         <span class="player-card__stat-label">{t("stat_peak")}</span>
       </div>
       {!!age && (
@@ -110,6 +104,4 @@ const formatNumber = (value: number) => value.toLocaleString(locale);
       </div>
     )}
   </div>
-
-  <div class="player-card__corner" aria-hidden="true"></div>
 </article>

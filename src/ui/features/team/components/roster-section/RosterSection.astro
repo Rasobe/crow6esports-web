@@ -17,9 +17,9 @@ const { title, players } = Astro.props;
       <h2 class="roster-section__title">{title}</h2>
 
       <ul class="roster-section__list">
-        {players.map((player) => (
+        {players.map((player, index) => (
           <li class="roster-section__list-item">
-            <PlayerCard player={player} />
+            <PlayerCard player={player} index={index} />
           </li>
         ))}
       </ul>
