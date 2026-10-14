@@ -29,6 +29,8 @@ export function TryoutsForm({ messages }: TryoutsFormProps) {
         <div
           className="tryouts-progress"
           role="progressbar"
+          aria-label={tForm("steps.label")}
+          aria-valuetext={tForm(STEP_LABEL_KEYS[currentStep])}
           aria-valuemin={1}
           aria-valuenow={currentStep + 1}
           aria-valuemax={totalSteps}

@@ -157,6 +157,7 @@
         "submit": "Enviar solicitud",
         "submitting": "Enviando...",
         "steps": {
+          "label": "Progreso de la solicitud",
           "profile": "Perfil",
           "technical": "Técnico",
           "mindset": "Mentalidad"

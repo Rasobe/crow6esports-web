@@ -157,6 +157,7 @@
         "submit": "Submit application",
         "submitting": "Submitting...",
         "steps": {
+          "label": "Application progress",
           "profile": "Profile",
           "technical": "Technical",
           "mindset": "Mindset"
