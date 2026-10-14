@@ -34,13 +34,7 @@
     position: relative;
     display: flex;
     margin: 0;
-
-    &::before {
-      content: "";
-      position: absolute;
-      inset: var(--space-5) calc(var(--space-5) * -1) calc(var(--space-5) * -1) var(--space-5);
-      border: 2px solid var(--brand);
-    }
+    border: var(--line-subtle);
   }
 
   .coaching-banner__photo {
@@ -72,27 +66,6 @@
     height: auto;
     transform: translate(-50%, -50%);
     opacity: 0.5;
-  }
-
-  .coaching-banner__soon {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: var(--space-3);
-    padding: var(--space-6);
-    font-family: var(--ff-ui);
-    font-size: var(--fs-xs);
-    font-weight: 700;
-    letter-spacing: var(--tracking-eyebrow);
-    text-transform: uppercase;
-    color: var(--text-muted);
-
-    &::before {
-      content: "";
-      width: var(--space-6);
-      height: 1px;
-      background: currentColor;
-    }
   }
 
   .coaching-banner__caption {
@@ -187,8 +160,8 @@
     align-items: center;
     justify-content: space-between;
     gap: var(--space-6);
-    padding: var(--space-6) var(--space-8);
-    border: var(--line-strong);
+    padding: var(--space-5) var(--space-8);
+    border: var(--line-subtle);
     background: var(--brand-wash);
   }
 
@@ -204,7 +177,7 @@
 
   .coaching-banner__progress-value {
     font-family: var(--ff-display);
-    font-size: clamp(3rem, 5vw, 4.5rem);
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
     line-height: 1;
     color: var(--text-muted);
   }
@@ -225,33 +198,18 @@
   .coaching-banner__services {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-6);
     margin: 0;
     padding: 0;
     list-style: none;
-    border-top: var(--line-subtle);
-    border-bottom: var(--line-subtle);
   }
 
   .coaching-banner__service {
     display: flex;
     flex-direction: column;
-    gap: var(--space-2);
-    padding: var(--space-6) var(--space-4);
-
-    &:first-child {
-      padding-left: 0;
-    }
-
-    & + & {
-      border-left: var(--line-subtle);
-    }
-  }
-
-  .coaching-banner__service-number {
-    font-family: var(--ff-display);
-    font-size: var(--fs-2xl);
-    line-height: 1;
-    color: var(--brand);
+    gap: var(--space-1);
+    padding-left: var(--space-4);
+    border-left: 2px solid var(--brand);
   }
 
   .coaching-banner__service-title {
@@ -264,41 +222,49 @@
   }
 
   .coaching-banner__service-description {
-    font-size: var(--fs-md);
+    font-size: var(--fs-sm);
     line-height: 1.5;
     color: var(--text-muted);
   }
 
-  /* ─── Pricing ─── */
-  .coaching-banner__pricing {
+  /* ─── Offer: precios + reserva en una sola tarjeta, único bloque con peso ─── */
+  .coaching-banner__offer {
     display: flex;
     flex-direction: column;
-    gap: var(--space-4);
+    gap: var(--space-6);
+    padding: var(--space-8);
+    border: var(--line);
+    background: var(--bg-surface);
+  }
+
+  .coaching-banner__pricing {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-6);
   }
 
   .coaching-banner__price {
-    display: grid;
-    grid-template-columns: minmax(8rem, 12rem) 1fr;
-    align-items: center;
-    gap: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
   }
 
   .coaching-banner__price-label {
-    color: var(--text-primary);
+    color: var(--text-muted);
   }
 
   .coaching-banner__price-value {
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
-    gap: var(--space-2) var(--space-3);
+    gap: var(--space-1) var(--space-2);
   }
 
   .coaching-banner__price-amount {
     font-family: var(--ff-display);
     font-size: clamp(2.5rem, 4vw, 3.5rem);
     line-height: 1;
-    color: var(--brand);
+    color: var(--text-primary);
   }
 
   .coaching-banner__price-unit,
@@ -311,23 +277,27 @@
     color: var(--text-muted);
   }
 
+  .coaching-banner__price-before {
+    margin-left: auto;
+  }
+
   /* ─── Booking ─── */
   .coaching-banner__booking {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: var(--space-6);
+    gap: var(--space-3) var(--space-6);
+    padding-top: var(--space-6);
+    border-top: var(--line-subtle);
   }
 
   .coaching-banner__schedule {
-    padding-bottom: var(--space-2);
     font-family: var(--ff-ui);
-    font-size: var(--fs-sm);
+    font-size: var(--fs-xs);
     font-weight: 700;
     letter-spacing: var(--tracking-widest);
     text-transform: uppercase;
-    color: var(--text-primary);
-    border-bottom: 2px solid var(--brand);
+    color: var(--text-muted);
   }
 
   .coaching-banner__cta {
@@ -361,10 +331,6 @@
     .coaching-banner__coach::before,
     .coaching-banner__image,
     .coaching-banner__placeholder,
-    .coaching-banner__soon {
-      display: none;
-    }
-
     .coaching-banner__photo {
       min-height: 0;
       border-width: 1px 0;
@@ -388,24 +354,24 @@
   @include below(sm) {
     .coaching-banner__services {
       grid-template-columns: minmax(0, 1fr);
-    }
-
-    .coaching-banner__service {
-      padding-inline: 0;
-
-      & + & {
-        border-top: var(--line-subtle);
-        border-left: 0;
-      }
+      gap: var(--space-4);
     }
 
     .coaching-banner__progress {
       padding: var(--space-5);
     }
 
-    .coaching-banner__price {
+    .coaching-banner__offer {
+      padding: var(--space-5);
+    }
+
+    .coaching-banner__pricing {
       grid-template-columns: minmax(0, 1fr);
-      gap: var(--space-2);
+    }
+
+    .coaching-banner__booking {
+      align-items: stretch;
+      text-align: center;
     }
   }
 }

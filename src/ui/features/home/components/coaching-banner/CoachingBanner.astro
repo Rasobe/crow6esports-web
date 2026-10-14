@@ -27,19 +27,16 @@ const formatNumber = (value: number) => value.toLocaleString(locale);
             decoding="async"
           />
         ) : (
-          <>
-            <img
-              class="coaching-banner__placeholder"
-              src="/images/brand/crow6-mascot-full.svg"
-              alt=""
-              aria-hidden="true"
-              loading="lazy"
-              decoding="async"
-              width="2163"
-              height="1525"
-            />
-            <span class="coaching-banner__soon">{t("photo_soon")}</span>
-          </>
+          <img
+            class="coaching-banner__placeholder"
+            src="/images/brand/crow6-mascot-full.svg"
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            decoding="async"
+            width="2163"
+            height="1525"
+          />
         )}
 
         <figcaption class="coaching-banner__caption">
@@ -75,42 +72,41 @@ const formatNumber = (value: number) => value.toLocaleString(locale);
         </div>
       </dl>
 
-      <ol class="coaching-banner__services">
-        {SERVICES.map((service, index) => (
+      <ul class="coaching-banner__services">
+        {SERVICES.map((service) => (
           <li class="coaching-banner__service">
-            <span class="coaching-banner__service-number" aria-hidden="true">
-              {String(index + 1).padStart(2, "0")}
-            </span>
             <h3 class="coaching-banner__service-title">{t(`service_${service}_title`)}</h3>
             <p class="coaching-banner__service-description">
               {t(`service_${service}_description`)}
             </p>
           </li>
         ))}
-      </ol>
+      </ul>
 
-      <dl class="coaching-banner__pricing">
-        {pricing.map(({ id, from, original }) => (
-          <div class="coaching-banner__price">
-            <dt class="coaching-banner__price-label">{t(`price_${id}`)}</dt>
-            <dd class="coaching-banner__price-value">
-              <span class="coaching-banner__price-amount">{from}€</span>
-              <span class="coaching-banner__price-unit">{t("price_unit")}</span>
-              <span class="coaching-banner__price-before">
-                <span class="coaching-banner__visually-hidden">{t("price_before")}:</span>
-                <s>{original}€</s>
-              </span>
-            </dd>
-          </div>
-        ))}
-      </dl>
+      <div class="coaching-banner__offer">
+        <dl class="coaching-banner__pricing">
+          {pricing.map(({ id, from, original }) => (
+            <div class="coaching-banner__price">
+              <dt class="coaching-banner__price-label">{t(`price_${id}`)}</dt>
+              <dd class="coaching-banner__price-value">
+                <span class="coaching-banner__price-amount">{from}€</span>
+                <span class="coaching-banner__price-unit">{t("price_unit")}</span>
+                <span class="coaching-banner__price-before">
+                  <span class="coaching-banner__visually-hidden">{t("price_before")}:</span>
+                  <s>{original}€</s>
+                </span>
+              </dd>
+            </div>
+          ))}
+        </dl>
 
-      <div class="coaching-banner__booking">
-        <p class="coaching-banner__schedule">{t("schedule")}</p>
-        <Button href={ROUTES.coaching} size="lg" class="coaching-banner__cta">
-          {t("cta_reserve")}
-          <Icon name="arrow-right" size={18} />
-        </Button>
+        <div class="coaching-banner__booking">
+          <Button href={ROUTES.coaching} size="lg" class="coaching-banner__cta">
+            {t("cta_reserve")}
+            <Icon name="arrow-right" size={18} />
+          </Button>
+          <p class="coaching-banner__schedule">{t("schedule")}</p>
+        </div>
       </div>
     </div>
   </div>
