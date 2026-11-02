@@ -54,7 +54,7 @@
   /* ─── Media ─── */
   .player-card__media {
     position: relative;
-    aspect-ratio: 1 / 1.25;
+    aspect-ratio: 1 / 1;
     overflow: hidden;
     background: var(--bg-surface);
   }
@@ -87,7 +87,7 @@
     inset: 0;
     display: grid;
     place-items: center;
-    padding-bottom: 18%;
+    padding-bottom: 14%;
     background:
       linear-gradient(135deg, rgb(var(--brand-rgb) / 0.12) 0%, transparent 45%),
       repeating-linear-gradient(
@@ -112,7 +112,7 @@
 
   .player-card__initial {
     font-family: var(--ff-display);
-    font-size: clamp(7rem, 52cqw, 11rem);
+    font-size: clamp(6rem, 46cqw, 9.5rem);
     font-weight: 700;
     line-height: 1;
     color: transparent;
@@ -158,8 +158,26 @@
   .player-card__identity {
     display: flex;
     flex-direction: column;
-    gap: var(--space-1);
+    gap: var(--space-1-5);
     padding: var(--space-2) var(--space-5) var(--space-5);
+  }
+
+  .player-card__meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+  }
+
+  .player-card__country {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1-5);
+    font-family: var(--ff-ui);
+    font-size: var(--fs-xs);
+    font-weight: 700;
+    letter-spacing: var(--tracking-widest);
+    color: var(--text-muted);
   }
 
   .player-card__nickname {
@@ -174,7 +192,7 @@
   }
 
   .player-card__role {
-    margin: var(--space-1-5) 0 0;
+    margin: 0;
     font-family: var(--ff-ui);
     font-size: var(--fs-xs);
     font-weight: 700;
@@ -236,6 +254,7 @@
     display: flex;
     align-items: center;
     justify-content: space-evenly;
+    min-height: 3rem;
   }
 
   .player-card__social-link {
@@ -244,23 +263,22 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 3rem;
+    height: 3rem;
     color: var(--text-secondary);
     text-decoration: none;
     transition:
       color var(--duration-base) var(--ease-standard),
-      background var(--duration-base) var(--ease-standard),
-      border-color var(--duration-base) var(--ease-standard);
+      background var(--duration-base) var(--ease-standard);
 
     &:hover {
       color: var(--brand);
-      border-color: var(--brand);
+      background: rgb(var(--brand-rgb) / 0.08);
     }
 
     &:focus-visible {
       outline: 2px solid var(--brand);
-      outline-offset: 2px;
+      outline-offset: -2px;
     }
   }
 

@@ -1,5 +1,11 @@
 import { describe, expect, it } from "vitest";
-import { formatStat, getAge, getActiveSocialLinks, getInitial } from "./player-card.utils";
+import {
+  formatStat,
+  getAge,
+  getActiveSocialLinks,
+  getInitial,
+  getFlagEmoji,
+} from "./player-card.utils";
 import type { PlayerSocials } from "@/domain/team/player";
 
 describe("getInitial", () => {
@@ -11,6 +17,18 @@ describe("getInitial", () => {
   it("ignores leading whitespace and handles empty input", () => {
     expect(getInitial("  kronos")).toBe("K");
     expect(getInitial("")).toBe("");
+  });
+});
+
+describe("getFlagEmoji", () => {
+  it("converts an ISO country code into a flag emoji", () => {
+    expect(getFlagEmoji("ES")).toBe("🇪🇸");
+    expect(getFlagEmoji("gb")).toBe("🇬🇧");
+  });
+
+  it("returns an empty string for invalid codes", () => {
+    expect(getFlagEmoji("")).toBe("");
+    expect(getFlagEmoji("ESP")).toBe("");
   });
 });
 
