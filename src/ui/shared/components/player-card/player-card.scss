@@ -96,18 +96,6 @@
         rgb(var(--white-rgb) / 0.03) 1.25rem 1.3125rem
       ),
       var(--bg-surface);
-
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      right: 0;
-      z-index: 1;
-      width: 38%;
-      height: 3px;
-      background: var(--brand);
-      transition: width var(--duration-slower) var(--ease-out);
-    }
   }
 
   .player-card__initial {
