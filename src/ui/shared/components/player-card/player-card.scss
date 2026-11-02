@@ -3,6 +3,9 @@
 @layer components {
   .player-card {
     position: relative;
+    transition:
+      transform var(--duration-slower) var(--ease-out),
+      box-shadow var(--duration-slower) var(--ease-standard);
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -26,9 +29,20 @@
       border-color: var(--brand);
     }
 
+    &:hover,
+    &:focus-within {
+      transform: translateY(calc(var(--lift-distance) * -1));
+      box-shadow: 0 1rem 2rem -1rem rgb(var(--brand-rgb) / 0.25);
+    }
+
     &:hover .player-card__img {
       transform: scale(1.05);
       filter: brightness(1.1);
+    }
+
+    &:hover .player-card__avatar::before,
+    &:focus-within .player-card__avatar::before {
+      width: 100%;
     }
 
     &:hover .player-card__initial {
@@ -57,6 +71,17 @@
       filter var(--duration-slower) var(--ease-standard);
   }
 
+  /* El wrapper de cada card (li/div con reveal) crea su propio contexto de apilado:
+     hay que elevarlo a él para que el borde de la card activa no lo tapen las vecinas. */
+  :has(> .player-card) {
+    position: relative;
+  }
+
+  :has(> .player-card:hover),
+  :has(> .player-card:focus-within) {
+    z-index: 1;
+  }
+
   .player-card__avatar {
     position: absolute;
     inset: 0;
@@ -77,9 +102,11 @@
       position: absolute;
       top: 0;
       right: 0;
+      z-index: 1;
       width: 38%;
       height: 3px;
       background: var(--brand);
+      transition: width var(--duration-slower) var(--ease-out);
     }
   }
 
@@ -240,10 +267,14 @@
   @media (prefers-reduced-motion: reduce) {
     .player-card__img,
     .player-card__initial,
+    .player-card__avatar::before,
+    .player-card,
     .player-card::after {
       transition: none;
     }
 
+    .player-card:hover,
+    .player-card:focus-within,
     .player-card:hover .player-card__img,
     .player-card:hover .player-card__initial {
       transform: none;
