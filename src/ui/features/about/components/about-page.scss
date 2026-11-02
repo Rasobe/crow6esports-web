@@ -287,7 +287,19 @@
     list-style: none;
   }
 
+  // Cada celda solapa 1px con la vecina (joined-grid): la que recibe el cursor sube de capa
+  // para que su borde se vea completo.
+  .about-pillars__list > li {
+    position: relative;
+
+    &:hover,
+    &:focus-within {
+      z-index: 1;
+    }
+  }
+
   .pillar {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: var(--space-3);
@@ -297,17 +309,38 @@
     background: var(--bg-surface);
     border: var(--line-subtle);
     transition:
-      background var(--duration-base) var(--ease-standard),
+      transform var(--duration-slow) var(--ease-out),
       border-color var(--duration-base) var(--ease-standard);
 
-    &:hover {
-      background: var(--bg-raised);
-      border-color: var(--brand);
+    // Barra dorada que se dibuja de izquierda a derecha
+    &::before {
+      content: "";
+      position: absolute;
+      inset: -1px -1px auto -1px;
+      height: 3px;
+      background: var(--brand);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform var(--duration-slower) var(--ease-out);
+    }
+
+    &:hover,
+    &:focus-visible {
+      transform: translateY(calc(var(--lift-distance) * -1));
+      border-color: var(--border-strong);
+
+      &::before {
+        transform: scaleX(1);
+      }
+
+      .pillar__cta svg {
+        transform: translateX(var(--space-1));
+      }
     }
 
     &:focus-visible {
       outline: 2px solid var(--brand);
-      outline-offset: -2px;
+      outline-offset: 2px;
     }
   }
 
@@ -333,6 +366,10 @@
     font-size: var(--fs-body);
     line-height: 1.6;
     color: var(--text-secondary);
+  }
+
+  .pillar__cta svg {
+    transition: transform var(--duration-base) var(--ease-out);
   }
 
   .pillar__cta {
@@ -415,8 +452,15 @@
 
   @media (prefers-reduced-motion: reduce) {
     .pillar,
+    .pillar::before,
+    .pillar__cta svg,
     .timeline__card {
       transition: none;
+    }
+
+    .pillar:hover,
+    .pillar:focus-visible {
+      transform: none;
     }
   }
 }
