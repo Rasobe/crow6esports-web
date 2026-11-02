@@ -420,23 +420,54 @@
       "founded": "Crow 6 Esports nace en {year} como organización competitiva de {game}.",
       "today": "Hoy el roster oficial reúne a {players} jugadores entre titulares y suplentes."
     },
-    "history": {
-      "title": "Palmarés y trayectoria",
+    "stats": {
+      "label": "Cifras del club",
+      "years": "Años de trayectoria",
+      "achievements": "Hitos en el palmarés",
+      "players": "Jugadores en plantilla",
+      "peak": "Peak MMR del roster"
+    },
+    "timeline": {
+      "title": "Nuestra trayectoria",
+      "lead": "De los inicios en 2020 a la plantilla actual: los momentos que han marcado al club.",
+      "founding_title": "Nace Crow 6",
+      "founding_text": "Arrancamos como organización competitiva de {game}.",
+      "today_label": "Hoy",
+      "today_title": "Una plantilla en marcha",
+      "today_text": "Un roster de {players} jugadores entre titulares y suplentes, con coaching para jugadores y equipos."
+    },
+    "achievements": {
       "winner": "Campeones",
-      "placement": "{place}{suffix} puesto",
-      "ordinal": {
-        "one": "º",
-        "two": "º",
-        "few": "º",
-        "other": "º"
+      "placement": "Puesto {place}",
+      "ranking": "Top {place} de {scope}",
+      "scopes": {
+        "europe": "Europa"
+      },
+      "events": {
+        "european-ranking": "Ranking europeo"
       },
       "onsite": "Presencial",
       "lineup": "Alineación",
-      "roster_title": "Plantilla de {year}",
-      "roles": {
-        "manager_coach": "Manager / coach",
-        "captain": "Capitán",
-        "player": "Jugador"
+      "substitutes": "Suplente"
+    },
+    "pillars": {
+      "title": "Qué hacemos",
+      "items": {
+        "compete": {
+          "title": "Competimos",
+          "description": "Un roster competitivo de Rocket League con titulares y suplentes.",
+          "cta": "Conoce la plantilla"
+        },
+        "train": {
+          "title": "Formamos",
+          "description": "Coaching individual y para equipos con el Head Coach de Crow 6.",
+          "cta": "Ver coaching"
+        },
+        "join": {
+          "title": "Fichamos",
+          "description": "Buscamos jugadores comprometidos con ganas de competir.",
+          "cta": "Ir a tryouts"
+        }
       }
     },
     "values": {
@@ -458,6 +489,7 @@
     },
     "contact": {
       "title": "Contacto",
+      "lead": "¿Quieres competir con nosotros, entrenar o hablar de colaboraciones? Escríbenos.",
       "socials_label": "Redes sociales",
       "new_tab": "se abre en una pestaña nueva",
       "discord": "Únete al Discord"

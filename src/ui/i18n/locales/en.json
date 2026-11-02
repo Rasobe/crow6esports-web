@@ -420,23 +420,54 @@
       "founded": "Crow 6 Esports was founded in {year} as a competitive {game} organization.",
       "today": "Today the official roster brings together {players} players between starters and substitutes."
     },
-    "history": {
-      "title": "Honours and history",
+    "stats": {
+      "label": "Club figures",
+      "years": "Years of history",
+      "achievements": "Honours listed",
+      "players": "Players on the roster",
+      "peak": "Roster peak MMR"
+    },
+    "timeline": {
+      "title": "Our journey",
+      "lead": "From our start in 2020 to today's roster: the moments that shaped the club.",
+      "founding_title": "Crow 6 is born",
+      "founding_text": "We start out as a competitive {game} organization.",
+      "today_label": "Today",
+      "today_title": "A roster on the move",
+      "today_text": "A roster of {players} players between starters and substitutes, with coaching for players and teams."
+    },
+    "achievements": {
       "winner": "Champions",
-      "placement": "{place}{suffix} place",
-      "ordinal": {
-        "one": "st",
-        "two": "nd",
-        "few": "rd",
-        "other": "th"
+      "placement": "Place {place}",
+      "ranking": "Top {place} in {scope}",
+      "scopes": {
+        "europe": "Europe"
+      },
+      "events": {
+        "european-ranking": "European ranking"
       },
       "onsite": "On-site",
       "lineup": "Line-up",
-      "roster_title": "{year} roster",
-      "roles": {
-        "manager_coach": "Manager / coach",
-        "captain": "Captain",
-        "player": "Player"
+      "substitutes": "Substitute"
+    },
+    "pillars": {
+      "title": "What we do",
+      "items": {
+        "compete": {
+          "title": "We compete",
+          "description": "A competitive Rocket League roster with starters and substitutes.",
+          "cta": "Meet the roster"
+        },
+        "train": {
+          "title": "We train",
+          "description": "1on1 and team coaching with the Crow 6 Head Coach.",
+          "cta": "See coaching"
+        },
+        "join": {
+          "title": "We recruit",
+          "description": "We look for committed players eager to compete.",
+          "cta": "Go to tryouts"
+        }
       }
     },
     "values": {
@@ -458,6 +489,7 @@
     },
     "contact": {
       "title": "Contact",
+      "lead": "Want to compete with us, train or talk about collaborations? Get in touch.",
       "socials_label": "Social media",
       "new_tab": "opens in a new tab",
       "discord": "Join the Discord"

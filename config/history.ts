@@ -1,4 +1,7 @@
-export type AchievementResult = { kind: "winner" } | { kind: "placement"; place: number };
+export type AchievementResult =
+  | { kind: "winner" }
+  | { kind: "placement"; place: number }
+  | { kind: "ranking"; place: number; scope: "europe" };
 
 export interface ClubDate {
   year: number;
@@ -8,21 +11,17 @@ export interface ClubDate {
 
 export interface Achievement {
   id: string;
-  event: string;
+  /** Nombre propio de la competición; si falta, se usa la clave i18n `about.achievements.events.<id>`. */
+  event?: string;
   date: ClubDate;
   onsite: boolean;
   result: AchievementResult;
   lineup: readonly string[];
+  substitutes?: readonly string[];
 }
 
-export type HistoricalRole = "manager_coach" | "captain" | "player";
-
-export interface HistoricalMember {
-  handle: string;
-  role: HistoricalRole;
-}
-
-// TODO: validar — fecha exacta de Gamergy Amazon 2022 (solo se conoce el año) y alineaciones
+// TODO: validar — fecha exacta de Gamergy Amazon 2022 (solo se conoce el año), nombre de la
+// competición y año del top 172 de Europa ("hace un año"), y las alineaciones.
 export const ACHIEVEMENTS: readonly Achievement[] = [
   {
     id: "sfl-master-series",
@@ -40,16 +39,12 @@ export const ACHIEVEMENTS: readonly Achievement[] = [
     result: { kind: "placement", place: 5 },
     lineup: ["TehQoz", "IvanRL", "alemnz"],
   },
-];
-
-export const ROSTER_2022_YEAR = 2022;
-
-export const ROSTER_2022: readonly HistoricalMember[] = [
-  { handle: "xTerazzz_", role: "manager_coach" },
-  { handle: "StizzyRl", role: "captain" },
-  { handle: "BoomRL", role: "player" },
-  { handle: "TehQoz_RL", role: "player" },
-  { handle: "Marvalz_", role: "player" },
-  { handle: "AnyeeloRL", role: "player" },
-  { handle: "zgarsen", role: "player" },
+  {
+    id: "european-ranking",
+    date: { year: 2025 },
+    onsite: false,
+    result: { kind: "ranking", place: 172, scope: "europe" },
+    lineup: ["Blazeon", "Bubet", "Desheyy"],
+    substitutes: ["Ethan_Letal"],
+  },
 ];
