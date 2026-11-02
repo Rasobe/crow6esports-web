@@ -18,6 +18,10 @@
     @include joined-grid(16.25rem);
   }
 
+  .team-highlight__item {
+    display: flex;
+  }
+
   @include below(sm) {
     .team-highlight__inner {
       gap: var(--space-8);

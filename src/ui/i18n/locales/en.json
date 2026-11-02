@@ -50,7 +50,7 @@
     "teamHighlight": {
       "eyebrow": "Official roster",
       "title_lead": "The",
-      "title_accent": "crows",
+      "title_accent": "roster",
       "cta_view_more": "Full roster"
     },
     "coachingBanner": {
@@ -107,6 +107,11 @@
       "description": "We are looking for committed players ready to compete. Fill in the form and we will contact you.",
       "cta": "Apply now",
       "watermark": "Tryouts"
+    },
+    "newsHighlight": {
+      "eyebrow": "Latest news",
+      "title": "News",
+      "cta_view_more": "View all"
     }
   },
   "team": {
@@ -128,9 +133,22 @@
     }
   },
   "news": {
+    "meta": {
+      "title": "News",
+      "description": "The latest news from Crow 6 Esports."
+    },
     "title": "News",
     "eyebrow": "Latest news",
-    "read_more": "Read more"
+    "list_label": "News list",
+    "back": "Back to news",
+    "reading_time": "{minutes} min read",
+    "read_more": "Read more",
+    "empty": {
+      "title": "News coming soon",
+      "description": "We are preparing our first posts. In the meantime, follow us on social media so you do not miss anything.",
+      "socials_label": "Social media",
+      "new_tab": "opens in a new tab"
+    }
   },
   "store": {
     "meta": {
@@ -142,7 +160,15 @@
     "eyebrow": "Official merchandise",
     "sold_out": "Sold out",
     "add_to_cart": "Add to cart",
-    "size": "Size"
+    "size": "Size",
+    "next_edition": {
+      "eyebrow": "Next edition",
+      "title": "Next edition",
+      "description": "The official jersey is sold out for now. Join our Discord to be the first to know when it is back.",
+      "teaser": "The official jersey is sold out. Join the Discord to find out when it is back.",
+      "cta_discord": "Notify me on Discord",
+      "cta_email": "Email the club"
+    }
   },
   "tryouts": {
     "meta": {
@@ -289,23 +315,120 @@
       }
     },
     "closed": {
-      "label": "Process closed",
       "eyebrow": "Selection process",
       "title": "TRYOUTS CLOSED",
-      "subtitle": "",
-      "desc": "Leave us your Discord and we will let you know when the next process opens.",
-      "notify_label": "Leave us your Discord",
-      "notify_placeholder": "Your Discord username",
-      "notify_button": "Notify me"
+      "desc": "There is no open process right now. Follow us on Discord and we will let you know when the next one opens.",
+      "cta": "Go to Discord"
     }
   },
   "coaching": {
+    "meta": {
+      "title": "Coaching",
+      "description": "Rocket League coaching for individuals and teams with the Crow 6 Esports Head Coach."
+    },
     "eyebrow": "Professional training",
     "title": "Coaching",
-    "individual": "Individual",
-    "group": "Group",
-    "book": "Book a session",
-    "contact": "Contact"
+    "description": "Rank up with replay reviews, clear goals every session and a weekly plan that fits your schedule.",
+    "profile": {
+      "role": "Head Coach",
+      "title": "Who trains you",
+      "stats": {
+        "hours": "Hours in Rocket League",
+        "years": "Years as a coach",
+        "max_mmr": "MMR reached by his students",
+        "recent_case": "Recent case (MMR)"
+      }
+    },
+    "services": {
+      "title": "Services",
+      "one_to_one": {
+        "title": "1on1 coaching",
+        "description": "Replay and mechanics analysis"
+      },
+      "teams": {
+        "title": "Full teams",
+        "description": "Synergy, rotations and strategy"
+      },
+      "weekly_plan": {
+        "title": "Weekly plan",
+        "description": "Clear goals and daily follow-up"
+      }
+    },
+    "plans": {
+      "title": "Coaching packs",
+      "lead": "Launch prices: take advantage of the reduced price while it lasts.",
+      "mode": {
+        "individual": "Individual",
+        "teams": "Group / teams"
+      },
+      "tier": {
+        "basic": "Basic",
+        "pro": "Pro",
+        "elite": "Elite"
+      },
+      "launch_badge": "Launch price",
+      "featured_badge": "Most popular",
+      "period": "/ month",
+      "original_price": "Original price",
+      "sessions_one": "{count} weekly session of {hours} h",
+      "sessions_other": "{count} weekly sessions of {hours} h",
+      "cta": "Book on Discord"
+    },
+    "teams": {
+      "title": "Teams he has worked with"
+    },
+    "availability": {
+      "title": "Availability",
+      "schedule": "Monday to Saturday · {from} to {to} {timezone}",
+      "note": "Confirm availability with the coach before booking."
+    },
+    "policy": {
+      "title": "Session policy",
+      "postpone": "You can postpone a session up to {days} days within the same week, a maximum of {times} times per month.",
+      "recover": "If the coach cannot make it for a justified reason, the session is always made up."
+    },
+    "cta": {
+      "title": "Book your spot",
+      "description": "Message us on Discord or by email and we will confirm schedule and pack.",
+      "discord": "Talk on Discord",
+      "email": "Send an email"
+    }
+  },
+  "about": {
+    "meta": {
+      "title": "About us",
+      "description": "The story, values and contact details of Crow 6 Esports."
+    },
+    "eyebrow": "The club",
+    "title": "About us",
+    "story": {
+      "title": "Our story",
+      "founded": "Crow 6 Esports was founded in {year} in {location} as a competitive {game} organization.",
+      "today": "Today the official roster brings together {players} players between starters and substitutes."
+    },
+    "values": {
+      "title": "Our values",
+      "items": {
+        "commitment": {
+          "title": "Commitment",
+          "description": "We look for players who are truly invested in the team and in the process."
+        },
+        "effort": {
+          "title": "Effort",
+          "description": "Performance is built by training with consistency and standards."
+        },
+        "teamwork": {
+          "title": "Team",
+          "description": "We compete together: communication and trust come before ego."
+        }
+      }
+    },
+    "contact": {
+      "title": "Contact",
+      "socials_label": "Social media",
+      "new_tab": "opens in a new tab",
+      "discord": "Join the Discord"
+    }
   },
   "footer": {
     "nav": {
@@ -362,6 +485,10 @@
       "aboutUs": {
         "title": "About us",
         "description": "Soon we will tell the story of Crow 6 Esports, who we are and what drives us."
+      },
+      "news": {
+        "title": "News",
+        "description": "We will soon publish the latest from Crow 6 Esports."
       }
     }
   }

@@ -62,5 +62,9 @@ export function stripLocale(pathname: string): string {
 }
 
 export function formatCurrency(locale: Locale, amount: number, currency: string): string {
-  return new Intl.NumberFormat(locale, { style: "currency", currency }).format(amount);
+  return new Intl.NumberFormat(locale, {
+    style: "currency",
+    currency,
+    minimumFractionDigits: Number.isInteger(amount) ? 0 : 2,
+  }).format(amount);
 }

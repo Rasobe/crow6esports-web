@@ -1,6 +1,6 @@
 ---
 import { BaseLayout } from "@/ui/layouts";
-import { Navbar } from "@/ui/layouts/_components";
+import { Footer, Navbar } from "@/ui/layouts/_components";
 import { NotFound, SkipLink } from "@/ui/shared/components";
 import { createTranslator } from "@/ui/i18n";
 
@@ -13,4 +13,5 @@ const t = createTranslator(Astro.locals.locale, "notFound");
   <div id="main-content" class="content-offset" tabindex="-1">
     <NotFound />
   </div>
+  <Footer />
 </BaseLayout>

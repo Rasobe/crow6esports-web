@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { getTotalStock, isInStock, isSoldOut, type Product } from "./product";
+import { getTotalStock, isInStock, isPurchasable, isSoldOut, type Product } from "./product";
 
 const buildProduct = (overrides: Partial<Product>): Product => ({
   id: "id",
@@ -59,5 +59,18 @@ describe("isInStock", () => {
 
     expect(isInStock(product, "ONE")).toBe(true);
     expect(isInStock(product, "S")).toBe(false);
+  });
+});
+
+describe("isPurchasable", () => {
+  const stocked = buildProduct({ stock: [{ size: "M", quantity: 3 }] });
+
+  it("requires the store flag to be on", () => {
+    expect(isPurchasable(stocked, false)).toBe(false);
+    expect(isPurchasable(stocked, true)).toBe(true);
+  });
+
+  it("is false for a sold out product even with the store open", () => {
+    expect(isPurchasable(buildProduct({ stock: [] }), true)).toBe(false);
   });
 });

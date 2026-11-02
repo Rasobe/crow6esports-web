@@ -5,6 +5,7 @@ import { createTranslator } from "@/ui/i18n";
 import { Icon } from "../icons";
 import {
   SOCIAL_ICONS,
+  ROLE_KEY,
   STATUS_KEY,
   formatStat,
   getActiveSocialLinks,
@@ -63,6 +64,7 @@ const socialLinks = getActiveSocialLinks(player.socials);
 
   <div class="player-card__identity">
     <h3 class="player-card__nickname">{player.nickname}</h3>
+    {player.type !== "player" && <p class="player-card__role">{t(ROLE_KEY[player.type])}</p>}
   </div>
 
   <dl class="player-card__stats">

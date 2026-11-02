@@ -1,0 +1,68 @@
+---
+import "./coach-profile.scss";
+import { COACHING } from "@config/coaching";
+import { yearsSince } from "@/domain/site/years";
+import { createTranslator } from "@/ui/i18n";
+
+const { locale } = Astro.locals;
+const t = createTranslator(locale, "coaching.profile");
+const { coach, results } = COACHING;
+const format = (value: number) => value.toLocaleString(locale);
+
+const stats = [
+  { key: "hours", value: `${format(coach.hoursPlayed)}+` },
+  { key: "years", value: String(yearsSince(coach.startYear)) },
+  { key: "max_mmr", value: `${format(results.maxMmrReached)}+` },
+  {
+    key: "recent_case",
+    value: `${format(results.recentCase.from)} → ${format(results.recentCase.to)}`,
+  },
+];
+---
+
+<section class="coach-profile" aria-labelledby="coach-profile-title">
+  <div class="coach-profile__inner">
+    <figure class="coach-profile__figure" data-reveal>
+      {coach.photo ? (
+        <img
+          class="coach-profile__image"
+          src={coach.photo}
+          alt={coach.name}
+          width="480"
+          height="600"
+          loading="lazy"
+          decoding="async"
+        />
+      ) : (
+        <img
+          class="coach-profile__placeholder"
+          src="/images/brand/crow6-mascot-full.svg"
+          alt=""
+          aria-hidden="true"
+          width="2163"
+          height="1525"
+          loading="lazy"
+          decoding="async"
+        />
+      )}
+      <figcaption class="coach-profile__caption">
+        <span class="coach-profile__role">{t("role")}</span>
+        <span class="coach-profile__name">{coach.name}</span>
+      </figcaption>
+    </figure>
+
+    <div class="coach-profile__content">
+      <h2 id="coach-profile-title" class="coach-profile__title" data-reveal>
+        {t("title")}
+      </h2>
+      <dl class="coach-profile__stats">
+        {stats.map(({ key, value }) => (
+          <div class="coach-profile__stat" data-reveal>
+            <dt class="coach-profile__stat-label">{t(`stats.${key}`)}</dt>
+            <dd class="coach-profile__stat-value">{value}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </div>
+</section>

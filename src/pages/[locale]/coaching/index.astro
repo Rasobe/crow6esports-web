@@ -1,6 +1,12 @@
 ---
+import { CoachingPage } from "@/ui/features/coaching/components";
 import { LocaleLayout } from "@/ui/layouts";
+import { createTranslator } from "@/ui/i18n";
 import { ROUTES } from "@config/routes";
+
+const t = createTranslator(Astro.locals.locale, "coaching.meta");
 ---
 
-<LocaleLayout path={ROUTES.coaching} />
+<LocaleLayout title={t("title")} description={t("description")} path={ROUTES.coaching}>
+  <CoachingPage />
+</LocaleLayout>

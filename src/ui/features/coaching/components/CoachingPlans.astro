@@ -1,0 +1,68 @@
+---
+import "./coaching-plans.scss";
+import { COACHING } from "@config/coaching";
+import { DISCORD_URL } from "@config/site";
+import type { CoachingMode } from "@/domain/coaching/coaching-plan";
+import { createTranslator, formatCurrency } from "@/ui/i18n";
+import { Button } from "@/ui/shared/components";
+
+const MODES: readonly CoachingMode[] = ["individual", "teams"];
+
+const { locale } = Astro.locals;
+const t = createTranslator(locale, "coaching.plans");
+const { plans, currency, sessionDurationHours } = COACHING;
+const price = (amount: number) => formatCurrency(locale, amount, currency);
+---
+
+<section class="coaching-plans" aria-labelledby="coaching-plans-title">
+  <div class="coaching-plans__inner">
+    <header class="coaching-plans__header" data-reveal>
+      <h2 id="coaching-plans-title" class="coaching-plans__title">
+        {t("title")}
+      </h2>
+      <p class="coaching-plans__lead">{t("lead")}</p>
+    </header>
+
+    {MODES.map((mode) => (
+      <div class="coaching-plans__group">
+        <h3 class="coaching-plans__mode">{t(`mode.${mode}`)}</h3>
+        <ul class="coaching-plans__grid">
+          {plans[mode].map((plan) => (
+            <li class:list={["plan-card", { "plan-card--featured": plan.featured }]} data-reveal>
+              <div class="plan-card__badges">
+                <span class="plan-card__badge">{t("launch_badge")}</span>
+                {plan.featured && (
+                  <span class="plan-card__badge plan-card__badge--featured">
+                    {t("featured_badge")}
+                  </span>
+                )}
+              </div>
+              <h4 class="plan-card__tier">{t(`tier.${plan.tier}`)}</h4>
+              <p class="plan-card__price">
+                <span class="plan-card__amount">{price(plan.price)}</span>
+                <span class="plan-card__period">{t("period")}</span>
+                <span class="plan-card__original">
+                  <span class="plan-card__sr-only">{t("original_price")}:</span>
+                  <s>{price(plan.originalPrice)}</s>
+                </span>
+              </p>
+              <p class="plan-card__sessions">
+                {t(plan.weeklySessions === 1 ? "sessions_one" : "sessions_other", {
+                  count: plan.weeklySessions,
+                  hours: sessionDurationHours,
+                })}
+              </p>
+              <Button
+                href={DISCORD_URL}
+                variant={plan.featured ? "primary" : "outline"}
+                class="plan-card__cta"
+              >
+                {t("cta")}
+              </Button>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </div>
+</section>

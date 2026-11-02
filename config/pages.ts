@@ -10,10 +10,11 @@ export type PageKey = keyof typeof ROUTES;
  */
 const PAGE_STATUS: Record<PageKey, PageStatus> = {
   home: "live",
-  team: "soon",
-  coaching: "soon",
-  store: "soon",
-  aboutUs: "soon",
+  team: "live",
+  news: "live",
+  coaching: "live",
+  store: "live",
+  aboutUs: "live",
   tryouts: "live",
 };
 

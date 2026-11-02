@@ -1,0 +1,190 @@
+@use "styles/layers";
+@use "styles/mixins" as *;
+@layer components {
+  .coaching-plans {
+    padding: var(--section-py) 0;
+    background: var(--bg-surface);
+    border-top: var(--line-subtle);
+  }
+
+  .coaching-plans__inner {
+    @include container;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-12);
+  }
+
+  .coaching-plans__header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .coaching-plans__title {
+    font-size: var(--fs-h3);
+    line-height: 0.95;
+    text-transform: uppercase;
+    color: var(--text-primary);
+  }
+
+  .coaching-plans__lead {
+    max-width: 56ch;
+    font-family: var(--ff-body);
+    font-size: var(--fs-body);
+    line-height: 1.7;
+    color: var(--text-secondary);
+  }
+
+  .coaching-plans__group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  .coaching-plans__mode {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-family: var(--ff-ui);
+    font-size: var(--fs-md);
+    font-weight: 700;
+    letter-spacing: var(--tracking-ultra);
+    text-transform: uppercase;
+    color: var(--brand);
+
+    &::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--border-subtle);
+    }
+  }
+
+  .coaching-plans__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-4);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    @include below(md) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .plan-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    padding: var(--space-6);
+    background: var(--bg-base);
+    border: var(--line-subtle);
+    transition:
+      transform var(--duration-slow) var(--ease-smooth),
+      border-color var(--duration-base) var(--ease-standard);
+
+    &:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-strong);
+    }
+  }
+
+  .plan-card--featured {
+    border-color: var(--brand);
+    background: linear-gradient(to bottom, var(--brand-wash), var(--bg-base));
+  }
+
+  .plan-card__badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    min-height: 1.5rem;
+  }
+
+  .plan-card__badge {
+    @include angular-cut(6px);
+    padding: var(--space-1) var(--space-3);
+    font-family: var(--ff-ui);
+    font-size: var(--fs-2xs);
+    font-weight: 700;
+    letter-spacing: var(--tracking-normal);
+    text-transform: uppercase;
+    color: var(--brand);
+    background: var(--brand-tint);
+  }
+
+  .plan-card__badge--featured {
+    color: var(--brand-fg);
+    background: var(--brand);
+  }
+
+  .plan-card__tier {
+    font-size: var(--fs-2xl);
+    text-transform: uppercase;
+    color: var(--text-primary);
+  }
+
+  .plan-card__price {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-2);
+    margin: 0;
+  }
+
+  .plan-card__amount {
+    font-family: var(--ff-display);
+    font-size: clamp(2.5rem, 5vw, 3.25rem);
+    line-height: 1;
+    color: var(--brand);
+  }
+
+  .plan-card__period {
+    font-family: var(--ff-ui);
+    font-size: var(--fs-md);
+    color: var(--text-muted);
+  }
+
+  .plan-card__original {
+    font-family: var(--ff-ui);
+    font-size: var(--fs-base);
+    color: var(--text-muted);
+  }
+
+  .plan-card__sessions {
+    flex: 1;
+    margin: 0;
+    padding-top: var(--space-4);
+    border-top: var(--line-subtle);
+    font-family: var(--ff-body);
+    font-size: var(--fs-body);
+    color: var(--text-secondary);
+  }
+
+  .plan-card__sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .plan-card__cta {
+    width: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .plan-card {
+      transition: none;
+
+      &:hover {
+        transform: none;
+      }
+    }
+  }
+}

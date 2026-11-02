@@ -1,0 +1,20 @@
+---
+import { createTranslator } from "@/ui/i18n";
+import { PageHeader } from "@/ui/shared/components";
+import CoachingAvailability from "./CoachingAvailability.astro";
+import CoachingCTA from "./CoachingCTA.astro";
+import CoachingPlans from "./CoachingPlans.astro";
+import CoachingServices from "./CoachingServices.astro";
+import CoachingTeams from "./CoachingTeams.astro";
+import CoachProfile from "./CoachProfile.astro";
+
+const t = createTranslator(Astro.locals.locale, "coaching");
+---
+
+<PageHeader eyebrow={t("eyebrow")} title={t("title")} description={t("description")} />
+<CoachProfile />
+<CoachingServices />
+<CoachingPlans />
+<CoachingTeams />
+<CoachingAvailability />
+<CoachingCTA />

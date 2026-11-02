@@ -1,0 +1,85 @@
+---
+import "./about-page.scss";
+import { ABOUT_VALUES } from "@config/about";
+import { CLUB } from "@config/club";
+import { DISCORD_URL, socialLinks } from "@config/site";
+import { getRosterStats } from "@/application/team/get-roster-stats";
+import { container } from "@/infrastructure/container";
+import { createTranslator } from "@/ui/i18n";
+import { Button, Icon, PageHeader } from "@/ui/shared/components";
+import { getLocationLabel } from "@/ui/shared/lib/club-info";
+
+const { locale } = Astro.locals;
+const t = createTranslator(locale, "about");
+const location = getLocationLabel(locale);
+const { playerCount } = getRosterStats(container.playerRepository);
+---
+
+<PageHeader eyebrow={t("eyebrow")} title={t("title")} description={t("meta.description")} />
+
+<section class="about-story" aria-labelledby="about-story-title">
+  <div class="about-story__inner">
+    <h2 id="about-story-title" class="about-story__title" data-reveal>
+      {t("story.title")}
+    </h2>
+    <div class="about-story__text" data-reveal>
+      <p>{t("story.founded", { year: CLUB.foundedYear, location, game: CLUB.game })}</p>
+      <p>{t("story.today", { players: playerCount })}</p>
+    </div>
+  </div>
+</section>
+
+<section class="about-values" aria-labelledby="about-values-title">
+  <div class="about-values__inner">
+    <h2 id="about-values-title" class="about-values__title" data-reveal>
+      {t("values.title")}
+    </h2>
+    <ul class="about-values__list">
+      {ABOUT_VALUES.map((value, index) => (
+        <li class="about-values__item" data-reveal>
+          <span class="about-values__index" aria-hidden="true">
+            {String(index + 1).padStart(2, "0")}
+          </span>
+          <h3 class="about-values__name">{t(`values.items.${value}.title`)}</h3>
+          <p class="about-values__description">{t(`values.items.${value}.description`)}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<section class="about-contact" aria-labelledby="about-contact-title">
+  <div class="about-contact__inner" data-reveal>
+    <h2 id="about-contact-title" class="about-contact__title">
+      {t("contact.title")}
+    </h2>
+    <ul class="about-contact__list">
+      <li class="about-contact__item">
+        <Icon name="mail" size={16} />
+        <a href={`mailto:${CLUB.email}`}>{CLUB.email}</a>
+      </li>
+      <li class="about-contact__item">
+        <Icon name="map-pin" size={16} />
+        <span>{location}</span>
+      </li>
+    </ul>
+    <ul class="about-contact__socials" aria-label={t("contact.socials_label")}>
+      {socialLinks.map(({ platform, href, label }) => (
+        <li>
+          <a
+            class="about-contact__social"
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${label} (${t("contact.new_tab")})`}
+          >
+            <Icon name={platform} size={20} />
+          </a>
+        </li>
+      ))}
+    </ul>
+    <Button href={DISCORD_URL} size="lg">
+      {t("contact.discord")}
+    </Button>
+  </div>
+</section>

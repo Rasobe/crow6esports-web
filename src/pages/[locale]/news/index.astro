@@ -1,0 +1,12 @@
+---
+import { NewsPage } from "@/ui/features/news/components";
+import { LocaleLayout } from "@/ui/layouts";
+import { createTranslator } from "@/ui/i18n";
+import { ROUTES } from "@config/routes";
+
+const t = createTranslator(Astro.locals.locale, "news.meta");
+---
+
+<LocaleLayout title={t("title")} description={t("description")} path={ROUTES.news}>
+  <NewsPage />
+</LocaleLayout>

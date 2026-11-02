@@ -1,0 +1,39 @@
+---
+import "./coaching-availability.scss";
+import { COACHING } from "@config/coaching";
+import { createTranslator } from "@/ui/i18n";
+
+const t = createTranslator(Astro.locals.locale, "coaching");
+const { availability, policy } = COACHING;
+---
+
+<section class="coaching-availability" aria-labelledby="coaching-availability-title">
+  <div class="coaching-availability__inner">
+    <article class="coaching-availability__panel" data-reveal>
+      <h2 id="coaching-availability-title" class="coaching-availability__title">
+        {t("availability.title")}
+      </h2>
+      <p class="coaching-availability__highlight">
+        {t("availability.schedule", {
+          from: availability.hours.from,
+          to: availability.hours.to,
+          timezone: availability.timezone,
+        })}
+      </p>
+      <p class="coaching-availability__text">{t("availability.note")}</p>
+    </article>
+
+    <article class="coaching-availability__panel" data-reveal>
+      <h2 class="coaching-availability__title">{t("policy.title")}</h2>
+      <ul class="coaching-availability__rules">
+        <li>
+          {t("policy.postpone", {
+            days: policy.postponeMaxDays,
+            times: policy.postponeMaxPerMonth,
+          })}
+        </li>
+        <li>{t("policy.recover")}</li>
+      </ul>
+    </article>
+  </div>
+</section>

@@ -11,6 +11,7 @@ export interface CoachingConfig {
     maxMmrReached: number;
     recentCase: { from: number; to: number };
   };
+  currency: "EUR";
   sessionDurationHours: number;
   availability: {
     days: { from: "mon"; to: "sat" };
@@ -26,6 +27,7 @@ export interface CoachingConfig {
 export const COACHING: CoachingConfig = {
   coach: { name: "Rasobe", photo: null, startYear: 2020, hoursPlayed: 6000 },
   results: { maxMmrReached: 2000, recentCase: { from: 1700, to: 2000 } },
+  currency: "EUR",
   sessionDurationHours: 1,
   availability: {
     days: { from: "mon", to: "sat" },

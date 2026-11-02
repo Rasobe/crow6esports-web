@@ -1,0 +1,42 @@
+---
+import "./article-card.scss";
+import { ROUTES } from "@config/routes";
+import type { Article } from "@/domain/news/article";
+import { createTranslator, localizePath } from "@/ui/i18n";
+
+interface Props {
+  article: Article;
+}
+
+const { article } = Astro.props;
+const { locale } = Astro.locals;
+const t = createTranslator(locale, "news");
+const href = localizePath(locale, `${ROUTES.news}/${article.slug}`);
+const date = new Intl.DateTimeFormat(locale, { dateStyle: "long" }).format(article.date);
+---
+
+<article class="article-card">
+  <a href={href} class="article-card__link">
+    <div class="article-card__media">
+      <img
+        class="article-card__image"
+        src={article.cover}
+        alt=""
+        width="640"
+        height="360"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+    <div class="article-card__body">
+      <p class="article-card__meta">
+        <time datetime={article.date.toISOString()}>{date}</time>
+        <span aria-hidden="true">·</span>
+        <span>{t("reading_time", { minutes: article.readingTime })}</span>
+      </p>
+      <h3 class="article-card__title">{article.title}</h3>
+      <p class="article-card__excerpt">{article.excerpt}</p>
+      <span class="article-card__more">{t("read_more")}</span>
+    </div>
+  </a>
+</article>

@@ -1,0 +1,58 @@
+---
+import "./next-edition.scss";
+import { DISCORD_URL } from "@config/site";
+import { CLUB } from "@config/club";
+import type { Product } from "@/domain/store/product";
+import { createTranslator } from "@/ui/i18n";
+import { Button } from "@/ui/shared/components";
+
+interface Props {
+  products: Product[];
+}
+
+const { products } = Astro.props;
+const t = createTranslator(Astro.locals.locale, "store");
+const tNext = createTranslator(Astro.locals.locale, "store.next_edition");
+const images = products.flatMap(({ name, images: sources }) =>
+  sources.map((src) => ({ src, alt: name })),
+);
+---
+
+<section class="next-edition" aria-labelledby="next-edition-title">
+  <div class="next-edition__inner">
+    <ul class="next-edition__gallery">
+      {images.map(({ src, alt }) => (
+        <li class="next-edition__item" data-reveal>
+          <figure class="next-edition__figure">
+            <img
+              class="next-edition__image"
+              src={src}
+              alt={alt}
+              width="640"
+              height="800"
+              loading="lazy"
+              decoding="async"
+            />
+            <span class="next-edition__badge">{t("sold_out")}</span>
+          </figure>
+        </li>
+      ))}
+    </ul>
+
+    <div class="next-edition__content" data-reveal>
+      <span class="section-label">{tNext("eyebrow")}</span>
+      <h2 id="next-edition-title" class="next-edition__title">
+        {tNext("title")}
+      </h2>
+      <p class="next-edition__description">{tNext("description")}</p>
+      <div class="next-edition__actions">
+        <Button href={DISCORD_URL} size="lg">
+          {tNext("cta_discord")}
+        </Button>
+        <Button href={`mailto:${CLUB.email}`} variant="outline" size="lg">
+          {tNext("cta_email")}
+        </Button>
+      </div>
+    </div>
+  </div>
+</section>
