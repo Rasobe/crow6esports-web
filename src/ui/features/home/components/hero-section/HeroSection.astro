@@ -21,18 +21,20 @@ const stats = [
 ---
 
 <section class="hero" aria-labelledby="hero-heading">
-  <img
-    class="hero__bg"
-    src="/images/hero-bg.webp"
-    srcset="/images/hero-bg-960.webp 960w, /images/hero-bg.webp 1774w"
-    sizes="100vw"
-    alt=""
-    width="1774"
-    height="887"
-    fetchpriority="high"
-    decoding="async"
-    aria-hidden="true"
-  />
+  <div class="hero__media" aria-hidden="true">
+    <img
+      class="hero__bg"
+      src="/images/hero-bg.webp"
+      srcset="/images/hero-bg-960.webp 960w, /images/hero-bg.webp 1774w"
+      sizes="(min-width: 48rem) 62vw, 100vw"
+      alt=""
+      width="1774"
+      height="887"
+      fetchpriority="high"
+      decoding="async"
+    />
+  </div>
+  <div class="hero__edge" aria-hidden="true"></div>
   <div class="hero__shade" aria-hidden="true"></div>
   <div class="hero__sweep" aria-hidden="true"></div>
 

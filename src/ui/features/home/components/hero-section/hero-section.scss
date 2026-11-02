@@ -1,5 +1,8 @@
 @use "styles/layers";
 @use "styles/mixins" as *;
+// Desde este ancho la imagen pasa a un panel lateral; por debajo ocupa todo el hero
+$hero-split: 64rem;
+
 @layer components {
   .hero {
     position: relative;
@@ -9,14 +12,51 @@
     background: var(--bg-base);
   }
 
+  // En escritorio la imagen ocupa un panel a la derecha con corte diagonal y filo dorado
+  .hero__media,
+  .hero__edge {
+    position: absolute;
+    inset: 0;
+
+    @media (min-width: $hero-split) {
+      --hero-cut: 14%;
+      left: auto;
+      width: 62%;
+    }
+  }
+
+  .hero__media {
+    overflow: hidden;
+
+    @media (min-width: $hero-split) {
+      clip-path: polygon(var(--hero-cut) 0, 100% 0, 100% 100%, 0 100%);
+    }
+  }
+
+  .hero__edge {
+    display: none;
+    background: var(--brand);
+    pointer-events: none;
+
+    @media (min-width: $hero-split) {
+      display: block;
+      clip-path: polygon(
+        var(--hero-cut) 0,
+        calc(var(--hero-cut) + 0.25rem) 0,
+        0.25rem 100%,
+        0 100%
+      );
+    }
+  }
+
   .hero__bg {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: 70% center;
-    transform-origin: 70% 50%;
+    object-position: 55% center;
+    transform-origin: 55% 50%;
 
     @media (prefers-reduced-motion: no-preference) {
       animation:
@@ -51,15 +91,8 @@
         color-mix(in srgb, var(--bg-base) 62%, transparent)
       );
 
-    @include above(md) {
-      background:
-        linear-gradient(to top, var(--bg-base) 0%, transparent 30%),
-        linear-gradient(
-          to right,
-          var(--bg-base) 0%,
-          color-mix(in srgb, var(--bg-base) 85%, transparent) 50%,
-          transparent 90%
-        );
+    @media (min-width: $hero-split) {
+      background: linear-gradient(to top, var(--bg-base) 0%, transparent 28%);
     }
   }
 
@@ -82,7 +115,7 @@
   }
 
   .hero-title {
-    font-size: clamp(4rem, min(14vw, 20dvh), 11rem);
+    font-size: clamp(3.5rem, min(9vw, 16dvh), 8.5rem);
     text-transform: uppercase;
     line-height: 0.95;
     letter-spacing: 0;
@@ -106,6 +139,10 @@
     line-height: 1.5;
     color: var(--text-primary);
     max-width: 40ch;
+
+    @media (min-width: $hero-split) {
+      max-width: 26ch;
+    }
   }
 
   .hero__ctas {
@@ -164,7 +201,8 @@
   }
 
   @media (forced-colors: active) {
-    .hero__bg,
+    .hero__media,
+    .hero__edge,
     .hero__shade {
       display: none;
     }
