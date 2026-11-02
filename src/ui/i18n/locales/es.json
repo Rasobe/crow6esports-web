@@ -32,18 +32,20 @@
       "cta_join": "Únete al equipo",
       "stats": {
         "label": "Cifras del equipo",
-        "wins": "Victorias",
-        "tournaments": "Torneos",
-        "players": "Jugadores",
-        "championships": "Campeonatos"
+        "years": "Años de trayectoria",
+        "players": "Jugadores en plantilla",
+        "peak": "Peak MMR del roster",
+        "location": "Ubicación"
       }
     },
     "ticker": {
       "label": "Novedades del equipo",
       "pause": "Pausar animación de novedades",
-      "roster": "Roster oficial",
-      "tryouts": "Tryouts 2026 abiertos",
-      "go_crows": "#GoCrows"
+      "items": {
+        "roster": "Roster oficial",
+        "coaching": "Coaching 1a1 y equipos",
+        "tryouts": "Tryouts abiertos"
+      }
     },
     "teamHighlight": {
       "eyebrow": "Roster oficial",
@@ -55,7 +57,7 @@
       "title_lead": "Sube de rango con el",
       "title_accent": "Head Coach",
       "title_tail": "de Crow 6.",
-      "description": "Cinco años formando jugadores y equipos. Revisión de tus replays, objetivos claros en cada sesión y un plan semanal que encaja con tu horario.",
+      "description": "{years} años formando jugadores y equipos. Revisión de tus replays, objetivos claros en cada sesión y un plan semanal que encaja con tu horario.",
       "coach_role": "Head Coach",
       "hours_label": "Horas de juego",
       "photo_soon": "Foto próximamente",
@@ -72,7 +74,7 @@
       "price_teams": "Equipos desde",
       "price_unit": "/ mes",
       "price_before": "Precio anterior",
-      "schedule": "Lun a Sáb · 16:00 a 22:00",
+      "schedule": "Lun a Sáb · {from} a {to} {timezone}",
       "cta_reserve": "Reserva tu plaza"
     },
     "storeHighlight": {
@@ -99,7 +101,7 @@
       "featured_badge": "Destacado"
     },
     "tryoutsBanner": {
-      "eyebrow": "Tryouts temporada 2026",
+      "eyebrow": "Proceso de selección",
       "title_line_1": "Únete a",
       "title_line_2": "los cuervos.",
       "description": "Buscamos jugadores comprometidos con ganas de competir. Rellena el formulario y te contactamos.",
@@ -133,7 +135,7 @@
   "store": {
     "meta": {
       "title": "Tienda",
-      "description": "Merchandising oficial de Crow 6 Esports: camisetas, sudaderas y pegatinas."
+      "description": "Merchandising oficial de Crow 6 Esports: la camiseta del equipo."
     },
     "catalog_label": "Catálogo de productos",
     "title": "Tienda",
@@ -315,13 +317,11 @@
       "about_us": "Sobre nosotros"
     },
     "contact": {
-      "title": "Contacto",
-      "email": "crow6esports@gmail.com",
-      "location": "Huesca, España"
+      "title": "Contacto"
     },
     "brand_description": "Organización competitiva de Rocket League.",
     "rights": "Todos los derechos reservados",
-    "founded": "Fundado en 2020 · Huesca, España"
+    "founded": "Fundado en {year} · {location}"
   },
   "notFound": {
     "eyebrow": "Página no encontrada",
@@ -337,7 +337,7 @@
     "description": "Estamos trabajando en una nueva experiencia para Crow 6 Esports. Vuelve pronto.",
     "socialsLabel": "Redes sociales",
     "newTab": "se abre en una pestaña nueva",
-    "meta": "Desde 2020 · Huesca, España · Rocket League",
+    "meta": "Desde {year} · {location} · {game}",
     "hashtag": "#GoCrows"
   },
   "underConstruction": {
@@ -357,7 +357,7 @@
       },
       "store": {
         "title": "Tienda",
-        "description": "Estamos preparando la tienda oficial con camisetas, sudaderas y pegatinas de Crow 6."
+        "description": "Estamos preparando la tienda oficial de Crow 6."
       },
       "aboutUs": {
         "title": "Sobre nosotros",

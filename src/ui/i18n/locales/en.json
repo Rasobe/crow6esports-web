@@ -32,18 +32,20 @@
       "cta_join": "Join the team",
       "stats": {
         "label": "Team figures",
-        "wins": "Wins",
-        "tournaments": "Tournaments",
-        "players": "Players",
-        "championships": "Championships"
+        "years": "Years of history",
+        "players": "Players on the roster",
+        "peak": "Roster peak MMR",
+        "location": "Location"
       }
     },
     "ticker": {
       "label": "Team news",
       "pause": "Pause news animation",
-      "roster": "Official roster",
-      "tryouts": "Tryouts 2026 open",
-      "go_crows": "#GoCrows"
+      "items": {
+        "roster": "Official roster",
+        "coaching": "1on1 and team coaching",
+        "tryouts": "Tryouts open"
+      }
     },
     "teamHighlight": {
       "eyebrow": "Official roster",
@@ -55,7 +57,7 @@
       "title_lead": "Rank up with the",
       "title_accent": "Head Coach",
       "title_tail": "of Crow 6.",
-      "description": "Five years training players and teams. Replay reviews, clear goals every session and a weekly plan that fits your schedule.",
+      "description": "{years} years training players and teams. Replay reviews, clear goals every session and a weekly plan that fits your schedule.",
       "coach_role": "Head Coach",
       "hours_label": "Hours played",
       "photo_soon": "Photo coming soon",
@@ -72,7 +74,7 @@
       "price_teams": "Teams from",
       "price_unit": "/ month",
       "price_before": "Previous price",
-      "schedule": "Mon to Sat · 4:00 pm to 10:00 pm",
+      "schedule": "Mon to Sat · {from} to {to} {timezone}",
       "cta_reserve": "Book your spot"
     },
     "storeHighlight": {
@@ -99,7 +101,7 @@
       "featured_badge": "Featured"
     },
     "tryoutsBanner": {
-      "eyebrow": "Tryouts season 2026",
+      "eyebrow": "Selection process",
       "title_line_1": "Join",
       "title_line_2": "the crows.",
       "description": "We are looking for committed players ready to compete. Fill in the form and we will contact you.",
@@ -133,7 +135,7 @@
   "store": {
     "meta": {
       "title": "Store",
-      "description": "Official Crow 6 Esports merchandise: jerseys, hoodies and stickers."
+      "description": "Official Crow 6 Esports merchandise: the team jersey."
     },
     "catalog_label": "Product catalog",
     "title": "Store",
@@ -315,13 +317,11 @@
       "about_us": "About us"
     },
     "contact": {
-      "title": "Contact",
-      "email": "crow6esports@gmail.com",
-      "location": "Huesca, Spain"
+      "title": "Contact"
     },
     "brand_description": "Competitive Rocket League organization.",
     "rights": "All rights reserved",
-    "founded": "Founded in 2020 · Huesca, Spain"
+    "founded": "Founded in {year} · {location}"
   },
   "notFound": {
     "eyebrow": "Page not found",
@@ -337,7 +337,7 @@
     "description": "We are building a new experience for Crow 6 Esports. Check back soon.",
     "socialsLabel": "Social media",
     "newTab": "opens in a new tab",
-    "meta": "Since 2020 · Huesca, Spain · Rocket League",
+    "meta": "Since {year} · {location} · {game}",
     "hashtag": "#GoCrows"
   },
   "underConstruction": {
@@ -357,7 +357,7 @@
       },
       "store": {
         "title": "Store",
-        "description": "We are getting the official store ready with Crow 6 jerseys, hoodies and stickers."
+        "description": "We are getting the official Crow 6 store ready."
       },
       "aboutUs": {
         "title": "About us",

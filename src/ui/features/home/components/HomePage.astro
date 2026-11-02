@@ -1,4 +1,7 @@
 ---
+import { TRYOUTS_OPEN } from "astro:env/server";
+import { ANNOUNCEMENTS } from "@config/announcements";
+import { getAnnouncementKeys } from "@/application/site/get-announcements";
 import { createTranslator } from "@/ui/i18n";
 import { NewsTicker } from "@/ui/shared/components";
 import { CoachingBanner } from "./coaching-banner";
@@ -8,7 +11,9 @@ import { TeamHighlight } from "./team-highlight";
 import { TryoutsBanner } from "./tryouts-banner";
 
 const t = createTranslator(Astro.locals.locale, "home.ticker");
-const tickerItems = [t("roster"), t("tryouts"), t("go_crows")];
+const tickerItems = getAnnouncementKeys(ANNOUNCEMENTS, { tryoutsOpen: TRYOUTS_OPEN }).map((key) =>
+  t(`items.${key}`),
+);
 ---
 
 <HeroSection />

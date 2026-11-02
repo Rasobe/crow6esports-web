@@ -118,6 +118,11 @@
     color: var(--text-primary);
   }
 
+  .hero__stat--text .hero__stat-value {
+    font-size: clamp(1.5rem, 3.4vw, 2rem);
+    line-height: 1.15;
+  }
+
   .hero__stat--brand .hero__stat-value {
     color: var(--brand);
   }

@@ -1,9 +1,12 @@
 ---
+import { CLUB } from "@config/club";
 import { createTranslator } from "@/ui/i18n";
 import { Icon } from "@/ui/shared/components";
+import { getLocationLabel } from "@/ui/shared/lib/club-info";
 
-const t = createTranslator(Astro.locals.locale, "footer");
-const email = t("contact.email");
+const { locale } = Astro.locals;
+const t = createTranslator(locale, "footer");
+const { email } = CLUB;
 ---
 
 <div class="footer__column">
@@ -16,7 +19,7 @@ const email = t("contact.email");
     </li>
     <li class="footer__contact-item">
       <Icon name="map-pin" size={16} />
-      <span>{t("contact.location")}</span>
+      <span>{getLocationLabel(locale)}</span>
     </li>
   </ul>
 </div>
