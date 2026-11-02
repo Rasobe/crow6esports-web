@@ -162,24 +162,6 @@
     padding: var(--space-2) var(--space-5) var(--space-5);
   }
 
-  .player-card__meta {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--space-2);
-  }
-
-  .player-card__country {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-1-5);
-    font-family: var(--ff-ui);
-    font-size: var(--fs-xs);
-    font-weight: 700;
-    letter-spacing: var(--tracking-widest);
-    color: var(--text-muted);
-  }
-
   .player-card__nickname {
     font-family: var(--ff-display);
     font-size: clamp(2rem, 3vw, 2.5rem);

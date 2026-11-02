@@ -10,16 +10,6 @@ export function getInitial(nickname: string): string {
   return Array.from(nickname.trim())[0]?.toUpperCase() ?? "";
 }
 
-const REGIONAL_INDICATOR_OFFSET = 0x1f1e6 - "A".charCodeAt(0);
-
-export function getFlagEmoji(countryCode: string): string {
-  const code = countryCode.trim().toUpperCase();
-  if (!/^[A-Z]{2}$/.test(code)) return "";
-  return Array.from(code, (letter) =>
-    String.fromCodePoint(letter.charCodeAt(0) + REGIONAL_INDICATOR_OFFSET),
-  ).join("");
-}
-
 export type SocialPlatform =
   "twitter" | "instagram" | "twitch" | "tiktok" | "youtube" | "rltracker";
 

@@ -10,7 +10,6 @@ import {
   formatStat,
   getActiveSocialLinks,
   getAge,
-  getFlagEmoji,
   getInitial,
 } from "./player-card.utils";
 
@@ -25,10 +24,6 @@ const t = createTranslator(locale, "home.playerCard");
 
 const { stats } = player;
 const initial = getInitial(player.nickname);
-const flag = getFlagEmoji(player.country);
-const countryName = new Intl.DisplayNames([locale], { type: "region" }).of(
-  player.country.toUpperCase(),
-);
 const age = getAge(player.birthYear);
 const statusKey = STATUS_KEY[player.status];
 const socialLinks = getActiveSocialLinks(player.socials);
@@ -63,15 +58,7 @@ const socialLinks = getActiveSocialLinks(player.socials);
   </div>
 
   <div class="player-card__identity">
-    <div class="player-card__meta">
-      <p class="player-card__role">{t(ROLE_KEY[player.type])}</p>
-      {flag && (
-        <span class="player-card__country" role="img" aria-label={countryName} title={countryName}>
-          <span aria-hidden="true">{flag}</span>
-          <span aria-hidden="true">{player.country.toUpperCase()}</span>
-        </span>
-      )}
-    </div>
+    <p class="player-card__role">{t(ROLE_KEY[player.type])}</p>
     <h3 class="player-card__nickname">{player.nickname}</h3>
   </div>
 
