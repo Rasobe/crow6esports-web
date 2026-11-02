@@ -1,8 +1,8 @@
 ---
 import "./video-highlight.scss";
+import { HIGHLIGHTS_VIDEO_ID } from "@config/media";
 import { createTranslator } from "@/ui/i18n";
 
-const VIDEO_SRC = "/videos/crow6-highlights.mp4";
 const POSTER_SRC = "/images/highlights-poster.webp";
 const POSTER_SMALL_SRC = "/images/highlights-poster-800.webp";
 
@@ -21,7 +21,7 @@ const t = createTranslator(Astro.locals.locale, "home.videoHighlight");
 
     <video-player
       class="video-highlight__player"
-      data-src={VIDEO_SRC}
+      data-video-id={HIGHLIGHTS_VIDEO_ID}
       data-label={t("video_label")}
       data-reveal
     >
@@ -59,22 +59,21 @@ const t = createTranslator(Astro.locals.locale, "home.videoHighlight");
     }
 
     private load() {
-      const src = this.dataset.src;
-      if (!src) return;
+      const { videoId, label } = this.dataset;
+      if (!videoId) return;
 
-      const video = document.createElement("video");
-      video.className = "video-highlight__video";
-      video.src = src;
-      video.controls = true;
-      video.autoplay = true;
-      video.playsInline = true;
-      video.preload = "auto";
-      video.setAttribute("aria-label", this.dataset.label ?? "");
+      const params = new URLSearchParams({ autoplay: "1", rel: "0", playsinline: "1" });
+      const frame = document.createElement("iframe");
+      frame.className = "video-highlight__frame";
+      frame.src = `https://www.youtube-nocookie.com/embed/${videoId}?${params}`;
+      frame.title = label ?? "";
+      frame.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
+      frame.referrerPolicy = "strict-origin-when-cross-origin";
+      frame.allowFullscreen = true;
 
-      this.replaceChildren(video);
+      this.replaceChildren(frame);
       this.setAttribute("data-playing", "");
-      void video.play().catch(() => undefined);
-      video.focus();
+      frame.focus();
     }
   }
 

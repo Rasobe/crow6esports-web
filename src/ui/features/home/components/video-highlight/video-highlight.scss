@@ -47,7 +47,7 @@
   }
 
   .video-highlight__poster,
-  .video-highlight__video {
+  .video-highlight__frame {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -55,9 +55,9 @@
     object-fit: cover;
   }
 
-  .video-highlight__video {
+  .video-highlight__frame {
+    border: 0;
     background: var(--bg-base);
-    object-fit: contain;
   }
 
   .video-highlight__poster {
