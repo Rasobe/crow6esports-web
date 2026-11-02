@@ -24,9 +24,7 @@ export interface CoachingConfig {
   teamsWorkedWith: readonly string[];
 }
 
-// TODO: validar — nombre del coach (aquí "Rasobe"; en players.json el staff es Kronos)
 // Los precios de equipo son por equipo (mínimo `teamMinPlayers` jugadores), no por jugador.
-// TODO: validar — precios de equipo propuestos (el brief original los dejaba casi iguales al individual)
 export const COACHING: CoachingConfig = {
   coach: { name: "Rasobe", photo: null, startYear: 2020, hoursPlayed: 6000 },
   results: { maxMmrReached: 2000, recentCase: { from: 1700, to: 2000 } },
@@ -51,7 +49,6 @@ export const COACHING: CoachingConfig = {
       { tier: "elite", price: 169, originalPrice: 260, weeklySessions: 3 },
     ],
   },
-  // TODO: validar — logos de los equipos (no hay assets en el repo; se muestran como texto)
   teamsWorkedWith: [
     "K8 eSports",
     "Crow 6 eSports",

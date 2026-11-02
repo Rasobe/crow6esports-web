@@ -20,8 +20,6 @@ export interface Achievement {
   substitutes?: readonly string[];
 }
 
-// TODO: validar — fecha exacta de Gamergy Amazon 2022 (solo se conoce el año), nombre de la
-// competición y año del top 172 de Europa ("hace un año"), y las alineaciones.
 export const ACHIEVEMENTS: readonly Achievement[] = [
   {
     id: "sfl-master-series",
