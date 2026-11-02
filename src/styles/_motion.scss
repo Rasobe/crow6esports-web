@@ -7,9 +7,24 @@
    prefers-reduced-motion el contenido se ve directamente.
    ───────────────────────────────────────────── */
 @layer components {
-  [data-motion] [data-reveal]:not(.is-revealed),
-  [data-motion] [data-hero]:not(.is-revealed) {
+  [data-motion] [data-reveal]:not(.is-revealed) {
     opacity: 0;
+  }
+
+  /* Entrada del hero en CSS puro: arranca en el primer pintado, sin esperar al JS,
+     para no retrasar el LCP. Solo transform y opacity. */
+  @media (prefers-reduced-motion: no-preference) {
+    [data-hero] {
+      animation: hero-enter var(--hero-duration) var(--ease-out) backwards;
+      animation-delay: calc(var(--hero-step, 0) * var(--hero-stagger));
+    }
+  }
+
+  @keyframes hero-enter {
+    from {
+      opacity: 0;
+      transform: translateY(var(--hero-distance));
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {

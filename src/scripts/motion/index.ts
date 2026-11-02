@@ -1,7 +1,6 @@
 import { prefersReducedMotion } from "./animate";
 import { MOTION_ATTRIBUTE } from "./config";
 import { initCounters } from "./counters";
-import { playHeroEntrance } from "./hero";
 import { initReveals } from "./reveal";
 
 let teardown: Array<() => void> = [];
@@ -10,7 +9,6 @@ function start(): void {
   if (prefersReducedMotion()) return;
 
   document.documentElement.setAttribute(MOTION_ATTRIBUTE, "ready");
-  playHeroEntrance();
   teardown = [initReveals(), initCounters()];
 }
 

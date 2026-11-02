@@ -61,11 +61,19 @@ Rutas bajo `src/pages/[locale]/…` con locales `es` (default) y `en`. `src/midd
 
 ### Estado de las páginas
 
-`config/pages.ts` define si cada ruta está `live` o `soon`. El middleware reescribe las rutas en `soon` (y sus subrutas) a `src/pages/[locale]/under-construction.astro`, que muestra el aviso "en construcción" con `noindex`; el sitemap solo incluye las `live`. La URL no cambia y la implementación de la página se conserva, así que publicar una página es cambiar su estado a `live`. Hoy están en `soon` plantilla, coaching, tienda y sobre nosotros; `coaching` y `about-us` aún no tienen contenido propio. Dentro de componentes usa `Astro.originPathname` (no `Astro.url.pathname`) para conocer la ruta pedida, porque tras un `rewrite` la segunda apunta a la ruta interna.
+`config/pages.ts` define si cada ruta está `live` o `soon`. El middleware reescribe las rutas en `soon` (y sus subrutas) a `src/pages/[locale]/under-construction.astro`, que muestra el aviso "en construcción" con `noindex`; el sitemap solo incluye las `live`. La URL no cambia y la implementación de la página se conserva, así que publicar una página es cambiar su estado a `live`. Hoy todas están `live`. Dentro de componentes usa `Astro.originPathname` (no `Astro.url.pathname`) para conocer la ruta pedida, porque tras un `rewrite` la segunda apunta a la ruta interna.
 
 ### Contenido como fuente de verdad
 
 No hay base de datos. `content/players.json` y `content/stock.json` son los datos del roster y la tienda; las noticias son `.mdx` en `content/news/` (content collection `news`). Cualquier cambio de datos se hace editando estos ficheros.
+
+### Datos de negocio y flags
+
+Los datos viven en `config/` (`club.ts`, `coaching.ts`, `site.ts`, `store.ts`, `announcements.ts`, `about.ts`). Los años de trayectoria se calculan (`yearsSince`), y plantilla y peak MMR salen de `players.json` (`getRosterStats`). `STORE_IN_STOCK` (config/store.ts) controla el modo venta de la tienda; con `false` no hay precios y se muestra "Próxima edición". El texto de tryouts del ticker depende de la variable `TRYOUTS_OPEN`.
+
+### Motion
+
+`src/scripts/motion/` (sin dependencias: Web Animations API + IntersectionObserver). Reveals con `data-reveal`, contadores con `data-count-to`, entrada del hero en CSS (`data-hero` + `--hero-step`). Solo `transform` y `opacity`; sin JS o con `prefers-reduced-motion` todo se ve directamente. Transiciones entre páginas con `ClientRouter`.
 
 ### Estilos
 

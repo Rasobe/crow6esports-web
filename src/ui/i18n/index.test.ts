@@ -90,3 +90,21 @@ describe("locales", () => {
     expect(enKeys).toEqual(esKeys);
   });
 });
+
+describe("locale parity", () => {
+  const collectKeys = (node: unknown, prefix = ""): string[] =>
+    typeof node === "object" && node !== null
+      ? Object.entries(node).flatMap(([key, value]) => collectKeys(value, `${prefix}${key}.`))
+      : [prefix.slice(0, -1)];
+
+  it("defines the same keys in every locale", () => {
+    expect(collectKeys(en).sort()).toEqual(collectKeys(es).sort());
+  });
+
+  it("has no empty translations", () => {
+    const empty = (messages: unknown) =>
+      JSON.stringify(messages).includes('":""') ? "has empty values" : "ok";
+    expect(empty(es)).toBe("ok");
+    expect(empty(en)).toBe("ok");
+  });
+});

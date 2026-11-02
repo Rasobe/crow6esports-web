@@ -44,3 +44,13 @@ test("rejects malformed submissions at the API", async ({ request }) => {
   const response = await request.post("/api/contact", { data: { discord: "only-this" } });
   expect(response.status()).toBe(400);
 });
+
+test("validates each step of the form in English", async ({ page }) => {
+  await page.goto("/en/tryouts");
+  await page.locator("astro-island:not([ssr])").waitFor();
+
+  await page.getByRole("button", { name: "Next" }).click();
+  await expect(
+    page.locator(".text-field__error", { hasText: "Discord ID is required" }),
+  ).toBeVisible();
+});
