@@ -1,7 +1,9 @@
+import type { APIContext, MiddlewareNext } from "astro";
 import { MAINTENANCE_MODE } from "astro:env/server";
 import { defineMiddleware } from "astro:middleware";
 import { PAGES } from "@config/pages";
 import { findPage } from "@/domain/site/page-status";
+import { applySecurityHeaders } from "@/infrastructure/http/security-headers";
 import { detectLocale, isLocale, stripLocale } from "@/ui/i18n";
 
 const COMING_SOON_PATH = "/coming-soon";
@@ -10,7 +12,7 @@ const FILE_EXTENSION_PATTERN = /\.[^/]+$/;
 const API_PREFIX = "/api/";
 const UNDER_CONSTRUCTION_SEGMENT = "under-construction";
 
-export const onRequest = defineMiddleware((context, next) => {
+const handleRequest = (context: APIContext, next: MiddlewareNext): Promise<Response> | Response => {
   const { pathname } = context.url;
   const [, firstSegment] = pathname.split("/");
 
@@ -38,4 +40,8 @@ export const onRequest = defineMiddleware((context, next) => {
   }
 
   return next();
-});
+};
+
+export const onRequest = defineMiddleware(async (context, next) =>
+  applySecurityHeaders(await handleRequest(context, next)),
+);
