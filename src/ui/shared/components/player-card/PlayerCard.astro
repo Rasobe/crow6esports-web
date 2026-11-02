@@ -10,6 +10,7 @@ import {
   formatStat,
   getActiveSocialLinks,
   getAge,
+  getInitial,
 } from "./player-card.utils";
 
 interface Props {
@@ -17,13 +18,12 @@ interface Props {
   index: number;
 }
 
-const ANONYMOUS_IMAGE = "/images/players/anonymous-player-silhouette.webp";
-
 const { player } = Astro.props;
 const { locale } = Astro.locals;
 const t = createTranslator(locale, "home.playerCard");
 
 const { stats } = player;
+const initial = getInitial(player.nickname);
 const age = getAge(player.birthYear);
 const statusKey = STATUS_KEY[player.status];
 const socialLinks = getActiveSocialLinks(player.socials);
@@ -40,14 +40,9 @@ const socialLinks = getActiveSocialLinks(player.socials);
         class="player-card__img"
       />
     ) : (
-      <img
-        src={ANONYMOUS_IMAGE}
-        alt=""
-        aria-hidden="true"
-        loading="lazy"
-        decoding="async"
-        class="player-card__img player-card__img--anonymous"
-      />
+      <div class="player-card__avatar" aria-hidden="true">
+        <span class="player-card__initial">{initial}</span>
+      </div>
     )}
     <div class="player-card__overlay"></div>
     {statusKey && (

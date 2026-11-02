@@ -31,8 +31,9 @@
       filter: brightness(1.1);
     }
 
-    &:hover .player-card__img--anonymous {
-      filter: invert(1) brightness(1.3);
+    &:hover .player-card__initial {
+      -webkit-text-stroke-color: var(--brand);
+      transform: translateY(calc(var(--lift-distance) * -1));
     }
   }
 
@@ -54,13 +55,44 @@
     transition:
       transform var(--duration-slower) var(--ease-smooth),
       filter var(--duration-slower) var(--ease-standard);
+  }
 
-    &--anonymous {
-      filter: invert(1);
-      mix-blend-mode: screen;
-      opacity: 0.35;
-      object-position: center bottom;
+  .player-card__avatar {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    padding-bottom: 18%;
+    background:
+      linear-gradient(135deg, rgb(var(--brand-rgb) / 0.12) 0%, transparent 45%),
+      repeating-linear-gradient(
+        -45deg,
+        transparent 0 1.25rem,
+        rgb(var(--white-rgb) / 0.03) 1.25rem 1.3125rem
+      ),
+      var(--bg-surface);
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 38%;
+      height: 3px;
+      background: var(--brand);
     }
+  }
+
+  .player-card__initial {
+    font-family: var(--ff-display);
+    font-size: clamp(7rem, 52cqw, 11rem);
+    font-weight: 700;
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 2px rgb(var(--brand-rgb) / 0.55);
+    transition:
+      transform var(--duration-slower) var(--ease-out),
+      -webkit-text-stroke-color var(--duration-base) var(--ease-standard);
   }
 
   .player-card__overlay {
@@ -207,11 +239,13 @@
 
   @media (prefers-reduced-motion: reduce) {
     .player-card__img,
+    .player-card__initial,
     .player-card::after {
       transition: none;
     }
 
-    .player-card:hover .player-card__img {
+    .player-card:hover .player-card__img,
+    .player-card:hover .player-card__initial {
       transform: none;
     }
   }
