@@ -54,7 +54,7 @@
   /* ─── Media ─── */
   .player-card__media {
     position: relative;
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 1 / 0.88;
     overflow: hidden;
     background: var(--bg-surface);
   }
@@ -87,7 +87,7 @@
     inset: 0;
     display: grid;
     place-items: center;
-    padding-bottom: 14%;
+    padding-bottom: 6%;
     background:
       linear-gradient(135deg, rgb(var(--brand-rgb) / 0.12) 0%, transparent 45%),
       repeating-linear-gradient(
@@ -112,11 +112,11 @@
 
   .player-card__initial {
     font-family: var(--ff-display);
-    font-size: clamp(6rem, 46cqw, 9.5rem);
+    font-size: clamp(7rem, 54cqw, 11rem);
     font-weight: 700;
     line-height: 1;
     color: transparent;
-    -webkit-text-stroke: 2px rgb(var(--brand-rgb) / 0.55);
+    -webkit-text-stroke: 2px rgb(var(--brand-rgb) / 0.75);
     transition:
       transform var(--duration-slower) var(--ease-out),
       -webkit-text-stroke-color var(--duration-base) var(--ease-standard);
@@ -147,11 +147,6 @@
     line-height: 1.5;
     color: var(--bg-base);
     background: var(--text-primary);
-
-    &--highlight {
-      color: var(--brand-fg);
-      background: var(--brand);
-    }
   }
 
   /* ─── Identity ─── */

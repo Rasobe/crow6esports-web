@@ -25,7 +25,9 @@ const t = createTranslator(locale, "home.playerCard");
 const { stats } = player;
 const initial = getInitial(player.nickname);
 const age = getAge(player.birthYear);
-const statusKey = STATUS_KEY[player.status];
+const isSubstitute = player.status === "substitute";
+const statusKey = isSubstitute ? null : STATUS_KEY[player.status];
+const roleLabel = isSubstitute ? t("status_substitute") : t(ROLE_KEY[player.type]);
 const socialLinks = getActiveSocialLinks(player.socials);
 ---
 
@@ -45,20 +47,11 @@ const socialLinks = getActiveSocialLinks(player.socials);
       </div>
     )}
     <div class="player-card__overlay"></div>
-    {statusKey && (
-      <span
-        class:list={[
-          "player-card__status",
-          { "player-card__status--highlight": player.status === "substitute" },
-        ]}
-      >
-        {t(statusKey)}
-      </span>
-    )}
+    {statusKey && <span class="player-card__status">{t(statusKey)}</span>}
   </div>
 
   <div class="player-card__identity">
-    <p class="player-card__role">{t(ROLE_KEY[player.type])}</p>
+    <p class="player-card__role">{roleLabel}</p>
     <h3 class="player-card__nickname">{player.nickname}</h3>
   </div>
 
