@@ -35,15 +35,19 @@ const stats = [
   <div class="hero__inner">
     <div class="hero__content">
       <h1 id="hero-heading" class="hero-title">
-        <span class="hero-title__line">
+        <span class="hero-title__line" data-hero>
           {t("title.name")} <span class="hero-title__accent">{t("title.number")}</span>
         </span>
-        <span class="hero-title__line text-stroke-brand">{t("title.sector")}</span>
+        <span class="hero-title__line text-stroke-brand" data-hero>
+          {t("title.sector")}
+        </span>
       </h1>
 
-      <p class="hero-subtitle">{t("subtitle")}</p>
+      <p class="hero-subtitle" data-hero>
+        {t("subtitle")}
+      </p>
 
-      <div class="hero__ctas">
+      <div class="hero__ctas" data-hero>
         <Button href={ROUTES.tryouts} size="lg">
           {t("cta_join")}
         </Button>
@@ -53,7 +57,7 @@ const stats = [
       </div>
     </div>
 
-    <dl class="hero__stats" aria-label={t("stats.label")}>
+    <dl class="hero__stats" data-hero aria-label={t("stats.label")}>
       {stats.map(({ key, value, text }, index) => (
         <div
           class:list={[

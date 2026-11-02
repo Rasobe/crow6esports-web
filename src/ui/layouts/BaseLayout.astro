@@ -1,6 +1,7 @@
 ---
 import "@/styles/global.scss";
 import { Font } from "astro:assets";
+import { ClientRouter } from "astro:transitions";
 import SpeedInsights from "@vercel/speed-insights/astro";
 import { Seo } from "@/ui/shared/components";
 
@@ -24,10 +25,27 @@ const { locale } = Astro.locals;
     <Font cssVariable="--font-display" preload />
     <Font cssVariable="--font-ui" preload />
     <Font cssVariable="--font-body" preload />
+    <script is:inline>
+      (() => {
+        const root = document.documentElement;
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        root.setAttribute("data-motion", "pending");
+        // Failsafe: if the motion script never runs, the content must still show.
+        setTimeout(() => {
+          if (root.getAttribute("data-motion") === "pending") root.removeAttribute("data-motion");
+        }, 3000);
+      })();
+    </script>
+    <ClientRouter />
     <Seo title={title} description={description} locale={locale} path={path} noindex={noindex} />
   </head>
   <body>
     <SpeedInsights />
     <slot />
+    <script>
+      import { initMotion } from "@/scripts/motion";
+
+      initMotion();
+    </script>
   </body>
 </html>
