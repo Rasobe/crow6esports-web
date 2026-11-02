@@ -6,7 +6,7 @@ import { STORE_IN_STOCK } from "@config/store";
 import { getProducts } from "@/application/store/get-products";
 import { container } from "@/infrastructure/container";
 import { createTranslator, localizePath } from "@/ui/i18n";
-import { Button, SectionHeading, SectionBackdrop } from "@/ui/shared/components";
+import { Button, SectionHeading } from "@/ui/shared/components";
 import { ProductCard } from "@/ui/features/store/components";
 
 const HIGHLIGHTED_PRODUCTS = 4;
@@ -17,8 +17,7 @@ const tNext = createTranslator(locale, "store.next_edition");
 const products = getProducts(container.productRepository).slice(0, HIGHLIGHTED_PRODUCTS);
 ---
 
-<section class="store-highlight has-backdrop" aria-labelledby="store-highlight-title">
-  <SectionBackdrop image="turf" />
+<section class="store-highlight" aria-labelledby="store-highlight-title">
   <div class="store-highlight__inner">
     <SectionHeading
       id="store-highlight-title"

@@ -3,13 +3,12 @@ import "./coaching-cta.scss";
 import { CLUB } from "@config/club";
 import { DISCORD_URL } from "@config/site";
 import { createTranslator } from "@/ui/i18n";
-import { Button, SectionBackdrop } from "@/ui/shared/components";
+import { Button } from "@/ui/shared/components";
 
 const t = createTranslator(Astro.locals.locale, "coaching.cta");
 ---
 
-<section class="coaching-cta has-backdrop" aria-labelledby="coaching-cta-title">
-  <SectionBackdrop image="ball" />
+<section class="coaching-cta" aria-labelledby="coaching-cta-title">
   <div class="coaching-cta__inner" data-reveal>
     <h2 id="coaching-cta-title" class="coaching-cta__title">
       {t("title")}

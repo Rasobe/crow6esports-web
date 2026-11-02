@@ -2,7 +2,7 @@
 import "./coaching-availability.scss";
 import { COACHING } from "@config/coaching";
 import { createTranslator } from "@/ui/i18n";
-import { Icon, SectionBackdrop } from "@/ui/shared/components";
+import { Icon } from "@/ui/shared/components";
 
 const WEEK = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"] as const;
 const MONDAY = new Date(2024, 0, 1);
@@ -30,8 +30,7 @@ const rules = [
 ] as const;
 ---
 
-<section class="coaching-availability has-backdrop" aria-labelledby="coaching-availability-title">
-  <SectionBackdrop image="fire" />
+<section class="coaching-availability" aria-labelledby="coaching-availability-title">
   <div class="coaching-availability__inner">
     <article class="availability" data-reveal>
       <header class="availability__header">

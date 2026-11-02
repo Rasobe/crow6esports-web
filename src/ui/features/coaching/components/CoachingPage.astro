@@ -11,12 +11,7 @@ import CoachProfile from "./CoachProfile.astro";
 const t = createTranslator(Astro.locals.locale, "coaching");
 ---
 
-<PageHeader
-  eyebrow={t("eyebrow")}
-  title={t("title")}
-  description={t("description")}
-  image="lights"
-/>
+<PageHeader eyebrow={t("eyebrow")} title={t("title")} description={t("description")} />
 <CoachProfile />
 <CoachingServices />
 <CoachingPlans />

@@ -6,7 +6,13 @@
     align-items: flex-end;
     min-height: clamp(18rem, 46dvh, 28rem);
     padding: var(--space-20) 0 var(--space-12);
-    background: var(--bg-base);
+    position: relative;
+    overflow: hidden;
+    background:
+      linear-gradient(var(--border-subtle) 1px, transparent 1px) 0 0 / 64px 64px,
+      linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px) 0 0 / 64px 64px,
+      var(--bg-base);
+    border-bottom: var(--line);
     clip-path: polygon(0 0, 100% 0, 100% calc(100% - 2rem), calc(100% - 9rem) 100%, 0 100%);
   }
 
@@ -19,8 +25,8 @@
     width: clamp(6rem, 18vw, 16rem);
     background: linear-gradient(
       to bottom,
-      rgb(var(--brand-rgb) / 0.28),
-      rgb(var(--brand-rgb) / 0.02) 80%
+      rgb(var(--brand-rgb) / 0.1),
+      rgb(var(--brand-rgb) / 0) 80%
     );
     transform: skewX(-18deg);
     border-inline: 1px solid var(--border);
@@ -41,7 +47,7 @@
     text-transform: uppercase;
     white-space: nowrap;
     color: transparent;
-    -webkit-text-stroke: 1px rgb(var(--brand-rgb) / 0.22);
+    -webkit-text-stroke: 1px rgb(var(--brand-rgb) / 0.12);
     pointer-events: none;
     user-select: none;
   }

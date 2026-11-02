@@ -4,7 +4,7 @@ import { DISCORD_URL } from "@config/site";
 import { CLUB } from "@config/club";
 import type { Product } from "@/domain/store/product";
 import { createTranslator } from "@/ui/i18n";
-import { Button, SectionBackdrop } from "@/ui/shared/components";
+import { Button } from "@/ui/shared/components";
 
 interface Props {
   products: Product[];
@@ -18,8 +18,7 @@ const images = products.flatMap(({ name, images: sources }) =>
 );
 ---
 
-<section class="next-edition has-backdrop" aria-labelledby="next-edition-title">
-  <SectionBackdrop image="fire" />
+<section class="next-edition" aria-labelledby="next-edition-title">
   <div class="next-edition__inner">
     <ul class="next-edition__gallery">
       {images.map(({ src, alt }) => (

@@ -5,7 +5,7 @@ import { ROUTES } from "@config/routes";
 import { getStartingPlan } from "@/domain/coaching/coaching-plan";
 import { yearsSince } from "@/domain/site/years";
 import { createTranslator } from "@/ui/i18n";
-import { Button, Icon, SectionBackdrop } from "@/ui/shared/components";
+import { Button, Icon } from "@/ui/shared/components";
 
 const SERVICES = ["one_to_one", "teams", "weekly_plan"] as const;
 
@@ -21,8 +21,7 @@ const pricing = (["individual", "teams"] as const).map((id) => {
 const formatNumber = (value: number) => value.toLocaleString(locale);
 ---
 
-<section class="coaching-banner has-backdrop" aria-labelledby="coaching-banner-title">
-  <SectionBackdrop image="fire" />
+<section class="coaching-banner" aria-labelledby="coaching-banner-title">
   <div class="coaching-banner__inner">
     <figure class="coaching-banner__coach">
       <div class="coaching-banner__photo">

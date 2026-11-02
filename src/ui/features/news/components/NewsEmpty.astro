@@ -2,13 +2,12 @@
 import "./news-empty.scss";
 import { socialLinks } from "@config/site";
 import { createTranslator } from "@/ui/i18n";
-import { Icon, SectionBackdrop } from "@/ui/shared/components";
+import { Icon } from "@/ui/shared/components";
 
 const t = createTranslator(Astro.locals.locale, "news.empty");
 ---
 
-<section class="news-empty has-backdrop" aria-labelledby="news-empty-title">
-  <SectionBackdrop image="arena" />
+<section class="news-empty" aria-labelledby="news-empty-title">
   <div class="news-empty__inner" data-reveal>
     <span class="news-empty__icon" aria-hidden="true">
       <svg

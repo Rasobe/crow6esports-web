@@ -14,27 +14,10 @@ const t = createTranslator(Astro.locals.locale, "team");
 const { playerRepository } = container;
 ---
 
-<PageHeader
-  eyebrow={t("eyebrow")}
-  title={t("meta.title")}
-  description={t("meta.description")}
-  image="ball"
-/>
+<PageHeader eyebrow={t("eyebrow")} title={t("meta.title")} description={t("meta.description")} />
 
-<RosterSection
-  image="ball"
-  title={t("sections.active")}
-  players={getActivePlayers(playerRepository)}
-/>
-<RosterSection
-  image="turf"
-  title={t("sections.substitutes")}
-  players={getSubstitutePlayers(playerRepository)}
-/>
-<RosterSection
-  image="lights"
-  title={t("sections.staff")}
-  players={getStaffMembers(playerRepository)}
-/>
+<RosterSection title={t("sections.active")} players={getActivePlayers(playerRepository)} />
+<RosterSection title={t("sections.substitutes")} players={getSubstitutePlayers(playerRepository)} />
+<RosterSection title={t("sections.staff")} players={getStaffMembers(playerRepository)} />
 
 <TeamCTA />

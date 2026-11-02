@@ -4,7 +4,7 @@ import { COACHING } from "@config/coaching";
 import { DISCORD_URL } from "@config/site";
 import { getPricePerPlayer, type CoachingMode } from "@/domain/coaching/coaching-plan";
 import { createTranslator, formatCurrency } from "@/ui/i18n";
-import { Button, SectionBackdrop } from "@/ui/shared/components";
+import { Button } from "@/ui/shared/components";
 
 const MODES: readonly CoachingMode[] = ["individual", "teams"];
 
@@ -14,8 +14,7 @@ const { plans, currency, sessionDurationHours, teamMinPlayers } = COACHING;
 const price = (amount: number) => formatCurrency(locale, amount, currency);
 ---
 
-<section class="coaching-plans has-backdrop" aria-labelledby="coaching-plans-title">
-  <SectionBackdrop image="arena" />
+<section class="coaching-plans" aria-labelledby="coaching-plans-title">
   <div class="coaching-plans__inner">
     <header class="coaching-plans__header" data-reveal>
       <h2 id="coaching-plans-title" class="coaching-plans__title">

@@ -3,6 +3,7 @@
 @layer components {
   .coaching-availability {
     padding: var(--section-py) 0;
+    background: var(--bg-base);
     border-top: var(--line-subtle);
   }
 
@@ -23,13 +24,8 @@
     flex-direction: column;
     gap: var(--space-6);
     padding: var(--space-8);
-    background: linear-gradient(
-      150deg,
-      rgb(var(--bg-base-rgb) / 0.92),
-      rgb(var(--bg-base-rgb) / 0.78)
-    );
-    border: var(--line);
-    backdrop-filter: blur(8px);
+    background: var(--bg-surface);
+    border: var(--line-subtle);
     clip-path: polygon(0 0, calc(100% - 28px) 0, 100% 28px, 100% 100%, 0 100%);
 
     // Barra superior dorada
@@ -38,7 +34,7 @@
       position: absolute;
       inset: 0 0 auto 0;
       height: 3px;
-      background: var(--grad-brand);
+      background: var(--brand);
     }
   }
 

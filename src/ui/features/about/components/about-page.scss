@@ -52,8 +52,15 @@
     }
   }
 
+  .about-history,
   .about-values {
-    border-top: var(--line-subtle);
+    background: var(--bg-surface);
+    border-block: var(--line-subtle);
+  }
+
+  .about-history .achievement,
+  .about-values .about-values__item {
+    background: var(--bg-base);
   }
 
   .about-history__inner,
@@ -81,10 +88,9 @@
     flex-direction: column;
     gap: var(--space-3);
     padding: var(--space-8);
-    background: rgb(var(--bg-base-rgb) / 0.82);
+    background: var(--bg-surface);
     border: var(--line);
     border-top: 3px solid var(--brand);
-    backdrop-filter: blur(6px);
   }
 
   .achievement__result {
@@ -161,7 +167,7 @@
     height: 100%;
     padding: var(--space-5);
     text-decoration: none;
-    background: rgb(var(--bg-base-rgb) / 0.82);
+    background: var(--bg-surface);
     border: var(--line-subtle);
     border-left: 3px solid var(--brand);
     transition:

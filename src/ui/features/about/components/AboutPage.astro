@@ -7,7 +7,7 @@ import { DISCORD_URL, socialLinks } from "@config/site";
 import { getRosterStats } from "@/application/team/get-roster-stats";
 import { container } from "@/infrastructure/container";
 import { createTranslator } from "@/ui/i18n";
-import { Button, Icon, PageHeader, SectionBackdrop } from "@/ui/shared/components";
+import { Button, Icon, PageHeader } from "@/ui/shared/components";
 
 const { locale } = Astro.locals;
 const t = createTranslator(locale, "about");
@@ -24,15 +24,9 @@ const toIsoDate = ({ year, month, day }: ClubDate) =>
     : String(year);
 ---
 
-<PageHeader
-  eyebrow={t("eyebrow")}
-  title={t("title")}
-  description={t("meta.description")}
-  image="arena"
-/>
+<PageHeader eyebrow={t("eyebrow")} title={t("title")} description={t("meta.description")} />
 
-<section class="about-story has-backdrop" aria-labelledby="about-story-title">
-  <SectionBackdrop image="lights" />
+<section class="about-story" aria-labelledby="about-story-title">
   <div class="about-story__inner">
     <h2 id="about-story-title" class="about-story__title" data-reveal>
       {t("story.title")}
@@ -44,8 +38,7 @@ const toIsoDate = ({ year, month, day }: ClubDate) =>
   </div>
 </section>
 
-<section class="about-history has-backdrop" aria-labelledby="about-history-title">
-  <SectionBackdrop image="fire" />
+<section class="about-history" aria-labelledby="about-history-title">
   <div class="about-history__inner">
     <h2 id="about-history-title" class="about-history__title" data-reveal>
       {t("history.title")}
@@ -76,8 +69,7 @@ const toIsoDate = ({ year, month, day }: ClubDate) =>
   </div>
 </section>
 
-<section class="about-roster has-backdrop" aria-labelledby="about-roster-title">
-  <SectionBackdrop image="turf" />
+<section class="about-roster" aria-labelledby="about-roster-title">
   <div class="about-roster__inner">
     <h2 id="about-roster-title" class="about-roster__title" data-reveal>
       {t("history.roster_title", { year: ROSTER_2022_YEAR })}
@@ -101,8 +93,7 @@ const toIsoDate = ({ year, month, day }: ClubDate) =>
   </div>
 </section>
 
-<section class="about-values has-backdrop" aria-labelledby="about-values-title">
-  <SectionBackdrop image="ball" />
+<section class="about-values" aria-labelledby="about-values-title">
   <div class="about-values__inner">
     <h2 id="about-values-title" class="about-values__title" data-reveal>
       {t("values.title")}

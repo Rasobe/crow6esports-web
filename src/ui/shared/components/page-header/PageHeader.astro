@@ -1,21 +1,16 @@
 ---
 import "./page-header.scss";
-import SectionBackdrop from "../section-backdrop/SectionBackdrop.astro";
-
-type HeaderImage = "arena" | "lights" | "ball" | "fire" | "turf";
 
 interface Props {
   eyebrow?: string;
   title: string;
   description?: string;
-  image?: HeaderImage;
 }
 
-const { eyebrow, title, description, image = "arena" } = Astro.props;
+const { eyebrow, title, description } = Astro.props;
 ---
 
-<header class="page-header has-backdrop">
-  <SectionBackdrop image={image} fade="bottom" strong eager />
+<header class="page-header">
   <span class="page-header__slash" aria-hidden="true"></span>
   <span class="page-header__watermark" aria-hidden="true">
     {title}

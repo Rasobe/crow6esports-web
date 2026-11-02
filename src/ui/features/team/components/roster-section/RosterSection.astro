@@ -1,32 +1,24 @@
 ---
 import "./roster-section.scss";
 import type { Player } from "@/domain/team/player";
-import { PlayerCard, SectionBackdrop } from "@/ui/shared/components";
+import { PlayerCard } from "@/ui/shared/components";
 
 interface Props {
   title: string;
   players: Player[];
-  image: "arena" | "lights" | "ball" | "fire" | "turf";
-  count?: number;
 }
 
-const { title, players, image } = Astro.props;
+const { title, players } = Astro.props;
 ---
 
 {players.length > 0 && (
-  <section class="roster-section has-backdrop">
-    <SectionBackdrop image={image} />
+  <section class="roster-section">
     <div class="roster-section__inner">
-      <header class="roster-section__header" data-reveal>
-        <span class="roster-section__count" aria-hidden="true">
-          {String(players.length).padStart(2, "0")}
-        </span>
-        <h2 class="roster-section__title">{title}</h2>
-      </header>
+      <h2 class="roster-section__title">{title}</h2>
 
       <ul class="roster-section__list">
         {players.map((player, index) => (
-          <li class="roster-section__list-item" data-reveal>
+          <li class="roster-section__list-item">
             <PlayerCard player={player} index={index} />
           </li>
         ))}
