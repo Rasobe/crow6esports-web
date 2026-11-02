@@ -2,12 +2,16 @@
 @use "styles/mixins" as *;
 @layer components {
   .about-story,
+  .about-history,
+  .about-roster,
   .about-values,
   .about-contact {
     padding: var(--section-py) 0;
   }
 
   .about-story__inner,
+  .about-history__inner,
+  .about-roster__inner,
   .about-values__inner,
   .about-contact__inner {
     @include container;
@@ -24,6 +28,8 @@
   }
 
   .about-story__title,
+  .about-history__title,
+  .about-roster__title,
   .about-values__title,
   .about-contact__title {
     font-size: var(--fs-h3);
@@ -47,8 +53,146 @@
   }
 
   .about-values {
-    background: var(--bg-surface);
     border-top: var(--line-subtle);
+  }
+
+  .about-history__inner,
+  .about-roster__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-10);
+  }
+
+  .about-history__list {
+    display: grid;
+    gap: var(--space-4);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    @include above(md) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  .achievement {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-8);
+    background: rgb(var(--bg-base-rgb) / 0.82);
+    border: var(--line);
+    border-top: 3px solid var(--brand);
+    backdrop-filter: blur(6px);
+  }
+
+  .achievement__result {
+    margin: 0;
+    font-family: var(--ff-display);
+    font-size: var(--fs-h3);
+    line-height: 1;
+    text-transform: uppercase;
+    color: var(--brand);
+  }
+
+  .achievement__event {
+    font-size: var(--fs-2xl);
+    text-transform: uppercase;
+    color: var(--text-primary);
+  }
+
+  .achievement__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3);
+    margin: 0;
+    font-family: var(--ff-ui);
+    font-size: var(--fs-md);
+    font-weight: 600;
+    letter-spacing: var(--tracking-normal);
+    text-transform: uppercase;
+    color: var(--text-secondary);
+  }
+
+  .achievement__tag {
+    padding: var(--space-1) var(--space-3);
+    font-size: var(--fs-xs);
+    color: var(--brand-fg);
+    background: var(--brand);
+    @include angular-cut(6px);
+  }
+
+  .achievement__lineup {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    margin: 0;
+    padding-top: var(--space-4);
+    border-top: var(--line-subtle);
+    font-family: var(--ff-body);
+    font-size: var(--fs-lg);
+    color: var(--text-primary);
+  }
+
+  .achievement__lineup-label {
+    font-family: var(--ff-ui);
+    font-size: var(--fs-xs);
+    font-weight: 700;
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .about-roster__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+    gap: var(--space-3);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .member {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    height: 100%;
+    padding: var(--space-5);
+    text-decoration: none;
+    background: rgb(var(--bg-base-rgb) / 0.82);
+    border: var(--line-subtle);
+    border-left: 3px solid var(--brand);
+    transition:
+      transform var(--duration-slow) var(--ease-out),
+      border-color var(--duration-base) var(--ease-standard);
+
+    &:hover {
+      transform: translateY(calc(var(--lift-distance) * -1));
+      border-color: var(--brand);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--brand);
+      outline-offset: 3px;
+    }
+  }
+
+  .member__role {
+    font-family: var(--ff-ui);
+    font-size: var(--fs-xs);
+    font-weight: 700;
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    color: var(--brand);
+  }
+
+  .member__handle {
+    font-family: var(--ff-display);
+    font-size: var(--fs-xl);
+    color: var(--text-primary);
+    overflow-wrap: anywhere;
   }
 
   .about-values__inner {

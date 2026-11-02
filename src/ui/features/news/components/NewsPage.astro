@@ -11,7 +11,12 @@ const t = createTranslator(Astro.locals.locale, "news");
 const articles = await getArticles(container.articleRepository);
 ---
 
-<PageHeader eyebrow={t("eyebrow")} title={t("title")} description={t("meta.description")} />
+<PageHeader
+  eyebrow={t("eyebrow")}
+  title={t("title")}
+  description={t("meta.description")}
+  image="turf"
+/>
 
 {articles.length === 0 ? (
   <NewsEmpty />

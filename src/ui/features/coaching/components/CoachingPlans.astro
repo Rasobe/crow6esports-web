@@ -2,19 +2,20 @@
 import "./coaching-plans.scss";
 import { COACHING } from "@config/coaching";
 import { DISCORD_URL } from "@config/site";
-import type { CoachingMode } from "@/domain/coaching/coaching-plan";
+import { getPricePerPlayer, type CoachingMode } from "@/domain/coaching/coaching-plan";
 import { createTranslator, formatCurrency } from "@/ui/i18n";
-import { Button } from "@/ui/shared/components";
+import { Button, SectionBackdrop } from "@/ui/shared/components";
 
 const MODES: readonly CoachingMode[] = ["individual", "teams"];
 
 const { locale } = Astro.locals;
 const t = createTranslator(locale, "coaching.plans");
-const { plans, currency, sessionDurationHours } = COACHING;
+const { plans, currency, sessionDurationHours, teamMinPlayers } = COACHING;
 const price = (amount: number) => formatCurrency(locale, amount, currency);
 ---
 
-<section class="coaching-plans" aria-labelledby="coaching-plans-title">
+<section class="coaching-plans has-backdrop" aria-labelledby="coaching-plans-title">
+  <SectionBackdrop image="arena" />
   <div class="coaching-plans__inner">
     <header class="coaching-plans__header" data-reveal>
       <h2 id="coaching-plans-title" class="coaching-plans__title">
@@ -26,6 +27,9 @@ const price = (amount: number) => formatCurrency(locale, amount, currency);
     {MODES.map((mode) => (
       <div class="coaching-plans__group">
         <h3 class="coaching-plans__mode">{t(`mode.${mode}`)}</h3>
+        {mode === "teams" && (
+          <p class="coaching-plans__note">{t("team_note", { players: teamMinPlayers })}</p>
+        )}
         <ul class="coaching-plans__grid">
           {plans[mode].map((plan) => (
             <li class:list={["plan-card", { "plan-card--featured": plan.featured }]} data-reveal>
@@ -46,6 +50,14 @@ const price = (amount: number) => formatCurrency(locale, amount, currency);
                   <s>{price(plan.originalPrice)}</s>
                 </span>
               </p>
+              {mode === "teams" && (
+                <p class="plan-card__per-player">
+                  {t("per_player", {
+                    price: price(getPricePerPlayer(plan, teamMinPlayers)),
+                    players: teamMinPlayers,
+                  })}
+                </p>
+              )}
               <p class="plan-card__sessions">
                 {t(plan.weeklySessions === 1 ? "sessions_one" : "sessions_other", {
                   count: plan.weeklySessions,

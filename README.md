@@ -13,7 +13,7 @@ Sitio web oficial de [Crow 6 Esports](https://crow6esports.com) — organizació
 | Pagos     | Stripe                               | Gestión de pedidos de tienda                            |
 | Email     | Resend                               | Notificaciones de tryouts y pedidos                     |
 | Hosting   | Vercel                               | Adaptador oficial de Astro, free tier suficiente        |
-| Fuentes   | Anton SC · Barlow Condensed · Barlow | Google Fonts vía la Fonts API de Astro                 |
+| Fuentes   | Anton SC · Barlow Condensed · Barlow | Google Fonts vía la Fonts API de Astro                  |
 
 ## Estructura del proyecto
 
@@ -116,4 +116,4 @@ El proyecto despliega automáticamente en Vercel en cada push a `main`. Las vari
 
 ---
 
-**Crow 6 Esports** · Huesca, España · Est. 2020 · [crow6esports.com](https://crow6esports.com) · [@crow6esports](https://linktr.ee/crow6esports)
+**Crow 6 Esports** · Est. 2020 · [crow6esports.com](https://crow6esports.com) · [@crow6esports](https://linktr.ee/crow6esports)

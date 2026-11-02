@@ -3,73 +3,184 @@
 @layer components {
   .coaching-availability {
     padding: var(--section-py) 0;
-    background: var(--bg-surface);
     border-top: var(--line-subtle);
   }
 
   .coaching-availability__inner {
     @include container;
     display: grid;
-    gap: var(--space-4);
+    gap: var(--space-6);
 
     @include above(md) {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     }
   }
 
-  .coaching-availability__panel {
+  .availability,
+  .policy {
+    position: relative;
     display: flex;
     flex-direction: column;
-    gap: var(--space-4);
+    gap: var(--space-6);
     padding: var(--space-8);
-    background: var(--bg-base);
-    border: var(--line-subtle);
-    border-top: 2px solid var(--brand);
+    background: linear-gradient(
+      150deg,
+      rgb(var(--bg-base-rgb) / 0.92),
+      rgb(var(--bg-base-rgb) / 0.78)
+    );
+    border: var(--line);
+    backdrop-filter: blur(8px);
+    clip-path: polygon(0 0, calc(100% - 28px) 0, 100% 28px, 100% 100%, 0 100%);
+
+    // Barra superior dorada
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 3px;
+      background: var(--grad-brand);
+    }
   }
 
-  .coaching-availability__title {
+  .availability__header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .availability__icon {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    color: var(--brand-fg);
+    background: var(--brand);
+    @include angular-cut(8px);
+  }
+
+  .availability__title {
     font-size: var(--fs-2xl);
     text-transform: uppercase;
     color: var(--text-primary);
   }
 
-  .coaching-availability__highlight {
+  .availability__hours {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-3);
     margin: 0;
     font-family: var(--ff-display);
-    font-size: var(--fs-xl);
-    letter-spacing: var(--tracking-snug);
+    font-size: clamp(2.5rem, 7vw, 4rem);
+    line-height: 1;
+    color: var(--text-primary);
+  }
+
+  .availability__arrow {
     color: var(--brand);
   }
 
-  .coaching-availability__text,
-  .coaching-availability__rules {
+  .availability__zone {
+    padding: var(--space-1) var(--space-3);
+    font-family: var(--ff-ui);
+    font-size: var(--fs-md);
+    font-weight: 700;
+    letter-spacing: var(--tracking-widest);
+    color: var(--brand);
+    border: 1px solid var(--border-strong);
+  }
+
+  .availability__days {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: var(--space-2);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .availability__day {
+    display: grid;
+    place-items: center;
+    padding: var(--space-3) 0;
+    font-family: var(--ff-ui);
+    font-size: var(--fs-sm);
+    font-weight: 700;
+    letter-spacing: var(--tracking-normal);
+    text-transform: uppercase;
+    color: var(--text-muted);
+    border: var(--line-subtle);
+    text-decoration: line-through;
+    text-decoration-color: rgb(var(--white-rgb) / 0.25);
+  }
+
+  .availability__day--active {
+    color: var(--brand-fg);
+    background: var(--brand);
+    border-color: var(--brand);
+    text-decoration: none;
+  }
+
+  .availability__note {
     margin: 0;
     font-family: var(--ff-body);
     font-size: var(--fs-body);
-    line-height: 1.7;
+    line-height: 1.6;
     color: var(--text-secondary);
   }
 
-  .coaching-availability__rules {
+  .policy__rules {
     display: flex;
     flex-direction: column;
     gap: var(--space-3);
+    margin: 0;
     padding: 0;
     list-style: none;
+  }
 
-    li {
-      padding-left: var(--space-5);
-      position: relative;
+  .policy__rule {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: var(--space-5);
+    padding: var(--space-4) var(--space-5);
+    background: var(--brand-wash);
+    border: var(--line-subtle);
+    border-left: 3px solid var(--brand);
+  }
 
-      &::before {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 0.7em;
-        width: 8px;
-        height: 2px;
-        background: var(--brand);
-      }
-    }
+  .policy__value {
+    min-width: 3.5rem;
+    font-family: var(--ff-display);
+    font-size: clamp(2rem, 5vw, 2.75rem);
+    line-height: 1;
+    color: var(--brand);
+  }
+
+  .policy__text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .policy__unit {
+    font-family: var(--ff-ui);
+    font-size: var(--fs-md);
+    font-weight: 700;
+    letter-spacing: var(--tracking-normal);
+    text-transform: uppercase;
+    color: var(--text-primary);
+  }
+
+  .policy__label {
+    font-family: var(--ff-body);
+    font-size: var(--fs-md);
+    line-height: 1.5;
+    color: var(--text-secondary);
+  }
+
+  .policy__rule-icon {
+    color: var(--text-muted);
   }
 }

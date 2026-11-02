@@ -1,4 +1,5 @@
 ---
+import { SectionBackdrop } from "@/ui/shared/components";
 import "./coaching-teams.scss";
 import { COACHING } from "@config/coaching";
 import { createTranslator } from "@/ui/i18n";
@@ -6,7 +7,8 @@ import { createTranslator } from "@/ui/i18n";
 const t = createTranslator(Astro.locals.locale, "coaching.teams");
 ---
 
-<section class="coaching-teams" aria-labelledby="coaching-teams-title">
+<section class="coaching-teams has-backdrop" aria-labelledby="coaching-teams-title">
+  <SectionBackdrop image="turf" />
   <div class="coaching-teams__inner">
     <h2 id="coaching-teams-title" class="coaching-teams__title" data-reveal>
       {t("title")}

@@ -1,19 +1,40 @@
 ---
 import "./page-header.scss";
+import SectionBackdrop from "../section-backdrop/SectionBackdrop.astro";
+
+type HeaderImage = "arena" | "lights" | "ball" | "fire" | "turf";
 
 interface Props {
   eyebrow?: string;
   title: string;
   description?: string;
+  image?: HeaderImage;
 }
 
-const { eyebrow, title, description } = Astro.props;
+const { eyebrow, title, description, image = "arena" } = Astro.props;
 ---
 
-<div class="page-header" data-title={title}>
+<header class="page-header has-backdrop">
+  <SectionBackdrop image={image} fade="bottom" strong eager />
+  <span class="page-header__slash" aria-hidden="true"></span>
+  <span class="page-header__watermark" aria-hidden="true">
+    {title}
+  </span>
+
   <div class="page-header__inner">
-    {eyebrow && <span class="page-header__eyebrow">{eyebrow}</span>}
-    <h1 class="page-header__title">{title}</h1>
-    {description && <p class="page-header__description">{description}</p>}
+    {eyebrow && (
+      <p class="page-header__eyebrow" data-hero style="--hero-step: 0">
+        {eyebrow}
+      </p>
+    )}
+    <h1 class="page-header__title" data-hero style="--hero-step: 1">
+      {title}
+    </h1>
+    {description && (
+      <p class="page-header__description" data-hero style="--hero-step: 2">
+        {description}
+      </p>
+    )}
+    <slot />
   </div>
-</div>
+</header>

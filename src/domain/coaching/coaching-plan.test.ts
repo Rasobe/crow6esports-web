@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { getStartingPlan, type CoachingPlan } from "./coaching-plan";
+import { getPricePerPlayer, getStartingPlan, type CoachingPlan } from "./coaching-plan";
 
 const plans: CoachingPlan[] = [
   { tier: "pro", price: 55, originalPrice: 90, weeklySessions: 2 },
@@ -10,5 +10,11 @@ const plans: CoachingPlan[] = [
 describe("getStartingPlan", () => {
   it("returns the cheapest plan", () => {
     expect(getStartingPlan(plans).tier).toBe("basic");
+  });
+});
+
+describe("getPricePerPlayer", () => {
+  it("splits the team price between its players, rounded", () => {
+    expect(getPricePerPlayer(plans[0], 3)).toBe(18);
   });
 });

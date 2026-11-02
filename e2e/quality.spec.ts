@@ -76,7 +76,7 @@ test("shows the news empty state", async ({ page }) => {
 test("renders the coaching packs with launch prices", async ({ page }) => {
   await page.goto("/es/coaching");
   await expect(page.getByText("Precio de lanzamiento")).toHaveCount(6);
-  await expect(page.getByText("Más elegido")).toHaveCount(1);
+  await expect(page.getByText("Más elegido")).toHaveCount(2);
 });
 
 test("keeps the content visible when reduced motion is requested", async ({ browser }) => {

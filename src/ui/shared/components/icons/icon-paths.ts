@@ -10,9 +10,13 @@ export type IconName =
   | "arrow-right"
   | "mail"
   | "map-pin"
-  | "lock";
+  | "lock"
+  | "clock"
+  | "calendar"
+  | "refresh";
 
-export type StrokedIconName = "arrow-left" | "arrow-right" | "mail" | "map-pin" | "lock";
+export type StrokedIconName =
+  "arrow-left" | "arrow-right" | "mail" | "map-pin" | "lock" | "clock" | "calendar" | "refresh";
 export type FilledIconName = Exclude<IconName, StrokedIconName>;
 
 /** Filled 16x16 glyphs rendered with currentColor. */
@@ -43,6 +47,23 @@ export const FILLED_ICON_PATHS: Record<FilledIconName, string[]> = {
 
 /** Outlined 24x24 glyphs rendered with currentColor strokes. */
 export const STROKED_ICONS: Record<StrokedIconName, { strokeWidth: number; paths: string[] }> = {
+  clock: { strokeWidth: 2, paths: ["M12 6v6l4 2", "M22 12a10 10 0 1 1-20 0 10 10 0 0 1 20 0z"] },
+  calendar: {
+    strokeWidth: 2,
+    paths: [
+      "M8 2v4M16 2v4M3 10h18",
+      "M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z",
+    ],
+  },
+  refresh: {
+    strokeWidth: 2,
+    paths: [
+      "M21 12a9 9 0 0 0-15-6.7L3 8",
+      "M3 3v5h5",
+      "M3 12a9 9 0 0 0 15 6.7L21 16",
+      "M16 16h5v5",
+    ],
+  },
   "arrow-left": { strokeWidth: 2.5, paths: ["M19 12H5M12 5l-7 7 7 7"] },
   "arrow-right": { strokeWidth: 2.5, paths: ["M5 12h14M12 5l7 7-7 7"] },
   mail: {

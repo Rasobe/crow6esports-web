@@ -4,7 +4,6 @@ import { CLUB } from "@config/club";
 import { socialLinks } from "@config/site";
 import { createTranslator } from "@/ui/i18n";
 import { Icon } from "@/ui/shared/components";
-import { getLocationLabel } from "@/ui/shared/lib/club-info";
 
 const { locale } = Astro.locals;
 const t = createTranslator(locale, "comingSoon");
@@ -53,9 +52,7 @@ const t = createTranslator(locale, "comingSoon");
       </ul>
     </nav>
 
-    <p class="coming-soon__meta">
-      {t("meta", { year: CLUB.foundedYear, location: getLocationLabel(locale), game: CLUB.game })}
-    </p>
+    <p class="coming-soon__meta">{t("meta", { year: CLUB.foundedYear, game: CLUB.game })}</p>
     <p class="coming-soon__hashtag">{t("hashtag")}</p>
   </div>
 </main>

@@ -1,4 +1,5 @@
 ---
+import { SectionBackdrop } from "@/ui/shared/components";
 import "./coach-profile.scss";
 import { COACHING } from "@config/coaching";
 import { yearsSince } from "@/domain/site/years";
@@ -20,7 +21,8 @@ const stats = [
 ];
 ---
 
-<section class="coach-profile" aria-labelledby="coach-profile-title">
+<section class="coach-profile has-backdrop" aria-labelledby="coach-profile-title">
+  <SectionBackdrop image="ball" />
   <div class="coach-profile__inner">
     <figure class="coach-profile__figure" data-reveal>
       {coach.photo ? (

@@ -1,6 +1,6 @@
 {
   "site": {
-    "description": "Organización competitiva de Rocket League con sede en Huesca, España."
+    "description": "Organización competitiva de Rocket League."
   },
   "nav": {
     "team": "Plantilla",
@@ -35,7 +35,7 @@
         "years": "Años de trayectoria",
         "players": "Jugadores en plantilla",
         "peak": "Peak MMR del roster",
-        "location": "Ubicación"
+        "game": "Juego"
       }
     },
     "ticker": {
@@ -83,7 +83,6 @@
       "cta_view_more": "Ir a la tienda"
     },
     "playerCard": {
-      "stat_mmr": "MMR",
       "stat_peak": "PEAK",
       "stat_age": "EDAD",
       "role_player": "Jugador",
@@ -356,7 +355,7 @@
     },
     "plans": {
       "title": "Packs de coaching",
-      "lead": "Precios de lanzamiento: aprovecha el precio reducido mientras dure.",
+      "lead": "Precios de lanzamiento. En los packs de equipo pagas una cuota por equipo: cuantos más jugadores, menos pagas por cabeza.",
       "mode": {
         "individual": "Individual",
         "teams": "Grupal / equipos"
@@ -372,7 +371,9 @@
       "original_price": "Precio original",
       "sessions_one": "{count} sesión semanal de {hours} h",
       "sessions_other": "{count} sesiones semanales de {hours} h",
-      "cta": "Reservar por Discord"
+      "cta": "Reservar por Discord",
+      "team_note": "Precio por equipo, mínimo {players} jugadores.",
+      "per_player": "≈ {price} por jugador con {players}"
     },
     "teams": {
       "title": "Equipos con los que ha trabajado"
@@ -380,12 +381,25 @@
     "availability": {
       "title": "Disponibilidad",
       "schedule": "Lunes a sábado · {from} a {to} {timezone}",
-      "note": "Confirma la disponibilidad con el coach antes de reservar."
+      "note": "Confirma la disponibilidad con el coach antes de reservar.",
+      "days_label": "Días disponibles",
+      "closed": "no disponible"
     },
     "policy": {
       "title": "Política de sesiones",
-      "postpone": "Puedes posponer una sesión hasta {days} días dentro de la misma semana, un máximo de {times} veces al mes.",
-      "recover": "Si el coach no puede por un motivo justificado, la sesión siempre se recupera."
+      "recover_value": "Siempre",
+      "postpone_days": {
+        "unit": "días para posponer",
+        "label": "Dentro de la misma semana."
+      },
+      "postpone_times": {
+        "unit": "veces al mes",
+        "label": "Máximo de aplazamientos permitidos."
+      },
+      "recover": {
+        "unit": "se recupera",
+        "label": "Si el coach no puede por un motivo justificado."
+      }
     },
     "cta": {
       "title": "Reserva tu plaza",
@@ -403,8 +417,27 @@
     "title": "Sobre nosotros",
     "story": {
       "title": "Nuestra historia",
-      "founded": "Crow 6 Esports nace en {year} en {location} como organización competitiva de {game}.",
+      "founded": "Crow 6 Esports nace en {year} como organización competitiva de {game}.",
       "today": "Hoy el roster oficial reúne a {players} jugadores entre titulares y suplentes."
+    },
+    "history": {
+      "title": "Palmarés y trayectoria",
+      "winner": "Campeones",
+      "placement": "{place}{suffix} puesto",
+      "ordinal": {
+        "one": "º",
+        "two": "º",
+        "few": "º",
+        "other": "º"
+      },
+      "onsite": "Presencial",
+      "lineup": "Alineación",
+      "roster_title": "Plantilla de {year}",
+      "roles": {
+        "manager_coach": "Manager / coach",
+        "captain": "Capitán",
+        "player": "Jugador"
+      }
     },
     "values": {
       "title": "Nuestros valores",
@@ -444,7 +477,7 @@
     },
     "brand_description": "Organización competitiva de Rocket League.",
     "rights": "Todos los derechos reservados",
-    "founded": "Fundado en {year} · {location}"
+    "founded": "Fundado en {year}"
   },
   "notFound": {
     "eyebrow": "Página no encontrada",
@@ -460,7 +493,7 @@
     "description": "Estamos trabajando en una nueva experiencia para Crow 6 Esports. Vuelve pronto.",
     "socialsLabel": "Redes sociales",
     "newTab": "se abre en una pestaña nueva",
-    "meta": "Desde {year} · {location} · {game}",
+    "meta": "Desde {year} · {game}",
     "hashtag": "#GoCrows"
   },
   "underConstruction": {

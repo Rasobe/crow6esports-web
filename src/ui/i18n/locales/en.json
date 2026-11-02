@@ -1,6 +1,6 @@
 {
   "site": {
-    "description": "Competitive Rocket League organization based in Huesca, Spain."
+    "description": "Competitive Rocket League organization."
   },
   "nav": {
     "team": "Team",
@@ -35,7 +35,7 @@
         "years": "Years of history",
         "players": "Players on the roster",
         "peak": "Roster peak MMR",
-        "location": "Location"
+        "game": "Game"
       }
     },
     "ticker": {
@@ -83,7 +83,6 @@
       "cta_view_more": "Go to the store"
     },
     "playerCard": {
-      "stat_mmr": "MMR",
       "stat_peak": "PEAK",
       "stat_age": "AGE",
       "role_player": "Player",
@@ -356,7 +355,7 @@
     },
     "plans": {
       "title": "Coaching packs",
-      "lead": "Launch prices: take advantage of the reduced price while it lasts.",
+      "lead": "Launch prices. Team packs are priced per team: the more players, the less each one pays.",
       "mode": {
         "individual": "Individual",
         "teams": "Group / teams"
@@ -372,7 +371,9 @@
       "original_price": "Original price",
       "sessions_one": "{count} weekly session of {hours} h",
       "sessions_other": "{count} weekly sessions of {hours} h",
-      "cta": "Book on Discord"
+      "cta": "Book on Discord",
+      "team_note": "Price per team, minimum {players} players.",
+      "per_player": "≈ {price} per player with {players}"
     },
     "teams": {
       "title": "Teams he has worked with"
@@ -380,12 +381,25 @@
     "availability": {
       "title": "Availability",
       "schedule": "Monday to Saturday · {from} to {to} {timezone}",
-      "note": "Confirm availability with the coach before booking."
+      "note": "Confirm availability with the coach before booking.",
+      "days_label": "Available days",
+      "closed": "unavailable"
     },
     "policy": {
       "title": "Session policy",
-      "postpone": "You can postpone a session up to {days} days within the same week, a maximum of {times} times per month.",
-      "recover": "If the coach cannot make it for a justified reason, the session is always made up."
+      "recover_value": "Always",
+      "postpone_days": {
+        "unit": "days to postpone",
+        "label": "Within the same week."
+      },
+      "postpone_times": {
+        "unit": "times per month",
+        "label": "Maximum postponements allowed."
+      },
+      "recover": {
+        "unit": "made up",
+        "label": "If the coach cannot make it for a justified reason."
+      }
     },
     "cta": {
       "title": "Book your spot",
@@ -403,8 +417,27 @@
     "title": "About us",
     "story": {
       "title": "Our story",
-      "founded": "Crow 6 Esports was founded in {year} in {location} as a competitive {game} organization.",
+      "founded": "Crow 6 Esports was founded in {year} as a competitive {game} organization.",
       "today": "Today the official roster brings together {players} players between starters and substitutes."
+    },
+    "history": {
+      "title": "Honours and history",
+      "winner": "Champions",
+      "placement": "{place}{suffix} place",
+      "ordinal": {
+        "one": "st",
+        "two": "nd",
+        "few": "rd",
+        "other": "th"
+      },
+      "onsite": "On-site",
+      "lineup": "Line-up",
+      "roster_title": "{year} roster",
+      "roles": {
+        "manager_coach": "Manager / coach",
+        "captain": "Captain",
+        "player": "Player"
+      }
     },
     "values": {
       "title": "Our values",
@@ -444,7 +477,7 @@
     },
     "brand_description": "Competitive Rocket League organization.",
     "rights": "All rights reserved",
-    "founded": "Founded in {year} · {location}"
+    "founded": "Founded in {year}"
   },
   "notFound": {
     "eyebrow": "Page not found",
@@ -460,7 +493,7 @@
     "description": "We are building a new experience for Crow 6 Esports. Check back soon.",
     "socialsLabel": "Social media",
     "newTab": "opens in a new tab",
-    "meta": "Since {year} · {location} · {game}",
+    "meta": "Since {year} · {game}",
     "hashtag": "#GoCrows"
   },
   "underConstruction": {

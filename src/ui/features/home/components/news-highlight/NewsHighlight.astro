@@ -5,7 +5,7 @@ import { getArticles } from "@/application/news/get-articles";
 import { container } from "@/infrastructure/container";
 import { ArticleCard } from "@/ui/features/news/components";
 import { createTranslator, localizePath } from "@/ui/i18n";
-import { SectionHeading } from "@/ui/shared/components";
+import { SectionHeading, SectionBackdrop } from "@/ui/shared/components";
 
 const HIGHLIGHTED_ARTICLES = 3;
 
@@ -15,7 +15,8 @@ const articles = (await getArticles(container.articleRepository)).slice(0, HIGHL
 ---
 
 {articles.length > 0 && (
-  <section class="news-highlight" aria-labelledby="news-highlight-title">
+  <section class="news-highlight has-backdrop" aria-labelledby="news-highlight-title">
+    <SectionBackdrop image="arena" />
     <div class="news-highlight__inner">
       <SectionHeading
         id="news-highlight-title"

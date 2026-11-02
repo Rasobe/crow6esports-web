@@ -9,3 +9,10 @@
   flex-direction: column;
   padding-top: var(--navbar-h);
 }
+
+/* Sección con imagen de fondo (ver SectionBackdrop) */
+.has-backdrop {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}

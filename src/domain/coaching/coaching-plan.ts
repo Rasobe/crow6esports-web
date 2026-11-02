@@ -12,3 +12,7 @@ export interface CoachingPlan {
 export function getStartingPlan(plans: readonly CoachingPlan[]): CoachingPlan {
   return plans.reduce((cheapest, plan) => (plan.price < cheapest.price ? plan : cheapest));
 }
+
+export function getPricePerPlayer(plan: CoachingPlan, players: number): number {
+  return Math.round(plan.price / players);
+}

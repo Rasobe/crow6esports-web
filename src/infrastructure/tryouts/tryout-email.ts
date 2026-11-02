@@ -140,7 +140,7 @@ export function buildTryoutEmail(data: TryoutApplication): string {
           <tr>
             <td style="background:#0a0a0a;border-top:1px solid rgba(245,184,0,0.15);padding:24px 40px;text-align:center;">
               <p style="margin:0;font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.2);">
-                #GOCROWS · CROW 6 ESPORTS · HUESCA, ESPAÑA
+                #GOCROWS · CROW 6 ESPORTS
               </p>
             </td>
           </tr>

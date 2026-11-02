@@ -2,34 +2,107 @@
 import "./about-page.scss";
 import { ABOUT_VALUES } from "@config/about";
 import { CLUB } from "@config/club";
+import { ACHIEVEMENTS, ROSTER_2022, ROSTER_2022_YEAR, type ClubDate } from "@config/history";
 import { DISCORD_URL, socialLinks } from "@config/site";
 import { getRosterStats } from "@/application/team/get-roster-stats";
 import { container } from "@/infrastructure/container";
 import { createTranslator } from "@/ui/i18n";
-import { Button, Icon, PageHeader } from "@/ui/shared/components";
-import { getLocationLabel } from "@/ui/shared/lib/club-info";
+import { Button, Icon, PageHeader, SectionBackdrop } from "@/ui/shared/components";
 
 const { locale } = Astro.locals;
 const t = createTranslator(locale, "about");
-const location = getLocationLabel(locale);
 const { playerCount } = getRosterStats(container.playerRepository);
+
+const ordinal = new Intl.PluralRules(locale, { type: "ordinal" });
+const formatDate = ({ year, month, day }: ClubDate) =>
+  month && day
+    ? new Intl.DateTimeFormat(locale, { dateStyle: "long" }).format(new Date(year, month - 1, day))
+    : String(year);
+const toIsoDate = ({ year, month, day }: ClubDate) =>
+  month && day
+    ? `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`
+    : String(year);
 ---
 
-<PageHeader eyebrow={t("eyebrow")} title={t("title")} description={t("meta.description")} />
+<PageHeader
+  eyebrow={t("eyebrow")}
+  title={t("title")}
+  description={t("meta.description")}
+  image="arena"
+/>
 
-<section class="about-story" aria-labelledby="about-story-title">
+<section class="about-story has-backdrop" aria-labelledby="about-story-title">
+  <SectionBackdrop image="lights" />
   <div class="about-story__inner">
     <h2 id="about-story-title" class="about-story__title" data-reveal>
       {t("story.title")}
     </h2>
     <div class="about-story__text" data-reveal>
-      <p>{t("story.founded", { year: CLUB.foundedYear, location, game: CLUB.game })}</p>
+      <p>{t("story.founded", { year: CLUB.foundedYear, game: CLUB.game })}</p>
       <p>{t("story.today", { players: playerCount })}</p>
     </div>
   </div>
 </section>
 
-<section class="about-values" aria-labelledby="about-values-title">
+<section class="about-history has-backdrop" aria-labelledby="about-history-title">
+  <SectionBackdrop image="fire" />
+  <div class="about-history__inner">
+    <h2 id="about-history-title" class="about-history__title" data-reveal>
+      {t("history.title")}
+    </h2>
+    <ol class="about-history__list">
+      {ACHIEVEMENTS.map(({ event, date, onsite, result, lineup }) => (
+        <li class="achievement" data-reveal>
+          <p class="achievement__result">
+            {result.kind === "winner"
+              ? t("history.winner")
+              : t("history.placement", {
+                  place: result.place,
+                  suffix: t(`history.ordinal.${ordinal.select(result.place)}`),
+                })}
+          </p>
+          <h3 class="achievement__event">{event}</h3>
+          <p class="achievement__meta">
+            <time datetime={toIsoDate(date)}>{formatDate(date)}</time>
+            {onsite && <span class="achievement__tag">{t("history.onsite")}</span>}
+          </p>
+          <p class="achievement__lineup">
+            <span class="achievement__lineup-label">{t("history.lineup")}</span>
+            {lineup.join(" · ")}
+          </p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<section class="about-roster has-backdrop" aria-labelledby="about-roster-title">
+  <SectionBackdrop image="turf" />
+  <div class="about-roster__inner">
+    <h2 id="about-roster-title" class="about-roster__title" data-reveal>
+      {t("history.roster_title", { year: ROSTER_2022_YEAR })}
+    </h2>
+    <ul class="about-roster__list">
+      {ROSTER_2022.map(({ handle, role }) => (
+        <li data-reveal>
+          <a
+            class="member"
+            href={`https://x.com/${handle}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`@${handle} (${t("contact.new_tab")})`}
+          >
+            <span class="member__role">{t(`history.roles.${role}`)}</span>
+            <span class="member__handle">@{handle}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<section class="about-values has-backdrop" aria-labelledby="about-values-title">
+  <SectionBackdrop image="ball" />
   <div class="about-values__inner">
     <h2 id="about-values-title" class="about-values__title" data-reveal>
       {t("values.title")}
@@ -57,10 +130,6 @@ const { playerCount } = getRosterStats(container.playerRepository);
       <li class="about-contact__item">
         <Icon name="mail" size={16} />
         <a href={`mailto:${CLUB.email}`}>{CLUB.email}</a>
-      </li>
-      <li class="about-contact__item">
-        <Icon name="map-pin" size={16} />
-        <span>{location}</span>
       </li>
     </ul>
     <ul class="about-contact__socials" aria-label={t("contact.socials_label")}>

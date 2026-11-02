@@ -1,11 +1,12 @@
 ---
 import "./hero-section.scss";
+import { CLUB } from "@config/club";
 import { ROUTES } from "@config/routes";
 import { getRosterStats } from "@/application/team/get-roster-stats";
 import { container } from "@/infrastructure/container";
 import { createTranslator } from "@/ui/i18n";
 import { Button } from "@/ui/shared/components";
-import { getClubYears, getLocationLabel } from "@/ui/shared/lib/club-info";
+import { getClubYears } from "@/ui/shared/lib/club-info";
 
 const { locale } = Astro.locals;
 const t = createTranslator(locale, "home.hero");
@@ -15,7 +16,7 @@ const stats = [
   { key: "years", value: getClubYears() },
   { key: "players", value: playerCount },
   { key: "peak", value: peakMmr },
-  { key: "location", text: getLocationLabel(locale) },
+  { key: "game", text: CLUB.game },
 ];
 ---
 
@@ -33,6 +34,7 @@ const stats = [
     aria-hidden="true"
   />
   <div class="hero__shade" aria-hidden="true"></div>
+  <div class="hero__sweep" aria-hidden="true"></div>
 
   <div class="hero__inner">
     <div class="hero__content">

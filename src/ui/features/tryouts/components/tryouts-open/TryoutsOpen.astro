@@ -9,7 +9,7 @@ const t = createTranslator(locale, "tryouts.open");
 ---
 
 <div class="tryouts-open">
-  <PageHeader eyebrow={t("eyebrow")} title={t("title")} description={t("desc")} />
+  <PageHeader eyebrow={t("eyebrow")} title={t("title")} description={t("desc")} image="fire" />
   <div class="tryouts-open__content">
     <TryoutsForm client:load messages={getMessages(locale, "tryouts.open")} />
   </div>

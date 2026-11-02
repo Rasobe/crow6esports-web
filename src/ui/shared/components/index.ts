@@ -7,6 +7,7 @@ export * from "./not-found";
 export * from "./page-header";
 export * from "./player-card";
 export * from "./section-header";
+export * from "./section-backdrop";
 export * from "./section-heading";
 export * from "./select-field";
 export * from "./seo";
