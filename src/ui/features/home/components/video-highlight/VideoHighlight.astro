@@ -1,0 +1,84 @@
+---
+import "./video-highlight.scss";
+import { createTranslator } from "@/ui/i18n";
+
+const VIDEO_SRC = "/videos/crow6-highlights.mp4";
+const POSTER_SRC = "/images/highlights-poster.webp";
+const POSTER_SMALL_SRC = "/images/highlights-poster-800.webp";
+
+const t = createTranslator(Astro.locals.locale, "home.videoHighlight");
+---
+
+<section class="video-highlight" aria-labelledby="video-highlight-title">
+  <div class="video-highlight__inner">
+    <header class="video-highlight__header" data-reveal>
+      <span class="section-label">{t("eyebrow")}</span>
+      <h2 id="video-highlight-title" class="video-highlight__title">
+        {t("title_lead")} <span class="video-highlight__accent">{t("title_accent")}</span>
+      </h2>
+      <p class="video-highlight__description">{t("description")}</p>
+    </header>
+
+    <video-player
+      class="video-highlight__player"
+      data-src={VIDEO_SRC}
+      data-label={t("video_label")}
+      data-reveal
+    >
+      <img
+        class="video-highlight__poster"
+        src={POSTER_SRC}
+        srcset={`${POSTER_SMALL_SRC} 800w, ${POSTER_SRC} 1600w`}
+        sizes="(min-width: 80rem) 75rem, 100vw"
+        width="1600"
+        height="800"
+        alt=""
+        loading="lazy"
+        decoding="async"
+      />
+      <button type="button" class="video-highlight__play" aria-label={t("play")}>
+        <span class="video-highlight__play-icon" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 14 14" fill="currentColor">
+            <path d="M3.5 2l8 5-8 5z" />
+          </svg>
+        </span>
+        <span class="video-highlight__play-label">{t("play_label")}</span>
+      </button>
+    </video-player>
+  </div>
+</section>
+
+<script>
+  class VideoPlayer extends HTMLElement {
+    connectedCallback() {
+      this.querySelector<HTMLButtonElement>(".video-highlight__play")?.addEventListener(
+        "click",
+        () => this.load(),
+        { once: true },
+      );
+    }
+
+    private load() {
+      const src = this.dataset.src;
+      if (!src) return;
+
+      const video = document.createElement("video");
+      video.className = "video-highlight__video";
+      video.src = src;
+      video.controls = true;
+      video.autoplay = true;
+      video.playsInline = true;
+      video.preload = "auto";
+      video.setAttribute("aria-label", this.dataset.label ?? "");
+
+      this.replaceChildren(video);
+      this.setAttribute("data-playing", "");
+      void video.play().catch(() => undefined);
+      video.focus();
+    }
+  }
+
+  if (!customElements.get("video-player")) {
+    customElements.define("video-player", VideoPlayer);
+  }
+</script>

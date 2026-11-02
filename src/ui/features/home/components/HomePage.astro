@@ -10,6 +10,7 @@ import { NewsHighlight } from "./news-highlight";
 import { StoreHighlight } from "./store-highlight";
 import { TeamHighlight } from "./team-highlight";
 import { TryoutsBanner } from "./tryouts-banner";
+import { VideoHighlight } from "./video-highlight";
 
 const t = createTranslator(Astro.locals.locale, "home.ticker");
 const tickerItems = getAnnouncementKeys(ANNOUNCEMENTS, { tryoutsOpen: TRYOUTS_OPEN }).map((key) =>
@@ -20,6 +21,7 @@ const tickerItems = getAnnouncementKeys(ANNOUNCEMENTS, { tryoutsOpen: TRYOUTS_OP
 <HeroSection />
 <NewsTicker items={tickerItems} label={t("label")} pauseLabel={t("pause")} />
 <TeamHighlight />
+<VideoHighlight />
 <CoachingBanner />
 <StoreHighlight />
 <NewsHighlight />

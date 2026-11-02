@@ -111,6 +111,15 @@
       "eyebrow": "Últimas noticias",
       "title": "Noticias",
       "cta_view_more": "Ver todas"
+    },
+    "videoHighlight": {
+      "eyebrow": "Momentos del club",
+      "title_lead": "Nuestros",
+      "title_accent": "golazos",
+      "description": "Un montaje con las mejores jugadas y los momentos que han marcado la historia del club.",
+      "play": "Reproducir el vídeo de momentos del club",
+      "play_label": "Ver el montaje",
+      "video_label": "Montaje de golazos y momentos del club"
     }
   },
   "team": {

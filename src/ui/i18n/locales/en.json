@@ -111,6 +111,15 @@
       "eyebrow": "Latest news",
       "title": "News",
       "cta_view_more": "View all"
+    },
+    "videoHighlight": {
+      "eyebrow": "Club moments",
+      "title_lead": "Our",
+      "title_accent": "best goals",
+      "description": "A montage of the best plays and the moments that have shaped the club's history.",
+      "play": "Play the club highlights video",
+      "play_label": "Watch the montage",
+      "video_label": "Montage of club goals and moments"
     }
   },
   "team": {
