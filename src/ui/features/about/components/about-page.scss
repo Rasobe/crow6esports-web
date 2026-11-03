@@ -279,6 +279,7 @@
   }
 
   .timeline__card {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -294,8 +295,22 @@
     }
   }
 
+  // La barra dorada es un elemento aparte: con `border-left` el navegador la une en diagonal con
+  // los bordes finos y las esquinas quedan cortadas en ángulo.
   .timeline__card--achievement {
-    border-left: 3px solid var(--brand);
+    border: var(--line);
+
+    &:hover {
+      border-color: var(--border-strong);
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: -1px auto -1px -1px;
+      width: 3px;
+      background: var(--brand);
+    }
 
     // En escritorio el resultado va a la izquierda y la alineación a la derecha
     @include above(md) {
