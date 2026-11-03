@@ -85,4 +85,4 @@ Identidad visual: alto contraste, anguloso, sin border-radius generoso; botones 
 
 ### Integraciones externas
 
-Los endpoints viven en `src/pages/api/` y solo orquestan: validan con zod (esquemas en `infrastructure/`), llaman a un caso de uso y devuelven JSON. Tryouts: `POST /api/contact` → `submitTryoutApplication` → puerto `TryoutNotifier` → adaptador Resend (`infrastructure/tryouts`). Los emails escapan siempre el contenido del usuario. Stripe está instalado pero sin implementar. No hay servidor backend separado.
+Los endpoints viven en `src/pages/api/` y solo orquestan: validan con zod (esquemas en `infrastructure/`), llaman a un caso de uso y devuelven JSON. Tryouts: `POST /api/contact` → `submitTryoutApplication` → puerto `TryoutNotifier` → adaptador Resend (`infrastructure/tryouts`). Los emails escapan siempre el contenido del usuario. Stripe está previsto para la tienda pero aún no está instalado. No hay servidor backend separado.

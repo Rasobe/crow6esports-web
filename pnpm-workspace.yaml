@@ -3,3 +3,12 @@ allowBuilds:
   '@swc/core': true
   sharp: true
   unrs-resolver: true
+
+# Los paquetes de analítica de Vercel declaran Next.js como peer opcional; esta web no lo usa
+autoInstallPeers: false
+
+# Parches de seguridad en dependencias internas de Astro y del adaptador de Vercel
+overrides:
+  zod@^4: ^4.6.7
+  undici@^8: ^8.12.2
+  brace-expansion@^5: ^5.0.11

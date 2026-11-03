@@ -10,7 +10,7 @@ Sitio web oficial de [Crow 6 Esports](https://crow6esports.com) — organizació
 | Islas     | React (solo formularios)             | Interactividad donde hace falta, el resto es HTML       |
 | Estilos   | SCSS por componente + tokens CSS     | Estilos colocados junto al componente, sin runtime      |
 | CMS       | Keystatic                            | Panel visual sobre el propio repo, sin servidor externo |
-| Pagos     | Stripe                               | Gestión de pedidos de tienda                            |
+| Pagos     | Stripe (previsto, sin instalar)      | Gestión de pedidos de tienda                            |
 | Email     | Resend                               | Notificaciones de tryouts y pedidos                     |
 | Hosting   | Vercel                               | Adaptador oficial de Astro, free tier suficiente        |
 | Fuentes   | Anton SC · Barlow Condensed · Barlow | Google Fonts vía la Fonts API de Astro                  |
@@ -82,15 +82,15 @@ Requiere Node.js 22+ y pnpm.
 
 ## Variables de entorno
 
-Crea un archivo `.env.local` en la raíz:
+Copia `.env.example` a `.env` y rellénalo:
 
 ```env
-STRIPE_SECRET_KEY=sk_...
-PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_...
-RESEND_API_KEY=re_...
-MAINTENANCE_MODE=true
-TRYOUTS_OPEN=true
 SITE_URL=https://crow6esports.com
+MAINTENANCE_MODE=false
+TRYOUTS_OPEN=true
+RESEND_API_KEY=re_...
+TRYOUT_EMAIL_FROM="Crow 6 Esports <noreply@crow6esports.com>"  # dominio verificado en Resend
+TRYOUT_EMAIL_TO=crow6esports@gmail.com
 ```
 
 Nunca subas `.env.local` al repositorio. Está incluido en `.gitignore`.
