@@ -121,58 +121,43 @@ const achievements = [...ACHIEVEMENTS].sort(
                 <span class="timeline__day">{formatDay(achievement.date)}</span>
               )}
             </time>
+            {achievement.onsite && <span class="timeline__note">{t("achievements.onsite")}</span>}
           </p>
           <span class="timeline__node timeline__node--trophy" aria-hidden="true" />
-          <article class="timeline__card timeline__card--achievement">
-            <div class="timeline__headline">
-              {achievement.onsite && <span class="timeline__tag">{t("achievements.onsite")}</span>}
-              <p class="timeline__result">{resultLabel(achievement)}</p>
-              <h3 class="timeline__name">{eventName(achievement)}</h3>
-              {achievement.link && (
-                <a
-                  class="timeline__link"
-                  href={achievement.link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {achievement.link.kind === "video" && <Icon name="youtube" size={16} />}
-                  {t(`achievements.links.${achievement.link.kind}`)}
-                  <Icon name="arrow-right" size={14} />
-                  <span class="timeline__sr-only"> ({t("contact.new_tab")})</span>
-                </a>
-              )}
-            </div>
+          <article class="timeline__card">
+            <p class="timeline__result">{resultLabel(achievement)}</p>
+            <h3 class="timeline__name">{eventName(achievement)}</h3>
             <dl class="timeline__lineup">
               <div>
                 <dt>{t("achievements.lineup")}</dt>
-                <dd>
-                  <ul class="timeline__players">
-                    {achievement.lineup.map((player) => (
-                      <li class="timeline__player">{player}</li>
-                    ))}
-                  </ul>
-                </dd>
+                <dd>{achievement.lineup.join(" · ")}</dd>
               </div>
               {achievement.substitutes && (
                 <div>
                   <dt>{t("achievements.substitutes")}</dt>
-                  <dd>
-                    <ul class="timeline__players timeline__players--sub">
-                      {achievement.substitutes.map((player) => (
-                        <li class="timeline__player">{player}</li>
-                      ))}
-                    </ul>
-                  </dd>
+                  <dd>{achievement.substitutes.join(" · ")}</dd>
                 </div>
               )}
             </dl>
+            {achievement.link && (
+              <a
+                class="timeline__link"
+                href={achievement.link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {t(`achievements.links.${achievement.link.kind}`)}
+                <Icon name="arrow-right" size={14} />
+                <span class="timeline__sr-only"> ({t("contact.new_tab")})</span>
+              </a>
+            )}
           </article>
         </li>
       ))}
 
       <li class="timeline__item" data-reveal>
         <p class="timeline__when">
-          <span class="timeline__year timeline__year--now">{t("timeline.today_label")}</span>
+          <span class="timeline__year">{t("timeline.today_label")}</span>
         </p>
         <span class="timeline__node timeline__node--now" aria-hidden="true"></span>
         <article class="timeline__card">

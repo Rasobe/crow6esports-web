@@ -167,13 +167,14 @@
     color: var(--text-secondary);
   }
 
+  // Línea temporal sobria: sin cajas, el oro solo en los nodos y el hilo conductor
   .timeline {
-    --timeline-when: 8.75rem;
+    --timeline-when: 8rem;
 
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: var(--space-8);
+    gap: var(--space-12);
     margin: 0;
     padding: 0;
     list-style: none;
@@ -181,30 +182,30 @@
     &::before {
       content: "";
       position: absolute;
-      top: 0;
+      top: 0.5rem;
       bottom: 0;
-      left: calc(1rem - 1px);
-      width: 2px;
-      background: linear-gradient(to bottom, var(--brand), var(--border) 90%);
+      left: calc(0.5rem - 1px);
+      width: 1px;
+      background: linear-gradient(to bottom, var(--border-hover), var(--border-subtle));
 
       @include above(md) {
-        left: calc(var(--timeline-when) + 1.5rem - 1px);
+        left: calc(var(--timeline-when) + 0.5rem);
       }
     }
   }
 
   .timeline__item {
     display: grid;
-    grid-template-columns: 2rem minmax(0, 1fr);
+    grid-template-columns: 1rem minmax(0, 1fr);
     grid-template-areas:
       "node when"
       "node card";
-    column-gap: var(--space-4);
-    row-gap: var(--space-3);
+    column-gap: var(--space-6);
+    row-gap: var(--space-4);
     position: relative;
 
     @include above(md) {
-      grid-template-columns: var(--timeline-when) 3rem minmax(0, 1fr);
+      grid-template-columns: var(--timeline-when) 1rem minmax(0, 1fr);
       grid-template-areas: "when node card";
       column-gap: 0;
       align-items: start;
@@ -224,28 +225,21 @@
       gap: var(--space-1);
     }
 
-    // Los años van pegados al borde izquierdo del contenido, alineados con los títulos
     @include above(md) {
-      align-items: flex-start;
       padding-right: var(--space-4);
     }
   }
 
   .timeline__year {
     font-family: var(--ff-display);
-    font-size: clamp(2rem, 4vw, 3.25rem);
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
     line-height: 1;
     text-transform: uppercase;
-    color: transparent;
-    -webkit-text-stroke: 1.5px var(--brand);
+    color: var(--text-primary);
   }
 
-  .timeline__year--now {
-    color: var(--brand);
-    -webkit-text-stroke: 0;
-  }
-
-  .timeline__day {
+  .timeline__day,
+  .timeline__note {
     font-family: var(--ff-ui);
     font-size: var(--fs-xs);
     font-weight: 700;
@@ -256,17 +250,12 @@
 
   .timeline__node {
     grid-area: node;
-    justify-self: center;
-    width: 0.95rem;
-    height: 0.95rem;
-    margin-top: var(--space-2);
+    width: 0.6rem;
+    height: 0.6rem;
+    margin: 0.55rem 0 0 0.2rem;
     background: var(--bg-surface);
-    border: 2px solid var(--brand);
+    border: 1px solid var(--brand);
     transform: rotate(45deg);
-
-    @include above(md) {
-      margin-top: var(--space-4);
-    }
   }
 
   .timeline__node--trophy {
@@ -275,98 +264,116 @@
 
   .timeline__node--now {
     background: var(--brand);
-    box-shadow: 0 0 0 5px rgb(var(--brand-rgb) / 0.2);
+    box-shadow: 0 0 0 4px rgb(var(--brand-rgb) / 0.18);
   }
 
   .timeline__card {
-    position: relative;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     grid-area: card;
-    gap: var(--space-3);
-    padding: var(--space-6);
-    background: var(--bg-base);
-    border: var(--line-subtle);
-    transition: border-color var(--duration-base) var(--ease-standard);
+    gap: var(--space-2);
+    max-width: 44rem;
 
-    &:hover {
-      border-color: var(--border-strong);
-    }
-  }
-
-  // La barra dorada es un elemento aparte: con `border-left` el navegador la une en diagonal con
-  // los bordes finos y las esquinas quedan cortadas en ángulo.
-  .timeline__card--achievement {
-    border: var(--line);
-
-    &:hover {
-      border-color: var(--border-strong);
-    }
-
-    &::before {
-      content: "";
-      position: absolute;
-      inset: -1px auto -1px -1px;
-      width: 3px;
-      background: var(--brand);
-    }
-
-    // En escritorio el resultado va a la izquierda y la alineación a la derecha
     @include above(md) {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(15rem, 22rem);
-      align-items: center;
-      column-gap: var(--space-10);
+      padding-left: var(--space-8);
     }
   }
 
-  .timeline__headline {
+  .timeline__result {
+    margin: 0;
+    font-family: var(--ff-display);
+    font-size: var(--fs-h3);
+    line-height: 1;
+    text-transform: uppercase;
+    color: var(--text-primary);
+  }
+
+  // Título de los hitos sin resultado (fundación, hoy): protagonista, en blanco
+  .timeline__name {
+    font-size: var(--fs-2xl);
+    line-height: 1.05;
+    text-transform: uppercase;
+    color: var(--text-primary);
+  }
+
+  // En los logros el protagonista es el resultado; la competición va debajo, más discreta
+  .timeline__result + .timeline__name {
+    font-family: var(--ff-ui);
+    font-size: var(--fs-lg);
+    font-weight: 700;
+    letter-spacing: var(--tracking-wider);
+    color: var(--text-secondary);
+  }
+
+  .timeline__text {
+    margin: 0;
+    font-family: var(--ff-body);
+    font-size: var(--fs-body);
+    line-height: 1.6;
+    color: var(--text-secondary);
+  }
+
+  .timeline__lineup {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: var(--space-3);
-  }
+    gap: var(--space-1);
+    margin: var(--space-3) 0 0;
 
-  .timeline__tag {
-    padding: var(--space-1) var(--space-4);
-    font-family: var(--ff-ui);
-    font-size: var(--fs-xs);
-    font-weight: 700;
-    letter-spacing: var(--tracking-widest);
-    text-transform: uppercase;
-    color: var(--brand-fg);
-    background: var(--brand);
-    @include angular-cut(6px);
+    div {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: var(--space-1) var(--space-4);
+    }
+
+    dt {
+      min-width: 6.5rem;
+      font-family: var(--ff-ui);
+      font-size: var(--fs-xs);
+      font-weight: 700;
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    dd {
+      margin: 0;
+      font-family: var(--ff-body);
+      font-size: var(--fs-body);
+      color: var(--text-primary);
+    }
   }
 
   .timeline__link {
     display: inline-flex;
     align-items: center;
     gap: var(--space-2);
-    margin-top: var(--space-1);
+    margin-top: var(--space-3);
+    padding-bottom: 2px;
     font-family: var(--ff-ui);
-    font-size: var(--fs-md);
+    font-size: var(--fs-sm);
     font-weight: 700;
     letter-spacing: var(--tracking-widest);
     text-decoration: none;
     text-transform: uppercase;
-    color: var(--brand);
-    border-bottom: 2px solid transparent;
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border-hover);
     transition:
       color var(--duration-base) var(--ease-standard),
       border-color var(--duration-base) var(--ease-standard);
 
-    svg:last-of-type {
+    svg {
+      color: var(--brand);
       transition: transform var(--duration-base) var(--ease-out);
     }
 
     &:hover,
     &:focus-visible {
-      color: var(--text-primary);
+      color: var(--brand);
       border-bottom-color: var(--brand);
 
-      svg:last-of-type {
+      svg {
         transform: translateX(var(--space-1));
       }
     }
@@ -385,86 +392,6 @@
     overflow: hidden;
     clip-path: inset(50%);
     white-space: nowrap;
-  }
-
-  .timeline__result {
-    margin: 0;
-    font-family: var(--ff-display);
-    font-size: var(--fs-h3);
-    line-height: 1;
-    text-transform: uppercase;
-    color: var(--brand);
-  }
-
-  .timeline__name {
-    font-size: var(--fs-2xl);
-    text-transform: uppercase;
-    color: var(--text-primary);
-  }
-
-  .timeline__text {
-    margin: 0;
-    font-family: var(--ff-body);
-    font-size: var(--fs-body);
-    line-height: 1.6;
-    color: var(--text-secondary);
-  }
-
-  .timeline__lineup {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-4);
-    align-self: stretch;
-    margin: var(--space-1) 0 0;
-    padding-top: var(--space-4);
-    border-top: var(--line-subtle);
-
-    @include above(md) {
-      margin: 0;
-      padding: 0 0 0 var(--space-8);
-      border-top: 0;
-      border-left: var(--line-subtle);
-    }
-
-    dt {
-      margin-bottom: var(--space-2);
-      font-family: var(--ff-ui);
-      font-size: var(--fs-xs);
-      font-weight: 700;
-      letter-spacing: var(--tracking-widest);
-      text-transform: uppercase;
-      color: var(--text-muted);
-    }
-
-    dd {
-      margin: 0;
-    }
-  }
-
-  .timeline__players {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-2);
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .timeline__player {
-    padding: var(--space-1-5) var(--space-4);
-    font-family: var(--ff-ui);
-    font-size: var(--fs-md);
-    font-weight: 700;
-    letter-spacing: var(--tracking-wide);
-    text-transform: uppercase;
-    color: var(--text-primary);
-    background: var(--bg-surface);
-    border: 1px solid var(--border-strong);
-  }
-
-  .timeline__players--sub .timeline__player {
-    color: var(--text-secondary);
-    border-style: dashed;
   }
 
   /* ─── Pilares ─── */
