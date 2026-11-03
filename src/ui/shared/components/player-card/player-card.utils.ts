@@ -6,6 +6,10 @@ export function getAge(birthYear: number | null): number | null {
   return new Date().getFullYear() - birthYear;
 }
 
+export function getInitial(nickname: string): string {
+  return Array.from(nickname.trim())[0]?.toUpperCase() ?? "";
+}
+
 export type SocialPlatform =
   "twitter" | "instagram" | "twitch" | "tiktok" | "youtube" | "rltracker";
 

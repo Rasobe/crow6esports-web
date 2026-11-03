@@ -21,6 +21,7 @@ const tSite = createTranslator(Astro.locals.locale, "site");
   path={path}
   noindex={noindex}
 >
+  <slot name="head" slot="head" />
   <SkipLink targetId="main-content" />
   <Navbar />
   <main id="main-content" class="content-offset" tabindex="-1">

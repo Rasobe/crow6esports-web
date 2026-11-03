@@ -1,0 +1,56 @@
+@use "styles/layers";
+@use "styles/mixins" as *;
+@layer components {
+  .coaching-services {
+    padding: var(--section-py) 0;
+    border-top: var(--line-subtle);
+  }
+
+  .coaching-services__inner {
+    @include container;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-10);
+  }
+
+  .coaching-services__title {
+    font-size: var(--fs-h3);
+    line-height: 0.95;
+    text-transform: uppercase;
+    color: var(--text-primary);
+  }
+
+  .coaching-services__list {
+    @include joined-grid(16rem);
+    margin: 0;
+    list-style: none;
+  }
+
+  .coaching-services__item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-8) var(--space-6);
+    background: var(--bg-surface);
+    border: var(--line-subtle);
+  }
+
+  .coaching-services__index {
+    font-family: var(--ff-display);
+    font-size: var(--fs-2xl);
+    color: var(--brand);
+  }
+
+  .coaching-services__name {
+    font-size: var(--fs-xl);
+    text-transform: uppercase;
+    color: var(--text-primary);
+  }
+
+  .coaching-services__description {
+    font-family: var(--ff-body);
+    font-size: var(--fs-body);
+    line-height: 1.6;
+    color: var(--text-secondary);
+  }
+}

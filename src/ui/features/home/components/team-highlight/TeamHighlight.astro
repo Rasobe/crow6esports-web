@@ -1,16 +1,15 @@
 ---
 import "./team-highlight.scss";
 import { ROUTES } from "@config/routes";
-import { getAllPlayers } from "@/application/team/get-players";
+import { getActivePlayers, getSubstitutePlayers } from "@/application/team/get-players";
 import { container } from "@/infrastructure/container";
 import { createTranslator, localizePath } from "@/ui/i18n";
 import { PlayerCard, SectionHeading } from "@/ui/shared/components";
 
-const HIGHLIGHTED_PLAYERS = 4;
-
 const { locale } = Astro.locals;
 const t = createTranslator(locale, "home.teamHighlight");
-const players = getAllPlayers(container.playerRepository).slice(0, HIGHLIGHTED_PLAYERS);
+const { playerRepository } = container;
+const players = [...getActivePlayers(playerRepository), ...getSubstitutePlayers(playerRepository)];
 ---
 
 <section class="team-highlight" aria-labelledby="team-highlight-title">
@@ -26,7 +25,9 @@ const players = getAllPlayers(container.playerRepository).slice(0, HIGHLIGHTED_P
 
     <div class="team-highlight__grid">
       {players.map((player, index) => (
-        <PlayerCard player={player} index={index} />
+        <div class="team-highlight__item" data-reveal>
+          <PlayerCard player={player} index={index} />
+        </div>
       ))}
     </div>
   </div>

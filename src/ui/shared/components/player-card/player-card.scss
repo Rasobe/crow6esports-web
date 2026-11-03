@@ -3,6 +3,9 @@
 @layer components {
   .player-card {
     position: relative;
+    transition:
+      transform var(--duration-slower) var(--ease-out),
+      box-shadow var(--duration-slower) var(--ease-standard);
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -26,20 +29,32 @@
       border-color: var(--brand);
     }
 
+    &:hover,
+    &:focus-within {
+      transform: translateY(calc(var(--lift-distance) * -1));
+      box-shadow: 0 1rem 2rem -1rem rgb(var(--brand-rgb) / 0.25);
+    }
+
     &:hover .player-card__img {
       transform: scale(1.05);
       filter: brightness(1.1);
     }
 
-    &:hover .player-card__img--anonymous {
-      filter: invert(1) brightness(1.3);
+    &:hover .player-card__avatar::before,
+    &:focus-within .player-card__avatar::before {
+      width: 100%;
+    }
+
+    &:hover .player-card__initial {
+      -webkit-text-stroke-color: var(--brand);
+      transform: translateY(calc(var(--lift-distance) * -1));
     }
   }
 
   /* ─── Media ─── */
   .player-card__media {
     position: relative;
-    aspect-ratio: 1 / 1.25;
+    aspect-ratio: 1 / 0.88;
     overflow: hidden;
     background: var(--bg-surface);
   }
@@ -54,13 +69,45 @@
     transition:
       transform var(--duration-slower) var(--ease-smooth),
       filter var(--duration-slower) var(--ease-standard);
+  }
 
-    &--anonymous {
-      filter: invert(1);
-      mix-blend-mode: screen;
-      opacity: 0.35;
-      object-position: center bottom;
-    }
+  /* El wrapper de cada card (li/div con reveal) crea su propio contexto de apilado:
+     hay que elevarlo a él para que el borde de la card activa no lo tapen las vecinas. */
+  :has(> .player-card) {
+    position: relative;
+  }
+
+  :has(> .player-card:hover),
+  :has(> .player-card:focus-within) {
+    z-index: 1;
+  }
+
+  .player-card__avatar {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    padding-bottom: 6%;
+    background:
+      linear-gradient(135deg, rgb(var(--brand-rgb) / 0.12) 0%, transparent 45%),
+      repeating-linear-gradient(
+        -45deg,
+        transparent 0 1.25rem,
+        rgb(var(--white-rgb) / 0.03) 1.25rem 1.3125rem
+      ),
+      var(--bg-surface);
+  }
+
+  .player-card__initial {
+    font-family: var(--ff-display);
+    font-size: clamp(7rem, 54cqw, 11rem);
+    font-weight: 700;
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 2px rgb(var(--brand-rgb) / 0.75);
+    transition:
+      transform var(--duration-slower) var(--ease-out),
+      -webkit-text-stroke-color var(--duration-base) var(--ease-standard);
   }
 
   .player-card__overlay {
@@ -88,18 +135,13 @@
     line-height: 1.5;
     color: var(--bg-base);
     background: var(--text-primary);
-
-    &--highlight {
-      color: var(--brand-fg);
-      background: var(--brand);
-    }
   }
 
   /* ─── Identity ─── */
   .player-card__identity {
     display: flex;
     flex-direction: column;
-    gap: var(--space-1);
+    gap: var(--space-1-5);
     padding: var(--space-2) var(--space-5) var(--space-5);
   }
 
@@ -112,6 +154,16 @@
     text-transform: uppercase;
     color: var(--text-primary);
     overflow-wrap: anywhere;
+  }
+
+  .player-card__role {
+    margin: 0;
+    font-family: var(--ff-ui);
+    font-size: var(--fs-xs);
+    font-weight: 700;
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--brand);
   }
 
   /* ─── Stats strip ─── */
@@ -167,6 +219,7 @@
     display: flex;
     align-items: center;
     justify-content: space-evenly;
+    min-height: 3rem;
   }
 
   .player-card__social-link {
@@ -175,33 +228,38 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 3rem;
+    height: 3rem;
     color: var(--text-secondary);
     text-decoration: none;
     transition:
       color var(--duration-base) var(--ease-standard),
-      background var(--duration-base) var(--ease-standard),
-      border-color var(--duration-base) var(--ease-standard);
+      background var(--duration-base) var(--ease-standard);
 
     &:hover {
       color: var(--brand);
-      border-color: var(--brand);
+      background: rgb(var(--brand-rgb) / 0.08);
     }
 
     &:focus-visible {
       outline: 2px solid var(--brand);
-      outline-offset: 2px;
+      outline-offset: -2px;
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
     .player-card__img,
+    .player-card__initial,
+    .player-card__avatar::before,
+    .player-card,
     .player-card::after {
       transition: none;
     }
 
-    .player-card:hover .player-card__img {
+    .player-card:hover,
+    .player-card:focus-within,
+    .player-card:hover .player-card__img,
+    .player-card:hover .player-card__initial {
       transform: none;
     }
   }

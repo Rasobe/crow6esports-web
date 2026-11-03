@@ -25,9 +25,13 @@ describe("detectLocale", () => {
     expect(detectLocale("es-ES,es;q=0.9")).toBe("es");
   });
 
-  it("falls back to English otherwise", () => {
+  it("falls back to English for other languages", () => {
     expect(detectLocale("fr-FR")).toBe("en");
-    expect(detectLocale(null)).toBe("en");
+  });
+
+  it("uses the default locale when the header is missing, as for crawlers", () => {
+    expect(detectLocale(null)).toBe("es");
+    expect(detectLocale("")).toBe("es");
   });
 });
 
@@ -88,5 +92,23 @@ describe("locales", () => {
     const enKeys = collectKeys(en).sort();
 
     expect(enKeys).toEqual(esKeys);
+  });
+});
+
+describe("locale parity", () => {
+  const collectKeys = (node: unknown, prefix = ""): string[] =>
+    typeof node === "object" && node !== null
+      ? Object.entries(node).flatMap(([key, value]) => collectKeys(value, `${prefix}${key}.`))
+      : [prefix.slice(0, -1)];
+
+  it("defines the same keys in every locale", () => {
+    expect(collectKeys(en).sort()).toEqual(collectKeys(es).sort());
+  });
+
+  it("has no empty translations", () => {
+    const empty = (messages: unknown) =>
+      JSON.stringify(messages).includes('":""') ? "has empty values" : "ok";
+    expect(empty(es)).toBe("ok");
+    expect(empty(en)).toBe("ok");
   });
 });

@@ -41,7 +41,7 @@ export default defineConfig({
       TRYOUT_EMAIL_FROM: envField.string({
         context: "server",
         access: "secret",
-        default: "noreply@crow6esports.com",
+        default: "Crow 6 Esports <noreply@crow6esports.com>",
       }),
       TRYOUT_EMAIL_TO: envField.string({
         context: "server",
@@ -68,7 +68,7 @@ export default defineConfig({
       provider: fontProviders.google(),
       name: "Barlow Condensed",
       cssVariable: "--font-ui",
-      weights: [400, 500, 600, 700],
+      weights: [400, 600, 700],
       styles: ["normal"],
       subsets: ["latin"],
     },
@@ -76,7 +76,7 @@ export default defineConfig({
       provider: fontProviders.google(),
       name: "Barlow",
       cssVariable: "--font-body",
-      weights: [300, 400, 500, 600, 700],
+      weights: [400, 600, 700],
       styles: ["normal"],
       subsets: ["latin"],
     },

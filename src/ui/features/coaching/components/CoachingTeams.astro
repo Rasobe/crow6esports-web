@@ -1,0 +1,22 @@
+---
+import "./coaching-teams.scss";
+import { COACHING } from "@config/coaching";
+import { createTranslator } from "@/ui/i18n";
+
+const t = createTranslator(Astro.locals.locale, "coaching.teams");
+---
+
+<section class="coaching-teams" aria-labelledby="coaching-teams-title">
+  <div class="coaching-teams__inner">
+    <h2 id="coaching-teams-title" class="coaching-teams__title" data-reveal>
+      {t("title")}
+    </h2>
+    <ul class="coaching-teams__list">
+      {COACHING.teamsWorkedWith.map((name) => (
+        <li class="coaching-teams__item" data-reveal>
+          {name}
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

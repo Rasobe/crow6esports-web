@@ -1,8 +1,10 @@
 ---
 import "./product-card.scss";
 import { ROUTES } from "@config/routes";
-import { isSoldOut, type Product, type ProductCategory } from "@/domain/store/product";
+import { STORE_IN_STOCK } from "@config/store";
+import { isPurchasable, type Product, type ProductCategory } from "@/domain/store/product";
 import { createTranslator, formatCurrency, localizePath } from "@/ui/i18n";
+import { storeImageSrcset } from "@/ui/shared/lib/responsive-image";
 
 interface Props {
   product: Product;
@@ -21,7 +23,8 @@ const { locale } = Astro.locals;
 const t = createTranslator(locale, "home.productCard");
 const tStore = createTranslator(locale, "store");
 const [image] = product.images;
-const soldOut = isSoldOut(product);
+const available = isPurchasable(product, STORE_IN_STOCK);
+const soldOut = !available;
 ---
 
 <article class:list={["product-card", { "product-card--sold-out": soldOut }]}>
@@ -30,7 +33,11 @@ const soldOut = isSoldOut(product);
       {image ? (
         <img
           src={image}
+          srcset={storeImageSrcset(image)}
+          sizes="(min-width: 48rem) 20rem, 70vw"
           alt={product.name}
+          width="722"
+          height="932"
           loading="lazy"
           decoding="async"
           class="product-card__img"
@@ -59,7 +66,9 @@ const soldOut = isSoldOut(product);
         <span class="product-card__category">{t(CATEGORY_KEY[product.category])}</span>
         <h3 class="product-card__name">{product.name}</h3>
       </div>
-      <p class="product-card__price">{formatCurrency(locale, product.price, product.currency)}</p>
+      {available && (
+        <p class="product-card__price">{formatCurrency(locale, product.price, product.currency)}</p>
+      )}
     </div>
   </a>
 </article>

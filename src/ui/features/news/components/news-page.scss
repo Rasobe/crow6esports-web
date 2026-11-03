@@ -1,0 +1,21 @@
+@use "styles/layers";
+@use "styles/mixins" as *;
+@layer components {
+  .news-list {
+    @include container;
+    padding-block: var(--space-12) var(--section-py);
+  }
+
+  .news-list__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+    gap: var(--space-4);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .news-list__item {
+    display: flex;
+  }
+}

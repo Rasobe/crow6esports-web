@@ -1,0 +1,35 @@
+---
+import "./article-detail.scss";
+import { ROUTES } from "@config/routes";
+import type { Article } from "@/domain/news/article";
+import { createTranslator, localizePath } from "@/ui/i18n";
+
+interface Props {
+  article: Article;
+}
+
+const { article } = Astro.props;
+const { locale } = Astro.locals;
+const t = createTranslator(locale, "news");
+const date = new Intl.DateTimeFormat(locale, { dateStyle: "long" }).format(article.date);
+---
+
+<article class="article-detail">
+  <header class="article-detail__header">
+    <a class="article-detail__back" href={localizePath(locale, ROUTES.news)}>
+      {t("back")}
+    </a>
+    <p class="article-detail__meta">
+      <time datetime={article.date.toISOString()}>{date}</time>
+      <span aria-hidden="true">·</span>
+      <span>{article.author}</span>
+      <span aria-hidden="true">·</span>
+      <span>{t("reading_time", { minutes: article.readingTime })}</span>
+    </p>
+    <h1 class="article-detail__title">{article.title}</h1>
+  </header>
+
+  <div class="article-detail__body">
+    <slot />
+  </div>
+</article>

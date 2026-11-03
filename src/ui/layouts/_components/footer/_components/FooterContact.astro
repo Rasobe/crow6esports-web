@@ -1,9 +1,10 @@
 ---
+import { CLUB } from "@config/club";
 import { createTranslator } from "@/ui/i18n";
 import { Icon } from "@/ui/shared/components";
 
 const t = createTranslator(Astro.locals.locale, "footer");
-const email = t("contact.email");
+const { email } = CLUB;
 ---
 
 <div class="footer__column">
@@ -13,10 +14,6 @@ const email = t("contact.email");
     <li class="footer__contact-item">
       <Icon name="mail" size={16} />
       <a href={`mailto:${email}`}>{email}</a>
-    </li>
-    <li class="footer__contact-item">
-      <Icon name="map-pin" size={16} />
-      <span>{t("contact.location")}</span>
     </li>
   </ul>
 </div>

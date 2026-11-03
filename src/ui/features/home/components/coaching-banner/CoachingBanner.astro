@@ -2,6 +2,8 @@
 import "./coaching-banner.scss";
 import { COACHING } from "@config/coaching";
 import { ROUTES } from "@config/routes";
+import { getStartingPlan } from "@/domain/coaching/coaching-plan";
+import { yearsSince } from "@/domain/site/years";
 import { createTranslator } from "@/ui/i18n";
 import { Button, Icon } from "@/ui/shared/components";
 
@@ -10,7 +12,12 @@ const SERVICES = ["one_to_one", "teams", "weekly_plan"] as const;
 const { locale } = Astro.locals;
 const t = createTranslator(locale, "home.coachingBanner");
 
-const { coach, progress, pricing } = COACHING;
+const { coach, results, plans, availability } = COACHING;
+const progress = results.recentCase;
+const pricing = (["individual", "teams"] as const).map((id) => {
+  const { price, originalPrice } = getStartingPlan(plans[id]);
+  return { id, from: price, original: originalPrice };
+});
 const formatNumber = (value: number) => value.toLocaleString(locale);
 ---
 
@@ -58,17 +65,19 @@ const formatNumber = (value: number) => value.toLocaleString(locale);
         {t("title_tail")}
       </h2>
 
-      <p class="coaching-banner__description">{t("description")}</p>
+      <p class="coaching-banner__description">
+        {t("description", { years: yearsSince(coach.startYear) })}
+      </p>
 
       <dl class="coaching-banner__progress" aria-label={t("progress_label")}>
         <div class="coaching-banner__progress-item">
           <dt class="coaching-banner__progress-label">{t("progress_start")}</dt>
-          <dd class="coaching-banner__progress-value">{formatNumber(progress.start)}</dd>
+          <dd class="coaching-banner__progress-value">{formatNumber(progress.from)}</dd>
         </div>
         <Icon name="arrow-right" size={40} class="coaching-banner__progress-arrow" />
         <div class="coaching-banner__progress-item coaching-banner__progress-item--current">
           <dt class="coaching-banner__progress-label">{t("progress_current")}</dt>
-          <dd class="coaching-banner__progress-value">{formatNumber(progress.current)}</dd>
+          <dd class="coaching-banner__progress-value">{formatNumber(progress.to)}</dd>
         </div>
       </dl>
 
@@ -105,7 +114,13 @@ const formatNumber = (value: number) => value.toLocaleString(locale);
             {t("cta_reserve")}
             <Icon name="arrow-right" size={18} />
           </Button>
-          <p class="coaching-banner__schedule">{t("schedule")}</p>
+          <p class="coaching-banner__schedule">
+            {t("schedule", {
+              from: availability.hours.from,
+              to: availability.hours.to,
+              timezone: availability.timezone,
+            })}
+          </p>
         </div>
       </div>
     </div>

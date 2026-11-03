@@ -1,9 +1,11 @@
 ---
+import { CLUB } from "@config/club";
 import { socialLinks } from "@config/site";
 import { createTranslator } from "@/ui/i18n";
 import { Icon } from "@/ui/shared/components";
 
-const t = createTranslator(Astro.locals.locale, "footer");
+const { locale } = Astro.locals;
+const t = createTranslator(locale, "footer");
 ---
 
 <div class="footer__column">
@@ -18,7 +20,7 @@ const t = createTranslator(Astro.locals.locale, "footer");
 
   <div>
     <p class="footer__text footer__text--lead">{t("brand_description")}</p>
-    <p class="footer__text">{t("founded")}</p>
+    <p class="footer__text">{t("founded", { year: CLUB.foundedYear })}</p>
   </div>
 
   <ul class="footer__list footer__list--inline">

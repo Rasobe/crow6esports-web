@@ -1,0 +1,137 @@
+@use "styles/layers";
+@layer components {
+  .choice-field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  // ── Label ──
+  .choice-field__label {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    padding: 0;
+    margin-bottom: var(--space-1);
+    font-family: var(--ff-ui);
+    font-size: var(--fs-2xs);
+    font-weight: 700;
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--text-secondary);
+  }
+
+  .choice-field__required {
+    color: var(--brand);
+    font-size: var(--fs-xs);
+  }
+
+  // ── Opciones ──
+  .choice-field__options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
+    gap: var(--space-2);
+  }
+
+  .choice-field__option {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    background: var(--bg-surface);
+    border: var(--line-subtle);
+    cursor: pointer;
+    transition:
+      border-color var(--duration-base) var(--ease-standard),
+      background var(--duration-base) var(--ease-standard);
+
+    &:hover {
+      border-color: var(--border-soft);
+    }
+
+    &:has(.choice-field__input:checked) {
+      border-color: var(--brand);
+      background: var(--brand-tint);
+    }
+
+    &:has(.choice-field__input:focus-visible) {
+      outline: 2px solid var(--brand);
+      outline-offset: 2px;
+    }
+  }
+
+  // El radio nativo queda accesible pero invisible; la marca lo sustituye
+  .choice-field__input {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  // Marca angular: rombo que se rellena al seleccionar
+  .choice-field__mark {
+    flex-shrink: 0;
+    width: 0.75rem;
+    height: 0.75rem;
+    border: 1.5px solid var(--border-hover);
+    transform: rotate(45deg);
+    transition:
+      background var(--duration-base) var(--ease-standard),
+      border-color var(--duration-base) var(--ease-standard);
+
+    .choice-field__input:checked ~ & {
+      background: var(--brand);
+      border-color: var(--brand);
+    }
+  }
+
+  .choice-field__text {
+    font-family: var(--ff-ui);
+    font-size: var(--fs-md);
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--text-secondary);
+    transition: color var(--duration-base) var(--ease-standard);
+
+    .choice-field__input:checked ~ & {
+      color: var(--text-primary);
+    }
+  }
+
+  // ── Hint / error ──
+  .choice-field__hint {
+    font-family: var(--ff-body);
+    font-size: var(--fs-xs);
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+
+  .choice-field__error {
+    font-family: var(--ff-ui);
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    letter-spacing: var(--tracking-snug);
+    color: var(--danger);
+    line-height: 1.4;
+  }
+
+  .choice-field--error .choice-field__option {
+    border-color: rgb(var(--danger-rgb) / 0.5);
+  }
+
+  // ── Disabled ──
+  .choice-field:disabled {
+    opacity: 0.45;
+
+    .choice-field__option,
+    .choice-field__input {
+      cursor: not-allowed;
+    }
+  }
+}

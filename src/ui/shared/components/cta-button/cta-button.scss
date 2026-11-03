@@ -16,7 +16,16 @@
     transition:
       background var(--duration-fast) var(--ease-standard),
       border-color var(--duration-fast) var(--ease-standard),
-      color var(--duration-fast) var(--ease-standard);
+      color var(--duration-fast) var(--ease-standard),
+      transform var(--duration-base) var(--ease-out);
+
+    &:hover {
+      transform: translateY(calc(var(--lift-distance) * -0.5));
+    }
+
+    &:active {
+      transform: none;
+    }
 
     &:focus-visible {
       outline: 2px solid var(--brand);

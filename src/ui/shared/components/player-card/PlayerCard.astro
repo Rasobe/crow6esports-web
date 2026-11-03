@@ -5,10 +5,12 @@ import { createTranslator } from "@/ui/i18n";
 import { Icon } from "../icons";
 import {
   SOCIAL_ICONS,
+  ROLE_KEY,
   STATUS_KEY,
   formatStat,
   getActiveSocialLinks,
   getAge,
+  getInitial,
 } from "./player-card.utils";
 
 interface Props {
@@ -16,15 +18,16 @@ interface Props {
   index: number;
 }
 
-const ANONYMOUS_IMAGE = "/images/players/anonymous-player-silhouette.webp";
-
 const { player } = Astro.props;
 const { locale } = Astro.locals;
 const t = createTranslator(locale, "home.playerCard");
 
 const { stats } = player;
+const initial = getInitial(player.nickname);
 const age = getAge(player.birthYear);
-const statusKey = STATUS_KEY[player.status];
+const isSubstitute = player.status === "substitute";
+const statusKey = isSubstitute ? null : STATUS_KEY[player.status];
+const roleLabel = isSubstitute ? t("status_substitute") : t(ROLE_KEY[player.type]);
 const socialLinks = getActiveSocialLinks(player.socials);
 ---
 
@@ -39,38 +42,21 @@ const socialLinks = getActiveSocialLinks(player.socials);
         class="player-card__img"
       />
     ) : (
-      <img
-        src={ANONYMOUS_IMAGE}
-        alt=""
-        aria-hidden="true"
-        loading="lazy"
-        decoding="async"
-        class="player-card__img player-card__img--anonymous"
-      />
+      <div class="player-card__avatar" aria-hidden="true">
+        <span class="player-card__initial">{initial}</span>
+      </div>
     )}
     <div class="player-card__overlay"></div>
-    {statusKey && (
-      <span
-        class:list={[
-          "player-card__status",
-          { "player-card__status--highlight": player.status === "substitute" },
-        ]}
-      >
-        {t(statusKey)}
-      </span>
-    )}
+    {statusKey && <span class="player-card__status">{t(statusKey)}</span>}
   </div>
 
   <div class="player-card__identity">
+    <p class="player-card__role">{roleLabel}</p>
     <h3 class="player-card__nickname">{player.nickname}</h3>
   </div>
 
   <dl class="player-card__stats">
     <div class="player-card__stat player-card__stat--primary">
-      <dt class="player-card__stat-label">{t("stat_mmr")}</dt>
-      <dd class="player-card__stat-value">{formatStat(stats.mmr, locale)}</dd>
-    </div>
-    <div class="player-card__stat">
       <dt class="player-card__stat-label">{t("stat_peak")}</dt>
       <dd class="player-card__stat-value">{formatStat(stats.peak, locale)}</dd>
     </div>
@@ -82,20 +68,18 @@ const socialLinks = getActiveSocialLinks(player.socials);
     )}
   </dl>
 
-  {socialLinks.length > 0 && (
-    <div class="player-card__socials">
-      {socialLinks.map(({ platform, href, label }) => (
-        <a
-          href={href}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="player-card__social-link"
-          aria-label={label}
-          title={label}
-        >
-          <Icon name={SOCIAL_ICONS[platform]} size={16} />
-        </a>
-      ))}
-    </div>
-  )}
+  <div class="player-card__socials">
+    {socialLinks.map(({ platform, href, label }) => (
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="player-card__social-link"
+        aria-label={label}
+        title={label}
+      >
+        <Icon name={SOCIAL_ICONS[platform]} size={16} />
+      </a>
+    ))}
+  </div>
 </article>

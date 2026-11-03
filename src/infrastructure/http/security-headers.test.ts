@@ -1,0 +1,39 @@
+import { describe, expect, it } from "vitest";
+import { applySecurityHeaders, createSecurityHeaders } from "./security-headers";
+
+describe("applySecurityHeaders", () => {
+  it("adds every security header to the response", () => {
+    const response = applySecurityHeaders(new Response("ok"));
+
+    for (const [name, value] of Object.entries(createSecurityHeaders())) {
+      expect(response.headers.get(name)).toBe(value);
+    }
+  });
+
+  it("keeps a header that the response already defines", () => {
+    const response = applySecurityHeaders(
+      new Response("ok", { headers: { "X-Frame-Options": "SAMEORIGIN" } }),
+    );
+
+    expect(response.headers.get("X-Frame-Options")).toBe("SAMEORIGIN");
+  });
+});
+
+describe("Content-Security-Policy", () => {
+  const policyFor = (isDev: boolean) => createSecurityHeaders(isDev)["Content-Security-Policy"];
+
+  it("only allows the site itself and the YouTube player in production", () => {
+    const policy = policyFor(false);
+
+    expect(policy).toContain("default-src 'self'");
+    expect(policy).toContain("script-src 'self' 'unsafe-inline';");
+    expect(policy).toContain("frame-src https://www.youtube-nocookie.com");
+    expect(policy).toContain("object-src 'none'");
+    expect(policy).toContain("frame-ancestors 'none'");
+    expect(policy).not.toContain("vercel");
+  });
+
+  it("allows the Vercel debug scripts only in development", () => {
+    expect(policyFor(true)).toContain("https://cdn.vercel-insights.com");
+  });
+});

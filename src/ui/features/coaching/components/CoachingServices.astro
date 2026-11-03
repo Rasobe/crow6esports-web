@@ -1,0 +1,27 @@
+---
+import "./coaching-services.scss";
+import { createTranslator } from "@/ui/i18n";
+
+const SERVICES = ["one_to_one", "teams", "weekly_plan"] as const;
+
+const t = createTranslator(Astro.locals.locale, "coaching.services");
+---
+
+<section class="coaching-services" aria-labelledby="coaching-services-title">
+  <div class="coaching-services__inner">
+    <h2 id="coaching-services-title" class="coaching-services__title" data-reveal>
+      {t("title")}
+    </h2>
+    <ul class="coaching-services__list">
+      {SERVICES.map((service, index) => (
+        <li class="coaching-services__item" data-reveal>
+          <span class="coaching-services__index" aria-hidden="true">
+            {String(index + 1).padStart(2, "0")}
+          </span>
+          <h3 class="coaching-services__name">{t(`${service}.title`)}</h3>
+          <p class="coaching-services__description">{t(`${service}.description`)}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

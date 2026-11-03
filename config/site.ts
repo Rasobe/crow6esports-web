@@ -12,4 +12,6 @@ export const socialLinks = [
   { platform: "youtube", href: "https://youtube.com/@crow6esports", label: "YouTube" },
 ] as const;
 
+export const DISCORD_URL = socialLinks.find(({ platform }) => platform === "discord")!.href;
+
 export type SiteConfig = typeof siteConfig;

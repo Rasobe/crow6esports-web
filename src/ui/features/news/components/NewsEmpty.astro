@@ -1,0 +1,46 @@
+---
+import "./news-empty.scss";
+import { socialLinks } from "@config/site";
+import { createTranslator } from "@/ui/i18n";
+import { Icon } from "@/ui/shared/components";
+
+const t = createTranslator(Astro.locals.locale, "news.empty");
+---
+
+<section class="news-empty" aria-labelledby="news-empty-title">
+  <div class="news-empty__inner" data-reveal>
+    <span class="news-empty__icon" aria-hidden="true">
+      <svg
+        width="28"
+        height="28"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M4 5h13a1 1 0 0 1 1 1v13H6a2 2 0 0 1-2-2zM18 9h2v8a2 2 0 0 1-2 2M8 9h6M8 13h6" />
+      </svg>
+    </span>
+    <h2 id="news-empty-title" class="news-empty__title">
+      {t("title")}
+    </h2>
+    <p class="news-empty__description">{t("description")}</p>
+    <ul class="news-empty__socials" aria-label={t("socials_label")}>
+      {socialLinks.map(({ platform, href, label }) => (
+        <li>
+          <a
+            class="news-empty__social"
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${label} (${t("new_tab")})`}
+          >
+            <Icon name={platform} size={20} />
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

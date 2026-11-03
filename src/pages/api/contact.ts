@@ -1,27 +1,17 @@
 import type { APIRoute } from "astro";
-import { submitTryoutApplication } from "@/application/tryouts/submit-tryout-application";
 import { container } from "@/infrastructure/container";
-import { tryoutApplicationSchema } from "@/infrastructure/tryouts/tryout-application.schema";
+import { createRateLimiter } from "@/infrastructure/http/rate-limiter";
+import { createContactHandler } from "@/infrastructure/tryouts/contact-handler";
 
-const jsonResponse = (body: unknown, status: number) =>
-  new Response(JSON.stringify(body), {
-    status,
-    headers: { "Content-Type": "application/json" },
-  });
+const SUBMISSIONS_PER_WINDOW = 5;
+const SUBMISSION_WINDOW_MS = 10 * 60 * 1000;
 
-export const POST: APIRoute = async ({ request }) => {
-  const payload = await request.json().catch(() => null);
-  const parsed = tryoutApplicationSchema.safeParse(payload);
+const handleContact = createContactHandler({
+  limiter: createRateLimiter({ limit: SUBMISSIONS_PER_WINDOW, windowMs: SUBMISSION_WINDOW_MS }),
+  getNotifier: () => container.tryoutNotifier,
+});
 
-  if (!parsed.success) {
-    return jsonResponse({ error: "invalid_payload", issues: parsed.error.issues }, 400);
-  }
+export const POST: APIRoute = ({ request, clientAddress }) => handleContact(request, clientAddress);
 
-  try {
-    await submitTryoutApplication(container.tryoutNotifier, parsed.data);
-    return jsonResponse({ success: true }, 200);
-  } catch (error) {
-    console.error("Tryout application could not be delivered", error);
-    return jsonResponse({ error: "delivery_failed" }, 502);
-  }
-};
+export const ALL: APIRoute = () =>
+  new Response(null, { status: 405, headers: { Allow: "POST", "Cache-Control": "no-store" } });

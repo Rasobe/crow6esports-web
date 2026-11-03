@@ -1,0 +1,159 @@
+---
+import "./coaching-plans.scss";
+import { COACHING } from "@config/coaching";
+import { DISCORD_URL } from "@config/site";
+import {
+  getPricePerPlayer,
+  includesFeature,
+  type CoachingMode,
+} from "@/domain/coaching/coaching-plan";
+import { createTranslator, formatCurrency } from "@/ui/i18n";
+import { Button, Icon } from "@/ui/shared/components";
+
+const MODES: readonly CoachingMode[] = ["individual", "teams"];
+
+const { locale } = Astro.locals;
+const t = createTranslator(locale, "coaching.plans");
+const {
+  plans,
+  features,
+  singleSessions,
+  singleSessionCreditDays,
+  currency,
+  sessionDurationHours,
+  teamMinPlayers,
+} = COACHING;
+const price = (amount: number) => formatCurrency(locale, amount, currency);
+---
+
+<section class="coaching-plans" aria-labelledby="coaching-plans-title">
+  <div class="coaching-plans__inner">
+    <header class="coaching-plans__header" data-reveal>
+      <h2 id="coaching-plans-title" class="coaching-plans__title">
+        {t("title")}
+      </h2>
+      <p class="coaching-plans__lead">{t("lead")}</p>
+    </header>
+
+    {MODES.map((mode) => (
+      <div class="coaching-plans__group">
+        <h3 class="coaching-plans__mode">{t(`mode.${mode}`)}</h3>
+        {mode === "teams" && (
+          <p class="coaching-plans__note">{t("team_note", { players: teamMinPlayers })}</p>
+        )}
+        <ul class="coaching-plans__grid">
+          {plans[mode].map((plan) => (
+            <li class:list={["plan-card", { "plan-card--featured": plan.featured }]} data-reveal>
+              {/* El hueco se reserva aunque no haya etiqueta, para alinear los títulos */}
+              <div class="plan-card__badges">
+                {plan.featured && (
+                  <span class="plan-card__badge plan-card__badge--featured">
+                    {t("featured_badge")}
+                  </span>
+                )}
+              </div>
+              <h4 class="plan-card__tier">{t(`tier.${plan.tier}`)}</h4>
+              <p class="plan-card__price">
+                <span class="plan-card__amount">{price(plan.price)}</span>
+                <span class="plan-card__period">{t("period")}</span>
+                <span class="plan-card__original">
+                  <span class="plan-card__sr-only">{t("original_price")}:</span>
+                  <s>{price(plan.originalPrice)}</s>
+                </span>
+              </p>
+              {mode === "teams" && (
+                <p class="plan-card__per-player">
+                  {t("per_player", {
+                    price: price(getPricePerPlayer(plan, teamMinPlayers)),
+                    players: teamMinPlayers,
+                  })}
+                </p>
+              )}
+              <p class="plan-card__sessions">
+                {t(plan.weeklySessions === 1 ? "sessions_one" : "sessions_other", {
+                  count: plan.weeklySessions,
+                  hours: sessionDurationHours,
+                })}
+              </p>
+              {/* Todas las ventajas en el mismo orden en cada pack, para compararlos fila a fila */}
+              <ul class="plan-card__features" aria-label={t("features_label")}>
+                {features[mode].map((feature) => {
+                  const included = includesFeature(plan, feature);
+                  return (
+                    <li
+                      class:list={[
+                        "plan-card__feature",
+                        { "plan-card__feature--excluded": !included },
+                      ]}
+                    >
+                      <Icon
+                        name={included ? "check" : "minus"}
+                        size={16}
+                        class="plan-card__feature-icon"
+                      />
+                      <span class="plan-card__sr-only">
+                        {t(included ? "included" : "not_included")}:
+                      </span>
+                      {t(`features.${mode}.${feature.key}`)}
+                    </li>
+                  );
+                })}
+              </ul>
+            </li>
+          ))}
+        </ul>
+        {/* Un solo botón por modalidad: todos los packs se reservan en el mismo sitio */}
+        <div class="coaching-plans__actions">
+          <Button href={DISCORD_URL}>{t(`cta.${mode}`)}</Button>
+          <p class="coaching-plans__actions-hint">{t(`cta_hint.${mode}`)}</p>
+        </div>
+      </div>
+    ))}
+
+    <div class="coaching-plans__group">
+      <h3 class="coaching-plans__mode">{t("single.title")}</h3>
+      <p class="coaching-plans__note">{t("single.lead", { days: singleSessionCreditDays })}</p>
+      <ul class="coaching-plans__grid coaching-plans__grid--single">
+        {singleSessions.map((session) => {
+          const isFree = session.price === 0;
+          return (
+            <li class:list={["single-card", { "single-card--free": isFree }]} data-reveal>
+              <div class="single-card__head">
+                <h4 class="single-card__title">{t(`single.items.${session.key}.title`)}</h4>
+                <p class="single-card__price">
+                  {isFree ? (
+                    <span class="single-card__amount">{t("single.free")}</span>
+                  ) : (
+                    <>
+                      <span class="single-card__amount">{price(session.price)}</span>
+                      <span class="single-card__unit">{t(`single.items.${session.key}.unit`)}</span>
+                    </>
+                  )}
+                </p>
+              </div>
+              <p class="single-card__description">
+                {t(`single.items.${session.key}.description`, { hours: sessionDurationHours })}
+              </p>
+              {isFree && (
+                <Button href={DISCORD_URL} size="sm" class="single-card__cta">
+                  {t("single.cta_free")}
+                </Button>
+              )}
+            </li>
+          );
+        })}
+      </ul>
+      <p class="coaching-plans__note">
+        {t("single.paid_note")}{" "}
+        <a
+          href={DISCORD_URL}
+          class="coaching-plans__link"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {t("single.paid_link")}
+        </a>
+      </p>
+    </div>
+  </div>
+</section>
