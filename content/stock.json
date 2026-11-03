@@ -11,8 +11,7 @@
       "/images/store/jersey/back.webp",
       "/images/store/jersey/three-quarter-front.webp",
       "/images/store/jersey/model.webp",
-      "/images/store/jersey/details.webp",
-      "/images/store/jersey/lifestyle.webp"
+      "/images/store/jersey/details.webp"
     ],
     "stock": [
       { "size": "S", "quantity": 10 },
