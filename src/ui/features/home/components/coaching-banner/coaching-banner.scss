@@ -118,6 +118,7 @@
     line-height: 0.95;
     letter-spacing: 0;
     text-transform: uppercase;
+    text-wrap: balance;
     color: var(--text-primary);
   }
 
@@ -167,6 +168,8 @@
     letter-spacing: var(--tracking-widest);
     text-transform: uppercase;
     color: var(--text-secondary);
+    // Reserva dos líneas para que las tres cifras queden alineadas aunque una etiqueta se parta
+    min-height: 2lh;
   }
 
   /* ─── Actions: reserva, precio de entrada y enlace a la oferta completa ─── */
@@ -232,12 +235,23 @@
       gap: var(--space-8);
     }
 
-    .coaching-banner__coach::before,
-    .coaching-banner__image,
-    .coaching-banner__placeholder,
     .coaching-banner__photo {
       min-height: 0;
       border-width: 1px 0;
+    }
+
+    // La imagen del coach pasa a ser una marca pequeña a la derecha, sin tapar el nombre
+    .coaching-banner__image,
+    .coaching-banner__placeholder {
+      inset: auto;
+      top: 50%;
+      right: var(--space-2);
+      left: auto;
+      width: 5.5rem;
+      height: 4rem;
+      object-fit: contain;
+      opacity: 0.55;
+      transform: translateY(-50%);
     }
 
     .coaching-banner__caption {
