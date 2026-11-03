@@ -1,12 +1,7 @@
+@use "styles/mixins" as *;
 /* ─────────────────────────────────────────────
    UTILITIES
    ───────────────────────────────────────────── */
-.container-site {
-  width: 100%;
-  max-width: var(--container);
-  margin-inline: auto;
-  padding-inline: 1.5rem;
-}
 
 .content-offset {
   display: flex;

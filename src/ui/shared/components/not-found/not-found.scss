@@ -9,16 +9,16 @@
     align-items: center;
     justify-content: center;
     min-height: calc(100dvh - var(--navbar-h));
-    padding: 2rem;
+    padding: var(--space-8);
     overflow: hidden;
   }
 
   .not-found__bg-number {
-    font-family: var(--font-display), sans-serif;
+    font-family: var(--ff-display);
     font-size: clamp(200px, 35vw, 360px);
     line-height: 1;
     letter-spacing: -8px;
-    color: rgba(245, 184, 0, 0.06);
+    color: var(--brand-wash);
     position: absolute;
     top: 50%;
     left: 50%;
@@ -37,31 +37,31 @@
   }
 
   .not-found__eyebrow {
-    font-family: var(--font-ui), sans-serif;
-    font-size: 11px;
+    font-family: var(--ff-ui);
+    font-size: var(--fs-2xs);
     font-weight: 600;
-    letter-spacing: 4px;
+    letter-spacing: var(--tracking-ultra);
     text-transform: uppercase;
     color: var(--brand);
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 24px;
+    gap: var(--space-2-5);
+    margin-bottom: var(--space-6);
   }
 
   .not-found__eyebrow span {
     display: block;
     width: 32px;
     height: 1px;
-    background: rgba(245, 184, 0, 0.4);
+    background: rgb(var(--brand-rgb) / 0.4);
   }
 
   .not-found__title {
-    font-family: var(--font-display), sans-serif;
+    font-family: var(--ff-display);
     font-size: clamp(48px, 10vw, 80px);
     line-height: 1;
     color: var(--text-primary);
-    margin-bottom: 16px;
+    margin-bottom: var(--space-4);
   }
 
   .not-found__title span {
@@ -72,20 +72,20 @@
     width: 2px;
     height: 40px;
     background: linear-gradient(to bottom, var(--brand), transparent);
-    margin: 0 auto 24px;
+    margin: 0 auto var(--space-6);
   }
 
   .not-found__desc {
-    font-family: var(--font-body), sans-serif;
-    font-size: 15px;
+    font-family: var(--ff-body);
+    font-size: var(--fs-body);
     color: var(--text-secondary);
     max-width: 400px;
     line-height: 1.7;
-    margin-bottom: 40px;
+    margin-bottom: var(--space-10);
   }
 
   .not-found__cta {
-    font-family: var(--font-ui), sans-serif;
+    font-family: var(--ff-ui);
     font-size: 13px;
     font-weight: 700;
     letter-spacing: 3px;
@@ -93,14 +93,14 @@
     color: var(--brand);
     background: transparent;
     border: 1.5px solid var(--brand);
-    padding: 12px 32px;
+    padding: var(--space-3) var(--space-8);
     text-decoration: none;
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: var(--space-2);
     transition:
-      background 0.2s ease,
-      color 0.2s ease;
+      background var(--duration-base) var(--ease-standard),
+      color var(--duration-base) var(--ease-standard);
   }
 
   .not-found__cta:hover {

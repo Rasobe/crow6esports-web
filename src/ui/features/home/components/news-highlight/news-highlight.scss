@@ -1,0 +1,28 @@
+@use "styles/layers";
+@use "styles/mixins" as *;
+@layer components {
+  .news-highlight {
+    padding: var(--section-py) 0;
+    border-top: var(--line-subtle);
+  }
+
+  .news-highlight__inner {
+    @include container;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-12);
+  }
+
+  .news-highlight__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+    gap: var(--space-4);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .news-highlight__item {
+    display: flex;
+  }
+}

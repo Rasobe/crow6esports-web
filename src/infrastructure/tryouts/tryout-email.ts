@@ -1,11 +1,12 @@
-import type { TryoutApplication } from "@/domain/tryouts/tryout-application";
-import { escapeHtml } from "./html";
 import type {
   CoachingOpenness,
   CompetitiveExperience,
   LossReaction,
   Playstyle,
+  TryoutApplication,
+  Weekday,
 } from "@/domain/tryouts/tryout-application";
+import { escapeHtml } from "./html";
 
 const PLAYSTYLE_LABELS: Record<Playstyle, string> = {
   calm: "Calma y posicionamiento",
@@ -31,6 +32,24 @@ const COMPETITIVE_EXP_LABELS: Record<CompetitiveExperience, string> = {
   no: "No",
 };
 
+const WEEKDAY_LABELS: Record<Weekday, string> = {
+  mon: "Lunes",
+  tue: "Martes",
+  wed: "Miércoles",
+  thu: "Jueves",
+  fri: "Viernes",
+  sat: "Sábado",
+  sun: "Domingo",
+};
+
+const formatDays = (days: Weekday[]) => days.map((day) => WEEKDAY_LABELS[day]).join(", ");
+
+function formatSchedule(data: TryoutApplication): string {
+  if (data.scheduleType === "flexible") return "Flexible";
+  const nextDay = data.scheduleTo && data.scheduleFrom && data.scheduleTo < data.scheduleFrom;
+  return `${data.scheduleFrom} a ${data.scheduleTo}${nextDay ? " (del día siguiente)" : ""}`;
+}
+
 export function buildTryoutEmail(data: TryoutApplication): string {
   return `
 <!DOCTYPE html>
@@ -38,7 +57,7 @@ export function buildTryoutEmail(data: TryoutApplication): string {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nueva solicitud de tryout — Crow 6 Esports</title>
+  <title>Nueva solicitud de tryout: Crow 6 Esports</title>
 </head>
 <body style="margin:0;padding:0;background:#0a0a0a;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">
 
@@ -57,7 +76,7 @@ export function buildTryoutEmail(data: TryoutApplication): string {
                 NUEVA SOLICITUD
               </h1>
               <p style="margin:8px 0 0;font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.3);">
-                PROCESO DE SELECCIÓN — ROCKET LEAGUE
+                PROCESO DE SELECCIÓN · ROCKET LEAGUE
               </p>
             </td>
           </tr>
@@ -87,9 +106,10 @@ export function buildTryoutEmail(data: TryoutApplication): string {
               <table width="100%" cellpadding="0" cellspacing="0">
                 ${row("Fecha de nacimiento", data.birthDate)}
                 ${row("País / Región", data.country)}
-                ${row("Disponibilidad entre semana", data.availabilityWeekdays)}
-                ${row("Disponibilidad fines de semana", data.availabilityWeekends)}
-                ${row("Disponibilidad para scrims", data.availabilityScrims)}
+                ${row("Días para entrenar", formatDays(data.availableDays))}
+                ${row("Horario", formatSchedule(data))}
+                ${data.timeZone ? row("Zona horaria", data.timeZone) : ""}
+                ${data.availabilityNotes ? row("Comentarios de disponibilidad", data.availabilityNotes) : ""}
               </table>
             </td>
           </tr>
@@ -140,7 +160,7 @@ export function buildTryoutEmail(data: TryoutApplication): string {
           <tr>
             <td style="background:#0a0a0a;border-top:1px solid rgba(245,184,0,0.15);padding:24px 40px;text-align:center;">
               <p style="margin:0;font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.2);">
-                #GOCROWS · CROW 6 ESPORTS · HUESCA, ESPAÑA
+                #GOCROWS · CROW 6 ESPORTS
               </p>
             </td>
           </tr>

@@ -1,6 +1,6 @@
 ---
-import BaseLayout from "@/ui/layouts/BaseLayout.astro";
-import ComingSoon from "@/ui/features/coming-soon/components/ComingSoon.astro";
+import { BaseLayout } from "@/ui/layouts";
+import { ComingSoon } from "@/ui/features/coming-soon/components";
 import { createTranslator } from "@/ui/i18n";
 
 const t = createTranslator(Astro.locals.locale, "comingSoon");

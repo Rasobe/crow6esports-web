@@ -1,30 +1,24 @@
 import { MAINTENANCE_MODE } from "astro:env/server";
 import { defineMiddleware } from "astro:middleware";
-import { detectLocale, isLocale } from "@/ui/i18n";
+import { PAGES } from "@config/pages";
+import { applySecurityHeaders } from "@/infrastructure/http/security-headers";
+import { resolveLocale, resolveRequest } from "@/ui/routing/resolve-request";
 
-const COMING_SOON_PATH = "/coming-soon";
-const NOT_FOUND_PATH = "/404";
-const FILE_EXTENSION_PATTERN = /\.[^/]+$/;
-const API_PREFIX = "/api/";
-
-export const onRequest = defineMiddleware((context, next) => {
+export const onRequest = defineMiddleware(async (context, next) => {
   const { pathname } = context.url;
-  const [, firstSegment] = pathname.split("/");
+  context.locals.locale = resolveLocale(pathname, context.request.headers.get("accept-language"));
 
-  context.locals.locale = isLocale(firstSegment)
-    ? firstSegment
-    : detectLocale(context.request.headers.get("accept-language"));
+  const route = resolveRequest({
+    pathname,
+    localeParam: context.params.locale,
+    maintenance: MAINTENANCE_MODE,
+    pages: PAGES,
+  });
 
-  if (FILE_EXTENSION_PATTERN.test(pathname) || pathname.startsWith(API_PREFIX)) return next();
-
-  if (MAINTENANCE_MODE && pathname !== COMING_SOON_PATH) {
-    return context.rewrite(COMING_SOON_PATH);
+  if (route.kind === "rewrite" && route.underConstruction) {
+    context.locals.underConstruction = route.underConstruction;
   }
 
-  const { locale: localeParam } = context.params;
-  if (localeParam !== undefined && !isLocale(localeParam)) {
-    return context.rewrite(NOT_FOUND_PATH);
-  }
-
-  return next();
+  const response = await (route.kind === "rewrite" ? context.rewrite(route.path) : next());
+  return applySecurityHeaders(response, import.meta.env.DEV);
 });

@@ -17,22 +17,21 @@
     "link-ai-context": "mkdir -p .claude && ln -sf ../../ai-context/.agents/skills .claude/skills && ln -sf ../ai-context/CLAUDE.md CLAUDE-global.md"
   },
   "dependencies": {
-    "@astrojs/mdx": "^8.0.3",
-    "@astrojs/react": "^7.0.1",
-    "@astrojs/vercel": "^11.0.13",
+    "@astrojs/mdx": "^8.1.2",
+    "@astrojs/react": "^7.1.2",
+    "@astrojs/vercel": "^11.0.17",
     "@hookform/resolvers": "^5.9.1",
-    "@stripe/stripe-js": "^9.7.0",
     "@vercel/speed-insights": "^2.0.0",
-    "astro": "^7.3.8",
-    "react": "^19.3.0",
-    "react-dom": "^19.3.0",
-    "react-hook-form": "^7.89.0",
-    "resend": "^6.12.4",
-    "stripe": "^22.2.0",
-    "zod": "^4.6.5"
+    "astro": "^7.4.4",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-hook-form": "^7.91.0",
+    "resend": "^6.37.0",
+    "zod": "^4.6.7"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
+    "@axe-core/playwright": "^4.14.0",
     "@commitlint/cli": "^21.2.3",
     "@commitlint/config-conventional": "^21.2.3",
     "@eslint/js": "^10.0.1",

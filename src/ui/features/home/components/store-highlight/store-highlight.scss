@@ -1,61 +1,62 @@
 @use "styles/layers";
+@use "styles/mixins" as *;
 @layer components {
   .store-highlight {
     position: relative;
-    padding: 100px 0;
+    padding: var(--section-py) 0;
     overflow: hidden;
     background: var(--bg-surface);
+    border-top: var(--line-subtle);
   }
 
   .store-highlight__inner {
-    max-width: var(--container);
-    margin-inline: auto;
-    padding-inline: 1.5rem;
+    @include container;
     display: flex;
     flex-direction: column;
-    gap: 56px;
+    gap: var(--space-12);
   }
 
-  /* ─── Cards grid (centered, doesn't stretch with few items) ─── */
-  .store-highlight__grid {
+  .store-highlight__layout--teaser {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 320px));
-    justify-content: center;
-    gap: 20px;
-  }
+    gap: var(--space-8);
+    align-items: center;
 
-  .store-highlight__footer {
-    display: flex;
-    justify-content: flex-end;
-  }
-
-  /* ─── Responsive ─── */
-  @media (max-width: 640px) {
-    .store-highlight {
-      padding: 64px 0;
+    @include above(md) {
+      grid-template-columns: minmax(0, 20rem) minmax(0, 1fr);
     }
+  }
 
+  .store-highlight__grid {
+    @include joined-grid(15rem);
+  }
+
+  .store-highlight__item {
+    display: flex;
+  }
+
+  .store-highlight__teaser {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-4);
+  }
+
+  .store-highlight__teaser-text {
+    max-width: 44ch;
+    margin: 0;
+    font-family: var(--ff-body);
+    font-size: var(--fs-lg);
+    line-height: 1.6;
+    color: var(--text-secondary);
+  }
+
+  @include below(sm) {
     .store-highlight__inner {
-      gap: 36px;
+      gap: var(--space-8);
     }
 
     .store-highlight__grid {
-      display: flex;
-      flex-wrap: nowrap;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      scrollbar-width: none;
-      -webkit-overflow-scrolling: touch;
-
-      &::-webkit-scrollbar {
-        display: none;
-      }
-
-      > * {
-        flex: 0 0 75%;
-        max-width: 280px;
-        scroll-snap-align: start;
-      }
+      @include snap-scroller;
     }
   }
 }

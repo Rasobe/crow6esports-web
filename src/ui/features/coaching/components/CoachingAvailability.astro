@@ -1,0 +1,90 @@
+---
+import "./coaching-availability.scss";
+import { COACHING } from "@config/coaching";
+import { createTranslator } from "@/ui/i18n";
+import { Icon } from "@/ui/shared/components";
+
+const WEEK = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"] as const;
+const MONDAY = new Date(2024, 0, 1);
+
+const { locale } = Astro.locals;
+const t = createTranslator(locale, "coaching");
+const { availability, policy } = COACHING;
+
+const firstDay = WEEK.indexOf(availability.days.from);
+const lastDay = WEEK.indexOf(availability.days.to);
+const days = WEEK.map((key, index) => {
+  const date = new Date(MONDAY);
+  date.setDate(MONDAY.getDate() + index);
+  return {
+    key,
+    label: new Intl.DateTimeFormat(locale, { weekday: "short" }).format(date),
+    active: index >= firstDay && index <= lastDay,
+  };
+});
+
+const rules = [
+  { key: "postpone_days", value: String(policy.postponeMaxDays), icon: "calendar" },
+  { key: "postpone_times", value: String(policy.postponeMaxPerMonth), icon: "refresh" },
+  { key: "recover", value: t("policy.recover_value"), icon: "clock" },
+] as const;
+---
+
+<section class="coaching-availability" aria-labelledby="coaching-availability-title">
+  <div class="coaching-availability__inner">
+    <article class="availability" data-reveal>
+      <header class="availability__header">
+        <span class="availability__icon">
+          <Icon name="clock" size={22} />
+        </span>
+        <h2 id="coaching-availability-title" class="availability__title">
+          {t("availability.title")}
+        </h2>
+      </header>
+
+      <p class="availability__hours">
+        <span>{availability.hours.from}</span>
+        <span class="availability__arrow" aria-hidden="true">
+          →
+        </span>
+        <span>{availability.hours.to}</span>
+        <span class="availability__zone">{availability.timezone}</span>
+      </p>
+
+      <ul class="availability__days" aria-label={t("availability.days_label")}>
+        {days.map(({ label, active }) => (
+          <li
+            class:list={["availability__day", { "availability__day--active": active }]}
+            aria-label={`${label}${active ? "" : ` (${t("availability.closed")})`}`}
+          >
+            {label}
+          </li>
+        ))}
+      </ul>
+
+      <p class="availability__note">{t("availability.note")}</p>
+    </article>
+
+    <article class="policy" data-reveal>
+      <header class="availability__header">
+        <span class="availability__icon">
+          <Icon name="refresh" size={22} />
+        </span>
+        <h2 class="availability__title">{t("policy.title")}</h2>
+      </header>
+
+      <ul class="policy__rules">
+        {rules.map(({ key, value, icon }) => (
+          <li class="policy__rule">
+            <span class="policy__value">{value}</span>
+            <span class="policy__text">
+              <strong class="policy__unit">{t(`policy.${key}.unit`)}</strong>
+              <span class="policy__label">{t(`policy.${key}.label`)}</span>
+            </span>
+            <Icon name={icon} size={18} class="policy__rule-icon" />
+          </li>
+        ))}
+      </ul>
+    </article>
+  </div>
+</section>

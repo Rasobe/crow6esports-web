@@ -1,0 +1,21 @@
+---
+import { UnderConstruction } from "@/ui/features/under-construction/components";
+import { LocaleLayout } from "@/ui/layouts";
+import { createTranslator } from "@/ui/i18n";
+import { ROUTES } from "@config/routes";
+
+const pageKey = Astro.locals.underConstruction;
+if (!pageKey) return Astro.rewrite("/404");
+
+const t = createTranslator(Astro.locals.locale, `underConstruction.pages.${pageKey}`);
+const tCommon = createTranslator(Astro.locals.locale, "underConstruction");
+---
+
+<LocaleLayout
+  title={`${t("title")} · ${tCommon("eyebrow")}`}
+  description={t("description")}
+  path={ROUTES[pageKey]}
+  noindex
+>
+  <UnderConstruction pageKey={pageKey} />
+</LocaleLayout>

@@ -1,11 +1,25 @@
 ---
-import HomePage from "@/ui/features/home/components/HomePage.astro";
-import LocaleLayout from "@/ui/layouts/LocaleLayout.astro";
+import { CLUB } from "@config/club";
+import { siteConfig, socialLinks } from "@config/site";
+import { HomePage } from "@/ui/features/home/components";
+import { LocaleLayout } from "@/ui/layouts";
 import { createTranslator } from "@/ui/i18n";
+import { JsonLd } from "@/ui/shared/components";
+import { sportsTeamData } from "@/ui/shared/lib/structured-data";
 
 const t = createTranslator(Astro.locals.locale, "home.meta");
+const team = sportsTeamData({
+  name: siteConfig.name,
+  url: siteConfig.url,
+  logo: `${siteConfig.url}/icon-512.png`,
+  sport: CLUB.game,
+  email: CLUB.email,
+  foundingYear: CLUB.foundedYear,
+  sameAs: socialLinks.map((link) => link.href),
+});
 ---
 
 <LocaleLayout title={t("title")} description={t("description")}>
+  <JsonLd slot="head" data={team} />
   <HomePage />
 </LocaleLayout>

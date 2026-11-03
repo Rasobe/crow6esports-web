@@ -3,5 +3,6 @@
 declare namespace App {
   interface Locals {
     locale: import("@/ui/i18n").Locale;
+    underConstruction?: import("@config/pages").PageKey;
   }
 }

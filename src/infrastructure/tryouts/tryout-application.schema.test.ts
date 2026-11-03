@@ -5,9 +5,10 @@ const valid = {
   discord: "user",
   birthDate: "2000-01-01",
   country: "ES",
-  availabilityWeekdays: "L-V",
-  availabilityWeekends: "S-D",
-  availabilityScrims: "X",
+  availableDays: ["mon", "wed", "sat"],
+  scheduleType: "fixed",
+  scheduleFrom: "18:00",
+  scheduleTo: "22:00",
   rltracker: "https://rocketleague.tracker.network/profile/1",
   rank: "1800",
   peak: "2000",
@@ -32,6 +33,38 @@ describe("tryoutApplicationSchema", () => {
       rltracker: "javascript:alert(1)",
     });
     expect(result.success).toBe(false);
+  });
+
+  it("only accepts RLTracker profile links", () => {
+    const result = tryoutApplicationSchema.safeParse({
+      ...valid,
+      rltracker: "https://example.com/profile/1",
+    });
+    expect(result.success).toBe(false);
+  });
+
+  it("rejects malformed discord usernames and impossible birth dates", () => {
+    expect(tryoutApplicationSchema.safeParse({ ...valid, discord: "a b#1234" }).success).toBe(
+      false,
+    );
+    expect(tryoutApplicationSchema.safeParse({ ...valid, birthDate: "2999-01-01" }).success).toBe(
+      false,
+    );
+    expect(tryoutApplicationSchema.safeParse({ ...valid, birthDate: "2000-02-30" }).success).toBe(
+      false,
+    );
+  });
+
+  it("requires complete fixed schedules and at least one training day", () => {
+    const parse = (overrides: object) =>
+      tryoutApplicationSchema.safeParse({ ...valid, ...overrides });
+    expect(parse({ scheduleTo: "" }).success).toBe(false);
+    expect(parse({ scheduleTo: "18:00" }).success).toBe(false);
+    expect(parse({ scheduleFrom: "18:15" }).success).toBe(false);
+    expect(parse({ scheduleType: "flexible", scheduleFrom: "", scheduleTo: "" }).success).toBe(
+      true,
+    );
+    expect(parse({ availableDays: [] }).success).toBe(false);
   });
 
   it("rejects unknown enum values and oversized text", () => {

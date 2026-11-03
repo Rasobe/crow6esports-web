@@ -8,6 +8,8 @@ interface ResendTryoutNotifierConfig {
   to: string;
 }
 
+const toSingleLine = (value: string) => value.replace(/[\r\n\u2028\u2029]+/g, " ").trim();
+
 export function createResendTryoutNotifier({
   apiKey,
   from,
@@ -20,7 +22,7 @@ export function createResendTryoutNotifier({
       const { error } = await resend.emails.send({
         from,
         to,
-        subject: `Tryout — ${application.discord}`,
+        subject: `Tryout: ${toSingleLine(application.discord)}`,
         html: buildTryoutEmail(application),
       });
 

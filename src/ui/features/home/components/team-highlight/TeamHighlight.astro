@@ -1,31 +1,34 @@
 ---
 import "./team-highlight.scss";
 import { ROUTES } from "@config/routes";
-import { getAllPlayers } from "@/application/team/get-players";
+import { getActivePlayers, getSubstitutePlayers } from "@/application/team/get-players";
 import { container } from "@/infrastructure/container";
-import { createTranslator } from "@/ui/i18n";
-import { Button, PlayerCard, SectionHeader } from "@/ui/shared/components";
+import { createTranslator, localizePath } from "@/ui/i18n";
+import { PlayerCard, SectionHeading } from "@/ui/shared/components";
 
-const HIGHLIGHTED_PLAYERS = 4;
-
-const t = createTranslator(Astro.locals.locale, "home.teamHighlight");
-const players = getAllPlayers(container.playerRepository).slice(0, HIGHLIGHTED_PLAYERS);
+const { locale } = Astro.locals;
+const t = createTranslator(locale, "home.teamHighlight");
+const { playerRepository } = container;
+const players = [...getActivePlayers(playerRepository), ...getSubstitutePlayers(playerRepository)];
 ---
 
-<section class="team-highlight">
+<section class="team-highlight" aria-labelledby="team-highlight-title">
   <div class="team-highlight__inner">
-    <SectionHeader namespace="home.teamHighlight" />
+    <SectionHeading
+      id="team-highlight-title"
+      eyebrow={t("eyebrow")}
+      title={t("title_lead")}
+      accent={t("title_accent")}
+      href={localizePath(locale, ROUTES.team)}
+      linkLabel={t("cta_view_more")}
+    />
 
     <div class="team-highlight__grid">
-      {players.map((player) => (
-        <PlayerCard player={player} />
+      {players.map((player, index) => (
+        <div class="team-highlight__item" data-reveal>
+          <PlayerCard player={player} index={index} />
+        </div>
       ))}
-    </div>
-
-    <div class="team-highlight__footer">
-      <Button href={ROUTES.team} variant="outline">
-        {t("cta_view_more")}
-      </Button>
     </div>
   </div>
 </section>

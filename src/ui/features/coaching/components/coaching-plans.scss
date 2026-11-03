@@ -1,0 +1,343 @@
+@use "styles/layers";
+@use "styles/mixins" as *;
+@layer components {
+  .coaching-plans {
+    padding: var(--section-py) 0;
+    background: var(--bg-surface);
+    border-top: var(--line-subtle);
+  }
+
+  .coaching-plans__inner {
+    @include container;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-12);
+  }
+
+  .coaching-plans__header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .coaching-plans__title {
+    font-size: var(--fs-h3);
+    line-height: 0.95;
+    text-transform: uppercase;
+    color: var(--text-primary);
+  }
+
+  .coaching-plans__lead {
+    max-width: 56ch;
+    font-family: var(--ff-body);
+    font-size: var(--fs-body);
+    line-height: 1.7;
+    color: var(--text-secondary);
+  }
+
+  .coaching-plans__group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  .coaching-plans__mode {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-family: var(--ff-ui);
+    font-size: var(--fs-md);
+    font-weight: 700;
+    letter-spacing: var(--tracking-ultra);
+    text-transform: uppercase;
+    color: var(--brand);
+
+    &::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--border-subtle);
+    }
+  }
+
+  .coaching-plans__note {
+    margin: calc(var(--space-2) * -1) 0 0;
+    font-family: var(--ff-body);
+    font-size: var(--fs-body);
+    color: var(--text-secondary);
+  }
+
+  .plan-card__per-player {
+    margin: 0;
+    padding: var(--space-2) var(--space-3);
+    font-family: var(--ff-ui);
+    font-size: var(--fs-md);
+    font-weight: 600;
+    color: var(--brand);
+    background: var(--brand-tint);
+    border-left: 2px solid var(--brand);
+  }
+
+  .coaching-plans__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-4);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    @include below(md) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .plan-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    padding: var(--space-6);
+    background: var(--bg-base);
+    border: var(--line-subtle);
+    transition:
+      transform var(--duration-slow) var(--ease-smooth),
+      border-color var(--duration-base) var(--ease-standard);
+
+    &:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-strong);
+    }
+  }
+
+  .plan-card--featured {
+    border-color: var(--brand);
+    background: linear-gradient(to bottom, var(--brand-wash), var(--bg-base));
+  }
+
+  .plan-card__badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    min-height: 1.5rem;
+  }
+
+  .plan-card__badge {
+    @include angular-cut(6px);
+    padding: var(--space-1) var(--space-3);
+    font-family: var(--ff-ui);
+    font-size: var(--fs-2xs);
+    font-weight: 700;
+    letter-spacing: var(--tracking-normal);
+    text-transform: uppercase;
+    color: var(--brand);
+    background: var(--brand-tint);
+  }
+
+  .plan-card__badge--featured {
+    color: var(--brand-fg);
+    background: var(--brand);
+  }
+
+  .plan-card__tier {
+    font-size: var(--fs-2xl);
+    text-transform: uppercase;
+    color: var(--text-primary);
+  }
+
+  .plan-card__price {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-2);
+    margin: 0;
+  }
+
+  .plan-card__amount {
+    font-family: var(--ff-display);
+    font-size: clamp(2.5rem, 5vw, 3.25rem);
+    line-height: 1;
+    color: var(--brand);
+  }
+
+  .plan-card__period {
+    font-family: var(--ff-ui);
+    font-size: var(--fs-md);
+    color: var(--text-muted);
+  }
+
+  .plan-card__original {
+    font-family: var(--ff-ui);
+    font-size: var(--fs-base);
+    color: var(--text-muted);
+  }
+
+  .plan-card__sessions {
+    margin: 0;
+    padding-top: var(--space-4);
+    border-top: var(--line-subtle);
+    font-family: var(--ff-ui);
+    font-size: var(--fs-body);
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  // ── Qué incluye: misma lista en todos los packs para compararlos fila a fila ──
+  .plan-card__features {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2-5);
+    margin: 0;
+    padding: 0 0 var(--space-2);
+    list-style: none;
+  }
+
+  .plan-card__feature {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2-5);
+    font-family: var(--ff-body);
+    font-size: var(--fs-md);
+    line-height: 1.45;
+    color: var(--text-secondary);
+  }
+
+  .plan-card__feature-icon {
+    flex-shrink: 0;
+    margin-top: 0.15em;
+    color: var(--brand);
+  }
+
+  .plan-card__feature--excluded {
+    color: var(--text-muted);
+    opacity: 0.6;
+
+    .plan-card__feature-icon {
+      color: var(--text-muted);
+    }
+  }
+
+  .plan-card__sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  // ── Acción única bajo cada modalidad ──
+  .coaching-plans__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3) var(--space-5);
+  }
+
+  .coaching-plans__actions-hint {
+    margin: 0;
+    font-family: var(--ff-body);
+    font-size: var(--fs-md);
+    color: var(--text-muted);
+  }
+
+  .coaching-plans__link {
+    font-weight: 600;
+    color: var(--brand);
+    text-underline-offset: 3px;
+
+    &:hover {
+      color: var(--brand-hover);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--brand);
+      outline-offset: 2px;
+    }
+  }
+
+  // ── Sesiones sueltas: más discretas que los packs ──
+  .coaching-plans__grid--single {
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  }
+
+  .single-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-5);
+    background: var(--bg-base);
+    border: 1px dashed var(--border-soft);
+    transition: border-color var(--duration-base) var(--ease-standard);
+
+    &:hover {
+      border-color: var(--border-strong);
+    }
+  }
+
+  // La sesión gratuita destaca: es la puerta de entrada
+  .single-card--free {
+    border: 1px solid var(--brand);
+    background: linear-gradient(to bottom, var(--brand-wash), var(--bg-base));
+  }
+
+  // Título y precio apilados en todas las cartas, para que las descripciones arranquen a la misma altura
+  .single-card__head {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding-bottom: var(--space-3);
+    border-bottom: var(--line-subtle);
+  }
+
+  .single-card__title {
+    font-size: var(--fs-lg);
+    text-transform: uppercase;
+    color: var(--text-primary);
+  }
+
+  .single-card__price {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-1-5);
+    margin: 0;
+  }
+
+  .single-card__amount {
+    font-family: var(--ff-display);
+    font-size: var(--fs-2xl);
+    line-height: 1;
+    color: var(--brand);
+  }
+
+  .single-card__unit {
+    font-family: var(--ff-ui);
+    font-size: var(--fs-sm);
+    color: var(--text-muted);
+  }
+
+  .single-card__description {
+    flex: 1;
+    margin: 0;
+    font-family: var(--ff-body);
+    font-size: var(--fs-md);
+    line-height: 1.55;
+    color: var(--text-secondary);
+  }
+
+  .single-card__cta {
+    width: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .plan-card {
+      transition: none;
+
+      &:hover {
+        transform: none;
+      }
+    }
+  }
+}

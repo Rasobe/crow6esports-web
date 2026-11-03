@@ -1,12 +1,13 @@
 @use "styles/layers";
+@use "styles/mixins" as *;
 @layer components {
   .tryouts-success {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 20px;
-    padding: 48px 24px;
+    gap: var(--space-5);
+    padding: var(--space-12) var(--space-6);
     max-width: 480px;
     margin-inline: auto;
   }
@@ -17,36 +18,36 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(245, 184, 0, 0.08);
-    border: 1px solid rgba(245, 184, 0, 0.3);
-    clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+    background: var(--brand-tint);
+    border: 1px solid rgb(var(--brand-rgb) / 0.3);
+    @include angular-cut(10px);
     color: var(--brand);
   }
 
   .tryouts-success__eyebrow {
-    font-family: var(--font-ui), sans-serif;
-    font-size: 11px;
+    font-family: var(--ff-ui);
+    font-size: var(--fs-2xs);
     font-weight: 700;
     letter-spacing: 5px;
     text-transform: uppercase;
     color: var(--brand);
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: var(--space-3);
 
     span {
       display: block;
       width: 32px;
       height: 1px;
-      background: rgba(245, 184, 0, 0.4);
+      background: rgb(var(--brand-rgb) / 0.4);
     }
   }
 
   .tryouts-success__title {
-    font-family: var(--font-display), sans-serif;
-    font-size: clamp(32px, 6vw, 52px);
+    font-family: var(--ff-display);
+    font-size: var(--fs-h3);
     line-height: 0.95;
-    letter-spacing: 0.02em;
+    letter-spacing: var(--tracking-tight);
     text-transform: uppercase;
     color: var(--text-primary);
   }
@@ -59,21 +60,21 @@
   }
 
   .tryouts-success__desc {
-    font-family: var(--font-body), sans-serif;
-    font-size: 15px;
+    font-family: var(--ff-body);
+    font-size: var(--fs-body);
     color: var(--text-secondary);
     line-height: 1.7;
     max-width: 400px;
   }
 
   .tryouts-success__note {
-    font-family: var(--font-ui), sans-serif;
+    font-family: var(--ff-ui);
     font-size: 12px;
     font-weight: 600;
-    letter-spacing: 0.05em;
+    letter-spacing: var(--tracking-snug);
     color: var(--text-muted);
-    border: 1px solid var(--border-subtle);
-    padding: 12px 20px;
+    border: var(--line-subtle);
+    padding: var(--space-3) var(--space-5);
     max-width: 400px;
   }
 }

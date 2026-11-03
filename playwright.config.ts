@@ -1,6 +1,6 @@
 import { defineConfig, devices } from "@playwright/test";
 
-const PORT = 4321;
+const PORT = Number(process.env.E2E_PORT ?? 4321);
 
 export default defineConfig({
   testDir: "./e2e",
@@ -15,7 +15,7 @@ export default defineConfig({
   },
   projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"] } }],
   webServer: {
-    command: "pnpm dev --ignore-lock",
+    command: `pnpm dev --ignore-lock --port ${PORT}`,
     url: `http://localhost:${PORT}`,
     reuseExistingServer: !process.env.CI,
     env: { TRYOUTS_OPEN: "true" },

@@ -1,0 +1,104 @@
+@use "styles/layers";
+@use "styles/mixins" as *;
+@layer components {
+  .tryouts-banner {
+    position: relative;
+    padding: var(--section-py) 0;
+    overflow: hidden;
+    background: var(--brand);
+    color: var(--brand-fg);
+  }
+
+  .tryouts-banner__watermark {
+    position: absolute;
+    bottom: -0.3em;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--ff-display);
+    font-size: clamp(9rem, 30vw, 26rem);
+    line-height: 0.8;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: transparent;
+    -webkit-text-stroke: 2px rgb(var(--bg-base-rgb) / 0.14);
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .tryouts-banner__inner {
+    @include container;
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    align-items: center;
+    gap: var(--space-12);
+  }
+
+  .tryouts-banner__heading {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  .tryouts-banner__eyebrow {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-family: var(--ff-ui);
+    font-size: var(--fs-xs);
+    font-weight: 700;
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+  }
+
+  .tryouts-banner__title {
+    font-size: clamp(3.5rem, 9vw, 8rem);
+    padding-top: 0.14em; /* deja sitio al acento de la Ú, que sobresale con line-height < 1 */
+    line-height: 0.88;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    color: var(--brand-fg);
+  }
+
+  .tryouts-banner__title-line {
+    display: block;
+  }
+
+  .tryouts-banner__content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-8);
+  }
+
+  .tryouts-banner__description {
+    max-width: 34ch;
+    font-size: var(--fs-lg);
+    line-height: 1.7;
+  }
+
+  .tryouts-banner .tryouts-banner__cta {
+    padding-right: var(--space-10);
+    color: var(--brand);
+    background: var(--brand-fg);
+    border-color: var(--brand-fg);
+    clip-path: polygon(0 0, 100% 0, calc(100% - var(--space-3)) 100%, 0 100%);
+
+    &:hover {
+      background: rgb(var(--bg-base-rgb) / 0.82);
+    }
+
+    /* El clip-path recorta el outline: en foco se anula y el anillo va en oscuro sobre el amarillo */
+    &:focus-visible {
+      clip-path: none;
+      outline-color: var(--brand-fg);
+    }
+  }
+
+  @include below(md) {
+    .tryouts-banner__inner {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-8);
+    }
+  }
+}

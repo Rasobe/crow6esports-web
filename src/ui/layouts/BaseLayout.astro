@@ -1,8 +1,9 @@
 ---
 import "@/styles/global.scss";
 import { Font } from "astro:assets";
+import { ClientRouter } from "astro:transitions";
 import SpeedInsights from "@vercel/speed-insights/astro";
-import Seo from "@/ui/shared/components/seo/Seo.astro";
+import { Seo } from "@/ui/shared/components";
 
 interface Props {
   title?: string;
@@ -20,14 +21,36 @@ const { locale } = Astro.locals;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content="#0a0a0a" />
+    <!-- Solo se precarga lo que se ve al cargar: titulares, navegación y botones, y texto normal -->
     <Font cssVariable="--font-display" preload />
-    <Font cssVariable="--font-ui" preload />
-    <Font cssVariable="--font-body" preload />
+    <Font cssVariable="--font-ui" preload={[{ weight: 700 }]} />
+    <Font cssVariable="--font-body" preload={[{ weight: 400 }]} />
+    <script is:inline>
+      (() => {
+        const root = document.documentElement;
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        root.setAttribute("data-motion", "pending");
+        // Failsafe: if the motion script never runs, the content must still show.
+        setTimeout(() => {
+          if (root.getAttribute("data-motion") === "pending") root.removeAttribute("data-motion");
+        }, 3000);
+      })();
+    </script>
+    <ClientRouter />
     <Seo title={title} description={description} locale={locale} path={path} noindex={noindex} />
+    <slot name="head" />
   </head>
   <body>
     <SpeedInsights />
     <slot />
+    <script>
+      import { initMotion } from "@/scripts/motion";
+
+      initMotion();
+    </script>
   </body>
 </html>

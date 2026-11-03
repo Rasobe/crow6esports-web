@@ -1,0 +1,214 @@
+---
+import "./about-page.scss";
+import { ABOUT_VALUES } from "@config/about";
+import { CLUB } from "@config/club";
+import { ACHIEVEMENTS, type Achievement, type ClubDate } from "@config/history";
+import { ROUTES } from "@config/routes";
+import { DISCORD_URL, socialLinks } from "@config/site";
+import { getRosterStats } from "@/application/team/get-roster-stats";
+import { container } from "@/infrastructure/container";
+import { createTranslator, localizePath } from "@/ui/i18n";
+import { Button, Icon, PageHeader } from "@/ui/shared/components";
+import { getClubYears } from "@/ui/shared/lib/club-info";
+
+const PILLARS = [
+  { key: "compete", route: ROUTES.team },
+  { key: "train", route: ROUTES.coaching },
+  { key: "join", route: ROUTES.tryouts },
+] as const;
+
+const { locale } = Astro.locals;
+const t = createTranslator(locale, "about");
+const { playerCount, peakMmr } = getRosterStats(container.playerRepository);
+
+const stats = [
+  { key: "years", value: getClubYears() },
+  { key: "achievements", value: ACHIEVEMENTS.length },
+  { key: "players", value: playerCount },
+  { key: "peak", value: peakMmr },
+];
+
+const formatDate = ({ year, month, day }: ClubDate) =>
+  month && day
+    ? new Intl.DateTimeFormat(locale, { dateStyle: "long" }).format(new Date(year, month - 1, day))
+    : String(year);
+const toIsoDate = ({ year, month, day }: ClubDate) =>
+  month && day
+    ? `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`
+    : String(year);
+
+const resultLabel = ({ result }: Achievement) => {
+  if (result.kind === "winner") return t("achievements.winner");
+  if (result.kind === "ranking") {
+    return t("achievements.ranking", {
+      place: result.place,
+      scope: t(`achievements.scopes.${result.scope}`),
+    });
+  }
+  return t("achievements.placement", { place: result.place });
+};
+
+const eventName = ({ id, event }: Achievement) => event ?? t(`achievements.events.${id}`);
+
+const achievements = [...ACHIEVEMENTS].sort(
+  (a, b) => a.date.year - b.date.year || (a.date.month ?? 13) - (b.date.month ?? 13),
+);
+---
+
+<PageHeader eyebrow={t("eyebrow")} title={t("title")} description={t("meta.description")} />
+
+<section class="about-intro" aria-labelledby="about-intro-title">
+  <div class="about-intro__inner">
+    <div class="about-intro__text" data-reveal>
+      <h2 id="about-intro-title" class="about-intro__title">
+        {t("story.title")}
+      </h2>
+      <p>{t("story.founded", { year: CLUB.foundedYear, game: CLUB.game })}</p>
+      <p>{t("story.today", { players: playerCount })}</p>
+    </div>
+
+    <dl class="about-intro__stats" aria-label={t("stats.label")}>
+      {stats.map(({ key, value }) => (
+        <div class="about-intro__stat" data-reveal>
+          <dt class="about-intro__stat-label">{t(`stats.${key}`)}</dt>
+          <dd class="about-intro__stat-value" data-count-to={value}>
+            {value.toLocaleString(locale)}
+          </dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+</section>
+
+<section class="about-timeline" aria-labelledby="about-timeline-title">
+  <div class="about-timeline__inner">
+    <header class="about-timeline__header" data-reveal>
+      <h2 id="about-timeline-title" class="about-timeline__title">
+        {t("timeline.title")}
+      </h2>
+      <p class="about-timeline__lead">{t("timeline.lead")}</p>
+    </header>
+
+    <ol class="timeline">
+      <li class="timeline__item" data-reveal>
+        <span class="timeline__node" aria-hidden="true"></span>
+        <article class="timeline__card">
+          <p class="timeline__date">{CLUB.foundedYear}</p>
+          <h3 class="timeline__name">{t("timeline.founding_title")}</h3>
+          <p class="timeline__text">{t("timeline.founding_text", { game: CLUB.game })}</p>
+        </article>
+      </li>
+
+      {achievements.map((achievement) => (
+        <li class="timeline__item" data-reveal>
+          <span class="timeline__node timeline__node--trophy" aria-hidden="true" />
+          <article class="timeline__card timeline__card--achievement">
+            <p class="timeline__date">
+              <time datetime={toIsoDate(achievement.date)}>{formatDate(achievement.date)}</time>
+              {achievement.onsite && <span class="timeline__tag">{t("achievements.onsite")}</span>}
+            </p>
+            <p class="timeline__result">{resultLabel(achievement)}</p>
+            <h3 class="timeline__name">{eventName(achievement)}</h3>
+            <dl class="timeline__lineup">
+              <div>
+                <dt>{t("achievements.lineup")}</dt>
+                <dd>{achievement.lineup.join(" · ")}</dd>
+              </div>
+              {achievement.substitutes && (
+                <div>
+                  <dt>{t("achievements.substitutes")}</dt>
+                  <dd>{achievement.substitutes.join(" · ")}</dd>
+                </div>
+              )}
+            </dl>
+          </article>
+        </li>
+      ))}
+
+      <li class="timeline__item" data-reveal>
+        <span class="timeline__node timeline__node--now" aria-hidden="true"></span>
+        <article class="timeline__card">
+          <p class="timeline__date">{t("timeline.today_label")}</p>
+          <h3 class="timeline__name">{t("timeline.today_title")}</h3>
+          <p class="timeline__text">{t("timeline.today_text", { players: playerCount })}</p>
+        </article>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="about-pillars" aria-labelledby="about-pillars-title">
+  <div class="about-pillars__inner">
+    <h2 id="about-pillars-title" class="about-pillars__title" data-reveal>
+      {t("pillars.title")}
+    </h2>
+    <ul class="about-pillars__list">
+      {PILLARS.map(({ key, route }, index) => (
+        <li data-reveal>
+          <a class="pillar" href={localizePath(locale, route)}>
+            <span class="pillar__index" aria-hidden="true">
+              {String(index + 1).padStart(2, "0")}
+            </span>
+            <h3 class="pillar__name">{t(`pillars.items.${key}.title`)}</h3>
+            <p class="pillar__description">{t(`pillars.items.${key}.description`)}</p>
+            <span class="pillar__cta">
+              {t(`pillars.items.${key}.cta`)}
+              <Icon name="arrow-right" size={16} />
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<section class="about-values" aria-labelledby="about-values-title">
+  <div class="about-values__inner">
+    <h2 id="about-values-title" class="about-values__title" data-reveal>
+      {t("values.title")}
+    </h2>
+    <ul class="about-values__list">
+      {ABOUT_VALUES.map((value, index) => (
+        <li class="about-values__item" data-reveal>
+          <span class="about-values__index" aria-hidden="true">
+            {String(index + 1).padStart(2, "0")}
+          </span>
+          <h3 class="about-values__name">{t(`values.items.${value}.title`)}</h3>
+          <p class="about-values__description">{t(`values.items.${value}.description`)}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<section class="about-contact" aria-labelledby="about-contact-title">
+  <div class="about-contact__inner" data-reveal>
+    <h2 id="about-contact-title" class="about-contact__title">
+      {t("contact.title")}
+    </h2>
+    <p class="about-contact__lead">{t("contact.lead")}</p>
+    <div class="about-contact__actions">
+      <Button href={DISCORD_URL} size="lg">
+        {t("contact.discord")}
+      </Button>
+      <Button href={`mailto:${CLUB.email}`} variant="outline" size="lg">
+        {CLUB.email}
+      </Button>
+    </div>
+    <ul class="about-contact__socials" aria-label={t("contact.socials_label")}>
+      {socialLinks.map(({ platform, href, label }) => (
+        <li>
+          <a
+            class="about-contact__social"
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${label} (${t("contact.new_tab")})`}
+          >
+            <Icon name={platform} size={20} />
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

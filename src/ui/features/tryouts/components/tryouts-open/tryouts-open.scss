@@ -1,12 +1,12 @@
 @use "styles/layers";
+@use "styles/mixins" as *;
 @layer components {
   .tryouts-open {
     min-height: calc(100dvh - var(--navbar-h));
   }
 
   .tryouts-open__content {
-    max-width: var(--container);
-    margin-inline: auto;
-    padding: 64px 1.5rem 80px;
+    @include container-bounds;
+    padding: var(--space-16) var(--space-6) var(--space-20);
   }
 }

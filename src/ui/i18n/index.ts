@@ -15,8 +15,10 @@ export function isLocale(value: string | undefined): value is Locale {
   return LOCALES.includes(value as Locale);
 }
 
+/** Sin cabecera (buscadores, bots) se usa el idioma por defecto; con ella, español o inglés. */
 export function detectLocale(acceptLanguage: string | null): Locale {
-  return acceptLanguage?.toLowerCase().startsWith("es") ? "es" : "en";
+  if (!acceptLanguage) return DEFAULT_LOCALE;
+  return acceptLanguage.toLowerCase().startsWith("es") ? "es" : "en";
 }
 
 function lookup(messages: unknown, path: string): unknown {
@@ -55,10 +57,16 @@ export function localizePath(locale: Locale, path: string): string {
 }
 
 export function stripLocale(pathname: string): string {
-  const stripped = pathname.replace(new RegExp(`^/(${LOCALES.join("|")})(?=/|$)`), "");
+  const stripped = pathname
+    .replace(new RegExp(`^/(${LOCALES.join("|")})(?=/|$)`), "")
+    .replace(/\/+$/, "");
   return stripped === "" ? "/" : stripped;
 }
 
 export function formatCurrency(locale: Locale, amount: number, currency: string): string {
-  return new Intl.NumberFormat(locale, { style: "currency", currency }).format(amount);
+  return new Intl.NumberFormat(locale, {
+    style: "currency",
+    currency,
+    minimumFractionDigits: Number.isInteger(amount) ? 0 : 2,
+  }).format(amount);
 }

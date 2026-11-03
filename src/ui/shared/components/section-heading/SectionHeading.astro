@@ -1,0 +1,29 @@
+---
+import "./section-heading.scss";
+
+interface Props {
+  id: string;
+  eyebrow: string;
+  title: string;
+  accent?: string;
+  href: string;
+  linkLabel: string;
+}
+
+const { id, eyebrow, title, accent, href, linkLabel } = Astro.props;
+---
+
+<header class="section-heading">
+  <div class="section-heading__text">
+    <span class="section-label">{eyebrow}</span>
+    <h2 id={id} class="section-heading__title">
+      {title}
+      {accent && " "}
+      {accent && <span class="section-heading__accent">{accent}</span>}
+    </h2>
+  </div>
+
+  <a class="section-heading__link" href={href}>
+    {linkLabel}
+  </a>
+</header>

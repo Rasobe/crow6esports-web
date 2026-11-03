@@ -1,17 +1,26 @@
 import type { APIRoute } from "astro";
 import { SITE_URL } from "astro:env/server";
+import { LIVE_ROUTES } from "@config/pages";
 import { ROUTES } from "@config/routes";
+import { getArticles } from "@/application/news/get-articles";
+import { getSitemapPaths } from "@/application/site/get-sitemap-paths";
+import { container } from "@/infrastructure/container";
 import { LOCALES, localizePath } from "@/ui/i18n";
 
 const CHANGE_FREQUENCY = "weekly";
 
-export const GET: APIRoute = () => {
-  const lastModified = new Date().toISOString();
+export const GET: APIRoute = async () => {
+  const articles = await getArticles(container.articleRepository);
+  const paths = getSitemapPaths({
+    liveRoutes: LIVE_ROUTES,
+    newsRoute: ROUTES.news,
+    articleSlugs: articles.map((article) => article.slug),
+  });
 
   const entries = LOCALES.flatMap((locale) =>
-    Object.values(ROUTES).map((route) => {
-      const priority = route === ROUTES.home ? "1.0" : "0.8";
-      return `  <url><loc>${SITE_URL}${localizePath(locale, route)}</loc><lastmod>${lastModified}</lastmod><changefreq>${CHANGE_FREQUENCY}</changefreq><priority>${priority}</priority></url>`;
+    paths.map((path) => {
+      const priority = path === ROUTES.home ? "1.0" : "0.8";
+      return `  <url><loc>${SITE_URL}${localizePath(locale, path)}</loc><changefreq>${CHANGE_FREQUENCY}</changefreq><priority>${priority}</priority></url>`;
     }),
   );
 

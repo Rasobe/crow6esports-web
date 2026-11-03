@@ -1,19 +1,12 @@
 ---
 import "./coming-soon.scss";
+import { CLUB } from "@config/club";
 import { socialLinks } from "@config/site";
 import { createTranslator } from "@/ui/i18n";
-import { Icon, type IconName } from "@/ui/shared/components";
+import { Icon } from "@/ui/shared/components";
 
-const SOCIAL_ICONS: Record<(typeof socialLinks)[number]["platform"], IconName> = {
-  x: "x",
-  instagram: "instagram",
-  discord: "discord",
-  twitch: "twitch",
-  tiktok: "tiktok",
-  youtube: "youtube",
-};
-
-const t = createTranslator(Astro.locals.locale, "comingSoon");
+const { locale } = Astro.locals;
+const t = createTranslator(locale, "comingSoon");
 ---
 
 <main class="coming-soon" id="main">
@@ -49,7 +42,7 @@ const t = createTranslator(Astro.locals.locale, "comingSoon");
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Icon name={SOCIAL_ICONS[social.platform]} size={20} />
+              <Icon name={social.platform} size={20} />
               <span class="coming-soon__sr-only">
                 {social.label} ({t("newTab")})
               </span>
@@ -59,7 +52,7 @@ const t = createTranslator(Astro.locals.locale, "comingSoon");
       </ul>
     </nav>
 
-    <p class="coming-soon__meta">{t("meta")}</p>
+    <p class="coming-soon__meta">{t("meta", { year: CLUB.foundedYear, game: CLUB.game })}</p>
     <p class="coming-soon__hashtag">{t("hashtag")}</p>
   </div>
 </main>

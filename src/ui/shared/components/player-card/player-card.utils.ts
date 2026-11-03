@@ -1,8 +1,13 @@
-import type { PlayerSocials } from "@/domain/team/player";
+import type { PlayerSocials, PlayerStatus, PlayerType } from "@/domain/team/player";
+import type { IconName } from "../icons";
 
 export function getAge(birthYear: number | null): number | null {
   if (!birthYear) return null;
   return new Date().getFullYear() - birthYear;
+}
+
+export function getInitial(nickname: string): string {
+  return Array.from(nickname.trim())[0]?.toUpperCase() ?? "";
 }
 
 export type SocialPlatform =
@@ -38,4 +43,31 @@ export function getActiveSocialLinks(socials: PlayerSocials): ActiveSocialLink[]
     if (!href) return [];
     return [{ platform, href, label: SOCIAL_LABELS[platform] }];
   });
+}
+
+export const ROLE_KEY: Record<PlayerType, string> = {
+  player: "role_player",
+  coach: "role_coach",
+  analyst: "role_analyst",
+  manager: "role_manager",
+};
+
+export const STATUS_KEY: Record<PlayerStatus, string | null> = {
+  active: null,
+  substitute: "status_substitute",
+  retired: "status_retired",
+  former: "status_former",
+};
+
+export const SOCIAL_ICONS: Record<SocialPlatform, IconName> = {
+  twitter: "x",
+  instagram: "instagram",
+  twitch: "twitch",
+  tiktok: "tiktok",
+  youtube: "youtube",
+  rltracker: "rltracker",
+};
+
+export function formatStat(value: number, locale: string): string {
+  return value.toLocaleString(locale);
 }

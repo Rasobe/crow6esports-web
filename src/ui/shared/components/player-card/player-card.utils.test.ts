@@ -1,6 +1,18 @@
 import { describe, expect, it } from "vitest";
-import { getAge, getActiveSocialLinks } from "./player-card.utils";
+import { formatStat, getAge, getActiveSocialLinks, getInitial } from "./player-card.utils";
 import type { PlayerSocials } from "@/domain/team/player";
+
+describe("getInitial", () => {
+  it("returns the uppercased first character", () => {
+    expect(getInitial("blackito")).toBe("B");
+    expect(getInitial("94s")).toBe("9");
+  });
+
+  it("ignores leading whitespace and handles empty input", () => {
+    expect(getInitial("  kronos")).toBe("K");
+    expect(getInitial("")).toBe("");
+  });
+});
 
 describe("getAge", () => {
   it("returns null when birthYear is null", () => {
@@ -44,5 +56,12 @@ describe("getActiveSocialLinks", () => {
         label: "RLTracker",
       },
     ]);
+  });
+});
+
+describe("formatStat", () => {
+  it("formats the number with the given locale", () => {
+    expect(formatStat(1234, "en")).toBe("1,234");
+    expect(formatStat(1234567, "es")).toBe("1.234.567");
   });
 });

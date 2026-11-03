@@ -26,11 +26,16 @@ const {
 
 const hasIcon = Astro.slots.has("icon");
 const classes = ["btn", `btn--${variant}`, `btn--${size}`, className];
-const localizedHref = href === undefined ? undefined : localizePath(Astro.locals.locale, href);
+const isExternal = href !== undefined && /^(https?:|mailto:)/.test(href);
+const localizedHref =
+  href === undefined || isExternal ? href : localizePath(Astro.locals.locale, href);
+const externalAttrs = href?.startsWith("http")
+  ? { target: "_blank", rel: "noopener noreferrer" }
+  : {};
 ---
 
 {localizedHref !== undefined ? (
-  <a href={localizedHref} class:list={classes} {...attrs}>
+  <a href={localizedHref} class:list={classes} {...externalAttrs} {...attrs}>
     {hasIcon && (
       <span class="btn__icon" aria-hidden="true">
         <slot name="icon" />

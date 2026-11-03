@@ -1,6 +1,6 @@
 {
   "site": {
-    "description": "Organización competitiva de Rocket League con sede en Huesca, España."
+    "description": "Organización competitiva de Rocket League."
   },
   "nav": {
     "team": "Plantilla",
@@ -9,10 +9,11 @@
     "coaching": "Coaching",
     "about_us": "Sobre nosotros",
     "join": "Únete",
-    "home_aria": "Crow 6 Esports — Inicio",
+    "home_aria": "Crow 6 Esports, Inicio",
     "locale_switcher_aria": "Seleccionar idioma",
     "menu_aria": "Menú de navegación",
     "menu_open_aria": "Abrir menú",
+    "skip_to_content": "Saltar al contenido",
     "menu_close_aria": "Cerrar menú"
   },
   "home": {
@@ -21,60 +22,68 @@
       "description": "Organización competitiva de Rocket League."
     },
     "hero": {
-      "eyebrow": "Organización de esports",
-      "tagline": "Domina · Compite · Conquista",
+      "title": {
+        "name": "Crow",
+        "number": "6",
+        "sector": "Esports"
+      },
+      "subtitle": "Organización competitiva de Rocket League",
       "cta_team": "Ver equipo",
       "cta_join": "Únete al equipo",
       "stats": {
-        "wins": "Victorias",
-        "tournaments": "Torneos",
-        "players": "Jugadores",
-        "championships": "Campeonatos"
+        "label": "Cifras del equipo",
+        "years": "Años de trayectoria",
+        "players": "Jugadores en plantilla",
+        "peak": "Peak MMR del roster",
+        "game": "Juego"
+      }
+    },
+    "ticker": {
+      "label": "Novedades del equipo",
+      "pause": "Pausar animación de novedades",
+      "items": {
+        "roster": "Roster oficial",
+        "coaching": "Coaching 1a1 y equipos",
+        "tryouts": "Tryouts abiertos"
       }
     },
     "teamHighlight": {
-      "eyebrow": "El Equipo",
-      "title": "Conoce a nuestros jugadores",
-      "subtitle": "Profesionales dedicados que representan a Crow6 en la arena competitiva.",
-      "cta_view_more": "Ver más"
+      "eyebrow": "Roster oficial",
+      "title_lead": "La",
+      "title_accent": "plantilla",
+      "cta_view_more": "Plantilla completa"
     },
     "coachingBanner": {
-      "eyebrow": "Entrenamiento profesional",
-      "title": "Lleva tu juego al siguiente nivel",
-      "subtitle": "Entrenamiento personalizado para mejorar tu rendimiento en Rocket League en equipo o individualmente.",
-      "credibility": "6 años formando jugadores con hasta 2000+ MMR",
-      "pack_1_title": "Pack Básico",
-      "pack_1_price": "28€/mes",
-      "pack_1_description": "Ideal para empezar a pulir tu mecánica y tus decisiones en partido.",
-      "pack_1_feature_1": "1 sesión semanal (60 min)",
-      "pack_1_feature_2": "Feedback de tu última partida ranked",
-      "pack_1_feature_3": "Acceso al Discord de la academia",
-      "pack_2_badge": "Más elegido",
-      "pack_2_title": "Pack Destacado",
-      "pack_2_price": "55€/mes",
-      "pack_2_description": "El equilibrio perfecto entre seguimiento constante y precio.",
-      "pack_2_feature_1": "2 sesiones semanales (60 min)",
-      "pack_2_feature_2": "Análisis de replays personalizado",
-      "pack_2_feature_3": "Plan de mejora mensual",
-      "pack_2_feature_4": "Acceso prioritario a horarios",
-      "pack_3_title": "Pack Premium",
-      "pack_3_price": "78€/mes",
-      "pack_3_description": "Entrenamiento intensivo para quien compite al máximo nivel.",
-      "pack_3_feature_1": "3 sesiones semanales (60 min)",
-      "pack_3_feature_2": "Análisis de VOD ilimitado",
-      "pack_3_feature_3": "Seguimiento 1 a 1 por Discord",
-      "pack_3_feature_4": "Sesión mensual con el equipo de analistas",
-      "cta_reserve": "Reservar sesión"
+      "title_lead": "Sube de rango con el",
+      "title_accent": "Head Coach",
+      "title_tail": "de Crow 6.",
+      "description": "{years} años formando jugadores y equipos. Revisión de tus replays, objetivos claros en cada sesión y un plan semanal que encaja con tu horario.",
+      "coach_role": "Head Coach",
+      "hours_label": "Horas de juego",
+      "photo_soon": "Foto próximamente",
+      "progress_label": "Progreso del alumno",
+      "progress_start": "Alumno · inicio",
+      "progress_current": "Actual · MMR",
+      "service_one_to_one_title": "Coaching 1a1",
+      "service_one_to_one_description": "Análisis de replays y mecánicas",
+      "service_teams_title": "Equipos completos",
+      "service_teams_description": "Sinergia, rotaciones y estrategia",
+      "service_weekly_plan_title": "Plan semanal",
+      "service_weekly_plan_description": "Objetivos claros y seguimiento diario",
+      "price_individual": "Individual desde",
+      "price_teams": "Equipos desde",
+      "price_unit": "/ mes",
+      "price_before": "Precio anterior",
+      "schedule": "Lun a Sáb · {from} a {to} {timezone}",
+      "cta_reserve": "Reserva tu plaza"
     },
     "storeHighlight": {
-      "eyebrow": "La Tienda",
-      "title": "Viste los colores de Crow6",
-      "subtitle": "Equipación oficial pensada para el equipo y la afición.",
-      "cta_view_more": "Ver más"
+      "eyebrow": "Tienda oficial",
+      "title": "Viste los colores",
+      "cta_view_more": "Ir a la tienda"
     },
     "playerCard": {
-      "stat_mmr": "MMR",
-      "stat_peak": "PEAK",
+      "stat_peak": "PEAK MMR",
       "stat_age": "EDAD",
       "role_player": "Jugador",
       "role_coach": "Entrenador",
@@ -87,9 +96,30 @@
     "productCard": {
       "category_jersey": "Camiseta",
       "category_hoodie": "Sudadera",
-      "category_cap": "Gorra",
-      "category_accessory": "Accesorio",
+      "category_sticker": "Pegatina",
       "featured_badge": "Destacado"
+    },
+    "tryoutsBanner": {
+      "eyebrow": "Proceso de selección",
+      "title_line_1": "Únete a",
+      "title_line_2": "los cuervos.",
+      "description": "Buscamos jugadores comprometidos con ganas de competir. Rellena el formulario y te contactamos.",
+      "cta": "Inscribirme",
+      "watermark": "Tryouts"
+    },
+    "newsHighlight": {
+      "eyebrow": "Últimas noticias",
+      "title": "Noticias",
+      "cta_view_more": "Ver todas"
+    },
+    "videoHighlight": {
+      "eyebrow": "Momentos del club",
+      "title_lead": "Nuestros",
+      "title_accent": "golazos",
+      "description": "Un montaje con las mejores jugadas y los momentos que han marcado la historia del club.",
+      "play": "Reproducir el vídeo de momentos del club",
+      "play_label": "Ver el montaje",
+      "video_label": "Montaje de golazos y momentos del club"
     }
   },
   "team": {
@@ -111,16 +141,42 @@
     }
   },
   "news": {
+    "meta": {
+      "title": "Noticias",
+      "description": "Las últimas noticias de Crow 6 Esports."
+    },
     "title": "Noticias",
     "eyebrow": "Últimas noticias",
-    "read_more": "Leer más"
+    "list_label": "Listado de noticias",
+    "back": "Volver a noticias",
+    "reading_time": "{minutes} min de lectura",
+    "read_more": "Leer más",
+    "empty": {
+      "title": "Pronto publicaremos noticias",
+      "description": "Estamos preparando las primeras publicaciones. Mientras tanto, síguenos en redes para no perderte nada.",
+      "socials_label": "Redes sociales",
+      "new_tab": "se abre en una pestaña nueva"
+    }
   },
   "store": {
+    "meta": {
+      "title": "Tienda",
+      "description": "Merchandising oficial de Crow 6 Esports: la camiseta del equipo."
+    },
+    "catalog_label": "Catálogo de productos",
     "title": "Tienda",
     "eyebrow": "Merchandise oficial",
     "sold_out": "Agotado",
     "add_to_cart": "Añadir al carrito",
-    "size": "Talla"
+    "size": "Talla",
+    "next_edition": {
+      "eyebrow": "Próxima edición",
+      "title": "Próxima edición",
+      "description": "La camiseta oficial está agotada por ahora. Únete a nuestro Discord para enterarte antes que nadie de cuándo vuelve.",
+      "teaser": "La camiseta oficial está agotada. Entra en el Discord para saber cuándo vuelve.",
+      "cta_discord": "Avisarme por Discord",
+      "cta_email": "Escribir al club"
+    }
   },
   "tryouts": {
     "meta": {
@@ -137,35 +193,64 @@
         "submit": "Enviar solicitud",
         "submitting": "Enviando...",
         "steps": {
-          "profile": "Perfil",
-          "technical": "Técnico",
-          "mindset": "Mentalidad"
+          "label": "Pasos de la solicitud",
+          "counter": "Paso {current} de {total}",
+          "profile": {
+            "title": "Perfil",
+            "desc": "Cómo contactarte y cuándo puedes entrenar."
+          },
+          "technical": {
+            "title": "Nivel",
+            "desc": "Tu nivel actual, tu estilo y dónde ver tus partidas."
+          },
+          "mindset": {
+            "title": "Mentalidad",
+            "desc": "Cómo compites en equipo. Responde con sinceridad."
+          }
         },
         "fields": {
           "discord": {
-            "label": "Discord ID",
-            "placeholder": "usuario#0000",
-            "hint": "Principal método de contacto"
+            "label": "Usuario de Discord",
+            "placeholder": "tu_usuario",
+            "hint": "Tu nombre de usuario, no el nombre visible. Te contactaremos por aquí."
           },
           "birth_date": {
             "label": "Fecha de nacimiento",
-            "placeholder": "DD/MM/AAAA"
+            "day": "Día",
+            "month": "Mes",
+            "year": "Año"
           },
           "country": {
             "label": "País / Región",
             "placeholder": "España"
           },
-          "availability_weekdays": {
-            "label": "Disponibilidad entre semana",
-            "placeholder": "Ej: L-V 18:00 a 22:00"
+          "available_days": {
+            "label": "Días que puedes entrenar",
+            "presets": {
+              "weekdays": "Entre semana",
+              "weekend": "Fin de semana",
+              "all": "Todos"
+            }
           },
-          "availability_weekends": {
-            "label": "Disponibilidad fines de semana",
-            "placeholder": "Ej: S-D 10:00 a 23:00"
+          "schedule_type": {
+            "label": "Horario",
+            "options": {
+              "fixed": "Horas fijas",
+              "flexible": "Flexible"
+            }
           },
-          "availability_scrims": {
-            "label": "Disponibilidad para scrims",
-            "placeholder": "Ej: Miércoles y viernes 20:00"
+          "schedule_from": {
+            "label": "Desde",
+            "time_zone": "Horas en tu zona horaria ({timeZone})."
+          },
+          "schedule_to": {
+            "label": "Hasta",
+            "next_day": "Termina al día siguiente."
+          },
+          "availability_notes": {
+            "label": "Comentarios sobre tu disponibilidad",
+            "placeholder": "Ej: los martes solo hasta las 21:00",
+            "hint": "Opcional"
           },
           "rltracker": {
             "label": "Enlace RLTracker",
@@ -185,7 +270,6 @@
           },
           "playstyle": {
             "label": "Estilo de juego predominante",
-            "placeholder": "Selecciona un estilo de juego",
             "options": {
               "calm": "Calma y posicionamiento",
               "intermediate": "Equilibrado",
@@ -232,30 +316,68 @@
               "no": "No",
               "maybe": "Tal vez"
             }
-          }
+          },
+          "long_text_hint": "Mínimo 10 caracteres."
         },
         "validation": {
-          "discord_required": "El Discord ID es obligatorio",
+          "discord_required": "El usuario de Discord es obligatorio",
           "birth_date_required": "La fecha de nacimiento es obligatoria",
           "country_required": "El país es obligatorio",
-          "availability_weekdays_required": "La disponibilidad entre semana es obligatoria",
-          "availability_weekends_required": "La disponibilidad en fines de semana es obligatoria",
-          "availability_scrims_required": "La disponibilidad para scrims es obligatoria",
           "rltracker_required": "El enlace de RLTracker es obligatorio",
-          "rltracker_invalid": "Introduce una URL válida de RLTracker",
+          "rltracker_invalid": "Introduce el enlace de tu perfil en RLTracker (tracker.network)",
           "rank_required": "El rango es obligatorio",
           "peak_required": "El peak MMR es obligatorio",
           "hours_required": "Las horas jugadas son obligatorias",
           "playstyle_required": "Selecciona un estilo de juego",
           "highlights_invalid": "Introduce una URL válida",
-          "competitive_exp_required": "Este campo es obligatorio",
-          "reaction_mistakes_required": "Respuesta demasiado corta — mínimo 10 caracteres",
-          "reaction_losses_required": "Este campo es obligatorio",
-          "looking_for_required": "Respuesta demasiado corta — mínimo 10 caracteres",
-          "coaching_required": "Este campo es obligatorio"
+          "competitive_exp_required": "Elige una opción",
+          "reaction_mistakes_required": "Respuesta demasiado corta: mínimo 10 caracteres",
+          "reaction_losses_required": "Elige una opción",
+          "looking_for_required": "Respuesta demasiado corta: mínimo 10 caracteres",
+          "coaching_required": "Elige una opción",
+          "discord_invalid": "Usa tu nombre de usuario de Discord: de 2 a 32 caracteres, solo letras, números, _ y .",
+          "birth_date_invalid": "Introduce una fecha de nacimiento válida",
+          "hours_invalid": "Introduce un número entero de horas",
+          "too_long": "El texto es demasiado largo",
+          "available_days_required": "Elige al menos un día",
+          "schedule_type_required": "Elige un tipo de horario",
+          "schedule_from_required": "Elige la hora de inicio",
+          "schedule_to_required": "Elige la hora de fin",
+          "schedule_same_time": "La hora de fin debe ser distinta a la de inicio"
         },
         "error": {
-          "submit_failed": "No se pudo enviar la solicitud. Inténtalo de nuevo en unos minutos."
+          "submit_failed": "No se pudo enviar la solicitud. Inténtalo de nuevo en unos minutos.",
+          "rate_limited": "Has enviado demasiadas solicitudes seguidas. Espera unos minutos antes de volver a intentarlo."
+        },
+        "required_legend": "Campos obligatorios",
+        "groups": {
+          "contact": "Contacto",
+          "availability": "Disponibilidad",
+          "level": "Nivel",
+          "links": "Perfil y clips",
+          "experience": "Experiencia",
+          "team_play": "Juego en equipo",
+          "goals": "Objetivos"
+        },
+        "weekdays": {
+          "short": {
+            "mon": "Lun",
+            "tue": "Mar",
+            "wed": "Mié",
+            "thu": "Jue",
+            "fri": "Vie",
+            "sat": "Sáb",
+            "sun": "Dom"
+          },
+          "long": {
+            "mon": "Lunes",
+            "tue": "Martes",
+            "wed": "Miércoles",
+            "thu": "Jueves",
+            "fri": "Viernes",
+            "sat": "Sábado",
+            "sun": "Domingo"
+          }
         }
       },
       "success": {
@@ -266,23 +388,242 @@
       }
     },
     "closed": {
-      "label": "Proceso cerrado",
       "eyebrow": "Proceso de selección",
       "title": "TRYOUTS CERRADOS",
-      "subtitle": "",
-      "desc": "Déjanos tu Discord y te avisamos cuando abramos el siguiente proceso.",
-      "notify_label": "Déjanos tu Discord",
-      "notify_placeholder": "Tu usuario de Discord",
-      "notify_button": "Avísame"
+      "desc": "Ahora mismo no hay ningún proceso abierto. Síguenos en Discord y te avisaremos cuando abramos el siguiente.",
+      "cta": "Ir al Discord"
     }
   },
   "coaching": {
+    "meta": {
+      "title": "Coaching",
+      "description": "Coaching de Rocket League individual y para equipos con el Head Coach de Crow 6 Esports."
+    },
     "eyebrow": "Entrenamiento profesional",
     "title": "Coaching",
-    "individual": "Individual",
-    "group": "Grupal",
-    "book": "Reservar sesión",
-    "contact": "Contactar"
+    "description": "Sube de rango con revisión de replays, objetivos claros en cada sesión y un plan semanal que encaja con tu horario.",
+    "profile": {
+      "role": "Head Coach",
+      "title": "Quién te entrena",
+      "stats": {
+        "hours": "Horas en Rocket League",
+        "years": "Años como coach",
+        "max_mmr": "MMR alcanzado por sus alumnos",
+        "recent_case": "Caso reciente (MMR)"
+      }
+    },
+    "services": {
+      "title": "Servicios",
+      "one_to_one": {
+        "title": "Coaching 1a1",
+        "description": "Análisis de replays y mecánicas"
+      },
+      "teams": {
+        "title": "Equipos completos",
+        "description": "Sinergia, rotaciones y estrategia"
+      },
+      "weekly_plan": {
+        "title": "Plan semanal",
+        "description": "Objetivos claros y seguimiento diario"
+      }
+    },
+    "plans": {
+      "title": "Packs de coaching",
+      "lead": "Precios de lanzamiento. Todos los packs son mensuales y cada nivel incluye todo lo del anterior.",
+      "mode": {
+        "individual": "Individual",
+        "teams": "Grupal / equipos"
+      },
+      "tier": {
+        "basic": "Basic",
+        "pro": "Pro",
+        "elite": "Elite"
+      },
+      "featured_badge": "Más elegido",
+      "period": "/ mes",
+      "original_price": "Precio original",
+      "sessions_one": "{count} sesión semanal de {hours} h",
+      "sessions_other": "{count} sesiones semanales de {hours} h",
+      "cta": {
+        "individual": "Reservar pack individual",
+        "teams": "Reservar pack de equipo"
+      },
+      "team_note": "Precio por equipo, mínimo {players} jugadores.",
+      "per_player": "≈ {price} por jugador con {players}",
+      "features_label": "Qué incluye",
+      "included": "Incluido",
+      "not_included": "No incluido",
+      "features": {
+        "individual": {
+          "live_review": "Análisis de tus replays en la sesión",
+          "weekly_goals": "Objetivos y plan semanal",
+          "training_routine": "Rutina de entrenamiento personalizada",
+          "offline_review": "Revisión de replays entre sesiones",
+          "discord_support": "Dudas por Discord entre sesiones",
+          "progress_report": "Informe mensual de progreso"
+        },
+        "teams": {
+          "rotations": "Rotaciones y posicionamiento",
+          "match_review": "Revisión de partidos del equipo",
+          "roles_comms": "Roles y comunicación en partida",
+          "scrim_review": "Análisis de scrims y rivales",
+          "tournament_prep": "Preparación de torneos",
+          "discord_support": "Seguimiento por Discord entre sesiones"
+        }
+      },
+      "single": {
+        "title": "Sesiones sueltas",
+        "lead": "Empieza con una sesión de presentación gratis. Y si contratas un pack en los {days} días siguientes a una sesión de pago, te descontamos lo que pagaste.",
+        "items": {
+          "intro": {
+            "title": "Sesión de presentación",
+            "description": "30 min para conocernos, ver tu nivel y tus objetivos, y recomendarte el pack que mejor te encaja. Sin compromiso."
+          },
+          "live": {
+            "title": "Sesión individual",
+            "unit": "/ sesión",
+            "description": "{hours} h en directo con el coach para trabajar algo concreto: una mecánica, una mala racha o un torneo."
+          },
+          "replay_review": {
+            "title": "Revisión de replay",
+            "unit": "/ replay",
+            "description": "Envías una partida y recibes el análisis con los puntos clave a mejorar, sin necesidad de cuadrar horario."
+          },
+          "team_live": {
+            "title": "Sesión de equipo",
+            "unit": "/ sesión",
+            "description": "{hours} h con tu equipo para preparar un torneo o resolver un problema concreto de juego."
+          }
+        },
+        "free": "Gratis",
+        "cta_free": "Reservar sesión gratis",
+        "paid_note": "Las sesiones de pago también se reservan por Discord:",
+        "paid_link": "escríbenos y la cuadramos."
+      },
+      "cta_hint": {
+        "individual": "Dinos qué pack te interesa y cuadramos horario por Discord.",
+        "teams": "Dinos cuántos sois y qué pack os interesa, y cuadramos horario."
+      }
+    },
+    "teams": {
+      "title": "Equipos con los que ha trabajado"
+    },
+    "availability": {
+      "title": "Disponibilidad",
+      "schedule": "Lunes a sábado · {from} a {to} {timezone}",
+      "note": "Confirma la disponibilidad con el coach antes de reservar.",
+      "days_label": "Días disponibles",
+      "closed": "no disponible"
+    },
+    "policy": {
+      "title": "Política de sesiones",
+      "recover_value": "Siempre",
+      "postpone_days": {
+        "unit": "días para posponer",
+        "label": "Dentro de la misma semana."
+      },
+      "postpone_times": {
+        "unit": "veces al mes",
+        "label": "Máximo de aplazamientos permitidos."
+      },
+      "recover": {
+        "unit": "se recupera",
+        "label": "Si el coach no puede por un motivo justificado."
+      }
+    },
+    "cta": {
+      "title": "Reserva tu plaza",
+      "description": "Escríbenos por Discord o por email y te confirmamos horario y pack.",
+      "discord": "Hablar por Discord",
+      "email": "Escribir por email"
+    }
+  },
+  "about": {
+    "meta": {
+      "title": "Sobre nosotros",
+      "description": "La historia, los valores y el contacto de Crow 6 Esports."
+    },
+    "eyebrow": "El club",
+    "title": "Sobre nosotros",
+    "story": {
+      "title": "Nuestra historia",
+      "founded": "Crow 6 Esports nace en {year} como organización competitiva de {game}.",
+      "today": "Hoy el roster oficial reúne a {players} jugadores entre titulares y suplentes."
+    },
+    "stats": {
+      "label": "Cifras del club",
+      "years": "Años de trayectoria",
+      "achievements": "Hitos en el palmarés",
+      "players": "Jugadores en plantilla",
+      "peak": "Peak MMR del roster"
+    },
+    "timeline": {
+      "title": "Nuestra trayectoria",
+      "lead": "De los inicios en 2020 a la plantilla actual: los momentos que han marcado al club.",
+      "founding_title": "Nace Crow 6",
+      "founding_text": "Arrancamos como organización competitiva de {game}.",
+      "today_label": "Hoy",
+      "today_title": "Una plantilla en marcha",
+      "today_text": "Un roster de {players} jugadores entre titulares y suplentes, con coaching para jugadores y equipos."
+    },
+    "achievements": {
+      "winner": "Campeones",
+      "placement": "Puesto {place}",
+      "ranking": "Top {place} de {scope}",
+      "scopes": {
+        "europe": "Europa"
+      },
+      "events": {
+        "european-ranking": "Ranking europeo"
+      },
+      "onsite": "Presencial",
+      "lineup": "Alineación",
+      "substitutes": "Suplente"
+    },
+    "pillars": {
+      "title": "Qué hacemos",
+      "items": {
+        "compete": {
+          "title": "Competimos",
+          "description": "Un roster competitivo de Rocket League con titulares y suplentes.",
+          "cta": "Conoce la plantilla"
+        },
+        "train": {
+          "title": "Formamos",
+          "description": "Coaching individual y para equipos con el Head Coach de Crow 6.",
+          "cta": "Ver coaching"
+        },
+        "join": {
+          "title": "Fichamos",
+          "description": "Buscamos jugadores comprometidos con ganas de competir.",
+          "cta": "Ir a tryouts"
+        }
+      }
+    },
+    "values": {
+      "title": "Nuestros valores",
+      "items": {
+        "commitment": {
+          "title": "Compromiso",
+          "description": "Buscamos jugadores que se impliquen de verdad con el equipo y con el proceso."
+        },
+        "effort": {
+          "title": "Esfuerzo",
+          "description": "El rendimiento se construye entrenando con constancia y exigencia."
+        },
+        "teamwork": {
+          "title": "Equipo",
+          "description": "Competimos juntos: la comunicación y la confianza van antes que el ego."
+        }
+      }
+    },
+    "contact": {
+      "title": "Contacto",
+      "lead": "¿Quieres competir con nosotros, entrenar o hablar de colaboraciones? Escríbenos.",
+      "socials_label": "Redes sociales",
+      "new_tab": "se abre en una pestaña nueva",
+      "discord": "Únete al Discord"
+    }
   },
   "footer": {
     "nav": {
@@ -294,13 +635,11 @@
       "about_us": "Sobre nosotros"
     },
     "contact": {
-      "title": "Contacto",
-      "email": "crow6esports@gmail.com",
-      "location": "Huesca, España"
+      "title": "Contacto"
     },
     "brand_description": "Organización competitiva de Rocket League.",
     "rights": "Todos los derechos reservados",
-    "founded": "Fundado en 2020 · Huesca, España"
+    "founded": "Fundado en {year}"
   },
   "notFound": {
     "eyebrow": "Página no encontrada",
@@ -316,7 +655,36 @@
     "description": "Estamos trabajando en una nueva experiencia para Crow 6 Esports. Vuelve pronto.",
     "socialsLabel": "Redes sociales",
     "newTab": "se abre en una pestaña nueva",
-    "meta": "Desde 2020 · Huesca, España · Rocket League",
+    "meta": "Desde {year} · {game}",
     "hashtag": "#GoCrows"
+  },
+  "underConstruction": {
+    "eyebrow": "En construcción",
+    "back_home": "Volver al inicio",
+    "follow_us": "Mientras tanto, síguenos",
+    "socials_label": "Redes sociales",
+    "new_tab": "se abre en una pestaña nueva",
+    "pages": {
+      "team": {
+        "title": "Plantilla",
+        "description": "Estamos preparando la nueva plantilla, con los jugadores, el staff y las estadísticas del roster completo."
+      },
+      "coaching": {
+        "title": "Coaching",
+        "description": "Muy pronto podrás reservar tu plaza y conocer todos los servicios de coaching, tanto individual como para equipos."
+      },
+      "store": {
+        "title": "Tienda",
+        "description": "Estamos preparando la tienda oficial de Crow 6."
+      },
+      "aboutUs": {
+        "title": "Sobre nosotros",
+        "description": "Pronto contaremos la historia de Crow 6 Esports, quiénes somos y lo que nos mueve."
+      },
+      "news": {
+        "title": "Noticias",
+        "description": "Pronto publicaremos las novedades de Crow 6 Esports."
+      }
+    }
   }
 }

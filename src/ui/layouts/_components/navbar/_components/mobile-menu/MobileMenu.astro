@@ -15,7 +15,7 @@ interface Props {
 const { links } = Astro.props;
 const { locale } = Astro.locals;
 const t = createTranslator(locale, "nav");
-const currentPath = stripLocale(Astro.url.pathname);
+const currentPath = stripLocale(Astro.originPathname);
 ---
 
 <mobile-menu>
@@ -59,14 +59,8 @@ const currentPath = stripLocale(Astro.url.pathname);
 
   <div class="mobile-menu__overlay" aria-hidden="true" hidden></div>
 
-  <div
-    id="mobile-menu"
-    class="mobile-menu__drawer"
-    role="dialog"
-    aria-modal="true"
-    aria-label={t("menu_aria")}
-  >
-    <nav>
+  <div id="mobile-menu" class="mobile-menu__drawer">
+    <nav aria-label={t("menu_aria")}>
       <ul class="mobile-menu__links">
         {links.map(({ href, label }) => {
           const isActive = currentPath.startsWith(href);
@@ -93,6 +87,8 @@ const currentPath = stripLocale(Astro.url.pathname);
 
 <script>
   class MobileMenu extends HTMLElement {
+    private onKeydown?: (event: KeyboardEvent) => void;
+
     connectedCallback() {
       const trigger = this.querySelector<HTMLButtonElement>(".mobile-menu__trigger");
       const drawer = this.querySelector<HTMLElement>(".mobile-menu__drawer");
@@ -118,9 +114,17 @@ const currentPath = stripLocale(Astro.url.pathname);
         setOpen(trigger.getAttribute("aria-expanded") !== "true");
       });
       overlay.addEventListener("click", () => setOpen(false));
-      document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape") setOpen(false);
-      });
+      this.onKeydown = (event) => {
+        if (event.key !== "Escape" || trigger.getAttribute("aria-expanded") !== "true") return;
+        setOpen(false);
+        trigger.focus();
+      };
+      document.addEventListener("keydown", this.onKeydown);
+    }
+
+    disconnectedCallback() {
+      if (this.onKeydown) document.removeEventListener("keydown", this.onKeydown);
+      document.body.style.overflow = "";
     }
   }
 

@@ -1,4 +1,5 @@
 @use "styles/layers";
+@use "styles/mixins" as *;
 @layer components {
   .coming-soon {
     position: relative;
@@ -8,7 +9,7 @@
     align-items: center;
     justify-content: center;
     overflow-x: clip;
-    padding: 4rem 1.5rem;
+    padding: var(--space-16) var(--space-6);
     background: var(--bg-base);
   }
 
@@ -37,7 +38,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-family: var(--font-display), sans-serif;
+    font-family: var(--ff-display);
     font-size: clamp(11rem, 35vw, 21rem);
     line-height: 1;
     letter-spacing: -0.04em;
@@ -91,24 +92,24 @@
   .coming-soon__logo {
     max-width: 100%;
     height: auto;
-    margin-bottom: 3rem;
+    margin-bottom: var(--space-12);
   }
 
   .coming-soon__eyebrow {
-    margin-bottom: 1.5rem;
-    font-family: var(--font-ui), sans-serif;
-    font-size: 0.875rem;
+    margin-bottom: var(--space-6);
+    font-family: var(--ff-ui);
+    font-size: var(--fs-md);
     font-weight: 700;
-    letter-spacing: 0.25em;
+    letter-spacing: var(--tracking-eyebrow);
     text-transform: uppercase;
     color: var(--brand);
   }
 
   .coming-soon__title {
     position: relative;
-    margin-bottom: 2.5rem;
-    padding-bottom: 1.5rem;
-    font-family: var(--font-display), sans-serif;
+    margin-bottom: var(--space-10);
+    padding-bottom: var(--space-6);
+    font-family: var(--ff-display);
     font-size: clamp(3rem, 12vw, 6.25rem);
     line-height: 0.95;
     letter-spacing: -0.01em;
@@ -130,22 +131,22 @@
 
   .coming-soon__description {
     max-width: 28rem;
-    margin-bottom: 2.5rem;
-    font-family: var(--font-body), sans-serif;
-    font-size: 1rem;
+    margin-bottom: var(--space-10);
+    font-family: var(--ff-body);
+    font-size: var(--fs-base);
     line-height: 1.7;
     color: var(--text-secondary);
   }
 
   .coming-soon__socials {
-    margin-bottom: 3rem;
+    margin-bottom: var(--space-12);
   }
 
   .coming-soon__socials-list {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 0.75rem;
+    gap: var(--space-3);
     list-style: none;
   }
 
@@ -156,10 +157,10 @@
     justify-content: center;
     width: 2.75rem;
     height: 2.75rem;
-    border: 1px solid rgba(255, 255, 255, 0.4);
+    border: 1px solid var(--border-hover);
     color: var(--text-secondary);
     text-decoration: none;
-    clip-path: polygon(0.25rem 0%, 100% 0%, calc(100% - 0.25rem) 100%, 0% 100%);
+    @include angular-cut(0.25rem);
 
     &:hover {
       border-color: var(--brand);
@@ -176,8 +177,8 @@
 
     @media (prefers-reduced-motion: no-preference) {
       transition:
-        border-color 0.2s ease,
-        color 0.2s ease;
+        border-color var(--duration-base) var(--ease-standard),
+        color var(--duration-base) var(--ease-standard);
     }
 
     @media (forced-colors: active) {
@@ -192,25 +193,25 @@
   }
 
   .coming-soon__meta {
-    margin-bottom: 1rem;
-    font-family: var(--font-ui), sans-serif;
-    font-size: 0.8125rem;
+    margin-bottom: var(--space-4);
+    font-family: var(--ff-ui);
+    font-size: var(--fs-sm);
     font-weight: 600;
-    letter-spacing: 0.15em;
+    letter-spacing: var(--tracking-wider);
     text-transform: uppercase;
     color: var(--text-muted);
   }
 
   .coming-soon__hashtag {
-    font-family: var(--font-ui), sans-serif;
-    font-size: 0.8125rem;
+    font-family: var(--ff-ui);
+    font-size: var(--fs-sm);
     font-weight: 700;
-    letter-spacing: 0.15em;
+    letter-spacing: var(--tracking-wider);
     text-transform: uppercase;
     color: var(--brand);
   }
 
-  @media (max-width: 40rem) {
+  @include below(sm) {
     .coming-soon__corner {
       display: none;
     }
