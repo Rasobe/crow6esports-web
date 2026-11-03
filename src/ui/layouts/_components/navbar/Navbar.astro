@@ -20,7 +20,13 @@ const links = navigationConfig.mainNav.map(({ href, labelKey }) => ({
 <header class="navbar">
   <nav class="navbar__inner">
     <a href={localizePath(locale, ROUTES.home)} class="navbar__brand" aria-label={t("home_aria")}>
-      <img src="/images/brand/crow6-wordmark.svg" alt="Crow 6 Esports" width="80" height="28" />
+      <img
+        class="navbar__logo"
+        src="/images/brand/crow6-wordmark.svg"
+        alt="Crow 6 Esports"
+        width="92"
+        height="32"
+      />
     </a>
 
     <ul class="navbar__links">
@@ -42,10 +48,24 @@ const links = navigationConfig.mainNav.map(({ href, labelKey }) => ({
 
     <div class="navbar__actions">
       <LocaleSwitcher />
-      <Button variant="brand-outline" size="sm" href={ROUTES.tryouts} class="navbar__cta">
+      <Button variant="primary" size="sm" href={ROUTES.tryouts} class="navbar__cta">
         {t("join")}
       </Button>
       <MobileMenu links={links} />
     </div>
   </nav>
 </header>
+
+<script>
+  const SCROLLED_AFTER_PX = 8;
+
+  const syncScrolled = () => {
+    document
+      .querySelector(".navbar")
+      ?.toggleAttribute("data-scrolled", window.scrollY > SCROLLED_AFTER_PX);
+  };
+
+  window.addEventListener("scroll", syncScrolled, { passive: true });
+  document.addEventListener("astro:page-load", syncScrolled);
+  syncScrolled();
+</script>

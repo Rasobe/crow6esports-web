@@ -10,10 +10,28 @@
     top: 0;
     z-index: var(--z-navbar);
     height: var(--navbar-h);
-    background: var(--bg-overlay);
-    border-bottom: var(--line);
-    -webkit-backdrop-filter: blur(14px);
-    backdrop-filter: blur(14px);
+
+    // El fondo desenfocado va en un pseudo-elemento: un `backdrop-filter` en la propia barra
+    // la convertiría en el bloque contenedor del menú móvil (`position: fixed`) y su capa solo
+    // cubriría la cabecera. Así la capa cubre la página y la barra queda por encima, nítida.
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: calc(var(--z-navbar) - 1);
+      background: var(--bg-overlay);
+      border-bottom: var(--line);
+      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(14px);
+      transition:
+        background var(--duration-base) var(--ease-standard),
+        border-color var(--duration-base) var(--ease-standard);
+    }
+
+    &[data-scrolled]::before {
+      background: rgb(var(--bg-base-rgb) / 0.94);
+      border-bottom-color: rgb(var(--brand-rgb) / 0.45);
+    }
   }
 
   .navbar__inner {
@@ -22,6 +40,18 @@
     justify-content: space-between;
     height: 100%;
     @include container;
+  }
+
+  // Cada control de la cabecera se eleva por separado por encima de la capa del menú móvil.
+  // `.navbar__inner` no puede llevar z-index: crearía un contexto de apilado y la capa, que
+  // vive dentro, volvería a quedar encima de sus hermanos.
+  .navbar__brand,
+  .navbar__links,
+  .navbar__cta,
+  .locale-switcher,
+  .mobile-menu__trigger {
+    position: relative;
+    z-index: var(--z-navbar);
   }
 
   .navbar__brand {
@@ -36,6 +66,12 @@
     opacity: 0.85;
   }
 
+  .navbar__logo {
+    display: block;
+    width: 5.75rem;
+    height: auto;
+  }
+
   .navbar__brand:focus-visible {
     outline: 2px solid var(--brand);
     outline-offset: 4px;
@@ -44,7 +80,7 @@
   .navbar__links {
     display: none;
     align-items: center;
-    gap: var(--space-8);
+    gap: clamp(var(--space-4), 2.4vw, var(--space-8));
     list-style: none;
     margin: 0;
     padding: 0;
@@ -59,7 +95,7 @@
   .navbar__link {
     position: relative;
     font-family: var(--ff-ui);
-    font-size: var(--fs-sm);
+    font-size: var(--fs-md);
     font-weight: 600;
     letter-spacing: var(--tracking-wide);
     text-transform: uppercase;
@@ -88,6 +124,7 @@
 
   .navbar__link:hover::after,
   .navbar__link--active::after {
+    height: 2px;
     transform: scaleX(1);
   }
 
@@ -106,15 +143,27 @@
     gap: var(--space-4);
   }
 
-  // display:none por defecto; visible en md+
-  // los estilos visuales vienen de .btn--brand-outline
+  // display:none por defecto; visible en md+. Los estilos vienen de .btn--primary
   .navbar__cta {
     display: none;
+    clip-path: polygon(0 0, 100% 0, calc(100% - var(--space-2)) 100%, 0 100%);
+    padding-right: var(--space-6);
+
+    // clip-path recorta el outline: en foco se desactiva para que el anillo se vea
+    &:focus-visible {
+      clip-path: none;
+    }
   }
 
   @include above(md) {
     .navbar__cta {
       display: inline-flex;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .navbar::before {
+      transition: none;
     }
   }
 }

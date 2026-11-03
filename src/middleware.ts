@@ -15,6 +15,13 @@ export const onRequest = defineMiddleware(async (context, next) => {
     pages: PAGES,
   });
 
+  if (route.kind === "redirect") {
+    return applySecurityHeaders(
+      context.redirect(`${route.path}${context.url.search}`, 301),
+      import.meta.env.DEV,
+    );
+  }
+
   if (route.kind === "rewrite" && route.underConstruction) {
     context.locals.underConstruction = route.underConstruction;
   }

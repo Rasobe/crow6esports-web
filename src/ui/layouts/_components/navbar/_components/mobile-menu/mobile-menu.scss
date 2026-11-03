@@ -8,21 +8,22 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 2.25rem;
-    height: 2.25rem;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
     background: transparent;
-    border: 1px solid rgb(var(--white-rgb) / 0.1);
-    color: var(--text-secondary);
+    border: 0;
+    color: var(--text-primary);
     cursor: pointer;
-    @include angular-cut(4px);
-    transition:
-      border-color var(--duration-base) var(--ease-standard),
-      color var(--duration-base) var(--ease-standard);
+    transition: color var(--duration-base) var(--ease-standard);
   }
 
   .mobile-menu__trigger:hover {
-    border-color: rgb(var(--white-rgb) / 0.3);
-    color: var(--text-primary);
+    color: var(--brand);
+  }
+
+  .mobile-menu__trigger[aria-expanded="true"] {
+    color: var(--brand);
   }
 
   .mobile-menu__trigger:focus-visible {
@@ -89,9 +90,12 @@
     text-transform: uppercase;
     color: var(--text-secondary);
     text-decoration: none;
-    padding: var(--space-3-5) 0;
+    padding: var(--space-4) 0 var(--space-4) var(--space-4);
     border-bottom: var(--line-subtle);
-    transition: color var(--duration-base) var(--ease-standard);
+    border-left: 2px solid transparent;
+    transition:
+      color var(--duration-base) var(--ease-standard),
+      border-color var(--duration-base) var(--ease-standard);
   }
 
   .mobile-menu__link:hover {
@@ -100,6 +104,7 @@
 
   .mobile-menu__link--active {
     color: var(--brand);
+    border-left-color: var(--brand);
   }
 
   .mobile-menu__cta {
@@ -110,19 +115,22 @@
     font-weight: 700;
     letter-spacing: var(--tracking-wider);
     text-transform: uppercase;
-    color: var(--brand);
-    background: transparent;
-    border: 1.5px solid var(--brand);
+    color: var(--brand-fg);
+    background: var(--brand);
     text-decoration: none;
     text-align: center;
-    padding: var(--space-3) var(--space-6);
-    transition:
-      background var(--duration-base) var(--ease-standard),
-      color var(--duration-base) var(--ease-standard);
+    padding: var(--space-4) var(--space-6);
+    clip-path: polygon(0 0, 100% 0, calc(100% - var(--space-3)) 100%, 0 100%);
+    transition: background var(--duration-base) var(--ease-standard);
   }
 
   .mobile-menu__cta:hover {
-    background: var(--brand);
-    color: var(--brand-fg);
+    background: var(--brand-hover);
+  }
+
+  .mobile-menu__cta:focus-visible {
+    clip-path: none;
+    outline: 2px solid var(--brand);
+    outline-offset: 2px;
   }
 }

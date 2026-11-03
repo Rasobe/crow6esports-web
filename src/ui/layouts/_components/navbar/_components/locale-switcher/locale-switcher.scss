@@ -15,7 +15,7 @@
 
   .locale-switcher__btn {
     font-family: var(--ff-ui);
-    font-size: var(--fs-xs);
+    font-size: var(--fs-sm);
     font-weight: 700;
     letter-spacing: var(--tracking-wide);
     text-transform: uppercase;
@@ -51,7 +51,7 @@
   .locale-switcher__sep {
     display: block;
     width: 1px;
-    height: 12px;
-    background: var(--border-subtle);
+    height: 14px;
+    background: var(--border-strong);
   }
 }
