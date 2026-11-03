@@ -1,10 +1,10 @@
 [
   {
     "id": "prod-1",
-    "slug": "crow6-jersey-2025",
-    "name": "Jersey CROW6 2025",
-    "description": "Jersey oficial de la temporada 2025. Tejido técnico transpirable.",
-    "price": 59.99,
+    "slug": "crow6-jersey",
+    "name": "Jersey CROW6",
+    "description": "Jersey oficial. Tejido técnico transpirable.",
+    "price": 29.99,
     "currency": "EUR",
     "images": ["/images/store/jersey-front.webp", "/images/store/jersey-back.webp"],
     "stock": [

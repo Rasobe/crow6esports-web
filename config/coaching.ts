@@ -39,21 +39,15 @@ export const COACHING: CoachingConfig = {
   policy: { postponeMaxDays: 2, postponeMaxPerMonth: 2 },
   plans: {
     individual: [
-      { tier: "basic", price: 28, originalPrice: 55, weeklySessions: 1 },
-      { tier: "pro", price: 55, originalPrice: 90, weeklySessions: 2, featured: true },
-      { tier: "elite", price: 78, originalPrice: 120, weeklySessions: 3 },
+      { tier: "basic", price: 19, originalPrice: 29, weeklySessions: 1 },
+      { tier: "pro", price: 35, originalPrice: 55, weeklySessions: 2, featured: true },
+      { tier: "elite", price: 49, originalPrice: 79, weeklySessions: 3 },
     ],
     teams: [
-      { tier: "basic", price: 69, originalPrice: 105, weeklySessions: 1 },
-      { tier: "pro", price: 119, originalPrice: 180, weeklySessions: 2, featured: true },
-      { tier: "elite", price: 169, originalPrice: 260, weeklySessions: 3 },
+      { tier: "basic", price: 49, originalPrice: 75, weeklySessions: 1 },
+      { tier: "pro", price: 85, originalPrice: 135, weeklySessions: 2, featured: true },
+      { tier: "elite", price: 119, originalPrice: 189, weeklySessions: 3 },
     ],
   },
-  teamsWorkedWith: [
-    "K8 eSports",
-    "Crow 6 eSports",
-    "VentuCorp eSports",
-    "Prodigy Five",
-    "Moonlab Gaming",
-  ],
+  teamsWorkedWith: ["Crow 6 eSports", "VentuCorp eSports", "Prodigy Five"],
 };
