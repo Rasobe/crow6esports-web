@@ -56,10 +56,12 @@ const price = (amount: number) => formatCurrency(locale, amount, currency);
               <p class="plan-card__price">
                 <span class="plan-card__amount">{price(plan.price)}</span>
                 <span class="plan-card__period">{t("period")}</span>
-                <span class="plan-card__original">
-                  <span class="plan-card__sr-only">{t("original_price")}:</span>
-                  <s>{price(plan.originalPrice)}</s>
-                </span>
+                {plan.originalPrice !== undefined && (
+                  <span class="plan-card__original">
+                    <span class="plan-card__sr-only">{t("original_price")}:</span>
+                    <s>{price(plan.originalPrice)}</s>
+                  </span>
+                )}
               </p>
               {mode === "teams" && (
                 <p class="plan-card__per-player">

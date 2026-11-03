@@ -4,7 +4,8 @@ export type CoachingTier = "basic" | "pro" | "elite";
 export interface CoachingPlan {
   tier: CoachingTier;
   price: number;
-  originalPrice: number;
+  /** Solo si el precio anterior se cobró de verdad: un tachado sin respaldo no se muestra. */
+  originalPrice?: number;
   weeklySessions: number;
   featured?: boolean;
 }

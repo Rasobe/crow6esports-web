@@ -35,6 +35,7 @@ export interface CoachingConfig {
   teamsWorkedWith: readonly string[];
 }
 
+// Estudio de mercado y razonamiento de los precios en docs/estudio-precios-coaching.md.
 // Los precios de equipo son por equipo (mínimo `teamMinPlayers` jugadores), no por jugador.
 export const COACHING: CoachingConfig = {
   coach: { name: "Rasobe", photo: null, startYear: 2020, hoursPlayed: 6000 },
@@ -50,14 +51,14 @@ export const COACHING: CoachingConfig = {
   policy: { postponeMaxDays: 2, postponeMaxPerMonth: 2 },
   plans: {
     individual: [
-      { tier: "basic", price: 27, originalPrice: 39, weeklySessions: 1 },
-      { tier: "pro", price: 48, originalPrice: 69, weeklySessions: 2, featured: true },
-      { tier: "elite", price: 67, originalPrice: 97, weeklySessions: 3 },
+      { tier: "basic", price: 49, weeklySessions: 1 },
+      { tier: "pro", price: 89, weeklySessions: 2, featured: true },
+      { tier: "elite", price: 129, weeklySessions: 3 },
     ],
     teams: [
-      { tier: "basic", price: 52, originalPrice: 75, weeklySessions: 1 },
-      { tier: "pro", price: 94, originalPrice: 135, weeklySessions: 2, featured: true },
-      { tier: "elite", price: 129, originalPrice: 185, weeklySessions: 3 },
+      { tier: "basic", price: 89, weeklySessions: 1 },
+      { tier: "pro", price: 159, weeklySessions: 2, featured: true },
+      { tier: "elite", price: 229, weeklySessions: 3 },
     ],
   },
   features: {
@@ -82,9 +83,9 @@ export const COACHING: CoachingConfig = {
   // para que el pack sea siempre la mejor opción
   singleSessions: [
     { key: "intro", price: 0 },
-    { key: "live", price: 12 },
-    { key: "replay_review", price: 6 },
-    { key: "team_live", price: 22 },
+    { key: "live", price: 20 },
+    { key: "replay_review", price: 10 },
+    { key: "team_live", price: 35 },
   ],
   singleSessionCreditDays: 7,
   teamsWorkedWith: ["Crow 6 eSports", "VentuCorp eSports", "Prodigy Five"],
