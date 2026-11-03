@@ -25,9 +25,13 @@ describe("detectLocale", () => {
     expect(detectLocale("es-ES,es;q=0.9")).toBe("es");
   });
 
-  it("falls back to English otherwise", () => {
+  it("falls back to English for other languages", () => {
     expect(detectLocale("fr-FR")).toBe("en");
-    expect(detectLocale(null)).toBe("en");
+  });
+
+  it("uses the default locale when the header is missing, as for crawlers", () => {
+    expect(detectLocale(null)).toBe("es");
+    expect(detectLocale("")).toBe("es");
   });
 });
 

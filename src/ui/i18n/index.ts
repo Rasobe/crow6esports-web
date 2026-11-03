@@ -15,8 +15,10 @@ export function isLocale(value: string | undefined): value is Locale {
   return LOCALES.includes(value as Locale);
 }
 
+/** Sin cabecera (buscadores, bots) se usa el idioma por defecto; con ella, español o inglés. */
 export function detectLocale(acceptLanguage: string | null): Locale {
-  return acceptLanguage?.toLowerCase().startsWith("es") ? "es" : "en";
+  if (!acceptLanguage) return DEFAULT_LOCALE;
+  return acceptLanguage.toLowerCase().startsWith("es") ? "es" : "en";
 }
 
 function lookup(messages: unknown, path: string): unknown {
