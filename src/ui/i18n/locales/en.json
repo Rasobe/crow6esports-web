@@ -56,26 +56,17 @@
     "coachingBanner": {
       "title_lead": "Rank up with the",
       "title_accent": "Head Coach",
-      "title_tail": "of Crow 6.",
+      "title_tail": "of Crow 6.",
       "description": "{years} years training players and teams. Replay reviews, clear goals every session and a weekly plan that fits your schedule.",
       "coach_role": "Head Coach",
-      "hours_label": "Hours played",
-      "photo_soon": "Photo coming soon",
-      "progress_label": "Student progress",
-      "progress_start": "Student · start",
-      "progress_current": "Now · MMR",
-      "service_one_to_one_title": "1on1 coaching",
-      "service_one_to_one_description": "Replay and mechanics analysis",
-      "service_teams_title": "Full teams",
-      "service_teams_description": "Synergy, rotations and strategy",
-      "service_weekly_plan_title": "Weekly plan",
-      "service_weekly_plan_description": "Clear goals and daily follow-up",
-      "price_individual": "Solo from",
-      "price_teams": "Teams from",
       "price_unit": "/ month",
-      "price_before": "Previous price",
-      "schedule": "Mon to Sat · {from} to {to} {timezone}",
-      "cta_reserve": "Book your spot"
+      "cta_reserve": "Book your spot",
+      "figures_label": "Coach track record",
+      "figure_years": "Years coaching",
+      "figure_hours": "Hours played",
+      "figure_mmr": "Students' MMR",
+      "price_from": "From",
+      "cta_more": "See services and prices"
     },
     "storeHighlight": {
       "eyebrow": "Official store",
@@ -176,6 +167,27 @@
       "teaser": "The official jersey is sold out. Join the Discord to find out when it is back.",
       "cta_discord": "Notify me on Discord",
       "cta_email": "Email the club"
+    },
+    "jersey_video": {
+      "section_label": "Jersey video",
+      "video_label": "Video of the official Crow 6 jersey: crest detail and full turn",
+      "pause": "Pause video",
+      "play": "Play video"
+    },
+    "showcase": {
+      "tag": "Next edition",
+      "product_label": "Official jersey",
+      "club": "Crow 6 Esports",
+      "status_note": "For now",
+      "title_lead": "The official",
+      "title_accent": "jersey",
+      "views_label": "Views",
+      "view_back": "Back",
+      "view_video": "Video",
+      "view_frontal": "Front",
+      "view_three_quarter_front": "Angle",
+      "view_model": "On model",
+      "view_details": "Details"
     }
   },
   "tryouts": {

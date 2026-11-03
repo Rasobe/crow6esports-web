@@ -6,7 +6,13 @@
     "description": "Jersey oficial. Tejido técnico transpirable.",
     "price": 29.99,
     "currency": "EUR",
-    "images": ["/images/store/jersey-front.webp", "/images/store/jersey-back.webp"],
+    "images": [
+      "/images/store/jersey/frontal.webp",
+      "/images/store/jersey/back.webp",
+      "/images/store/jersey/three-quarter-front.webp",
+      "/images/store/jersey/model.webp",
+      "/images/store/jersey/details.webp"
+    ],
     "stock": [
       { "size": "S", "quantity": 10 },
       { "size": "M", "quantity": 25 },

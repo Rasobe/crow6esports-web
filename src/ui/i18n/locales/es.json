@@ -56,26 +56,17 @@
     "coachingBanner": {
       "title_lead": "Sube de rango con el",
       "title_accent": "Head Coach",
-      "title_tail": "de Crow 6.",
+      "title_tail": "de Crow 6.",
       "description": "{years} años formando jugadores y equipos. Revisión de tus replays, objetivos claros en cada sesión y un plan semanal que encaja con tu horario.",
       "coach_role": "Head Coach",
-      "hours_label": "Horas de juego",
-      "photo_soon": "Foto próximamente",
-      "progress_label": "Progreso del alumno",
-      "progress_start": "Alumno · inicio",
-      "progress_current": "Actual · MMR",
-      "service_one_to_one_title": "Coaching 1a1",
-      "service_one_to_one_description": "Análisis de replays y mecánicas",
-      "service_teams_title": "Equipos completos",
-      "service_teams_description": "Sinergia, rotaciones y estrategia",
-      "service_weekly_plan_title": "Plan semanal",
-      "service_weekly_plan_description": "Objetivos claros y seguimiento diario",
-      "price_individual": "Individual desde",
-      "price_teams": "Equipos desde",
       "price_unit": "/ mes",
-      "price_before": "Precio anterior",
-      "schedule": "Lun a Sáb · {from} a {to} {timezone}",
-      "cta_reserve": "Reserva tu plaza"
+      "cta_reserve": "Reserva tu plaza",
+      "figures_label": "Trayectoria del coach",
+      "figure_years": "Años como coach",
+      "figure_hours": "Horas de juego",
+      "figure_mmr": "MMR de sus alumnos",
+      "price_from": "Desde",
+      "cta_more": "Ver servicios y precios"
     },
     "storeHighlight": {
       "eyebrow": "Tienda oficial",
@@ -176,6 +167,27 @@
       "teaser": "La camiseta oficial está agotada. Entra en el Discord para saber cuándo vuelve.",
       "cta_discord": "Avisarme por Discord",
       "cta_email": "Escribir al club"
+    },
+    "jersey_video": {
+      "section_label": "Vídeo de la camiseta",
+      "video_label": "Vídeo de la camiseta oficial de Crow 6: detalle del escudo y giro completo",
+      "pause": "Pausar vídeo",
+      "play": "Reproducir vídeo"
+    },
+    "showcase": {
+      "tag": "Próxima edición",
+      "product_label": "Camiseta oficial",
+      "club": "Crow 6 Esports",
+      "status_note": "Por ahora",
+      "title_lead": "La camiseta",
+      "title_accent": "oficial",
+      "views_label": "Vistas",
+      "view_back": "Espalda",
+      "view_video": "Vídeo",
+      "view_frontal": "Frontal",
+      "view_three_quarter_front": "Ángulo",
+      "view_model": "Modelo",
+      "view_details": "Detalles"
     }
   },
   "tryouts": {

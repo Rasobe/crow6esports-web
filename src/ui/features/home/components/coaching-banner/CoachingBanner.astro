@@ -4,21 +4,21 @@ import { COACHING } from "@config/coaching";
 import { ROUTES } from "@config/routes";
 import { getStartingPlan } from "@/domain/coaching/coaching-plan";
 import { yearsSince } from "@/domain/site/years";
-import { createTranslator } from "@/ui/i18n";
+import { createTranslator, localizePath } from "@/ui/i18n";
 import { Button, Icon } from "@/ui/shared/components";
-
-const SERVICES = ["one_to_one", "teams", "weekly_plan"] as const;
 
 const { locale } = Astro.locals;
 const t = createTranslator(locale, "home.coachingBanner");
 
-const { coach, results, plans, availability } = COACHING;
-const progress = results.recentCase;
-const pricing = (["individual", "teams"] as const).map((id) => {
-  const { price, originalPrice } = getStartingPlan(plans[id]);
-  return { id, from: price, original: originalPrice };
-});
-const formatNumber = (value: number) => value.toLocaleString(locale);
+const { coach, results, plans } = COACHING;
+const { price: startingPrice } = getStartingPlan(plans.individual);
+const years = yearsSince(coach.startYear);
+
+const figures = [
+  { key: "years", value: years, suffix: "" },
+  { key: "hours", value: coach.hoursPlayed, suffix: "+" },
+  { key: "mmr", value: results.maxMmrReached, suffix: "+" },
+];
 ---
 
 <section class="coaching-banner" aria-labelledby="coaching-banner-title">
@@ -51,10 +51,6 @@ const formatNumber = (value: number) => value.toLocaleString(locale);
             <span class="coaching-banner__role">{t("coach_role")}</span>
             <span class="coaching-banner__name">{coach.name}</span>
           </div>
-          <div class="coaching-banner__hours">
-            <span class="coaching-banner__hours-value">{formatNumber(coach.hoursPlayed)}+</span>
-            <span class="coaching-banner__hours-label">{t("hours_label")}</span>
-          </div>
         </figcaption>
       </div>
     </figure>
@@ -65,63 +61,33 @@ const formatNumber = (value: number) => value.toLocaleString(locale);
         {t("title_tail")}
       </h2>
 
-      <p class="coaching-banner__description">
-        {t("description", { years: yearsSince(coach.startYear) })}
-      </p>
+      <p class="coaching-banner__description">{t("description", { years })}</p>
 
-      <dl class="coaching-banner__progress" aria-label={t("progress_label")}>
-        <div class="coaching-banner__progress-item">
-          <dt class="coaching-banner__progress-label">{t("progress_start")}</dt>
-          <dd class="coaching-banner__progress-value">{formatNumber(progress.from)}</dd>
-        </div>
-        <Icon name="arrow-right" size={40} class="coaching-banner__progress-arrow" />
-        <div class="coaching-banner__progress-item coaching-banner__progress-item--current">
-          <dt class="coaching-banner__progress-label">{t("progress_current")}</dt>
-          <dd class="coaching-banner__progress-value">{formatNumber(progress.to)}</dd>
-        </div>
+      <dl class="coaching-banner__figures" aria-label={t("figures_label")}>
+        {figures.map(({ key, value, suffix }) => (
+          <div class="coaching-banner__figure">
+            <dt class="coaching-banner__figure-label">{t(`figure_${key}`)}</dt>
+            <dd class="coaching-banner__figure-value">
+              <span data-count-to={value}>{value.toLocaleString(locale)}</span>
+              {suffix}
+            </dd>
+          </div>
+        ))}
       </dl>
 
-      <ul class="coaching-banner__services">
-        {SERVICES.map((service) => (
-          <li class="coaching-banner__service">
-            <h3 class="coaching-banner__service-title">{t(`service_${service}_title`)}</h3>
-            <p class="coaching-banner__service-description">
-              {t(`service_${service}_description`)}
-            </p>
-          </li>
-        ))}
-      </ul>
-
-      <div class="coaching-banner__offer">
-        <dl class="coaching-banner__pricing">
-          {pricing.map(({ id, from, original }) => (
-            <div class="coaching-banner__price">
-              <dt class="coaching-banner__price-label">{t(`price_${id}`)}</dt>
-              <dd class="coaching-banner__price-value">
-                <span class="coaching-banner__price-amount">{from}€</span>
-                <span class="coaching-banner__price-unit">{t("price_unit")}</span>
-                <span class="coaching-banner__price-before">
-                  <span class="coaching-banner__visually-hidden">{t("price_before")}:</span>
-                  <s>{original}€</s>
-                </span>
-              </dd>
-            </div>
-          ))}
-        </dl>
-
-        <div class="coaching-banner__booking">
-          <Button href={ROUTES.coaching} size="lg" class="coaching-banner__cta">
-            {t("cta_reserve")}
-            <Icon name="arrow-right" size={18} />
-          </Button>
-          <p class="coaching-banner__schedule">
-            {t("schedule", {
-              from: availability.hours.from,
-              to: availability.hours.to,
-              timezone: availability.timezone,
-            })}
-          </p>
-        </div>
+      <div class="coaching-banner__actions">
+        <Button href={ROUTES.coaching} size="lg" class="coaching-banner__cta">
+          {t("cta_reserve")}
+          <Icon name="arrow-right" size={18} />
+        </Button>
+        <p class="coaching-banner__from">
+          {t("price_from")}
+          <strong class="coaching-banner__from-amount">{startingPrice}€</strong>
+          {t("price_unit")}
+        </p>
+        <a class="coaching-banner__more" href={localizePath(locale, ROUTES.coaching)}>
+          {t("cta_more")}
+        </a>
       </div>
     </div>
   </div>

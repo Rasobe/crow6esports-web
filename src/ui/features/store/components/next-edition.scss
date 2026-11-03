@@ -13,68 +13,57 @@
     align-items: center;
 
     @include above(md) {
-      grid-template-columns: 1.2fr 1fr;
+      grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+      gap: var(--space-16);
     }
   }
 
-  .next-edition__gallery {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-4);
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .next-edition__item {
+  .next-edition__panel {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-6);
     min-width: 0;
   }
 
-  .next-edition__figure {
-    position: relative;
-    margin: 0;
-    aspect-ratio: 4 / 5;
-    overflow: hidden;
-    background: var(--bg-base);
-    border: var(--line-subtle);
-  }
-
-  .next-edition__image {
-    width: 100%;
-    height: 100%;
-    padding: var(--space-4);
-    object-fit: contain;
-    opacity: 0.55;
+  .next-edition__status {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3);
   }
 
   .next-edition__badge {
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: var(--space-2) var(--space-4);
+    padding: var(--space-1-5) var(--space-4);
     font-family: var(--ff-ui);
     font-size: var(--fs-xs);
     font-weight: 700;
     letter-spacing: var(--tracking-widest);
     text-transform: uppercase;
     color: var(--text-primary);
-    background: var(--bg-base);
-    border-bottom: var(--line-subtle);
-    border-left: var(--line-subtle);
+    border: 1px solid var(--border-strong);
   }
 
-  .next-edition__content {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--space-5);
+  .next-edition__status-note {
+    font-family: var(--ff-ui);
+    font-size: var(--fs-xs);
+    font-weight: 700;
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    color: var(--text-muted);
   }
 
   .next-edition__title {
-    font-size: var(--fs-h2);
-    line-height: 0.95;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    line-height: 0.92;
+    letter-spacing: 0;
     text-transform: uppercase;
     color: var(--text-primary);
+  }
+
+  .next-edition__title-accent {
+    color: transparent;
+    -webkit-text-stroke: clamp(1.5px, 0.02em, 3px) var(--brand);
   }
 
   .next-edition__description {
@@ -85,9 +74,95 @@
     color: var(--text-secondary);
   }
 
+  /* ─── Vistas: frente y espalda como miniaturas ─── */
+  .next-edition__views {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    width: 100%;
+  }
+
+  .next-edition__views-label {
+    font-family: var(--ff-ui);
+    font-size: var(--fs-xs);
+    font-weight: 700;
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    color: var(--brand);
+  }
+
+  .next-edition__gallery {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 6rem));
+    gap: var(--space-3);
+  }
+
+  .next-edition__tab {
+    position: relative;
+    display: block;
+    aspect-ratio: 4 / 5;
+    padding: 0;
+    overflow: hidden;
+    cursor: pointer;
+    background: var(--bg-base);
+    border: var(--line-subtle);
+    transition: border-color var(--duration-base) var(--ease-standard);
+
+    &:hover {
+      border-color: var(--border-strong);
+    }
+
+    &[aria-selected="true"] {
+      border-color: var(--brand);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--brand);
+      outline-offset: 2px;
+    }
+  }
+
+  .next-edition__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.6;
+    transition: opacity var(--duration-base) var(--ease-standard);
+  }
+
+  .next-edition__tab:hover .next-edition__image,
+  .next-edition__tab[aria-selected="true"] .next-edition__image {
+    opacity: 1;
+  }
+
+  .next-edition__tab-label {
+    position: absolute;
+    inset: auto 0 0;
+    padding: var(--space-1-5) var(--space-2);
+    font-family: var(--ff-ui);
+    font-size: var(--fs-xs);
+    font-weight: 700;
+    letter-spacing: var(--tracking-widest);
+    text-align: center;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    background: linear-gradient(to top, var(--bg-base), transparent);
+  }
+
+  .next-edition__tab[aria-selected="true"] .next-edition__tab-label {
+    color: var(--brand);
+  }
+
   .next-edition__actions {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-3);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .next-edition__tab,
+    .next-edition__image {
+      transition: none;
+    }
   }
 }

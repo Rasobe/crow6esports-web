@@ -6,6 +6,8 @@ import type { Product } from "@/domain/store/product";
 import { createTranslator } from "@/ui/i18n";
 import { Button } from "@/ui/shared/components";
 import { storeImageSrcset } from "@/ui/shared/lib/responsive-image";
+import JerseyStage from "./JerseyStage.astro";
+import type { JerseyView } from "./jersey-view";
 
 interface Props {
   products: Product[];
@@ -14,40 +16,89 @@ interface Props {
 const { products } = Astro.props;
 const t = createTranslator(Astro.locals.locale, "store");
 const tNext = createTranslator(Astro.locals.locale, "store.next_edition");
-const images = products.flatMap(({ name, images: sources }) =>
-  sources.map((src) => ({ src, alt: name })),
+const tShowcase = createTranslator(Astro.locals.locale, "store.showcase");
+const viewKey = (src: string) => (src.split("/").pop() ?? "").replace(/\.webp$/, "");
+const views: JerseyView[] = products.flatMap(({ name, images }) =>
+  images.map((src) => {
+    const view = viewKey(src);
+    const label = tShowcase(`view_${view.replaceAll("-", "_")}`);
+    return { view, src, alt: `${name}: ${label}`, label };
+  }),
 );
 ---
 
 <section class="next-edition" aria-labelledby="next-edition-title">
-  <div class="next-edition__inner">
-    <ul class="next-edition__gallery">
-      {images.map(({ src, alt }) => (
-        <li class="next-edition__item" data-reveal>
-          <figure class="next-edition__figure">
-            <img
-              class="next-edition__image"
-              src={src}
-              srcset={storeImageSrcset(src)}
-              sizes="(min-width: 48rem) 22rem, 45vw"
-              alt={alt}
-              width="640"
-              height="800"
-              loading="lazy"
-              decoding="async"
-            />
-            <span class="next-edition__badge">{t("sold_out")}</span>
-          </figure>
-        </li>
-      ))}
-    </ul>
+  <jersey-gallery class="next-edition__inner">
+    <JerseyStage views={views} />
 
-    <div class="next-edition__content" data-reveal>
-      <span class="section-label">{tNext("eyebrow")}</span>
+    <div class="next-edition__panel" data-reveal>
+      <div class="next-edition__status">
+        <span class="next-edition__badge">{t("sold_out")}</span>
+        <span class="next-edition__status-note">{tShowcase("status_note")}</span>
+      </div>
+
       <h2 id="next-edition-title" class="next-edition__title">
-        {tNext("title")}
+        {tShowcase("title_lead")}{" "}
+        <span class="next-edition__title-accent">{tShowcase("title_accent")}</span>
       </h2>
+
       <p class="next-edition__description">{tNext("description")}</p>
+
+      {views.length > 0 && (
+        <div class="next-edition__views">
+          <span id="jersey-views-label" class="next-edition__views-label">
+            {tShowcase("views_label")}
+          </span>
+          <div class="next-edition__gallery" role="tablist" aria-labelledby="jersey-views-label">
+            <button
+              type="button"
+              role="tab"
+              id="jersey-tab-video"
+              class="next-edition__tab"
+              aria-selected="true"
+              aria-controls="jersey-panel-video"
+              data-caption={tShowcase("club")}
+            >
+              <img
+                class="next-edition__image"
+                src="/images/jersey-video-poster.webp"
+                alt=""
+                width="640"
+                height="800"
+                loading="lazy"
+                decoding="async"
+              />
+              <span class="next-edition__tab-label">{tShowcase("view_video")}</span>
+            </button>
+            {views.map(({ src, view, label }) => (
+              <button
+                type="button"
+                role="tab"
+                id={`jersey-tab-${view}`}
+                class="next-edition__tab"
+                aria-selected="false"
+                aria-controls={`jersey-panel-${view}`}
+                tabindex="-1"
+                data-caption={label}
+              >
+                <img
+                  class="next-edition__image"
+                  src={src}
+                  srcset={storeImageSrcset(src)}
+                  sizes="(min-width: 48rem) 7rem, 22vw"
+                  alt=""
+                  width="640"
+                  height="800"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <span class="next-edition__tab-label">{label}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
       <div class="next-edition__actions">
         <Button href={DISCORD_URL} size="lg">
           {tNext("cta_discord")}
@@ -57,5 +108,5 @@ const images = products.flatMap(({ name, images: sources }) =>
         </Button>
       </div>
     </div>
-  </div>
+  </jersey-gallery>
 </section>

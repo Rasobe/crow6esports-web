@@ -1,10 +1,5 @@
 @use "styles/layers";
 @use "styles/mixins" as *;
-// Desde este ancho la imagen pasa a un panel lateral; por debajo ocupa todo el hero
-$hero-split: 64rem;
-// Desde este ancho el contenido deja de crecer y se centra; el panel reserva espacio al texto
-$hero-wide: 90rem;
-$hero-text-room: 42rem;
 
 @layer components {
   .hero {
@@ -15,60 +10,14 @@ $hero-text-room: 42rem;
     background: var(--bg-base);
   }
 
-  // En escritorio la imagen ocupa un panel a la derecha con corte diagonal y filo dorado
-  .hero__media,
-  .hero__edge {
-    position: absolute;
-    inset: 0;
-
-    @media (min-width: $hero-split) {
-      --hero-cut: 14%;
-      left: auto;
-      width: 62%;
-    }
-
-    // En pantallas muy anchas el contenido queda centrado en el contenedor, pero el panel
-    // sigue al borde de la ventana: se limita para dejar siempre sitio al texto.
-    @media (min-width: $hero-wide) {
-      width: min(
-        62%,
-        calc(100% - max(0px, (100% - var(--container)) / 2) - var(--gutter) - #{$hero-text-room})
-      );
-    }
-  }
-
-  .hero__media {
-    overflow: hidden;
-
-    @media (min-width: $hero-split) {
-      clip-path: polygon(var(--hero-cut) 0, 100% 0, 100% 100%, 0 100%);
-    }
-  }
-
-  .hero__edge {
-    display: none;
-    background: var(--brand);
-    pointer-events: none;
-
-    @media (min-width: $hero-split) {
-      display: block;
-      clip-path: polygon(
-        var(--hero-cut) 0,
-        calc(var(--hero-cut) + 0.25rem) 0,
-        0.25rem 100%,
-        0 100%
-      );
-    }
-  }
-
   .hero__bg {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: 55% center;
-    transform-origin: 55% 50%;
+    object-position: 30% center;
+    transform-origin: 60% 50%;
 
     @media (prefers-reduced-motion: no-preference) {
       animation:
@@ -92,19 +41,28 @@ $hero-text-room: 42rem;
     }
   }
 
+  // El degradado solo oscurece donde hay texto: arriba en vertical y a la izquierda en horizontal
   .hero__shade {
     position: absolute;
     inset: 0;
     background:
-      linear-gradient(to top, var(--bg-base) 0%, transparent 35%),
+      linear-gradient(to top, var(--bg-base) 0%, transparent 32%),
       linear-gradient(
         to bottom,
-        color-mix(in srgb, var(--bg-base) 88%, transparent),
-        color-mix(in srgb, var(--bg-base) 62%, transparent)
+        color-mix(in srgb, var(--bg-base) 92%, transparent) 0%,
+        color-mix(in srgb, var(--bg-base) 70%, transparent) 38%,
+        color-mix(in srgb, var(--bg-base) 25%, transparent) 70%
       );
 
-    @media (min-width: $hero-split) {
-      background: linear-gradient(to top, var(--bg-base) 0%, transparent 28%);
+    @include above(md) {
+      background:
+        linear-gradient(to top, var(--bg-base) 0%, transparent 28%),
+        linear-gradient(
+          to right,
+          color-mix(in srgb, var(--bg-base) 94%, transparent) 0%,
+          color-mix(in srgb, var(--bg-base) 70%, transparent) 38%,
+          transparent 66%
+        );
     }
   }
 
@@ -124,10 +82,21 @@ $hero-text-room: 42rem;
     flex-direction: column;
     gap: var(--space-6);
     margin-block: auto;
+
+    // En vertical el texto va arriba y deja ver el coche entre el título y las cifras
+    @include below(md) {
+      margin-block: var(--space-4) auto;
+    }
   }
 
   .hero-title {
-    font-size: clamp(3.5rem, min(9vw, 16dvh), 8.5rem);
+    // En vertical "ESPORTS" cabe en el ancho útil hasta ~19vw; en horizontal el título comparte
+    // sitio con la imagen y se contiene.
+    font-size: clamp(3.5rem, min(19vw, 14dvh), 5.5rem);
+
+    @include above(md) {
+      font-size: clamp(3.5rem, min(9vw, 16dvh), 8.5rem);
+    }
     text-transform: uppercase;
     line-height: 0.95;
     letter-spacing: 0;
@@ -153,12 +122,13 @@ $hero-text-room: 42rem;
   }
 
   .hero-subtitle {
-    font-size: clamp(1.125rem, 0.9rem + 0.6vw, 1.5rem);
+    font-size: 1rem;
     line-height: 1.5;
     color: var(--text-primary);
-    max-width: 40ch;
+    max-width: 32ch;
 
-    @media (min-width: $hero-split) {
+    @include above(md) {
+      font-size: clamp(1.125rem, 0.9rem + 0.6vw, 1.5rem);
       max-width: 26ch;
     }
   }
@@ -219,8 +189,7 @@ $hero-text-room: 42rem;
   }
 
   @media (forced-colors: active) {
-    .hero__media,
-    .hero__edge,
+    .hero__bg,
     .hero__shade {
       display: none;
     }

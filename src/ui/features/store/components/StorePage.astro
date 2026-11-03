@@ -5,6 +5,7 @@ import { getProducts } from "@/application/store/get-products";
 import { container } from "@/infrastructure/container";
 import { createTranslator } from "@/ui/i18n";
 import { PageHeader } from "@/ui/shared/components";
+import JerseyStage from "./JerseyStage.astro";
 import NextEdition from "./NextEdition.astro";
 import ProductCard from "./ProductCard.astro";
 
@@ -17,6 +18,9 @@ const products = getProducts(container.productRepository);
 {STORE_IN_STOCK ? (
   <section class="store-catalog" aria-label={t("catalog_label")}>
     <div class="store-catalog__inner">
+      <jersey-gallery class="store-catalog__stage">
+        <JerseyStage />
+      </jersey-gallery>
       <ul class="store-catalog__grid">
         {products.map((product) => (
           <li class="store-catalog__item" data-reveal>
