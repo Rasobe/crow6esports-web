@@ -698,5 +698,13 @@
         "description": "We will soon publish the latest from Crow 6 Esports."
       }
     }
+  },
+  "contactEmail": {
+    "write": "Write by email",
+    "hint": "Doesn't your mail app open?",
+    "copy": "Copy email",
+    "copied": "Copied!",
+    "gmail": "Open in Gmail",
+    "new_tab": "opens in a new tab"
   }
 }

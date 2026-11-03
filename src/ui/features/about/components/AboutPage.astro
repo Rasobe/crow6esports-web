@@ -8,7 +8,7 @@ import { DISCORD_URL, socialLinks } from "@config/site";
 import { getRosterStats } from "@/application/team/get-roster-stats";
 import { container } from "@/infrastructure/container";
 import { createTranslator, localizePath } from "@/ui/i18n";
-import { Button, Icon, PageHeader } from "@/ui/shared/components";
+import { Button, ContactEmail, Icon, PageHeader } from "@/ui/shared/components";
 import { getClubYears } from "@/ui/shared/lib/club-info";
 
 const PILLARS = [
@@ -191,9 +191,7 @@ const achievements = [...ACHIEVEMENTS].sort(
       <Button href={DISCORD_URL} size="lg">
         {t("contact.discord")}
       </Button>
-      <Button href={`mailto:${CLUB.email}`} variant="outline" size="lg">
-        {CLUB.email}
-      </Button>
+      <ContactEmail />
     </div>
     <ul class="about-contact__socials" aria-label={t("contact.socials_label")}>
       {socialLinks.map(({ platform, href, label }) => (

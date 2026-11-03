@@ -156,6 +156,7 @@
   .next-edition__actions {
     display: flex;
     flex-wrap: wrap;
+    align-items: flex-start;
     gap: var(--space-3);
   }
 

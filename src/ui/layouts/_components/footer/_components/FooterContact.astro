@@ -1,10 +1,8 @@
 ---
-import { CLUB } from "@config/club";
 import { createTranslator } from "@/ui/i18n";
-import { Icon } from "@/ui/shared/components";
+import { ContactEmail } from "@/ui/shared/components";
 
 const t = createTranslator(Astro.locals.locale, "footer");
-const { email } = CLUB;
 ---
 
 <div class="footer__column">
@@ -12,8 +10,7 @@ const { email } = CLUB;
 
   <ul class="footer__list footer__list--roomy">
     <li class="footer__contact-item">
-      <Icon name="mail" size={16} />
-      <a href={`mailto:${email}`}>{email}</a>
+      <ContactEmail variant="compact" />
     </li>
   </ul>
 </div>

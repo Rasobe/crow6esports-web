@@ -1,0 +1,120 @@
+---
+import "./contact-email.scss";
+import { CLUB } from "@config/club";
+import { createTranslator } from "@/ui/i18n";
+import { Button } from "../button";
+import { Icon } from "../icons";
+import { getGmailComposeUrl } from "./gmail-compose-url";
+
+interface Props {
+  /** `button` ofrece un botón principal con alternativas; `compact` es una línea para el pie. */
+  variant?: "button" | "compact";
+  /** Texto del botón principal; por defecto "Escribir por email". */
+  label?: string;
+}
+
+const { variant = "button", label } = Astro.props;
+const t = createTranslator(Astro.locals.locale, "contactEmail");
+const { email } = CLUB;
+---
+
+<contact-email class:list={["contact-email", `contact-email--${variant}`]} data-email={email}>
+  {variant === "button" ? (
+    <Button href={`mailto:${email}`} variant="outline" size="lg">
+      {label ?? t("write")}
+    </Button>
+  ) : (
+    <p class="contact-email__line">
+      <Icon name="mail" size={16} />
+      <a class="contact-email__address" href={`mailto:${email}`}>
+        {email}
+      </a>
+    </p>
+  )}
+
+  <div class="contact-email__alternatives">
+    {variant === "button" && (
+      <p class="contact-email__hint">
+        {t("hint")} <span class="contact-email__address">{email}</span>
+      </p>
+    )}
+    <div class="contact-email__actions">
+      <button
+        type="button"
+        class="contact-email__copy"
+        data-label-copy={t("copy")}
+        data-label-copied={t("copied")}
+      >
+        {t("copy")}
+      </button>
+      <a
+        class="contact-email__gmail"
+        href={getGmailComposeUrl(email)}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {t("gmail")}
+        <span class="contact-email__sr-only"> ({t("new_tab")})</span>
+      </a>
+    </div>
+    <span class="contact-email__status" role="status" aria-live="polite"></span>
+  </div>
+</contact-email>
+
+<script>
+  const FEEDBACK_MS = 2000;
+
+  async function writeToClipboard(text: string): Promise<boolean> {
+    try {
+      await navigator.clipboard.writeText(text);
+      return true;
+    } catch {
+      const field = document.createElement("textarea");
+      field.value = text;
+      field.setAttribute("readonly", "");
+      field.style.position = "fixed";
+      field.style.opacity = "0";
+      document.body.append(field);
+      field.select();
+      const copied = document.execCommand("copy");
+      field.remove();
+      return copied;
+    }
+  }
+
+  class ContactEmail extends HTMLElement {
+    private resetTimer = 0;
+
+    connectedCallback() {
+      const button = this.querySelector<HTMLButtonElement>(".contact-email__copy");
+      const status = this.querySelector<HTMLElement>(".contact-email__status");
+      const email = this.dataset.email;
+      if (!button || !status || !email) return;
+
+      button.addEventListener("click", async () => {
+        const copied = await writeToClipboard(email);
+        if (!copied) return;
+
+        const { labelCopy = "", labelCopied = "" } = button.dataset;
+        button.textContent = labelCopied;
+        button.setAttribute("data-copied", "");
+        status.textContent = labelCopied;
+
+        window.clearTimeout(this.resetTimer);
+        this.resetTimer = window.setTimeout(() => {
+          button.textContent = labelCopy;
+          button.removeAttribute("data-copied");
+          status.textContent = "";
+        }, FEEDBACK_MS);
+      });
+    }
+
+    disconnectedCallback() {
+      window.clearTimeout(this.resetTimer);
+    }
+  }
+
+  if (!customElements.get("contact-email")) {
+    customElements.define("contact-email", ContactEmail);
+  }
+</script>
