@@ -167,14 +167,14 @@
     color: var(--text-secondary);
   }
 
-  // Línea temporal sobria: sin cajas, el oro solo en los nodos y el hilo conductor
+  // Línea temporal: tarjetas neutras con estructura; el oro queda en nodos, iconos y flechas
   .timeline {
     --timeline-when: 8rem;
 
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: var(--space-12);
+    gap: var(--space-6);
     margin: 0;
     padding: 0;
     list-style: none;
@@ -200,8 +200,8 @@
     grid-template-areas:
       "node when"
       "node card";
-    column-gap: var(--space-6);
-    row-gap: var(--space-4);
+    column-gap: var(--space-5);
+    row-gap: var(--space-3);
     position: relative;
 
     @include above(md) {
@@ -215,8 +215,9 @@
   .timeline__when {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     grid-area: when;
-    gap: var(--space-1);
+    gap: var(--space-2);
     margin: 0;
 
     time {
@@ -226,7 +227,7 @@
     }
 
     @include above(md) {
-      padding-right: var(--space-4);
+      padding: var(--space-3) var(--space-4) 0 0;
     }
   }
 
@@ -238,14 +239,24 @@
     color: var(--text-primary);
   }
 
-  .timeline__day,
-  .timeline__note {
+  .timeline__day {
     font-family: var(--ff-ui);
     font-size: var(--fs-xs);
     font-weight: 700;
     letter-spacing: var(--tracking-widest);
     text-transform: uppercase;
     color: var(--text-muted);
+  }
+
+  .timeline__note {
+    padding: var(--space-1) var(--space-3);
+    font-family: var(--ff-ui);
+    font-size: var(--fs-xs);
+    font-weight: 700;
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-soft);
   }
 
   .timeline__node {
@@ -256,6 +267,10 @@
     background: var(--bg-surface);
     border: 1px solid var(--brand);
     transform: rotate(45deg);
+
+    @include above(md) {
+      margin-top: 1.4rem;
+    }
   }
 
   .timeline__node--trophy {
@@ -270,26 +285,85 @@
   .timeline__card {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
     grid-area: card;
     gap: var(--space-2);
-    max-width: 44rem;
+    padding: var(--space-6);
+    background: var(--bg-base);
+    border: var(--line-subtle);
+    transition: border-color var(--duration-base) var(--ease-standard);
+
+    &:hover {
+      border-color: var(--border-hover);
+    }
 
     @include above(md) {
-      padding-left: var(--space-8);
+      margin-left: var(--space-8);
     }
+  }
+
+  // Logros: insignia + resultado | alineación | enlace. Las columnas son las mismas en todas las
+  // tarjetas para que la alineación y los botones queden en vertical.
+  .timeline__card--achievement {
+    gap: var(--space-6);
+
+    @include above(md) {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      align-items: center;
+      column-gap: var(--space-10);
+      row-gap: var(--space-5);
+    }
+
+    @media (min-width: 64rem) {
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) 13rem;
+    }
+
+    .timeline__link {
+      @include above(md) {
+        grid-column: 1 / -1;
+        justify-self: start;
+      }
+
+      @media (min-width: 64rem) {
+        grid-column: auto;
+        justify-self: stretch;
+      }
+    }
+  }
+
+  .timeline__headline {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+  }
+
+  .timeline__badge {
+    display: grid;
+    flex-shrink: 0;
+    place-items: center;
+    width: 3.25rem;
+    height: 3.25rem;
+    color: var(--brand);
+    background: var(--bg-surface);
+    border: 1px solid var(--border-soft);
+  }
+
+  .timeline__headline-text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    min-width: 0;
   }
 
   .timeline__result {
     margin: 0;
     font-family: var(--ff-display);
-    font-size: var(--fs-h3);
+    font-size: clamp(1.75rem, 2.6vw, 2.25rem);
     line-height: 1;
     text-transform: uppercase;
     color: var(--text-primary);
   }
 
-  // Título de los hitos sin resultado (fundación, hoy): protagonista, en blanco
   .timeline__name {
     font-size: var(--fs-2xl);
     line-height: 1.05;
@@ -297,12 +371,12 @@
     color: var(--text-primary);
   }
 
-  // En los logros el protagonista es el resultado; la competición va debajo, más discreta
-  .timeline__result + .timeline__name {
+  .timeline__result + .timeline__name,
+  .timeline__headline-text .timeline__name {
     font-family: var(--ff-ui);
-    font-size: var(--fs-lg);
+    font-size: var(--fs-md);
     font-weight: 700;
-    letter-spacing: var(--tracking-wider);
+    letter-spacing: var(--tracking-widest);
     color: var(--text-secondary);
   }
 
@@ -317,18 +391,11 @@
   .timeline__lineup {
     display: flex;
     flex-direction: column;
-    gap: var(--space-1);
-    margin: var(--space-3) 0 0;
-
-    div {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: baseline;
-      gap: var(--space-1) var(--space-4);
-    }
+    gap: var(--space-3);
+    margin: 0;
 
     dt {
-      min-width: 6.5rem;
+      margin-bottom: var(--space-2);
       font-family: var(--ff-ui);
       font-size: var(--fs-xs);
       font-weight: 700;
@@ -339,26 +406,51 @@
 
     dd {
       margin: 0;
-      font-family: var(--ff-body);
-      font-size: var(--fs-body);
-      color: var(--text-primary);
     }
+  }
+
+  .timeline__players {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .timeline__player {
+    padding: var(--space-1-5) var(--space-3);
+    font-family: var(--ff-ui);
+    font-size: var(--fs-sm);
+    font-weight: 700;
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--text-primary);
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+  }
+
+  .timeline__players--sub .timeline__player {
+    color: var(--text-secondary);
+    border-style: dashed;
+    border-color: var(--border-soft);
   }
 
   .timeline__link {
     display: inline-flex;
     align-items: center;
-    gap: var(--space-2);
-    margin-top: var(--space-3);
-    padding-bottom: 2px;
+    justify-content: center;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-5);
     font-family: var(--ff-ui);
     font-size: var(--fs-sm);
     font-weight: 700;
     letter-spacing: var(--tracking-widest);
     text-decoration: none;
     text-transform: uppercase;
+    white-space: nowrap;
     color: var(--text-primary);
-    border-bottom: 1px solid var(--border-hover);
+    border: 1px solid var(--border-soft);
     transition:
       color var(--duration-base) var(--ease-standard),
       border-color var(--duration-base) var(--ease-standard);
@@ -371,7 +463,7 @@
     &:hover,
     &:focus-visible {
       color: var(--brand);
-      border-bottom-color: var(--brand);
+      border-color: var(--brand);
 
       svg {
         transform: translateX(var(--space-1));
@@ -380,7 +472,7 @@
 
     &:focus-visible {
       outline: 2px solid var(--brand);
-      outline-offset: 4px;
+      outline-offset: 2px;
     }
   }
 
