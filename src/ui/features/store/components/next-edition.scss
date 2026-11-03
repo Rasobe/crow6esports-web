@@ -10,7 +10,7 @@
     @include container;
     display: grid;
     gap: var(--space-12);
-    align-items: center;
+    align-items: start;
 
     @include above(md) {
       grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);

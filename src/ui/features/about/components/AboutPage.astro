@@ -23,19 +23,31 @@ const { playerCount, peakMmr } = getRosterStats(container.playerRepository);
 
 const stats = [
   { key: "years", value: getClubYears() },
-  { key: "achievements", value: ACHIEVEMENTS.length },
   { key: "players", value: playerCount },
   { key: "peak", value: peakMmr },
 ];
 
-const formatDate = ({ year, month, day }: ClubDate) =>
-  month && day
-    ? new Intl.DateTimeFormat(locale, { dateStyle: "long" }).format(new Date(year, month - 1, day))
-    : String(year);
 const toIsoDate = ({ year, month, day }: ClubDate) =>
   month && day
     ? `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`
     : String(year);
+
+const formatDay = ({ year, month, day }: ClubDate) =>
+  month && day
+    ? new Intl.DateTimeFormat(locale, { day: "numeric", month: "long" }).format(
+        new Date(year, month - 1, day),
+      )
+    : null;
+
+// Un icono por tipo de resultado: dibujan el logro sin recurrir al color
+const RESULT_ICON_PATHS = {
+  winner: [
+    "M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4Z",
+    "M7 6H4v1a3 3 0 0 0 3 3M17 6h3v1a3 3 0 0 1-3 3",
+  ],
+  placement: ["M12 15a5 5 0 1 0 0-10 5 5 0 0 0 0 10Z", "M8.5 14 7 21l5-3 5 3-1.5-7"],
+  ranking: ["M5 20v-6M12 20V4M19 20v-9M3 20h18"],
+} as const;
 
 const resultLabel = ({ result }: Achievement) => {
   if (result.kind === "winner") return t("achievements.winner");
@@ -59,17 +71,24 @@ const achievements = [...ACHIEVEMENTS].sort(
 
 <section class="about-intro" aria-labelledby="about-intro-title">
   <div class="about-intro__inner">
+    <p class="about-intro__since" aria-hidden="true" data-reveal>
+      <span class="about-intro__since-label">{t("story.since")}</span>
+      <span class="about-intro__since-year">{CLUB.foundedYear}</span>
+    </p>
+
     <div class="about-intro__text" data-reveal>
       <h2 id="about-intro-title" class="about-intro__title">
         {t("story.title")}
       </h2>
-      <p>{t("story.founded", { year: CLUB.foundedYear, game: CLUB.game })}</p>
+      <p class="about-intro__lead">
+        {t("story.founded", { year: CLUB.foundedYear, game: CLUB.game })}
+      </p>
       <p>{t("story.today", { players: playerCount })}</p>
     </div>
 
-    <dl class="about-intro__stats" aria-label={t("stats.label")}>
+    <dl class="about-intro__stats" aria-label={t("stats.label")} data-reveal>
       {stats.map(({ key, value }) => (
-        <div class="about-intro__stat" data-reveal>
+        <div class="about-intro__stat">
           <dt class="about-intro__stat-label">{t(`stats.${key}`)}</dt>
           <dd class="about-intro__stat-value" data-count-to={value}>
             {value.toLocaleString(locale)}
@@ -91,9 +110,13 @@ const achievements = [...ACHIEVEMENTS].sort(
 
     <ol class="timeline">
       <li class="timeline__item" data-reveal>
+        <p class="timeline__when">
+          <time datetime={String(CLUB.foundedYear)} class="timeline__year">
+            {CLUB.foundedYear}
+          </time>
+        </p>
         <span class="timeline__node" aria-hidden="true"></span>
         <article class="timeline__card">
-          <p class="timeline__date">{CLUB.foundedYear}</p>
           <h3 class="timeline__name">{t("timeline.founding_title")}</h3>
           <p class="timeline__text">{t("timeline.founding_text", { game: CLUB.game })}</p>
         </article>
@@ -101,34 +124,87 @@ const achievements = [...ACHIEVEMENTS].sort(
 
       {achievements.map((achievement) => (
         <li class="timeline__item" data-reveal>
+          <p class="timeline__when">
+            <time datetime={toIsoDate(achievement.date)}>
+              <span class="timeline__year">{achievement.date.year}</span>
+              {formatDay(achievement.date) && (
+                <span class="timeline__day">{formatDay(achievement.date)}</span>
+              )}
+            </time>
+            {achievement.onsite && <span class="timeline__note">{t("achievements.onsite")}</span>}
+          </p>
           <span class="timeline__node timeline__node--trophy" aria-hidden="true" />
           <article class="timeline__card timeline__card--achievement">
-            <p class="timeline__date">
-              <time datetime={toIsoDate(achievement.date)}>{formatDate(achievement.date)}</time>
-              {achievement.onsite && <span class="timeline__tag">{t("achievements.onsite")}</span>}
-            </p>
-            <p class="timeline__result">{resultLabel(achievement)}</p>
-            <h3 class="timeline__name">{eventName(achievement)}</h3>
+            <div class="timeline__headline">
+              <span class="timeline__badge" aria-hidden="true">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  {RESULT_ICON_PATHS[achievement.result.kind].map((path) => (
+                    <path d={path} />
+                  ))}
+                </svg>
+              </span>
+              <div class="timeline__headline-text">
+                <p class="timeline__result">{resultLabel(achievement)}</p>
+                <h3 class="timeline__name">{eventName(achievement)}</h3>
+              </div>
+            </div>
+
             <dl class="timeline__lineup">
               <div>
                 <dt>{t("achievements.lineup")}</dt>
-                <dd>{achievement.lineup.join(" · ")}</dd>
+                <dd>
+                  <ul class="timeline__players">
+                    {achievement.lineup.map((player) => (
+                      <li class="timeline__player">{player}</li>
+                    ))}
+                  </ul>
+                </dd>
               </div>
               {achievement.substitutes && (
                 <div>
                   <dt>{t("achievements.substitutes")}</dt>
-                  <dd>{achievement.substitutes.join(" · ")}</dd>
+                  <dd>
+                    <ul class="timeline__players timeline__players--sub">
+                      {achievement.substitutes.map((player) => (
+                        <li class="timeline__player">{player}</li>
+                      ))}
+                    </ul>
+                  </dd>
                 </div>
               )}
             </dl>
+
+            {achievement.link && (
+              <a
+                class="timeline__link"
+                href={achievement.link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {t(`achievements.links.${achievement.link.kind}`)}
+                <Icon name="arrow-right" size={14} />
+                <span class="timeline__sr-only"> ({t("contact.new_tab")})</span>
+              </a>
+            )}
           </article>
         </li>
       ))}
 
       <li class="timeline__item" data-reveal>
+        <p class="timeline__when">
+          <span class="timeline__year">{t("timeline.today_label")}</span>
+        </p>
         <span class="timeline__node timeline__node--now" aria-hidden="true"></span>
         <article class="timeline__card">
-          <p class="timeline__date">{t("timeline.today_label")}</p>
           <h3 class="timeline__name">{t("timeline.today_title")}</h3>
           <p class="timeline__text">{t("timeline.today_text", { players: playerCount })}</p>
         </article>
@@ -168,11 +244,8 @@ const achievements = [...ACHIEVEMENTS].sort(
       {t("values.title")}
     </h2>
     <ul class="about-values__list">
-      {ABOUT_VALUES.map((value, index) => (
+      {ABOUT_VALUES.map((value) => (
         <li class="about-values__item" data-reveal>
-          <span class="about-values__index" aria-hidden="true">
-            {String(index + 1).padStart(2, "0")}
-          </span>
           <h3 class="about-values__name">{t(`values.items.${value}.title`)}</h3>
           <p class="about-values__description">{t(`values.items.${value}.description`)}</p>
         </li>

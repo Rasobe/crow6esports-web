@@ -43,3 +43,24 @@ test("marks the page as scrolled and shows the solid join button on desktop", as
   await page.evaluate(() => window.scrollTo(0, 600));
   await expect(page.locator(".navbar")).toHaveAttribute("data-scrolled", "");
 });
+
+test("does not navigate again when the current page link is pressed", async ({ page }) => {
+  await page.goto("/es/coaching", { waitUntil: "networkidle" });
+  await page.evaluate(() => {
+    document.body.dataset.marker = "same-page";
+    window.scrollTo(0, 800);
+  });
+
+  await page.locator('.navbar__link[href="/es/coaching"]').click();
+
+  // Si hubiera navegado, el cuerpo de la página se habría sustituido y la marca se perdería
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0);
+  expect(await page.evaluate(() => document.body.dataset.marker)).toBe("same-page");
+  await expect(page).toHaveURL(/\/es\/coaching$/);
+});
+
+test("still navigates when a different section is pressed", async ({ page }) => {
+  await page.goto("/es/coaching", { waitUntil: "networkidle" });
+  await page.locator('.navbar__link[href="/es/team"]').click();
+  await expect(page).toHaveURL(/\/es\/team$/);
+});

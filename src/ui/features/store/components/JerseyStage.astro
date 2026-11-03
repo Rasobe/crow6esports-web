@@ -87,24 +87,42 @@ const panelAttributes = (id: string): HTMLAttributes<"div"> =>
     private observer?: IntersectionObserver;
     private tabs: HTMLButtonElement[] = [];
     private panels: HTMLElement[] = [];
-    private video: HTMLVideoElement | null = null;
+    /**
+     * Astro 7 sustituye cada `<video>` por una copia nueva tras cambiar de página
+     * (`reifyMediaElements`). Un vídeo guardado en `connectedCallback` quedaría desconectado,
+     * así que se busca siempre en el momento de usarlo.
+     */
+    private get video(): HTMLVideoElement | null {
+      return this.querySelector("video");
+    }
     private toggle: HTMLButtonElement | null = null;
     private captionName: HTMLElement | null = null;
     private screen: HTMLElement | null = null;
     private selected = 0;
     private visible = false;
     private pausedByUser = false;
+    private wantsVideo = false;
     private preloaded = false;
     private transitionTimer = 0;
 
     connectedCallback() {
+      this.init();
+    }
+
+    private init() {
+      const screen = this.querySelector<HTMLElement>(".jersey-stage__screen");
+      if (!screen || screen === this.screen) return;
+
+      this.teardown();
+      this.selected = 0;
+      this.visible = false;
+      this.wantsVideo = false;
+      this.preloaded = false;
       this.tabs = [...this.querySelectorAll<HTMLButtonElement>('[role="tab"]')];
       this.panels = [...this.querySelectorAll<HTMLElement>(".jersey-stage__panel")];
-      this.video = this.querySelector("video");
       this.toggle = this.querySelector(".jersey-stage__toggle");
       this.captionName = this.querySelector(".jersey-stage__caption-name");
-      const screen = this.querySelector<HTMLElement>(".jersey-stage__screen");
-      if (!this.video || !this.toggle || !screen) return;
+      if (!this.toggle) return;
       this.screen = screen;
 
       this.pausedByUser = this.prefersReducedMotion();
@@ -112,10 +130,13 @@ const panelAttributes = (id: string): HTMLAttributes<"div"> =>
       this.observer = new IntersectionObserver(
         ([entry]) => {
           this.visible = entry.isIntersecting;
+          this.wantsVideo = false;
           if (this.visible) this.preloadImages();
           this.syncPlayback();
         },
-        { threshold: 0.35 },
+        // Basta con asomar y arranca un poco antes de entrar: en pantallas bajas el escenario
+        // queda casi entero bajo el pliegue y el visitante vería solo el póster parado.
+        { threshold: 0, rootMargin: "0px 0px 25% 0px" },
       );
       this.observer.observe(screen);
 
@@ -134,8 +155,13 @@ const panelAttributes = (id: string): HTMLAttributes<"div"> =>
     }
 
     disconnectedCallback() {
+      this.teardown();
+    }
+
+    private teardown() {
       this.observer?.disconnect();
       window.clearTimeout(this.transitionTimer);
+      this.screen = null;
     }
 
     private handleKey(event: KeyboardEvent, index: number) {
@@ -196,6 +222,10 @@ const panelAttributes = (id: string): HTMLAttributes<"div"> =>
         }
       }
 
+      // Elegir la pestaña del vídeo es una petición explícita: se reproduce aunque el escenario
+      // aún no esté a la vista.
+      this.wantsVideo = next?.dataset.kind === "video";
+
       const caption = this.tabs[index]?.dataset.caption;
       if (caption && this.captionName) this.captionName.textContent = caption;
       this.syncPlayback();
@@ -239,7 +269,7 @@ const panelAttributes = (id: string): HTMLAttributes<"div"> =>
       );
       this.toggleAttribute("data-paused", this.pausedByUser);
 
-      if (videoIsShown && this.visible && !this.pausedByUser) {
+      if (videoIsShown && (this.visible || this.wantsVideo) && !this.pausedByUser) {
         void video.play().catch(() => undefined);
       } else {
         video.pause();

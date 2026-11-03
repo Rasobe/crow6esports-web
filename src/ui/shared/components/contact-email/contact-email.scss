@@ -19,6 +19,23 @@
     flex-direction: column;
     align-items: inherit;
     gap: var(--space-2);
+
+    &[hidden] {
+      display: none;
+    }
+
+    &[data-revealed] {
+      @media (prefers-reduced-motion: no-preference) {
+        animation: contact-email-reveal var(--duration-slower) var(--ease-out);
+      }
+    }
+  }
+
+  @keyframes contact-email-reveal {
+    from {
+      opacity: 0;
+      transform: translateY(-0.5rem);
+    }
   }
 
   .contact-email__hint {
