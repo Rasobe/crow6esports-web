@@ -1,5 +1,5 @@
 import AxeBuilder from "@axe-core/playwright";
-import { expect, test } from "@playwright/test";
+import { expect, test, type Page } from "@playwright/test";
 import { COACHING } from "../config/coaching";
 
 const PUBLIC_ROUTES = ["", "/team", "/news", "/coaching", "/store", "/about-us", "/tryouts"];
@@ -36,11 +36,25 @@ for (const locale of ["es", "en"]) {
   }
 }
 
+// axe mide el contraste con el color resultante: un texto a mitad de su fundido de entrada
+// daría un falso positivo. Se esperan solo las animaciones finitas (el drift del hero no acaba).
+async function settleEntranceAnimations(page: Page) {
+  await page.evaluate(() =>
+    Promise.all(
+      document
+        .getAnimations()
+        .filter((animation) => animation.effect?.getComputedTiming().iterations !== Infinity)
+        .map((animation) => animation.finished),
+    ),
+  );
+}
+
 // Mantiene el 100 de accesibilidad de Lighthouse: cualquier fallo WCAG A/AA rompe el test
 for (const route of PUBLIC_ROUTES) {
   test(`has no accessibility violations on /es${route}`, async ({ page }) => {
     await page.goto(`/es${route}`);
     await page.waitForLoadState("networkidle");
+    await settleEntranceAnimations(page);
 
     const { violations } = await new AxeBuilder({ page })
       .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
