@@ -1,33 +1,59 @@
 ---
 import "./not-found.scss";
-import { createTranslator } from "@/ui/i18n";
-import { CTAButton } from "../cta-button";
+import { navigationConfig } from "@config/navigation";
+import { ROUTES } from "@config/routes";
+import { createTranslator, localizePath } from "@/ui/i18n";
+import { Button } from "../button";
 import { Icon } from "../icons";
 
-const t = createTranslator(Astro.locals.locale, "notFound");
+const { locale } = Astro.locals;
+const t = createTranslator(locale, "notFound");
+const tNav = createTranslator(locale, "footer.nav");
 ---
 
 <main class="not-found">
-  <div class="not-found__bg-number" aria-hidden="true">
-    404
-  </div>
+  <div class="not-found__sweep" aria-hidden="true"></div>
 
   <div class="not-found__inner">
-    <p class="not-found__eyebrow">
-      <span></span>
-      {t("eyebrow")}
-      <span></span>
+    <p class="not-found__tag" data-hero style="--hero-step: 0">
+      {t("tag")}
     </p>
 
-    <h1 class="not-found__title" set:html={t("title")} />
+    <p class="not-found__code" aria-hidden="true" data-hero style="--hero-step: 1">
+      <span class="not-found__digit">4</span>
+      <span class="not-found__ball">
+        <span class="not-found__ball-light"></span>
+        <span class="not-found__ball-light"></span>
+      </span>
+      <span class="not-found__digit">4</span>
+    </p>
 
-    <div class="not-found__divider" aria-hidden="true"></div>
+    <h1 class="not-found__title" data-hero style="--hero-step: 2">
+      {t("title")}
+    </h1>
+    <p class="not-found__desc" data-hero style="--hero-step: 3">
+      {t("desc")}
+    </p>
 
-    <p class="not-found__desc">{t("desc")}</p>
+    <div class="not-found__actions" data-hero style="--hero-step: 4">
+      <Button href={ROUTES.home} size="lg">
+        <Icon slot="icon" name="arrow-left" size={16} />
+        {t("cta")}
+      </Button>
+    </div>
 
-    <CTAButton href="/" class="not-found__cta">
-      <Icon slot="icon" name="arrow-left" size={14} />
-      {t("cta")}
-    </CTAButton>
+    <nav class="not-found__links" aria-label={t("links_label")} data-hero style="--hero-step: 5">
+      <span class="not-found__links-label">{t("links_label")}</span>
+      <ul class="not-found__grid">
+        {navigationConfig.mainNav.map(({ href, labelKey }) => (
+          <li class="not-found__item">
+            <a class="not-found__link" href={localizePath(locale, href)}>
+              <span>{tNav(labelKey)}</span>
+              <Icon name="arrow-right" size={16} />
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
   </div>
 </main>

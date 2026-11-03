@@ -655,9 +655,11 @@
   },
   "notFound": {
     "eyebrow": "Página no encontrada",
-    "title": "PÁGINA <span>NO</span><br>ENCONTRADA",
-    "desc": "La página que buscas no existe o ha sido movida. Vuelve al inicio y sigue compitiendo.",
-    "cta": "Volver al inicio"
+    "tag": "Error 404 · Fuera de juego",
+    "title": "Esta jugada no existe",
+    "desc": "La página que buscas no existe o ha sido movida. Vuelve al campo y sigue jugando.",
+    "cta": "Volver al inicio",
+    "links_label": "Sigue jugando"
   },
   "comingSoon": {
     "pageTitle": "Próximamente",

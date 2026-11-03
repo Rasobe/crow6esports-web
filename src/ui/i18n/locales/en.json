@@ -655,9 +655,11 @@
   },
   "notFound": {
     "eyebrow": "Page not found",
-    "title": "PAGE <span>NOT</span><br>FOUND",
-    "desc": "The page you are looking for does not exist or has been moved. Go back and keep competing.",
-    "cta": "Back to home"
+    "tag": "Error 404 · Out of play",
+    "title": "This play does not exist",
+    "desc": "The page you are looking for does not exist or has been moved. Get back on the pitch and keep playing.",
+    "cta": "Back to home",
+    "links_label": "Keep playing"
   },
   "comingSoon": {
     "pageTitle": "Coming soon",
