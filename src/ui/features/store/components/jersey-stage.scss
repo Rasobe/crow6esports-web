@@ -49,6 +49,7 @@
   .jersey-stage__panel {
     position: absolute;
     inset: 0;
+    background: var(--bg-base);
 
     // Cortina diagonal: el panel nuevo se destapa encima del anterior, que sigue opaco debajo
     &.is-entering {
@@ -70,11 +71,10 @@
       align-items: center;
       justify-content: center;
       padding: var(--space-4) var(--space-4) 4.5rem;
-      background: radial-gradient(
-        ellipse at 50% 55%,
-        rgb(var(--brand-rgb) / 0.18),
-        transparent 65%
-      );
+      // Fondo opaco: el panel que entra tiene que tapar del todo al anterior
+      background:
+        radial-gradient(ellipse at 50% 55%, rgb(var(--brand-rgb) / 0.18), transparent 65%),
+        var(--bg-base);
 
       &[hidden] {
         display: none;
