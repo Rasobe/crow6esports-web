@@ -10,7 +10,8 @@
     @include container;
   }
 
-  .store-catalog__inner > .jersey-video {
+  .store-catalog__stage {
+    display: block;
     margin-bottom: var(--space-8);
   }
 

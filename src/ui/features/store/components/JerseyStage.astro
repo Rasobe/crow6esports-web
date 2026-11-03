@@ -1,0 +1,186 @@
+---
+import "./jersey-stage.scss";
+import type { HTMLAttributes } from "astro/types";
+import { createTranslator } from "@/ui/i18n";
+import { storeImageSrcset } from "@/ui/shared/lib/responsive-image";
+import type { JerseyView } from "./jersey-view";
+
+interface Props {
+  /** Fotos del producto. Sin ellas el escenario solo muestra el vídeo y no hay pestañas. */
+  views?: JerseyView[];
+}
+
+const { views = [] } = Astro.props;
+const tVideo = createTranslator(Astro.locals.locale, "store.jersey_video");
+const tShowcase = createTranslator(Astro.locals.locale, "store.showcase");
+
+const isGallery = views.length > 0;
+const panelAttributes = (id: string): HTMLAttributes<"div"> =>
+  isGallery
+    ? { role: "tabpanel", id: `jersey-panel-${id}`, "aria-labelledby": `jersey-tab-${id}` }
+    : {};
+---
+
+<div class="jersey-stage" data-reveal>
+  <div class="jersey-stage__screen">
+    <div class="jersey-stage__panel" data-kind="video" {...panelAttributes("video")}>
+      <video
+        class="jersey-stage__media"
+        poster="/images/jersey-video-poster.webp"
+        width="1280"
+        height="722"
+        muted
+        loop
+        playsinline
+        preload="none"
+        aria-label={tVideo("video_label")}
+      >
+        <source src="/videos/crow6-jersey.webm" type="video/webm" />
+        <source src="/videos/crow6-jersey.mp4" type="video/mp4" />
+      </video>
+    </div>
+
+    {views.map(({ src, alt, view }) => (
+      <div class="jersey-stage__panel" data-kind="image" hidden {...panelAttributes(view)}>
+        <img
+          class="jersey-stage__image"
+          src={src}
+          srcset={storeImageSrcset(src)}
+          sizes="(min-width: 48rem) 24rem, 80vw"
+          alt={alt}
+          width="640"
+          height="800"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    ))}
+
+    <span class="jersey-stage__tag">{tShowcase("tag")}</span>
+
+    <div class="jersey-stage__caption" aria-live="polite">
+      <span class="jersey-stage__caption-label">{tShowcase("product_label")}</span>
+      <span class="jersey-stage__caption-name">{tShowcase("club")}</span>
+    </div>
+
+    <button
+      type="button"
+      class="jersey-stage__toggle"
+      aria-pressed="false"
+      aria-label={tVideo("pause")}
+      data-label-pause={tVideo("pause")}
+      data-label-play={tVideo("play")}
+    >
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true">
+        <path class="jersey-stage__icon-pause" d="M3 2h2.5v10H3zM8.5 2H11v10H8.5z" />
+        <path class="jersey-stage__icon-play" d="M3.5 2l8 5-8 5z" />
+      </svg>
+    </button>
+  </div>
+</div>
+
+<script>
+  class JerseyGallery extends HTMLElement {
+    private observer?: IntersectionObserver;
+    private tabs: HTMLButtonElement[] = [];
+    private panels: HTMLElement[] = [];
+    private video: HTMLVideoElement | null = null;
+    private toggle: HTMLButtonElement | null = null;
+    private captionName: HTMLElement | null = null;
+    private selected = 0;
+    private visible = false;
+    private pausedByUser = false;
+
+    connectedCallback() {
+      this.tabs = [...this.querySelectorAll<HTMLButtonElement>('[role="tab"]')];
+      this.panels = [...this.querySelectorAll<HTMLElement>(".jersey-stage__panel")];
+      this.video = this.querySelector("video");
+      this.toggle = this.querySelector(".jersey-stage__toggle");
+      this.captionName = this.querySelector(".jersey-stage__caption-name");
+      const screen = this.querySelector(".jersey-stage__screen");
+      if (!this.video || !this.toggle || !screen) return;
+
+      this.pausedByUser = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      this.observer = new IntersectionObserver(
+        ([entry]) => {
+          this.visible = entry.isIntersecting;
+          this.syncPlayback();
+        },
+        { threshold: 0.35 },
+      );
+      this.observer.observe(screen);
+
+      this.toggle.addEventListener("click", () => {
+        this.pausedByUser = !this.pausedByUser;
+        this.syncPlayback();
+      });
+
+      this.tabs.forEach((tab, index) => {
+        tab.addEventListener("click", () => this.select(index));
+        tab.addEventListener("keydown", (event) => this.handleKey(event, index));
+      });
+
+      this.syncPlayback();
+    }
+
+    disconnectedCallback() {
+      this.observer?.disconnect();
+    }
+
+    private handleKey(event: KeyboardEvent, index: number) {
+      const last = this.tabs.length - 1;
+      const target = {
+        ArrowRight: index === last ? 0 : index + 1,
+        ArrowLeft: index === 0 ? last : index - 1,
+        Home: 0,
+        End: last,
+      }[event.key];
+      if (target === undefined) return;
+
+      event.preventDefault();
+      this.select(target);
+      this.tabs[target]?.focus();
+    }
+
+    private select(index: number) {
+      this.selected = index;
+      this.tabs.forEach((tab, position) => {
+        const isActive = position === index;
+        tab.setAttribute("aria-selected", String(isActive));
+        tab.tabIndex = isActive ? 0 : -1;
+      });
+      this.panels.forEach((panel, position) => {
+        panel.hidden = position !== index;
+      });
+      const caption = this.tabs[index]?.dataset.caption;
+      if (caption && this.captionName) this.captionName.textContent = caption;
+      this.syncPlayback();
+    }
+
+    private syncPlayback() {
+      const video = this.video;
+      const toggle = this.toggle;
+      if (!video || !toggle) return;
+
+      const videoIsShown = this.panels[this.selected]?.dataset.kind === "video";
+      toggle.hidden = !videoIsShown;
+      toggle.setAttribute("aria-pressed", String(this.pausedByUser));
+      toggle.setAttribute(
+        "aria-label",
+        (this.pausedByUser ? toggle.dataset.labelPlay : toggle.dataset.labelPause) ?? "",
+      );
+      this.toggleAttribute("data-paused", this.pausedByUser);
+
+      if (videoIsShown && this.visible && !this.pausedByUser) {
+        void video.play().catch(() => undefined);
+      } else {
+        video.pause();
+      }
+    }
+  }
+
+  if (!customElements.get("jersey-gallery")) {
+    customElements.define("jersey-gallery", JerseyGallery);
+  }
+</script>

@@ -6,7 +6,8 @@ import type { Product } from "@/domain/store/product";
 import { createTranslator } from "@/ui/i18n";
 import { Button } from "@/ui/shared/components";
 import { storeImageSrcset } from "@/ui/shared/lib/responsive-image";
-import JerseyVideo from "./JerseyVideo.astro";
+import JerseyStage from "./JerseyStage.astro";
+import type { JerseyView } from "./jersey-view";
 
 interface Props {
   products: Product[];
@@ -18,7 +19,7 @@ const { products } = Astro.props;
 const t = createTranslator(Astro.locals.locale, "store");
 const tNext = createTranslator(Astro.locals.locale, "store.next_edition");
 const tShowcase = createTranslator(Astro.locals.locale, "store.showcase");
-const views = products.flatMap(({ name, images }) =>
+const views: JerseyView[] = products.flatMap(({ name, images }) =>
   images.flatMap((src) => {
     const view = VIEWS.find((candidate) => src.includes(candidate));
     return view ? [{ src, alt: name, view }] : [];
@@ -27,8 +28,8 @@ const views = products.flatMap(({ name, images }) =>
 ---
 
 <section class="next-edition" aria-labelledby="next-edition-title">
-  <div class="next-edition__inner">
-    <JerseyVideo />
+  <jersey-gallery class="next-edition__inner">
+    <JerseyStage views={views} />
 
     <div class="next-edition__panel" data-reveal>
       <div class="next-edition__status">
@@ -45,29 +46,56 @@ const views = products.flatMap(({ name, images }) =>
 
       {views.length > 0 && (
         <div class="next-edition__views">
-          <span class="next-edition__views-label">{tShowcase("views_label")}</span>
-          <ul class="next-edition__gallery">
-            {views.map(({ src, alt, view }) => (
-              <li class="next-edition__item">
-                <figure class="next-edition__figure">
-                  <img
-                    class="next-edition__image"
-                    src={src}
-                    srcset={storeImageSrcset(src)}
-                    sizes="(min-width: 48rem) 10rem, 40vw"
-                    alt={alt}
-                    width="640"
-                    height="800"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  <figcaption class="next-edition__figure-label">
-                    {tShowcase(`view_${view}`)}
-                  </figcaption>
-                </figure>
-              </li>
+          <span id="jersey-views-label" class="next-edition__views-label">
+            {tShowcase("views_label")}
+          </span>
+          <div class="next-edition__gallery" role="tablist" aria-labelledby="jersey-views-label">
+            <button
+              type="button"
+              role="tab"
+              id="jersey-tab-video"
+              class="next-edition__tab"
+              aria-selected="true"
+              aria-controls="jersey-panel-video"
+              data-caption={tShowcase("club")}
+            >
+              <img
+                class="next-edition__image next-edition__image--cover"
+                src="/images/jersey-video-poster.webp"
+                alt=""
+                width="640"
+                height="800"
+                loading="lazy"
+                decoding="async"
+              />
+              <span class="next-edition__tab-label">{tShowcase("view_video")}</span>
+            </button>
+            {views.map(({ src, view }) => (
+              <button
+                type="button"
+                role="tab"
+                id={`jersey-tab-${view}`}
+                class="next-edition__tab"
+                aria-selected="false"
+                aria-controls={`jersey-panel-${view}`}
+                tabindex="-1"
+                data-caption={tShowcase(`view_${view}`)}
+              >
+                <img
+                  class="next-edition__image"
+                  src={src}
+                  srcset={storeImageSrcset(src)}
+                  sizes="(min-width: 48rem) 8rem, 28vw"
+                  alt=""
+                  width="640"
+                  height="800"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <span class="next-edition__tab-label">{tShowcase(`view_${view}`)}</span>
+              </button>
             ))}
-          </ul>
+          </div>
         </div>
       )}
 
@@ -80,5 +108,5 @@ const views = products.flatMap(({ name, images }) =>
         </Button>
       </div>
     </div>
-  </div>
+  </jersey-gallery>
 </section>
