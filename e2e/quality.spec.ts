@@ -85,9 +85,26 @@ test("shows the sold out store without prices", async ({ page }) => {
   await expect(page.getByText(/€/)).toHaveCount(0);
 });
 
-test("shows the news empty state", async ({ page }) => {
+test("shows the news empty state and keeps it out of search engines", async ({ page }) => {
   await page.goto("/es/news");
   await expect(page.getByRole("heading", { name: "Pronto publicaremos noticias" })).toBeVisible();
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/);
+});
+
+test("describes the club and the coaching service for search engines", async ({ page }) => {
+  const structuredTypes = async () =>
+    page
+      .locator('script[type="application/ld+json"]')
+      .evaluateAll((scripts) =>
+        scripts.map((script) => JSON.parse(script.textContent ?? "")["@type"]),
+      );
+
+  await page.goto("/es");
+  expect(await structuredTypes()).toContain("SportsTeam");
+
+  await page.goto("/es/coaching");
+  expect(await structuredTypes()).toContain("Service");
+  await expect(page.locator('meta[property="og:locale"]')).toHaveAttribute("content", "es_ES");
 });
 
 test("renders the coaching packs and single sessions from the config", async ({ page }) => {

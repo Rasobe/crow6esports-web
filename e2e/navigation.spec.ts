@@ -26,10 +26,12 @@ test("does not expose the internal under construction route", async ({ page }) =
 
 test("lists every published page in the sitemap", async ({ request }) => {
   const xml = await (await request.get("/sitemap.xml")).text();
-  for (const route of ["tryouts", "team", "news", "coaching", "store", "about-us"]) {
+  for (const route of ["tryouts", "team", "coaching", "store", "about-us"]) {
     expect(xml).toContain(`/es/${route}`);
     expect(xml).toContain(`/en/${route}`);
   }
+  // Noticias no tiene artículos todavía, así que queda fuera
+  expect(xml).not.toContain("/news");
 });
 
 test("switches locale keeping the current path", async ({ page }) => {

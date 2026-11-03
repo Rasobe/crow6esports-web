@@ -1,12 +1,21 @@
 ---
+import { ROUTES } from "@config/routes";
+import { getArticles } from "@/application/news/get-articles";
+import { container } from "@/infrastructure/container";
 import { NewsPage } from "@/ui/features/news/components";
 import { LocaleLayout } from "@/ui/layouts";
 import { createTranslator } from "@/ui/i18n";
-import { ROUTES } from "@config/routes";
 
 const t = createTranslator(Astro.locals.locale, "news.meta");
+// Sin artículos la página solo muestra el aviso: se deja fuera del buscador hasta que haya
+const articles = await getArticles(container.articleRepository);
 ---
 
-<LocaleLayout title={t("title")} description={t("description")} path={ROUTES.news}>
+<LocaleLayout
+  title={t("title")}
+  description={t("description")}
+  path={ROUTES.news}
+  noindex={articles.length === 0}
+>
   <NewsPage />
 </LocaleLayout>

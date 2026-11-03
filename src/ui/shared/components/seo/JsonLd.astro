@@ -1,0 +1,12 @@
+---
+import type { StructuredData } from "@/ui/shared/lib/structured-data";
+
+interface Props {
+  data: StructuredData;
+}
+
+// "<" se escapa para que un texto nunca pueda cerrar la etiqueta script
+const json = JSON.stringify(Astro.props.data).replace(/</g, "\\u003c");
+---
+
+<script type="application/ld+json" is:inline set:html={json} />

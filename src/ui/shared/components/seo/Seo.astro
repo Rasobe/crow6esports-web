@@ -16,9 +16,12 @@ const {
   description,
   locale,
   path = "",
-  image = "/images/og-default.webp",
+  image = "/images/og-default.jpg",
   noindex,
 } = Astro.props;
+
+// Open Graph usa el formato idioma_REGIÓN
+const OG_LOCALES: Record<Locale, string> = { es: "es_ES", en: "en_GB" };
 
 const pageTitle = title ? `${title} - ${siteConfig.name}` : siteConfig.name;
 const urlFor = (target: Locale) => `${siteConfig.url}/${target}${path}`;
@@ -40,7 +43,10 @@ const ogImage = `${siteConfig.url}${image}`;
 <meta property="og:title" content={pageTitle} />
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonical} />
-<meta property="og:locale" content={locale} />
+<meta property="og:locale" content={OG_LOCALES[locale]} />
+{LOCALES.filter((target) => target !== locale).map((target) => (
+  <meta property="og:locale:alternate" content={OG_LOCALES[target]} />
+))}
 <meta property="og:image" content={ogImage} />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
