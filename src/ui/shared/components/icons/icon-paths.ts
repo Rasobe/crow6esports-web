@@ -13,10 +13,21 @@ export type IconName =
   | "lock"
   | "clock"
   | "calendar"
-  | "refresh";
+  | "refresh"
+  | "check"
+  | "minus";
 
 export type StrokedIconName =
-  "arrow-left" | "arrow-right" | "mail" | "map-pin" | "lock" | "clock" | "calendar" | "refresh";
+  | "arrow-left"
+  | "arrow-right"
+  | "mail"
+  | "map-pin"
+  | "lock"
+  | "clock"
+  | "calendar"
+  | "refresh"
+  | "check"
+  | "minus";
 export type FilledIconName = Exclude<IconName, StrokedIconName>;
 
 /** Filled 16x16 glyphs rendered with currentColor. */
@@ -87,4 +98,6 @@ export const STROKED_ICONS: Record<StrokedIconName, { strokeWidth: number; paths
       "M15 10a3 3 0 1 1-6 0 3 3 0 0 1 6 0z",
     ],
   },
+  check: { strokeWidth: 2.5, paths: ["M20 6 9 17l-5-5"] },
+  minus: { strokeWidth: 2, paths: ["M5 12h14"] },
 };

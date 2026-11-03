@@ -429,7 +429,7 @@
     },
     "plans": {
       "title": "Coaching packs",
-      "lead": "Launch prices. Team packs are priced per team: the more players, the less each one pays.",
+      "lead": "Launch prices. All packs are monthly and each tier includes everything in the one before.",
       "mode": {
         "individual": "Individual",
         "teams": "Group / teams"
@@ -439,15 +439,71 @@
         "pro": "Pro",
         "elite": "Elite"
       },
-      "launch_badge": "Launch price",
       "featured_badge": "Most popular",
       "period": "/ month",
       "original_price": "Original price",
       "sessions_one": "{count} weekly session of {hours} h",
       "sessions_other": "{count} weekly sessions of {hours} h",
-      "cta": "Book on Discord",
+      "cta": {
+        "individual": "Book an individual pack",
+        "teams": "Book a team pack"
+      },
       "team_note": "Price per team, minimum {players} players.",
-      "per_player": "≈ {price} per player with {players}"
+      "per_player": "≈ {price} per player with {players}",
+      "features_label": "What's included",
+      "included": "Included",
+      "not_included": "Not included",
+      "features": {
+        "individual": {
+          "live_review": "Review of your replays during the session",
+          "weekly_goals": "Goals and weekly plan",
+          "training_routine": "Personalised training routine",
+          "offline_review": "Replay reviews between sessions",
+          "discord_support": "Questions on Discord between sessions",
+          "progress_report": "Monthly progress report"
+        },
+        "teams": {
+          "rotations": "Rotations and positioning",
+          "match_review": "Team match reviews",
+          "roles_comms": "In-game roles and communication",
+          "scrim_review": "Scrim and opponent analysis",
+          "tournament_prep": "Tournament preparation",
+          "discord_support": "Follow-up on Discord between sessions"
+        }
+      },
+      "single": {
+        "title": "Single sessions",
+        "lead": "Start with a free intro session. And if you sign up for a pack within {days} days of a paid session, we deduct what you paid.",
+        "items": {
+          "intro": {
+            "title": "Intro session",
+            "description": "30 min to get to know each other, look at your level and goals, and recommend the pack that suits you best. No commitment."
+          },
+          "live": {
+            "title": "1-on-1 session",
+            "unit": "/ session",
+            "description": "{hours} h live with the coach to work on something specific: a mechanic, a losing streak or a tournament."
+          },
+          "replay_review": {
+            "title": "Replay review",
+            "unit": "/ replay",
+            "description": "Send a match and get an analysis with the key points to improve, no scheduling needed."
+          },
+          "team_live": {
+            "title": "Team session",
+            "unit": "/ session",
+            "description": "{hours} h with your team to prepare for a tournament or fix a specific gameplay problem."
+          }
+        },
+        "free": "Free",
+        "cta_free": "Book your free session",
+        "paid_note": "Paid sessions are booked on Discord too:",
+        "paid_link": "message us and we'll set it up."
+      },
+      "cta_hint": {
+        "individual": "Tell us which pack you want and we'll set a schedule on Discord.",
+        "teams": "Tell us how many you are and which pack you want, and we'll set a schedule."
+      }
     },
     "teams": {
       "title": "Teams he has worked with"

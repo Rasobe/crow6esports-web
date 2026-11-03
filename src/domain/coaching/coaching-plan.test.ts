@@ -1,5 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { getPricePerPlayer, getStartingPlan, type CoachingPlan } from "./coaching-plan";
+import {
+  getPricePerPlayer,
+  getStartingPlan,
+  includesFeature,
+  type CoachingPlan,
+} from "./coaching-plan";
 
 const plans: CoachingPlan[] = [
   { tier: "pro", price: 55, originalPrice: 90, weeklySessions: 2 },
@@ -10,6 +15,14 @@ const plans: CoachingPlan[] = [
 describe("getStartingPlan", () => {
   it("returns the cheapest plan", () => {
     expect(getStartingPlan(plans).tier).toBe("basic");
+  });
+});
+
+describe("includesFeature", () => {
+  it("is true only for the tiers listed in the feature", () => {
+    const feature = { key: "progress_report", tiers: ["pro", "elite"] as const };
+    expect(includesFeature(plans[0], feature)).toBe(true);
+    expect(includesFeature(plans[1], feature)).toBe(false);
   });
 });
 

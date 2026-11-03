@@ -2,15 +2,27 @@
 import "./coaching-plans.scss";
 import { COACHING } from "@config/coaching";
 import { DISCORD_URL } from "@config/site";
-import { getPricePerPlayer, type CoachingMode } from "@/domain/coaching/coaching-plan";
+import {
+  getPricePerPlayer,
+  includesFeature,
+  type CoachingMode,
+} from "@/domain/coaching/coaching-plan";
 import { createTranslator, formatCurrency } from "@/ui/i18n";
-import { Button } from "@/ui/shared/components";
+import { Button, Icon } from "@/ui/shared/components";
 
 const MODES: readonly CoachingMode[] = ["individual", "teams"];
 
 const { locale } = Astro.locals;
 const t = createTranslator(locale, "coaching.plans");
-const { plans, currency, sessionDurationHours, teamMinPlayers } = COACHING;
+const {
+  plans,
+  features,
+  singleSessions,
+  singleSessionCreditDays,
+  currency,
+  sessionDurationHours,
+  teamMinPlayers,
+} = COACHING;
 const price = (amount: number) => formatCurrency(locale, amount, currency);
 ---
 
@@ -32,8 +44,8 @@ const price = (amount: number) => formatCurrency(locale, amount, currency);
         <ul class="coaching-plans__grid">
           {plans[mode].map((plan) => (
             <li class:list={["plan-card", { "plan-card--featured": plan.featured }]} data-reveal>
+              {/* El hueco se reserva aunque no haya etiqueta, para alinear los títulos */}
               <div class="plan-card__badges">
-                <span class="plan-card__badge">{t("launch_badge")}</span>
                 {plan.featured && (
                   <span class="plan-card__badge plan-card__badge--featured">
                     {t("featured_badge")}
@@ -63,17 +75,85 @@ const price = (amount: number) => formatCurrency(locale, amount, currency);
                   hours: sessionDurationHours,
                 })}
               </p>
-              <Button
-                href={DISCORD_URL}
-                variant={plan.featured ? "primary" : "outline"}
-                class="plan-card__cta"
-              >
-                {t("cta")}
-              </Button>
+              {/* Todas las ventajas en el mismo orden en cada pack, para compararlos fila a fila */}
+              <ul class="plan-card__features" aria-label={t("features_label")}>
+                {features[mode].map((feature) => {
+                  const included = includesFeature(plan, feature);
+                  return (
+                    <li
+                      class:list={[
+                        "plan-card__feature",
+                        { "plan-card__feature--excluded": !included },
+                      ]}
+                    >
+                      <Icon
+                        name={included ? "check" : "minus"}
+                        size={16}
+                        class="plan-card__feature-icon"
+                      />
+                      <span class="plan-card__sr-only">
+                        {t(included ? "included" : "not_included")}:
+                      </span>
+                      {t(`features.${mode}.${feature.key}`)}
+                    </li>
+                  );
+                })}
+              </ul>
             </li>
           ))}
         </ul>
+        {/* Un solo botón por modalidad: todos los packs se reservan en el mismo sitio */}
+        <div class="coaching-plans__actions">
+          <Button href={DISCORD_URL}>{t(`cta.${mode}`)}</Button>
+          <p class="coaching-plans__actions-hint">{t(`cta_hint.${mode}`)}</p>
+        </div>
       </div>
     ))}
+
+    <div class="coaching-plans__group">
+      <h3 class="coaching-plans__mode">{t("single.title")}</h3>
+      <p class="coaching-plans__note">{t("single.lead", { days: singleSessionCreditDays })}</p>
+      <ul class="coaching-plans__grid coaching-plans__grid--single">
+        {singleSessions.map((session) => {
+          const isFree = session.price === 0;
+          return (
+            <li class:list={["single-card", { "single-card--free": isFree }]} data-reveal>
+              <div class="single-card__head">
+                <h4 class="single-card__title">{t(`single.items.${session.key}.title`)}</h4>
+                <p class="single-card__price">
+                  {isFree ? (
+                    <span class="single-card__amount">{t("single.free")}</span>
+                  ) : (
+                    <>
+                      <span class="single-card__amount">{price(session.price)}</span>
+                      <span class="single-card__unit">{t(`single.items.${session.key}.unit`)}</span>
+                    </>
+                  )}
+                </p>
+              </div>
+              <p class="single-card__description">
+                {t(`single.items.${session.key}.description`, { hours: sessionDurationHours })}
+              </p>
+              {isFree && (
+                <Button href={DISCORD_URL} size="sm" class="single-card__cta">
+                  {t("single.cta_free")}
+                </Button>
+              )}
+            </li>
+          );
+        })}
+      </ul>
+      <p class="coaching-plans__note">
+        {t("single.paid_note")}{" "}
+        <a
+          href={DISCORD_URL}
+          class="coaching-plans__link"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {t("single.paid_link")}
+        </a>
+      </p>
+    </div>
   </div>
 </section>

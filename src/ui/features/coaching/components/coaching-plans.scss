@@ -172,13 +172,49 @@
   }
 
   .plan-card__sessions {
-    flex: 1;
     margin: 0;
     padding-top: var(--space-4);
     border-top: var(--line-subtle);
-    font-family: var(--ff-body);
+    font-family: var(--ff-ui);
     font-size: var(--fs-body);
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  // ── Qué incluye: misma lista en todos los packs para compararlos fila a fila ──
+  .plan-card__features {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2-5);
+    margin: 0;
+    padding: 0 0 var(--space-2);
+    list-style: none;
+  }
+
+  .plan-card__feature {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2-5);
+    font-family: var(--ff-body);
+    font-size: var(--fs-md);
+    line-height: 1.45;
     color: var(--text-secondary);
+  }
+
+  .plan-card__feature-icon {
+    flex-shrink: 0;
+    margin-top: 0.15em;
+    color: var(--brand);
+  }
+
+  .plan-card__feature--excluded {
+    color: var(--text-muted);
+    opacity: 0.6;
+
+    .plan-card__feature-icon {
+      color: var(--text-muted);
+    }
   }
 
   .plan-card__sr-only {
@@ -192,7 +228,106 @@
     white-space: nowrap;
   }
 
-  .plan-card__cta {
+  // ── Acción única bajo cada modalidad ──
+  .coaching-plans__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3) var(--space-5);
+  }
+
+  .coaching-plans__actions-hint {
+    margin: 0;
+    font-family: var(--ff-body);
+    font-size: var(--fs-md);
+    color: var(--text-muted);
+  }
+
+  .coaching-plans__link {
+    font-weight: 600;
+    color: var(--brand);
+    text-underline-offset: 3px;
+
+    &:hover {
+      color: var(--brand-hover);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--brand);
+      outline-offset: 2px;
+    }
+  }
+
+  // ── Sesiones sueltas: más discretas que los packs ──
+  .coaching-plans__grid--single {
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  }
+
+  .single-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-5);
+    background: var(--bg-base);
+    border: 1px dashed var(--border-soft);
+    transition: border-color var(--duration-base) var(--ease-standard);
+
+    &:hover {
+      border-color: var(--border-strong);
+    }
+  }
+
+  // La sesión gratuita destaca: es la puerta de entrada
+  .single-card--free {
+    border: 1px solid var(--brand);
+    background: linear-gradient(to bottom, var(--brand-wash), var(--bg-base));
+  }
+
+  // Título y precio apilados en todas las cartas, para que las descripciones arranquen a la misma altura
+  .single-card__head {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding-bottom: var(--space-3);
+    border-bottom: var(--line-subtle);
+  }
+
+  .single-card__title {
+    font-size: var(--fs-lg);
+    text-transform: uppercase;
+    color: var(--text-primary);
+  }
+
+  .single-card__price {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-1-5);
+    margin: 0;
+  }
+
+  .single-card__amount {
+    font-family: var(--ff-display);
+    font-size: var(--fs-2xl);
+    line-height: 1;
+    color: var(--brand);
+  }
+
+  .single-card__unit {
+    font-family: var(--ff-ui);
+    font-size: var(--fs-sm);
+    color: var(--text-muted);
+  }
+
+  .single-card__description {
+    flex: 1;
+    margin: 0;
+    font-family: var(--ff-body);
+    font-size: var(--fs-md);
+    line-height: 1.55;
+    color: var(--text-secondary);
+  }
+
+  .single-card__cta {
     width: 100%;
   }
 

@@ -429,7 +429,7 @@
     },
     "plans": {
       "title": "Packs de coaching",
-      "lead": "Precios de lanzamiento. En los packs de equipo pagas una cuota por equipo: cuantos más jugadores, menos pagas por cabeza.",
+      "lead": "Precios de lanzamiento. Todos los packs son mensuales y cada nivel incluye todo lo del anterior.",
       "mode": {
         "individual": "Individual",
         "teams": "Grupal / equipos"
@@ -439,15 +439,71 @@
         "pro": "Pro",
         "elite": "Elite"
       },
-      "launch_badge": "Precio de lanzamiento",
       "featured_badge": "Más elegido",
       "period": "/ mes",
       "original_price": "Precio original",
       "sessions_one": "{count} sesión semanal de {hours} h",
       "sessions_other": "{count} sesiones semanales de {hours} h",
-      "cta": "Reservar por Discord",
+      "cta": {
+        "individual": "Reservar pack individual",
+        "teams": "Reservar pack de equipo"
+      },
       "team_note": "Precio por equipo, mínimo {players} jugadores.",
-      "per_player": "≈ {price} por jugador con {players}"
+      "per_player": "≈ {price} por jugador con {players}",
+      "features_label": "Qué incluye",
+      "included": "Incluido",
+      "not_included": "No incluido",
+      "features": {
+        "individual": {
+          "live_review": "Análisis de tus replays en la sesión",
+          "weekly_goals": "Objetivos y plan semanal",
+          "training_routine": "Rutina de entrenamiento personalizada",
+          "offline_review": "Revisión de replays entre sesiones",
+          "discord_support": "Dudas por Discord entre sesiones",
+          "progress_report": "Informe mensual de progreso"
+        },
+        "teams": {
+          "rotations": "Rotaciones y posicionamiento",
+          "match_review": "Revisión de partidos del equipo",
+          "roles_comms": "Roles y comunicación en partida",
+          "scrim_review": "Análisis de scrims y rivales",
+          "tournament_prep": "Preparación de torneos",
+          "discord_support": "Seguimiento por Discord entre sesiones"
+        }
+      },
+      "single": {
+        "title": "Sesiones sueltas",
+        "lead": "Empieza con una sesión de presentación gratis. Y si contratas un pack en los {days} días siguientes a una sesión de pago, te descontamos lo que pagaste.",
+        "items": {
+          "intro": {
+            "title": "Sesión de presentación",
+            "description": "30 min para conocernos, ver tu nivel y tus objetivos, y recomendarte el pack que mejor te encaja. Sin compromiso."
+          },
+          "live": {
+            "title": "Sesión individual",
+            "unit": "/ sesión",
+            "description": "{hours} h en directo con el coach para trabajar algo concreto: una mecánica, una mala racha o un torneo."
+          },
+          "replay_review": {
+            "title": "Revisión de replay",
+            "unit": "/ replay",
+            "description": "Envías una partida y recibes el análisis con los puntos clave a mejorar, sin necesidad de cuadrar horario."
+          },
+          "team_live": {
+            "title": "Sesión de equipo",
+            "unit": "/ sesión",
+            "description": "{hours} h con tu equipo para preparar un torneo o resolver un problema concreto de juego."
+          }
+        },
+        "free": "Gratis",
+        "cta_free": "Reservar sesión gratis",
+        "paid_note": "Las sesiones de pago también se reservan por Discord:",
+        "paid_link": "escríbenos y la cuadramos."
+      },
+      "cta_hint": {
+        "individual": "Dinos qué pack te interesa y cuadramos horario por Discord.",
+        "teams": "Dinos cuántos sois y qué pack os interesa, y cuadramos horario."
+      }
     },
     "teams": {
       "title": "Equipos con los que ha trabajado"
