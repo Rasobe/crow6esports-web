@@ -26,10 +26,10 @@
     "image": null
   },
   {
-    "id": "94s",
-    "nickname": "94s",
-    "realName": "Adrián",
-    "birthYear": 2002,
+    "id": "Gato",
+    "nickname": "Gato",
+    "realName": "Álvar",
+    "birthYear": 2008,
     "anonymous": false,
     "country": "ES",
     "type": "player",
@@ -47,7 +47,7 @@
       "twitch": null,
       "tiktok": null,
       "youtube": null,
-      "rltracker": "https://rocketleague.tracker.network/rocket-league/profile/epic/94s%C7%83/overview"
+      "rltracker": "https://rocketleague.tracker.network/rocket-league/profile/epic/Gato%C7%83/overview"
     },
     "image": null
   },
@@ -55,7 +55,7 @@
     "id": "k94",
     "nickname": "K94",
     "realName": "Lorenzo",
-    "birthYear": 2003,
+    "birthYear": 2007,
     "anonymous": false,
     "country": "ES",
     "type": "player",
@@ -104,10 +104,36 @@
     "image": null
   },
   {
-    "id": "kronos",
-    "nickname": "Kronos",
+    "id": "extaahh",
+    "nickname": "Extaahh",
     "realName": "Jorge",
-    "birthYear": 1997,
+    "birthYear": 2005,
+    "anonymous": false,
+    "country": "ES",
+    "type": "coach",
+    "status": "active",
+    "game": "rocket-league",
+    "joinedYear": 2026,
+    "stats": {
+      "mmr": 1937,
+      "peak": 2317,
+      "rank": "Supersonic Legend"
+    },
+    "socials": {
+      "twitter": "https://x.com/extaahh",
+      "instagram": null,
+      "twitch": "https://www.twitch.tv/extaahh",
+      "tiktok": "https://www.tiktok.com/@Extah",
+      "youtube": null,
+      "rltracker": "https://rocketleague.tracker.network/rocket-league/profile/epic/extaahh./overview"
+    },
+    "image": null
+  },
+  {
+    "id": "rasobe",
+    "nickname": "Rasobe",
+    "realName": "Raúl",
+    "birthYear": 2003,
     "anonymous": false,
     "country": "ES",
     "type": "coach",
@@ -115,17 +141,17 @@
     "game": "rocket-league",
     "joinedYear": 2023,
     "stats": {
-      "mmr": 1920,
-      "peak": 2010,
+      "mmr": 1721,
+      "peak": 1939,
       "rank": "Supersonic Legend"
     },
     "socials": {
-      "twitter": "https://x.com/kronos_coach",
+      "twitter": "https://x.com/rasobe_",
       "instagram": null,
-      "twitch": "https://twitch.tv/kronos_rl",
+      "twitch": "https://www.twitch.tv/rasobe",
       "tiktok": null,
-      "youtube": "https://youtube.com/@kronosrl",
-      "rltracker": "https://rocketleague.tracker.network/rocket-league/profile/epic/Kronos/overview"
+      "youtube": null,
+      "rltracker": "https://rocketleague.tracker.network/rocket-league/profile/steam/76561198329732390/overview"
     },
     "image": null
   }
