@@ -5,6 +5,7 @@ import { CLUB } from "@config/club";
 import type { Product } from "@/domain/store/product";
 import { createTranslator } from "@/ui/i18n";
 import { Button } from "@/ui/shared/components";
+import { storeImageSrcset } from "@/ui/shared/lib/responsive-image";
 
 interface Props {
   products: Product[];
@@ -27,6 +28,8 @@ const images = products.flatMap(({ name, images: sources }) =>
             <img
               class="next-edition__image"
               src={src}
+              srcset={storeImageSrcset(src)}
+              sizes="(min-width: 48rem) 22rem, 45vw"
               alt={alt}
               width="640"
               height="800"

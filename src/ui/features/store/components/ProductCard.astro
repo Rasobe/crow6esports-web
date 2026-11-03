@@ -4,6 +4,7 @@ import { ROUTES } from "@config/routes";
 import { STORE_IN_STOCK } from "@config/store";
 import { isPurchasable, type Product, type ProductCategory } from "@/domain/store/product";
 import { createTranslator, formatCurrency, localizePath } from "@/ui/i18n";
+import { storeImageSrcset } from "@/ui/shared/lib/responsive-image";
 
 interface Props {
   product: Product;
@@ -32,6 +33,8 @@ const soldOut = !available;
       {image ? (
         <img
           src={image}
+          srcset={storeImageSrcset(image)}
+          sizes="(min-width: 48rem) 20rem, 70vw"
           alt={product.name}
           width="722"
           height="932"
