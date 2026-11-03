@@ -1,0 +1,8 @@
+@use "styles/layers";
+@layer components {
+  // Reutiliza las clases de text-field; aquí solo lo propio del área de texto
+  .textarea-field__input {
+    min-height: 7.5rem;
+    resize: vertical;
+  }
+}

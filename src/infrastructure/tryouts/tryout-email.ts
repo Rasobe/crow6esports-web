@@ -1,11 +1,12 @@
-import type { TryoutApplication } from "@/domain/tryouts/tryout-application";
-import { escapeHtml } from "./html";
 import type {
   CoachingOpenness,
   CompetitiveExperience,
   LossReaction,
   Playstyle,
+  TryoutApplication,
+  Weekday,
 } from "@/domain/tryouts/tryout-application";
+import { escapeHtml } from "./html";
 
 const PLAYSTYLE_LABELS: Record<Playstyle, string> = {
   calm: "Calma y posicionamiento",
@@ -30,6 +31,24 @@ const COMPETITIVE_EXP_LABELS: Record<CompetitiveExperience, string> = {
   yes: "Sí",
   no: "No",
 };
+
+const WEEKDAY_LABELS: Record<Weekday, string> = {
+  mon: "Lunes",
+  tue: "Martes",
+  wed: "Miércoles",
+  thu: "Jueves",
+  fri: "Viernes",
+  sat: "Sábado",
+  sun: "Domingo",
+};
+
+const formatDays = (days: Weekday[]) => days.map((day) => WEEKDAY_LABELS[day]).join(", ");
+
+function formatSchedule(data: TryoutApplication): string {
+  if (data.scheduleType === "flexible") return "Flexible";
+  const nextDay = data.scheduleTo && data.scheduleFrom && data.scheduleTo < data.scheduleFrom;
+  return `${data.scheduleFrom} a ${data.scheduleTo}${nextDay ? " (del día siguiente)" : ""}`;
+}
 
 export function buildTryoutEmail(data: TryoutApplication): string {
   return `
@@ -87,9 +106,10 @@ export function buildTryoutEmail(data: TryoutApplication): string {
               <table width="100%" cellpadding="0" cellspacing="0">
                 ${row("Fecha de nacimiento", data.birthDate)}
                 ${row("País / Región", data.country)}
-                ${row("Disponibilidad entre semana", data.availabilityWeekdays)}
-                ${row("Disponibilidad fines de semana", data.availabilityWeekends)}
-                ${row("Disponibilidad para scrims", data.availabilityScrims)}
+                ${row("Días para entrenar", formatDays(data.availableDays))}
+                ${row("Horario", formatSchedule(data))}
+                ${data.timeZone ? row("Zona horaria", data.timeZone) : ""}
+                ${data.availabilityNotes ? row("Comentarios de disponibilidad", data.availabilityNotes) : ""}
               </table>
             </td>
           </tr>

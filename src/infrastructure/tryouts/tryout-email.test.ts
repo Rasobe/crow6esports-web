@@ -6,9 +6,11 @@ const application: TryoutApplication = {
   discord: "<script>alert(1)</script>",
   birthDate: "2000-01-01",
   country: "ES",
-  availabilityWeekdays: "L-V",
-  availabilityWeekends: "S-D",
-  availabilityScrims: "X",
+  availableDays: ["mon", "wed", "sat"],
+  scheduleType: "fixed",
+  scheduleFrom: "18:00",
+  scheduleTo: "22:00",
+  timeZone: "Europe/Madrid",
   rltracker: 'https://example.com/"onmouseover="x',
   rank: "1800",
   peak: "2000",
@@ -30,6 +32,12 @@ describe("buildTryoutEmail", () => {
     expect(html).not.toContain("<b>A</b>");
     expect(html).not.toContain('"onmouseover="x');
     expect(html).toContain("&lt;script&gt;alert(1)&lt;/script&gt;");
+  });
+
+  it("renders the availability in a readable way", () => {
+    expect(html).toContain("Lunes, Miércoles, Sábado");
+    expect(html).toContain("18:00 a 22:00");
+    expect(html).toContain("Europe/Madrid");
   });
 
   it("renders human readable labels for enum values", () => {

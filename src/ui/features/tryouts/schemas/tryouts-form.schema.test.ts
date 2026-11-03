@@ -13,9 +13,10 @@ describe("tryouts form schema", () => {
       discord: "",
       birthDate: "",
       country: "",
-      availabilityWeekdays: "",
-      availabilityWeekends: "",
-      availabilityScrims: "",
+      availableDays: ["mon", "wed", "sat"],
+      scheduleType: "fixed",
+      scheduleFrom: "18:00",
+      scheduleTo: "22:00",
     });
     const messages = result.success ? [] : result.error.issues.map((issue) => issue.message);
     expect(messages).toContain("validation.discord_required");
@@ -32,6 +33,66 @@ describe("tryouts form schema", () => {
     const messages = result.success ? [] : result.error.issues.map((issue) => issue.message);
     expect(messages).toEqual(
       expect.arrayContaining(["validation.rltracker_invalid", "validation.hours_required"]),
+    );
+  });
+
+  it("explains invalid discord usernames and birth dates", () => {
+    const result = stepProfileSchema.safeParse({
+      discord: "user#1234",
+      birthDate: "2999-01-01",
+      country: "ES",
+      availableDays: ["sat"],
+      scheduleType: "flexible",
+    });
+    const messages = result.success ? [] : result.error.issues.map((issue) => issue.message);
+    expect(messages).toEqual(
+      expect.arrayContaining(["validation.discord_invalid", "validation.birth_date_invalid"]),
+    );
+  });
+
+  it("requires at least one training day and a schedule type", () => {
+    const result = stepProfileSchema.safeParse({ availableDays: [] });
+    const messages = result.success ? [] : result.error.issues.map((issue) => issue.message);
+    expect(messages).toEqual(
+      expect.arrayContaining([
+        "validation.available_days_required",
+        "validation.schedule_type_required",
+      ]),
+    );
+  });
+
+  it("asks for both times only with a fixed schedule", () => {
+    const issuesFor = (schedule: object) => {
+      const result = tryoutsFormSchema.safeParse(schedule);
+      return result.success ? [] : result.error.issues.map((issue) => issue.message);
+    };
+
+    expect(issuesFor({ scheduleType: "fixed", scheduleFrom: "", scheduleTo: "" })).toEqual(
+      expect.arrayContaining([
+        "validation.schedule_from_required",
+        "validation.schedule_to_required",
+      ]),
+    );
+    expect(
+      issuesFor({ scheduleType: "fixed", scheduleFrom: "20:00", scheduleTo: "20:00" }),
+    ).toContain("validation.schedule_same_time");
+    expect(issuesFor({ scheduleType: "flexible" })).not.toContain(
+      "validation.schedule_from_required",
+    );
+  });
+
+  it("requires the choice questions to be answered", () => {
+    const result = stepMindsetSchema.safeParse({
+      reactionToMistakes: "I stay calm and talk it through",
+      lookingFor: "A serious competitive environment",
+    });
+    const messages = result.success ? [] : result.error.issues.map((issue) => issue.message);
+    expect(messages).toEqual(
+      expect.arrayContaining([
+        "validation.competitive_exp_required",
+        "validation.reaction_losses_required",
+        "validation.coaching_required",
+      ]),
     );
   });
 

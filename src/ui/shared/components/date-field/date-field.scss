@@ -1,0 +1,141 @@
+@use "styles/layers";
+@layer components {
+  .date-field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1-5);
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  // ── Label ──
+  .date-field__label {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    padding: 0;
+    margin-bottom: var(--space-1-5);
+    font-family: var(--ff-ui);
+    font-size: var(--fs-2xs);
+    font-weight: 700;
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--text-secondary);
+  }
+
+  .date-field__required {
+    color: var(--brand);
+    font-size: var(--fs-xs);
+  }
+
+  // ── Segmentos unidos en una sola caja ──
+  .date-field__parts {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.6fr) minmax(0, 1fr);
+    padding-left: 1px;
+
+    > * {
+      margin-left: -1px;
+    }
+  }
+
+  .date-field__part {
+    position: relative;
+    display: flex;
+    background: var(--bg-surface);
+    border: var(--line-subtle);
+    transition:
+      border-color var(--duration-base) var(--ease-standard),
+      background var(--duration-base) var(--ease-standard);
+
+    &:hover {
+      z-index: 1;
+      border-color: var(--border-soft);
+    }
+
+    &:focus-within {
+      z-index: 2;
+      border-color: var(--brand);
+      background: var(--bg-raised);
+    }
+  }
+
+  // Rótulo pequeño dentro de cada segmento
+  .date-field__part-label {
+    position: absolute;
+    top: var(--space-2);
+    left: var(--space-3-5);
+    font-family: var(--ff-ui);
+    font-size: var(--fs-2xs);
+    font-weight: 700;
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--text-muted);
+    pointer-events: none;
+    transition: color var(--duration-base) var(--ease-standard);
+
+    .date-field__part:focus-within & {
+      color: var(--brand);
+    }
+  }
+
+  .date-field__select {
+    width: 100%;
+    appearance: none;
+    padding: var(--space-6) var(--space-8) var(--space-2) var(--space-3-5);
+    background: transparent;
+    border: 0;
+    outline: none;
+    font-family: var(--ff-body);
+    font-size: var(--fs-body);
+    line-height: 1.5;
+    color: var(--text-primary);
+    cursor: pointer;
+
+    option {
+      background: var(--bg-surface);
+      color: var(--text-primary);
+    }
+
+    // Placeholder "--" mientras no hay valor
+    &:has(option[value=""]:checked) {
+      color: var(--text-muted);
+    }
+  }
+
+  .date-field__chevron {
+    position: absolute;
+    right: var(--space-3);
+    bottom: var(--space-3);
+    display: flex;
+    color: var(--text-muted);
+    pointer-events: none;
+
+    .date-field__part:focus-within & {
+      color: var(--brand);
+    }
+  }
+
+  // ── Hint / error ──
+  .date-field__hint {
+    font-family: var(--ff-body);
+    font-size: var(--fs-xs);
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+
+  .date-field__error {
+    font-family: var(--ff-ui);
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    letter-spacing: var(--tracking-snug);
+    color: var(--danger);
+    line-height: 1.4;
+  }
+
+  .date-field--error .date-field__part {
+    border-color: var(--danger);
+  }
+}

@@ -1,5 +1,8 @@
 export * from "./button";
+export * from "./chip-group-field";
+export * from "./choice-field";
 export * from "./cta-button";
+export * from "./date-field";
 export * from "./icons";
 export * from "./news-ticker";
 export * from "./not-found";
@@ -10,3 +13,4 @@ export * from "./select-field";
 export * from "./seo";
 export * from "./skip-link";
 export * from "./text-field";
+export * from "./textarea-field";

@@ -193,36 +193,64 @@
         "submit": "Submit application",
         "submitting": "Submitting...",
         "steps": {
-          "label": "Application progress",
-          "profile": "Profile",
-          "technical": "Technical",
-          "mindset": "Mindset"
+          "label": "Application steps",
+          "counter": "Step {current} of {total}",
+          "profile": {
+            "title": "Profile",
+            "desc": "How to reach you and when you can train."
+          },
+          "technical": {
+            "title": "Level",
+            "desc": "Your current level, your playstyle and where to watch your games."
+          },
+          "mindset": {
+            "title": "Mindset",
+            "desc": "How you compete as a team. Be honest."
+          }
         },
         "fields": {
           "discord": {
-            "label": "Discord ID",
-            "placeholder": "usuario#0000",
-            "hint": "Main contact method"
+            "label": "Discord username",
+            "placeholder": "your_username",
+            "hint": "Your username, not your display name. We will contact you here."
           },
           "birth_date": {
             "label": "Date of birth",
-            "placeholder": "DD/MM/YYYY"
+            "day": "Day",
+            "month": "Month",
+            "year": "Year"
           },
           "country": {
             "label": "Country / Region",
             "placeholder": "Spain"
           },
-          "availability_weekdays": {
-            "label": "Weekday availability",
-            "placeholder": "E.g.: Mon-Fri 18:00 to 22:00"
+          "available_days": {
+            "label": "Days you can train",
+            "presets": {
+              "weekdays": "Weekdays",
+              "weekend": "Weekend",
+              "all": "All"
+            }
           },
-          "availability_weekends": {
-            "label": "Weekend availability",
-            "placeholder": "E.g.: Sat-Sun 10:00 to 23:00"
+          "schedule_type": {
+            "label": "Schedule",
+            "options": {
+              "fixed": "Fixed hours",
+              "flexible": "Flexible"
+            }
           },
-          "availability_scrims": {
-            "label": "Scrims availability",
-            "placeholder": "E.g.: Wednesday and Friday 20:00"
+          "schedule_from": {
+            "label": "From",
+            "time_zone": "Times in your time zone ({timeZone})."
+          },
+          "schedule_to": {
+            "label": "To",
+            "next_day": "Ends the next day."
+          },
+          "availability_notes": {
+            "label": "Notes about your availability",
+            "placeholder": "E.g.: Tuesdays only until 21:00",
+            "hint": "Optional"
           },
           "rltracker": {
             "label": "RLTracker link",
@@ -242,7 +270,6 @@
           },
           "playstyle": {
             "label": "Predominant playstyle",
-            "placeholder": "Select a playstyle",
             "options": {
               "calm": "Calm and positioning",
               "intermediate": "Balanced",
@@ -253,7 +280,7 @@
           "highlights": {
             "label": "Clip or highlights",
             "placeholder": "YouTube, Medal, Twitch...",
-            "hint": "Optional: share a clip or highlight of your gameplay"
+            "hint": "Optional"
           },
           "competitive_exp": {
             "label": "Do you have experience in competitive teams?",
@@ -289,30 +316,68 @@
               "no": "No",
               "maybe": "Maybe"
             }
-          }
+          },
+          "long_text_hint": "At least 10 characters."
         },
         "validation": {
-          "discord_required": "Discord ID is required",
+          "discord_required": "Discord username is required",
           "birth_date_required": "Birth date is required",
           "country_required": "Country is required",
-          "availability_weekdays_required": "Weekday availability is required",
-          "availability_weekends_required": "Weekend availability is required",
-          "availability_scrims_required": "Scrim availability is required",
           "rltracker_required": "RLTracker link is required",
-          "rltracker_invalid": "Enter a valid RLTracker URL",
+          "rltracker_invalid": "Enter your RLTracker profile link (tracker.network)",
           "rank_required": "Rank is required",
           "peak_required": "Peak MMR is required",
           "hours_required": "Hours played are required",
           "playstyle_required": "Select a playstyle",
           "highlights_invalid": "Enter a valid URL",
-          "competitive_exp_required": "This field is required",
-          "reaction_mistakes_required": "Response too short, minimum 10 characters",
-          "reaction_losses_required": "This field is required",
-          "looking_for_required": "Response too short, minimum 10 characters",
-          "coaching_required": "This field is required"
+          "competitive_exp_required": "Choose an option",
+          "reaction_mistakes_required": "Answer too short: at least 10 characters",
+          "reaction_losses_required": "Choose an option",
+          "looking_for_required": "Answer too short: at least 10 characters",
+          "coaching_required": "Choose an option",
+          "discord_invalid": "Use your Discord username: 2 to 32 characters, only letters, numbers, _ and .",
+          "birth_date_invalid": "Enter a valid date of birth",
+          "hours_invalid": "Enter a whole number of hours",
+          "too_long": "The text is too long",
+          "available_days_required": "Pick at least one day",
+          "schedule_type_required": "Pick a schedule type",
+          "schedule_from_required": "Pick a start time",
+          "schedule_to_required": "Pick an end time",
+          "schedule_same_time": "The end time must differ from the start time"
         },
         "error": {
-          "submit_failed": "We couldn't send your application. Please try again in a few minutes."
+          "submit_failed": "We could not send your application. Please try again in a few minutes.",
+          "rate_limited": "You have sent too many applications in a row. Wait a few minutes before trying again."
+        },
+        "required_legend": "Required fields",
+        "groups": {
+          "contact": "Contact",
+          "availability": "Availability",
+          "level": "Level",
+          "links": "Profile and clips",
+          "experience": "Experience",
+          "team_play": "Teamplay",
+          "goals": "Goals"
+        },
+        "weekdays": {
+          "short": {
+            "mon": "Mon",
+            "tue": "Tue",
+            "wed": "Wed",
+            "thu": "Thu",
+            "fri": "Fri",
+            "sat": "Sat",
+            "sun": "Sun"
+          },
+          "long": {
+            "mon": "Monday",
+            "tue": "Tuesday",
+            "wed": "Wednesday",
+            "thu": "Thursday",
+            "fri": "Friday",
+            "sat": "Saturday",
+            "sun": "Sunday"
+          }
         }
       },
       "success": {
