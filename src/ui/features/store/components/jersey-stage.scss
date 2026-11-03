@@ -31,6 +31,9 @@
   }
 
   .jersey-stage__screen {
+    --jersey-wipe-duration: 0.55s;
+    --jersey-wipe-ease: cubic-bezier(0.65, 0, 0.35, 1);
+
     position: relative;
     aspect-ratio: 1;
     overflow: hidden;
@@ -47,9 +50,19 @@
     position: absolute;
     inset: 0;
 
+    // Cortina diagonal: el panel nuevo se destapa encima del anterior, que sigue opaco debajo
     &.is-entering {
       z-index: 1;
-      animation: jersey-stage-fade 0.3s var(--ease-out) both;
+      animation: jersey-wipe-ltr var(--jersey-wipe-duration) var(--jersey-wipe-ease) both;
+
+      &[data-direction="rtl"] {
+        animation-name: jersey-wipe-rtl;
+      }
+
+      > .jersey-stage__image,
+      > .jersey-stage__media {
+        animation: jersey-wipe-zoom var(--jersey-wipe-duration) var(--jersey-wipe-ease) both;
+      }
     }
 
     &[data-kind="image"] {
@@ -171,9 +184,77 @@
     }
   }
 
-  @keyframes jersey-stage-fade {
+  // Línea dorada que acompaña al borde de la cortina
+  .jersey-stage__screen::after {
+    content: "";
+    position: absolute;
+    inset-block: -10%;
+    left: -7.5%;
+    z-index: 3;
+    width: 3px;
+    pointer-events: none;
+    background: var(--brand);
+    box-shadow: 0 0 1.25rem 0.15rem rgb(var(--brand-rgb) / 0.6);
+    opacity: 0;
+    transform: skewX(-11deg);
+  }
+
+  .jersey-stage__screen[data-wiping="ltr"]::after {
+    animation: jersey-wipe-bar-ltr var(--jersey-wipe-duration) var(--jersey-wipe-ease) both;
+  }
+
+  .jersey-stage__screen[data-wiping="rtl"]::after {
+    transform: skewX(11deg);
+    animation: jersey-wipe-bar-rtl var(--jersey-wipe-duration) var(--jersey-wipe-ease) both;
+  }
+
+  @keyframes jersey-wipe-ltr {
     from {
-      opacity: 0;
+      clip-path: polygon(0% 0%, 0% 0%, -15% 100%, 0% 100%);
+    }
+
+    to {
+      clip-path: polygon(0% 0%, 115% 0%, 100% 100%, 0% 100%);
+    }
+  }
+
+  @keyframes jersey-wipe-rtl {
+    from {
+      clip-path: polygon(100% 0%, 100% 0%, 115% 100%, 100% 100%);
+    }
+
+    to {
+      clip-path: polygon(100% 0%, -15% 0%, 0% 100%, 100% 100%);
+    }
+  }
+
+  @keyframes jersey-wipe-bar-ltr {
+    from {
+      left: -7.5%;
+      opacity: 1;
+    }
+
+    to {
+      left: 107.5%;
+      opacity: 1;
+    }
+  }
+
+  @keyframes jersey-wipe-bar-rtl {
+    from {
+      left: 107.5%;
+      opacity: 1;
+    }
+
+    to {
+      left: -7.5%;
+      opacity: 1;
+    }
+  }
+
+  @keyframes jersey-wipe-zoom {
+    from {
+      transform: scale(1.06);
     }
   }
 }

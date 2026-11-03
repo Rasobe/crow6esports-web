@@ -80,7 +80,7 @@ const panelAttributes = (id: string): HTMLAttributes<"div"> =>
 </div>
 
 <script>
-  const TRANSITION_MS = 320;
+  const TRANSITION_MS = 560;
   const READY_TIMEOUT_MS = 600;
 
   class JerseyGallery extends HTMLElement {
@@ -90,6 +90,7 @@ const panelAttributes = (id: string): HTMLAttributes<"div"> =>
     private video: HTMLVideoElement | null = null;
     private toggle: HTMLButtonElement | null = null;
     private captionName: HTMLElement | null = null;
+    private screen: HTMLElement | null = null;
     private selected = 0;
     private visible = false;
     private pausedByUser = false;
@@ -102,8 +103,9 @@ const panelAttributes = (id: string): HTMLAttributes<"div"> =>
       this.video = this.querySelector("video");
       this.toggle = this.querySelector(".jersey-stage__toggle");
       this.captionName = this.querySelector(".jersey-stage__caption-name");
-      const screen = this.querySelector(".jersey-stage__screen");
+      const screen = this.querySelector<HTMLElement>(".jersey-stage__screen");
       if (!this.video || !this.toggle || !screen) return;
+      this.screen = screen;
 
       this.pausedByUser = this.prefersReducedMotion();
 
@@ -184,7 +186,10 @@ const panelAttributes = (id: string): HTMLAttributes<"div"> =>
         next.hidden = false;
         // El panel anterior sigue visible debajo mientras el nuevo aparece: sin hueco oscuro.
         if (previous && !this.prefersReducedMotion()) {
+          const direction = index > this.panels.indexOf(previous) ? "ltr" : "rtl";
+          next.dataset.direction = direction;
           next.classList.add("is-entering");
+          this.screen?.setAttribute("data-wiping", direction);
           this.transitionTimer = window.setTimeout(() => this.finishTransition(), TRANSITION_MS);
         } else {
           this.finishTransition();
@@ -208,8 +213,10 @@ const panelAttributes = (id: string): HTMLAttributes<"div"> =>
 
     private finishTransition() {
       window.clearTimeout(this.transitionTimer);
+      this.screen?.removeAttribute("data-wiping");
       this.panels.forEach((panel, position) => {
         panel.classList.remove("is-entering");
+        delete panel.dataset.direction;
         panel.hidden = position !== this.selected;
       });
     }
