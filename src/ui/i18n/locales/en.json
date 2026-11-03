@@ -560,12 +560,12 @@
     "story": {
       "title": "Our story",
       "founded": "Crow 6 Esports was founded in {year} as a competitive {game} organization.",
-      "today": "Today the official roster brings together {players} players between starters and substitutes."
+      "today": "Today the official roster brings together {players} players between starters and substitutes.",
+      "since": "Since"
     },
     "stats": {
       "label": "Club figures",
       "years": "Years of history",
-      "achievements": "Honours listed",
       "players": "Players on the roster",
       "peak": "Roster peak MMR"
     },
