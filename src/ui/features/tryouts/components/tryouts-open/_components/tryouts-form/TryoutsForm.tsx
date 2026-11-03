@@ -2,6 +2,7 @@ import "./tryouts-form.scss";
 import { useEffect, useRef } from "react";
 import { FormProvider } from "react-hook-form";
 import { createMessageTranslator, type Locale, type Messages } from "@/ui/i18n";
+import { HONEYPOT_FIELD } from "@/ui/features/tryouts/api/submit-tryout-application";
 import { FormButton } from "@/ui/shared/components/button/FormButton";
 import { classNames } from "@/ui/shared/lib/class-names";
 import { StepMindset, StepProfile, StepTechnical } from "../steps";
@@ -20,7 +21,7 @@ const formatStepNumber = (index: number) => String(index + 1).padStart(2, "0");
 export function TryoutsForm({ messages, locale }: TryoutsFormProps) {
   const tOpen = createMessageTranslator(messages);
   const tForm = createMessageTranslator(messages, "form");
-  const { form, currentStep, totalSteps, status, failure, goNext, goPrev, onSubmit } =
+  const { form, currentStep, totalSteps, status, failure, honeypotRef, goNext, goPrev, onSubmit } =
     useTryoutsForm();
 
   // Al cambiar de paso, el foco va al título del panel para que el lector de pantalla
@@ -42,6 +43,16 @@ export function TryoutsForm({ messages, locale }: TryoutsFormProps) {
   return (
     <FormProvider {...form}>
       <form onSubmit={onSubmit} noValidate className="tryouts-form">
+        {/* Campo trampa contra bots: fuera de pantalla, sin foco ni autocompletado */}
+        <input
+          ref={honeypotRef}
+          type="text"
+          name={HONEYPOT_FIELD}
+          className="tryouts-form__honeypot"
+          tabIndex={-1}
+          autoComplete="off"
+          aria-hidden="true"
+        />
         <aside className="tryouts-form__aside">
           <ol className="tryouts-steps" aria-label={tForm("steps.label")}>
             {STEP_KEYS.map((key, index) => (

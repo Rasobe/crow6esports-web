@@ -105,6 +105,12 @@ test("rejects malformed submissions at the API", async ({ request }) => {
   expect(response.status()).toBe(400);
 });
 
+test("only accepts POST at the contact API", async ({ request }) => {
+  const response = await request.get("/api/contact");
+  expect(response.status()).toBe(405);
+  expect(response.headers()["allow"]).toBe("POST");
+});
+
 test("validates each step of the form in English", async ({ page }) => {
   await page.goto("/en/tryouts");
   await page.locator("astro-island:not([ssr])").waitFor();

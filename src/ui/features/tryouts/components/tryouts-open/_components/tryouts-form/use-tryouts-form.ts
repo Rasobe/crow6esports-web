@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -19,6 +19,7 @@ export function useTryoutsForm() {
   const [currentStep, setCurrentStep] = useState(0);
   const [status, setStatus] = useState<SubmitStatus>("idle");
   const [failure, setFailure] = useState<TryoutSubmissionFailure>("submit_failed");
+  const honeypotRef = useRef<HTMLInputElement>(null);
 
   // Se valida al pulsar "Siguiente" o "Enviar", nunca al salir de un campo.
   const form = useForm<TryoutsFormValues>({
@@ -49,13 +50,16 @@ export function useTryoutsForm() {
     try {
       // Se descartan los valores de campos que quedaron ocultos por otra respuesta
       const isFixedSchedule = values.scheduleType === "fixed";
-      await submitTryoutApplication({
-        ...values,
-        scheduleFrom: isFixedSchedule ? values.scheduleFrom : "",
-        scheduleTo: isFixedSchedule ? values.scheduleTo : "",
-        previousTeams: values.hasCompetitiveExp === "yes" ? values.previousTeams : "",
-        timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-      });
+      await submitTryoutApplication(
+        {
+          ...values,
+          scheduleFrom: isFixedSchedule ? values.scheduleFrom : "",
+          scheduleTo: isFixedSchedule ? values.scheduleTo : "",
+          previousTeams: values.hasCompetitiveExp === "yes" ? values.previousTeams : "",
+          timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        },
+        honeypotRef.current?.value,
+      );
       setStatus("success");
     } catch (error) {
       setFailure(error instanceof TryoutSubmissionError ? error.reason : "submit_failed");
@@ -69,6 +73,7 @@ export function useTryoutsForm() {
     totalSteps: STEP_FIELDS.length,
     status,
     failure,
+    honeypotRef,
     goNext,
     goPrev,
     onSubmit,

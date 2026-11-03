@@ -11,11 +11,17 @@ export class TryoutSubmissionError extends Error {
   }
 }
 
-export async function submitTryoutApplication(application: TryoutApplication): Promise<void> {
+/** Nombre del campo trampa; debe coincidir con el que comprueba el endpoint. */
+export const HONEYPOT_FIELD = "website";
+
+export async function submitTryoutApplication(
+  application: TryoutApplication,
+  honeypot = "",
+): Promise<void> {
   const response = await fetch(CONTACT_ENDPOINT, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(application),
+    body: JSON.stringify({ ...application, [HONEYPOT_FIELD]: honeypot }),
   });
 
   if (!response.ok) {
