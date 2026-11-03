@@ -23,12 +23,10 @@ test("shows a helpful not found page that search engines skip", async ({ page })
   const response = await page.goto("/es/no-existe");
 
   expect(response?.status()).toBe(404);
-  await expect(
-    page.getByRole("heading", { level: 1, name: "Esta jugada no existe" }),
-  ).toBeVisible();
+  await expect(page.getByRole("heading", { level: 1, name: "Página no encontrada" })).toBeVisible();
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/);
 
-  const links = page.getByRole("navigation", { name: "Sigue jugando" });
+  const links = page.getByRole("navigation", { name: "Páginas principales" });
   await expect(links.getByRole("link")).toHaveCount(5);
   await expect(page.getByRole("link", { name: "Volver al inicio" })).toHaveAttribute("href", "/es");
 });
