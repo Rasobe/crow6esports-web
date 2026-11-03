@@ -13,16 +13,16 @@ interface Props {
   products: Product[];
 }
 
-const VIEWS = ["front", "back"] as const;
-
 const { products } = Astro.props;
 const t = createTranslator(Astro.locals.locale, "store");
 const tNext = createTranslator(Astro.locals.locale, "store.next_edition");
 const tShowcase = createTranslator(Astro.locals.locale, "store.showcase");
+const viewKey = (src: string) => (src.split("/").pop() ?? "").replace(/\.webp$/, "");
 const views: JerseyView[] = products.flatMap(({ name, images }) =>
-  images.flatMap((src) => {
-    const view = VIEWS.find((candidate) => src.includes(candidate));
-    return view ? [{ src, alt: name, view }] : [];
+  images.map((src) => {
+    const view = viewKey(src);
+    const label = tShowcase(`view_${view.replaceAll("-", "_")}`);
+    return { view, src, alt: `${name}: ${label}`, label };
   }),
 );
 ---
@@ -60,7 +60,7 @@ const views: JerseyView[] = products.flatMap(({ name, images }) =>
               data-caption={tShowcase("club")}
             >
               <img
-                class="next-edition__image next-edition__image--cover"
+                class="next-edition__image"
                 src="/images/jersey-video-poster.webp"
                 alt=""
                 width="640"
@@ -70,7 +70,7 @@ const views: JerseyView[] = products.flatMap(({ name, images }) =>
               />
               <span class="next-edition__tab-label">{tShowcase("view_video")}</span>
             </button>
-            {views.map(({ src, view }) => (
+            {views.map(({ src, view, label }) => (
               <button
                 type="button"
                 role="tab"
@@ -79,20 +79,20 @@ const views: JerseyView[] = products.flatMap(({ name, images }) =>
                 aria-selected="false"
                 aria-controls={`jersey-panel-${view}`}
                 tabindex="-1"
-                data-caption={tShowcase(`view_${view}`)}
+                data-caption={label}
               >
                 <img
                   class="next-edition__image"
                   src={src}
                   srcset={storeImageSrcset(src)}
-                  sizes="(min-width: 48rem) 8rem, 28vw"
+                  sizes="(min-width: 48rem) 7rem, 22vw"
                   alt=""
                   width="640"
                   height="800"
                   loading="lazy"
                   decoding="async"
                 />
-                <span class="next-edition__tab-label">{tShowcase(`view_${view}`)}</span>
+                <span class="next-edition__tab-label">{label}</span>
               </button>
             ))}
           </div>

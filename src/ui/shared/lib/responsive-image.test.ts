@@ -6,7 +6,7 @@ import { storeImageSrcset, storeImageVariants } from "./responsive-image";
 describe("storeImageSrcset", () => {
   it("lists the width variants of an image", () => {
     expect(storeImageSrcset("/images/store/jersey.webp")).toBe(
-      "/images/store/jersey-400.webp 400w, /images/store/jersey-560.webp 560w, /images/store/jersey-720.webp 720w",
+      "/images/store/jersey-400.webp 400w, /images/store/jersey-560.webp 560w, /images/store/jersey-720.webp 720w, /images/store/jersey-1000.webp 1000w",
     );
   });
 

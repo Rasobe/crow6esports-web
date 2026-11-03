@@ -182,9 +182,13 @@
       "title_lead": "La camiseta",
       "title_accent": "oficial",
       "views_label": "Vistas",
-      "view_front": "Frente",
       "view_back": "Espalda",
-      "view_video": "Vídeo"
+      "view_video": "Vídeo",
+      "view_frontal": "Frontal",
+      "view_three_quarter_front": "Ángulo",
+      "view_model": "Modelo",
+      "view_details": "Detalles",
+      "view_lifestyle": "Ambiente"
     }
   },
   "tryouts": {

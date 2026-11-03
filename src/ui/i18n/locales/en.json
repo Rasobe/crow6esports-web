@@ -182,9 +182,13 @@
       "title_lead": "The official",
       "title_accent": "jersey",
       "views_label": "Views",
-      "view_front": "Front",
       "view_back": "Back",
-      "view_video": "Video"
+      "view_video": "Video",
+      "view_frontal": "Front",
+      "view_three_quarter_front": "Angle",
+      "view_model": "On model",
+      "view_details": "Details",
+      "view_lifestyle": "Lifestyle"
     }
   },
   "tryouts": {

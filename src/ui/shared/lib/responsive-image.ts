@@ -1,5 +1,5 @@
-/** Anchos que se generan para cada imagen de la tienda (`nombre-400.webp`, `-560`, `-720`). */
-export const STORE_IMAGE_WIDTHS = [400, 560, 720] as const;
+/** Anchos que se generan para cada imagen de la tienda (`nombre-400.webp`, `-560`, `-720`, `-1000`). */
+export const STORE_IMAGE_WIDTHS = [400, 560, 720, 1000] as const;
 
 const withWidth = (src: string, width: number) => src.replace(/\.webp$/, `-${width}.webp`);
 

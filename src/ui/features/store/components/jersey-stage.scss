@@ -39,7 +39,7 @@
     box-shadow: 0 2rem 5rem -2.5rem rgb(var(--brand-rgb) / 0.35);
 
     @include above(md) {
-      aspect-ratio: 1280 / 722;
+      aspect-ratio: 4 / 3;
     }
   }
 

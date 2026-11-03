@@ -44,8 +44,8 @@ test("switches the store stage between the video and the product photos", async 
     .poll(() => video.evaluate((element: HTMLVideoElement) => element.paused))
     .toBe(false);
 
-  await page.getByRole("tab", { name: "Frente" }).click();
-  await expect(page.getByRole("tab", { name: "Frente" })).toHaveAttribute("aria-selected", "true");
+  await page.getByRole("tab", { name: "Frontal" }).click();
+  await expect(page.getByRole("tab", { name: "Frontal" })).toHaveAttribute("aria-selected", "true");
   await expect(page.getByRole("tabpanel").locator("img:visible")).toHaveCount(1);
   await expect.poll(() => video.evaluate((element: HTMLVideoElement) => element.paused)).toBe(true);
 

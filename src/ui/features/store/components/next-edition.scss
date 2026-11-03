@@ -93,7 +93,7 @@
 
   .next-edition__gallery {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 7.5rem));
+    grid-template-columns: repeat(4, minmax(0, 6rem));
     gap: var(--space-3);
   }
 
@@ -125,15 +125,9 @@
   .next-edition__image {
     width: 100%;
     height: 100%;
-    padding: var(--space-2);
-    object-fit: contain;
+    object-fit: cover;
     opacity: 0.6;
     transition: opacity var(--duration-base) var(--ease-standard);
-
-    &--cover {
-      padding: 0;
-      object-fit: cover;
-    }
   }
 
   .next-edition__tab:hover .next-edition__image,
