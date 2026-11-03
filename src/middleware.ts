@@ -43,5 +43,5 @@ const handleRequest = (context: APIContext, next: MiddlewareNext): Promise<Respo
 };
 
 export const onRequest = defineMiddleware(async (context, next) =>
-  applySecurityHeaders(await handleRequest(context, next)),
+  applySecurityHeaders(await handleRequest(context, next), import.meta.env.DEV),
 );
