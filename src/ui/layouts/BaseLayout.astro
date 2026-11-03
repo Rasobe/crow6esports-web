@@ -22,9 +22,10 @@ const { locale } = Astro.locals;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" href="/favicon.ico" />
+    <!-- Solo se precarga lo que se ve al cargar: titulares, navegación y botones, y texto normal -->
     <Font cssVariable="--font-display" preload />
-    <Font cssVariable="--font-ui" preload />
-    <Font cssVariable="--font-body" preload />
+    <Font cssVariable="--font-ui" preload={[{ weight: 700 }]} />
+    <Font cssVariable="--font-body" preload={[{ weight: 400 }]} />
     <script is:inline>
       (() => {
         const root = document.documentElement;
