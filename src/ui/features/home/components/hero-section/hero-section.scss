@@ -2,6 +2,9 @@
 @use "styles/mixins" as *;
 // Desde este ancho la imagen pasa a un panel lateral; por debajo ocupa todo el hero
 $hero-split: 64rem;
+// Desde este ancho el contenido deja de crecer y se centra; el panel reserva espacio al texto
+$hero-wide: 90rem;
+$hero-text-room: 42rem;
 
 @layer components {
   .hero {
@@ -22,6 +25,15 @@ $hero-split: 64rem;
       --hero-cut: 14%;
       left: auto;
       width: 62%;
+    }
+
+    // En pantallas muy anchas el contenido queda centrado en el contenedor, pero el panel
+    // sigue al borde de la ventana: se limita para dejar siempre sitio al texto.
+    @media (min-width: $hero-wide) {
+      width: min(
+        62%,
+        calc(100% - max(0px, (100% - var(--container)) / 2) - var(--gutter) - #{$hero-text-room})
+      );
     }
   }
 
