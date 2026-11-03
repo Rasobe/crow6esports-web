@@ -128,6 +128,19 @@ const achievements = [...ACHIEVEMENTS].sort(
               {achievement.onsite && <span class="timeline__tag">{t("achievements.onsite")}</span>}
               <p class="timeline__result">{resultLabel(achievement)}</p>
               <h3 class="timeline__name">{eventName(achievement)}</h3>
+              {achievement.link && (
+                <a
+                  class="timeline__link"
+                  href={achievement.link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {achievement.link.kind === "video" && <Icon name="youtube" size={16} />}
+                  {t(`achievements.links.${achievement.link.kind}`)}
+                  <Icon name="arrow-right" size={14} />
+                  <span class="timeline__sr-only"> ({t("contact.new_tab")})</span>
+                </a>
+              )}
             </div>
             <dl class="timeline__lineup">
               <div>

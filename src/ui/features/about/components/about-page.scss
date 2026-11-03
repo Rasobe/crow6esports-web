@@ -340,6 +340,53 @@
     @include angular-cut(6px);
   }
 
+  .timeline__link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-top: var(--space-1);
+    font-family: var(--ff-ui);
+    font-size: var(--fs-md);
+    font-weight: 700;
+    letter-spacing: var(--tracking-widest);
+    text-decoration: none;
+    text-transform: uppercase;
+    color: var(--brand);
+    border-bottom: 2px solid transparent;
+    transition:
+      color var(--duration-base) var(--ease-standard),
+      border-color var(--duration-base) var(--ease-standard);
+
+    svg:last-of-type {
+      transition: transform var(--duration-base) var(--ease-out);
+    }
+
+    &:hover,
+    &:focus-visible {
+      color: var(--text-primary);
+      border-bottom-color: var(--brand);
+
+      svg:last-of-type {
+        transform: translateX(var(--space-1));
+      }
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--brand);
+      outline-offset: 4px;
+    }
+  }
+
+  .timeline__sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
   .timeline__result {
     margin: 0;
     font-family: var(--ff-display);
@@ -637,6 +684,11 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
+    .timeline__link,
+    .timeline__link svg {
+      transition: none;
+    }
+
     .pillar,
     .pillar::before,
     .pillar__cta svg,

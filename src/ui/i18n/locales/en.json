@@ -590,7 +590,11 @@
       },
       "onsite": "On-site",
       "lineup": "Line-up",
-      "substitutes": "Substitute"
+      "substitutes": "Substitute",
+      "links": {
+        "video": "Watch the video",
+        "liquipedia": "View on Liquipedia"
+      }
     },
     "pillars": {
       "title": "What we do",

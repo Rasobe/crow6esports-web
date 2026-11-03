@@ -590,7 +590,11 @@
       },
       "onsite": "Presencial",
       "lineup": "Alineación",
-      "substitutes": "Suplente"
+      "substitutes": "Suplente",
+      "links": {
+        "video": "Ver el vídeo",
+        "liquipedia": "Ver en Liquipedia"
+      }
     },
     "pillars": {
       "title": "Qué hacemos",
