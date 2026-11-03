@@ -14,6 +14,11 @@ for (const path of PAGES) {
       "href",
       /^mailto:.+@.+/,
     );
+    // La ayuda solo aparece al pulsar el botón principal
+    await expect(contact.getByRole("button", { name: "Copiar correo" })).toBeHidden();
+    await contact.getByRole("link", { name: /Escribir/ }).click();
+
+    await expect(contact.getByText("¿No se abre tu app de correo?")).toBeVisible();
     await expect(contact.getByRole("link", { name: /Abrir en Gmail/ })).toHaveAttribute(
       "href",
       /^https:\/\/mail\.google\.com\/mail\/\?view=cm.*to=.+/,

@@ -32,7 +32,7 @@ const { email } = CLUB;
     </p>
   )}
 
-  <div class="contact-email__alternatives">
+  <div class="contact-email__alternatives" aria-live="polite">
     {variant === "button" && (
       <p class="contact-email__hint">
         {t("hint")} <span class="contact-email__address">{email}</span>
@@ -86,6 +86,8 @@ const { email } = CLUB;
     private resetTimer = 0;
 
     connectedCallback() {
+      this.revealAlternativesOnClick();
+
       const button = this.querySelector<HTMLButtonElement>(".contact-email__copy");
       const status = this.querySelector<HTMLElement>(".contact-email__status");
       const email = this.dataset.email;
@@ -106,6 +108,23 @@ const { email } = CLUB;
           button.removeAttribute("data-copied");
           status.textContent = "";
         }, FEEDBACK_MS);
+      });
+    }
+
+    /**
+     * Con el botón principal, la ayuda "¿No se abre tu app de correo?" aparece al pulsarlo: quien
+     * tiene app de correo no la necesita y quien no la tiene la ve justo cuando no pasa nada.
+     * Sin JavaScript se queda visible. La versión compacta (pie) la muestra siempre.
+     */
+    private revealAlternativesOnClick() {
+      const alternatives = this.querySelector<HTMLElement>(".contact-email__alternatives");
+      const mailLink = this.querySelector<HTMLAnchorElement>('a[href^="mailto:"].btn');
+      if (!alternatives || !mailLink) return;
+
+      alternatives.hidden = true;
+      mailLink.addEventListener("click", () => {
+        alternatives.hidden = false;
+        alternatives.setAttribute("data-revealed", "");
       });
     }
 

@@ -57,3 +57,26 @@ test("switches the store stage between the video and the product photos", async 
     .poll(() => video.evaluate((element: HTMLVideoElement) => element.paused))
     .toBe(false);
 });
+
+test.describe("store video reached through the navigation bar", () => {
+  // En un portátil el escenario queda casi todo bajo el pliegue al llegar
+  test.use({ viewport: { width: 1280, height: 720 } });
+
+  test("starts playing every time, including when revisiting the store", async ({ page }) => {
+    const isPlaying = () =>
+      page.locator("jersey-gallery video").evaluate((video: HTMLVideoElement) => !video.paused);
+    const openFromNavbar = async (route: string) => {
+      await page.locator(`.navbar__link[href="${route}"]`).click();
+      await page.waitForURL(`**${route}`);
+    };
+
+    await page.goto("/es", { waitUntil: "networkidle" });
+
+    await openFromNavbar("/es/store");
+    await expect.poll(isPlaying).toBe(true);
+
+    await openFromNavbar("/es/coaching");
+    await openFromNavbar("/es/store");
+    await expect.poll(isPlaying).toBe(true);
+  });
+});
