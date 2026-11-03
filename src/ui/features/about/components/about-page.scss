@@ -421,6 +421,7 @@
   .about-contact__socials {
     display: flex;
     flex-wrap: wrap;
+    align-items: flex-start;
     justify-content: center;
     gap: var(--space-3);
     margin: 0;

@@ -1,6 +1,7 @@
 export * from "./button";
 export * from "./chip-group-field";
 export * from "./choice-field";
+export * from "./contact-email";
 export * from "./cta-button";
 export * from "./date-field";
 export * from "./icons";

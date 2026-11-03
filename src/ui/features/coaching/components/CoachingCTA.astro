@@ -1,9 +1,8 @@
 ---
 import "./coaching-cta.scss";
-import { CLUB } from "@config/club";
 import { DISCORD_URL } from "@config/site";
 import { createTranslator } from "@/ui/i18n";
-import { Button } from "@/ui/shared/components";
+import { Button, ContactEmail } from "@/ui/shared/components";
 
 const t = createTranslator(Astro.locals.locale, "coaching.cta");
 ---
@@ -18,9 +17,7 @@ const t = createTranslator(Astro.locals.locale, "coaching.cta");
       <Button href={DISCORD_URL} size="lg">
         {t("discord")}
       </Button>
-      <Button href={`mailto:${CLUB.email}`} variant="outline" size="lg">
-        {t("email")}
-      </Button>
+      <ContactEmail label={t("email")} />
     </div>
   </div>
 </section>

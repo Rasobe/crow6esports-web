@@ -1,10 +1,9 @@
 ---
 import "./next-edition.scss";
 import { DISCORD_URL } from "@config/site";
-import { CLUB } from "@config/club";
 import type { Product } from "@/domain/store/product";
 import { createTranslator } from "@/ui/i18n";
-import { Button } from "@/ui/shared/components";
+import { Button, ContactEmail } from "@/ui/shared/components";
 import { storeImageSrcset } from "@/ui/shared/lib/responsive-image";
 import JerseyStage from "./JerseyStage.astro";
 import type { JerseyView } from "./jersey-view";
@@ -103,9 +102,7 @@ const views: JerseyView[] = products.flatMap(({ name, images }) =>
         <Button href={DISCORD_URL} size="lg">
           {tNext("cta_discord")}
         </Button>
-        <Button href={`mailto:${CLUB.email}`} variant="outline" size="lg">
-          {tNext("cta_email")}
-        </Button>
+        <ContactEmail label={tNext("cta_email")} />
       </div>
     </div>
   </jersey-gallery>

@@ -1,0 +1,144 @@
+@use "styles/layers";
+@use "styles/mixins" as *;
+@layer components {
+  .contact-email {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+    min-width: 0;
+  }
+
+  .contact-email--button {
+    align-items: center;
+    text-align: center;
+  }
+
+  .contact-email__alternatives {
+    display: flex;
+    flex-direction: column;
+    align-items: inherit;
+    gap: var(--space-2);
+  }
+
+  .contact-email__hint {
+    font-family: var(--ff-ui);
+    font-size: var(--fs-sm);
+    letter-spacing: var(--tracking-wider);
+    color: var(--text-muted);
+  }
+
+  .contact-email__address {
+    color: var(--text-secondary);
+    overflow-wrap: anywhere;
+  }
+
+  .contact-email__hint .contact-email__address {
+    display: block;
+    margin-top: var(--space-1);
+    font-size: var(--fs-md);
+  }
+
+  .contact-email__line {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-size: var(--fs-md);
+    color: var(--text-secondary);
+
+    svg {
+      flex-shrink: 0;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: color var(--duration-base) var(--ease-standard);
+
+      &:hover {
+        color: var(--brand);
+      }
+    }
+  }
+
+  .contact-email__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .contact-email--button .contact-email__actions {
+    justify-content: center;
+  }
+
+  .contact-email__copy,
+  .contact-email__gmail {
+    font-family: var(--ff-ui);
+    font-size: var(--fs-xs);
+    font-weight: 700;
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+  }
+
+  .contact-email__copy {
+    padding: var(--space-2) var(--space-4);
+    color: var(--text-primary);
+    cursor: pointer;
+    background: none;
+    border: 1px solid var(--border-strong);
+    transition:
+      color var(--duration-base) var(--ease-standard),
+      border-color var(--duration-base) var(--ease-standard);
+
+    &:hover,
+    &:focus-visible {
+      color: var(--brand);
+      border-color: var(--brand);
+    }
+
+    &[data-copied] {
+      color: var(--brand-fg);
+      background: var(--brand);
+      border-color: var(--brand);
+    }
+  }
+
+  .contact-email__gmail {
+    color: var(--text-primary);
+    text-decoration: none;
+    border-bottom: 2px solid var(--brand);
+    transition: color var(--duration-base) var(--ease-standard);
+
+    &:hover,
+    &:focus-visible {
+      color: var(--brand);
+    }
+  }
+
+  .contact-email__sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .contact-email__status {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .contact-email__copy,
+    .contact-email__gmail,
+    .contact-email__line a {
+      transition: none;
+    }
+  }
+}
