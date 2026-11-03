@@ -7,7 +7,9 @@ const UNDER_CONSTRUCTION_SEGMENT = "under-construction";
 const API_PREFIX = "/api/";
 
 export type RequestRoute<Key extends string> =
-  { kind: "next" } | { kind: "rewrite"; path: string; underConstruction?: Key };
+  | { kind: "next" }
+  | { kind: "redirect"; path: string }
+  | { kind: "rewrite"; path: string; underConstruction?: Key };
 
 interface RouteInput<Key extends string> {
   pathname: string;
@@ -30,9 +32,12 @@ export function resolveLocale(pathname: string, acceptLanguage: string | null): 
   return isLocale(firstSegment) ? firstSegment : detectLocale(acceptLanguage);
 }
 
+const TRAILING_SLASHES = /\/+$/;
+
 /**
  * Decide qué servir para una petición: la ruta pedida, el modo mantenimiento, el 404 de
- * un idioma inválido o el aviso "en construcción" de una página en "soon".
+ * un idioma inválido o el aviso "en construcción" de una página en "soon". Las URLs con barra
+ * final se redirigen a su versión sin barra para que cada página tenga una sola dirección.
  */
 export function resolveRequest<Key extends string>({
   pathname,
@@ -41,6 +46,10 @@ export function resolveRequest<Key extends string>({
   pages,
 }: RouteInput<Key>): RequestRoute<Key> {
   if (isFileRequest(pathname) || pathname.startsWith(API_PREFIX)) return { kind: "next" };
+
+  if (pathname !== "/" && TRAILING_SLASHES.test(pathname)) {
+    return { kind: "redirect", path: pathname.replace(TRAILING_SLASHES, "") || "/" };
+  }
 
   if (maintenance && pathname !== COMING_SOON_PATH) {
     return { kind: "rewrite", path: COMING_SOON_PATH };

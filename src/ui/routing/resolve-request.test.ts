@@ -32,6 +32,16 @@ describe("resolveRequest", () => {
     expect(route("/es/team")).toEqual({ kind: "next" });
   });
 
+  it("redirects a trailing slash to the same page without it", () => {
+    expect(route("/es/team/")).toEqual({ kind: "redirect", path: "/es/team" });
+    expect(route("/es/")).toEqual({ kind: "redirect", path: "/es" });
+    expect(route("/es//")).toEqual({ kind: "redirect", path: "/es" });
+  });
+
+  it("leaves the site root alone", () => {
+    expect(route("/")).toEqual({ kind: "next" });
+  });
+
   it("never touches files or API calls", () => {
     expect(route("/images/hero.webp", { maintenance: true })).toEqual({ kind: "next" });
     expect(route("/api/contact", { maintenance: true })).toEqual({ kind: "next" });
