@@ -168,7 +168,7 @@
   }
 
   .timeline {
-    --timeline-when: 11rem;
+    --timeline-when: 8.75rem;
 
     position: relative;
     display: flex;
@@ -224,14 +224,10 @@
       gap: var(--space-1);
     }
 
+    // Los años van pegados al borde izquierdo del contenido, alineados con los títulos
     @include above(md) {
-      align-items: flex-end;
+      align-items: flex-start;
       padding-right: var(--space-4);
-      text-align: right;
-
-      time {
-        align-items: flex-end;
-      }
     }
   }
 
