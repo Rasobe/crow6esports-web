@@ -1,3 +1,4 @@
+import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 import { COACHING } from "../config/coaching";
 
@@ -33,6 +34,21 @@ for (const locale of ["es", "en"]) {
       expect(errors).toEqual([]);
     });
   }
+}
+
+// Mantiene el 100 de accesibilidad de Lighthouse: cualquier fallo WCAG A/AA rompe el test
+for (const route of PUBLIC_ROUTES) {
+  test(`has no accessibility violations on /es${route}`, async ({ page }) => {
+    await page.goto(`/es${route}`);
+    await page.waitForLoadState("networkidle");
+
+    const { violations } = await new AxeBuilder({ page })
+      .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
+      .exclude("astro-dev-toolbar")
+      .analyze();
+
+    expect(violations.map(({ id, nodes }) => `${id} (${nodes.length})`)).toEqual([]);
+  });
 }
 
 test("switches language from the home page", async ({ page }) => {
