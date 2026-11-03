@@ -167,6 +167,12 @@
       "teaser": "The official jersey is sold out. Join the Discord to find out when it is back.",
       "cta_discord": "Notify me on Discord",
       "cta_email": "Email the club"
+    },
+    "jersey_video": {
+      "section_label": "Jersey video",
+      "video_label": "Video of the official Crow 6 jersey: crest detail and full turn",
+      "pause": "Pause video",
+      "play": "Play video"
     }
   },
   "tryouts": {

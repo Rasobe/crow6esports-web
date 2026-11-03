@@ -1,0 +1,69 @@
+@use "styles/layers";
+@use "styles/mixins" as *;
+@layer components {
+  .jersey-video {
+    padding: var(--space-12) 0 0;
+    background: var(--bg-surface);
+  }
+
+  .jersey-video__inner {
+    @include container;
+  }
+
+  .jersey-video__player {
+    position: relative;
+    display: block;
+    max-width: 68rem;
+    margin-inline: auto;
+    aspect-ratio: 1280 / 722;
+    overflow: hidden;
+    background: var(--bg-base);
+    border: var(--line);
+  }
+
+  .jersey-video__media {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .jersey-video__toggle {
+    position: absolute;
+    right: var(--space-4);
+    bottom: var(--space-4);
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+    color: var(--text-primary);
+    cursor: pointer;
+    background: rgb(var(--bg-base-rgb) / 0.7);
+    border: var(--line);
+    transition:
+      color var(--duration-base) var(--ease-standard),
+      border-color var(--duration-base) var(--ease-standard);
+
+    &:hover,
+    &:focus-visible {
+      color: var(--brand);
+      border-color: var(--brand);
+    }
+  }
+
+  .jersey-video__icon-play {
+    display: none;
+  }
+
+  .jersey-video__player[data-paused] {
+    .jersey-video__icon-pause {
+      display: none;
+    }
+
+    .jersey-video__icon-play {
+      display: block;
+    }
+  }
+}

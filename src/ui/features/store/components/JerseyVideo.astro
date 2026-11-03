@@ -1,0 +1,91 @@
+---
+import "./jersey-video.scss";
+import { createTranslator } from "@/ui/i18n";
+
+const t = createTranslator(Astro.locals.locale, "store.jersey_video");
+---
+
+<section class="jersey-video" aria-label={t("section_label")}>
+  <div class="jersey-video__inner" data-reveal>
+    <jersey-video class="jersey-video__player">
+      <video
+        class="jersey-video__media"
+        poster="/images/jersey-video-poster.webp"
+        width="1280"
+        height="722"
+        muted
+        loop
+        playsinline
+        preload="none"
+        aria-label={t("video_label")}
+      >
+        <source src="/videos/crow6-jersey.webm" type="video/webm" />
+        <source src="/videos/crow6-jersey.mp4" type="video/mp4" />
+      </video>
+
+      <button
+        type="button"
+        class="jersey-video__toggle"
+        aria-pressed="false"
+        aria-label={t("pause")}
+        data-label-pause={t("pause")}
+        data-label-play={t("play")}
+      >
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true">
+          <path class="jersey-video__icon-pause" d="M3 2h2.5v10H3zM8.5 2H11v10H8.5z" />
+          <path class="jersey-video__icon-play" d="M3.5 2l8 5-8 5z" />
+        </svg>
+      </button>
+    </jersey-video>
+  </div>
+</section>
+
+<script>
+  class JerseyVideo extends HTMLElement {
+    private observer?: IntersectionObserver;
+    private pausedByUser = false;
+
+    connectedCallback() {
+      const video = this.querySelector("video");
+      const toggle = this.querySelector<HTMLButtonElement>(".jersey-video__toggle");
+      if (!video || !toggle) return;
+
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+      this.pausedByUser = reducedMotion.matches;
+      this.syncToggle(toggle);
+
+      this.observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting && !this.pausedByUser) void video.play().catch(() => undefined);
+          else video.pause();
+        },
+        { threshold: 0.35 },
+      );
+      this.observer.observe(video);
+
+      toggle.addEventListener("click", () => {
+        this.pausedByUser = !this.pausedByUser;
+        this.syncToggle(toggle);
+        if (this.pausedByUser) video.pause();
+        else void video.play().catch(() => undefined);
+      });
+    }
+
+    disconnectedCallback() {
+      this.observer?.disconnect();
+    }
+
+    private syncToggle(toggle: HTMLButtonElement) {
+      toggle.setAttribute("aria-pressed", String(this.pausedByUser));
+      toggle.setAttribute(
+        "aria-label",
+        (this.pausedByUser ? toggle.dataset.labelPlay : toggle.dataset.labelPause) ?? "",
+      );
+      this.toggleAttribute("data-paused", this.pausedByUser);
+    }
+  }
+
+  if (!customElements.get("jersey-video")) {
+    customElements.define("jersey-video", JerseyVideo);
+  }
+</script>

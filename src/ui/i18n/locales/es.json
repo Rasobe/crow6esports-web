@@ -167,6 +167,12 @@
       "teaser": "La camiseta oficial está agotada. Entra en el Discord para saber cuándo vuelve.",
       "cta_discord": "Avisarme por Discord",
       "cta_email": "Escribir al club"
+    },
+    "jersey_video": {
+      "section_label": "Vídeo de la camiseta",
+      "video_label": "Vídeo de la camiseta oficial de Crow 6: detalle del escudo y giro completo",
+      "pause": "Pausar vídeo",
+      "play": "Reproducir vídeo"
     }
   },
   "tryouts": {

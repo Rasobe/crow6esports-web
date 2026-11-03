@@ -5,6 +5,7 @@ import { getProducts } from "@/application/store/get-products";
 import { container } from "@/infrastructure/container";
 import { createTranslator } from "@/ui/i18n";
 import { PageHeader } from "@/ui/shared/components";
+import JerseyVideo from "./JerseyVideo.astro";
 import NextEdition from "./NextEdition.astro";
 import ProductCard from "./ProductCard.astro";
 
@@ -13,6 +14,8 @@ const products = getProducts(container.productRepository);
 ---
 
 <PageHeader eyebrow={t("eyebrow")} title={t("title")} description={t("meta.description")} />
+
+<JerseyVideo />
 
 {STORE_IN_STOCK ? (
   <section class="store-catalog" aria-label={t("catalog_label")}>
