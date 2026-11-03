@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { COACHING } from "../config/coaching";
 
 const PUBLIC_ROUTES = ["", "/team", "/news", "/coaching", "/store", "/about-us", "/tryouts"];
 
@@ -73,10 +74,37 @@ test("shows the news empty state", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "Pronto publicaremos noticias" })).toBeVisible();
 });
 
-test("renders the coaching packs with launch prices", async ({ page }) => {
+test("renders the coaching packs and single sessions from the config", async ({ page }) => {
   await page.goto("/es/coaching");
-  await expect(page.getByText("Precio de lanzamiento")).toHaveCount(6);
+  const cards = page.locator(".plan-card");
+  const packs = [...COACHING.plans.individual, ...COACHING.plans.teams];
+  await expect(cards).toHaveCount(packs.length);
+
+  for (const [index, plan] of packs.entries()) {
+    const card = cards.nth(index);
+    const mode = index < COACHING.plans.individual.length ? "individual" : "teams";
+    const features = COACHING.features[mode];
+    const included = features.filter((feature) => feature.tiers.includes(plan.tier));
+
+    await expect(card.locator(".plan-card__amount")).toHaveText(new RegExp(`^${plan.price}\\s€$`));
+    await expect(card.locator(".plan-card__feature")).toHaveCount(features.length);
+    await expect(
+      card.locator(".plan-card__feature:not(.plan-card__feature--excluded)"),
+    ).toHaveCount(included.length);
+  }
+
   await expect(page.getByText("Más elegido")).toHaveCount(2);
+  await expect(page.locator(".single-card")).toHaveCount(COACHING.singleSessions.length);
+  await expect(page.locator(".single-card--free")).toContainText("Gratis");
+
+  // Una sola acción por sección, no un botón por carta
+  for (const label of [
+    "Reservar pack individual",
+    "Reservar pack de equipo",
+    "Reservar sesión gratis",
+  ]) {
+    await expect(page.getByRole("link", { name: label })).toHaveCount(1);
+  }
 });
 
 test("keeps the content visible when reduced motion is requested", async ({ browser }) => {
