@@ -245,7 +245,7 @@
     .coaching-banner__placeholder {
       inset: auto;
       top: 50%;
-      right: var(--space-2);
+      right: var(--space-5);
       left: auto;
       width: 5.5rem;
       height: 4rem;
@@ -256,7 +256,7 @@
 
     .coaching-banner__caption {
       align-items: center;
-      padding: var(--space-5) 0;
+      padding: var(--space-5) var(--space-5);
       background: none;
     }
 
