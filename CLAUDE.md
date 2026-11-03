@@ -56,7 +56,7 @@ Rutas bajo `src/pages/[locale]/…` con locales `es` (default) y `en`. `src/midd
 - Carpeta en `kebab-case`, archivo en `PascalCase.astro`, estilos colocados como `kebab-case.scss` e importados en el frontmatter.
 - Compartidos en `ui/shared/components/` (se exportan desde su `index.ts`); lo que usa una sola feature en `ui/features/<x>/components/`.
 - Subcomponentes privados en `_components/`.
-- JS de cliente solo cuando hace falta: custom element con `<script>` para cosas simples (ver `MobileMenu.astro`) o isla React (`client:load`) para formularios complejos (ver `ui/features/tryouts`). Las islas no pueden importar componentes `.astro` ni el barrel `ui/shared/components`: importa los `.tsx` directamente. Reciben sus textos como prop (`getMessages(locale, namespace)` + `createMessageTranslator`).
+- JS de cliente solo cuando hace falta: custom element con `<script>` para cosas simples (ver `MobileMenu.astro`) o isla React (`client:load`) para formularios complejos (ver `ui/features/tryouts`). Las islas no pueden importar componentes `.astro` ni el barrel `ui/shared/components`: importa los `.tsx` directamente. Reciben sus textos como prop (`getMessages(locale, namespace)` + `createMessageTranslator`). En el cliente se valida con `zod/mini` (más ligero); los esquemas del servidor usan zod completo.
 - `Button`, `CTAButton` y `PlayerCard` leen el locale de `Astro.locals`: no hace falta pasarlo por props.
 
 ### Estado de las páginas
@@ -86,3 +86,9 @@ Identidad visual: alto contraste, anguloso, sin border-radius generoso; botones 
 ### Integraciones externas
 
 Los endpoints viven en `src/pages/api/` y solo orquestan: validan con zod (esquemas en `infrastructure/`), llaman a un caso de uso y devuelven JSON. Tryouts: `POST /api/contact` → `createContactHandler` (`infrastructure/tryouts/contact-handler.ts`: origen, tamaño, campo trampa `website`, validación y límite de envíos) → `submitTryoutApplication` → puerto `TryoutNotifier` → adaptador Resend. El endpoint solo cablea el handler, que se prueba sin Astro con un notificador falso; cualquier método que no sea POST devuelve 405. Los emails escapan siempre el contenido del usuario. Stripe está previsto para la tienda pero aún no está instalado. No hay servidor backend separado.
+
+### Seguridad y SEO
+
+`src/middleware.ts` solo aplica lo que decide `resolveRequest` (`ui/routing/`, probado) y añade las cabeceras de `infrastructure/http/security-headers.ts`, incluida la CSP: todo limitado al propio dominio salvo el reproductor de `youtube-nocookie.com`. Si añades un recurso externo (script, iframe, imagen, fuente), amplía la CSP o el navegador lo bloqueará; el e2e `quality.spec.ts` falla si aparece una violación en consola. La CSP integrada de Astro no se usa porque no admite `<ClientRouter />`.
+
+Datos estructurados con `<JsonLd slot="head" />` y los constructores de `ui/shared/lib/structured-data.ts` (equipo en la home, servicio de coaching). El sitemap sale de `getSitemapPaths`: Noticias solo aparece (y se indexa) cuando hay artículos. Las imágenes de la tienda necesitan sus variantes `-400`, `-560` y `-720` (`storeImageSrcset`); un test comprueba que existan.
