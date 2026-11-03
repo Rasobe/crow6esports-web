@@ -173,6 +173,17 @@
       "video_label": "Vídeo de la camiseta oficial de Crow 6: detalle del escudo y giro completo",
       "pause": "Pausar vídeo",
       "play": "Reproducir vídeo"
+    },
+    "showcase": {
+      "tag": "Próxima edición",
+      "product_label": "Camiseta oficial",
+      "club": "Crow 6 Esports",
+      "status_note": "Por ahora",
+      "title_lead": "La camiseta",
+      "title_accent": "oficial",
+      "views_label": "Vistas",
+      "view_front": "Frente",
+      "view_back": "Espalda"
     }
   },
   "tryouts": {

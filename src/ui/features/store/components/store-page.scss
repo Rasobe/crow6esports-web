@@ -10,6 +10,10 @@
     @include container;
   }
 
+  .store-catalog__inner > .jersey-video {
+    margin-bottom: var(--space-8);
+  }
+
   .store-catalog__grid {
     @include joined-grid(15rem);
     margin: 0;

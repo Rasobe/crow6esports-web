@@ -173,6 +173,17 @@
       "video_label": "Video of the official Crow 6 jersey: crest detail and full turn",
       "pause": "Pause video",
       "play": "Play video"
+    },
+    "showcase": {
+      "tag": "Next edition",
+      "product_label": "Official jersey",
+      "club": "Crow 6 Esports",
+      "status_note": "For now",
+      "title_lead": "The official",
+      "title_accent": "jersey",
+      "views_label": "Views",
+      "view_front": "Front",
+      "view_back": "Back"
     }
   },
   "tryouts": {

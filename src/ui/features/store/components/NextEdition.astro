@@ -6,48 +6,71 @@ import type { Product } from "@/domain/store/product";
 import { createTranslator } from "@/ui/i18n";
 import { Button } from "@/ui/shared/components";
 import { storeImageSrcset } from "@/ui/shared/lib/responsive-image";
+import JerseyVideo from "./JerseyVideo.astro";
 
 interface Props {
   products: Product[];
 }
 
+const VIEWS = ["front", "back"] as const;
+
 const { products } = Astro.props;
 const t = createTranslator(Astro.locals.locale, "store");
 const tNext = createTranslator(Astro.locals.locale, "store.next_edition");
-const images = products.flatMap(({ name, images: sources }) =>
-  sources.map((src) => ({ src, alt: name })),
+const tShowcase = createTranslator(Astro.locals.locale, "store.showcase");
+const views = products.flatMap(({ name, images }) =>
+  images.flatMap((src) => {
+    const view = VIEWS.find((candidate) => src.includes(candidate));
+    return view ? [{ src, alt: name, view }] : [];
+  }),
 );
 ---
 
 <section class="next-edition" aria-labelledby="next-edition-title">
   <div class="next-edition__inner">
-    <ul class="next-edition__gallery">
-      {images.map(({ src, alt }) => (
-        <li class="next-edition__item" data-reveal>
-          <figure class="next-edition__figure">
-            <img
-              class="next-edition__image"
-              src={src}
-              srcset={storeImageSrcset(src)}
-              sizes="(min-width: 48rem) 22rem, 45vw"
-              alt={alt}
-              width="640"
-              height="800"
-              loading="lazy"
-              decoding="async"
-            />
-            <span class="next-edition__badge">{t("sold_out")}</span>
-          </figure>
-        </li>
-      ))}
-    </ul>
+    <JerseyVideo />
 
-    <div class="next-edition__content" data-reveal>
-      <span class="section-label">{tNext("eyebrow")}</span>
+    <div class="next-edition__panel" data-reveal>
+      <div class="next-edition__status">
+        <span class="next-edition__badge">{t("sold_out")}</span>
+        <span class="next-edition__status-note">{tShowcase("status_note")}</span>
+      </div>
+
       <h2 id="next-edition-title" class="next-edition__title">
-        {tNext("title")}
+        {tShowcase("title_lead")}{" "}
+        <span class="next-edition__title-accent">{tShowcase("title_accent")}</span>
       </h2>
+
       <p class="next-edition__description">{tNext("description")}</p>
+
+      {views.length > 0 && (
+        <div class="next-edition__views">
+          <span class="next-edition__views-label">{tShowcase("views_label")}</span>
+          <ul class="next-edition__gallery">
+            {views.map(({ src, alt, view }) => (
+              <li class="next-edition__item">
+                <figure class="next-edition__figure">
+                  <img
+                    class="next-edition__image"
+                    src={src}
+                    srcset={storeImageSrcset(src)}
+                    sizes="(min-width: 48rem) 10rem, 40vw"
+                    alt={alt}
+                    width="640"
+                    height="800"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <figcaption class="next-edition__figure-label">
+                    {tShowcase(`view_${view}`)}
+                  </figcaption>
+                </figure>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
       <div class="next-edition__actions">
         <Button href={DISCORD_URL} size="lg">
           {tNext("cta_discord")}

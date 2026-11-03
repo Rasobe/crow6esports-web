@@ -1,24 +1,43 @@
 @use "styles/layers";
 @use "styles/mixins" as *;
 @layer components {
+  // Escenario del vídeo: marco de visor con esquinas doradas y brillo suave
   .jersey-video {
-    padding: var(--space-12) 0 0;
-    background: var(--bg-surface);
-  }
-
-  .jersey-video__inner {
-    @include container;
-  }
-
-  .jersey-video__player {
     position: relative;
     display: block;
-    max-width: 68rem;
-    margin-inline: auto;
+    min-width: 0;
+    padding: var(--space-3);
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      width: 2.5rem;
+      height: 2.5rem;
+      pointer-events: none;
+      border: 0 solid var(--brand);
+    }
+
+    &::before {
+      top: 0;
+      left: 0;
+      border-width: 3px 0 0 3px;
+    }
+
+    &::after {
+      right: 0;
+      bottom: 0;
+      border-width: 0 3px 3px 0;
+    }
+  }
+
+  .jersey-video__stage {
+    position: relative;
     aspect-ratio: 1280 / 722;
     overflow: hidden;
     background: var(--bg-base);
     border: var(--line);
+    box-shadow: 0 2rem 5rem -2.5rem rgb(var(--brand-rgb) / 0.35);
   }
 
   .jersey-video__media {
@@ -27,6 +46,49 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+
+  .jersey-video__tag {
+    position: absolute;
+    top: var(--space-4);
+    left: var(--space-4);
+    padding: var(--space-1-5) var(--space-6);
+    font-family: var(--ff-ui);
+    font-size: var(--fs-xs);
+    font-weight: 700;
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    color: var(--brand-fg);
+    background: var(--brand);
+    @include angular-cut(0.5rem);
+  }
+
+  .jersey-video__caption {
+    position: absolute;
+    inset: auto 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    padding: var(--space-12) var(--space-5) var(--space-4);
+    pointer-events: none;
+    background: linear-gradient(to top, rgb(var(--bg-base-rgb) / 0.85), transparent);
+  }
+
+  .jersey-video__caption-label {
+    font-family: var(--ff-ui);
+    font-size: var(--fs-xs);
+    font-weight: 700;
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    color: var(--brand);
+  }
+
+  .jersey-video__caption-name {
+    font-family: var(--ff-display);
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    line-height: 1;
+    text-transform: uppercase;
+    color: var(--text-primary);
   }
 
   .jersey-video__toggle {
@@ -57,7 +119,7 @@
     display: none;
   }
 
-  .jersey-video__player[data-paused] {
+  .jersey-video[data-paused] {
     .jersey-video__icon-pause {
       display: none;
     }
