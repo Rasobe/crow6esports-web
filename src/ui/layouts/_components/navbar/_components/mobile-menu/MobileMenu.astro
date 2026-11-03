@@ -114,6 +114,9 @@ const currentPath = stripLocale(Astro.originPathname);
         setOpen(trigger.getAttribute("aria-expanded") !== "true");
       });
       overlay.addEventListener("click", () => setOpen(false));
+      drawer.addEventListener("click", (event) => {
+        if ((event.target as Element).closest("a")) setOpen(false);
+      });
       this.onKeydown = (event) => {
         if (event.key !== "Escape" || trigger.getAttribute("aria-expanded") !== "true") return;
         setOpen(false);
