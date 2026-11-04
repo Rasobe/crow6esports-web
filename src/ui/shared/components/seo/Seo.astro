@@ -1,32 +1,40 @@
 ---
 import { siteConfig } from "@config/site";
-import { DEFAULT_LOCALE, LOCALES, type Locale } from "@/ui/i18n";
+import { createTranslator, DEFAULT_LOCALE, LOCALES, type Locale } from "@/ui/i18n";
+import { buildPageTitle } from "@/ui/shared/lib/seo";
 
 interface Props {
   title?: string;
+  /** El título ya incluye la marca (la home) y no se le añade la plantilla. */
+  absoluteTitle?: boolean;
   description: string;
   locale: Locale;
   path?: string;
   image?: string;
+  /** Descripción de la imagen social; por defecto la de la imagen por defecto del sitio. */
+  imageAlt?: string;
   noindex?: boolean;
 }
 
 const {
   title,
+  absoluteTitle,
   description,
   locale,
   path = "",
-  image = "/images/og-default.jpg",
+  image = "/images/og-crow6.jpg",
+  imageAlt,
   noindex,
 } = Astro.props;
 
 // Open Graph usa el formato idioma_REGIÓN
 const OG_LOCALES: Record<Locale, string> = { es: "es_ES", en: "en_GB" };
 
-const pageTitle = title ? `${title} - ${siteConfig.name}` : siteConfig.name;
+const pageTitle = buildPageTitle(title, siteConfig.name, absoluteTitle);
 const urlFor = (target: Locale) => `${siteConfig.url}/${target}${path}`;
 const canonical = urlFor(locale);
 const ogImage = `${siteConfig.url}${image}`;
+const altText = imageAlt ?? createTranslator(locale, "site")("image_alt");
 ---
 
 <title>{pageTitle}</title>
@@ -50,9 +58,10 @@ const ogImage = `${siteConfig.url}${image}`;
 <meta property="og:image" content={ogImage} />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content={pageTitle} />
+<meta property="og:image:alt" content={altText} />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={pageTitle} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={ogImage} />
+<meta name="twitter:image:alt" content={altText} />

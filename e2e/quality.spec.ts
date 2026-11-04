@@ -1,6 +1,7 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test, type Page } from "@playwright/test";
-import { COACHING } from "../config/coaching";
+import { COACHING, LAUNCH_PRICE_ENDS } from "../config/coaching";
+import { getCoachingPricing } from "../src/application/coaching/get-coaching-pricing";
 
 const PUBLIC_ROUTES = ["", "/team", "/news", "/coaching", "/store", "/about-us", "/tryouts"];
 
@@ -114,7 +115,7 @@ test("describes the club and the coaching service for search engines", async ({ 
       );
 
   await page.goto("/es");
-  expect(await structuredTypes()).toContain("SportsTeam");
+  expect(await structuredTypes()).toEqual(expect.arrayContaining(["SportsTeam", "WebSite"]));
 
   await page.goto("/es/coaching");
   expect(await structuredTypes()).toContain("Service");
@@ -124,7 +125,8 @@ test("describes the club and the coaching service for search engines", async ({ 
 test("renders the coaching packs and single sessions from the config", async ({ page }) => {
   await page.goto("/es/coaching");
   const cards = page.locator(".plan-card");
-  const packs = [...COACHING.plans.individual, ...COACHING.plans.teams];
+  const pricing = getCoachingPricing(COACHING.plans, LAUNCH_PRICE_ENDS);
+  const packs = [...pricing.plans.individual, ...pricing.plans.teams];
   await expect(cards).toHaveCount(packs.length);
 
   for (const [index, plan] of packs.entries()) {
@@ -133,7 +135,9 @@ test("renders the coaching packs and single sessions from the config", async ({ 
     const features = COACHING.features[mode];
     const included = features.filter((feature) => feature.tiers.includes(plan.tier));
 
-    await expect(card.locator(".plan-card__amount")).toHaveText(new RegExp(`^${plan.price}\\s€$`));
+    await expect(card.locator(".plan-card__amount")).toHaveText(
+      new RegExp(`^${plan.current}\\s€$`),
+    );
     await expect(card.locator(".plan-card__feature")).toHaveCount(features.length);
     await expect(
       card.locator(".plan-card__feature:not(.plan-card__feature--excluded)"),
@@ -141,6 +145,10 @@ test("renders the coaching packs and single sessions from the config", async ({ 
   }
 
   await expect(page.getByText("Más elegido")).toHaveCount(2);
+  // El texto de lanzamiento solo existe mientras el precio de lanzamiento esté vigente
+  await expect(page.getByText("Precio de lanzamiento")).toHaveCount(
+    pricing.launchActive ? packs.length * 2 : 0,
+  );
   await expect(page.locator(".single-card")).toHaveCount(COACHING.singleSessions.length);
   await expect(page.locator(".single-card--free")).toContainText("Gratis");
 
