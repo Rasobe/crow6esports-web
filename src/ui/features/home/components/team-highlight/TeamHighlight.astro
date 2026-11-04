@@ -1,5 +1,6 @@
 ---
 import "./team-highlight.scss";
+import { CLUB } from "@config/club";
 import { ROUTES } from "@config/routes";
 import { getActivePlayers, getSubstitutePlayers } from "@/application/team/get-players";
 import { container } from "@/infrastructure/container";
@@ -22,6 +23,10 @@ const players = [...getActivePlayers(playerRepository), ...getSubstitutePlayers(
       href={localizePath(locale, ROUTES.team)}
       linkLabel={t("cta_view_more")}
     />
+
+    <p class="team-highlight__intro">
+      {t("intro", { year: CLUB.foundedYear, city: CLUB.location.city })}
+    </p>
 
     <div class="team-highlight__grid">
       {players.map((player, index) => (

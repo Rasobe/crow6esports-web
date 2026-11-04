@@ -44,7 +44,9 @@ test("/en has its whole head in English", async ({ page }) => {
   await page.goto("/en");
 
   await expect(page).toHaveTitle("Crow 6 eSports · Rocket League Organization");
-  expect(await meta(page, 'meta[name="description"]')).toMatch(/^Competitive Rocket League/);
+  expect(await meta(page, 'meta[name="description"]')).toMatch(
+    /^Crow 6 is a competitive Rocket League/,
+  );
   expect(await meta(page, 'meta[property="og:locale"]')).toBe("en_GB");
   expect(await meta(page, 'meta[property="og:image:alt"]')).toMatch(/cars/);
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", `${ORIGIN}/en`);
@@ -54,7 +56,7 @@ test("the Spanish home uses its own title", async ({ page }) => {
   await page.goto("/es");
 
   await expect(page).toHaveTitle("Crow 6 eSports · Organización de Rocket League");
-  expect(await meta(page, 'meta[name="description"]')).toMatch(/^Organización competitiva/);
+  expect(await meta(page, 'meta[name="description"]')).toMatch(/^Crow 6 es una organización/);
 });
 
 test("the home describes the team and the website as valid JSON-LD", async ({ page }) => {
@@ -68,14 +70,21 @@ test("the home describes the team and the website as valid JSON-LD", async ({ pa
 
   expect(team).toMatchObject({
     name: "Crow 6 eSports",
-    alternateName: ["Crow6", "Crow 6", "C6 eSports"],
+    alternateName: [
+      "Crow6",
+      "Crow 6",
+      "Crow6 eSports",
+      "Crow 6 Esports",
+      "crow6esports",
+      "C6 eSports",
+    ],
     location: { "@type": "PostalAddress", addressLocality: "Huesca", addressCountry: "ES" },
   });
   expect(team.description).toBeTruthy();
   expect(team.sameAs.length).toBeGreaterThan(0);
   expect(website).toMatchObject({
     name: "Crow 6 eSports",
-    alternateName: ["Crow6", "Crow 6"],
+    alternateName: team.alternateName,
     url: ORIGIN,
   });
 });
