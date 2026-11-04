@@ -14,6 +14,11 @@
     gap: var(--space-12);
   }
 
+  .team-highlight__intro {
+    max-width: 46rem;
+    color: var(--text-secondary);
+  }
+
   .team-highlight__grid {
     @include joined-grid(16.25rem);
   }

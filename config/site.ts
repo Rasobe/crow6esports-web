@@ -1,7 +1,6 @@
 export const siteConfig = {
   name: "Crow 6 eSports",
   url: "https://crow6esports.com",
-  alternateNames: ["Crow6", "Crow 6"],
 } as const;
 
 export const socialLinks = [
