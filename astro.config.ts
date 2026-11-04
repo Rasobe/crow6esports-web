@@ -41,7 +41,7 @@ export default defineConfig({
       TRYOUT_EMAIL_FROM: envField.string({
         context: "server",
         access: "secret",
-        default: "Crow 6 Esports <noreply@crow6esports.com>",
+        default: "Crow 6 eSports <noreply@crow6esports.com>",
       }),
       TRYOUT_EMAIL_TO: envField.string({
         context: "server",
@@ -83,6 +83,8 @@ export default defineConfig({
   ],
   vite: {
     plugins: [stubBuildOnlyRolldown],
+    // Momento del build (o del arranque en desarrollo): es el lastmod del sitemap
+    define: { __BUILD_DATE__: JSON.stringify(new Date().toISOString()) },
     css: {
       preprocessorOptions: {
         scss: { loadPaths: ["src"], silenceDeprecations: ["import"] },

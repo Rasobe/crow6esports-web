@@ -1,5 +1,6 @@
 {
   "site": {
+    "image_alt": "Coches amarillos y negros de Crow 6 eSports con el escudo del cuervo en un estadio de Rocket League, bajo la pelota",
     "description": "Organización competitiva de Rocket League."
   },
   "nav": {
@@ -9,7 +10,7 @@
     "coaching": "Coaching",
     "about_us": "Sobre nosotros",
     "join": "Únete",
-    "home_aria": "Crow 6 Esports, Inicio",
+    "home_aria": "Crow 6 eSports, Inicio",
     "locale_switcher_aria": "Seleccionar idioma",
     "menu_aria": "Menú de navegación",
     "menu_open_aria": "Abrir menú",
@@ -17,15 +18,15 @@
     "menu_close_aria": "Cerrar menú"
   },
   "home": {
-    "meta": {
-      "title": "Inicio",
-      "description": "Organización competitiva de Rocket League."
+    "seo": {
+      "title": "Crow 6 eSports · Organización de Rocket League",
+      "description": "Organización competitiva de Rocket League fundada en {year} en {city}. Conoce la plantilla, el coaching y los tryouts del club."
     },
     "hero": {
       "title": {
         "name": "Crow",
         "number": "6",
-        "sector": "Esports"
+        "sector": "eSports"
       },
       "subtitle": "Organización competitiva de Rocket League",
       "cta_team": "Ver equipo",
@@ -65,7 +66,7 @@
       "figure_years": "Años como coach",
       "figure_hours": "Horas de juego",
       "figure_mmr": "MMR de sus alumnos",
-      "price_from": "Desde",
+      "price_from": "Individual desde",
       "cta_more": "Ver servicios y precios"
     },
     "storeHighlight": {
@@ -114,9 +115,13 @@
     }
   },
   "team": {
+    "seo": {
+      "title": "Plantilla de Rocket League",
+      "description": "Conoce la plantilla oficial de Crow 6 eSports: jugadores titulares, suplentes y staff del equipo competitivo de Rocket League."
+    },
     "meta": {
       "title": "Plantilla",
-      "description": "El roster oficial de Crow 6 Esports."
+      "description": "El roster oficial de Crow 6 eSports."
     },
     "eyebrow": "Roster oficial",
     "sections": {
@@ -132,9 +137,9 @@
     }
   },
   "news": {
-    "meta": {
+    "seo": {
       "title": "Noticias",
-      "description": "Las últimas noticias de Crow 6 Esports."
+      "description": "Las últimas noticias de Crow 6 eSports: novedades del club, resultados de torneos y anuncios del equipo de Rocket League."
     },
     "title": "Noticias",
     "eyebrow": "Últimas noticias",
@@ -150,9 +155,14 @@
     }
   },
   "store": {
+    "seo": {
+      "title": "Tienda oficial",
+      "description": "Merchandising oficial de Crow 6 eSports. La camiseta del equipo está agotada por ahora: únete al Discord y te avisamos cuando vuelva.",
+      "description_in_stock": "Merchandising oficial de Crow 6 eSports: la camiseta del equipo de Rocket League y más productos del club, disponibles en la tienda oficial."
+    },
     "meta": {
       "title": "Tienda",
-      "description": "Merchandising oficial de Crow 6 Esports: la camiseta del equipo."
+      "description": "Merchandising oficial de Crow 6 eSports: la camiseta del equipo."
     },
     "catalog_label": "Catálogo de productos",
     "title": "Tienda",
@@ -177,7 +187,7 @@
     "showcase": {
       "tag": "Próxima edición",
       "product_label": "Camiseta oficial",
-      "club": "Crow 6 Esports",
+      "club": "Crow 6 eSports",
       "status_note": "Por ahora",
       "title_lead": "La camiseta",
       "title_accent": "oficial",
@@ -191,9 +201,9 @@
     }
   },
   "tryouts": {
-    "meta": {
-      "title": "Tryouts",
-      "description": "Proceso de selección de jugadores para Crow 6 Esports."
+    "seo": {
+      "title": "Tryouts de Rocket League",
+      "description": "Consulta cómo es el proceso de selección de jugadores de Rocket League de Crow 6 eSports y entra en el Discord para saber cuándo abren los tryouts."
     },
     "open": {
       "eyebrow": "Proceso de selección",
@@ -318,7 +328,7 @@
             }
           },
           "looking_for": {
-            "label": "¿Qué buscas en Crow 6 Esports?",
+            "label": "¿Qué buscas en Crow 6 eSports?",
             "placeholder": "¿Qué esperas del equipo?"
           },
           "open_to_coaching": {
@@ -407,9 +417,9 @@
     }
   },
   "coaching": {
-    "meta": {
-      "title": "Coaching",
-      "description": "Coaching de Rocket League individual y para equipos con el Head Coach de Crow 6 Esports."
+    "seo": {
+      "title": "Coaching de Rocket League",
+      "description": "Coaching de Rocket League con {years} años de experiencia: sesiones 1a1 y para equipos con el Head Coach de Crow 6 eSports. Individual desde {price}/mes."
     },
     "eyebrow": "Entrenamiento profesional",
     "title": "Coaching",
@@ -441,7 +451,7 @@
     },
     "plans": {
       "title": "Packs de coaching",
-      "lead": "Precios de lanzamiento. Todos los packs son mensuales y cada nivel incluye todo lo del anterior.",
+      "lead": "Todos los packs son mensuales y cada nivel incluye todo lo del anterior.",
       "mode": {
         "individual": "Individual",
         "teams": "Grupal / equipos"
@@ -453,9 +463,10 @@
       },
       "featured_badge": "Más elegido",
       "period": "/ mes",
-      "original_price": "Precio original",
-      "sessions_one": "{count} sesión semanal de {hours} h",
-      "sessions_other": "{count} sesiones semanales de {hours} h",
+      "launch_badge": "Precio de lanzamiento",
+      "launch_note": "Precio de lanzamiento hasta {date} · después {price}",
+      "sessions_one": "{count} sesión semanal de {hours} h · {monthly} h al mes",
+      "sessions_other": "{count} sesiones semanales de {hours} h · {monthly} h al mes",
       "cta": {
         "individual": "Reservar pack individual",
         "teams": "Reservar pack de equipo"
@@ -551,15 +562,15 @@
     }
   },
   "about": {
-    "meta": {
+    "seo": {
       "title": "Sobre nosotros",
-      "description": "La historia, los valores y el contacto de Crow 6 Esports."
+      "description": "Descubre la historia, los valores y el contacto de Crow 6 eSports, organización competitiva de Rocket League nacida en {year} en {city}."
     },
     "eyebrow": "El club",
     "title": "Sobre nosotros",
     "story": {
       "title": "Nuestra historia",
-      "founded": "Crow 6 Esports nace en {year} como organización competitiva de {game}.",
+      "founded": "Crow 6 eSports nace en {year} como organización competitiva de {game}.",
       "today": "Hoy el roster oficial reúne a {players} jugadores entre titulares y suplentes.",
       "since": "Desde"
     },
@@ -667,10 +678,10 @@
   },
   "comingSoon": {
     "pageTitle": "Próximamente",
-    "pageDescription": "Estamos preparando la nueva web de Crow 6 Esports. Vuelve pronto.",
+    "pageDescription": "Estamos preparando la nueva web de Crow 6 eSports. Vuelve pronto.",
     "eyebrow": "Estamos preparando algo",
     "title": "Próximamente",
-    "description": "Estamos trabajando en una nueva experiencia para Crow 6 Esports. Vuelve pronto.",
+    "description": "Estamos trabajando en una nueva experiencia para Crow 6 eSports. Vuelve pronto.",
     "socialsLabel": "Redes sociales",
     "newTab": "se abre en una pestaña nueva",
     "meta": "Desde {year} · {game}",
@@ -697,11 +708,11 @@
       },
       "aboutUs": {
         "title": "Sobre nosotros",
-        "description": "Pronto contaremos la historia de Crow 6 Esports, quiénes somos y lo que nos mueve."
+        "description": "Pronto contaremos la historia de Crow 6 eSports, quiénes somos y lo que nos mueve."
       },
       "news": {
         "title": "Noticias",
-        "description": "Pronto publicaremos las novedades de Crow 6 Esports."
+        "description": "Pronto publicaremos las novedades de Crow 6 eSports."
       }
     }
   },

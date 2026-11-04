@@ -70,3 +70,12 @@ export function formatCurrency(locale: Locale, amount: number, currency: string)
     minimumFractionDigits: Number.isInteger(amount) ? 0 : 2,
   }).format(amount);
 }
+
+const SITE_TIME_ZONE = "Europe/Madrid";
+
+/** Fecha larga en el idioma de la página ("31 de diciembre de 2026"), en la hora del club. */
+export function formatDate(locale: Locale, date: Date): string {
+  return new Intl.DateTimeFormat(locale, { dateStyle: "long", timeZone: SITE_TIME_ZONE }).format(
+    date,
+  );
+}

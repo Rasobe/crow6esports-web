@@ -3,11 +3,19 @@ export type CoachingTier = "basic" | "pro" | "elite";
 
 export interface CoachingPlan {
   tier: CoachingTier;
-  price: number;
-  /** Solo si el precio anterior se cobró de verdad: un tachado sin respaldo no se muestra. */
-  originalPrice?: number;
+  /** Precio mensual mientras dure el precio de lanzamiento. */
+  launchPrice: number;
+  /** Precio mensual una vez termina el lanzamiento. */
+  regularPrice: number;
   weeklySessions: number;
   featured?: boolean;
+}
+
+/** Lo que paga hoy quien contrata un pack, y si el precio de lanzamiento sigue vigente. */
+export interface PlanPricing {
+  current: number;
+  regular: number;
+  launchActive: boolean;
 }
 
 /** Sesión o servicio que se contrata por unidad, fuera de los packs mensuales. */
@@ -22,14 +30,42 @@ export interface CoachingFeature {
   tiers: readonly CoachingTier[];
 }
 
+const WEEKS_PER_MONTH = 4;
+
 export function includesFeature(plan: CoachingPlan, feature: CoachingFeature): boolean {
   return feature.tiers.includes(plan.tier);
 }
 
-export function getStartingPlan(plans: readonly CoachingPlan[]): CoachingPlan {
-  return plans.reduce((cheapest, plan) => (plan.price < cheapest.price ? plan : cheapest));
+/** El precio de lanzamiento vale hasta el instante `endsAt` incluido. */
+export function isLaunchActive(endsAt: Date, now: Date = new Date()): boolean {
+  return now.getTime() <= endsAt.getTime();
 }
 
-export function getPricePerPlayer(plan: CoachingPlan, players: number): number {
-  return Math.round(plan.price / players);
+export function getPlanPricing(plan: CoachingPlan, launchActive: boolean): PlanPricing {
+  return {
+    current: launchActive ? plan.launchPrice : plan.regularPrice,
+    regular: plan.regularPrice,
+    launchActive,
+  };
+}
+
+/** El plan más barato según el precio que se cobra ahora. */
+export function getStartingPlan(
+  plans: readonly CoachingPlan[],
+  launchActive: boolean,
+): CoachingPlan {
+  return plans.reduce((cheapest, plan) =>
+    getPlanPricing(plan, launchActive).current < getPlanPricing(cheapest, launchActive).current
+      ? plan
+      : cheapest,
+  );
+}
+
+export function getPricePerPlayer(price: number, players: number): number {
+  return Math.round(price / players);
+}
+
+/** Horas de coaching al mes de un pack: sesiones por semana × 4 semanas × duración. */
+export function getMonthlyHours(plan: CoachingPlan, sessionDurationHours: number): number {
+  return plan.weeklySessions * WEEKS_PER_MONTH * sessionDurationHours;
 }

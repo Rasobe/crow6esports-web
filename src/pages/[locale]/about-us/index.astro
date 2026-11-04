@@ -2,11 +2,13 @@
 import { AboutPage } from "@/ui/features/about/components";
 import { LocaleLayout } from "@/ui/layouts";
 import { createTranslator } from "@/ui/i18n";
+import { CLUB } from "@config/club";
 import { ROUTES } from "@config/routes";
 
-const t = createTranslator(Astro.locals.locale, "about.meta");
+const t = createTranslator(Astro.locals.locale, "about.seo");
+const params = { year: CLUB.foundedYear, city: CLUB.location.city };
 ---
 
-<LocaleLayout title={t("title")} description={t("description")} path={ROUTES.aboutUs}>
+<LocaleLayout title={t("title")} description={t("description", params)} path={ROUTES.aboutUs}>
   <AboutPage />
 </LocaleLayout>

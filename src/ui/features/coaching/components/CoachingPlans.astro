@@ -1,13 +1,15 @@
 ---
 import "./coaching-plans.scss";
-import { COACHING } from "@config/coaching";
+import { COACHING, LAUNCH_PRICE_ENDS } from "@config/coaching";
 import { DISCORD_URL } from "@config/site";
+import { getCoachingPricing } from "@/application/coaching/get-coaching-pricing";
 import {
+  getMonthlyHours,
   getPricePerPlayer,
   includesFeature,
   type CoachingMode,
 } from "@/domain/coaching/coaching-plan";
-import { createTranslator, formatCurrency } from "@/ui/i18n";
+import { createTranslator, formatCurrency, formatDate } from "@/ui/i18n";
 import { Button, Icon } from "@/ui/shared/components";
 
 const MODES: readonly CoachingMode[] = ["individual", "teams"];
@@ -15,7 +17,6 @@ const MODES: readonly CoachingMode[] = ["individual", "teams"];
 const { locale } = Astro.locals;
 const t = createTranslator(locale, "coaching.plans");
 const {
-  plans,
   features,
   singleSessions,
   singleSessionCreditDays,
@@ -24,6 +25,7 @@ const {
   teamMinPlayers,
 } = COACHING;
 const price = (amount: number) => formatCurrency(locale, amount, currency);
+const { launchActive, launchEndsAt, plans } = getCoachingPricing(COACHING.plans, LAUNCH_PRICE_ENDS);
 ---
 
 <section class="coaching-plans" aria-labelledby="coaching-plans-title">
@@ -51,22 +53,25 @@ const price = (amount: number) => formatCurrency(locale, amount, currency);
                     {t("featured_badge")}
                   </span>
                 )}
+                {launchActive && <span class="plan-card__badge">{t("launch_badge")}</span>}
               </div>
               <h4 class="plan-card__tier">{t(`tier.${plan.tier}`)}</h4>
               <p class="plan-card__price">
-                <span class="plan-card__amount">{price(plan.price)}</span>
+                <span class="plan-card__amount">{price(plan.current)}</span>
                 <span class="plan-card__period">{t("period")}</span>
-                {plan.originalPrice !== undefined && (
-                  <span class="plan-card__original">
-                    <span class="plan-card__sr-only">{t("original_price")}:</span>
-                    <s>{price(plan.originalPrice)}</s>
-                  </span>
-                )}
               </p>
+              {launchActive && (
+                <p class="plan-card__launch-note">
+                  {t("launch_note", {
+                    date: formatDate(locale, launchEndsAt),
+                    price: price(plan.regular),
+                  })}
+                </p>
+              )}
               {mode === "teams" && (
                 <p class="plan-card__per-player">
                   {t("per_player", {
-                    price: price(getPricePerPlayer(plan, teamMinPlayers)),
+                    price: price(getPricePerPlayer(plan.current, teamMinPlayers)),
                     players: teamMinPlayers,
                   })}
                 </p>
@@ -75,6 +80,7 @@ const price = (amount: number) => formatCurrency(locale, amount, currency);
                 {t(plan.weeklySessions === 1 ? "sessions_one" : "sessions_other", {
                   count: plan.weeklySessions,
                   hours: sessionDurationHours,
+                  monthly: getMonthlyHours(plan, sessionDurationHours),
                 })}
               </p>
               {/* Todas las ventajas en el mismo orden en cada pack, para compararlos fila a fila */}
