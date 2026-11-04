@@ -25,14 +25,17 @@ export function initCounters(): () => void {
           observer.unobserve(target);
           const element = target as HTMLElement;
           const value = Number(element.dataset.countTo);
-          if (Number.isFinite(value)) countUp(element, value, locale ?? "es");
+          if (!Number.isFinite(value)) return;
+          // El valor real llega del servidor y se conserva hasta este momento: así los
+          // buscadores y quien no haga scroll leen la cifra, no un "0" a medio animar.
+          element.textContent = "0";
+          countUp(element, value, locale ?? "es");
         });
     },
     { threshold: 0.6 },
   );
 
   document.querySelectorAll<HTMLElement>(COUNTER_SELECTOR).forEach((element) => {
-    element.textContent = "0";
     observer.observe(element);
   });
 

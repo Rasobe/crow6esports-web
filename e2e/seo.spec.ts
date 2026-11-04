@@ -121,3 +121,14 @@ test("serves a sitemap with lastmod, hreflang alternates and the public domain o
   for (const loc of locs) expect(loc.startsWith(`${ORIGIN}/`)).toBe(true);
   expect(xml).not.toMatch(/localhost|vercel\.app/);
 });
+
+test("keeps the real figures in the page until their counters scroll into view", async ({
+  page,
+}) => {
+  await page.goto("/es");
+  await page.waitForLoadState("networkidle");
+
+  const figure = page.locator(".coaching-banner__figure-value [data-count-to]").first();
+  await expect(figure).not.toBeInViewport();
+  await expect(figure).not.toHaveText("0");
+});
