@@ -20,7 +20,7 @@
   "home": {
     "seo": {
       "title": "Crow 6 eSports · Rocket League Organization",
-      "description": "Competitive Rocket League organization founded in {year} in {city}, Spain. Meet the roster, the coaching service and the club tryouts."
+      "description": "Crow 6 is a competitive Rocket League organization founded in {year} in {city}, Spain. Meet the roster, the coaching service and the club tryouts."
     },
     "hero": {
       "title": {
@@ -52,13 +52,14 @@
       "eyebrow": "Official roster",
       "title_lead": "The",
       "title_accent": "roster",
+      "intro": "Crow 6 eSports (also known as Crow6 or C6 eSports) is a Rocket League organization founded in {year} in {city}, Spain. A Rocket League team with its own roster, coaching and a selection process open to new players.",
       "cta_view_more": "Full roster"
     },
     "coachingBanner": {
       "title_lead": "Rank up with the",
       "title_accent": "Head Coach",
       "title_tail": "of Crow 6.",
-      "description": "{years} years training players and teams. Replay reviews, clear goals every session and a weekly plan that fits your schedule.",
+      "description": "{years} years training players and teams. Rocket League coaching with replay reviews, clear goals every session and a weekly plan that fits your schedule.",
       "coach_role": "Head Coach",
       "price_unit": "/ month",
       "cta_reserve": "Book your spot",
@@ -95,7 +96,7 @@
       "eyebrow": "Selection process",
       "title_line_1": "Join",
       "title_line_2": "the crows.",
-      "description": "We are looking for committed players ready to compete. Fill in the form and we will contact you.",
+      "description": "Crow6 eSports is looking for committed players ready to compete. Fill in the form and we will contact you.",
       "cta": "Apply now",
       "watermark": "Tryouts"
     },
@@ -117,7 +118,7 @@
   "team": {
     "seo": {
       "title": "Rocket League Roster",
-      "description": "Meet the official Crow 6 eSports roster: starting players, substitutes and coaching staff of our competitive Rocket League team."
+      "description": "Meet the Crow6 eSports roster, a Rocket League team from Huesca: starting players, substitutes and coaching staff of our competitive squad."
     },
     "meta": {
       "title": "Team",
@@ -203,7 +204,7 @@
   "tryouts": {
     "seo": {
       "title": "Rocket League Tryouts",
-      "description": "Find out how the Crow 6 eSports Rocket League player selection works and join our Discord to learn when the next tryouts open."
+      "description": "Find out how the Crow6 eSports Rocket League player selection works and join our Discord to learn when the next tryouts open."
     },
     "open": {
       "eyebrow": "Selection process",
@@ -419,7 +420,7 @@
   "coaching": {
     "seo": {
       "title": "Rocket League Coaching",
-      "description": "Rocket League coaching with {years} years of experience: 1on1 and team sessions with the Crow 6 eSports Head Coach. Individual from {price}/month."
+      "description": "Rocket League coaching with {years} years of experience: 1on1 and team sessions with the Crow 6 Head Coach. Individual from {price}/month."
     },
     "eyebrow": "Professional training",
     "title": "Coaching",
@@ -566,12 +567,15 @@
       "title": "About Us",
       "description": "Discover the story, values and contact details of Crow 6 eSports, a competitive Rocket League organization founded in {year} in {city}."
     },
+    "meta": {
+      "description": "The story, values and contact details of Crow 6 eSports."
+    },
     "eyebrow": "The club",
     "title": "About us",
     "story": {
       "title": "Our story",
       "founded": "Crow 6 eSports was founded in {year} as a competitive {game} organization.",
-      "today": "Today the official roster brings together {players} players between starters and substitutes.",
+      "today": "Today the official Crow 6 roster brings together {players} players between starters and substitutes.",
       "since": "Since"
     },
     "stats": {
@@ -664,7 +668,7 @@
     "contact": {
       "title": "Contact"
     },
-    "brand_description": "Competitive Rocket League organization.",
+    "brand_description": "Crow6 eSports: competitive Rocket League organization from Huesca, Spain.",
     "rights": "All rights reserved",
     "founded": "Founded in {year}",
     "social_aria": "Crow 6 on {network}"

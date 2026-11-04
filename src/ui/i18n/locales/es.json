@@ -20,7 +20,7 @@
   "home": {
     "seo": {
       "title": "Crow 6 eSports · Organización de Rocket League",
-      "description": "Organización competitiva de Rocket League fundada en {year} en {city}. Conoce la plantilla, el coaching y los tryouts del club."
+      "description": "Crow 6 es una organización competitiva de Rocket League fundada en {year} en {city}. Conoce su plantilla, el coaching y los tryouts del club."
     },
     "hero": {
       "title": {
@@ -52,13 +52,14 @@
       "eyebrow": "Roster oficial",
       "title_lead": "La",
       "title_accent": "plantilla",
+      "intro": "Crow 6 eSports (también Crow6 o C6 eSports) es una organización de Rocket League fundada en {year} en {city}. Un equipo de Rocket League en Huesca con plantilla propia, coaching y un proceso de selección abierto a nuevos jugadores.",
       "cta_view_more": "Plantilla completa"
     },
     "coachingBanner": {
       "title_lead": "Sube de rango con el",
       "title_accent": "Head Coach",
       "title_tail": "de Crow 6.",
-      "description": "{years} años formando jugadores y equipos. Revisión de tus replays, objetivos claros en cada sesión y un plan semanal que encaja con tu horario.",
+      "description": "{years} años formando jugadores y equipos. Coaching de Rocket League con revisión de tus replays, objetivos claros en cada sesión y un plan semanal que encaja con tu horario.",
       "coach_role": "Head Coach",
       "price_unit": "/ mes",
       "cta_reserve": "Reserva tu plaza",
@@ -95,7 +96,7 @@
       "eyebrow": "Proceso de selección",
       "title_line_1": "Únete a",
       "title_line_2": "los cuervos.",
-      "description": "Buscamos jugadores comprometidos con ganas de competir. Rellena el formulario y te contactamos.",
+      "description": "Crow6 eSports busca jugadores comprometidos con ganas de competir. Rellena el formulario y te contactamos.",
       "cta": "Inscribirme",
       "watermark": "Tryouts"
     },
@@ -117,7 +118,7 @@
   "team": {
     "seo": {
       "title": "Plantilla de Rocket League",
-      "description": "Conoce la plantilla oficial de Crow 6 eSports: jugadores titulares, suplentes y staff del equipo competitivo de Rocket League."
+      "description": "Conoce la plantilla de Crow6 eSports, equipo de Rocket League en Huesca: jugadores titulares, suplentes y staff del equipo competitivo."
     },
     "meta": {
       "title": "Plantilla",
@@ -203,7 +204,7 @@
   "tryouts": {
     "seo": {
       "title": "Tryouts de Rocket League",
-      "description": "Consulta cómo es el proceso de selección de jugadores de Rocket League de Crow 6 eSports y entra en el Discord para saber cuándo abren los tryouts."
+      "description": "Consulta cómo es el proceso de selección de jugadores de Rocket League de Crow6 y entra en el Discord para saber cuándo abren los tryouts."
     },
     "open": {
       "eyebrow": "Proceso de selección",
@@ -419,7 +420,7 @@
   "coaching": {
     "seo": {
       "title": "Coaching de Rocket League",
-      "description": "Coaching de Rocket League con {years} años de experiencia: sesiones 1a1 y para equipos con el Head Coach de Crow 6 eSports. Individual desde {price}/mes."
+      "description": "Coaching de Rocket League con {years} años de experiencia: sesiones 1a1 y para equipos con el Head Coach de Crow 6. Individual desde {price}/mes."
     },
     "eyebrow": "Entrenamiento profesional",
     "title": "Coaching",
@@ -566,12 +567,15 @@
       "title": "Sobre nosotros",
       "description": "Descubre la historia, los valores y el contacto de Crow 6 eSports, organización competitiva de Rocket League nacida en {year} en {city}."
     },
+    "meta": {
+      "description": "La historia, los valores y el contacto de Crow 6 eSports."
+    },
     "eyebrow": "El club",
     "title": "Sobre nosotros",
     "story": {
       "title": "Nuestra historia",
       "founded": "Crow 6 eSports nace en {year} como organización competitiva de {game}.",
-      "today": "Hoy el roster oficial reúne a {players} jugadores entre titulares y suplentes.",
+      "today": "Hoy el roster oficial de Crow 6 reúne a {players} jugadores entre titulares y suplentes.",
       "since": "Desde"
     },
     "stats": {
@@ -664,7 +668,7 @@
     "contact": {
       "title": "Contacto"
     },
-    "brand_description": "Organización competitiva de Rocket League.",
+    "brand_description": "Crow6 eSports: organización competitiva de Rocket League en Huesca.",
     "rights": "Todos los derechos reservados",
     "founded": "Fundado en {year}",
     "social_aria": "Crow 6 en {network}"
