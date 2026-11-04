@@ -1,9 +1,12 @@
 ---
 import { siteConfig } from "@config/site";
 import { DEFAULT_LOCALE, LOCALES, type Locale } from "@/ui/i18n";
+import { buildPageTitle } from "@/ui/shared/lib/seo";
 
 interface Props {
   title?: string;
+  /** El título ya incluye la marca (la home) y no se le añade la plantilla. */
+  absoluteTitle?: boolean;
   description: string;
   locale: Locale;
   path?: string;
@@ -13,6 +16,7 @@ interface Props {
 
 const {
   title,
+  absoluteTitle,
   description,
   locale,
   path = "",
@@ -23,7 +27,7 @@ const {
 // Open Graph usa el formato idioma_REGIÓN
 const OG_LOCALES: Record<Locale, string> = { es: "es_ES", en: "en_GB" };
 
-const pageTitle = title ? `${title} - ${siteConfig.name}` : siteConfig.name;
+const pageTitle = buildPageTitle(title, siteConfig.name, absoluteTitle);
 const urlFor = (target: Locale) => `${siteConfig.url}/${target}${path}`;
 const canonical = urlFor(locale);
 const ogImage = `${siteConfig.url}${image}`;

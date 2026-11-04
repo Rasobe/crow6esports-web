@@ -17,9 +17,9 @@
     "menu_close_aria": "Close menu"
   },
   "home": {
-    "meta": {
-      "title": "Home",
-      "description": "Competitive Rocket League organization."
+    "seo": {
+      "title": "Crow 6 eSports · Rocket League Organization",
+      "description": "Competitive Rocket League organization founded in {year} in {city}, Spain. Meet the roster, the coaching service and the club tryouts."
     },
     "hero": {
       "title": {
@@ -114,6 +114,10 @@
     }
   },
   "team": {
+    "seo": {
+      "title": "Rocket League Roster",
+      "description": "Meet the official Crow 6 eSports roster: starting players, substitutes and coaching staff of our competitive Rocket League team."
+    },
     "meta": {
       "title": "Team",
       "description": "The official roster of Crow 6 eSports."
@@ -132,9 +136,9 @@
     }
   },
   "news": {
-    "meta": {
+    "seo": {
       "title": "News",
-      "description": "The latest news from Crow 6 eSports."
+      "description": "The latest news from Crow 6 eSports: club updates, tournament results and announcements from our competitive Rocket League team."
     },
     "title": "News",
     "eyebrow": "Latest news",
@@ -150,6 +154,11 @@
     }
   },
   "store": {
+    "seo": {
+      "title": "Official Store",
+      "description": "Official Crow 6 eSports merchandise. The team jersey is sold out for now: join our Discord and we will tell you when it returns.",
+      "description_in_stock": "Official Crow 6 eSports merchandise: the Rocket League team jersey and more club products, available in the official store."
+    },
     "meta": {
       "title": "Store",
       "description": "Official Crow 6 eSports merchandise: the team jersey."
@@ -191,9 +200,9 @@
     }
   },
   "tryouts": {
-    "meta": {
-      "title": "Tryouts",
-      "description": "Apply to join Crow 6 eSports."
+    "seo": {
+      "title": "Rocket League Tryouts",
+      "description": "Find out how the Crow 6 eSports Rocket League player selection works and join our Discord to learn when the next tryouts open."
     },
     "open": {
       "eyebrow": "Selection process",
@@ -407,9 +416,9 @@
     }
   },
   "coaching": {
-    "meta": {
-      "title": "Coaching",
-      "description": "Rocket League coaching for individuals and teams with the Crow 6 eSports Head Coach."
+    "seo": {
+      "title": "Rocket League Coaching",
+      "description": "Rocket League coaching with {years} years of experience: 1on1 and team sessions with the Crow 6 eSports Head Coach. Individual from {price}/month."
     },
     "eyebrow": "Professional training",
     "title": "Coaching",
@@ -552,9 +561,9 @@
     }
   },
   "about": {
-    "meta": {
-      "title": "About us",
-      "description": "The story, values and contact details of Crow 6 eSports."
+    "seo": {
+      "title": "About Us",
+      "description": "Discover the story, values and contact details of Crow 6 eSports, a competitive Rocket League organization founded in {year} in {city}."
     },
     "eyebrow": "The club",
     "title": "About us",

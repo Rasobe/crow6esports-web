@@ -3,18 +3,24 @@ import { COACHING, LAUNCH_PRICE_ENDS } from "@config/coaching";
 import { ROUTES } from "@config/routes";
 import { siteConfig } from "@config/site";
 import { getCoachingPricing } from "@/application/coaching/get-coaching-pricing";
+import { yearsSince } from "@/domain/site/years";
 import { CoachingPage } from "@/ui/features/coaching/components";
 import { LocaleLayout } from "@/ui/layouts";
-import { createTranslator, localizePath } from "@/ui/i18n";
+import { createTranslator, formatCurrency, localizePath } from "@/ui/i18n";
 import { JsonLd } from "@/ui/shared/components";
 import { coachingServiceData } from "@/ui/shared/lib/structured-data";
 
 const { locale } = Astro.locals;
-const t = createTranslator(locale, "coaching.meta");
-const { currentPrices } = getCoachingPricing(COACHING.plans, LAUNCH_PRICE_ENDS);
+const t = createTranslator(locale, "coaching.seo");
+const { currentPrices, startingPrice } = getCoachingPricing(COACHING.plans, LAUNCH_PRICE_ENDS);
+// Cifras de la descripción: salen de la config, nunca escritas a mano
+const description = t("description", {
+  years: yearsSince(COACHING.coach.startYear),
+  price: formatCurrency(locale, startingPrice.individual, COACHING.currency),
+});
 const service = coachingServiceData({
   name: t("title"),
-  description: t("description"),
+  description,
   url: `${siteConfig.url}${localizePath(locale, ROUTES.coaching)}`,
   provider: { name: siteConfig.name, url: siteConfig.url },
   currency: COACHING.currency,
@@ -22,7 +28,7 @@ const service = coachingServiceData({
 });
 ---
 
-<LocaleLayout title={t("title")} description={t("description")} path={ROUTES.coaching}>
+<LocaleLayout title={t("title")} description={description} path={ROUTES.coaching}>
   <JsonLd slot="head" data={service} />
   <CoachingPage />
 </LocaleLayout>

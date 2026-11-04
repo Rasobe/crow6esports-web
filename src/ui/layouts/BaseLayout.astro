@@ -7,12 +7,13 @@ import { Seo } from "@/ui/shared/components";
 
 interface Props {
   title?: string;
+  absoluteTitle?: boolean;
   description: string;
   path?: string;
   noindex?: boolean;
 }
 
-const { title, description, path, noindex } = Astro.props;
+const { title, absoluteTitle, description, path, noindex } = Astro.props;
 const { locale } = Astro.locals;
 ---
 
@@ -42,7 +43,14 @@ const { locale } = Astro.locals;
       })();
     </script>
     <ClientRouter />
-    <Seo title={title} description={description} locale={locale} path={path} noindex={noindex} />
+    <Seo
+      title={title}
+      absoluteTitle={absoluteTitle}
+      description={description}
+      locale={locale}
+      path={path}
+      noindex={noindex}
+    />
     <slot name="head" />
   </head>
   <body>

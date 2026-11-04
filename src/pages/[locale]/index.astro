@@ -7,7 +7,7 @@ import { createTranslator } from "@/ui/i18n";
 import { JsonLd } from "@/ui/shared/components";
 import { sportsTeamData } from "@/ui/shared/lib/structured-data";
 
-const t = createTranslator(Astro.locals.locale, "home.meta");
+const t = createTranslator(Astro.locals.locale, "home.seo");
 const team = sportsTeamData({
   name: siteConfig.name,
   url: siteConfig.url,
@@ -19,7 +19,11 @@ const team = sportsTeamData({
 });
 ---
 
-<LocaleLayout title={t("title")} description={t("description")}>
+<LocaleLayout
+  title={t("title")}
+  absoluteTitle
+  description={t("description", { year: CLUB.foundedYear, city: CLUB.location.city })}
+>
   <JsonLd slot="head" data={team} />
   <HomePage />
 </LocaleLayout>
