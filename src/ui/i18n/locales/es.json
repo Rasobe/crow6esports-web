@@ -666,7 +666,8 @@
     },
     "brand_description": "Organización competitiva de Rocket League.",
     "rights": "Todos los derechos reservados",
-    "founded": "Fundado en {year}"
+    "founded": "Fundado en {year}",
+    "social_aria": "Crow 6 en {network}"
   },
   "notFound": {
     "eyebrow": "Página no encontrada",

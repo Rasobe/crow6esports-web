@@ -39,6 +39,7 @@ interface Website {
   name: string;
   url: string;
   alternateName: readonly string[];
+  sameAs?: readonly string[];
 }
 
 export function websiteData(site: Website): StructuredData {
@@ -48,6 +49,7 @@ export function websiteData(site: Website): StructuredData {
     name: site.name,
     alternateName: [...site.alternateName],
     url: site.url,
+    ...(site.sameAs?.length ? { sameAs: [...site.sameAs] } : {}),
   };
 }
 
