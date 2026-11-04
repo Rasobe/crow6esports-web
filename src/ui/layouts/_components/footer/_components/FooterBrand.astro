@@ -30,7 +30,7 @@ const t = createTranslator(locale, "footer");
           href={social.href}
           target="_blank"
           rel="noopener noreferrer"
-          aria-label={social.label}
+          aria-label={t("social_aria", { network: social.label })}
           class="footer__social"
         >
           <Icon name={social.platform} size={20} />

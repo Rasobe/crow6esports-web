@@ -13,6 +13,9 @@ export const socialLinks = [
   { platform: "youtube", href: "https://youtube.com/@crow6esports", label: "YouTube" },
 ] as const;
 
+/** URLs de todos los perfiles oficiales, para `sameAs` en los datos estructurados. */
+export const socialUrls: readonly string[] = socialLinks.map(({ href }) => href);
+
 export const DISCORD_URL = socialLinks.find(({ platform }) => platform === "discord")!.href;
 
 export type SiteConfig = typeof siteConfig;
