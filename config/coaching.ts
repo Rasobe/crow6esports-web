@@ -35,12 +35,7 @@ export interface CoachingConfig {
   teamsWorkedWith: readonly string[];
 }
 
-/**
- * Último instante del precio de lanzamiento. Pasada esta fecha la web muestra sola el precio
- * regular, sin badge ni texto de lanzamiento (se compara con la fecha actual en cada petición).
- */
-// TODO: validar fecha
-export const LAUNCH_PRICE_ENDS = new Date("2026-12-31T23:59:59+01:00");
+export const LAUNCH_PRICE_ENDS = new Date("2027-01-31T23:59:59+01:00");
 
 // Estudio de mercado y razonamiento de los precios en docs/estudio-precios-coaching.md.
 // Los precios de equipo son por equipo (mínimo `teamMinPlayers` jugadores), no por jugador.
@@ -58,14 +53,14 @@ export const COACHING: CoachingConfig = {
   policy: { postponeMaxDays: 2, postponeMaxPerMonth: 2 },
   plans: {
     individual: [
-      { tier: "basic", launchPrice: 40, regularPrice: 60, weeklySessions: 1 },
-      { tier: "pro", launchPrice: 75, regularPrice: 110, weeklySessions: 2, featured: true },
-      { tier: "elite", launchPrice: 105, regularPrice: 150, weeklySessions: 3 },
+      { tier: "basic", launchPrice: 49, regularPrice: 60, weeklySessions: 1 },
+      { tier: "pro", launchPrice: 89, regularPrice: 110, weeklySessions: 2, featured: true },
+      { tier: "elite", launchPrice: 129, regularPrice: 150, weeklySessions: 3 },
     ],
     teams: [
-      { tier: "basic", launchPrice: 60, regularPrice: 90, weeklySessions: 1 },
-      { tier: "pro", launchPrice: 110, regularPrice: 165, weeklySessions: 2, featured: true },
-      { tier: "elite", launchPrice: 150, regularPrice: 230, weeklySessions: 3 },
+      { tier: "basic", launchPrice: 89, regularPrice: 109, weeklySessions: 1 },
+      { tier: "pro", launchPrice: 159, regularPrice: 189, weeklySessions: 2, featured: true },
+      { tier: "elite", launchPrice: 229, regularPrice: 269, weeklySessions: 3 },
     ],
   },
   features: {
