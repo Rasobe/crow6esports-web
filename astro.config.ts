@@ -41,7 +41,7 @@ export default defineConfig({
       TRYOUT_EMAIL_FROM: envField.string({
         context: "server",
         access: "secret",
-        default: "Crow 6 Esports <noreply@crow6esports.com>",
+        default: "Crow 6 eSports <noreply@crow6esports.com>",
       }),
       TRYOUT_EMAIL_TO: envField.string({
         context: "server",

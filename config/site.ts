@@ -1,5 +1,5 @@
 export const siteConfig = {
-  name: "Crow 6 Esports",
+  name: "Crow 6 eSports",
   url: "https://crow6esports.com",
 } as const;
 

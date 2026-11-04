@@ -1,6 +1,6 @@
 # crow6esports-web
 
-Sitio web oficial de [Crow 6 Esports](https://crow6esports.com) — organización competitiva de Rocket League fundada en 2020.
+Sitio web oficial de [Crow 6 eSports](https://crow6esports.com) — organización competitiva de Rocket League fundada en 2020.
 
 ## Stack
 
@@ -89,7 +89,7 @@ SITE_URL=https://crow6esports.com
 MAINTENANCE_MODE=false
 TRYOUTS_OPEN=true
 RESEND_API_KEY=re_...
-TRYOUT_EMAIL_FROM="Crow 6 Esports <noreply@crow6esports.com>"  # dominio verificado en Resend
+TRYOUT_EMAIL_FROM="Crow 6 eSports <noreply@crow6esports.com>"  # dominio verificado en Resend
 TRYOUT_EMAIL_TO=crow6esports@gmail.com
 ```
 
@@ -116,4 +116,4 @@ El proyecto despliega automáticamente en Vercel en cada push a `main`. Las vari
 
 ---
 
-**Crow 6 Esports** · Est. 2020 · [crow6esports.com](https://crow6esports.com) · [@crow6esports](https://linktr.ee/crow6esports)
+**Crow 6 eSports** · Est. 2020 · [crow6esports.com](https://crow6esports.com) · [@crow6esports](https://linktr.ee/crow6esports)

@@ -9,7 +9,7 @@
     "coaching": "Coaching",
     "about_us": "About us",
     "join": "Join us",
-    "home_aria": "Crow 6 Esports, Home",
+    "home_aria": "Crow 6 eSports, Home",
     "locale_switcher_aria": "Select language",
     "menu_aria": "Navigation menu",
     "menu_open_aria": "Open menu",
@@ -25,7 +25,7 @@
       "title": {
         "name": "Crow",
         "number": "6",
-        "sector": "Esports"
+        "sector": "eSports"
       },
       "subtitle": "Competitive Rocket League organization",
       "cta_team": "Meet the team",
@@ -116,7 +116,7 @@
   "team": {
     "meta": {
       "title": "Team",
-      "description": "The official roster of Crow 6 Esports."
+      "description": "The official roster of Crow 6 eSports."
     },
     "eyebrow": "Official roster",
     "sections": {
@@ -134,7 +134,7 @@
   "news": {
     "meta": {
       "title": "News",
-      "description": "The latest news from Crow 6 Esports."
+      "description": "The latest news from Crow 6 eSports."
     },
     "title": "News",
     "eyebrow": "Latest news",
@@ -152,7 +152,7 @@
   "store": {
     "meta": {
       "title": "Store",
-      "description": "Official Crow 6 Esports merchandise: the team jersey."
+      "description": "Official Crow 6 eSports merchandise: the team jersey."
     },
     "catalog_label": "Product catalog",
     "title": "Store",
@@ -177,7 +177,7 @@
     "showcase": {
       "tag": "Next edition",
       "product_label": "Official jersey",
-      "club": "Crow 6 Esports",
+      "club": "Crow 6 eSports",
       "status_note": "For now",
       "title_lead": "The official",
       "title_accent": "jersey",
@@ -193,7 +193,7 @@
   "tryouts": {
     "meta": {
       "title": "Tryouts",
-      "description": "Apply to join Crow 6 Esports."
+      "description": "Apply to join Crow 6 eSports."
     },
     "open": {
       "eyebrow": "Selection process",
@@ -318,7 +318,7 @@
             }
           },
           "looking_for": {
-            "label": "What are you looking for in Crow 6 Esports?",
+            "label": "What are you looking for in Crow 6 eSports?",
             "placeholder": "What do you expect from the team?"
           },
           "open_to_coaching": {
@@ -409,7 +409,7 @@
   "coaching": {
     "meta": {
       "title": "Coaching",
-      "description": "Rocket League coaching for individuals and teams with the Crow 6 Esports Head Coach."
+      "description": "Rocket League coaching for individuals and teams with the Crow 6 eSports Head Coach."
     },
     "eyebrow": "Professional training",
     "title": "Coaching",
@@ -554,13 +554,13 @@
   "about": {
     "meta": {
       "title": "About us",
-      "description": "The story, values and contact details of Crow 6 Esports."
+      "description": "The story, values and contact details of Crow 6 eSports."
     },
     "eyebrow": "The club",
     "title": "About us",
     "story": {
       "title": "Our story",
-      "founded": "Crow 6 Esports was founded in {year} as a competitive {game} organization.",
+      "founded": "Crow 6 eSports was founded in {year} as a competitive {game} organization.",
       "today": "Today the official roster brings together {players} players between starters and substitutes.",
       "since": "Since"
     },
@@ -668,10 +668,10 @@
   },
   "comingSoon": {
     "pageTitle": "Coming soon",
-    "pageDescription": "We are getting the new Crow 6 Esports website ready. Check back soon.",
+    "pageDescription": "We are getting the new Crow 6 eSports website ready. Check back soon.",
     "eyebrow": "Something is on the way",
     "title": "Coming soon",
-    "description": "We are building a new experience for Crow 6 Esports. Check back soon.",
+    "description": "We are building a new experience for Crow 6 eSports. Check back soon.",
     "socialsLabel": "Social media",
     "newTab": "opens in a new tab",
     "meta": "Since {year} · {game}",
@@ -698,11 +698,11 @@
       },
       "aboutUs": {
         "title": "About us",
-        "description": "Soon we will tell the story of Crow 6 Esports, who we are and what drives us."
+        "description": "Soon we will tell the story of Crow 6 eSports, who we are and what drives us."
       },
       "news": {
         "title": "News",
-        "description": "We will soon publish the latest from Crow 6 Esports."
+        "description": "We will soon publish the latest from Crow 6 eSports."
       }
     }
   },
