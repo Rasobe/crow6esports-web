@@ -61,6 +61,17 @@ describe("websiteData", () => {
       url: "https://crow6esports.com",
     });
   });
+
+  it("links the social profiles when given", () => {
+    const data = websiteData({
+      name: "Crow 6 eSports",
+      url: "https://crow6esports.com",
+      alternateName: [],
+      sameAs: ["https://x.com/crow6esports"],
+    });
+
+    expect(data.sameAs).toEqual(["https://x.com/crow6esports"]);
+  });
 });
 
 describe("coachingServiceData", () => {

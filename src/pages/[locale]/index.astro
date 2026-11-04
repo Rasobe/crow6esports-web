@@ -1,6 +1,6 @@
 ---
 import { CLUB } from "@config/club";
-import { siteConfig, socialLinks } from "@config/site";
+import { siteConfig, socialUrls } from "@config/site";
 import { HomePage } from "@/ui/features/home/components";
 import { LocaleLayout } from "@/ui/layouts";
 import { createTranslator } from "@/ui/i18n";
@@ -19,12 +19,13 @@ const team = sportsTeamData({
   description,
   alternateName: CLUB.alternateNames,
   location: CLUB.location,
-  sameAs: socialLinks.map((link) => link.href),
+  sameAs: socialUrls,
 });
 const website = websiteData({
   name: siteConfig.name,
   url: siteConfig.url,
   alternateName: siteConfig.alternateNames,
+  sameAs: socialUrls,
 });
 ---
 
