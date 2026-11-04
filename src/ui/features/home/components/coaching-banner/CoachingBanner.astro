@@ -1,17 +1,18 @@
 ---
 import "./coaching-banner.scss";
-import { COACHING } from "@config/coaching";
+import { COACHING, LAUNCH_PRICE_ENDS } from "@config/coaching";
 import { ROUTES } from "@config/routes";
-import { getStartingPlan } from "@/domain/coaching/coaching-plan";
+import { getCoachingPricing } from "@/application/coaching/get-coaching-pricing";
 import { yearsSince } from "@/domain/site/years";
-import { createTranslator, localizePath } from "@/ui/i18n";
+import { createTranslator, formatCurrency, localizePath } from "@/ui/i18n";
 import { Button, Icon } from "@/ui/shared/components";
 
 const { locale } = Astro.locals;
 const t = createTranslator(locale, "home.coachingBanner");
 
-const { coach, results, plans } = COACHING;
-const { price: startingPrice } = getStartingPlan(plans.individual);
+const { coach, results, currency } = COACHING;
+const { startingPrice } = getCoachingPricing(COACHING.plans, LAUNCH_PRICE_ENDS);
+const fromPrice = formatCurrency(locale, startingPrice.individual, currency);
 const years = yearsSince(coach.startYear);
 
 const figures = [
@@ -82,7 +83,7 @@ const figures = [
         </Button>
         <p class="coaching-banner__from">
           {t("price_from")}
-          <strong class="coaching-banner__from-amount">{startingPrice}€</strong>
+          <strong class="coaching-banner__from-amount">{fromPrice}</strong>
           {t("price_unit")}
         </p>
         <a class="coaching-banner__more" href={localizePath(locale, ROUTES.coaching)}>

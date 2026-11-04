@@ -1,5 +1,3 @@
-import type { CoachingPlan } from "@/domain/coaching/coaching-plan";
-
 /** Datos estructurados de schema.org que los buscadores leen del JSON-LD de la página. */
 export type StructuredData = Record<string, unknown>;
 
@@ -33,12 +31,12 @@ interface CoachingService {
   url: string;
   provider: { name: string; url: string };
   currency: string;
-  plans: readonly CoachingPlan[];
+  prices: readonly number[];
 }
 
 /** El servicio de coaching con el rango de precios de sus packs mensuales. */
 export function coachingServiceData(service: CoachingService): StructuredData {
-  const prices = service.plans.map((plan) => plan.price);
+  const { prices } = service;
   return {
     "@context": "https://schema.org",
     "@type": "Service",

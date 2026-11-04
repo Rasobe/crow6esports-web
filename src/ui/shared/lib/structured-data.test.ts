@@ -30,16 +30,13 @@ describe("coachingServiceData", () => {
       url: "https://crow6esports.com/es/coaching",
       provider: { name: "Crow 6 Esports", url: "https://crow6esports.com" },
       currency: "EUR",
-      plans: [
-        { tier: "basic", price: 39, originalPrice: 55, weeklySessions: 1 },
-        { tier: "elite", price: 219, originalPrice: 309, weeklySessions: 3 },
-      ],
+      prices: [40, 219],
     });
 
     expect(data.offers).toEqual({
       "@type": "AggregateOffer",
       priceCurrency: "EUR",
-      lowPrice: 39,
+      lowPrice: 40,
       highPrice: 219,
       offerCount: 2,
     });

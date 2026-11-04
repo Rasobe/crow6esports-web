@@ -65,7 +65,7 @@
       "figure_years": "Años como coach",
       "figure_hours": "Horas de juego",
       "figure_mmr": "MMR de sus alumnos",
-      "price_from": "Desde",
+      "price_from": "Individual desde",
       "cta_more": "Ver servicios y precios"
     },
     "storeHighlight": {
@@ -441,7 +441,7 @@
     },
     "plans": {
       "title": "Packs de coaching",
-      "lead": "Precios de lanzamiento. Todos los packs son mensuales y cada nivel incluye todo lo del anterior.",
+      "lead": "Todos los packs son mensuales y cada nivel incluye todo lo del anterior.",
       "mode": {
         "individual": "Individual",
         "teams": "Grupal / equipos"
@@ -453,9 +453,10 @@
       },
       "featured_badge": "Más elegido",
       "period": "/ mes",
-      "original_price": "Precio original",
-      "sessions_one": "{count} sesión semanal de {hours} h",
-      "sessions_other": "{count} sesiones semanales de {hours} h",
+      "launch_badge": "Precio de lanzamiento",
+      "launch_note": "Precio de lanzamiento hasta {date} · después {price}",
+      "sessions_one": "{count} sesión semanal de {hours} h · {monthly} h al mes",
+      "sessions_other": "{count} sesiones semanales de {hours} h · {monthly} h al mes",
       "cta": {
         "individual": "Reservar pack individual",
         "teams": "Reservar pack de equipo"

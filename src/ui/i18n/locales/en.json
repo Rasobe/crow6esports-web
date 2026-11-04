@@ -65,7 +65,7 @@
       "figure_years": "Years coaching",
       "figure_hours": "Hours played",
       "figure_mmr": "Students' MMR",
-      "price_from": "From",
+      "price_from": "Individual from",
       "cta_more": "See services and prices"
     },
     "storeHighlight": {
@@ -441,7 +441,7 @@
     },
     "plans": {
       "title": "Coaching packs",
-      "lead": "Launch prices. All packs are monthly and each tier includes everything in the one before.",
+      "lead": "All packs are monthly and each tier includes everything in the one before.",
       "mode": {
         "individual": "Individual",
         "teams": "Group / teams"
@@ -453,9 +453,10 @@
       },
       "featured_badge": "Most popular",
       "period": "/ month",
-      "original_price": "Original price",
-      "sessions_one": "{count} weekly session of {hours} h",
-      "sessions_other": "{count} weekly sessions of {hours} h",
+      "launch_badge": "Launch price",
+      "launch_note": "Launch price until {date} · then {price}",
+      "sessions_one": "{count} weekly session of {hours} h · {monthly} h a month",
+      "sessions_other": "{count} weekly sessions of {hours} h · {monthly} h a month",
       "cta": {
         "individual": "Book an individual pack",
         "teams": "Book a team pack"
