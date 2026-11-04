@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { coachingServiceData, sportsTeamData } from "./structured-data";
+import { coachingServiceData, sportsTeamData, websiteData } from "./structured-data";
 
 describe("sportsTeamData", () => {
   it("describes the club as a sports team with its profiles", () => {
@@ -10,6 +10,9 @@ describe("sportsTeamData", () => {
       sport: "Rocket League",
       email: "club@example.com",
       foundingYear: 2020,
+      description: "Competitive Rocket League organization.",
+      alternateName: ["Crow6", "Crow 6", "C6 eSports"],
+      location: { city: "Huesca", country: "ES" },
       sameAs: ["https://x.com/crow6esports"],
     });
 
@@ -17,7 +20,45 @@ describe("sportsTeamData", () => {
       "@type": "SportsTeam",
       sport: "Rocket League",
       foundingDate: "2020",
+      description: "Competitive Rocket League organization.",
+      alternateName: ["Crow6", "Crow 6", "C6 eSports"],
+      location: { "@type": "PostalAddress", addressLocality: "Huesca", addressCountry: "ES" },
       sameAs: ["https://x.com/crow6esports"],
+    });
+  });
+
+  it("serialises to valid JSON", () => {
+    const data = sportsTeamData({
+      name: "Crow 6 eSports",
+      url: "https://crow6esports.com",
+      logo: "https://crow6esports.com/icon-512.png",
+      sport: "Rocket League",
+      email: "club@example.com",
+      foundingYear: 2020,
+      description: 'Quotes " and <tags>',
+      alternateName: [],
+      location: { city: "Huesca", country: "ES" },
+      sameAs: [],
+    });
+
+    expect(JSON.parse(JSON.stringify(data))).toEqual(data);
+  });
+});
+
+describe("websiteData", () => {
+  it("describes the site with its alternate names", () => {
+    expect(
+      websiteData({
+        name: "Crow 6 eSports",
+        url: "https://crow6esports.com",
+        alternateName: ["Crow6", "Crow 6"],
+      }),
+    ).toEqual({
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: "Crow 6 eSports",
+      alternateName: ["Crow6", "Crow 6"],
+      url: "https://crow6esports.com",
     });
   });
 });

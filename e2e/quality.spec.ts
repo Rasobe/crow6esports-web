@@ -115,7 +115,7 @@ test("describes the club and the coaching service for search engines", async ({ 
       );
 
   await page.goto("/es");
-  expect(await structuredTypes()).toContain("SportsTeam");
+  expect(await structuredTypes()).toEqual(expect.arrayContaining(["SportsTeam", "WebSite"]));
 
   await page.goto("/es/coaching");
   expect(await structuredTypes()).toContain("Service");

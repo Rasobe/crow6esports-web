@@ -8,6 +8,9 @@ interface Club {
   sport: string;
   email: string;
   foundingYear: number;
+  description: string;
+  alternateName: readonly string[];
+  location: { city: string; country: string };
   sameAs: readonly string[];
 }
 
@@ -21,7 +24,30 @@ export function sportsTeamData(club: Club): StructuredData {
     sport: club.sport,
     email: club.email,
     foundingDate: String(club.foundingYear),
+    description: club.description,
+    alternateName: [...club.alternateName],
+    location: {
+      "@type": "PostalAddress",
+      addressLocality: club.location.city,
+      addressCountry: club.location.country,
+    },
     sameAs: [...club.sameAs],
+  };
+}
+
+interface Website {
+  name: string;
+  url: string;
+  alternateName: readonly string[];
+}
+
+export function websiteData(site: Website): StructuredData {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: site.name,
+    alternateName: [...site.alternateName],
+    url: site.url,
   };
 }
 

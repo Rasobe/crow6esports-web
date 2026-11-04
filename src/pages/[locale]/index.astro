@@ -5,9 +5,10 @@ import { HomePage } from "@/ui/features/home/components";
 import { LocaleLayout } from "@/ui/layouts";
 import { createTranslator } from "@/ui/i18n";
 import { JsonLd } from "@/ui/shared/components";
-import { sportsTeamData } from "@/ui/shared/lib/structured-data";
+import { sportsTeamData, websiteData } from "@/ui/shared/lib/structured-data";
 
 const t = createTranslator(Astro.locals.locale, "home.seo");
+const description = t("description", { year: CLUB.foundedYear, city: CLUB.location.city });
 const team = sportsTeamData({
   name: siteConfig.name,
   url: siteConfig.url,
@@ -15,15 +16,20 @@ const team = sportsTeamData({
   sport: CLUB.game,
   email: CLUB.email,
   foundingYear: CLUB.foundedYear,
+  description,
+  alternateName: CLUB.alternateNames,
+  location: CLUB.location,
   sameAs: socialLinks.map((link) => link.href),
+});
+const website = websiteData({
+  name: siteConfig.name,
+  url: siteConfig.url,
+  alternateName: siteConfig.alternateNames,
 });
 ---
 
-<LocaleLayout
-  title={t("title")}
-  absoluteTitle
-  description={t("description", { year: CLUB.foundedYear, city: CLUB.location.city })}
->
+<LocaleLayout title={t("title")} absoluteTitle description={description}>
   <JsonLd slot="head" data={team} />
+  <JsonLd slot="head" data={website} />
   <HomePage />
 </LocaleLayout>
