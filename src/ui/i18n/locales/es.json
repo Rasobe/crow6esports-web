@@ -566,6 +566,9 @@
       "title": "Sobre nosotros",
       "description": "Descubre la historia, los valores y el contacto de Crow 6 eSports, organización competitiva de Rocket League nacida en {year} en {city}."
     },
+    "meta": {
+      "description": "La historia, los valores y el contacto de Crow 6 eSports."
+    },
     "eyebrow": "El club",
     "title": "Sobre nosotros",
     "story": {

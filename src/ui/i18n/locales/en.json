@@ -566,6 +566,9 @@
       "title": "About Us",
       "description": "Discover the story, values and contact details of Crow 6 eSports, a competitive Rocket League organization founded in {year} in {city}."
     },
+    "meta": {
+      "description": "The story, values and contact details of Crow 6 eSports."
+    },
     "eyebrow": "The club",
     "title": "About us",
     "story": {
