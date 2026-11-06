@@ -77,3 +77,9 @@ export function isCompleteSchedule({ scheduleType, scheduleFrom, scheduleTo }: S
   if (!scheduleFrom || !scheduleTo) return false;
   return isScheduleTime(scheduleFrom) && isScheduleTime(scheduleTo) && scheduleFrom !== scheduleTo;
 }
+
+export const SUBMISSION_LOCALES = ["es", "en"] as const;
+export type SubmissionLocale = (typeof SUBMISSION_LOCALES)[number];
+
+export const REQUEST_STATUSES = ["new", "contacted", "accepted", "rejected"] as const;
+export type RequestStatus = (typeof REQUEST_STATUSES)[number];

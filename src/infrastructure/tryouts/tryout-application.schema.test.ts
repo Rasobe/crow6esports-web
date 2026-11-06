@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { tryoutApplicationSchema } from "./tryout-application.schema";
+import { tryoutApplicationSchema, tryoutSubmissionSchema } from "./tryout-application.schema";
 
 const valid = {
   discord: "user",
@@ -72,5 +72,13 @@ describe("tryoutApplicationSchema", () => {
     expect(
       tryoutApplicationSchema.safeParse({ ...valid, lookingFor: "x".repeat(2001) }).success,
     ).toBe(false);
+  });
+});
+
+describe("tryoutSubmissionSchema", () => {
+  it("requires a supported locale", () => {
+    expect(tryoutSubmissionSchema.safeParse({ ...valid, locale: "en" }).success).toBe(true);
+    expect(tryoutSubmissionSchema.safeParse({ ...valid, locale: "fr" }).success).toBe(false);
+    expect(tryoutSubmissionSchema.safeParse(valid).success).toBe(false);
   });
 });

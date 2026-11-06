@@ -350,6 +350,55 @@
   }
 
   // ── Error de envío ──
+  .tryouts-form__status {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin: 0 var(--space-10) var(--space-6);
+    padding: var(--space-3) var(--space-4);
+    border-left: 2px solid var(--brand);
+    background: var(--brand-tint);
+    font-size: var(--fs-md);
+    color: var(--text-primary);
+
+    @include below(sm) {
+      margin-inline: var(--space-5);
+    }
+  }
+
+  .tryouts-form__spinner {
+    flex: none;
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    margin-right: var(--space-2);
+    border: 2px solid currentColor;
+    border-right-color: transparent;
+    border-radius: 50%;
+    vertical-align: -0.125em;
+    animation: tryouts-spin 0.8s linear infinite;
+
+    .tryouts-form__status & {
+      margin-right: 0;
+      color: var(--brand);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      animation-duration: 2.4s;
+    }
+  }
+
+  @keyframes tryouts-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .tryouts-panel__body[inert] {
+    opacity: 0.5;
+    transition: opacity var(--duration-base) var(--ease-standard);
+  }
+
   .tryouts-form__error {
     margin: 0 var(--space-10) var(--space-6);
     padding: var(--space-3) var(--space-4);

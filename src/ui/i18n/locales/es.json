@@ -401,13 +401,29 @@
             "sat": "Sábado",
             "sun": "Domingo"
           }
-        }
+        },
+        "saving": "Guardando tu solicitud. No cierres esta página."
       },
       "success": {
-        "eyebrow": "#GOCROWS",
         "title": "SOLICITUD ENVIADA",
-        "desc": "Hemos recibido tu solicitud. Revisamos cada candidatura personalmente. Si encajas con lo que buscamos, te contactaremos por Discord en un plazo de 7 días.",
-        "note": "Si no recibes respuesta en 7 días, tu candidatura no ha sido seleccionada para esta convocatoria."
+        "desc": "Hemos recibido tu solicitud y la revisaremos personalmente.",
+        "note": "Si no recibes respuesta en 7 días, tu candidatura no ha sido seleccionada para esta convocatoria.",
+        "home": "Volver al inicio",
+        "next": {
+          "title": "Qué pasa ahora",
+          "received": {
+            "title": "Solicitud recibida",
+            "desc": "Ya está guardada y el equipo ha sido avisado."
+          },
+          "review": {
+            "title": "La revisamos a mano",
+            "desc": "Cada candidatura la lee una persona del staff, no hay filtros automáticos."
+          },
+          "contact": {
+            "title": "Te escribimos por Discord",
+            "desc": "Si encajas, te contactaremos en un plazo de 7 días."
+          }
+        }
       }
     },
     "closed": {

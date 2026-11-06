@@ -22,7 +22,7 @@ export function TryoutsForm({ messages, locale }: TryoutsFormProps) {
   const tOpen = createMessageTranslator(messages);
   const tForm = createMessageTranslator(messages, "form");
   const { form, currentStep, totalSteps, status, failure, honeypotRef, goNext, goPrev, onSubmit } =
-    useTryoutsForm();
+    useTryoutsForm(locale);
 
   // Al cambiar de paso, el foco va al título del panel para que el lector de pantalla
   // anuncie el paso nuevo y la vista suba al inicio del formulario.
@@ -34,7 +34,7 @@ export function TryoutsForm({ messages, locale }: TryoutsFormProps) {
     headingRef.current?.focus();
   }, [currentStep]);
 
-  if (status === "success") return <TryoutsSuccess t={tOpen} />;
+  if (status === "success") return <TryoutsSuccess t={tOpen} locale={locale} />;
 
   const isSubmitting = status === "submitting";
   const isLastStep = currentStep === totalSteps - 1;
@@ -95,11 +95,18 @@ export function TryoutsForm({ messages, locale }: TryoutsFormProps) {
             </div>
           </header>
 
-          <div key={currentStep} className="tryouts-panel__body">
+          <div key={currentStep} className="tryouts-panel__body" inert={isSubmitting}>
             {currentStep === 0 && <StepProfile t={tForm} locale={locale} />}
             {currentStep === 1 && <StepTechnical t={tForm} />}
             {currentStep === 2 && <StepMindset t={tForm} />}
           </div>
+
+          {isSubmitting && (
+            <p className="tryouts-form__status" role="status">
+              <span className="tryouts-form__spinner" aria-hidden="true" />
+              {tForm("saving")}
+            </p>
+          )}
 
           {status === "error" && (
             <p className="tryouts-form__error" role="alert">
@@ -123,6 +130,7 @@ export function TryoutsForm({ messages, locale }: TryoutsFormProps) {
                 disabled={isSubmitting}
                 aria-busy={isSubmitting}
               >
+                {isSubmitting && <span className="tryouts-form__spinner" aria-hidden="true" />}
                 {isSubmitting ? tForm("submitting") : tForm("submit")}
               </FormButton>
             ) : (
