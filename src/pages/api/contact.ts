@@ -8,6 +8,7 @@ const SUBMISSION_WINDOW_MS = 10 * 60 * 1000;
 
 const handleContact = createContactHandler({
   limiter: createRateLimiter({ limit: SUBMISSIONS_PER_WINDOW, windowMs: SUBMISSION_WINDOW_MS }),
+  getRepository: () => container.tryoutRepository,
   getNotifier: () => container.tryoutNotifier,
 });
 

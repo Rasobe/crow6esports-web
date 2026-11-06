@@ -1,4 +1,4 @@
-import type { TryoutApplication } from "@/domain/tryouts/tryout-application";
+import type { SubmissionLocale, TryoutApplication } from "@/domain/tryouts/tryout-application";
 
 const CONTACT_ENDPOINT = "/api/contact";
 const TOO_MANY_REQUESTS = 429;
@@ -16,12 +16,13 @@ export const HONEYPOT_FIELD = "website";
 
 export async function submitTryoutApplication(
   application: TryoutApplication,
+  locale: SubmissionLocale,
   honeypot = "",
 ): Promise<void> {
   const response = await fetch(CONTACT_ENDPOINT, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ ...application, [HONEYPOT_FIELD]: honeypot }),
+    body: JSON.stringify({ ...application, locale, [HONEYPOT_FIELD]: honeypot }),
   });
 
   if (!response.ok) {

@@ -1,8 +1,9 @@
 import { submitTryoutApplication } from "@/application/tryouts/submit-tryout-application";
 import type { TryoutNotifier } from "@/domain/tryouts/tryout-notifier";
+import type { TryoutRepository } from "@/domain/tryouts/tryout-repository";
 import type { RateLimiter } from "@/infrastructure/http/rate-limiter";
 import { isJsonRequest, isSameOrigin, readJsonBody } from "@/infrastructure/http/request-guards";
-import { tryoutApplicationSchema } from "./tryout-application.schema";
+import { tryoutSubmissionSchema } from "./tryout-application.schema";
 
 /** Campo invisible para las personas: si llega relleno, lo ha enviado un bot. */
 export const HONEYPOT_FIELD = "website";
@@ -11,7 +12,8 @@ const MS_PER_SECOND = 1000;
 
 interface ContactHandlerDeps {
   limiter: RateLimiter;
-  /** Se resuelve en cada envío para no exigir la configuración de correo al arrancar. */
+  /** Se resuelven en cada envío para no exigir la configuración externa al arrancar. */
+  getRepository: () => TryoutRepository;
   getNotifier: () => TryoutNotifier;
 }
 
@@ -27,7 +29,7 @@ const isHoneypotFilled = (body: unknown) =>
   HONEYPOT_FIELD in body &&
   Boolean((body as Record<string, unknown>)[HONEYPOT_FIELD]);
 
-export function createContactHandler({ limiter, getNotifier }: ContactHandlerDeps) {
+export function createContactHandler({ limiter, getRepository, getNotifier }: ContactHandlerDeps) {
   return async (request: Request, clientAddress: string): Promise<Response> => {
     if (!isSameOrigin(request)) return jsonResponse({ error: "forbidden_origin" }, 403);
     if (!isJsonRequest(request)) return jsonResponse({ error: "unsupported_media_type" }, 415);
@@ -42,7 +44,7 @@ export function createContactHandler({ limiter, getNotifier }: ContactHandlerDep
     // Se responde como si todo fuera bien para que el bot no aprenda a evitarlo
     if (isHoneypotFilled(body.value)) return jsonResponse({ success: true }, 200);
 
-    const parsed = tryoutApplicationSchema.safeParse(body.value);
+    const parsed = tryoutSubmissionSchema.safeParse(body.value);
     if (!parsed.success) {
       return jsonResponse({ error: "invalid_payload", issues: parsed.error.issues }, 400);
     }
@@ -53,12 +55,24 @@ export function createContactHandler({ limiter, getNotifier }: ContactHandlerDep
       return jsonResponse({ error: "rate_limited" }, 429, { "Retry-After": retryAfter });
     }
 
+    const { locale, ...application } = parsed.data;
+
     try {
-      await submitTryoutApplication(getNotifier(), parsed.data);
+      await submitTryoutApplication(
+        {
+          repository: getRepository(),
+          // Resolución diferida: una configuración de correo ausente no debe impedir guardar
+          notifier: { notify: (submitted) => getNotifier().notify(submitted) },
+          onNotificationFailure: (error) =>
+            console.error("Tryout application stored but the email could not be sent", error),
+        },
+        application,
+        locale,
+      );
       return jsonResponse({ success: true }, 200);
     } catch (error) {
-      console.error("Tryout application could not be delivered", error);
-      return jsonResponse({ error: "delivery_failed" }, 502);
+      console.error("Tryout application could not be stored", error);
+      return jsonResponse({ error: "persist_failed" }, 500);
     }
   };
 }

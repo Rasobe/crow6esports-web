@@ -91,13 +91,32 @@ TRYOUTS_OPEN=true
 RESEND_API_KEY=re_...
 TRYOUT_EMAIL_FROM="Crow 6 eSports <noreply@crow6esports.com>"  # dominio verificado en Resend
 TRYOUT_EMAIL_TO=crow6esports@gmail.com
+SUPABASE_URL=https://<project-ref>.supabase.co
+SUPABASE_SERVICE_ROLE_KEY=...   # solo servidor, nunca con prefijo PUBLIC_
 ```
 
 Nunca subas `.env.local` al repositorio. Está incluido en `.gitignore`.
 
-**`TRYOUTS_OPEN`:** Con `true` la página `/tryouts` muestra el formulario de solicitud; en cualquier otro caso muestra el estado cerrado. Las solicitudes se validan en `/api/contact` y se envían por email con Resend (`RESEND_API_KEY`, `TRYOUT_EMAIL_FROM`, `TRYOUT_EMAIL_TO`).
+**`TRYOUTS_OPEN`:** Con `true` la página `/tryouts` muestra el formulario de solicitud; en cualquier otro caso muestra el estado cerrado. Las solicitudes se validan en `/api/contact`, se guardan en Supabase (`SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`) y después se avisa por email con Resend (`RESEND_API_KEY`, `TRYOUT_EMAIL_FROM`, `TRYOUT_EMAIL_TO`). Si el guardado falla, la API responde 500 y no se envía el email; si solo falla el email, la solicitud queda guardada, se responde éxito y el error se registra.
 
 **`MAINTENANCE_MODE`:** Si se define como `true`, todas las rutas se reescriben a `/coming-soon` excepto la propia página de mantenimiento. Útil para desactivar el sitio temporalmente sin desplegar. Para restaurar el comportamiento normal, desactívalo o asígnale cualquier otro valor. Configurable tanto en `.env.local` como en el panel de Vercel.
+
+## Base de datos (Supabase)
+
+Las solicitudes de tryouts se guardan en la tabla `tryout_requests` (`status`: `new`, `contacted`, `accepted`, `rejected`). La tabla tiene RLS activado y ninguna política: solo el servidor escribe, con la service role key, que vive en `src/infrastructure/supabase/supabase.ts` y nunca llega al bundle del cliente. Las solicitudes se revisan desde el panel de Supabase (Table Editor).
+
+Para aplicar la migración de `supabase/migrations/`:
+
+```bash
+# Opción A: Supabase CLI
+supabase link --project-ref <project-ref>
+supabase db push
+
+# Opción B: panel de Supabase
+# SQL Editor > pegar el contenido de supabase/migrations/20261106120000_create_tryout_requests.sql > Run
+```
+
+Hay que aplicarla antes de desplegar; sin la tabla, `/api/contact` responde 500. Un segundo formulario (por ejemplo coaching) no existe todavía: cuando exista, tendrá su propia migración.
 
 ## Despliegue
 
