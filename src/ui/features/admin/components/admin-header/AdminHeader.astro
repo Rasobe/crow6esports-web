@@ -18,9 +18,10 @@ const links = [
 
 <header class="admin-header">
   <div class="admin-header__inner">
-    <p class="admin-header__brand">
-      Crow 6 <span>Panel</span>
-    </p>
+    <a class="admin-header__brand" href="/admin" aria-label="Crow 6, panel de administración">
+      <img src="/images/brand/crow6-wordmark.svg" alt="" width="96" height="34" />
+      <span class="admin-header__tag">Panel</span>
+    </a>
     <nav class="admin-header__nav" aria-label="Panel">
       <ul class="admin-header__list">
         {links.map((link) => (

@@ -11,16 +11,16 @@ const { overview } = Astro.props;
 ---
 
 <div class="admin-overview">
-  <h1 class="admin-overview__title">Resumen</h1>
+  <h1 class="admin__title">Resumen</h1>
 
   <dl class="admin-overview__stats">
     <a class="admin-overview__stat" href="/admin/tryouts?status=new">
       <dt>Tryouts nuevos</dt>
       <dd>{overview.newTryouts}</dd>
     </a>
-    <a class="admin-overview__stat" href="/admin/coaching">
+    <a class="admin-overview__stat admin-overview__stat--idle" href="/admin/coaching">
       <dt>Coaching nuevos</dt>
-      <dd aria-label="Sin formulario de coaching todavía">&ndash;</dd>
+      <dd class="admin-overview__soon">Sin formulario todavía</dd>
     </a>
   </dl>
 

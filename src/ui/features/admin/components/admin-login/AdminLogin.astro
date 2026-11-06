@@ -14,45 +14,65 @@ const message =
     : "No se pudo iniciar sesión. Revisa los datos e inténtalo de nuevo.";
 ---
 
-<section class="admin-login" aria-labelledby="admin-login-title">
-  <h1 class="admin-login__title" id="admin-login-title">
-    Acceso al panel
-  </h1>
-  <p class="admin-login__lead">Solo para el staff de Crow 6.</p>
+<div class="admin-login">
+  <aside class="admin-login__brand">
+    <img
+      class="admin-login__wordmark"
+      src="/images/brand/crow6-wordmark.svg"
+      alt="Crow 6 eSports"
+      width="240"
+      height="84"
+    />
+    <img
+      class="admin-login__mascot"
+      src="/images/brand/crow6-mascot-full.svg"
+      alt=""
+      width="520"
+      height="367"
+    />
+    <p class="admin-login__claim">Panel del staff</p>
+  </aside>
 
-  {error && <AdminNotice tone="error" message={message} />}
+  <section class="admin-login__panel" aria-labelledby="admin-login-title">
+    <h1 class="admin-login__title" id="admin-login-title">
+      Acceso al panel
+    </h1>
+    <p class="admin-login__lead">Solo para el staff de Crow 6.</p>
 
-  <form class="admin-login__form" method="post" action="/api/admin/login">
-    <div class="admin-login__field">
-      <label class="admin-login__label" for="login-email">
-        Correo
-      </label>
-      <input
-        class="admin-login__control"
-        id="login-email"
-        name="email"
-        type="email"
-        autocomplete="username"
-        maxlength="254"
-        required
-      />
-    </div>
-    <div class="admin-login__field">
-      <label class="admin-login__label" for="login-password">
-        Contraseña
-      </label>
-      <input
-        class="admin-login__control"
-        id="login-password"
-        name="password"
-        type="password"
-        autocomplete="current-password"
-        maxlength="256"
-        required
-      />
-    </div>
-    <button type="submit" class="btn btn--primary btn--md">
-      Entrar
-    </button>
-  </form>
-</section>
+    {error && <AdminNotice tone="error" message={message} />}
+
+    <form class="admin-login__form" method="post" action="/api/admin/login">
+      <div class="admin-login__field">
+        <label class="admin-login__label" for="login-email">
+          Correo
+        </label>
+        <input
+          class="admin-login__control"
+          id="login-email"
+          name="email"
+          type="email"
+          autocomplete="username"
+          maxlength="254"
+          required
+        />
+      </div>
+      <div class="admin-login__field">
+        <label class="admin-login__label" for="login-password">
+          Contraseña
+        </label>
+        <input
+          class="admin-login__control"
+          id="login-password"
+          name="password"
+          type="password"
+          autocomplete="current-password"
+          maxlength="256"
+          required
+        />
+      </div>
+      <button type="submit" class="btn btn--primary btn--md admin-login__submit">
+        Entrar
+      </button>
+    </form>
+  </section>
+</div>

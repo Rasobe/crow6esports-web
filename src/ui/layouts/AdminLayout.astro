@@ -34,7 +34,7 @@ const { adminEmail } = Astro.locals;
       Saltar al contenido
     </a>
     {!bare && <AdminHeader current={current} email={adminEmail} />}
-    <main id="main-content" class="admin__main" tabindex="-1">
+    <main id="main-content" class:list={["admin__main", bare && "admin__main--bare"]} tabindex="-1">
       <slot />
     </main>
   </body>

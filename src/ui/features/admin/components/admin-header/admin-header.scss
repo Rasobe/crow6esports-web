@@ -16,15 +16,33 @@
   }
 
   .admin-header__brand {
-    margin: 0;
-    font-family: var(--ff-display);
-    font-size: var(--fs-xl);
-    letter-spacing: var(--tracking-display);
-    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    text-decoration: none;
 
-    span {
-      color: var(--brand);
+    img {
+      display: block;
+      width: auto;
+      height: 1.75rem;
     }
+
+    &:focus-visible {
+      outline: 2px solid var(--brand);
+      outline-offset: 4px;
+    }
+  }
+
+  .admin-header__tag {
+    padding: var(--space-1) var(--space-4);
+    background: var(--brand);
+    font-family: var(--ff-ui);
+    font-size: var(--fs-2xs);
+    font-weight: 700;
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    color: var(--brand-fg);
+    @include angular-cut(0.4rem);
   }
 
   .admin-header__nav {

@@ -1,9 +1,11 @@
 @use "styles/layers";
+@use "styles/mixins" as *;
 @layer components {
   .status-badge {
     display: inline-block;
-    padding: var(--space-1) var(--space-3);
+    padding: var(--space-1) var(--space-4);
     border: 1px solid var(--border-soft);
+    @include angular-cut(0.35rem);
     font-family: var(--ff-ui);
     font-size: var(--fs-xs);
     font-weight: 700;

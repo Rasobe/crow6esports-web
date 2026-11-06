@@ -4,7 +4,7 @@
   .request-detail {
     display: flex;
     flex-direction: column;
-    gap: var(--space-10);
+    gap: var(--space-6);
   }
 
   .request-detail__meta {
@@ -13,8 +13,18 @@
     color: var(--text-muted);
   }
 
+  .request-detail__section {
+    padding: var(--space-6);
+    border: var(--line-subtle);
+    background: var(--bg-surface);
+
+    @include below(sm) {
+      padding: var(--space-5);
+    }
+  }
+
   .request-detail__title {
-    margin: 0 0 var(--space-4);
+    margin: 0 0 var(--space-5);
     padding-bottom: var(--space-3);
     border-bottom: var(--line);
     font-family: var(--ff-ui);

@@ -7,36 +7,36 @@
     gap: var(--space-10);
   }
 
-  .admin-overview__title {
+  .admin-overview .admin__title {
     margin: 0;
-    font-family: var(--ff-display);
-    font-size: var(--fs-h3);
-    line-height: 1;
-    letter-spacing: var(--tracking-display);
-    text-transform: uppercase;
   }
 
   .admin-overview__stats {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--space-4);
+    @include joined-grid(18rem);
     margin: 0;
-
-    @include below(sm) {
-      grid-template-columns: minmax(0, 1fr);
-    }
   }
 
   .admin-overview__stat {
+    position: relative;
     display: flex;
     flex-direction: column-reverse;
-    gap: var(--space-2);
+    justify-content: flex-end;
+    gap: var(--space-3);
+    min-height: 9rem;
     padding: var(--space-6);
     border: var(--line-subtle);
-    border-left: 3px solid var(--brand);
     background: var(--bg-surface);
     text-decoration: none;
     color: var(--text-primary);
+    transition: border-color var(--duration-base) var(--ease-standard);
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 3px;
+      background: var(--brand);
+    }
 
     dt {
       font-family: var(--ff-ui);
@@ -50,19 +50,30 @@
     dd {
       margin: 0;
       font-family: var(--ff-display);
-      font-size: var(--fs-h3);
-      line-height: 1;
+      font-size: clamp(3rem, 6vw, 4.5rem);
+      line-height: 0.9;
+      color: var(--brand);
     }
 
     &:hover {
       border-color: var(--border-strong);
-      border-left-color: var(--brand);
     }
 
     &:focus-visible {
       outline: 2px solid var(--brand);
       outline-offset: 2px;
     }
+  }
+
+  .admin-overview__stat--idle::before {
+    background: var(--border-soft);
+  }
+
+  .admin-overview__stat dd.admin-overview__soon {
+    font-family: var(--ff-body);
+    font-size: var(--fs-base);
+    line-height: 1.4;
+    color: var(--text-muted);
   }
 
   .admin-overview__subtitle {
@@ -79,8 +90,13 @@
     margin: var(--space-4) 0 0;
 
     a {
-      color: var(--text-secondary);
+      font-family: var(--ff-ui);
+      font-size: var(--fs-md);
+      font-weight: 700;
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
       text-underline-offset: 4px;
+      color: var(--text-secondary);
 
       &:hover {
         color: var(--brand);

@@ -23,8 +23,11 @@
     }
   }
 
+  // El body es flex en columna: sin width el main se encogería al contenido
   .admin__main {
     @include container;
+    width: 100%;
+    flex: 1;
     padding-block: var(--space-10) var(--space-20);
 
     &:focus {
@@ -32,10 +35,19 @@
     }
   }
 
+  .admin__main--bare {
+    max-width: none;
+    padding: 0;
+  }
+
   .admin__title {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-4);
     margin: 0 0 var(--space-6);
     font-family: var(--ff-display);
-    font-size: var(--fs-h3);
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
     line-height: 1;
     letter-spacing: var(--tracking-display);
     text-transform: uppercase;

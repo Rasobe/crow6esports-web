@@ -1,6 +1,11 @@
 @use "styles/layers";
 @use "styles/mixins" as *;
 @layer components {
+  .requests-table__wrap {
+    border: var(--line-subtle);
+    background: var(--bg-surface);
+  }
+
   .requests-table {
     width: 100%;
     border-collapse: collapse;
@@ -26,6 +31,10 @@
 
     tbody th {
       font-weight: 600;
+    }
+
+    tbody tr:last-child > * {
+      border-bottom: 0;
     }
 
     tbody tr:hover {
@@ -61,6 +70,10 @@
         flex-direction: column;
         gap: var(--space-1);
 
+        .status-badge {
+          align-self: flex-start;
+        }
+
         &::before {
           content: attr(data-label);
           font-family: var(--ff-ui);
@@ -75,10 +88,11 @@
   }
 
   .requests-table__caption {
-    padding-bottom: var(--space-3);
-    text-align: left;
-    font-size: var(--fs-sm);
-    color: var(--text-muted);
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
   }
 
   .requests-table__link {
@@ -107,6 +121,7 @@
   .requests-table__empty {
     padding: var(--space-10) var(--space-6);
     border: var(--line-subtle);
+    background: var(--bg-surface);
     text-align: center;
     color: var(--text-secondary);
   }
