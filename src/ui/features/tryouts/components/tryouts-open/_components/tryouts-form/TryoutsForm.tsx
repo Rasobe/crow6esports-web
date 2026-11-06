@@ -22,7 +22,7 @@ export function TryoutsForm({ messages, locale }: TryoutsFormProps) {
   const tOpen = createMessageTranslator(messages);
   const tForm = createMessageTranslator(messages, "form");
   const { form, currentStep, totalSteps, status, failure, honeypotRef, goNext, goPrev, onSubmit } =
-    useTryoutsForm();
+    useTryoutsForm(locale);
 
   // Al cambiar de paso, el foco va al título del panel para que el lector de pantalla
   // anuncie el paso nuevo y la vista suba al inicio del formulario.

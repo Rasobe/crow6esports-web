@@ -11,6 +11,7 @@ import {
   RLTRACKER_HOSTNAME_PATTERN,
   SCHEDULE_TYPES,
   SHORT_TEXT_MAX,
+  SUBMISSION_LOCALES,
   WEEKDAYS,
   isCompleteSchedule,
   isPlausibleBirthDate,
@@ -52,3 +53,7 @@ export const tryoutApplicationSchema = z
     openToCoaching: z.enum(COACHING_OPENNESS),
   })
   .refine(isCompleteSchedule, { path: ["scheduleTo"] });
+
+export const tryoutSubmissionSchema = tryoutApplicationSchema.safeExtend({
+  locale: z.enum(SUBMISSION_LOCALES),
+});

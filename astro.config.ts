@@ -38,6 +38,12 @@ export default defineConfig({
       MAINTENANCE_MODE: envField.boolean({ context: "server", access: "secret", default: false }),
       TRYOUTS_OPEN: envField.boolean({ context: "server", access: "secret", default: false }),
       RESEND_API_KEY: envField.string({ context: "server", access: "secret", optional: true }),
+      SUPABASE_URL: envField.string({ context: "server", access: "secret", optional: true }),
+      SUPABASE_SERVICE_ROLE_KEY: envField.string({
+        context: "server",
+        access: "secret",
+        optional: true,
+      }),
       TRYOUT_EMAIL_FROM: envField.string({
         context: "server",
         access: "secret",

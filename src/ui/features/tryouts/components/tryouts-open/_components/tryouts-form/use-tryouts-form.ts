@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import type { Locale } from "@/ui/i18n";
 import {
   TryoutSubmissionError,
   submitTryoutApplication,
@@ -15,7 +16,7 @@ import {
 
 type SubmitStatus = "idle" | "submitting" | "success" | "error";
 
-export function useTryoutsForm() {
+export function useTryoutsForm(locale: Locale) {
   const [currentStep, setCurrentStep] = useState(0);
   const [status, setStatus] = useState<SubmitStatus>("idle");
   const [failure, setFailure] = useState<TryoutSubmissionFailure>("submit_failed");
@@ -58,6 +59,7 @@ export function useTryoutsForm() {
           previousTeams: values.hasCompetitiveExp === "yes" ? values.previousTeams : "",
           timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
         },
+        locale,
         honeypotRef.current?.value,
       );
       setStatus("success");

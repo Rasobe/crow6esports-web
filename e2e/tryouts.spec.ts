@@ -77,6 +77,7 @@ test("completes the three steps and shows the success state", async ({ page }) =
 
   await expect(page.getByRole("heading", { name: "SOLICITUD ENVIADA" })).toBeVisible();
   expect(submitted).toMatchObject({
+    locale: "es",
     birthDate: "2005-06-15",
     availableDays: ["mon", "tue", "wed", "thu", "fri"],
     scheduleType: "fixed",
