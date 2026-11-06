@@ -1,0 +1,93 @@
+@use "styles/layers";
+@use "styles/mixins" as *;
+@layer components {
+  .admin-header {
+    border-bottom: var(--line-subtle);
+    background: var(--bg-surface);
+  }
+
+  .admin-header__inner {
+    @include container;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3) var(--space-8);
+    padding-block: var(--space-3);
+  }
+
+  .admin-header__brand {
+    margin: 0;
+    font-family: var(--ff-display);
+    font-size: var(--fs-xl);
+    letter-spacing: var(--tracking-display);
+    text-transform: uppercase;
+
+    span {
+      color: var(--brand);
+    }
+  }
+
+  .admin-header__nav {
+    flex: 1;
+
+    @include below(sm) {
+      order: 3;
+      flex-basis: 100%;
+    }
+  }
+
+  .admin-header__list {
+    display: flex;
+    gap: var(--space-1);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .admin-header__link {
+    display: block;
+    padding: var(--space-3) var(--space-4);
+    border-bottom: 2px solid transparent;
+    font-family: var(--ff-ui);
+    font-size: var(--fs-md);
+    font-weight: 700;
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--text-secondary);
+
+    &:hover {
+      color: var(--text-primary);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--brand);
+      outline-offset: -2px;
+    }
+  }
+
+  .admin-header__link--active {
+    color: var(--text-primary);
+    border-bottom-color: var(--brand);
+  }
+
+  .admin-header__session {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-left: auto;
+  }
+
+  .admin-header__email {
+    max-width: 14rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: var(--fs-sm);
+    color: var(--text-muted);
+
+    @include below(sm) {
+      display: none;
+    }
+  }
+}

@@ -1,0 +1,33 @@
+@use "styles/layers";
+@layer components {
+  .status-badge {
+    display: inline-block;
+    padding: var(--space-1) var(--space-3);
+    border: 1px solid var(--border-soft);
+    font-family: var(--ff-ui);
+    font-size: var(--fs-xs);
+    font-weight: 700;
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: var(--text-secondary);
+  }
+
+  .status-badge--new {
+    border-color: var(--brand);
+    background: var(--brand-tint);
+    color: var(--brand);
+  }
+
+  .status-badge--accepted {
+    border-color: var(--success);
+    background: var(--success-bg);
+    color: var(--success);
+  }
+
+  .status-badge--rejected {
+    border-color: var(--danger-soft);
+    background: var(--danger-bg-subtle);
+    color: var(--danger-soft);
+  }
+}

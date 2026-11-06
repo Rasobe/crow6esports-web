@@ -1,0 +1,40 @@
+---
+import "./admin-overview.scss";
+import type { AdminOverview } from "@/application/admin/tryout-requests";
+import { RequestsTable } from "../requests-table";
+
+interface Props {
+  overview: AdminOverview;
+}
+
+const { overview } = Astro.props;
+---
+
+<div class="admin-overview">
+  <h1 class="admin-overview__title">Resumen</h1>
+
+  <dl class="admin-overview__stats">
+    <a class="admin-overview__stat" href="/admin/tryouts?status=new">
+      <dt>Tryouts nuevos</dt>
+      <dd>{overview.newTryouts}</dd>
+    </a>
+    <a class="admin-overview__stat" href="/admin/coaching">
+      <dt>Coaching nuevos</dt>
+      <dd aria-label="Sin formulario de coaching todavía">&ndash;</dd>
+    </a>
+  </dl>
+
+  <section aria-labelledby="latest-title">
+    <h2 class="admin-overview__subtitle" id="latest-title">
+      Últimas solicitudes de tryouts
+    </h2>
+    <RequestsTable
+      requests={overview.latestTryouts}
+      caption="Las 10 solicitudes de tryouts más recientes"
+      emptyMessage="Todavía no ha llegado ninguna solicitud."
+    />
+    <p class="admin-overview__more">
+      <a href="/admin/tryouts">Ver todas las solicitudes</a>
+    </p>
+  </section>
+</div>

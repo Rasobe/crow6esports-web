@@ -1,0 +1,58 @@
+---
+import "./admin-login.scss";
+import "@/ui/shared/components/button/button.scss";
+import { AdminNotice } from "../admin-notice";
+
+interface Props {
+  error?: "1" | "rate_limited";
+}
+
+const { error } = Astro.props;
+const message =
+  error === "rate_limited"
+    ? "Demasiados intentos. Espera unos minutos antes de volver a probar."
+    : "No se pudo iniciar sesión. Revisa los datos e inténtalo de nuevo.";
+---
+
+<section class="admin-login" aria-labelledby="admin-login-title">
+  <h1 class="admin-login__title" id="admin-login-title">
+    Acceso al panel
+  </h1>
+  <p class="admin-login__lead">Solo para el staff de Crow 6.</p>
+
+  {error && <AdminNotice tone="error" message={message} />}
+
+  <form class="admin-login__form" method="post" action="/api/admin/login">
+    <div class="admin-login__field">
+      <label class="admin-login__label" for="login-email">
+        Correo
+      </label>
+      <input
+        class="admin-login__control"
+        id="login-email"
+        name="email"
+        type="email"
+        autocomplete="username"
+        maxlength="254"
+        required
+      />
+    </div>
+    <div class="admin-login__field">
+      <label class="admin-login__label" for="login-password">
+        Contraseña
+      </label>
+      <input
+        class="admin-login__control"
+        id="login-password"
+        name="password"
+        type="password"
+        autocomplete="current-password"
+        maxlength="256"
+        required
+      />
+    </div>
+    <button type="submit" class="btn btn--primary btn--md">
+      Entrar
+    </button>
+  </form>
+</section>

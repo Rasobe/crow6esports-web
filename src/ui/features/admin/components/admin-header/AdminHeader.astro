@@ -1,0 +1,49 @@
+---
+import "./admin-header.scss";
+import "@/ui/shared/components/button/button.scss";
+
+interface Props {
+  current?: "overview" | "tryouts" | "coaching";
+  email?: string;
+}
+
+const { current, email } = Astro.props;
+
+const links = [
+  { key: "overview", href: "/admin", label: "Resumen" },
+  { key: "tryouts", href: "/admin/tryouts", label: "Tryouts" },
+  { key: "coaching", href: "/admin/coaching", label: "Coaching" },
+] as const;
+---
+
+<header class="admin-header">
+  <div class="admin-header__inner">
+    <p class="admin-header__brand">
+      Crow 6 <span>Panel</span>
+    </p>
+    <nav class="admin-header__nav" aria-label="Panel">
+      <ul class="admin-header__list">
+        {links.map((link) => (
+          <li>
+            <a
+              class:list={[
+                "admin-header__link",
+                current === link.key && "admin-header__link--active",
+              ]}
+              href={link.href}
+              aria-current={current === link.key ? "page" : undefined}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+    <form class="admin-header__session" method="post" action="/api/admin/logout">
+      {email && <span class="admin-header__email">{email}</span>}
+      <button type="submit" class="btn btn--ghost btn--sm">
+        Salir
+      </button>
+    </form>
+  </div>
+</header>

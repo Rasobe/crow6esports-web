@@ -1,0 +1,14 @@
+---
+import { ADMIN_HOME_PAGE } from "@/domain/admin/admin-access";
+import { AdminLogin } from "@/ui/features/admin/components";
+import { AdminLayout } from "@/ui/layouts";
+
+if (Astro.locals.adminEmail) return Astro.redirect(ADMIN_HOME_PAGE);
+
+const error = Astro.url.searchParams.get("error");
+const loginError = error === "rate_limited" ? "rate_limited" : error ? "1" : undefined;
+---
+
+<AdminLayout title="Acceso" bare>
+  <AdminLogin error={loginError} />
+</AdminLayout>

@@ -1,0 +1,13 @@
+---
+import "./status-badge.scss";
+import type { RequestStatus } from "@/domain/tryouts/tryout-application";
+import { STATUS_LABELS } from "../../lib/tryout-labels";
+
+interface Props {
+  status: RequestStatus;
+}
+
+const { status } = Astro.props;
+---
+
+<span class:list={["status-badge", `status-badge--${status}`]}>{STATUS_LABELS[status]}</span>
