@@ -1,0 +1,21 @@
+@use "styles/layers";
+@layer components {
+  .admin-notice {
+    margin: 0;
+    padding: var(--space-3) var(--space-4);
+    border-left: 2px solid var(--brand);
+    background: var(--brand-tint);
+    font-size: var(--fs-md);
+    color: var(--text-primary);
+  }
+
+  .admin-notice--success {
+    border-left-color: var(--success);
+    background: var(--success-bg);
+  }
+
+  .admin-notice--error {
+    border-left-color: var(--danger);
+    background: var(--danger-bg-subtle);
+  }
+}

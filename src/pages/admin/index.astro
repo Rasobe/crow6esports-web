@@ -1,0 +1,12 @@
+---
+import { getAdminOverview } from "@/application/admin/tryout-requests";
+import { container } from "@/infrastructure/container";
+import { AdminOverview } from "@/ui/features/admin/components";
+import { AdminLayout } from "@/ui/layouts";
+
+const overview = await getAdminOverview(container.tryoutRequestRepository);
+---
+
+<AdminLayout title="Resumen" current="overview">
+  <AdminOverview overview={overview} />
+</AdminLayout>

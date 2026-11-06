@@ -1,0 +1,106 @@
+@use "styles/layers";
+@use "styles/mixins" as *;
+@layer components {
+  .admin-overview {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-10);
+  }
+
+  .admin-overview .admin__title {
+    margin: 0;
+  }
+
+  .admin-overview__stats {
+    @include joined-grid(18rem);
+    margin: 0;
+  }
+
+  .admin-overview__stat {
+    position: relative;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    gap: var(--space-3);
+    min-height: 9rem;
+    padding: var(--space-6);
+    border: var(--line-subtle);
+    background: var(--bg-surface);
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: border-color var(--duration-base) var(--ease-standard);
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 3px;
+      background: var(--brand);
+    }
+
+    dt {
+      font-family: var(--ff-ui);
+      font-size: var(--fs-md);
+      font-weight: 700;
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      color: var(--text-secondary);
+    }
+
+    dd {
+      margin: 0;
+      font-family: var(--ff-display);
+      font-size: clamp(3rem, 6vw, 4.5rem);
+      line-height: 0.9;
+      color: var(--brand);
+    }
+
+    &:hover {
+      border-color: var(--border-strong);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--brand);
+      outline-offset: 2px;
+    }
+  }
+
+  .admin-overview__stat--idle::before {
+    background: var(--border-soft);
+  }
+
+  .admin-overview__stat dd.admin-overview__soon {
+    font-family: var(--ff-body);
+    font-size: var(--fs-base);
+    line-height: 1.4;
+    color: var(--text-muted);
+  }
+
+  .admin-overview__subtitle {
+    margin: 0 0 var(--space-4);
+    font-family: var(--ff-ui);
+    font-size: var(--fs-sm);
+    font-weight: 700;
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--brand);
+  }
+
+  .admin-overview__more {
+    margin: var(--space-4) 0 0;
+
+    a {
+      font-family: var(--ff-ui);
+      font-size: var(--fs-md);
+      font-weight: 700;
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      text-underline-offset: 4px;
+      color: var(--text-secondary);
+
+      &:hover {
+        color: var(--brand);
+      }
+    }
+  }
+}

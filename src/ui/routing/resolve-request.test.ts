@@ -69,3 +69,14 @@ describe("resolveRequest", () => {
     expect(route("/es/store/jersey")).toEqual(expected);
   });
 });
+
+describe("resolveRequest for the admin panel", () => {
+  it("serves /admin outside i18n and maintenance mode", () => {
+    expect(route("/admin", { maintenance: true })).toEqual({ kind: "next" });
+    expect(route("/admin/tryouts/abc", { maintenance: true })).toEqual({ kind: "next" });
+  });
+
+  it("still normalizes a trailing slash", () => {
+    expect(route("/admin/tryouts/")).toEqual({ kind: "redirect", path: "/admin/tryouts" });
+  });
+});

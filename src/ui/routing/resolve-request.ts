@@ -1,3 +1,4 @@
+import { isAdminPath } from "@/domain/admin/admin-access";
 import { findPage, type PageDefinition } from "@/domain/site/page-status";
 import { detectLocale, isLocale, stripLocale, type Locale } from "@/ui/i18n";
 
@@ -50,6 +51,9 @@ export function resolveRequest<Key extends string>({
   if (pathname !== "/" && TRAILING_SLASHES.test(pathname)) {
     return { kind: "redirect", path: pathname.replace(TRAILING_SLASHES, "") || "/" };
   }
+
+  // El panel queda fuera del i18n, del modo mantenimiento y de las páginas en construcción
+  if (isAdminPath(pathname)) return { kind: "next" };
 
   if (maintenance && pathname !== COMING_SOON_PATH) {
     return { kind: "rewrite", path: COMING_SOON_PATH };

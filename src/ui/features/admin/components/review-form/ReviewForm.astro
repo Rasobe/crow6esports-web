@@ -1,0 +1,51 @@
+---
+import "./review-form.scss";
+import "@/ui/shared/components/button/button.scss";
+import type { TryoutRequest } from "@/domain/tryouts/tryout-request";
+import { NOTES_MAX } from "@/domain/tryouts/tryout-application";
+import { STATUS_OPTIONS } from "../../lib/tryout-labels";
+
+interface Props {
+  request: TryoutRequest;
+}
+
+const { request } = Astro.props;
+---
+
+<form class="review-form" method="post" action={`/api/admin/tryouts/${request.id}`}>
+  <h2 class="review-form__title">Gestión</h2>
+
+  <div class="review-form__field">
+    <label class="review-form__label" for="review-status">
+      Estado
+    </label>
+    <select class="review-form__control" id="review-status" name="status" required>
+      {STATUS_OPTIONS.map((option) => (
+        <option value={option.value} selected={option.value === request.status}>
+          {option.label}
+        </option>
+      ))}
+    </select>
+  </div>
+
+  <div class="review-form__field">
+    <label class="review-form__label" for="review-notes">
+      Notas internas
+    </label>
+    <textarea
+      class="review-form__control review-form__control--notes"
+      id="review-notes"
+      name="notes"
+      rows="8"
+      maxlength={NOTES_MAX}
+      aria-describedby="review-notes-help"
+    >{request.notes ?? ""}</textarea>
+    <p class="review-form__help" id="review-notes-help">
+      Solo las ve el equipo. Máximo {NOTES_MAX} caracteres.
+    </p>
+  </div>
+
+  <button type="submit" class="btn btn--primary btn--md">
+    Guardar cambios
+  </button>
+</form>
