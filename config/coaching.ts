@@ -53,14 +53,14 @@ export const COACHING: CoachingConfig = {
   policy: { postponeMaxDays: 2, postponeMaxPerMonth: 2 },
   plans: {
     individual: [
-      { tier: "basic", launchPrice: 49, regularPrice: 60, weeklySessions: 1 },
-      { tier: "pro", launchPrice: 89, regularPrice: 110, weeklySessions: 2, featured: true },
-      { tier: "elite", launchPrice: 129, regularPrice: 150, weeklySessions: 3 },
+      { tier: "basic", launchPrice: 39, regularPrice: 59, weeklySessions: 1 },
+      { tier: "pro", launchPrice: 69, regularPrice: 109, weeklySessions: 2, featured: true },
+      { tier: "elite", launchPrice: 99, regularPrice: 149, weeklySessions: 3 },
     ],
     teams: [
-      { tier: "basic", launchPrice: 89, regularPrice: 109, weeklySessions: 1 },
-      { tier: "pro", launchPrice: 159, regularPrice: 189, weeklySessions: 2, featured: true },
-      { tier: "elite", launchPrice: 229, regularPrice: 269, weeklySessions: 3 },
+      { tier: "basic", launchPrice: 79, regularPrice: 109, weeklySessions: 1 },
+      { tier: "pro", launchPrice: 129, regularPrice: 189, weeklySessions: 2, featured: true },
+      { tier: "elite", launchPrice: 189, regularPrice: 269, weeklySessions: 3 },
     ],
   },
   features: {
@@ -85,9 +85,9 @@ export const COACHING: CoachingConfig = {
   // para que el pack sea siempre la mejor opción
   singleSessions: [
     { key: "intro", price: 0 },
-    { key: "live", price: 20 },
-    { key: "replay_review", price: 10 },
-    { key: "team_live", price: 35 },
+    { key: "live", price: 19 },
+    { key: "replay_review", price: 9 },
+    { key: "team_live", price: 39 },
   ],
   singleSessionCreditDays: 7,
   teamsWorkedWith: ["Crow 6 eSports", "VentuCorp eSports", "Prodigy Five"],

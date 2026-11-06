@@ -39,27 +39,29 @@ Consecuencias de estar tan por debajo:
 
 ## 3. Precios aplicados
 
-Criterio: situarse en la parte baja del rango típico de mercado. Es un precio de entrada atractivo para llegar al máximo público, y el pack sigue compensando frente a las sesiones sueltas.
+Criterio: el precio regular se sitúa en la parte baja del rango de mercado, creíble para el nivel del coach. El precio de lanzamiento aplica un descuento visible (28 a 37 %) para que la oferta tenga urgencia y el "desde 39 €" quede por debajo de la barrera de los 40 €. El pack sigue compensando frente a las sesiones sueltas. Todas las cifras terminan en 9 (precio psicológico). Los precios de lanzamiento están vigentes hasta `LAUNCH_PRICE_ENDS`; después se cobra el precio regular.
 
-| Producto                            | Precio    | €/hora        | Referencia de mercado     |
-| ----------------------------------- | --------- | ------------- | ------------------------- |
-| Sesión de presentación (30 min)     | Gratis    |               | Estándar del sector       |
-| Revisión de replay                  | 10 €      |               | 15 a 25 €                 |
-| Sesión individual (1 h)             | 20 €      | 20            | 20 a 30 €/h               |
-| Sesión de equipo (1 h)              | 35 €      | 35            | 40 a 60 €/h               |
-| Individual Basic, 1 sesión/semana   | 49 €/mes  | 12,25         | 80 € en sesiones sueltas  |
-| Individual Pro, 2 sesiones/semana   | 89 €/mes  | 11,1          | 160 € en sesiones sueltas |
-| Individual Elite, 3 sesiones/semana | 129 €/mes | 10,75         | 240 € en sesiones sueltas |
-| Equipo Basic, 1 sesión/semana       | 89 €/mes  | 22 por equipo | 200 $ en Metafy           |
-| Equipo Pro, 2 sesiones/semana       | 159 €/mes | 19,9          |                           |
-| Equipo Elite, 3 sesiones/semana     | 229 €/mes | 19,1          |                           |
+| Producto                            | Lanzamiento | Regular   | €/hora (lanzamiento) | Referencia de mercado     |
+| ----------------------------------- | ----------- | --------- | -------------------- | ------------------------- |
+| Sesión de presentación (30 min)     | Gratis      | Gratis    |                      | Estándar del sector       |
+| Revisión de replay                  | 9 €         | 9 €       |                      | 15 a 25 €                 |
+| Sesión individual (1 h)             | 19 €        | 19 €      | 19                   | 20 a 30 €/h               |
+| Sesión de equipo (1 h)              | 39 €        | 39 €      | 39                   | 40 a 60 €/h               |
+| Individual Basic, 1 sesión/semana   | 39 €/mes    | 59 €/mes  | 9,75                 | 76 € en sesiones sueltas  |
+| Individual Pro, 2 sesiones/semana   | 69 €/mes    | 109 €/mes | 8,6                  | 152 € en sesiones sueltas |
+| Individual Elite, 3 sesiones/semana | 99 €/mes    | 149 €/mes | 8,25                 | 228 € en sesiones sueltas |
+| Equipo Basic, 1 sesión/semana       | 79 €/mes    | 109 €/mes | 19,75 por equipo     | 200 $ en Metafy           |
+| Equipo Pro, 2 sesiones/semana       | 129 €/mes   | 189 €/mes | 16,1 por equipo      | 312 € en sesiones sueltas |
+| Equipo Elite, 3 sesiones/semana     | 189 €/mes   | 269 €/mes | 15,75 por equipo     | 468 € en sesiones sueltas |
 
 Cómo se llega a cada cifra:
 
-- **Escalera de entrada:** gratis, revisión de replay a 10 €, sesión suelta a 20 €, pack desde 49 €. Hay un escalón asequible para cada presupuesto.
-- **Descuento de pack:** 39 %, 44 % y 46 % frente a comprar las mismas horas sueltas. Es más que el 20 a 25 % habitual porque el pack incluye objetivos, rutina, revisión entre sesiones y soporte.
-- **Equipos:** cuestan 1,8 veces el pack individual. Con 3 jugadores salen a unos 30, 53 y 76 € por jugador y mes, en línea con las clases en grupo de mercado.
-- **Sin precio tachado:** el campo `originalPrice` pasa a ser opcional y solo se muestra si el precio anterior se cobró de verdad.
+- **Escalera de entrada:** gratis, revisión de replay a 9 €, sesión suelta a 19 €, pack desde 39 €. Hay un escalón asequible para cada presupuesto.
+- **Descuento de lanzamiento:** 34 %, 37 % y 34 % en individual, y 28 %, 32 % y 30 % en equipos, frente al precio regular.
+- **Descuento de pack:** 49 %, 55 % y 57 % en individual, y 49 %, 59 % y 60 % en equipos, frente a comprar las mismas horas sueltas (precio de lanzamiento). Es más que el 20 a 25 % habitual porque el pack incluye objetivos, rutina, revisión entre sesiones y soporte.
+- **Equipos:** cuestan unas 1,9 veces el pack individual. Con 3 jugadores salen a unos 26, 43 y 63 € por jugador y mes, en línea con las clases en grupo de mercado.
+- **Margen:** durante el lanzamiento cada hora del pack Elite individual deja unos 8,25 € brutos, por debajo del mercado. Es temporal y con fecha de fin (`LAUNCH_PRICE_ENDS`); al terminar, la hora sube a unos 12,4 €.
+- **Sin precio tachado propio:** el precio regular solo se muestra como referencia mientras dure el lanzamiento. En la UE un descuento solo puede referirse al precio más bajo de los 30 días anteriores (Directiva Omnibus), así que el precio regular debe cobrarse de verdad una vez termine el lanzamiento.
 
 ## 4. Fuentes
 
