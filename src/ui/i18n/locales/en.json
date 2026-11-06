@@ -401,13 +401,29 @@
             "sat": "Saturday",
             "sun": "Sunday"
           }
-        }
+        },
+        "saving": "Saving your application. Please do not close this page."
       },
       "success": {
-        "eyebrow": "#GOCROWS",
         "title": "APPLICATION SENT",
-        "desc": "We have received your application. We review each application personally. If you fit what we are looking for, we will contact you via Discord within 7 days.",
-        "note": "If you do not receive a response within 7 days, your application has not been selected for this call."
+        "desc": "We have received your application and we will review it personally.",
+        "note": "If you do not receive a response within 7 days, your application has not been selected for this call.",
+        "home": "Back to home",
+        "next": {
+          "title": "What happens next",
+          "received": {
+            "title": "Application received",
+            "desc": "It is saved and the team has been notified."
+          },
+          "review": {
+            "title": "We review it by hand",
+            "desc": "Every application is read by a staff member, there are no automatic filters."
+          },
+          "contact": {
+            "title": "We message you on Discord",
+            "desc": "If you fit, we will contact you within 7 days."
+          }
+        }
       }
     },
     "closed": {

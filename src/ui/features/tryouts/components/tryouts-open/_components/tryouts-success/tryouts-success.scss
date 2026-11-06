@@ -2,44 +2,44 @@
 @use "styles/mixins" as *;
 @layer components {
   .tryouts-success {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--space-12);
+    align-items: start;
+    border: var(--line-subtle);
+    background: var(--bg-surface);
+    padding: var(--space-12);
+
+    @include below(md) {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-8);
+      padding: var(--space-6);
+    }
+  }
+
+  .tryouts-success__main {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
+    align-items: flex-start;
     gap: var(--space-5);
-    padding: var(--space-12) var(--space-6);
-    max-width: 480px;
-    margin-inline: auto;
   }
 
-  .tryouts-success__icon {
-    width: 64px;
-    height: 64px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--brand-tint);
-    border: 1px solid rgb(var(--brand-rgb) / 0.3);
+  .tryouts-success__mark {
+    width: 4rem;
+    height: 4rem;
+    padding: var(--space-3);
+    background: var(--brand);
+    color: var(--brand-fg);
     @include angular-cut(10px);
-    color: var(--brand);
-  }
 
-  .tryouts-success__eyebrow {
-    font-family: var(--ff-ui);
-    font-size: var(--fs-2xs);
-    font-weight: 700;
-    letter-spacing: 5px;
-    text-transform: uppercase;
-    color: var(--brand);
-    display: flex;
-    align-items: center;
-    gap: var(--space-3);
+    @media (prefers-reduced-motion: no-preference) {
+      animation: tryouts-success-pop var(--duration-slower) var(--ease-out) both;
+    }
 
-    span {
+    svg {
       display: block;
-      width: 32px;
-      height: 1px;
-      background: rgb(var(--brand-rgb) / 0.4);
+      width: 100%;
+      height: 100%;
     }
   }
 
@@ -50,31 +50,105 @@
     letter-spacing: var(--tracking-tight);
     text-transform: uppercase;
     color: var(--text-primary);
-  }
 
-  .tryouts-success__divider {
-    width: 2px;
-    height: 32px;
-    background: linear-gradient(to bottom, var(--brand), transparent);
-    margin: 0 auto;
+    &:focus {
+      outline: none;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--brand);
+      outline-offset: 4px;
+    }
   }
 
   .tryouts-success__desc {
+    max-width: 34rem;
+    font-family: var(--ff-body);
+    font-size: var(--fs-base);
+    line-height: 1.7;
+    color: var(--text-secondary);
+  }
+
+  .tryouts-success__next {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    border-left: var(--line-subtle);
+    padding-left: var(--space-12);
+
+    @include below(md) {
+      border-left: 0;
+      border-top: var(--line-subtle);
+      padding: var(--space-8) 0 0;
+    }
+  }
+
+  .tryouts-success__next-title {
+    font-family: var(--ff-ui);
+    font-size: var(--fs-sm);
+    font-weight: 700;
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .tryouts-success__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .tryouts-success__item {
+    display: flex;
+    gap: var(--space-4);
+  }
+
+  .tryouts-success__index {
+    flex: none;
+    min-width: 2.5rem;
+    font-family: var(--ff-display);
+    font-size: var(--fs-xl);
+    line-height: 1.2;
+    color: var(--brand);
+  }
+
+  .tryouts-success__text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
     font-family: var(--ff-body);
     font-size: var(--fs-body);
+    line-height: 1.6;
     color: var(--text-secondary);
-    line-height: 1.7;
-    max-width: 400px;
+
+    strong {
+      font-family: var(--ff-ui);
+      font-size: var(--fs-lg);
+      font-weight: 700;
+      color: var(--text-primary);
+    }
   }
 
   .tryouts-success__note {
-    font-family: var(--ff-ui);
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: var(--tracking-snug);
+    border-top: var(--line-subtle);
+    padding-top: var(--space-4);
+    font-family: var(--ff-body);
+    font-size: var(--fs-md);
+    line-height: 1.6;
     color: var(--text-muted);
-    border: var(--line-subtle);
-    padding: var(--space-3) var(--space-5);
-    max-width: 400px;
+  }
+
+  @keyframes tryouts-success-pop {
+    from {
+      opacity: 0;
+      transform: scale(0.6);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
   }
 }

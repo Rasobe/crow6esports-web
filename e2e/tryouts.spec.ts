@@ -30,8 +30,10 @@ test("does not validate a field when leaving it, only when advancing", async ({ 
 
 test("completes the three steps and shows the success state", async ({ page }) => {
   let submitted: Record<string, unknown> | undefined;
-  await page.route("**/api/contact", (route) => {
+  await page.route("**/api/contact", async (route) => {
     submitted = route.request().postDataJSON();
+    // Retraso para poder comprobar el estado de envío
+    await new Promise((resolve) => setTimeout(resolve, 500));
     return route.fulfill({
       status: 200,
       contentType: "application/json",
@@ -75,7 +77,15 @@ test("completes the three steps and shows the success state", async ({ page }) =
     .check();
   await page.getByRole("button", { name: "Enviar solicitud" }).click();
 
-  await expect(page.getByRole("heading", { name: "SOLICITUD ENVIADA" })).toBeVisible();
+  await expect(
+    page.getByRole("status").filter({ hasText: "Guardando tu solicitud" }),
+  ).toBeVisible();
+  await expect(page.getByRole("button", { name: "Enviando..." })).toBeDisabled();
+
+  const heading = page.getByRole("heading", { name: "SOLICITUD ENVIADA" });
+  await expect(heading).toBeVisible();
+  await expect(heading).toBeFocused();
+  await expect(page.getByRole("link", { name: "Volver al inicio" })).toHaveAttribute("href", "/es");
   expect(submitted).toMatchObject({
     locale: "es",
     birthDate: "2005-06-15",
