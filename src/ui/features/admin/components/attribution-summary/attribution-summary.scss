@@ -22,6 +22,7 @@
   }
 
   .attribution-summary__table {
+    align-self: start;
     width: 100%;
     border-collapse: collapse;
     border: var(--line-subtle);
@@ -68,7 +69,7 @@
     text-transform: uppercase;
   }
 
-  .attribution-summary__count {
+  .attribution-summary__table .attribution-summary__count {
     width: 8rem;
     text-align: right;
     font-variant-numeric: tabular-nums;
