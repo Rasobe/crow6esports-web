@@ -10,7 +10,6 @@
     border: 0;
   }
 
-  // ── Label ──
   .date-field__label {
     display: flex;
     align-items: center;
@@ -30,7 +29,6 @@
     font-size: var(--fs-xs);
   }
 
-  // ── Segmentos unidos en una sola caja ──
   .date-field__parts {
     display: grid;
     grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.6fr) minmax(0, 1fr);
@@ -62,7 +60,6 @@
     }
   }
 
-  // Rótulo pequeño dentro de cada segmento
   .date-field__part-label {
     position: absolute;
     top: var(--space-2);
@@ -118,7 +115,6 @@
     }
   }
 
-  // ── Hint / error ──
   .date-field__hint {
     font-family: var(--ff-body);
     font-size: var(--fs-xs);

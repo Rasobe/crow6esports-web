@@ -7,7 +7,6 @@
     overflow: hidden;
     border-top: var(--line-subtle);
 
-    // Glow de fondo
     &::before {
       content: "";
       position: absolute;

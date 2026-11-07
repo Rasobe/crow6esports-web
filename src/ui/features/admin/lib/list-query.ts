@@ -8,7 +8,6 @@ export interface ListQuery {
 const isStatus = (value: string | null): value is RequestStatus =>
   REQUEST_STATUSES.some((status) => status === value);
 
-/** Anything unexpected in the URL falls back to the first page without filter. */
 export function parseListQuery(params: URLSearchParams): ListQuery {
   const status = params.get("status");
   const page = Number(params.get("page"));

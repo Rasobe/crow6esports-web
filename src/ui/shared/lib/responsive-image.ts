@@ -3,7 +3,6 @@ export const STORE_IMAGE_WIDTHS = [400, 560, 720, 1000] as const;
 
 const withWidth = (src: string, width: number) => src.replace(/\.webp$/, `-${width}.webp`);
 
-/** `srcset` con las variantes de una imagen de la tienda, para que cada pantalla baje la justa. */
 export function storeImageSrcset(src: string): string {
   return STORE_IMAGE_WIDTHS.map((width) => `${withWidth(src, width)} ${width}w`).join(", ");
 }

@@ -3,9 +3,7 @@ export type CoachingTier = "basic" | "pro" | "elite";
 
 export interface CoachingPlan {
   tier: CoachingTier;
-  /** Precio mensual mientras dure el precio de lanzamiento. */
   launchPrice: number;
-  /** Precio mensual una vez termina el lanzamiento. */
   regularPrice: number;
   weeklySessions: number;
   featured?: boolean;
@@ -24,7 +22,6 @@ export interface CoachingSingleSession {
   price: number;
 }
 
-/** Una ventaja de los packs y los niveles que la incluyen. */
 export interface CoachingFeature {
   key: string;
   tiers: readonly CoachingTier[];
@@ -49,7 +46,6 @@ export function getPlanPricing(plan: CoachingPlan, launchActive: boolean): PlanP
   };
 }
 
-/** El plan más barato según el precio que se cobra ahora. */
 export function getStartingPlan(
   plans: readonly CoachingPlan[],
   launchActive: boolean,

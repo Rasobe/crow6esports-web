@@ -32,7 +32,6 @@ function countBy(values: (string | null)[], emptyLabel: string): CountEntry[] {
     .slice(0, TOP_ENTRIES);
 }
 
-/** Requests of the last 30 days grouped by landing page and by utm_source. */
 export async function getAttributionSummary(
   repository: TryoutRequestRepository,
   now: Date = new Date(),

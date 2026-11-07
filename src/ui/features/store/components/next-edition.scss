@@ -74,7 +74,6 @@
     color: var(--text-secondary);
   }
 
-  /* ─── Vistas: frente y espalda como miniaturas ─── */
   .next-edition__views {
     display: flex;
     flex-direction: column;
@@ -153,7 +152,6 @@
     color: var(--brand);
   }
 
-  // Aviso de sin stock: lo primero que se lee junto a los botones de la reposición
   .next-edition__notice {
     display: flex;
     flex-direction: column;

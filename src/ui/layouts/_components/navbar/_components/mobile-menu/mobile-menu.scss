@@ -1,8 +1,5 @@
 @use "styles/layers";
 @use "styles/mixins" as *;
-/* ─────────────────────────────────────────────
-   MOBILE MENU
-   ───────────────────────────────────────────── */
 @layer components {
   .mobile-menu__trigger {
     display: flex;
