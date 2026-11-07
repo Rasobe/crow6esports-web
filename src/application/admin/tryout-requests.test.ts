@@ -13,6 +13,7 @@ function fakeRepository(): TryoutRequestRepository {
       page,
       pageSize,
     })),
+    listAttribution: vi.fn(),
     findById: vi.fn(),
     updateReview: vi.fn(),
   };

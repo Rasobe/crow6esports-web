@@ -1,4 +1,5 @@
 export { AdminLogin } from "./admin-login";
+export { AttributionSummary } from "./attribution-summary";
 export { AdminNotice } from "./admin-notice";
 export { AdminOverview } from "./admin-overview";
 export { Pagination } from "./pagination";

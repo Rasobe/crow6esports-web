@@ -40,6 +40,9 @@ test("completes the three steps and shows the success state", async ({ page }) =
       body: '{"success":true}',
     });
   });
+  // Primera página de la sesión, con utm: la atribución debe sobrevivir a la navegación
+  await page.goto("/es?utm_source=Instagram&utm_medium=social&utm_campaign=lanzamiento");
+  await page.waitForFunction(() => sessionStorage.getItem("crow6.attribution"));
   await openTryouts(page);
 
   await page.getByLabel(/Usuario de Discord/).fill("player_one");
@@ -87,6 +90,10 @@ test("completes the three steps and shows the success state", async ({ page }) =
   await expect(heading).toBeFocused();
   await expect(page.getByRole("link", { name: "Volver al inicio" })).toHaveAttribute("href", "/es");
   expect(submitted).toMatchObject({
+    sourcePage: "/es",
+    utmSource: "instagram",
+    utmMedium: "social",
+    utmCampaign: "lanzamiento",
     locale: "es",
     birthDate: "2005-06-15",
     availableDays: ["mon", "tue", "wed", "thu", "fri"],

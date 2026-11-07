@@ -1,0 +1,84 @@
+@use "styles/layers";
+@use "styles/mixins" as *;
+@layer components {
+  .attribution-summary__title {
+    margin: 0 0 var(--space-4);
+    font-family: var(--ff-ui);
+    font-size: var(--fs-sm);
+    font-weight: 700;
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--brand);
+  }
+
+  .attribution-summary__groups {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-6);
+
+    @include below(md) {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  .attribution-summary__table {
+    width: 100%;
+    border-collapse: collapse;
+    border: var(--line-subtle);
+    background: var(--bg-surface);
+    font-family: var(--ff-body);
+    font-size: var(--fs-body);
+
+    th,
+    td {
+      padding: var(--space-3) var(--space-4);
+      border-bottom: var(--line-subtle);
+      text-align: left;
+      overflow-wrap: anywhere;
+    }
+
+    tbody tr:last-child > * {
+      border-bottom: 0;
+    }
+
+    thead th {
+      font-family: var(--ff-ui);
+      font-size: var(--fs-xs);
+      font-weight: 700;
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    tbody th {
+      font-weight: 400;
+    }
+  }
+
+  .attribution-summary__caption {
+    padding: var(--space-3) var(--space-4);
+    border: var(--line-subtle);
+    border-bottom: 0;
+    background: var(--bg-surface);
+    text-align: left;
+    font-family: var(--ff-ui);
+    font-size: var(--fs-md);
+    font-weight: 700;
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+  }
+
+  .attribution-summary__count {
+    width: 8rem;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .attribution-summary__empty {
+    margin: 0;
+    padding: var(--space-6);
+    border: var(--line-subtle);
+    background: var(--bg-surface);
+    color: var(--text-secondary);
+  }
+}

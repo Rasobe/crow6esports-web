@@ -1,0 +1,51 @@
+---
+import "./attribution-summary.scss";
+import type { AttributionSummary, CountEntry } from "@/application/admin/attribution-summary";
+
+interface Props {
+  summary: AttributionSummary;
+}
+
+const { summary } = Astro.props;
+
+const groups: { title: string; entries: CountEntry[] }[] = [
+  { title: "Por página de entrada", entries: summary.bySourcePage },
+  { title: "Por utm_source", entries: summary.byUtmSource },
+];
+---
+
+<section class="attribution-summary" aria-labelledby="attribution-title">
+  <h2 class="attribution-summary__title" id="attribution-title">
+    Origen de las solicitudes, últimos {summary.days} días
+  </h2>
+
+  {summary.total === 0 ? (
+    <p class="attribution-summary__empty">
+      No ha llegado ninguna solicitud en los últimos {summary.days} días.
+    </p>
+  ) : (
+    <div class="attribution-summary__groups">
+      {groups.map((group) => (
+        <table class="attribution-summary__table">
+          <caption class="attribution-summary__caption">{group.title}</caption>
+          <thead>
+            <tr>
+              <th scope="col">Origen</th>
+              <th scope="col" class="attribution-summary__count">
+                Solicitudes
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {group.entries.map((entry) => (
+              <tr>
+                <th scope="row">{entry.label}</th>
+                <td class="attribution-summary__count">{entry.count}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ))}
+    </div>
+  )}
+</section>

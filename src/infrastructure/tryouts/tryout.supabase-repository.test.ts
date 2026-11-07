@@ -34,7 +34,7 @@ describe("supabase tryout repository", () => {
   it("inserts a snake_case row into tryout_requests with the locale", async () => {
     const { client, from, insert } = fakeClient();
 
-    await createSupabaseTryoutRepository(client).save(application, "en");
+    await createSupabaseTryoutRepository(client).save(application, "en", {});
 
     expect(from).toHaveBeenCalledWith("tryout_requests");
     expect(insert).toHaveBeenCalledWith(
@@ -52,7 +52,7 @@ describe("supabase tryout repository", () => {
   it("stores empty optional text as null and never sets status or id", async () => {
     const { client, insert } = fakeClient();
 
-    await createSupabaseTryoutRepository(client).save(application, "es");
+    await createSupabaseTryoutRepository(client).save(application, "es", {});
 
     const row = insert.mock.calls[0][0];
     expect(row).toMatchObject({ schedule_from: null, schedule_to: null, highlights: null });
@@ -60,11 +60,32 @@ describe("supabase tryout repository", () => {
     expect(row).not.toHaveProperty("id");
   });
 
+  it("stores the attribution columns, empty ones as null", async () => {
+    const { client, insert } = fakeClient();
+
+    await createSupabaseTryoutRepository(client).save(application, "es", {
+      sourcePage: "/es/coaching",
+      referrer: "https://www.instagram.com/",
+      utmSource: "instagram",
+      utmMedium: "",
+    });
+
+    expect(insert).toHaveBeenCalledWith(
+      expect.objectContaining({
+        source_page: "/es/coaching",
+        referrer: "https://www.instagram.com/",
+        utm_source: "instagram",
+        utm_medium: null,
+        utm_campaign: null,
+      }),
+    );
+  });
+
   it("rejects when Supabase returns an error", async () => {
     const { client } = fakeClient({ message: "permission denied" });
 
-    await expect(createSupabaseTryoutRepository(client).save(application, "es")).rejects.toThrow(
-      "permission denied",
-    );
+    await expect(
+      createSupabaseTryoutRepository(client).save(application, "es", {}),
+    ).rejects.toThrow("permission denied");
   });
 });

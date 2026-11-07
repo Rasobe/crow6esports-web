@@ -57,8 +57,11 @@ const { locale } = Astro.locals;
     <SpeedInsights />
     <slot />
     <script>
+      import { captureBrowserAttribution } from "@/scripts/attribution";
       import { initMotion } from "@/scripts/motion";
 
+      // Primera página de la sesión: queda en sessionStorage, sin cookies
+      captureBrowserAttribution();
       initMotion();
     </script>
   </body>

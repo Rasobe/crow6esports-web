@@ -41,9 +41,19 @@ describe("submitTryoutApplication", () => {
 
     await submitTryoutApplication(deps, application, "en");
 
-    expect(save).toHaveBeenCalledWith(application, "en");
+    expect(save).toHaveBeenCalledWith(application, "en", {});
     expect(notify).toHaveBeenCalledWith(application);
     expect(save.mock.invocationCallOrder[0]).toBeLessThan(notify.mock.invocationCallOrder[0]);
+  });
+
+  it("passes the attribution to the repository, never to the notifier", async () => {
+    const { deps, save, notify } = setup();
+    const attribution = { sourcePage: "/es", utmSource: "instagram" };
+
+    await submitTryoutApplication(deps, application, "es", attribution);
+
+    expect(save).toHaveBeenCalledWith(application, "es", attribution);
+    expect(notify).toHaveBeenCalledWith(application);
   });
 
   it("propagates storage failures without notifying", async () => {
