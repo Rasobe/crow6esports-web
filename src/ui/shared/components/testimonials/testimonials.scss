@@ -53,20 +53,40 @@
     -webkit-text-stroke: clamp(1.5px, 0.02em, 3px) var(--brand);
   }
 
-  .testimonials__controls {
+  .testimonials__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+    gap: var(--space-5);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .testimonials__entry {
     display: flex;
-    gap: var(--space-2);
 
     &[hidden] {
       display: none;
     }
   }
 
-  .testimonials__control {
-    display: grid;
-    place-items: center;
-    width: 2.75rem;
-    height: 2.75rem;
+  .testimonials__item {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin: 0;
+    background: var(--bg-surface);
+    border: var(--line-subtle);
+  }
+
+  .testimonials__more {
+    align-self: center;
+    padding: var(--space-3) var(--space-6);
+    font-family: var(--ff-ui);
+    font-size: var(--fs-md);
+    font-weight: 700;
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
     color: var(--text-primary);
     background: transparent;
     border: 1px solid var(--border-soft);
@@ -84,56 +104,6 @@
       outline: 2px solid var(--brand);
       outline-offset: 2px;
     }
-  }
-
-  .testimonials__icon-play {
-    display: none;
-  }
-
-  .testimonials__control--toggle[aria-pressed="true"] {
-    .testimonials__icon-pause {
-      display: none;
-    }
-
-    .testimonials__icon-play {
-      display: block;
-    }
-  }
-
-  .testimonials__track {
-    position: relative;
-    display: flex;
-    gap: var(--space-5);
-    margin: 0;
-    padding: 0 0 var(--space-2);
-    overflow-x: auto;
-    list-style: none;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-
-    &::-webkit-scrollbar {
-      display: none;
-    }
-
-    &:focus-visible {
-      outline: 2px solid var(--brand);
-      outline-offset: 4px;
-    }
-  }
-
-  .testimonials__entry {
-    display: flex;
-    flex: 1 0 min(30rem, 88%);
-    scroll-snap-align: start;
-  }
-
-  .testimonials__item {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    margin: 0;
-    background: var(--bg-surface);
-    border: var(--line-subtle);
   }
 
   .testimonials__highlight {

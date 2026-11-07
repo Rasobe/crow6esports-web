@@ -23,6 +23,17 @@ describe("getTestimonials", () => {
   });
 });
 
+describe("getTestimonials without affiliation", () => {
+  it("keeps the affiliation undefined when the testimonial has none", () => {
+    const [view] = getTestimonials(
+      [{ id: "x", author: "X", quote: { es: "uno", en: "one" } }],
+      "es",
+    );
+
+    expect(view?.affiliation).toBeUndefined();
+  });
+});
+
 describe("TESTIMONIALS config", () => {
   it("has unique ids and a quote in Spanish and English", () => {
     const ids = TESTIMONIALS.map(({ id }) => id);
@@ -30,7 +41,7 @@ describe("TESTIMONIALS config", () => {
     expect(new Set(ids).size).toBe(ids.length);
     for (const { author, affiliation, quote } of TESTIMONIALS) {
       expect(author).not.toBe("");
-      expect(affiliation).not.toBe("");
+      if (affiliation !== undefined) expect(affiliation).not.toBe("");
       expect(quote.es.trim()).not.toBe("");
       expect(quote.en.trim()).not.toBe("");
     }

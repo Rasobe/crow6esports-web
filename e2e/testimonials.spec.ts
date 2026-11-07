@@ -6,8 +6,18 @@ const QUOTES = {
 } as const;
 
 const HIGHLIGHTS = {
-  es: ["2000 MMR en 2s · 1700 MMR en 3s", "1500 → 1791 MMR en 3 meses"],
-  en: ["2000 MMR in 2s · 1700 MMR in 3s", "1500 → 1791 MMR in 3 months"],
+  es: [
+    "2000 MMR en 2s · 1700 MMR en 3s",
+    "1500 → 1791 MMR en 3 meses",
+    "De 1717 a 1922 MMR",
+    "De 1490 a 1763 MMR",
+  ],
+  en: [
+    "2000 MMR in 2s · 1700 MMR in 3s",
+    "1500 → 1791 MMR in 3 months",
+    "From 1717 to 1922 MMR",
+    "From 1490 to 1763 MMR",
+  ],
 } as const;
 
 for (const locale of ["es", "en"] as const) {
@@ -30,7 +40,8 @@ for (const locale of ["es", "en"] as const) {
     await page.goto(`/${locale}/coaching`);
     const section = page.locator(".testimonials");
 
-    await expect(section.locator("blockquote")).toHaveCount(2);
+    await expect(section.locator("blockquote")).toHaveCount(5);
+    await expect(section.locator("blockquote:visible")).toHaveCount(3);
     await expect(section.locator("figcaption cite").first()).toHaveText("Jerry");
     await expect(section.locator(".btn")).toHaveAttribute("href", /discord/);
 
@@ -68,52 +79,33 @@ test("does not publish Review or AggregateRating structured data", async ({ requ
   }
 });
 
-test.describe("carousel", () => {
-  test.use({ viewport: { width: 390, height: 800 } });
-
-  test("shows the controls when the cards overflow and moves with them", async ({ page }) => {
+test.describe("show more", () => {
+  test("shows three by default and reveals the rest with an accessible toggle", async ({
+    page,
+  }) => {
     await page.goto("/es/coaching");
-    const track = page.locator(".testimonials__track");
+    const section = page.locator(".testimonials");
+    const toggle = section.getByRole("button", { name: "Ver más" });
 
-    await expect(page.locator(".testimonials__controls")).toBeVisible();
-    await page.getByRole("button", { name: "Testimonio siguiente" }).click();
-    await expect.poll(() => track.evaluate((el) => el.scrollLeft)).toBeGreaterThan(0);
+    await expect(section.locator("blockquote:visible")).toHaveCount(3);
+    await expect(toggle).toHaveAttribute("aria-expanded", "false");
+
+    await toggle.click();
+    await expect(section.locator("blockquote:visible")).toHaveCount(5);
+    await expect(section.getByRole("button", { name: "Ver menos" })).toHaveAttribute(
+      "aria-expanded",
+      "true",
+    );
+
+    await section.getByRole("button", { name: "Ver menos" }).click();
+    await expect(section.locator("blockquote:visible")).toHaveCount(3);
   });
 
-  test("advances on its own", async ({ page }) => {
-    await page.clock.install();
-    await page.goto("/es/coaching");
-    const track = page.locator(".testimonials__track");
-    await track.scrollIntoViewIfNeeded();
+  test("renders no empty affiliation and the English label", async ({ page }) => {
+    await page.goto("/en/coaching");
+    const section = page.locator(".testimonials");
 
-    await expect
-      .poll(async () => {
-        await page.clock.fastForward(7000);
-        return track.evaluate((el) => el.scrollLeft);
-      })
-      .toBeGreaterThan(0);
-  });
-
-  test("stays still once paused", async ({ page }) => {
-    await page.clock.install();
-    await page.goto("/es/coaching");
-    const track = page.locator(".testimonials__track");
-    await track.scrollIntoViewIfNeeded();
-
-    const pause = page.getByRole("button", { name: /Pausar el desplazamiento/ });
-    await pause.click();
-    await expect(pause).toHaveAttribute("aria-pressed", "true");
-    await page.clock.fastForward(30000);
-    expect(await track.evaluate((el) => el.scrollLeft)).toBe(0);
-  });
-
-  test("does not auto-scroll with reduced motion", async ({ page }) => {
-    await page.emulateMedia({ reducedMotion: "reduce" });
-    await page.clock.install();
-    await page.goto("/es/coaching");
-    await page.locator(".testimonials__track").scrollIntoViewIfNeeded();
-
-    await page.clock.fastForward(20000);
-    expect(await page.locator(".testimonials__track").evaluate((el) => el.scrollLeft)).toBe(0);
+    await expect(section.getByRole("button", { name: "Show more" })).toBeVisible();
+    await expect(section.locator(".testimonials__affiliation:empty")).toHaveCount(0);
   });
 });
