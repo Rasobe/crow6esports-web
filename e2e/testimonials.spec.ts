@@ -41,9 +41,9 @@ for (const locale of ["es", "en"] as const) {
     expect(order).toBeTruthy();
   });
 
-  test(`${locale} home shows the compact version linking to coaching`, async ({ page }) => {
+  test(`${locale} home shows them linking to coaching`, async ({ page }) => {
     await page.goto(`/${locale}`);
-    const section = page.locator(".testimonials--compact");
+    const section = page.locator(".testimonials");
 
     await expect(section).toHaveCount(1);
     await expect(section.locator(".testimonials__link")).toHaveAttribute(
@@ -66,4 +66,54 @@ test("does not publish Review or AggregateRating structured data", async ({ requ
 
     expect(html).not.toMatch(/"@type"\s*:\s*"(Review|AggregateRating)"/);
   }
+});
+
+test.describe("carousel", () => {
+  test.use({ viewport: { width: 390, height: 800 } });
+
+  test("shows the controls when the cards overflow and moves with them", async ({ page }) => {
+    await page.goto("/es/coaching");
+    const track = page.locator(".testimonials__track");
+
+    await expect(page.locator(".testimonials__controls")).toBeVisible();
+    await page.getByRole("button", { name: "Testimonio siguiente" }).click();
+    await expect.poll(() => track.evaluate((el) => el.scrollLeft)).toBeGreaterThan(0);
+  });
+
+  test("advances on its own", async ({ page }) => {
+    await page.clock.install();
+    await page.goto("/es/coaching");
+    const track = page.locator(".testimonials__track");
+    await track.scrollIntoViewIfNeeded();
+
+    await expect
+      .poll(async () => {
+        await page.clock.fastForward(7000);
+        return track.evaluate((el) => el.scrollLeft);
+      })
+      .toBeGreaterThan(0);
+  });
+
+  test("stays still once paused", async ({ page }) => {
+    await page.clock.install();
+    await page.goto("/es/coaching");
+    const track = page.locator(".testimonials__track");
+    await track.scrollIntoViewIfNeeded();
+
+    const pause = page.getByRole("button", { name: /Pausar el desplazamiento/ });
+    await pause.click();
+    await expect(pause).toHaveAttribute("aria-pressed", "true");
+    await page.clock.fastForward(30000);
+    expect(await track.evaluate((el) => el.scrollLeft)).toBe(0);
+  });
+
+  test("does not auto-scroll with reduced motion", async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.clock.install();
+    await page.goto("/es/coaching");
+    await page.locator(".testimonials__track").scrollIntoViewIfNeeded();
+
+    await page.clock.fastForward(20000);
+    expect(await page.locator(".testimonials__track").evaluate((el) => el.scrollLeft)).toBe(0);
+  });
 });

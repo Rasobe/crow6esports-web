@@ -767,6 +767,10 @@
     "cta_title": "Want results like these?",
     "cta_description": "Start with a 30-minute intro session, no commitment.",
     "cta": "Book my session on Discord",
-    "home_link": "See the coaching"
+    "home_link": "See the coaching",
+    "controls_label": "Testimonial controls",
+    "previous": "Previous testimonial",
+    "next": "Next testimonial",
+    "pause": "Pause automatic scrolling"
   }
 }

@@ -767,6 +767,10 @@
     "cta_title": "¿Quieres resultados como estos?",
     "cta_description": "Empieza con una sesión de presentación de 30 minutos y sin compromiso.",
     "cta": "Pedir mi sesión por Discord",
-    "home_link": "Ver el coaching"
+    "home_link": "Ver el coaching",
+    "controls_label": "Controles de los testimonios",
+    "previous": "Testimonio anterior",
+    "next": "Testimonio siguiente",
+    "pause": "Pausar el desplazamiento automático"
   }
 }
