@@ -47,6 +47,16 @@ describe("Content-Security-Policy of the Keystatic panel", () => {
     expect(panelPolicy).toContain("https://avatars.githubusercontent.com");
   });
 
+  it("lets the panel read news content and images from raw.githubusercontent.com", () => {
+    expect(panelPolicy).toMatch(/connect-src [^;]*https:\/\/raw\.githubusercontent\.com/);
+    expect(panelPolicy).toMatch(/img-src [^;]*https:\/\/raw\.githubusercontent\.com/);
+  });
+
+  it("does not use unsafe-eval or wildcards", () => {
+    expect(panelPolicy).not.toContain("unsafe-eval");
+    expect(panelPolicy).not.toMatch(/(^|\s)\*(\s|;|$)/);
+  });
+
   it("lets the panel load its Inter typeface from Google Fonts", () => {
     expect(panelPolicy).toMatch(/style-src [^;]*https:\/\/fonts\.googleapis\.com/);
     expect(panelPolicy).toMatch(/font-src [^;]*https:\/\/fonts\.gstatic\.com/);
@@ -60,6 +70,7 @@ describe("Content-Security-Policy of the Keystatic panel", () => {
     expect(sitePolicy).toContain("form-action 'self';");
     expect(sitePolicy).not.toContain("github");
     expect(sitePolicy).not.toContain("google");
+    expect(sitePolicy).not.toContain("raw.githubusercontent.com");
     expect(sitePolicy).toContain("connect-src 'self'");
   });
 });
