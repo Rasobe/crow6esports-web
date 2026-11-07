@@ -44,6 +44,7 @@ export default defineConfig({
         access: "secret",
         optional: true,
       }),
+      ADMIN_EMAILS: envField.string({ context: "server", access: "secret", default: "" }),
       TRYOUT_EMAIL_FROM: envField.string({
         context: "server",
         access: "secret",

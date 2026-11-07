@@ -1,0 +1,45 @@
+---
+import { getTryoutRequest } from "@/application/admin/tryout-requests";
+import { requestIdSchema } from "@/infrastructure/admin/admin-schemas";
+import { container } from "@/infrastructure/container";
+import {
+  AdminNotice,
+  RequestDetail,
+  ReviewForm,
+  StatusBadge,
+} from "@/ui/features/admin/components";
+import { AdminLayout } from "@/ui/layouts";
+
+const id = requestIdSchema.safeParse(Astro.params.id);
+const request = id.success
+  ? await getTryoutRequest(container.tryoutRequestRepository, id.data)
+  : null;
+if (!request) return Astro.redirect("/admin/tryouts");
+
+const { searchParams } = Astro.url;
+const saved = searchParams.get("saved") === "1";
+const error = searchParams.get("error");
+const errorMessage =
+  error === "invalid"
+    ? "Los datos no son válidos. Revisa el estado y que las notas no superen el máximo."
+    : error
+      ? "No se pudieron guardar los cambios. Inténtalo de nuevo."
+      : undefined;
+---
+
+<AdminLayout title={request.discord} current="tryouts">
+  <a class="admin__back" href="/admin/tryouts">
+    Volver a la lista
+  </a>
+  <h1 class="admin__title">
+    {request.discord} <StatusBadge status={request.status} />
+  </h1>
+  <div class="admin__split">
+    <RequestDetail request={request} />
+    <div class="admin__aside">
+      {saved && <AdminNotice tone="success" message="Cambios guardados." />}
+      {errorMessage && <AdminNotice tone="error" message={errorMessage} />}
+      <ReviewForm request={request} />
+    </div>
+  </div>
+</AdminLayout>

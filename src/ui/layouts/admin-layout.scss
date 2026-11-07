@@ -1,0 +1,104 @@
+@use "styles/layers";
+@use "styles/mixins" as *;
+@layer components {
+  .admin {
+    min-height: 100dvh;
+    background: var(--bg-base);
+    color: var(--text-primary);
+  }
+
+  .admin__skip {
+    position: absolute;
+    left: var(--space-4);
+    top: -10rem;
+    z-index: var(--z-skip-link);
+    padding: var(--space-3) var(--space-4);
+    background: var(--brand);
+    color: var(--brand-fg);
+    font-family: var(--ff-ui);
+    font-weight: 700;
+
+    &:focus {
+      top: var(--space-4);
+    }
+  }
+
+  // El body es flex en columna: sin width el main se encogería al contenido
+  .admin__main {
+    @include container;
+    width: 100%;
+    flex: 1;
+    padding-block: var(--space-10) var(--space-20);
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .admin__main--bare {
+    max-width: none;
+    padding: 0;
+  }
+
+  .admin__title {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-4);
+    margin: 0 0 var(--space-6);
+    font-family: var(--ff-display);
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    line-height: 1;
+    letter-spacing: var(--tracking-display);
+    text-transform: uppercase;
+  }
+
+  .admin__toolbar {
+    margin-bottom: var(--space-8);
+  }
+
+  .admin__back {
+    display: inline-block;
+    margin-bottom: var(--space-6);
+    font-family: var(--ff-ui);
+    font-size: var(--fs-md);
+    font-weight: 700;
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--text-secondary);
+
+    &:hover {
+      color: var(--brand);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--brand);
+      outline-offset: 4px;
+    }
+  }
+
+  .admin__split {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, 24rem);
+    gap: var(--space-10);
+    align-items: start;
+
+    @include below(md) {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  .admin__aside {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    position: sticky;
+    top: var(--space-6);
+
+    @include below(md) {
+      position: static;
+      order: -1;
+    }
+  }
+}

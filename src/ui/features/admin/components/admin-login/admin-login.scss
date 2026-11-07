@@ -1,0 +1,158 @@
+@use "styles/layers";
+@use "styles/mixins" as *;
+@layer components {
+  .admin-login {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    min-height: 100dvh;
+
+    @include below(md) {
+      grid-template-columns: minmax(0, 1fr);
+      min-height: 0;
+    }
+  }
+
+  // Lado de marca: cuadrícula y destello dorado como el resto de la web
+  .admin-login__brand {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+    padding: var(--space-12);
+    overflow: hidden;
+    border-right: var(--line-subtle);
+    background:
+      radial-gradient(ellipse at 20% 30%, var(--brand-wash), transparent 65%),
+      linear-gradient(var(--border-subtle) 1px, transparent 1px) 0 0 / 64px 64px,
+      linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px) 0 0 / 64px 64px,
+      var(--bg-surface);
+
+    @include below(md) {
+      flex-direction: row;
+      align-items: center;
+      padding: var(--space-6) var(--gutter);
+      border-right: 0;
+      border-bottom: var(--line-subtle);
+    }
+  }
+
+  // En escritorio la mascota ya lleva el nombre; el logotipo solo hace falta en móvil
+  .admin-login__wordmark {
+    position: relative;
+    display: none;
+    width: min(15rem, 60%);
+    height: auto;
+
+    @include below(md) {
+      display: block;
+      width: 8rem;
+    }
+  }
+
+  // Entera y sin solaparse con el texto: ocupa el hueco central del panel de marca
+  .admin-login__mascot {
+    position: relative;
+    flex: 1;
+    align-self: center;
+    width: 100%;
+    max-width: 26rem;
+    min-height: 0;
+    object-fit: contain;
+
+    @include below(md) {
+      display: none;
+    }
+  }
+
+  .admin-login__claim {
+    position: relative;
+    margin: 0;
+    font-family: var(--ff-display);
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    line-height: 0.95;
+    letter-spacing: var(--tracking-display);
+    text-transform: uppercase;
+    color: var(--text-primary);
+
+    @include below(md) {
+      margin-left: auto;
+      font-size: var(--fs-xl);
+      color: var(--brand);
+    }
+  }
+
+  .admin-login__panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--space-5);
+    width: 100%;
+    max-width: 30rem;
+    margin-inline: auto;
+    padding: var(--space-12) var(--gutter);
+
+    @include below(md) {
+      padding-block: var(--space-10);
+    }
+  }
+
+  .admin-login__title {
+    margin: 0;
+    font-family: var(--ff-display);
+    font-size: var(--fs-2xl);
+    letter-spacing: var(--tracking-display);
+    text-transform: uppercase;
+  }
+
+  .admin-login__lead {
+    margin: 0;
+    color: var(--text-secondary);
+  }
+
+  .admin-login__form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    margin-top: var(--space-2);
+  }
+
+  .admin-login__field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .admin-login__label {
+    font-family: var(--ff-ui);
+    font-size: var(--fs-md);
+    font-weight: 700;
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+  }
+
+  .admin-login__control {
+    width: 100%;
+    min-height: 3rem;
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid var(--border-soft);
+    background: var(--bg-surface);
+    font-family: var(--ff-body);
+    font-size: var(--fs-base);
+    color: var(--text-primary);
+
+    &:hover {
+      border-color: var(--border-hover);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--brand);
+      outline-offset: 2px;
+      border-color: var(--brand);
+    }
+  }
+
+  .admin-login__submit {
+    margin-top: var(--space-2);
+    min-height: 3rem;
+  }
+}

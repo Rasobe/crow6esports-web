@@ -93,6 +93,7 @@ TRYOUT_EMAIL_FROM="Crow 6 eSports <noreply@crow6esports.com>"  # dominio verific
 TRYOUT_EMAIL_TO=crow6esports@gmail.com
 SUPABASE_URL=https://<project-ref>.supabase.co
 SUPABASE_SERVICE_ROLE_KEY=...   # solo servidor, nunca con prefijo PUBLIC_
+ADMIN_EMAILS=tu@correo.com,otro@correo.com   # quién puede entrar en /admin
 ```
 
 Nunca subas `.env.local` al repositorio. Está incluido en `.gitignore`.
@@ -117,6 +118,12 @@ supabase db push
 ```
 
 Hay que aplicarla antes de desplegar; sin la tabla, `/api/contact` responde 500. Un segundo formulario (por ejemplo coaching) no existe todavía: cuando exista, tendrá su propia migración.
+
+## Panel de administración
+
+`/admin` es un panel privado para revisar las solicitudes de tryouts (cambiar el estado y añadir notas internas). Se entra con correo y contraseña de un usuario creado a mano en Supabase Auth (el registro está desactivado) y solo pueden entrar los correos de `ADMIN_EMAILS`. La sesión se verifica en el servidor en cada petición y vive en cookies `httpOnly`. Está fuera del i18n y del sitemap, con `Disallow` en `robots.txt`, `X-Robots-Tag: noindex` y sin enlaces desde la web pública. Si `ADMIN_EMAILS` está vacía, nadie puede entrar.
+
+Las notas internas necesitan aplicar `supabase/migrations/20261106230000_add_tryout_requests_notes.sql` (mismo procedimiento que la migración anterior). El e2e de login real se activa con `E2E_ADMIN_EMAIL` y `E2E_ADMIN_PASSWORD` en el entorno; sin ellas se omite.
 
 ## Despliegue
 

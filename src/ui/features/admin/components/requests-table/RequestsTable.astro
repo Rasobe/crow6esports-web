@@ -1,0 +1,53 @@
+---
+import "./requests-table.scss";
+import type { TryoutRequest } from "@/domain/tryouts/tryout-request";
+import { StatusBadge } from "../status-badge";
+import { formatDateTime } from "../../lib/tryout-labels";
+
+interface Props {
+  requests: TryoutRequest[];
+  caption: string;
+  emptyMessage: string;
+}
+
+const { requests, caption, emptyMessage } = Astro.props;
+---
+
+{requests.length === 0 ? (
+  <p class="requests-table__empty">{emptyMessage}</p>
+) : (
+  <table class="requests-table">
+    <caption class="requests-table__caption">{caption}</caption>
+    <thead>
+      <tr>
+        <th scope="col">Fecha</th>
+        <th scope="col">Discord</th>
+        <th scope="col">País</th>
+        <th scope="col">Rango / Peak</th>
+        <th scope="col">Estado</th>
+      </tr>
+    </thead>
+    <tbody>
+      {requests.map((request) => (
+        <tr>
+          <td data-label="Fecha">
+            <time datetime={request.createdAt}>{formatDateTime(request.createdAt)}</time>
+          </td>
+          <th scope="row" data-label="Discord">
+            <a class="requests-table__link" href={`/admin/tryouts/${request.id}`}>
+              {request.discord}
+              <span class="requests-table__sr"> (ver solicitud)</span>
+            </a>
+          </th>
+          <td data-label="País">{request.country}</td>
+          <td data-label="Rango / Peak">
+            {request.rank} / {request.peak}
+          </td>
+          <td data-label="Estado">
+            <StatusBadge status={request.status} />
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+)}

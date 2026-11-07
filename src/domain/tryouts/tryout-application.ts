@@ -83,3 +83,6 @@ export type SubmissionLocale = (typeof SUBMISSION_LOCALES)[number];
 
 export const REQUEST_STATUSES = ["new", "contacted", "accepted", "rejected"] as const;
 export type RequestStatus = (typeof REQUEST_STATUSES)[number];
+
+/** Longest internal note an admin can save on a request. */
+export const NOTES_MAX = 4000;

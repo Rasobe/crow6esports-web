@@ -1,0 +1,33 @@
+---
+import { listTryoutRequests } from "@/application/admin/tryout-requests";
+import { totalPages } from "@/domain/admin/pagination";
+import { container } from "@/infrastructure/container";
+import { Pagination, RequestsTable, StatusFilter } from "@/ui/features/admin/components";
+import { listHref, parseListQuery } from "@/ui/features/admin/lib/list-query";
+import { AdminLayout } from "@/ui/layouts";
+
+const { status, page } = parseListQuery(Astro.url.searchParams);
+const result = await listTryoutRequests(container.tryoutRequestRepository, { status, page });
+
+const lastPage = totalPages(result.total, result.pageSize);
+if (page > lastPage) return Astro.redirect(listHref("/admin/tryouts", { status, page: lastPage }));
+---
+
+<AdminLayout title="Tryouts" current="tryouts">
+  <h1 class="admin__title">Solicitudes de tryouts</h1>
+  <div class="admin__toolbar">
+    <StatusFilter basePath="/admin/tryouts" active={status} />
+  </div>
+  <RequestsTable
+    requests={result.items}
+    caption={`${result.total} ${result.total === 1 ? "solicitud" : "solicitudes"}, de más reciente a más antigua`}
+    emptyMessage="No hay solicitudes con este filtro."
+  />
+  <Pagination
+    basePath="/admin/tryouts"
+    status={status}
+    page={result.page}
+    total={result.total}
+    pageSize={result.pageSize}
+  />
+</AdminLayout>

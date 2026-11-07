@@ -1,0 +1,33 @@
+---
+import "./status-filter.scss";
+import type { RequestStatus } from "@/domain/tryouts/tryout-application";
+import { listHref } from "../../lib/list-query";
+import { STATUS_OPTIONS } from "../../lib/tryout-labels";
+
+interface Props {
+  basePath: string;
+  active?: RequestStatus;
+}
+
+const { basePath, active } = Astro.props;
+const options = [{ value: undefined, label: "Todas" }, ...STATUS_OPTIONS];
+---
+
+<nav class="status-filter" aria-label="Filtrar por estado">
+  <ul class="status-filter__list">
+    {options.map((option) => (
+      <li>
+        <a
+          class:list={[
+            "status-filter__link",
+            option.value === active && "status-filter__link--active",
+          ]}
+          href={listHref(basePath, { status: option.value })}
+          aria-current={option.value === active ? "true" : undefined}
+        >
+          {option.label}
+        </a>
+      </li>
+    ))}
+  </ul>
+</nav>

@@ -1,0 +1,17 @@
+---
+import "./admin-notice.scss";
+
+interface Props {
+  tone: "success" | "error";
+  message: string;
+}
+
+const { tone, message } = Astro.props;
+---
+
+<p
+  class:list={["admin-notice", `admin-notice--${tone}`]}
+  role={tone === "error" ? "alert" : "status"}
+>
+  {message}
+</p>

@@ -1,0 +1,45 @@
+---
+import "./pagination.scss";
+import type { RequestStatus } from "@/domain/tryouts/tryout-application";
+import { totalPages } from "@/domain/admin/pagination";
+import { listHref } from "../../lib/list-query";
+
+interface Props {
+  basePath: string;
+  status?: RequestStatus;
+  page: number;
+  total: number;
+  pageSize: number;
+}
+
+const { basePath, status, page, total, pageSize } = Astro.props;
+const pages = totalPages(total, pageSize);
+const previous = page > 1 ? listHref(basePath, { status, page: page - 1 }) : undefined;
+const next = page < pages ? listHref(basePath, { status, page: page + 1 }) : undefined;
+---
+
+{pages > 1 && (
+  <nav class="pagination" aria-label="Paginación">
+    {previous ? (
+      <a class="pagination__link" href={previous} rel="prev">
+        Anterior
+      </a>
+    ) : (
+      <span class="pagination__link pagination__link--disabled" aria-disabled="true">
+        Anterior
+      </span>
+    )}
+    <p class="pagination__status">
+      Página {page} de {pages}
+    </p>
+    {next ? (
+      <a class="pagination__link" href={next} rel="next">
+        Siguiente
+      </a>
+    ) : (
+      <span class="pagination__link pagination__link--disabled" aria-disabled="true">
+        Siguiente
+      </span>
+    )}
+  </nav>
+)}

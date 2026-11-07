@@ -1,0 +1,41 @@
+---
+import "@/styles/global.scss";
+import "./admin-layout.scss";
+import { Font } from "astro:assets";
+import { AdminHeader } from "@/ui/features/admin/components/admin-header";
+
+interface Props {
+  title: string;
+  /** Sin navegación ni sesión: la pantalla de acceso. */
+  bare?: boolean;
+  current?: "overview" | "tryouts" | "coaching";
+}
+
+const { title, bare = false, current } = Astro.props;
+const { adminEmail } = Astro.locals;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="description" content="Panel privado de Crow 6 eSports." />
+    <title>{title} | Panel Crow 6</title>
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <meta name="theme-color" content="#0a0a0a" />
+    <Font cssVariable="--font-display" preload />
+    <Font cssVariable="--font-ui" preload={[{ weight: 700 }]} />
+    <Font cssVariable="--font-body" preload={[{ weight: 400 }]} />
+  </head>
+  <body class="admin">
+    <a class="admin__skip" href="#main-content">
+      Saltar al contenido
+    </a>
+    {!bare && <AdminHeader current={current} email={adminEmail} />}
+    <main id="main-content" class:list={["admin__main", bare && "admin__main--bare"]} tabindex="-1">
+      <slot />
+    </main>
+  </body>
+</html>

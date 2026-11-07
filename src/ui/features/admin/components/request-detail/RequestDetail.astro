@@ -1,0 +1,100 @@
+---
+import "./request-detail.scss";
+import type { TryoutRequest } from "@/domain/tryouts/tryout-request";
+import {
+  COACHING_LABELS,
+  COMPETITIVE_LABELS,
+  LOCALE_LABELS,
+  LOSS_REACTION_LABELS,
+  PLAYSTYLE_LABELS,
+  SCHEDULE_TYPE_LABELS,
+  WEEKDAY_LABELS,
+  formatBirthDate,
+  formatDateTime,
+  safeHttpUrl,
+} from "../../lib/tryout-labels";
+
+interface Props {
+  request: TryoutRequest;
+}
+
+type Field = { label: string; value?: string; href?: string; long?: boolean };
+
+const { request } = Astro.props;
+
+const schedule =
+  request.scheduleType === "fixed" && request.scheduleFrom && request.scheduleTo
+    ? `${SCHEDULE_TYPE_LABELS.fixed}, de ${request.scheduleFrom} a ${request.scheduleTo}`
+    : SCHEDULE_TYPE_LABELS[request.scheduleType];
+
+const sections: { title: string; fields: Field[] }[] = [
+  {
+    title: "Contacto y disponibilidad",
+    fields: [
+      { label: "Discord", value: request.discord },
+      { label: "Fecha de nacimiento", value: formatBirthDate(request.birthDate) },
+      { label: "País", value: request.country },
+      { label: "Días", value: request.availableDays.map((day) => WEEKDAY_LABELS[day]).join(", ") },
+      { label: "Horario", value: schedule },
+      { label: "Zona horaria", value: request.timeZone },
+      { label: "Notas de disponibilidad", value: request.availabilityNotes, long: true },
+    ],
+  },
+  {
+    title: "Nivel",
+    fields: [
+      { label: "Rango actual", value: request.rank },
+      { label: "Peak 2v2", value: request.peak },
+      { label: "Horas jugadas", value: request.hoursPlayed.toLocaleString("es-ES") },
+      { label: "Estilo de juego", value: PLAYSTYLE_LABELS[request.playstyle] },
+      { label: "RLTracker", value: request.rltracker, href: safeHttpUrl(request.rltracker) },
+      { label: "Clips", value: request.highlights, href: safeHttpUrl(request.highlights) },
+    ],
+  },
+  {
+    title: "Experiencia y mentalidad",
+    fields: [
+      { label: "Experiencia competitiva", value: COMPETITIVE_LABELS[request.hasCompetitiveExp] },
+      { label: "Equipos anteriores", value: request.previousTeams },
+      { label: "Ante un error repetido", value: request.reactionToMistakes, long: true },
+      {
+        label: "Ante una racha de derrotas",
+        value: LOSS_REACTION_LABELS[request.reactionToLosses],
+      },
+      { label: "Qué busca en Crow 6", value: request.lookingFor, long: true },
+      { label: "Abierto a coaching", value: COACHING_LABELS[request.openToCoaching] },
+    ],
+  },
+];
+---
+
+<article class="request-detail">
+  <p class="request-detail__meta">
+    Recibida el <time datetime={request.createdAt}>{formatDateTime(request.createdAt)}</time> en{" "}
+    {LOCALE_LABELS[request.locale].toLowerCase()}
+  </p>
+
+  {sections.map((section) => (
+    <section class="request-detail__section">
+      <h2 class="request-detail__title">{section.title}</h2>
+      <dl class="request-detail__list">
+        {section.fields
+          .filter((field) => field.value)
+          .map((field) => (
+            <div class:list={["request-detail__row", field.long && "request-detail__row--long"]}>
+              <dt>{field.label}</dt>
+              <dd>
+                {field.href ? (
+                  <a href={field.href} target="_blank" rel="noopener noreferrer">
+                    {field.value}
+                  </a>
+                ) : (
+                  field.value
+                )}
+              </dd>
+            </div>
+          ))}
+      </dl>
+    </section>
+  ))}
+</article>
