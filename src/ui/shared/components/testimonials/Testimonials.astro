@@ -1,0 +1,199 @@
+---
+import "./testimonials.scss";
+import { TESTIMONIALS } from "@config/testimonials";
+import { getTestimonials } from "@/application/testimonials/get-testimonials";
+import { createTranslator } from "@/ui/i18n";
+import { Icon } from "../icons";
+
+const { locale } = Astro.locals;
+const t = createTranslator(locale, "testimonials");
+const testimonials = getTestimonials(TESTIMONIALS, locale);
+const hasActions = Astro.slots.has("actions");
+---
+
+<testimonials-carousel class="testimonials" aria-labelledby="testimonials-title" role="region">
+  <div class="testimonials__inner">
+    <header class="testimonials__header" data-reveal>
+      <div class="testimonials__heading">
+        <span class="section-label">{t("eyebrow")}</span>
+        <h2 id="testimonials-title" class="testimonials__title">
+          {t("title_lead")} <span class="testimonials__title-accent">{t("title_accent")}</span>
+        </h2>
+      </div>
+
+      <div class="testimonials__controls" role="group" aria-label={t("controls_label")} hidden>
+        <button
+          type="button"
+          class="testimonials__control"
+          data-action="previous"
+          aria-label={t("previous")}
+        >
+          <Icon name="arrow-left" size={18} />
+        </button>
+        <button
+          type="button"
+          class="testimonials__control"
+          data-action="next"
+          aria-label={t("next")}
+        >
+          <Icon name="arrow-right" size={18} />
+        </button>
+        <button
+          type="button"
+          class="testimonials__control testimonials__control--toggle"
+          data-action="toggle"
+          aria-pressed="false"
+          aria-label={t("pause")}
+        >
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true">
+            <path class="testimonials__icon-pause" d="M3 2h2.5v10H3zM8.5 2H11v10H8.5z" />
+            <path class="testimonials__icon-play" d="M3.5 2l8 5-8 5z" />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <ul class="testimonials__track" tabindex="0" aria-label={t("list_label")} data-reveal>
+      {testimonials.map(({ id, author, affiliation, quote, highlight }) => (
+        <li class="testimonials__entry">
+          <figure class="testimonials__item">
+            {highlight && (
+              <p class="testimonials__highlight">
+                <span class="testimonials__highlight-label">{t("highlight_label")}</span>
+                <strong class="testimonials__highlight-value">
+                  {t(`highlight.${highlight.key}`, highlight.params)
+                    .split(" · ")
+                    .map((line) => (
+                      <span class="testimonials__highlight-line">{line}</span>
+                    ))}
+                </strong>
+              </p>
+            )}
+            <div class="testimonials__body">
+              <blockquote class="testimonials__quote" id={`testimonial-${id}`}>
+                <p>{quote}</p>
+              </blockquote>
+              <figcaption class="testimonials__author">
+                <cite class="testimonials__name">{author}</cite>
+                <span class="testimonials__affiliation">{affiliation}</span>
+              </figcaption>
+            </div>
+          </figure>
+        </li>
+      ))}
+    </ul>
+
+    {hasActions && (
+      <div class="testimonials__footer" data-reveal>
+        <slot name="actions" />
+      </div>
+    )}
+  </div>
+</testimonials-carousel>
+
+<script>
+  const AUTOPLAY_INTERVAL_MS = 6000;
+  const END_TOLERANCE_PX = 4;
+
+  class TestimonialsCarousel extends HTMLElement {
+    private track!: HTMLElement;
+    private controls!: HTMLElement;
+    private toggle!: HTMLButtonElement;
+    private timer: number | undefined;
+    private interacting = false;
+    private visible = false;
+    private reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    connectedCallback() {
+      const track = this.querySelector<HTMLElement>(".testimonials__track");
+      const controls = this.querySelector<HTMLElement>(".testimonials__controls");
+      const toggle = this.querySelector<HTMLButtonElement>('[data-action="toggle"]');
+      if (!track || !controls || !toggle) return;
+      this.track = track;
+      this.controls = controls;
+      this.toggle = toggle;
+
+      this.querySelector('[data-action="previous"]')?.addEventListener("click", () =>
+        this.step(-1),
+      );
+      this.querySelector('[data-action="next"]')?.addEventListener("click", () => this.step(1));
+      toggle.addEventListener("click", this.onToggle);
+
+      for (const [enter, leave] of [
+        ["pointerenter", "pointerleave"],
+        ["focusin", "focusout"],
+      ] as const) {
+        this.addEventListener(enter, () => (this.interacting = true));
+        this.addEventListener(leave, () => (this.interacting = false));
+      }
+      track.addEventListener("touchstart", () => (this.interacting = true), { passive: true });
+      track.addEventListener("touchend", () => (this.interacting = false), { passive: true });
+
+      new IntersectionObserver(
+        ([entry]) => (this.visible = entry?.isIntersecting ?? false),
+      ).observe(this);
+      new ResizeObserver(() => this.sync()).observe(track);
+      this.reducedMotion.addEventListener("change", () => this.sync());
+      this.sync();
+    }
+
+    disconnectedCallback() {
+      window.clearInterval(this.timer);
+    }
+
+    private get overflows() {
+      return this.track.scrollWidth - this.track.clientWidth > END_TOLERANCE_PX;
+    }
+
+    private get isPaused() {
+      return this.toggle.getAttribute("aria-pressed") === "true";
+    }
+
+    private sync() {
+      this.controls.hidden = !this.overflows;
+      window.clearInterval(this.timer);
+      if (this.overflows && !this.reducedMotion.matches) {
+        this.timer = window.setInterval(() => this.tick(), AUTOPLAY_INTERVAL_MS);
+      }
+    }
+
+    private tick() {
+      if (this.isPaused || this.interacting || !this.visible || document.hidden) return;
+      this.step(1);
+    }
+
+    private onToggle = () => {
+      this.toggle.setAttribute("aria-pressed", String(!this.isPaused));
+      this.toggleAttribute("data-paused", this.isPaused);
+    };
+
+    private step(direction: 1 | -1) {
+      const cards = Array.from(this.track.children) as HTMLElement[];
+      const offsets = cards.map((card) => card.offsetLeft - this.track.offsetLeft);
+      const maxScroll = this.track.scrollWidth - this.track.clientWidth;
+      const current = this.track.scrollLeft;
+      const atEnd = current >= maxScroll - END_TOLERANCE_PX;
+      const atStart = current <= END_TOLERANCE_PX;
+
+      let target: number;
+      if (direction === 1) {
+        target = atEnd
+          ? 0
+          : (offsets.find((offset) => offset > current + END_TOLERANCE_PX) ?? maxScroll);
+      } else {
+        target = atStart
+          ? maxScroll
+          : (offsets.findLast((offset) => offset < current - END_TOLERANCE_PX) ?? 0);
+      }
+
+      this.track.scrollTo({
+        left: Math.min(target, maxScroll),
+        behavior: this.reducedMotion.matches ? "auto" : "smooth",
+      });
+    }
+  }
+
+  if (!customElements.get("testimonials-carousel")) {
+    customElements.define("testimonials-carousel", TestimonialsCarousel);
+  }
+</script>

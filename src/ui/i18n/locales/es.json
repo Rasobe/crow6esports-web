@@ -753,5 +753,24 @@
     "copied": "¡Copiado!",
     "gmail": "Abrir en Gmail",
     "new_tab": "se abre en una pestaña nueva"
+  },
+  "testimonials": {
+    "eyebrow": "Testimonios",
+    "title_lead": "Lo que dicen",
+    "title_accent": "sus jugadores",
+    "list_label": "Opiniones de jugadores que han entrenado con Rasobe",
+    "highlight_label": "Resultado",
+    "highlight": {
+      "reached_ranks": "{mmr2s} MMR en 2s · {mmr3s} MMR en 3s",
+      "climb": "{from} → {to} MMR en {months} meses"
+    },
+    "cta_title": "¿Quieres resultados como estos?",
+    "cta_description": "Empieza con una sesión de presentación de 30 minutos y sin compromiso.",
+    "cta": "Pedir mi sesión por Discord",
+    "home_link": "Ver el coaching",
+    "controls_label": "Controles de los testimonios",
+    "previous": "Testimonio anterior",
+    "next": "Testimonio siguiente",
+    "pause": "Pausar el desplazamiento automático"
   }
 }

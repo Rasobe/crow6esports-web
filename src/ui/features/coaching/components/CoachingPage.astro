@@ -1,6 +1,7 @@
 ---
+import { DISCORD_URL } from "@config/site";
 import { createTranslator } from "@/ui/i18n";
-import { PageHeader } from "@/ui/shared/components";
+import { Button, PageHeader, Testimonials } from "@/ui/shared/components";
 import CoachingAvailability from "./CoachingAvailability.astro";
 import CoachingCTA from "./CoachingCTA.astro";
 import CoachingPlans from "./CoachingPlans.astro";
@@ -9,6 +10,7 @@ import CoachingTeams from "./CoachingTeams.astro";
 import CoachProfile from "./CoachProfile.astro";
 
 const t = createTranslator(Astro.locals.locale, "coaching");
+const tt = createTranslator(Astro.locals.locale, "testimonials");
 ---
 
 <PageHeader eyebrow={t("eyebrow")} title={t("title")} description={t("description")} />
@@ -17,4 +19,15 @@ const t = createTranslator(Astro.locals.locale, "coaching");
 <CoachingPlans />
 <CoachingTeams />
 <CoachingAvailability />
+<Testimonials>
+  <Fragment slot="actions">
+    <p class="testimonials__cta-text">
+      <strong class="testimonials__cta-title">{tt("cta_title")}</strong>
+      {tt("cta_description")}
+    </p>
+    <Button href={DISCORD_URL} size="lg">
+      {tt("cta")}
+    </Button>
+  </Fragment>
+</Testimonials>
 <CoachingCTA />
