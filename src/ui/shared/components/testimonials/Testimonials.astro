@@ -1,0 +1,60 @@
+---
+import "./testimonials.scss";
+import { TESTIMONIALS } from "@config/testimonials";
+import { getTestimonials } from "@/application/testimonials/get-testimonials";
+import { createTranslator } from "@/ui/i18n";
+
+interface Props {
+  variant?: "full" | "compact";
+}
+
+const { variant = "full" } = Astro.props;
+const { locale } = Astro.locals;
+const t = createTranslator(locale, "testimonials");
+const testimonials = getTestimonials(TESTIMONIALS, locale);
+const hasActions = Astro.slots.has("actions");
+---
+
+<section
+  class:list={["testimonials", `testimonials--${variant}`]}
+  aria-labelledby="testimonials-title"
+>
+  <div class="testimonials__inner">
+    <header class="testimonials__header">
+      <span class="section-label">{t("eyebrow")}</span>
+      <h2 id="testimonials-title" class="testimonials__title">
+        {t("title")}
+      </h2>
+    </header>
+
+    <ul class="testimonials__list" aria-label={t("list_label")}>
+      {testimonials.map(({ id, author, affiliation, quote, highlight }) => (
+        <li class="testimonials__entry" data-reveal>
+          <figure class="testimonials__item">
+            {highlight && (
+              <p class="testimonials__highlight">
+                <span class="testimonials__highlight-label">{t("highlight_label")}</span>
+                <strong class="testimonials__highlight-value">
+                  {t(`highlight.${highlight.key}`, highlight.params)}
+                </strong>
+              </p>
+            )}
+            <blockquote class="testimonials__quote" id={`testimonial-${id}`}>
+              <p>{quote}</p>
+            </blockquote>
+            <figcaption class="testimonials__author">
+              <cite class="testimonials__name">{author}</cite>
+              <span class="testimonials__affiliation">{affiliation}</span>
+            </figcaption>
+          </figure>
+        </li>
+      ))}
+    </ul>
+
+    {hasActions && (
+      <div class="testimonials__footer">
+        <slot name="actions" />
+      </div>
+    )}
+  </div>
+</section>

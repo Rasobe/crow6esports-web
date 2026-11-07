@@ -753,5 +753,19 @@
     "copied": "Copied!",
     "gmail": "Open in Gmail",
     "new_tab": "opens in a new tab"
+  },
+  "testimonials": {
+    "eyebrow": "Testimonials",
+    "title": "What his players say",
+    "list_label": "Feedback from players who have trained with Rasobe",
+    "highlight_label": "Result",
+    "highlight": {
+      "reached_ranks": "{mmr2s} MMR in 2s · {mmr3s} MMR in 3s",
+      "climb": "{from} → {to} MMR in {months} months"
+    },
+    "cta_title": "Want results like these?",
+    "cta_description": "Start with a 30-minute intro session, no commitment.",
+    "cta": "Book my session on Discord",
+    "home_link": "See the coaching"
   }
 }

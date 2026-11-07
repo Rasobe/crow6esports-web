@@ -13,5 +13,6 @@ export * from "./section-heading";
 export * from "./select-field";
 export * from "./seo";
 export * from "./skip-link";
+export * from "./testimonials";
 export * from "./text-field";
 export * from "./textarea-field";
