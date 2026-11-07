@@ -17,4 +17,6 @@ export const socialUrls: readonly string[] = socialLinks.map(({ href }) => href)
 
 export const DISCORD_URL = socialLinks.find(({ platform }) => platform === "discord")!.href;
 
+export const INSTAGRAM_URL = socialLinks.find(({ platform }) => platform === "instagram")!.href;
+
 export type SiteConfig = typeof siteConfig;
