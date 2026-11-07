@@ -3,12 +3,12 @@
 // El panel de Keystatic habla con la API de GitHub desde el navegador, muestra avatares e
 // imágenes del repositorio, carga su tipografía (Inter) de Google Fonts y su asistente envía
 // a github.com el formulario que crea la GitHub App
-const KEYSTATIC_CONNECT_HOSTS = "https://api.github.com";
+const GITHUB_RAW_HOST = "https://raw.githubusercontent.com";
+const KEYSTATIC_CONNECT_HOSTS = `https://api.github.com ${GITHUB_RAW_HOST}`;
 const KEYSTATIC_STYLE_HOSTS = "https://fonts.googleapis.com";
 const KEYSTATIC_FONT_HOSTS = "https://fonts.gstatic.com";
 const KEYSTATIC_FORM_HOSTS = "https://github.com";
-const KEYSTATIC_IMAGE_HOSTS =
-  "https://avatars.githubusercontent.com https://raw.githubusercontent.com";
+const KEYSTATIC_IMAGE_HOSTS = `https://avatars.githubusercontent.com ${GITHUB_RAW_HOST}`;
 
 const VERCEL_DEV_SCRIPT_HOSTS = "https://cdn.vercel-insights.com https://va.vercel-scripts.com";
 

@@ -2,8 +2,9 @@
 import { TRYOUTS_OPEN } from "astro:env/server";
 import { ANNOUNCEMENTS } from "@config/announcements";
 import { getAnnouncementKeys } from "@/application/site/get-announcements";
-import { createTranslator } from "@/ui/i18n";
-import { NewsTicker } from "@/ui/shared/components";
+import { ROUTES } from "@config/routes";
+import { createTranslator, localizePath } from "@/ui/i18n";
+import { NewsTicker, Testimonials } from "@/ui/shared/components";
 import { CoachingBanner } from "./coaching-banner";
 import { HeroSection } from "./hero-section";
 import { NewsHighlight } from "./news-highlight";
@@ -12,7 +13,9 @@ import { TeamHighlight } from "./team-highlight";
 import { TryoutsBanner } from "./tryouts-banner";
 import { VideoHighlight } from "./video-highlight";
 
-const t = createTranslator(Astro.locals.locale, "home.ticker");
+const { locale } = Astro.locals;
+const t = createTranslator(locale, "home.ticker");
+const tt = createTranslator(locale, "testimonials");
 const tickerItems = getAnnouncementKeys(ANNOUNCEMENTS, { tryoutsOpen: TRYOUTS_OPEN }).map((key) =>
   t(`items.${key}`),
 );
@@ -23,6 +26,11 @@ const tickerItems = getAnnouncementKeys(ANNOUNCEMENTS, { tryoutsOpen: TRYOUTS_OP
 <TeamHighlight />
 <VideoHighlight />
 <CoachingBanner />
+<Testimonials>
+  <a slot="actions" class="testimonials__link" href={localizePath(locale, ROUTES.coaching)}>
+    {tt("home_link")}
+  </a>
+</Testimonials>
 <StoreHighlight />
 <NewsHighlight />
 <TryoutsBanner />
