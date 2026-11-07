@@ -11,7 +11,10 @@ const HIGHLIGHTED_ARTICLES = 3;
 
 const { locale } = Astro.locals;
 const t = createTranslator(locale, "home.newsHighlight");
-const articles = (await getArticles(container.articleRepository)).slice(0, HIGHLIGHTED_ARTICLES);
+const articles = (await getArticles(container.articleRepository, locale)).slice(
+  0,
+  HIGHLIGHTED_ARTICLES,
+);
 ---
 
 {articles.length > 0 && (

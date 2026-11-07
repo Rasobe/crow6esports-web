@@ -1,5 +1,6 @@
 import { expect, test, type Page } from "@playwright/test";
 import { COACHING, LAUNCH_PRICE_ENDS } from "../config/coaching";
+import { hasNews } from "./support/news-content";
 import { getCoachingPricing } from "../src/application/coaching/get-coaching-pricing";
 
 const ORIGIN = "https://crow6esports.com";
@@ -89,9 +90,13 @@ test("the home describes the team and the website as valid JSON-LD", async ({ pa
   });
 });
 
-test("keeps only the empty news page out of search engines", async ({ page }) => {
+test("keeps the news page out of search engines only while it has no articles", async ({
+  page,
+}) => {
   await page.goto("/es/news");
-  await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/);
+  const noindex = page.locator('meta[name="robots"][content*="noindex"]');
+
+  await expect(noindex).toHaveCount(hasNews("es") ? 0 : 1);
 });
 
 test("the coaching JSON-LD and home banner use the current prices from the config", async ({
@@ -123,7 +128,7 @@ test("serves a sitemap with lastmod, hreflang alternates and the public domain o
   expect(xml).toContain('hreflang="es"');
   expect(xml).toContain('hreflang="en"');
   expect(xml).toContain('hreflang="x-default"');
-  expect(xml).not.toContain("/news");
+  if (!hasNews()) expect(xml).not.toContain("/news");
 
   const locs = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map(([, loc]) => loc);
   expect(locs.length).toBeGreaterThan(0);

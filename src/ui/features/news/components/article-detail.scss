@@ -50,6 +50,20 @@
     color: var(--text-primary);
   }
 
+  .article-detail__cover {
+    margin: 0 0 var(--space-10);
+    border: var(--line-subtle);
+    background: var(--bg-surface);
+  }
+
+  .article-detail__image {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1200 / 630;
+    object-fit: cover;
+  }
+
   .article-detail__body {
     font-family: var(--ff-body);
     font-size: var(--fs-lg);
@@ -58,6 +72,23 @@
 
     > * + * {
       margin-top: var(--space-5);
+    }
+
+    ul,
+    ol {
+      padding-left: var(--space-6);
+    }
+
+    ul {
+      list-style: disc;
+    }
+
+    ol {
+      list-style: decimal;
+    }
+
+    li + li {
+      margin-top: var(--space-2);
     }
 
     h2,

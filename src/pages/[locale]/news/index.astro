@@ -8,7 +8,7 @@ import { createTranslator } from "@/ui/i18n";
 
 const t = createTranslator(Astro.locals.locale, "news.seo");
 // Sin artículos la página solo muestra el aviso: se deja fuera del buscador hasta que haya
-const articles = await getArticles(container.articleRepository);
+const articles = await getArticles(container.articleRepository, Astro.locals.locale);
 ---
 
 <LocaleLayout

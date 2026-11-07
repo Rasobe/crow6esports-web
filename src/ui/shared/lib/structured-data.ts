@@ -82,3 +82,48 @@ export function coachingServiceData(service: CoachingService): StructuredData {
     },
   };
 }
+
+interface Publisher {
+  name: string;
+  url: string;
+  logo: string;
+}
+
+interface ArticleInput {
+  headline: string;
+  description: string;
+  url: string;
+  /** URL absoluta de la portada. */
+  image: string;
+  datePublished: Date;
+  dateModified: Date;
+  inLanguage: string;
+  /** El club firma sus noticias: autor y editor son la misma organización. */
+  publisher: Publisher;
+}
+
+/** Schema.org Article de una noticia, con las fechas en ISO 8601 completas. */
+export function articleData(article: ArticleInput): StructuredData {
+  const organization = {
+    "@type": "Organization",
+    name: article.publisher.name,
+    url: article.publisher.url,
+  };
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: article.headline,
+    description: article.description,
+    image: [article.image],
+    datePublished: article.datePublished.toISOString(),
+    dateModified: article.dateModified.toISOString(),
+    inLanguage: article.inLanguage,
+    mainEntityOfPage: { "@type": "WebPage", "@id": article.url },
+    author: organization,
+    publisher: {
+      ...organization,
+      logo: { "@type": "ImageObject", url: article.publisher.logo },
+    },
+  };
+}

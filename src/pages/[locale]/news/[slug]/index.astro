@@ -1,21 +1,60 @@
 ---
-import { getArticleBySlug } from "@/application/news/get-articles";
+import { ROUTES } from "@config/routes";
+import { siteConfig } from "@config/site";
+import { getArticleView } from "@/application/news/get-articles";
+import { lastModified } from "@/domain/news/article";
 import { container } from "@/infrastructure/container";
 import { renderArticleContent } from "@/infrastructure/news/article-content";
 import { ArticleDetail } from "@/ui/features/news/components";
 import { LocaleLayout } from "@/ui/layouts";
-import { ROUTES } from "@config/routes";
+import { JsonLd } from "@/ui/shared/components";
+import { articleData } from "@/ui/shared/lib/structured-data";
 
 const { slug = "" } = Astro.params;
-const article = await getArticleBySlug(container.articleRepository, slug);
-const rendered = await renderArticleContent(slug);
+const { locale } = Astro.locals;
+const view = await getArticleView(container.articleRepository, slug, locale);
+const rendered = view && (await renderArticleContent(slug));
 
-if (!article || !rendered) return Astro.rewrite("/404");
+if (!view || !rendered) return Astro.rewrite("/404");
 
+const { article, translation } = view;
 const { Content } = rendered;
+
+const path = `${ROUTES.news}/${article.slug}`;
+// Sin traducción no hay hreflang: un objeto vacío lo omite
+const alternates = translation
+  ? { [article.locale]: path, [translation.locale]: `${ROUTES.news}/${translation.slug}` }
+  : {};
+const modified = lastModified(article);
+
+const structuredData = articleData({
+  headline: article.title,
+  description: article.excerpt,
+  url: `${siteConfig.url}/${locale}${path}`,
+  image: new URL(article.cover, siteConfig.url).href,
+  datePublished: article.date,
+  dateModified: modified,
+  inLanguage: locale,
+  publisher: {
+    name: siteConfig.name,
+    url: siteConfig.url,
+    logo: `${siteConfig.url}/icon-512.png`,
+  },
+});
 ---
 
-<LocaleLayout title={article.title} description={article.excerpt} path={`${ROUTES.news}/${slug}`}>
+<LocaleLayout
+  title={article.title}
+  description={article.excerpt}
+  path={path}
+  ogType="article"
+  image={article.cover}
+  imageAlt={article.coverAlt}
+  alternates={alternates}
+  publishedTime={article.date}
+  modifiedTime={modified}
+>
+  <JsonLd slot="head" data={structuredData} />
   <ArticleDetail article={article}>
     <Content />
   </ArticleDetail>

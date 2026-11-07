@@ -1,5 +1,6 @@
 import { defineConfig, envField, fontProviders } from "astro/config";
 import mdx from "@astrojs/mdx";
+import keystatic from "@keystatic/astro";
 import react from "@astrojs/react";
 import vercel from "@astrojs/vercel";
 import type { ViteUserConfig } from "astro";
@@ -32,7 +33,7 @@ export default defineConfig({
   site: process.env.SITE_URL ?? "https://crow6esports.com",
   output: "server",
   adapter: vercel({ webAnalytics: { enabled: true } }),
-  integrations: [mdx(), react()],
+  integrations: [mdx(), react(), keystatic()],
   env: {
     schema: {
       MAINTENANCE_MODE: envField.boolean({ context: "server", access: "secret", default: false }),
@@ -45,6 +46,17 @@ export default defineConfig({
         optional: true,
       }),
       ADMIN_EMAILS: envField.string({ context: "server", access: "secret", default: "" }),
+      KEYSTATIC_GITHUB_CLIENT_ID: envField.string({
+        context: "server",
+        access: "secret",
+        optional: true,
+      }),
+      KEYSTATIC_GITHUB_CLIENT_SECRET: envField.string({
+        context: "server",
+        access: "secret",
+        optional: true,
+      }),
+      KEYSTATIC_SECRET: envField.string({ context: "server", access: "secret", optional: true }),
       TRYOUT_EMAIL_FROM: envField.string({
         context: "server",
         access: "secret",

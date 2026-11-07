@@ -125,6 +125,29 @@ Hay que aplicarla antes de desplegar; sin la tabla, `/api/contact` responde 500.
 
 Las notas internas necesitan aplicar `supabase/migrations/20261106230000_add_tryout_requests_notes.sql` (mismo procedimiento que la migración anterior). El e2e de login real se activa con `E2E_ADMIN_EMAIL` y `E2E_ADMIN_PASSWORD` en el entorno; sin ellas se omite.
 
+## Noticias y CMS (Keystatic)
+
+Las noticias se editan en `/keystatic` y viven en `content/news/` como un fichero MDX por artículo (la portada, en `public/images/news/<slug>/`). Cada artículo tiene título, slug, idioma (`es` o `en`), fecha, resumen de 160 caracteres como máximo (es la meta description), portada con texto alternativo, cuerpo y, opcionalmente, la traducción (`translationSlug`) y una fecha de última actualización.
+
+- **Un artículo por idioma.** Se publica solo en `/es/news` o `/en/news` según su idioma. El slug es único entre todos los idiomas: usa uno distinto por traducción y enlázalas con el campo de traducción (basta con enlazar desde un lado).
+- **hreflang solo con traducción.** Un artículo sin traducción no lleva hreflang. La fecha de última actualización alimenta `dateModified` y el `lastmod` del sitemap; sin ella se usa la fecha de publicación.
+- **`/news` solo se indexa con artículos.** Cada idioma tiene su listado: mientras un idioma no tenga artículos, su `/news` queda en noindex y fuera del sitemap.
+
+**En local** Keystatic guarda en el disco: `pnpm dev` y abre `http://127.0.0.1:4321/keystatic` (el servidor de desarrollo escucha en `127.0.0.1`). No hace falta ninguna variable. El listado de Keystatic sale de git, así que no muestra los ficheros ignorados.
+
+**En producción** Keystatic guarda con commits en el repositorio de GitHub (`config/repository.ts`) y exige iniciar sesión con GitHub. Necesita las variables de la GitHub App de Keystatic, que no están en el repositorio: se configuran en Vercel.
+
+```env
+KEYSTATIC_GITHUB_CLIENT_ID=
+KEYSTATIC_GITHUB_CLIENT_SECRET=
+KEYSTATIC_SECRET=                      # cadena aleatoria larga que cifra la sesión
+PUBLIC_KEYSTATIC_GITHUB_APP_SLUG=      # slug de la GitHub App
+```
+
+Según la documentación de Keystatic, la GitHub App se crea con su asistente: cambia temporalmente `storage` en `keystatic.config.tsx` a `{ kind: "github", repo: "<owner>/<repo>" }`, arranca `pnpm dev`, abre `/keystatic` y sigue los pasos; escribe las variables en `.env` (que no se sube al repositorio). Después instala la App en el repositorio y añade como callback `https://<dominio>/api/keystatic/github/oauth/callback`. Solo los colaboradores con permiso de escritura en el repositorio entran: el servidor comprueba contra GitHub, en cada carga del panel, que el token es válido y tiene permiso `push`. Mientras no estén las tres variables del servidor, `/keystatic` responde 404 en producción.
+
+Keystatic guarda en la rama por defecto del repositorio. `/keystatic` y `/api/keystatic` van con noindex, `Disallow` en `robots.txt`, fuera del sitemap y sin enlaces desde la web pública. Los borradores de prueba locales se llaman `borrador-*` y están ignorados en git (`.gitignore`).
+
 ## Despliegue
 
 El proyecto despliega automáticamente en Vercel en cada push a `main`. Las variables de entorno se configuran en el panel de Vercel, no en el repo.

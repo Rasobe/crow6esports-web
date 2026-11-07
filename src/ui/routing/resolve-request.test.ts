@@ -80,3 +80,10 @@ describe("resolveRequest for the admin panel", () => {
     expect(route("/admin/tryouts/")).toEqual({ kind: "redirect", path: "/admin/tryouts" });
   });
 });
+
+describe("resolveRequest for Keystatic", () => {
+  it("serves /keystatic outside i18n and maintenance mode", () => {
+    expect(route("/keystatic", { maintenance: true })).toEqual({ kind: "next" });
+    expect(route("/keystatic/collection/news", { maintenance: true })).toEqual({ kind: "next" });
+  });
+});

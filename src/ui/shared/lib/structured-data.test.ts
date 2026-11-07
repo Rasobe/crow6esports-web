@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { coachingServiceData, sportsTeamData, websiteData } from "./structured-data";
+import { articleData, coachingServiceData, sportsTeamData, websiteData } from "./structured-data";
 
 describe("sportsTeamData", () => {
   it("describes the club as a sports team with its profiles", () => {
@@ -92,5 +92,52 @@ describe("coachingServiceData", () => {
       highPrice: 219,
       offerCount: 2,
     });
+  });
+});
+
+describe("articleData", () => {
+  const data = articleData({
+    headline: "Nueva temporada",
+    description: "Resumen de la noticia.",
+    url: "https://crow6esports.com/es/news/nueva-temporada",
+    image: "https://crow6esports.com/images/news/portada.webp",
+    datePublished: new Date("2026-11-07T00:00:00Z"),
+    dateModified: new Date("2026-11-09T00:00:00Z"),
+    inLanguage: "es",
+    publisher: {
+      name: "Crow 6 eSports",
+      url: "https://crow6esports.com",
+      logo: "https://crow6esports.com/icon-512.png",
+    },
+  });
+
+  it("is a schema.org Article with every field search engines ask for", () => {
+    expect(data).toMatchObject({
+      "@context": "https://schema.org",
+      "@type": "Article",
+      headline: "Nueva temporada",
+      description: "Resumen de la noticia.",
+      image: ["https://crow6esports.com/images/news/portada.webp"],
+      datePublished: "2026-11-07T00:00:00.000Z",
+      dateModified: "2026-11-09T00:00:00.000Z",
+      inLanguage: "es",
+      mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": "https://crow6esports.com/es/news/nueva-temporada",
+      },
+      author: { "@type": "Organization", name: "Crow 6 eSports" },
+      publisher: {
+        "@type": "Organization",
+        name: "Crow 6 eSports",
+        logo: { "@type": "ImageObject", url: "https://crow6esports.com/icon-512.png" },
+      },
+    });
+  });
+
+  it("serializes to valid JSON without losing the dates", () => {
+    const parsed = JSON.parse(JSON.stringify(data));
+
+    expect(parsed.datePublished).toBe("2026-11-07T00:00:00.000Z");
+    expect(parsed.dateModified).toBe("2026-11-09T00:00:00.000Z");
   });
 });

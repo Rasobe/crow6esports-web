@@ -153,6 +153,10 @@
       "description": "Estamos preparando las primeras publicaciones. Mientras tanto, síguenos en redes para no perderte nada.",
       "socials_label": "Redes sociales",
       "new_tab": "se abre en una pestaña nueva"
+    },
+    "updated": "Actualizado",
+    "meta": {
+      "description": "Novedades, resultados y anuncios del club."
     }
   },
   "store": {
