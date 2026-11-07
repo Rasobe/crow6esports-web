@@ -1,4 +1,5 @@
 import AxeBuilder from "@axe-core/playwright";
+import { hasNews } from "./support/news-content";
 import { expect, test, type Page } from "@playwright/test";
 import { COACHING, LAUNCH_PRICE_ENDS } from "../config/coaching";
 import { getCoachingPricing } from "../src/application/coaching/get-coaching-pricing";
@@ -136,6 +137,8 @@ test("keeps the store visible and indexable with an out of stock notice", async 
 });
 
 test("shows the news empty state and keeps it out of search engines", async ({ page }) => {
+  test.skip(hasNews("es"), "Solo aplica mientras no hay artículos en español");
+
   await page.goto("/es/news");
   await expect(page.getByRole("heading", { name: "Pronto publicaremos noticias" })).toBeVisible();
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/);

@@ -46,3 +46,7 @@ barrel-builder.config.json
 # playwright
 /playwright-report/
 /test-results/
+
+# artículos de prueba locales (borradores que no deben llegar a producción)
+content/news/borrador-*
+public/images/news/borrador-*

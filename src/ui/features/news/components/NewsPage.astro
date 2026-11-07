@@ -8,7 +8,7 @@ import ArticleCard from "./ArticleCard.astro";
 import NewsEmpty from "./NewsEmpty.astro";
 
 const t = createTranslator(Astro.locals.locale, "news");
-const articles = await getArticles(container.articleRepository);
+const articles = await getArticles(container.articleRepository, Astro.locals.locale);
 ---
 
 <PageHeader eyebrow={t("eyebrow")} title={t("title")} description={t("meta.description")} />

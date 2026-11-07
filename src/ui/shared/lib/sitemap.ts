@@ -1,16 +1,24 @@
-export interface SitemapEntry {
+/** Una versión de una página: su idioma, su ruta sin prefijo y cuándo cambió por última vez. */
+export interface SitemapVersion<L extends string> {
+  locale: L;
   /** Ruta sin prefijo de idioma ("/" para la home). */
   path: string;
-  /** Última modificación, en ISO 8601 (solo la fecha basta). */
   lastmod: Date;
+}
+
+/**
+ * Versiones de una misma página en distintos idiomas. Se enlazan entre sí con hreflang; un
+ * grupo con una sola versión (un artículo sin traducción) no declara ninguna alternativa.
+ */
+export interface SitemapGroup<L extends string> {
   priority: string;
+  versions: readonly SitemapVersion<L>[];
 }
 
 interface SitemapInput<L extends string> {
   baseUrl: string;
-  locales: readonly L[];
   defaultLocale: L;
-  entries: readonly SitemapEntry[];
+  groups: readonly SitemapGroup<L>[];
   localizePath: (locale: L, path: string) => string;
 }
 
@@ -22,30 +30,38 @@ const escapeXml = (value: string) =>
 const formatDay = (date: Date) => date.toISOString().slice(0, 10);
 
 /**
- * Sitemap con una URL por idioma y página. Cada una declara con `xhtml:link` todas las
- * versiones (incluida ella misma) y la x-default, como pide Google para hreflang.
+ * Sitemap con una URL por versión. Cuando una página tiene varias, cada URL declara con
+ * `xhtml:link` todas las versiones (incluida ella misma) y la x-default, como pide Google.
  */
 export function buildSitemap<L extends string>({
   baseUrl,
-  locales,
   defaultLocale,
-  entries,
+  groups,
   localizePath,
 }: SitemapInput<L>): string {
-  const urlOf = (locale: L, path: string) => escapeXml(`${baseUrl}${localizePath(locale, path)}`);
+  const urlOf = ({ locale, path }: SitemapVersion<L>) =>
+    escapeXml(`${baseUrl}${localizePath(locale, path)}`);
 
-  const urls = entries.flatMap(({ path, lastmod, priority }) => {
-    const alternates = [
-      ...locales.map(
-        (locale) =>
-          `    <xhtml:link rel="alternate" hreflang="${locale}" href="${urlOf(locale, path)}"/>`,
-      ),
-      `    <xhtml:link rel="alternate" hreflang="x-default" href="${urlOf(defaultLocale, path)}"/>`,
-    ].join("\n");
+  const urls = groups.flatMap(({ priority, versions }) => {
+    const defaultVersion = versions.find((version) => version.locale === defaultLocale);
+    const alternates =
+      versions.length < 2
+        ? ""
+        : `\n${[
+            ...versions.map(
+              (version) =>
+                `    <xhtml:link rel="alternate" hreflang="${version.locale}" href="${urlOf(version)}"/>`,
+            ),
+            ...(defaultVersion
+              ? [
+                  `    <xhtml:link rel="alternate" hreflang="x-default" href="${urlOf(defaultVersion)}"/>`,
+                ]
+              : []),
+          ].join("\n")}`;
 
-    return locales.map(
-      (locale) =>
-        `  <url>\n    <loc>${urlOf(locale, path)}</loc>\n    <lastmod>${formatDay(lastmod)}</lastmod>\n    <changefreq>${CHANGE_FREQUENCY}</changefreq>\n    <priority>${priority}</priority>\n${alternates}\n  </url>`,
+    return versions.map(
+      (version) =>
+        `  <url>\n    <loc>${urlOf(version)}</loc>\n    <lastmod>${formatDay(version.lastmod)}</lastmod>\n    <changefreq>${CHANGE_FREQUENCY}</changefreq>\n    <priority>${priority}</priority>${alternates}\n  </url>`,
     );
   });
 

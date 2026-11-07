@@ -3,6 +3,7 @@ import "@/styles/global.scss";
 import { Font } from "astro:assets";
 import { ClientRouter } from "astro:transitions";
 import SpeedInsights from "@vercel/speed-insights/astro";
+import type { Locale } from "@/ui/i18n";
 import { Seo } from "@/ui/shared/components";
 
 interface Props {
@@ -11,9 +12,15 @@ interface Props {
   description: string;
   path?: string;
   noindex?: boolean;
+  ogType?: "website" | "article";
+  image?: string;
+  imageAlt?: string;
+  alternates?: Partial<Record<Locale, string>>;
+  publishedTime?: Date;
+  modifiedTime?: Date;
 }
 
-const { title, absoluteTitle, description, path, noindex } = Astro.props;
+const { title, absoluteTitle, description, path, noindex, ...social } = Astro.props;
 const { locale } = Astro.locals;
 ---
 
@@ -50,6 +57,7 @@ const { locale } = Astro.locals;
       locale={locale}
       path={path}
       noindex={noindex}
+      {...social}
     />
     <slot name="head" />
   </head>
