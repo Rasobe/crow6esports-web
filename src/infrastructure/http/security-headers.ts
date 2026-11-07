@@ -1,10 +1,12 @@
 // En producción Vercel sirve sus scripts de analítica desde el propio dominio; en
 // desarrollo las versiones de depuración llegan desde estos.
 // El panel de Keystatic habla con la API de GitHub desde el navegador, muestra avatares e
-// imágenes del repositorio y carga su tipografía (Inter) de Google Fonts
+// imágenes del repositorio, carga su tipografía (Inter) de Google Fonts y su asistente envía
+// a github.com el formulario que crea la GitHub App
 const KEYSTATIC_CONNECT_HOSTS = "https://api.github.com";
 const KEYSTATIC_STYLE_HOSTS = "https://fonts.googleapis.com";
 const KEYSTATIC_FONT_HOSTS = "https://fonts.gstatic.com";
+const KEYSTATIC_FORM_HOSTS = "https://github.com";
 const KEYSTATIC_IMAGE_HOSTS =
   "https://avatars.githubusercontent.com https://raw.githubusercontent.com";
 
@@ -30,7 +32,7 @@ function contentSecurityPolicy(isDev: boolean, panel: boolean): string {
     "frame-src https://www.youtube-nocookie.com",
     "object-src 'none'",
     "base-uri 'self'",
-    "form-action 'self'",
+    panel ? `form-action 'self' ${KEYSTATIC_FORM_HOSTS}` : "form-action 'self'",
     "frame-ancestors 'none'",
   ].join("; ");
 }
