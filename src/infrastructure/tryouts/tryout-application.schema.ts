@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { ATTRIBUTION_MAX } from "@/domain/tryouts/attribution";
 import {
   COACHING_OPENNESS,
   COMPETITIVE_EXPERIENCES,
@@ -54,6 +55,20 @@ export const tryoutApplicationSchema = z
   })
   .refine(isCompleteSchedule, { path: ["scheduleTo"] });
 
+/** Optional and empty-as-missing: attribution must never block a real application. */
+const attributionText = (max: number) =>
+  z
+    .string()
+    .trim()
+    .max(max)
+    .optional()
+    .transform((value) => value || undefined);
+
 export const tryoutSubmissionSchema = tryoutApplicationSchema.safeExtend({
   locale: z.enum(SUBMISSION_LOCALES),
+  sourcePage: attributionText(ATTRIBUTION_MAX.page),
+  referrer: attributionText(ATTRIBUTION_MAX.referrer),
+  utmSource: attributionText(ATTRIBUTION_MAX.utm),
+  utmMedium: attributionText(ATTRIBUTION_MAX.utm),
+  utmCampaign: attributionText(ATTRIBUTION_MAX.utm),
 });

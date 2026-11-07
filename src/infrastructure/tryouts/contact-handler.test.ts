@@ -57,9 +57,44 @@ describe("contact handler", () => {
     const response = await handle(request(payload), CLIENT);
 
     expect(response.status).toBe(200);
-    expect(save).toHaveBeenCalledWith(expect.objectContaining({ discord: "player_one" }), "es");
+    expect(save).toHaveBeenCalledWith(expect.objectContaining({ discord: "player_one" }), "es", {
+      sourcePage: undefined,
+      referrer: undefined,
+      utmSource: undefined,
+      utmMedium: undefined,
+      utmCampaign: undefined,
+    });
     expect(save.mock.calls[0][0]).not.toHaveProperty("locale");
     expect(notify).toHaveBeenCalledWith(expect.objectContaining({ discord: "player_one" }));
+  });
+
+  it("stores the attribution apart from the application", async () => {
+    const { handle, save, notify } = setup();
+    const attribution = {
+      sourcePage: "/es/coaching",
+      referrer: "https://www.instagram.com/",
+      utmSource: "instagram",
+      utmMedium: "social",
+      utmCampaign: "launch",
+    };
+
+    const response = await handle(request({ ...payload, ...attribution }), CLIENT);
+
+    expect(response.status).toBe(200);
+    expect(save).toHaveBeenCalledWith(expect.anything(), "es", attribution);
+    for (const field of Object.keys(attribution)) {
+      expect(save.mock.calls[0][0]).not.toHaveProperty(field);
+      expect(notify.mock.calls[0][0]).not.toHaveProperty(field);
+    }
+  });
+
+  it("rejects attribution fields longer than their limit without storing", async () => {
+    const { handle, save } = setup();
+
+    const response = await handle(request({ ...payload, utmSource: "x".repeat(101) }), CLIENT);
+
+    expect(response.status).toBe(400);
+    expect(save).not.toHaveBeenCalled();
   });
 
   it("rejects requests from another site", async () => {

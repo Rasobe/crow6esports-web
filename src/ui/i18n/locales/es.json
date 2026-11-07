@@ -177,7 +177,12 @@
       "description": "La camiseta oficial está agotada por ahora. Únete a nuestro Discord para enterarte antes que nadie de cuándo vuelve.",
       "teaser": "La camiseta oficial está agotada. Entra en el Discord para saber cuándo vuelve.",
       "cta_discord": "Avisarme por Discord",
-      "cta_email": "Escribir al club"
+      "cta_email": "Escribir al club",
+      "notice_label": "Aviso de stock",
+      "notice_tag": "Próximamente",
+      "notice_title": "Sin stock por ahora",
+      "notice_text": "La camiseta oficial no está disponible de momento. Síguenos en Discord e Instagram para enterarte de la próxima reposición.",
+      "cta_instagram": "Seguir en Instagram"
     },
     "jersey_video": {
       "section_label": "Vídeo de la camiseta",

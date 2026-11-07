@@ -1,13 +1,16 @@
 ---
 import "./admin-overview.scss";
+import type { AttributionSummary as Summary } from "@/application/admin/attribution-summary";
 import type { AdminOverview } from "@/application/admin/tryout-requests";
+import { AttributionSummary } from "../attribution-summary";
 import { RequestsTable } from "../requests-table";
 
 interface Props {
   overview: AdminOverview;
+  attribution: Summary;
 }
 
-const { overview } = Astro.props;
+const { overview, attribution } = Astro.props;
 ---
 
 <div class="admin-overview">
@@ -37,4 +40,6 @@ const { overview } = Astro.props;
       <a href="/admin/tryouts">Ver todas las solicitudes</a>
     </p>
   </section>
+
+  <AttributionSummary summary={attribution} />
 </div>

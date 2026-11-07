@@ -1,3 +1,4 @@
+import type { Attribution } from "@/domain/tryouts/attribution";
 import type { SubmissionLocale, TryoutApplication } from "@/domain/tryouts/tryout-application";
 
 const CONTACT_ENDPOINT = "/api/contact";
@@ -14,15 +15,20 @@ export class TryoutSubmissionError extends Error {
 /** Nombre del campo trampa; debe coincidir con el que comprueba el endpoint. */
 export const HONEYPOT_FIELD = "website";
 
+interface SubmitOptions {
+  locale: SubmissionLocale;
+  attribution: Attribution;
+  honeypot?: string;
+}
+
 export async function submitTryoutApplication(
   application: TryoutApplication,
-  locale: SubmissionLocale,
-  honeypot = "",
+  { locale, attribution, honeypot = "" }: SubmitOptions,
 ): Promise<void> {
   const response = await fetch(CONTACT_ENDPOINT, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ ...application, locale, [HONEYPOT_FIELD]: honeypot }),
+    body: JSON.stringify({ ...application, ...attribution, locale, [HONEYPOT_FIELD]: honeypot }),
   });
 
   if (!response.ok) {

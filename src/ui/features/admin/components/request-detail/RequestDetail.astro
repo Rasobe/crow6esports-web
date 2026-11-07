@@ -65,6 +65,16 @@ const sections: { title: string; fields: Field[] }[] = [
       { label: "Abierto a coaching", value: COACHING_LABELS[request.openToCoaching] },
     ],
   },
+  {
+    title: "Origen",
+    fields: [
+      { label: "Página de entrada", value: request.sourcePage },
+      { label: "Referrer", value: request.referrer },
+      { label: "utm_source", value: request.utmSource },
+      { label: "utm_medium", value: request.utmMedium },
+      { label: "utm_campaign", value: request.utmCampaign },
+    ],
+  },
 ];
 ---
 
@@ -74,27 +84,29 @@ const sections: { title: string; fields: Field[] }[] = [
     {LOCALE_LABELS[request.locale].toLowerCase()}
   </p>
 
-  {sections.map((section) => (
-    <section class="request-detail__section">
-      <h2 class="request-detail__title">{section.title}</h2>
-      <dl class="request-detail__list">
-        {section.fields
-          .filter((field) => field.value)
-          .map((field) => (
-            <div class:list={["request-detail__row", field.long && "request-detail__row--long"]}>
-              <dt>{field.label}</dt>
-              <dd>
-                {field.href ? (
-                  <a href={field.href} target="_blank" rel="noopener noreferrer">
-                    {field.value}
-                  </a>
-                ) : (
-                  field.value
-                )}
-              </dd>
-            </div>
-          ))}
-      </dl>
-    </section>
-  ))}
+  {sections
+    .filter((section) => section.fields.some((field) => field.value))
+    .map((section) => (
+      <section class="request-detail__section">
+        <h2 class="request-detail__title">{section.title}</h2>
+        <dl class="request-detail__list">
+          {section.fields
+            .filter((field) => field.value)
+            .map((field) => (
+              <div class:list={["request-detail__row", field.long && "request-detail__row--long"]}>
+                <dt>{field.label}</dt>
+                <dd>
+                  {field.href ? (
+                    <a href={field.href} target="_blank" rel="noopener noreferrer">
+                      {field.value}
+                    </a>
+                  ) : (
+                    field.value
+                  )}
+                </dd>
+              </div>
+            ))}
+        </dl>
+      </section>
+    ))}
 </article>

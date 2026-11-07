@@ -69,7 +69,7 @@ No hay base de datos. `content/players.json` y `content/stock.json` son los dato
 
 ### Datos de negocio y flags
 
-Los datos viven en `config/` (`club.ts`, `coaching.ts`, `site.ts`, `store.ts`, `announcements.ts`, `about.ts`). Los años de trayectoria se calculan (`yearsSince`), y plantilla y peak MMR salen de `players.json` (`getRosterStats`). `STORE_IN_STOCK` (config/store.ts) controla el modo venta de la tienda; con `false` no hay precios y se muestra "Próxima edición". El texto de tryouts del ticker depende de la variable `TRYOUTS_OPEN`.
+Los datos viven en `config/` (`club.ts`, `coaching.ts`, `site.ts`, `store.ts`, `announcements.ts`, `about.ts`). Los años de trayectoria se calculan (`yearsSince`), y plantilla y peak MMR salen de `players.json` (`getRosterStats`). `STORE_ENABLED` (config/store.ts) es el interruptor único de la tienda; con `false` no hay stock: se mantiene el vídeo, sin precios ni compra, con el aviso "Sin stock por ahora / Próximamente" y enlaces a Discord e Instagram. El texto de tryouts del ticker depende de la variable `TRYOUTS_OPEN`.
 
 ### Motion
 

@@ -153,7 +153,49 @@
     color: var(--brand);
   }
 
+  // Aviso de sin stock: lo primero que se lee junto a los botones de la reposición
+  .next-edition__notice {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    width: 100%;
+    padding: var(--space-6);
+    border: var(--line-strong);
+    border-left: 3px solid var(--brand);
+    background: var(--brand-tint);
+  }
+
+  .next-edition__notice-tag {
+    margin: 0;
+    font-family: var(--ff-ui);
+    font-size: var(--fs-xs);
+    font-weight: 700;
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    color: var(--brand);
+  }
+
+  .next-edition__notice-title {
+    margin: 0;
+    font-family: var(--ff-display);
+    font-size: var(--fs-2xl);
+    line-height: 1;
+    letter-spacing: var(--tracking-display);
+    text-transform: uppercase;
+    color: var(--text-primary);
+  }
+
+  .next-edition__notice-text {
+    max-width: 44ch;
+    margin: 0;
+    font-family: var(--ff-body);
+    font-size: var(--fs-body);
+    line-height: 1.7;
+    color: var(--text-secondary);
+  }
+
   .next-edition__actions {
+    margin-top: var(--space-2);
     display: flex;
     flex-wrap: wrap;
     align-items: flex-start;

@@ -12,6 +12,11 @@ const row: TryoutRequestRow = {
   status: "new",
   locale: "es",
   notes: null,
+  source_page: "/es/coaching",
+  referrer: "https://www.instagram.com/",
+  utm_source: "instagram",
+  utm_medium: null,
+  utm_campaign: null,
   discord: "player_one",
   birth_date: "2005-06-15",
   country: "España",
@@ -41,7 +46,7 @@ function fakeClient(result: unknown) {
   const builder: Record<string, unknown> = {
     then: (resolve: (value: unknown) => unknown) => resolve(result),
   };
-  for (const method of ["select", "order", "range", "eq", "update", "maybeSingle"]) {
+  for (const method of ["select", "order", "range", "eq", "gte", "update", "maybeSingle"]) {
     builder[method] = vi.fn((...args: unknown[]) => {
       calls[method] = args;
       return builder;
@@ -61,6 +66,12 @@ describe("toTryoutRequest", () => {
       birthDate: "2005-06-15",
       notes: null,
     });
+    expect(request).toMatchObject({
+      sourcePage: "/es/coaching",
+      referrer: "https://www.instagram.com/",
+      utmSource: "instagram",
+    });
+    expect(request.utmMedium).toBeUndefined();
     expect(request.scheduleFrom).toBeUndefined();
     expect(request.highlights).toBeUndefined();
   });
@@ -100,6 +111,27 @@ describe("supabase tryout request repository", () => {
         notes: null,
       }),
     ).resolves.toBe(false);
+  });
+
+  it("reads the attribution of the requests created since a date", async () => {
+    const { client, calls } = fakeClient({
+      data: [
+        { source_page: "/es", utm_source: "instagram" },
+        { source_page: null, utm_source: null },
+      ],
+      error: null,
+    });
+
+    const samples = await createSupabaseTryoutRequestRepository(client).listAttribution(
+      new Date("2026-10-08T00:00:00Z"),
+    );
+
+    expect(calls.select).toEqual(["source_page, utm_source"]);
+    expect(calls.gte).toEqual(["created_at", "2026-10-08T00:00:00.000Z"]);
+    expect(samples).toEqual([
+      { sourcePage: "/es", utmSource: "instagram" },
+      { sourcePage: null, utmSource: null },
+    ]);
   });
 
   it("throws when Supabase fails", async () => {

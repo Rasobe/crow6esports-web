@@ -2,7 +2,7 @@
 import "./store-highlight.scss";
 import { ROUTES } from "@config/routes";
 import { DISCORD_URL } from "@config/site";
-import { STORE_IN_STOCK } from "@config/store";
+import { STORE_ENABLED } from "@config/store";
 import { getProducts } from "@/application/store/get-products";
 import { container } from "@/infrastructure/container";
 import { createTranslator, localizePath } from "@/ui/i18n";
@@ -30,7 +30,7 @@ const products = getProducts(container.productRepository).slice(0, HIGHLIGHTED_P
     <div
       class:list={[
         "store-highlight__layout",
-        { "store-highlight__layout--teaser": !STORE_IN_STOCK },
+        { "store-highlight__layout--teaser": !STORE_ENABLED },
       ]}
     >
       <div class="store-highlight__grid">
@@ -41,7 +41,7 @@ const products = getProducts(container.productRepository).slice(0, HIGHLIGHTED_P
         ))}
       </div>
 
-      {!STORE_IN_STOCK && (
+      {!STORE_ENABLED && (
         <div class="store-highlight__teaser" data-reveal>
           <span class="section-label">{tNext("eyebrow")}</span>
           <p class="store-highlight__teaser-text">{tNext("teaser")}</p>
