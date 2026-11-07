@@ -21,4 +21,33 @@ export const TESTIMONIALS: readonly Testimonial[] = [
     },
     highlight: { key: "climb", params: { from: 1500, to: 1791, months: 3 } },
   },
+  {
+    id: "gato",
+    author: "Gato",
+    affiliation: "Crow 6 eSports",
+    quote: {
+      es: "Es un coach que se preocupa de verdad de que lo entiendas y, si hace falta, lo repite hasta que consigues pulirlo. Las ganas con las que coachea y la energía que transmite son muy positivas y motivadoras. A mí me ayudó a pasar de 1717 a 1922. Estoy muy contento con Rasobe.",
+      en: "He's a coach who genuinely cares whether you understand and will repeat things until you manage to polish them. The enthusiasm he coaches with and the energy he brings are very positive and motivating. He helped me go from 1717 to 1922. I'm very happy with Rasobe.",
+    },
+    highlight: { key: "climb_no_period", params: { from: 1717, to: 1922 } },
+  },
+  {
+    id: "blackito",
+    author: "Blackito",
+    affiliation: "Crow 6 eSports",
+    quote: {
+      es: "La primera vez que entré al competitivo de Rocket League era un GC1 pelado (~1490). Hace unos meses llegué a GC3 (1763) sin problemas, con solo 3 días de grinding. Tener un coach a estos niveles, o cerca de ellos, es muy importante. Rasobe me ha estado enseñando desde los inicios de mi carrera competitiva: me ha hecho darme cuenta de cosas que nunca había hecho, he podido perfeccionarlas y, sobre todo, a tener química con el equipo. A día de hoy no tengo ningún problema con lo que nos pide este coach, porque se nota que tiene experiencia (y le sobra).",
+      en: "The first time I entered competitive Rocket League, I was barely a GC1 (~1490). A few months ago I reached GC3 (1763) with no problems, in just 3 days of grinding. Having a coach at these levels, or close to them, is very important. Rasobe has been teaching me since the start of my competitive career: he made me notice things I had never done, I was able to perfect them and, above all, to build chemistry with the team. Today I have no problem with what this coach asks of us, because you can tell he has experience (and then some).",
+    },
+    highlight: { key: "climb_no_period", params: { from: 1490, to: 1763 } },
+  },
+  {
+    id: "diaxz",
+    author: "Diaxz",
+    affiliation: "Crow 6 eSports",
+    quote: {
+      es: "Muy buen coach. Llevo casi 2 años con él y he aprendido y mejorado muchísimo gracias a él.",
+      en: "Very good coach. I've been with him for almost 2 years and I've learned and improved a huge amount thanks to him.",
+    },
+  },
 ];

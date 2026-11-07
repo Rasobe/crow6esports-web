@@ -7,7 +7,7 @@ import type {
 export interface TestimonialView {
   id: string;
   author: string;
-  affiliation: string;
+  affiliation?: string;
   quote: string;
   highlight?: TestimonialHighlight;
 }
