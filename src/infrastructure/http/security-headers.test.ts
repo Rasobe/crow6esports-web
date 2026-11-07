@@ -52,7 +52,12 @@ describe("Content-Security-Policy of the Keystatic panel", () => {
     expect(panelPolicy).toMatch(/font-src [^;]*https:\/\/fonts\.gstatic\.com/);
   });
 
+  it("lets the setup wizard submit its form to github.com to create the GitHub App", () => {
+    expect(panelPolicy).toContain("form-action 'self' https://github.com");
+  });
+
   it("keeps the public site locked to its own origin", () => {
+    expect(sitePolicy).toContain("form-action 'self';");
     expect(sitePolicy).not.toContain("github");
     expect(sitePolicy).not.toContain("google");
     expect(sitePolicy).toContain("connect-src 'self'");
