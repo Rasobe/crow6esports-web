@@ -7,10 +7,9 @@
     width: 100%;
   }
 
-  // ── Label ──
   .text-field__label {
     font-family: var(--ff-ui);
-    font-size: var(--fs-2xs); // 11px
+    font-size: var(--fs-2xs);
     font-weight: 700;
     letter-spacing: var(--tracking-wider);
     text-transform: uppercase;
@@ -25,7 +24,6 @@
     font-size: var(--fs-xs);
   }
 
-  // ── Wrapper (input + icon) ──
   .text-field__wrapper {
     position: relative;
     display: flex;
@@ -46,14 +44,13 @@
     }
   }
 
-  // ── Input ──
   .text-field__input {
     width: 100%;
     background: var(--bg-surface);
     border: var(--line-subtle);
     color: var(--text-primary);
     font-family: var(--ff-body);
-    font-size: var(--fs-body); // 15px
+    font-size: var(--fs-body);
     line-height: 1.5;
     outline: none;
     transition:
@@ -78,7 +75,6 @@
       cursor: not-allowed;
     }
 
-    // ── Date picker native icon ──
     &[type="date"] {
       &::-webkit-calendar-picker-indicator {
         filter: invert(1);
@@ -93,7 +89,6 @@
     }
   }
 
-  // ── Hint ──
   .text-field__hint {
     font-family: var(--ff-body);
     font-size: var(--fs-xs);
@@ -101,7 +96,6 @@
     line-height: 1.4;
   }
 
-  // ── Error ──
   .text-field__error {
     font-family: var(--ff-ui);
     font-size: var(--fs-xs);
@@ -111,7 +105,6 @@
     line-height: 1.4;
   }
 
-  // ── Estado error ──
   .text-field--error {
     .text-field__input {
       border-color: var(--danger);
@@ -122,14 +115,12 @@
     }
   }
 
-  // ── Estado disabled ──
   .text-field--disabled {
     .text-field__label {
       opacity: 0.45;
     }
   }
 
-  // ── Tamaños ──
   .text-field--sm .text-field__input {
     padding: var(--space-2) var(--space-3);
     font-size: var(--fs-sm);

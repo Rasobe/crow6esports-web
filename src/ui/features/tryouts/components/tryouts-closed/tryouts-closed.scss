@@ -9,7 +9,6 @@
     overflow: hidden;
     padding: var(--space-20) var(--space-6);
 
-    // Glow de fondo
     &::before {
       content: "";
       position: absolute;
@@ -34,7 +33,6 @@
     width: 100%;
   }
 
-  // Icono candado
   .tryouts-closed__icon {
     display: flex;
     align-items: center;
@@ -52,7 +50,6 @@
     }
   }
 
-  // Descripción
   .tryouts-closed__desc {
     font-family: var(--ff-body);
     font-size: var(--fs-body);

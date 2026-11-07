@@ -21,7 +21,6 @@
     opacity: 0;
   }
 
-  // ── Índice de pasos ──
   .tryouts-form__aside {
     position: sticky;
     top: calc(var(--navbar-h) + var(--space-8));
@@ -162,7 +161,6 @@
     }
   }
 
-  // ── Panel ──
   .tryouts-panel {
     position: relative;
     background: var(--bg-surface);
@@ -225,7 +223,6 @@
     }
   }
 
-  // ── Cuerpo del paso ──
   @keyframes tryouts-step-in {
     from {
       opacity: 0;
@@ -270,7 +267,6 @@
     }
   }
 
-  // ── Bloques dentro de un paso ──
   .tryouts-group {
     display: flex;
     flex-direction: column;
@@ -302,7 +298,6 @@
     gap: var(--space-5);
   }
 
-  // ── Disponibilidad ──
   .tryouts-preset {
     padding: var(--space-1) var(--space-2-5);
     background: transparent;
@@ -349,7 +344,6 @@
     color: var(--text-muted);
   }
 
-  // ── Error de envío ──
   .tryouts-form__status {
     display: flex;
     align-items: center;
@@ -412,7 +406,6 @@
     }
   }
 
-  // ── Navegación ──
   .tryouts-panel__nav {
     display: flex;
     justify-content: flex-end;

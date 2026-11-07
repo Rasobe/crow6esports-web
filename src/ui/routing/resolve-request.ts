@@ -28,7 +28,6 @@ const isFileRequest = (pathname: string) => {
 
 const firstSegmentOf = (pathname: string) => pathname.split("/")[1];
 
-/** El idioma de la URL manda; si no lo lleva, se deduce de la cabecera del navegador. */
 export function resolveLocale(pathname: string, acceptLanguage: string | null): Locale {
   const firstSegment = firstSegmentOf(pathname);
   return isLocale(firstSegment) ? firstSegment : detectLocale(acceptLanguage);

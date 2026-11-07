@@ -1,11 +1,7 @@
 @use "styles/layers";
-/* ─────────────────────────────────────────────
-   MOTION
-
-   Estado inicial de los reveals. Solo se oculta cuando el script de motion
-   está activo (`data-motion` en <html>), así que sin JS o con
-   prefers-reduced-motion el contenido se ve directamente.
-   ───────────────────────────────────────────── */
+/* Estado inicial de los reveals. Solo se oculta cuando el script de motion está activo
+   (`data-motion` en <html>), así que sin JS o con prefers-reduced-motion el contenido se ve
+   directamente. */
 @layer components {
   [data-motion] [data-reveal]:not(.is-revealed) {
     opacity: 0;

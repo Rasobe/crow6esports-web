@@ -10,7 +10,6 @@ export interface TryoutRequestRepository {
   /** Newest first. */
   list(query: TryoutRequestQuery): Promise<TryoutRequestPage>;
   findById(id: string): Promise<TryoutRequest | null>;
-  /** Attribution of every request created since the given date. */
   listAttribution(since: Date): Promise<AttributionSample[]>;
   /** Only the review fields change, never the applicant's data. Resolves false if the id does not exist. */
   updateReview(id: string, review: TryoutReview): Promise<boolean>;

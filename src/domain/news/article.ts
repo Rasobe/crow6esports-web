@@ -12,7 +12,6 @@ export type Article = {
   updated?: Date;
   cover: string;
   coverAlt: string;
-  /** Slug del mismo artículo en el otro idioma, si se enlazó. */
   translationSlug?: string;
   readingTime: number;
 };
@@ -24,7 +23,6 @@ export function estimateReadingTime(text: string): number {
   return Math.max(1, Math.ceil(words / WORDS_PER_MINUTE));
 }
 
-/** Fecha de la última modificación real: la de actualización o, si no hay, la de publicación. */
 export const lastModified = (article: Article): Date => article.updated ?? article.date;
 
 /**

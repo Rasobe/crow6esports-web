@@ -1,7 +1,6 @@
 @use "styles/layers";
 @use "styles/mixins" as *;
 @layer components {
-  // Escenario: marco de visor con esquinas doradas y brillo suave
   .jersey-stage {
     position: relative;
     min-width: 0;
@@ -184,7 +183,6 @@
     }
   }
 
-  // Línea dorada que acompaña al borde de la cortina
   .jersey-stage__screen::after {
     content: "";
     position: absolute;

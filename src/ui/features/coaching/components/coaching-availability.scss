@@ -28,7 +28,6 @@
     border: var(--line-subtle);
     clip-path: polygon(0 0, calc(100% - 28px) 0, 100% 28px, 100% 100%, 0 100%);
 
-    // Barra superior dorada
     &::before {
       content: "";
       position: absolute;

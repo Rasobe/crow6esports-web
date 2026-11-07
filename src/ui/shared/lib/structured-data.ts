@@ -1,4 +1,3 @@
-/** Datos estructurados de schema.org que los buscadores leen del JSON-LD de la página. */
 export type StructuredData = Record<string, unknown>;
 
 interface Club {
@@ -62,7 +61,6 @@ interface CoachingService {
   prices: readonly number[];
 }
 
-/** El servicio de coaching con el rango de precios de sus packs mensuales. */
 export function coachingServiceData(service: CoachingService): StructuredData {
   const { prices } = service;
   return {
@@ -102,7 +100,6 @@ interface ArticleInput {
   publisher: Publisher;
 }
 
-/** Schema.org Article de una noticia, con las fechas en ISO 8601 completas. */
 export function articleData(article: ArticleInput): StructuredData {
   const organization = {
     "@type": "Organization",

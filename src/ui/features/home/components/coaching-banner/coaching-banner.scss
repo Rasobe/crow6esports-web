@@ -29,7 +29,6 @@
     gap: var(--space-20);
   }
 
-  /* ─── Coach card ─── */
   .coaching-banner__coach {
     position: relative;
     display: flex;
@@ -102,7 +101,6 @@
     color: var(--text-primary);
   }
 
-  /* ─── Content ─── */
   .coaching-banner__content {
     display: flex;
     flex-direction: column;
@@ -131,7 +129,6 @@
     color: var(--text-secondary);
   }
 
-  /* ─── Figures: tres cifras con el mismo peso ─── */
   .coaching-banner__figures {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -169,7 +166,6 @@
     min-height: 2lh;
   }
 
-  /* ─── Actions: reserva, precio de entrada y enlace a la oferta completa ─── */
   .coaching-banner__actions {
     display: flex;
     flex-wrap: wrap;
@@ -224,7 +220,6 @@
     }
   }
 
-  /* ─── Responsive ─── */
   /* En móvil la foto, el placeholder y el marco desaparecen: queda el coach como una tira compacta */
   @include below(md) {
     .coaching-banner__inner {

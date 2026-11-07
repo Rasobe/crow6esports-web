@@ -1,4 +1,3 @@
-/** Una versión de una página: su idioma, su ruta sin prefijo y cuándo cambió por última vez. */
 export interface SitemapVersion<L extends string> {
   locale: L;
   /** Ruta sin prefijo de idioma ("/" para la home). */

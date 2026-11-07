@@ -82,7 +82,6 @@ export function SelectField({
           ))}
         </select>
 
-        {/* Icono chevron */}
         <span className="select-field__chevron" aria-hidden>
           <svg
             width="14"
