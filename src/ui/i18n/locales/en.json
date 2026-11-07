@@ -756,7 +756,8 @@
   },
   "testimonials": {
     "eyebrow": "Testimonials",
-    "title": "What his players say",
+    "title_lead": "What his players",
+    "title_accent": "say",
     "list_label": "Feedback from players who have trained with Rasobe",
     "highlight_label": "Result",
     "highlight": {

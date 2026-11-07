@@ -15,7 +15,10 @@ for (const locale of ["es", "en"] as const) {
     test(`renders the testimonials in the server HTML of ${path}`, async ({ request }) => {
       const html = await (await request.get(path)).text();
 
-      for (const text of [...QUOTES[locale], ...HIGHLIGHTS[locale]]) {
+      for (const text of [
+        ...QUOTES[locale],
+        ...HIGHLIGHTS[locale].flatMap((h) => h.split(" · ")),
+      ]) {
         expect(html).toContain(text);
       }
     });

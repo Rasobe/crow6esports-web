@@ -756,7 +756,8 @@
   },
   "testimonials": {
     "eyebrow": "Testimonios",
-    "title": "Lo que dicen sus jugadores",
+    "title_lead": "Lo que dicen",
+    "title_accent": "sus jugadores",
     "list_label": "Opiniones de jugadores que han entrenado con Rasobe",
     "highlight_label": "Resultado",
     "highlight": {

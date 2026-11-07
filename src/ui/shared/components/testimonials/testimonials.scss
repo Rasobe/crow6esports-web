@@ -2,15 +2,26 @@
 @use "styles/mixins" as *;
 @layer components {
   .testimonials {
+    position: relative;
     padding: var(--section-py) 0;
+    overflow: hidden;
     border-top: var(--line-subtle);
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(ellipse at 100% 0%, var(--brand-wash), transparent 55%);
+    }
   }
 
   .testimonials__inner {
     @include container;
+    position: relative;
     display: flex;
     flex-direction: column;
-    gap: var(--space-12);
+    gap: var(--space-16);
   }
 
   .testimonials__header {
@@ -20,36 +31,47 @@
   }
 
   .testimonials__title {
-    font-size: var(--fs-h2);
-    line-height: 0.95;
+    font-size: clamp(3rem, 8vw, 6rem);
+    line-height: 0.9;
+    letter-spacing: 0;
     text-transform: uppercase;
     text-wrap: balance;
     color: var(--text-primary);
   }
 
+  .testimonials__title-accent {
+    color: transparent;
+    -webkit-text-stroke: clamp(1.5px, 0.02em, 3px) var(--brand);
+  }
+
   .testimonials__list {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--space-12) var(--space-16);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
     margin: 0;
     padding: 0;
     list-style: none;
   }
 
   .testimonials__item {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-6);
-    height: 100%;
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
     margin: 0;
-    padding-left: var(--space-6);
-    border-left: 3px solid var(--brand);
+    background: var(--bg-surface);
+    border: var(--line-subtle);
   }
 
   .testimonials__highlight {
+    position: relative;
     display: flex;
     flex-direction: column;
-    gap: var(--space-1);
+    justify-content: flex-end;
+    gap: var(--space-3);
+    min-width: 0;
+    padding: var(--space-10);
+    background: var(--brand);
+    color: var(--brand-fg);
+    clip-path: polygon(0 0, 100% 0, calc(100% - var(--space-10)) 100%, 0 100%);
   }
 
   .testimonials__highlight-label {
@@ -58,23 +80,50 @@
     font-weight: 700;
     letter-spacing: var(--tracking-widest);
     text-transform: uppercase;
-    color: var(--text-secondary);
+    opacity: 0.7;
   }
 
   .testimonials__highlight-value {
+    display: flex;
+    flex-direction: column;
     font-family: var(--ff-display);
-    font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+    font-size: clamp(2.25rem, 4.5vw, 4rem);
     font-weight: 400;
-    line-height: 1;
-    color: var(--brand);
+    line-height: 0.95;
+    text-transform: uppercase;
+    text-wrap: balance;
+  }
+
+  .testimonials__body {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--space-8);
+    min-width: 0;
+    padding: var(--space-16) var(--space-12) var(--space-10) var(--space-8);
+
+    &::before {
+      content: "\201C";
+      position: absolute;
+      top: var(--space-2);
+      left: var(--space-8);
+      font-family: var(--ff-display);
+      font-size: 9rem;
+      line-height: 1;
+      color: transparent;
+      -webkit-text-stroke: 2px rgb(var(--brand-rgb) / 0.35);
+      pointer-events: none;
+    }
   }
 
   .testimonials__quote {
+    position: relative;
     margin: 0;
-    max-width: 60ch;
+    max-width: 58ch;
     font-family: var(--ff-body);
     font-size: var(--fs-lg);
-    line-height: 1.7;
+    line-height: 1.75;
     color: var(--text-primary);
   }
 
@@ -82,36 +131,62 @@
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
-    gap: var(--space-1) var(--space-3);
-    margin-top: auto;
+    gap: var(--space-1) var(--space-4);
+    padding-top: var(--space-5);
     font-family: var(--ff-ui);
     letter-spacing: var(--tracking-wider);
     text-transform: uppercase;
+    border-top: var(--line-subtle);
   }
 
   .testimonials__name {
-    font-size: var(--fs-base);
+    font-family: var(--ff-display);
+    font-size: var(--fs-2xl);
     font-style: normal;
-    font-weight: 700;
-    color: var(--text-primary);
+    letter-spacing: 0;
+    line-height: 1;
+    color: var(--brand);
   }
 
   .testimonials__affiliation {
     font-size: var(--fs-sm);
-    color: var(--text-muted);
+    font-weight: 700;
+    color: var(--text-secondary);
+  }
+
+  @include above(md) {
+    .testimonials__entry:nth-child(even) .testimonials__item {
+      .testimonials__highlight {
+        order: 2;
+        clip-path: polygon(var(--space-10) 0, 100% 0, 100% 100%, 0 100%);
+        text-align: right;
+        align-items: flex-end;
+      }
+
+      .testimonials__body {
+        padding: var(--space-16) var(--space-8) var(--space-10) var(--space-12);
+
+        &::before {
+          left: var(--space-12);
+        }
+      }
+    }
   }
 
   .testimonials__footer {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: var(--space-4) var(--space-6);
+    justify-content: space-between;
+    gap: var(--space-6);
+    padding-top: var(--space-8);
+    border-top: var(--line-subtle);
   }
 
   .testimonials__cta-text {
     display: flex;
     flex-direction: column;
-    gap: var(--space-1);
+    gap: var(--space-2);
     max-width: 44ch;
     font-family: var(--ff-body);
     font-size: var(--fs-body);
@@ -121,9 +196,9 @@
 
   .testimonials__cta-title {
     font-family: var(--ff-display);
-    font-size: var(--fs-2xl);
+    font-size: var(--fs-h3);
     font-weight: 400;
-    line-height: 1;
+    line-height: 0.95;
     text-transform: uppercase;
     color: var(--text-primary);
   }
@@ -146,39 +221,59 @@
 
   .testimonials--compact {
     .testimonials__inner {
-      gap: var(--space-8);
+      gap: var(--space-10);
     }
 
     .testimonials__title {
-      font-size: var(--fs-h3);
+      font-size: var(--fs-h2);
     }
 
-    .testimonials__list {
-      gap: var(--space-8) var(--space-12);
+    .testimonials__highlight {
+      padding: var(--space-6);
     }
 
-    .testimonials__item {
-      gap: var(--space-4);
+    .testimonials__highlight-value {
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+    }
+
+    .testimonials__body {
+      gap: var(--space-5);
+      padding: var(--space-12) var(--space-8) var(--space-6);
+
+      &::before {
+        font-size: 6rem;
+      }
     }
 
     .testimonials__quote {
       font-size: var(--fs-base);
-      line-height: 1.6;
-    }
-
-    .testimonials__highlight-value {
-      font-size: var(--fs-2xl);
+      line-height: 1.65;
     }
   }
 
   @include below(md) {
-    .testimonials__list {
+    .testimonials__item {
       grid-template-columns: minmax(0, 1fr);
-      gap: var(--space-10);
     }
 
-    .testimonials__item {
-      padding-left: var(--space-4);
+    .testimonials__highlight,
+    .testimonials__entry:nth-child(even) .testimonials__highlight {
+      order: 0;
+      align-items: flex-start;
+      padding: var(--space-6);
+      text-align: left;
+      clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--space-5)), 0 100%);
+    }
+
+    .testimonials__body,
+    .testimonials__entry:nth-child(even) .testimonials__body {
+      padding: var(--space-12) var(--space-5) var(--space-8);
+
+      &::before {
+        top: 0;
+        left: var(--space-5);
+        font-size: 5rem;
+      }
     }
 
     .testimonials__quote {
