@@ -762,15 +762,14 @@
     "highlight_label": "Result",
     "highlight": {
       "reached_ranks": "{mmr2s} MMR in 2s · {mmr3s} MMR in 3s",
-      "climb": "{from} → {to} MMR in {months} months"
+      "climb": "{from} → {to} MMR in {months} months",
+      "climb_no_period": "From {from} to {to} MMR"
     },
     "cta_title": "Want results like these?",
     "cta_description": "Start with a 30-minute intro session, no commitment.",
     "cta": "Book my session on Discord",
     "home_link": "See the coaching",
-    "controls_label": "Testimonial controls",
-    "previous": "Previous testimonial",
-    "next": "Next testimonial",
-    "pause": "Pause automatic scrolling"
+    "show_more": "Show more",
+    "show_less": "Show less"
   }
 }
