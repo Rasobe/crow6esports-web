@@ -3,6 +3,8 @@ import { siteConfig } from "@config/site";
 import { createTranslator, DEFAULT_LOCALE, LOCALES, type Locale } from "@/ui/i18n";
 import { buildPageTitle } from "@/ui/shared/lib/seo";
 
+const DEFAULT_IMAGE = "/images/og-crow6.jpg";
+
 interface Props {
   title?: string;
   /** El título ya incluye la marca (la home) y no se le añade la plantilla. */
@@ -13,7 +15,18 @@ interface Props {
   image?: string;
   /** Descripción de la imagen social; por defecto la de la imagen por defecto del sitio. */
   imageAlt?: string;
+  /** Tamaño de la imagen si se conoce; sin él no se declara (la de por defecto es 1200x630). */
+  imageSize?: { width: number; height: number };
   noindex?: boolean;
+  ogType?: "website" | "article";
+  /**
+   * Ruta (sin idioma) de cada versión de la página para hreflang. Sin esta propiedad se
+   * declaran todos los idiomas con la misma ruta; con ella solo los que traiga, y un objeto
+   * vacío no declara ninguno (una página sin traducción no lleva hreflang).
+   */
+  alternates?: Partial<Record<Locale, string>>;
+  publishedTime?: Date;
+  modifiedTime?: Date;
 }
 
 const {
@@ -22,18 +35,29 @@ const {
   description,
   locale,
   path = "",
-  image = "/images/og-crow6.jpg",
+  image = DEFAULT_IMAGE,
   imageAlt,
+  imageSize,
   noindex,
+  ogType = "website",
+  alternates,
+  publishedTime,
+  modifiedTime,
 } = Astro.props;
 
 // Open Graph usa el formato idioma_REGIÓN
 const OG_LOCALES: Record<Locale, string> = { es: "es_ES", en: "en_GB" };
 
 const pageTitle = buildPageTitle(title, siteConfig.name, absoluteTitle);
-const urlFor = (target: Locale) => `${siteConfig.url}/${target}${path}`;
+const urlFor = (target: Locale, targetPath = path) => `${siteConfig.url}/${target}${targetPath}`;
+const versions = LOCALES.flatMap((target) => {
+  const targetPath = alternates ? alternates[target] : path;
+  return targetPath === undefined ? [] : [{ locale: target, href: urlFor(target, targetPath) }];
+});
+const defaultVersion = versions.find(({ locale: target }) => target === DEFAULT_LOCALE);
 const canonical = urlFor(locale);
-const ogImage = `${siteConfig.url}${image}`;
+const ogImage = image.startsWith("http") ? image : `${siteConfig.url}${image}`;
+const size = imageSize ?? (image === DEFAULT_IMAGE ? { width: 1200, height: 630 } : undefined);
 const altText = imageAlt ?? createTranslator(locale, "site")("image_alt");
 ---
 
@@ -41,23 +65,27 @@ const altText = imageAlt ?? createTranslator(locale, "site")("image_alt");
 <meta name="description" content={description} />
 {noindex && <meta name="robots" content="noindex, nofollow" />}
 <link rel="canonical" href={canonical} />
-{LOCALES.map((target) => (
-  <link rel="alternate" hreflang={target} href={urlFor(target)} />
+{versions.map((version) => (
+  <link rel="alternate" hreflang={version.locale} href={version.href} />
 ))}
-<link rel="alternate" hreflang="x-default" href={urlFor(DEFAULT_LOCALE)} />
+{defaultVersion && <link rel="alternate" hreflang="x-default" href={defaultVersion.href} />}
 
-<meta property="og:type" content="website" />
+<meta property="og:type" content={ogType} />
 <meta property="og:site_name" content={siteConfig.name} />
 <meta property="og:title" content={pageTitle} />
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonical} />
 <meta property="og:locale" content={OG_LOCALES[locale]} />
-{LOCALES.filter((target) => target !== locale).map((target) => (
-  <meta property="og:locale:alternate" content={OG_LOCALES[target]} />
-))}
+{versions
+  .filter((version) => version.locale !== locale)
+  .map((version) => (
+    <meta property="og:locale:alternate" content={OG_LOCALES[version.locale]} />
+  ))}
+{publishedTime && <meta property="article:published_time" content={publishedTime.toISOString()} />}
+{modifiedTime && <meta property="article:modified_time" content={modifiedTime.toISOString()} />}
 <meta property="og:image" content={ogImage} />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
+{size && <meta property="og:image:width" content={String(size.width)} />}
+{size && <meta property="og:image:height" content={String(size.height)} />}
 <meta property="og:image:alt" content={altText} />
 
 <meta name="twitter:card" content="summary_large_image" />

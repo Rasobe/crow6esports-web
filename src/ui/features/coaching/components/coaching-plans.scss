@@ -182,7 +182,6 @@
     color: var(--text-primary);
   }
 
-  // ── Qué incluye: misma lista en todos los packs para compararlos fila a fila ──
   .plan-card__features {
     flex: 1;
     display: flex;
@@ -229,7 +228,6 @@
     white-space: nowrap;
   }
 
-  // ── Acción única bajo cada modalidad ──
   .coaching-plans__actions {
     display: flex;
     flex-wrap: wrap;
@@ -259,7 +257,6 @@
     }
   }
 
-  // ── Sesiones sueltas: más discretas que los packs ──
   .coaching-plans__grid--single {
     grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
   }

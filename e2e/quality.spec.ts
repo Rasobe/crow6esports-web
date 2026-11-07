@@ -1,4 +1,5 @@
 import AxeBuilder from "@axe-core/playwright";
+import { hasNews } from "./support/news-content";
 import { expect, test, type Page } from "@playwright/test";
 import { COACHING, LAUNCH_PRICE_ENDS } from "../config/coaching";
 import { getCoachingPricing } from "../src/application/coaching/get-coaching-pricing";
@@ -100,7 +101,44 @@ test("shows the sold out store without prices", async ({ page }) => {
   await expect(page.getByText(/€/)).toHaveCount(0);
 });
 
+test("keeps the store visible and indexable with an out of stock notice", async ({
+  page,
+  request,
+}) => {
+  await page.goto("/es/store");
+
+  const notice = page.getByRole("complementary", { name: "Sin stock por ahora" });
+  await expect(notice).toBeVisible();
+  await expect(notice.getByText("Próximamente")).toBeVisible();
+  await expect(notice.getByRole("link", { name: /Discord/ })).toHaveAttribute(
+    "href",
+    /discord\.gg/,
+  );
+  await expect(notice.getByRole("link", { name: /Instagram/ })).toHaveAttribute(
+    "href",
+    "https://instagram.com/crow6esports",
+  );
+
+  // Vídeo y presentación de la camiseta siguen ahí, sin compra ni carrito
+  await expect(page.getByRole("tab", { name: "Vídeo" })).toBeVisible();
+  await expect(page.getByRole("button", { name: /carrito|comprar/i })).toHaveCount(0);
+
+  // Indexable, en la navegación y en el sitemap
+  await expect(page.locator('meta[name="robots"][content*="noindex"]')).toHaveCount(0);
+  await expect(
+    page.getByRole("navigation").first().getByRole("link", { name: "Tienda", exact: true }),
+  ).toBeVisible();
+  const sitemap = await (await request.get("/sitemap.xml")).text();
+  expect(sitemap).toContain("/es/store");
+  expect(sitemap).toContain("/en/store");
+
+  await page.goto("/en/store");
+  await expect(page.getByRole("complementary", { name: "Out of stock for now" })).toBeVisible();
+});
+
 test("shows the news empty state and keeps it out of search engines", async ({ page }) => {
+  test.skip(hasNews("es"), "Solo aplica mientras no hay artículos en español");
+
   await page.goto("/es/news");
   await expect(page.getByRole("heading", { name: "Pronto publicaremos noticias" })).toBeVisible();
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/);

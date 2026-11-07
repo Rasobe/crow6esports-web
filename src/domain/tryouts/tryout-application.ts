@@ -60,7 +60,6 @@ export const RLTRACKER_HOSTNAME_PATTERN = /(^|\.)tracker\.(network|gg)$/;
 
 const OLDEST_BIRTH_YEAR = 1900;
 
-/** Una fecha de nacimiento (YYYY-MM-DD) es plausible si existe y no es futura. */
 export function isPlausibleBirthDate(value: string, today: Date = new Date()): boolean {
   const date = new Date(`${value}T00:00:00Z`);
   if (Number.isNaN(date.getTime())) return false;
@@ -84,5 +83,4 @@ export type SubmissionLocale = (typeof SUBMISSION_LOCALES)[number];
 export const REQUEST_STATUSES = ["new", "contacted", "accepted", "rejected"] as const;
 export type RequestStatus = (typeof REQUEST_STATUSES)[number];
 
-/** Longest internal note an admin can save on a request. */
 export const NOTES_MAX = 4000;

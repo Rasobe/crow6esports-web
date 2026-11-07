@@ -11,7 +11,8 @@ interface Props {
 const { article } = Astro.props;
 const { locale } = Astro.locals;
 const t = createTranslator(locale, "news");
-const date = new Intl.DateTimeFormat(locale, { dateStyle: "long" }).format(article.date);
+const formatDate = (date: Date) =>
+  new Intl.DateTimeFormat(locale, { dateStyle: "long", timeZone: "UTC" }).format(date);
 ---
 
 <article class="article-detail">
@@ -20,14 +21,33 @@ const date = new Intl.DateTimeFormat(locale, { dateStyle: "long" }).format(artic
       {t("back")}
     </a>
     <p class="article-detail__meta">
-      <time datetime={article.date.toISOString()}>{date}</time>
-      <span aria-hidden="true">·</span>
-      <span>{article.author}</span>
+      <time datetime={article.date.toISOString()}>{formatDate(article.date)}</time>
       <span aria-hidden="true">·</span>
       <span>{t("reading_time", { minutes: article.readingTime })}</span>
+      {article.updated && (
+        <>
+          <span aria-hidden="true">·</span>
+          <span>
+            {t("updated")}{" "}
+            <time datetime={article.updated.toISOString()}>{formatDate(article.updated)}</time>
+          </span>
+        </>
+      )}
     </p>
     <h1 class="article-detail__title">{article.title}</h1>
   </header>
+
+  <figure class="article-detail__cover">
+    <img
+      class="article-detail__image"
+      src={article.cover}
+      alt={article.coverAlt}
+      width="1200"
+      height="630"
+      decoding="async"
+      fetchpriority="high"
+    />
+  </figure>
 
   <div class="article-detail__body">
     <slot />

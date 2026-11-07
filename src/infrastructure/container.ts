@@ -1,5 +1,8 @@
 import {
   ADMIN_EMAILS,
+  KEYSTATIC_GITHUB_CLIENT_ID,
+  KEYSTATIC_GITHUB_CLIENT_SECRET,
+  KEYSTATIC_SECRET,
   RESEND_API_KEY,
   SUPABASE_SERVICE_ROLE_KEY,
   SUPABASE_URL,
@@ -87,6 +90,9 @@ export const container = {
     return resolveTryoutRequestRepository();
   },
   adminAllowedEmails: parseAllowedEmails(ADMIN_EMAILS),
+  keystaticConfigured: Boolean(
+    KEYSTATIC_GITHUB_CLIENT_ID && KEYSTATIC_GITHUB_CLIENT_SECRET && KEYSTATIC_SECRET,
+  ),
   createAdminAuth,
   get tryoutNotifier(): TryoutNotifier {
     return resolveTryoutNotifier();

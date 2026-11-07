@@ -16,7 +16,6 @@
     clip-path: polygon(0 0, 100% 0, 100% calc(100% - 2rem), calc(100% - 9rem) 100%, 0 100%);
   }
 
-  // Corte diagonal luminoso a la derecha
   .page-header__slash {
     position: absolute;
     inset-block: 0;

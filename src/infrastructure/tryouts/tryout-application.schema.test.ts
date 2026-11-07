@@ -81,4 +81,31 @@ describe("tryoutSubmissionSchema", () => {
     expect(tryoutSubmissionSchema.safeParse({ ...valid, locale: "fr" }).success).toBe(false);
     expect(tryoutSubmissionSchema.safeParse(valid).success).toBe(false);
   });
+
+  it("treats attribution as optional and empty values as missing", () => {
+    const result = tryoutSubmissionSchema.safeParse({
+      ...valid,
+      locale: "es",
+      utmSource: "  ",
+      sourcePage: " /es/tryouts ",
+    });
+
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.data.utmSource).toBeUndefined();
+      expect(result.data.sourcePage).toBe("/es/tryouts");
+      expect(result.data.referrer).toBeUndefined();
+    }
+  });
+
+  it("enforces the length limits of every attribution field", () => {
+    const parse = (overrides: object) =>
+      tryoutSubmissionSchema.safeParse({ ...valid, locale: "es", ...overrides }).success;
+
+    expect(parse({ sourcePage: "x".repeat(200), referrer: "x".repeat(500) })).toBe(true);
+    expect(parse({ sourcePage: "x".repeat(201) })).toBe(false);
+    expect(parse({ referrer: "x".repeat(501) })).toBe(false);
+    expect(parse({ utmMedium: "x".repeat(101) })).toBe(false);
+    expect(parse({ utmCampaign: "x".repeat(101) })).toBe(false);
+  });
 });

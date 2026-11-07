@@ -1,4 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import type { Attribution } from "@/domain/tryouts/attribution";
 import type { SubmissionLocale, TryoutApplication } from "@/domain/tryouts/tryout-application";
 import type { TryoutRepository } from "@/domain/tryouts/tryout-repository";
 
@@ -6,9 +7,14 @@ const TRYOUT_REQUESTS_TABLE = "tryout_requests";
 
 const emptyToNull = (value: string | undefined) => (value ? value : null);
 
-function toRow(application: TryoutApplication, locale: SubmissionLocale) {
+function toRow(application: TryoutApplication, locale: SubmissionLocale, attribution: Attribution) {
   return {
     locale,
+    source_page: emptyToNull(attribution.sourcePage),
+    referrer: emptyToNull(attribution.referrer),
+    utm_source: emptyToNull(attribution.utmSource),
+    utm_medium: emptyToNull(attribution.utmMedium),
+    utm_campaign: emptyToNull(attribution.utmCampaign),
     discord: application.discord,
     birth_date: application.birthDate,
     country: application.country,
@@ -35,8 +41,10 @@ function toRow(application: TryoutApplication, locale: SubmissionLocale) {
 
 export function createSupabaseTryoutRepository(client: SupabaseClient): TryoutRepository {
   return {
-    async save(application, locale) {
-      const { error } = await client.from(TRYOUT_REQUESTS_TABLE).insert(toRow(application, locale));
+    async save(application, locale, attribution) {
+      const { error } = await client
+        .from(TRYOUT_REQUESTS_TABLE)
+        .insert(toRow(application, locale, attribution));
 
       if (error) throw new Error(`Supabase rejected the tryout request: ${error.message}`);
     },

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { captureBrowserAttribution } from "@/scripts/attribution";
 import type { Locale } from "@/ui/i18n";
 import {
   TryoutSubmissionError,
@@ -59,8 +60,7 @@ export function useTryoutsForm(locale: Locale) {
           previousTeams: values.hasCompetitiveExp === "yes" ? values.previousTeams : "",
           timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
         },
-        locale,
-        honeypotRef.current?.value,
+        { locale, attribution: captureBrowserAttribution(), honeypot: honeypotRef.current?.value },
       );
       setStatus("success");
     } catch (error) {

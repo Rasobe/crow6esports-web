@@ -1,8 +1,5 @@
 @use "styles/layers";
 @use "styles/mixins" as *;
-/* ─────────────────────────────────────────────
-   NAVBAR
-   ───────────────────────────────────────────── */
 @layer components {
   .navbar {
     position: fixed;

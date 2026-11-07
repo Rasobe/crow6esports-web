@@ -28,7 +28,6 @@
     color: var(--text-primary);
   }
 
-  /* ─── Historia: año de fundación, relato y tira de cifras ─── */
   .about-intro__inner {
     display: grid;
     gap: var(--space-8);
@@ -140,7 +139,6 @@
     color: var(--brand);
   }
 
-  /* ─── Línea temporal: año a la izquierda, tarjeta a la derecha ─── */
   .about-timeline {
     background: var(--bg-surface);
     border-block: var(--line-subtle);
@@ -486,7 +484,6 @@
     white-space: nowrap;
   }
 
-  /* ─── Pilares ─── */
   .about-pillars__inner,
   .about-values__inner {
     display: flex;
@@ -594,7 +591,6 @@
     color: var(--brand);
   }
 
-  /* ─── Valores: manifiesto tipográfico, sin tarjetas ─── */
   .about-values {
     background: var(--bg-surface);
     border-block: var(--line-subtle);
@@ -650,7 +646,6 @@
     color: var(--text-secondary);
   }
 
-  /* ─── Contacto ─── */
   .about-contact__inner {
     display: flex;
     flex-direction: column;

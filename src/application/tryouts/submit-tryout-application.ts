@@ -1,3 +1,4 @@
+import type { Attribution } from "@/domain/tryouts/attribution";
 import type { SubmissionLocale, TryoutApplication } from "@/domain/tryouts/tryout-application";
 import type { TryoutNotifier } from "@/domain/tryouts/tryout-notifier";
 import type { TryoutRepository } from "@/domain/tryouts/tryout-repository";
@@ -17,8 +18,9 @@ export async function submitTryoutApplication(
   { repository, notifier, onNotificationFailure }: SubmitTryoutDeps,
   application: TryoutApplication,
   locale: SubmissionLocale,
+  attribution: Attribution = {},
 ): Promise<void> {
-  await repository.save(application, locale);
+  await repository.save(application, locale, attribution);
 
   try {
     await notifier.notify(application);

@@ -1,7 +1,4 @@
 @use "styles/layers";
-/* ─────────────────────────────────────────────
-   BUTTON
-   ───────────────────────────────────────────── */
 @layer components {
   .btn {
     display: inline-flex;
@@ -41,7 +38,6 @@
     }
   }
 
-  // ── Sizes ──────────────────────────────────
   .btn--sm {
     font-size: var(--fs-xs);
     padding: var(--space-2) var(--space-5);
@@ -57,9 +53,6 @@
     padding: var(--space-4) var(--space-10);
   }
 
-  // ── Variants ───────────────────────────────
-
-  // Relleno sólido con brand
   .btn--primary {
     background: var(--brand);
     color: var(--brand-fg);
@@ -69,7 +62,6 @@
     }
   }
 
-  // Borde neutro, hover brand tintado
   .btn--outline {
     background: transparent;
     color: var(--text-primary);

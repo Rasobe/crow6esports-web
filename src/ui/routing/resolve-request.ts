@@ -1,4 +1,5 @@
 import { isAdminPath } from "@/domain/admin/admin-access";
+import { isKeystaticPath } from "@/domain/keystatic/keystatic-access";
 import { findPage, type PageDefinition } from "@/domain/site/page-status";
 import { detectLocale, isLocale, stripLocale, type Locale } from "@/ui/i18n";
 
@@ -27,7 +28,6 @@ const isFileRequest = (pathname: string) => {
 
 const firstSegmentOf = (pathname: string) => pathname.split("/")[1];
 
-/** El idioma de la URL manda; si no lo lleva, se deduce de la cabecera del navegador. */
 export function resolveLocale(pathname: string, acceptLanguage: string | null): Locale {
   const firstSegment = firstSegmentOf(pathname);
   return isLocale(firstSegment) ? firstSegment : detectLocale(acceptLanguage);
@@ -52,8 +52,8 @@ export function resolveRequest<Key extends string>({
     return { kind: "redirect", path: pathname.replace(TRAILING_SLASHES, "") || "/" };
   }
 
-  // El panel queda fuera del i18n, del modo mantenimiento y de las páginas en construcción
-  if (isAdminPath(pathname)) return { kind: "next" };
+  // Los paneles quedan fuera del i18n, del modo mantenimiento y de las páginas en construcción
+  if (isAdminPath(pathname) || isKeystaticPath(pathname)) return { kind: "next" };
 
   if (maintenance && pathname !== COMING_SOON_PATH) {
     return { kind: "rewrite", path: COMING_SOON_PATH };

@@ -1,6 +1,6 @@
 ---
 import "./next-edition.scss";
-import { DISCORD_URL } from "@config/site";
+import { DISCORD_URL, INSTAGRAM_URL } from "@config/site";
 import type { Product } from "@/domain/store/product";
 import { createTranslator } from "@/ui/i18n";
 import { Button, ContactEmail } from "@/ui/shared/components";
@@ -98,12 +98,23 @@ const views: JerseyView[] = products.flatMap(({ name, images }) =>
         </div>
       )}
 
-      <div class="next-edition__actions">
-        <Button href={DISCORD_URL} size="lg">
-          {tNext("cta_discord")}
-        </Button>
-        <ContactEmail label={tNext("cta_email")} />
-      </div>
+      <aside class="next-edition__notice" aria-labelledby="store-notice-title">
+        <p class="next-edition__notice-tag">{tNext("notice_tag")}</p>
+        <h3 id="store-notice-title" class="next-edition__notice-title">
+          {tNext("notice_title")}
+        </h3>
+        <p class="next-edition__notice-text">{tNext("notice_text")}</p>
+        <div class="next-edition__actions">
+          <Button href={DISCORD_URL} size="lg">
+            {tNext("cta_discord")}
+          </Button>
+          <Button href={INSTAGRAM_URL} variant="outline" size="lg">
+            {tNext("cta_instagram")}
+          </Button>
+        </div>
+      </aside>
+
+      <ContactEmail label={tNext("cta_email")} />
     </div>
   </jersey-gallery>
 </section>

@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { hasNews } from "./support/news-content";
 
 test("redirects the root to the detected locale", async ({ page }) => {
   await page.goto("/");
@@ -30,8 +31,8 @@ test("lists every published page in the sitemap", async ({ request }) => {
     expect(xml).toContain(`/es/${route}`);
     expect(xml).toContain(`/en/${route}`);
   }
-  // Noticias no tiene artículos todavía, así que queda fuera
-  expect(xml).not.toContain("/news");
+  // Noticias solo entra con artículos: sin ellos queda fuera
+  if (!hasNews()) expect(xml).not.toContain("/news");
 });
 
 test("switches locale keeping the current path", async ({ page }) => {

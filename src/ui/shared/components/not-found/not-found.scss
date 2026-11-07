@@ -16,7 +16,6 @@
       var(--bg-base);
   }
 
-  // Destello dorado que cruza la página una vez al cargar, como en el hero
   .not-found__sweep {
     position: absolute;
     inset-block: -10%;
@@ -147,7 +146,7 @@
     justify-content: center;
   }
 
-  /* ─── Enlaces: para no dejar al visitante en un callejón sin salida ─── */
+  /* Enlaces para no dejar al visitante en un callejón sin salida */
   .not-found__links {
     display: flex;
     flex-direction: column;

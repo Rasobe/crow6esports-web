@@ -55,7 +55,9 @@ export function createContactHandler({ limiter, getRepository, getNotifier }: Co
       return jsonResponse({ error: "rate_limited" }, 429, { "Retry-After": retryAfter });
     }
 
-    const { locale, ...application } = parsed.data;
+    const { locale, sourcePage, referrer, utmSource, utmMedium, utmCampaign, ...application } =
+      parsed.data;
+    const attribution = { sourcePage, referrer, utmSource, utmMedium, utmCampaign };
 
     try {
       await submitTryoutApplication(
@@ -68,6 +70,7 @@ export function createContactHandler({ limiter, getRepository, getNotifier }: Co
         },
         application,
         locale,
+        attribution,
       );
       return jsonResponse({ success: true }, 200);
     } catch (error) {

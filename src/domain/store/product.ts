@@ -33,6 +33,6 @@ export function isSoldOut(product: Product): boolean {
   return getTotalStock(product) === 0;
 }
 
-export function isPurchasable(product: Product, storeInStock: boolean): boolean {
-  return storeInStock && !isSoldOut(product);
+export function isPurchasable(product: Product, storeEnabled: boolean): boolean {
+  return storeEnabled && !isSoldOut(product);
 }

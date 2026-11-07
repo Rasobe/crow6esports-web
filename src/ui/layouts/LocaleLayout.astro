@@ -1,5 +1,5 @@
 ---
-import { createTranslator } from "@/ui/i18n";
+import { createTranslator, type Locale } from "@/ui/i18n";
 import { SkipLink } from "@/ui/shared/components";
 import BaseLayout from "./BaseLayout.astro";
 import { Footer, Navbar } from "./_components";
@@ -10,9 +10,15 @@ interface Props {
   description?: string;
   path?: string;
   noindex?: boolean;
+  ogType?: "website" | "article";
+  image?: string;
+  imageAlt?: string;
+  alternates?: Partial<Record<Locale, string>>;
+  publishedTime?: Date;
+  modifiedTime?: Date;
 }
 
-const { title, absoluteTitle, description, path, noindex } = Astro.props;
+const { title, absoluteTitle, description, path, noindex, ...social } = Astro.props;
 const tSite = createTranslator(Astro.locals.locale, "site");
 ---
 
@@ -22,6 +28,7 @@ const tSite = createTranslator(Astro.locals.locale, "site");
   description={description ?? tSite("description")}
   path={path}
   noindex={noindex}
+  {...social}
 >
   <slot name="head" slot="head" />
   <SkipLink targetId="main-content" />

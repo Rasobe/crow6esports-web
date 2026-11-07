@@ -153,6 +153,10 @@
       "description": "We are preparing our first posts. In the meantime, follow us on social media so you do not miss anything.",
       "socials_label": "Social media",
       "new_tab": "opens in a new tab"
+    },
+    "updated": "Updated",
+    "meta": {
+      "description": "News, results and announcements from the club."
     }
   },
   "store": {
@@ -177,7 +181,12 @@
       "description": "The official jersey is sold out for now. Join our Discord to be the first to know when it is back.",
       "teaser": "The official jersey is sold out. Join the Discord to find out when it is back.",
       "cta_discord": "Notify me on Discord",
-      "cta_email": "Email the club"
+      "cta_email": "Email the club",
+      "notice_label": "Stock notice",
+      "notice_tag": "Coming soon",
+      "notice_title": "Out of stock for now",
+      "notice_text": "The official jersey is not available at the moment. Follow us on Discord and Instagram to hear about the next restock.",
+      "cta_instagram": "Follow on Instagram"
     },
     "jersey_video": {
       "section_label": "Jersey video",

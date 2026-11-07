@@ -1,4 +1,3 @@
-/** Datos estructurados de schema.org que los buscadores leen del JSON-LD de la página. */
 export type StructuredData = Record<string, unknown>;
 
 interface Club {
@@ -62,7 +61,6 @@ interface CoachingService {
   prices: readonly number[];
 }
 
-/** El servicio de coaching con el rango de precios de sus packs mensuales. */
 export function coachingServiceData(service: CoachingService): StructuredData {
   const { prices } = service;
   return {
@@ -79,6 +77,50 @@ export function coachingServiceData(service: CoachingService): StructuredData {
       lowPrice: Math.min(...prices),
       highPrice: Math.max(...prices),
       offerCount: prices.length,
+    },
+  };
+}
+
+interface Publisher {
+  name: string;
+  url: string;
+  logo: string;
+}
+
+interface ArticleInput {
+  headline: string;
+  description: string;
+  url: string;
+  /** URL absoluta de la portada. */
+  image: string;
+  datePublished: Date;
+  dateModified: Date;
+  inLanguage: string;
+  /** El club firma sus noticias: autor y editor son la misma organización. */
+  publisher: Publisher;
+}
+
+export function articleData(article: ArticleInput): StructuredData {
+  const organization = {
+    "@type": "Organization",
+    name: article.publisher.name,
+    url: article.publisher.url,
+  };
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: article.headline,
+    description: article.description,
+    image: [article.image],
+    datePublished: article.datePublished.toISOString(),
+    dateModified: article.dateModified.toISOString(),
+    inLanguage: article.inLanguage,
+    mainEntityOfPage: { "@type": "WebPage", "@id": article.url },
+    author: organization,
+    publisher: {
+      ...organization,
+      logo: { "@type": "ImageObject", url: article.publisher.logo },
     },
   };
 }
