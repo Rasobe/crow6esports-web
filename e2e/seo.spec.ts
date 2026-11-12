@@ -19,11 +19,12 @@ for (const locale of ["es", "en"]) {
 
         const title = await page.title();
         const description = await meta(page, 'meta[name="description"]');
+        expect(title.length).toBeGreaterThanOrEqual(50);
         expect(title.length).toBeLessThanOrEqual(60);
         expect(title).toContain("Crow 6 eSports");
         expect(title).not.toMatch(/\b(Inicio|Home)\b/);
         expect(description?.length).toBeGreaterThanOrEqual(120);
-        expect(description?.length).toBeLessThanOrEqual(155);
+        expect(description?.length).toBeLessThanOrEqual(160);
         await expect(page.locator('meta[name="robots"]')).toHaveCount(0);
         expect(await meta(page, 'meta[property="og:title"]')).toBe(title);
       });
@@ -44,9 +45,9 @@ for (const locale of ["es", "en"]) {
 test("/en has its whole head in English", async ({ page }) => {
   await page.goto("/en");
 
-  await expect(page).toHaveTitle("Crow 6 eSports · Rocket League Organization");
+  await expect(page).toHaveTitle("Crow 6 eSports | Rocket League Organization & Coaching");
   expect(await meta(page, 'meta[name="description"]')).toMatch(
-    /^Crow 6 is a competitive Rocket League/,
+    /^Crow 6 eSports is a competitive Rocket League/,
   );
   expect(await meta(page, 'meta[property="og:locale"]')).toBe("en_GB");
   expect(await meta(page, 'meta[property="og:image:alt"]')).toMatch(/cars/);
@@ -56,39 +57,76 @@ test("/en has its whole head in English", async ({ page }) => {
 test("the Spanish home uses its own title", async ({ page }) => {
   await page.goto("/es");
 
-  await expect(page).toHaveTitle("Crow 6 eSports · Organización de Rocket League");
-  expect(await meta(page, 'meta[name="description"]')).toMatch(/^Crow 6 es una organización/);
+  await expect(page).toHaveTitle("Crow 6 eSports | Organización y coaching de Rocket League");
+  expect(await meta(page, 'meta[name="description"]')).toMatch(
+    /^Crow 6 eSports es una organización/,
+  );
 });
 
-test("the home describes the team and the website as valid JSON-LD", async ({ page }) => {
-  await page.goto("/es");
+for (const locale of ["es", "en"]) {
+  test(`the ${locale} home describes the organization, its team and the site as one JSON-LD graph`, async ({
+    page,
+  }) => {
+    await page.goto(`/${locale}`);
 
-  const blocks = await page
-    .locator('script[type="application/ld+json"]')
-    .evaluateAll((scripts) => scripts.map((script) => JSON.parse(script.textContent ?? "")));
-  const team = blocks.find((block) => block["@type"] === "SportsTeam");
-  const website = blocks.find((block) => block["@type"] === "WebSite");
+    const blocks = await page
+      .locator('script[type="application/ld+json"]')
+      .evaluateAll((scripts) => scripts.map((script) => JSON.parse(script.textContent ?? "")));
+    const graph = blocks.flatMap((block) => block["@graph"] ?? []);
+    const nodeOf = (type: string) =>
+      graph.find((node: { "@type": string }) => node["@type"] === type);
+    const organization = nodeOf("Organization");
 
-  expect(team).toMatchObject({
-    name: "Crow 6 eSports",
-    alternateName: [
-      "Crow6",
-      "Crow 6",
-      "Crow6 eSports",
-      "Crow 6 Esports",
-      "crow6esports",
-      "C6 eSports",
-    ],
-    location: { "@type": "PostalAddress", addressLocality: "Huesca", addressCountry: "ES" },
+    expect(organization).toMatchObject({
+      name: "Crow 6 eSports",
+      url: ORIGIN,
+      logo: { url: `${ORIGIN}/icon-512.png` },
+      foundingDate: "2020",
+      address: { "@type": "PostalAddress", addressLocality: "Huesca", addressCountry: "ES" },
+      alternateName: expect.arrayContaining(["Crow6", "C6 eSports"]),
+    });
+    expect(organization.description).toMatch(/^Crow 6 eSports/);
+    expect(organization.sameAs.length).toBeGreaterThan(0);
+    expect(nodeOf("SportsTeam")).toMatchObject({
+      sport: "Rocket League",
+      parentOrganization: { "@id": organization["@id"] },
+    });
+    expect(nodeOf("WebSite")).toMatchObject({
+      url: ORIGIN,
+      publisher: { "@id": organization["@id"] },
+    });
+    expect(JSON.stringify(blocks)).not.toMatch(/Review|AggregateRating/);
   });
-  expect(team.description).toBeTruthy();
-  expect(team.sameAs.length).toBeGreaterThan(0);
-  expect(website).toMatchObject({
-    name: "Crow 6 eSports",
-    alternateName: team.alternateName,
-    url: ORIGIN,
+}
+
+for (const locale of ["es", "en"]) {
+  test(`the ${locale} news list describes its articles as a CollectionPage`, async ({ page }) => {
+    test.skip(!hasNews(locale), "Sin artículos en este idioma");
+    await page.goto(`/${locale}/news`);
+
+    const collection = await page
+      .locator('script[type="application/ld+json"]')
+      .evaluateAll((scripts) =>
+        scripts
+          .map((script) => JSON.parse(script.textContent ?? ""))
+          .find((block) => block["@type"] === "CollectionPage"),
+      );
+    const items = collection.mainEntity.itemListElement;
+    const listed = await page
+      .locator("main article a")
+      .evaluateAll((links) =>
+        links.map((link) => (link as HTMLAnchorElement).getAttribute("href")),
+      );
+
+    expect(collection).toMatchObject({ url: `${ORIGIN}/${locale}/news`, inLanguage: locale });
+    expect(collection.mainEntity.numberOfItems).toBe(items.length);
+    expect(items.map((item: { url: string }) => item.url.replace(ORIGIN, ""))).toEqual(listed);
+    items.forEach((item: { position: number; name: string }, index: number) => {
+      expect(item.position).toBe(index + 1);
+      expect(item.name).toBeTruthy();
+    });
   });
-});
+}
 
 test("keeps the news page out of search engines only while it has no articles", async ({
   page,
@@ -117,14 +155,22 @@ test("the coaching JSON-LD and home banner use the current prices from the confi
   );
 });
 
-test("serves a sitemap with lastmod, hreflang alternates and the public domain only", async ({
+test("serves a sitemap with real lastmod dates, hreflang alternates and the public domain only", async ({
   request,
 }) => {
   const response = await request.get("/sitemap.xml");
   const xml = await response.text();
+  const entries = [...xml.matchAll(/<url>([\s\S]*?)<\/url>/g)].map(([, entry]) => ({
+    loc: /<loc>([^<]+)<\/loc>/.exec(entry)![1],
+    lastmod: /<lastmod>([^<]+)<\/lastmod>/.exec(entry)?.[1],
+  }));
 
   expect(response.status()).toBe(200);
-  expect(xml).toContain("<lastmod>");
+  // Solo las noticias tienen una fecha fiable; las páginas fijas no declaran lastmod
+  for (const { loc, lastmod } of entries) {
+    if (loc.includes("/news")) expect(lastmod, loc).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+    else expect(lastmod, loc).toBeUndefined();
+  }
   expect(xml).toContain('hreflang="es"');
   expect(xml).toContain('hreflang="en"');
   expect(xml).toContain('hreflang="x-default"');

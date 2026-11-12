@@ -3,10 +3,15 @@ import "./navbar.scss";
 import { navigationConfig } from "@config/navigation";
 import { ROUTES } from "@config/routes";
 import { Button } from "@/ui/shared/components";
-import { createTranslator, localizePath, stripLocale } from "@/ui/i18n";
+import { createTranslator, localizePath, stripLocale, type Locale } from "@/ui/i18n";
 import { LocaleSwitcher } from "./_components/locale-switcher";
 import { MobileMenu } from "./_components/mobile-menu";
 
+interface Props {
+  localePaths?: Partial<Record<Locale, string>>;
+}
+
+const { localePaths } = Astro.props;
 const { locale } = Astro.locals;
 const t = createTranslator(locale, "nav");
 const currentPath = stripLocale(Astro.originPathname);
@@ -47,7 +52,7 @@ const links = navigationConfig.mainNav.map(({ href, labelKey }) => ({
     </ul>
 
     <div class="navbar__actions">
-      <LocaleSwitcher />
+      <LocaleSwitcher paths={localePaths} />
       <Button variant="primary" size="sm" href={ROUTES.tryouts} class="navbar__cta">
         {t("join")}
       </Button>

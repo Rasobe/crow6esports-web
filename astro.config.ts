@@ -38,6 +38,9 @@ export default defineConfig({
     schema: {
       MAINTENANCE_MODE: envField.boolean({ context: "server", access: "secret", default: false }),
       TRYOUTS_OPEN: envField.boolean({ context: "server", access: "secret", default: false }),
+      // Solo `true` en el entorno Production de Vercel: se lee en tiempo de ejecución, así que
+      // un despliegue de preview promovido a producción también lo recoge
+      ANALYTICS_ENABLED: envField.boolean({ context: "server", access: "secret", default: false }),
       RESEND_API_KEY: envField.string({ context: "server", access: "secret", optional: true }),
       SUPABASE_URL: envField.string({ context: "server", access: "secret", optional: true }),
       SUPABASE_SERVICE_ROLE_KEY: envField.string({
@@ -102,8 +105,6 @@ export default defineConfig({
   ],
   vite: {
     plugins: [stubBuildOnlyRolldown],
-    // Momento del build (o del arranque en desarrollo): es el lastmod del sitemap
-    define: { __BUILD_DATE__: JSON.stringify(new Date().toISOString()) },
     css: {
       preprocessorOptions: {
         scss: { loadPaths: ["src"], silenceDeprecations: ["import"] },

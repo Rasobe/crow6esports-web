@@ -52,7 +52,8 @@ export default config({
         }),
         cover: fields.image({
           label: "Imagen de portada",
-          description: "Mejor 1200x630. Se usa también al compartir en redes.",
+          description:
+            "JPG de 1200x630 y menos de 200 KB (un test falla con más de 300 KB). Se usa también al compartir en redes.",
           directory: "public/images/news",
           publicPath: "/images/news/",
           validation: { isRequired: true },

@@ -1,0 +1,191 @@
+@use "styles/layers";
+@use "styles/mixins" as *;
+
+@layer components {
+  .about-club {
+    padding: var(--space-12) 0;
+
+    @include above(md) {
+      padding: var(--space-16) 0;
+    }
+  }
+
+  .about-club__inner {
+    @include container;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+
+  // En escritorio el titular y la intro comparten fila: sin hueco vacío a la derecha.
+  // Es un div y no un header: el header global lleva la tipografía condensada de la UI
+  .about-club__header {
+    display: grid;
+    gap: var(--space-4);
+
+    @include above(lg) {
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      align-items: end;
+      gap: var(--space-12);
+    }
+  }
+
+  .about-club__heading {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .about-club__title {
+    font-size: var(--fs-h3);
+    line-height: 0.95;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    color: var(--text-primary);
+  }
+
+  .about-club__intro {
+    max-width: 46rem;
+    margin: 0;
+    color: var(--text-secondary);
+  }
+
+  .about-club__cards {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-4);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    @include above(sm) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @include above(lg) {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  // Tablet: 2 + 1, la última tarjeta ocupa la fila entera
+  .about-club__item {
+    display: flex;
+
+    @include above(sm) {
+      &:last-child:nth-child(odd) {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @include above(lg) {
+      &:last-child:nth-child(odd) {
+        grid-column: auto;
+      }
+    }
+  }
+
+  .club-card {
+    position: relative;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-6);
+    background: var(--bg-surface);
+    border: var(--line-subtle);
+    transition: border-color var(--duration-base) var(--ease-standard);
+
+    // Barra dorada superior al pasar el cursor o enfocar un enlace de la tarjeta
+    &::before {
+      content: "";
+      position: absolute;
+      inset: -1px -1px auto -1px;
+      height: 3px;
+      background: var(--brand);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform var(--duration-slower) var(--ease-out);
+    }
+
+    &:hover,
+    &:focus-within {
+      border-color: var(--border-strong);
+
+      &::before {
+        transform: scaleX(1);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      &::before {
+        transition: none;
+      }
+    }
+  }
+
+  .club-card__index {
+    font-family: var(--ff-display);
+    font-size: var(--fs-2xl);
+    line-height: 1;
+    color: var(--brand);
+  }
+
+  .club-card__title {
+    font-size: var(--fs-xl);
+    text-transform: uppercase;
+    color: var(--text-primary);
+  }
+
+  .club-card__text {
+    flex: 1;
+    margin: 0;
+    font-size: var(--fs-body);
+    line-height: 1.6;
+    color: var(--text-secondary);
+  }
+
+  .club-card__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-6);
+    padding-top: var(--space-2);
+  }
+
+  .club-card__link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding-bottom: var(--space-1);
+    font-family: var(--ff-ui);
+    font-size: var(--fs-md);
+    font-weight: 700;
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--text-primary);
+    border-bottom: 2px solid transparent;
+    transition:
+      color var(--duration-base) var(--ease-standard),
+      border-color var(--duration-base) var(--ease-standard);
+
+    svg {
+      color: var(--brand);
+      transition: transform var(--duration-base) var(--ease-out);
+    }
+
+    &:hover {
+      color: var(--brand);
+      border-bottom-color: var(--brand);
+
+      svg {
+        transform: translateX(var(--space-1));
+      }
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--brand);
+      outline-offset: 4px;
+      border-bottom-color: var(--brand);
+    }
+  }
+}

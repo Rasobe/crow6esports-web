@@ -1,10 +1,11 @@
 ---
 import "@/styles/global.scss";
 import { Font } from "astro:assets";
+import { ANALYTICS_ENABLED } from "astro:env/server";
 import { ClientRouter } from "astro:transitions";
 import SpeedInsights from "@vercel/speed-insights/astro";
 import type { Locale } from "@/ui/i18n";
-import { Seo } from "@/ui/shared/components";
+import { AhrefsAnalytics, Seo } from "@/ui/shared/components";
 
 interface Props {
   title?: string;
@@ -50,6 +51,7 @@ const { locale } = Astro.locals;
       })();
     </script>
     <ClientRouter />
+    <AhrefsAnalytics enabled={ANALYTICS_ENABLED} />
     <Seo
       title={title}
       absoluteTitle={absoluteTitle}
