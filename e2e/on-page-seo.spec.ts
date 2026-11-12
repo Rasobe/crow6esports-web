@@ -29,14 +29,34 @@ test("the coaching h1 names Rocket League", async ({ page }) => {
   await expect(page.locator("h1")).toHaveText("Rocket League Coaching");
 });
 
-test("the home links to coaching, team and news from its club section", async ({ page }) => {
-  await page.goto("/es");
+const CLUB_LINKS = {
+  es: {
+    "/es/team": "Conoce la plantilla",
+    "/es/coaching": "Descubre el coaching",
+    "/es/tryouts": "Consulta los tryouts",
+    "/es/news": "Lee las noticias",
+  },
+  en: {
+    "/en/team": "Meet the roster",
+    "/en/coaching": "Discover the coaching",
+    "/en/tryouts": "Check the tryouts",
+    "/en/news": "Read the news",
+  },
+} as const;
 
-  const section = page.locator(".about-club");
-  for (const href of ["/es/coaching", "/es/team", "/es/news"]) {
-    await expect(section.locator(`a[href="${href}"]`)).toHaveCount(1);
-  }
-});
+for (const [locale, links] of Object.entries(CLUB_LINKS)) {
+  test(`the ${locale} home club section links to team, coaching, tryouts and news`, async ({
+    page,
+  }) => {
+    await page.goto(`/${locale}`);
+
+    const section = page.locator(".about-club");
+    await expect(section.locator("h3")).toHaveCount(3);
+    for (const [href, name] of Object.entries(links)) {
+      await expect(section.getByRole("link", { name })).toHaveAttribute("href", href);
+    }
+  });
+}
 
 test("describes the hero image and loads it first", async ({ page }) => {
   await page.goto("/en");

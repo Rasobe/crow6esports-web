@@ -120,7 +120,25 @@
     "aboutClub": {
       "eyebrow": "The club",
       "title": "Rocket League club, coaching and tryouts",
-      "body": "Crow 6 eSports was born in {year} in {city} with a simple idea: compete in Rocket League at the highest level while keeping a real club atmosphere. Today we bring together a [competitive roster](team) that plays national and European tournaments, [individual and team coaching](coaching) with the club's Head Coach, and tryouts for anyone ready to step up whenever we open applications. Follow our results, signings and announcements in the [news](news) section."
+      "intro": "Crow 6 eSports was born in {year} in {city} with a simple idea: compete in Rocket League at the highest level while keeping a real club atmosphere.",
+      "cards": {
+        "team": {
+          "title": "Competitive roster",
+          "text": "Players who compete in national and European tournaments wearing the club colours.",
+          "link": "Meet the roster"
+        },
+        "coaching": {
+          "title": "Individual and team coaching",
+          "text": "Sessions with the club's Head Coach to rank up, on your own or with your team.",
+          "link": "Discover the coaching"
+        },
+        "tryouts": {
+          "title": "Tryouts and news",
+          "text": "Applications whenever we open spots, plus results, signings and club announcements.",
+          "link": "Check the tryouts",
+          "link_news": "Read the news"
+        }
+      }
     }
   },
   "team": {
