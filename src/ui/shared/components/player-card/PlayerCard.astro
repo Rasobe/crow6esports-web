@@ -36,7 +36,10 @@ const socialLinks = getActiveSocialLinks(player.socials);
     {player.image ? (
       <img
         src={player.image}
-        alt={player.nickname}
+        alt={t("photo_alt", {
+          nickname: player.nickname,
+          role: t(ROLE_KEY[player.type]).toLowerCase(),
+        })}
         loading="lazy"
         decoding="async"
         class="player-card__img"

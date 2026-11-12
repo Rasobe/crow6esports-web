@@ -6,13 +6,13 @@ import { Icon } from "@/ui/shared/components";
 
 const { locale } = Astro.locals;
 const t = createTranslator(locale, "footer");
+const tSite = createTranslator(locale, "site");
 ---
 
 <div class="footer__column">
   <img
     src="/images/brand/crow6-mascot-full.svg"
-    alt=""
-    aria-hidden="true"
+    alt={tSite("logo_alt")}
     width="72"
     height="72"
     class="footer__logo"
