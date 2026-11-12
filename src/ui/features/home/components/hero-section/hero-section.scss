@@ -120,7 +120,24 @@
     -webkit-text-stroke: clamp(1.5px, 0.02em, 3px) var(--brand);
   }
 
+  .hero-title__sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  // Forma parte del h1 (nombre + qué es el club) pero conserva el aspecto de subtítulo
   .hero-subtitle {
+    display: block;
+    margin-top: var(--space-6);
+    font-family: var(--ff-body);
+    font-weight: 400;
+    letter-spacing: normal;
+    text-transform: none;
     font-size: 1rem;
     line-height: 1.5;
     color: var(--text-primary);

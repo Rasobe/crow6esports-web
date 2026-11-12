@@ -1,0 +1,47 @@
+@use "styles/layers";
+@use "styles/mixins" as *;
+
+@layer components {
+  .about-club {
+    padding: var(--section-py) 0;
+  }
+
+  .about-club__inner {
+    @include container;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .about-club__title {
+    max-width: 22ch;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 0.95;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    color: var(--text-primary);
+  }
+
+  .about-club__body {
+    max-width: 46rem;
+    color: var(--text-secondary);
+  }
+
+  .about-club__link {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-decoration-color: var(--brand);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.2em;
+    transition: color var(--duration-base) var(--ease-standard);
+
+    &:hover {
+      color: var(--brand);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--brand);
+      outline-offset: 2px;
+    }
+  }
+}

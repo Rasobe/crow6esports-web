@@ -12,6 +12,11 @@ const { locale } = Astro.locals;
 const t = createTranslator(locale, "home.hero");
 const { playerCount, peakMmr } = getRosterStats(container.playerRepository);
 
+// Variantes generadas con sharp: AVIF q45 y WebP q72
+const HERO_WIDTHS = [640, 960, 1280, 1774];
+const heroSrcset = (format: "avif" | "webp") =>
+  HERO_WIDTHS.map((width) => `/images/hero-bg-${width}.${format} ${width}w`).join(", ");
+
 const stats = [
   { key: "years", value: getClubYears() },
   { key: "players", value: playerCount },
@@ -21,18 +26,21 @@ const stats = [
 ---
 
 <section class="hero" aria-labelledby="hero-heading">
-  <img
-    class="hero__bg"
-    src="/images/hero-bg.webp"
-    srcset="/images/hero-bg-960.webp 960w, /images/hero-bg.webp 1774w"
-    sizes="100vw"
-    alt=""
-    width="1774"
-    height="887"
-    fetchpriority="high"
-    decoding="async"
-    aria-hidden="true"
-  />
+  <picture>
+    <source type="image/avif" srcset={heroSrcset("avif")} sizes="100vw" />
+    <img
+      class="hero__bg"
+      src="/images/hero-bg-1280.webp"
+      srcset={heroSrcset("webp")}
+      sizes="100vw"
+      alt={t("image_alt")}
+      width="1774"
+      height="887"
+      loading="eager"
+      fetchpriority="high"
+      decoding="async"
+    />
+  </picture>
   <div class="hero__shade" aria-hidden="true"></div>
   <div class="hero__sweep" aria-hidden="true"></div>
 
@@ -41,15 +49,15 @@ const stats = [
       <h1 id="hero-heading" class="hero-title">
         <span class="hero-title__line" data-hero style="--hero-step: 0">
           {t("title.name")} <span class="hero-title__accent">{t("title.number")}</span>
-        </span>
+        </span>{" "}
         <span class="hero-title__line text-stroke-brand" data-hero style="--hero-step: 1">
           {t("title.sector")}
         </span>
+        <span class="hero-title__sr-only">{t("title_separator")} </span>
+        <span class="hero-subtitle" data-hero style="--hero-step: 2">
+          {t("subtitle")}
+        </span>
       </h1>
-
-      <p class="hero-subtitle" data-hero style="--hero-step: 2">
-        {t("subtitle")}
-      </p>
 
       <div class="hero__ctas" data-hero style="--hero-step: 3">
         <Button href={ROUTES.tryouts} size="lg">

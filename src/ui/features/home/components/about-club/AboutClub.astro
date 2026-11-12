@@ -1,0 +1,36 @@
+---
+import "./about-club.scss";
+import { CLUB } from "@config/club";
+import { ROUTES } from "@config/routes";
+import { createTranslator, localizePath } from "@/ui/i18n";
+import { splitInlineLinks } from "@/ui/shared/lib/inline-links";
+
+const { locale } = Astro.locals;
+const t = createTranslator(locale, "home.aboutClub");
+
+const LINKS = { team: ROUTES.team, coaching: ROUTES.coaching, news: ROUTES.news } as const;
+const segments = splitInlineLinks(
+  t("body", { year: CLUB.foundedYear, city: CLUB.location.city }),
+  Object.keys(LINKS) as (keyof typeof LINKS)[],
+);
+---
+
+<section class="about-club" aria-labelledby="about-club-title">
+  <div class="about-club__inner" data-reveal>
+    <span class="section-label">{t("eyebrow")}</span>
+    <h2 id="about-club-title" class="about-club__title">
+      {t("title")}
+    </h2>
+    <p class="about-club__body">
+      {segments.map((segment) =>
+        segment.kind === "link" ? (
+          <a class="about-club__link" href={localizePath(locale, LINKS[segment.key])}>
+            {segment.text}
+          </a>
+        ) : (
+          segment.text
+        ),
+      )}
+    </p>
+  </div>
+</section>
