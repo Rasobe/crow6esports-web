@@ -1,76 +1,108 @@
 import { describe, expect, it } from "vitest";
-import { articleData, coachingServiceData, sportsTeamData, websiteData } from "./structured-data";
+import {
+  articleData,
+  clubGraphData,
+  coachingServiceData,
+  newsCollectionData,
+} from "./structured-data";
 
-describe("sportsTeamData", () => {
-  it("describes the club as a sports team with its profiles", () => {
-    const data = sportsTeamData({
+const CLUB = {
+  name: "Crow 6 eSports",
+  url: "https://crow6esports.com",
+  logo: "https://crow6esports.com/icon-512.png",
+  sport: "Rocket League",
+  email: "club@example.com",
+  foundingYear: 2020,
+  description: "Competitive Rocket League organization.",
+  alternateName: ["Crow6", "Crow 6", "C6 eSports"],
+  location: { city: "Huesca", country: "ES" },
+  sameAs: ["https://x.com/crow6esports", "https://www.instagram.com/crow6esports"],
+};
+
+type Node = Record<string, unknown>;
+const nodeOf = (data: Node, type: string) =>
+  (data["@graph"] as Node[]).find((node) => node["@type"] === type)!;
+
+describe("clubGraphData", () => {
+  const data = clubGraphData(CLUB);
+  const organization = nodeOf(data, "Organization");
+
+  it("gives the organization every field the audit asks for", () => {
+    expect(organization).toMatchObject({
+      "@id": "https://crow6esports.com/#organization",
       name: "Crow 6 eSports",
       url: "https://crow6esports.com",
-      logo: "https://crow6esports.com/icon-512.png",
-      sport: "Rocket League",
-      email: "club@example.com",
-      foundingYear: 2020,
+      logo: { "@type": "ImageObject", url: "https://crow6esports.com/icon-512.png" },
       description: "Competitive Rocket League organization.",
-      alternateName: ["Crow6", "Crow 6", "C6 eSports"],
-      location: { city: "Huesca", country: "ES" },
-      sameAs: ["https://x.com/crow6esports"],
-    });
-
-    expect(data).toMatchObject({
-      "@type": "SportsTeam",
-      sport: "Rocket League",
       foundingDate: "2020",
-      description: "Competitive Rocket League organization.",
-      alternateName: ["Crow6", "Crow 6", "C6 eSports"],
-      location: { "@type": "PostalAddress", addressLocality: "Huesca", addressCountry: "ES" },
-      sameAs: ["https://x.com/crow6esports"],
+      address: { "@type": "PostalAddress", addressLocality: "Huesca", addressCountry: "ES" },
+      sameAs: CLUB.sameAs,
     });
+    expect((organization.logo as Node).url).toMatch(/^https:\/\//);
   });
 
-  it("serialises to valid JSON", () => {
-    const data = sportsTeamData({
-      name: "Crow 6 eSports",
-      url: "https://crow6esports.com",
-      logo: "https://crow6esports.com/icon-512.png",
-      sport: "Rocket League",
-      email: "club@example.com",
-      foundingYear: 2020,
-      description: 'Quotes " and <tags>',
-      alternateName: [],
-      location: { city: "Huesca", country: "ES" },
-      sameAs: [],
-    });
+  it("links the team and the website to the organization instead of repeating it", () => {
+    const team = nodeOf(data, "SportsTeam");
+    const website = nodeOf(data, "WebSite");
 
-    expect(JSON.parse(JSON.stringify(data))).toEqual(data);
+    expect(team).toMatchObject({
+      sport: "Rocket League",
+      parentOrganization: { "@id": organization["@id"] },
+    });
+    expect(team).not.toHaveProperty("address");
+    expect(team).not.toHaveProperty("sameAs");
+    expect(website).toMatchObject({ url: CLUB.url, publisher: { "@id": organization["@id"] } });
+  });
+
+  it("publishes no reviews or ratings and serialises to valid JSON", () => {
+    const json = JSON.stringify(data);
+    expect(json).not.toMatch(/Review|AggregateRating/);
+    expect(JSON.parse(json)).toEqual(data);
   });
 });
 
-describe("websiteData", () => {
-  it("describes the site with its alternate names", () => {
-    expect(
-      websiteData({
-        name: "Crow 6 eSports",
-        url: "https://crow6esports.com",
-        alternateName: ["Crow6", "Crow 6"],
-      }),
-    ).toEqual({
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      name: "Crow 6 eSports",
-      alternateName: ["Crow6", "Crow 6"],
-      url: "https://crow6esports.com",
+describe("newsCollectionData", () => {
+  const data = newsCollectionData({
+    name: "Noticias",
+    description: "Las últimas noticias.",
+    url: "https://crow6esports.com/es/news",
+    inLanguage: "es",
+    siteUrl: "https://crow6esports.com",
+    articles: [
+      { name: "Newest", url: "https://crow6esports.com/es/news/newest" },
+      { name: "Older", url: "https://crow6esports.com/es/news/older" },
+    ],
+  });
+
+  it("describes the list page as a collection of the site", () => {
+    expect(data).toMatchObject({
+      "@type": "CollectionPage",
+      url: "https://crow6esports.com/es/news",
+      name: "Noticias",
+      inLanguage: "es",
+      isPartOf: { "@type": "WebSite", "@id": "https://crow6esports.com/#website" },
     });
   });
 
-  it("links the social profiles when given", () => {
-    const data = websiteData({
-      name: "Crow 6 eSports",
-      url: "https://crow6esports.com",
-      alternateName: [],
-      sameAs: ["https://x.com/crow6esports"],
+  it("lists the articles in order with url, name and position", () => {
+    expect(data.mainEntity).toEqual({
+      "@type": "ItemList",
+      numberOfItems: 2,
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          url: "https://crow6esports.com/es/news/newest",
+          name: "Newest",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          url: "https://crow6esports.com/es/news/older",
+          name: "Older",
+        },
+      ],
     });
-
-    expect(data.sameAs).toEqual(["https://x.com/crow6esports"]);
   });
 });
 
