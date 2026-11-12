@@ -14,11 +14,13 @@ interface Props {
   image?: string;
   imageAlt?: string;
   alternates?: Partial<Record<Locale, string>>;
+  /** Destino del selector de idioma por idioma, si no es la misma ruta (artículos con otro slug). */
+  localePaths?: Partial<Record<Locale, string>>;
   publishedTime?: Date;
   modifiedTime?: Date;
 }
 
-const { title, absoluteTitle, description, path, noindex, ...social } = Astro.props;
+const { title, absoluteTitle, description, path, noindex, localePaths, ...social } = Astro.props;
 const tSite = createTranslator(Astro.locals.locale, "site");
 ---
 
@@ -32,7 +34,7 @@ const tSite = createTranslator(Astro.locals.locale, "site");
 >
   <slot name="head" slot="head" />
   <SkipLink targetId="main-content" />
-  <Navbar />
+  <Navbar localePaths={localePaths} />
   <main id="main-content" class="content-offset" tabindex="-1">
     <slot />
   </main>

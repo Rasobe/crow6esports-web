@@ -6,6 +6,7 @@ import { lastModified } from "@/domain/news/article";
 import { container } from "@/infrastructure/container";
 import { renderArticleContent } from "@/infrastructure/news/article-content";
 import { ArticleDetail } from "@/ui/features/news/components";
+import { articleLocalePaths } from "@/ui/features/news/lib/article-locale-paths";
 import { LocaleLayout } from "@/ui/layouts";
 import { JsonLd } from "@/ui/shared/components";
 import { articleData } from "@/ui/shared/lib/structured-data";
@@ -25,6 +26,7 @@ const path = `${ROUTES.news}/${article.slug}`;
 const alternates = translation
   ? { [article.locale]: path, [translation.locale]: `${ROUTES.news}/${translation.slug}` }
   : {};
+const localePaths = articleLocalePaths(article, translation, ROUTES.news);
 const modified = lastModified(article);
 
 const structuredData = articleData({
@@ -51,6 +53,7 @@ const structuredData = articleData({
   image={article.cover}
   imageAlt={article.coverAlt}
   alternates={alternates}
+  localePaths={localePaths}
   publishedTime={article.date}
   modifiedTime={modified}
 >

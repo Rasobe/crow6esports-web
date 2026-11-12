@@ -1,15 +1,18 @@
 ---
+import { ROUTES } from "@config/routes";
 import { BaseLayout } from "@/ui/layouts";
 import { Footer, Navbar } from "@/ui/layouts/_components";
 import { NotFound, SkipLink } from "@/ui/shared/components";
-import { createTranslator } from "@/ui/i18n";
+import { LOCALES, createTranslator } from "@/ui/i18n";
 
 const t = createTranslator(Astro.locals.locale, "notFound");
+// La ruta pedida no existe en ningún idioma: el selector lleva a la portada de cada uno
+const localePaths = Object.fromEntries(LOCALES.map((code) => [code, ROUTES.home]));
 ---
 
 <BaseLayout title={t("eyebrow")} description={t("desc")} noindex>
   <SkipLink targetId="main-content" />
-  <Navbar />
+  <Navbar localePaths={localePaths} />
   <div id="main-content" class="content-offset" tabindex="-1">
     <NotFound />
   </div>
