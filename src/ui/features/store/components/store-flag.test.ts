@@ -18,8 +18,8 @@ describe("STORE_ENABLED", () => {
 
     expect(html).toContain("Sin stock por ahora");
     expect(html).toContain("Próximamente");
-    expect(html).toContain("https://discord.gg/");
-    expect(html).toContain("https://instagram.com/crow6esports");
+    expect(html).toContain("https://discord.com/invite/");
+    expect(html).toContain("https://www.instagram.com/crow6esports");
     expect(html).toContain("jersey-video-poster");
     expect(html).not.toContain("Añadir al carrito");
     expect(html).not.toMatch(/€|\bEUR\b/);

@@ -1,14 +1,36 @@
 ---
 import { ROUTES } from "@config/routes";
+import { siteConfig } from "@config/site";
 import { getArticles } from "@/application/news/get-articles";
 import { container } from "@/infrastructure/container";
 import { NewsPage } from "@/ui/features/news/components";
 import { LocaleLayout } from "@/ui/layouts";
 import { createTranslator } from "@/ui/i18n";
+import { JsonLd } from "@/ui/shared/components";
+import { breadcrumbData, newsCollectionData } from "@/ui/shared/lib/structured-data";
 
-const t = createTranslator(Astro.locals.locale, "news.seo");
+const { locale } = Astro.locals;
+const t = createTranslator(locale, "news.seo");
+const tNav = createTranslator(locale, "nav");
 // Sin artículos la página solo muestra el aviso: se deja fuera del buscador hasta que haya
-const articles = await getArticles(container.articleRepository, Astro.locals.locale);
+const articles = await getArticles(container.articleRepository, locale);
+const listUrl = `${siteConfig.url}/${locale}${ROUTES.news}`;
+// Sale del mismo contenido que el listado: cada noticia publicada entra sola
+const collection = newsCollectionData({
+  name: t("title"),
+  description: t("description"),
+  url: listUrl,
+  inLanguage: locale,
+  siteUrl: siteConfig.url,
+  articles: articles.map((article) => ({
+    name: article.title,
+    url: `${listUrl}/${article.slug}`,
+  })),
+});
+const breadcrumbs = breadcrumbData([
+  { name: siteConfig.name, url: `${siteConfig.url}/${locale}` },
+  { name: tNav("news"), url: listUrl },
+]);
 ---
 
 <LocaleLayout
@@ -17,5 +39,7 @@ const articles = await getArticles(container.articleRepository, Astro.locals.loc
   path={ROUTES.news}
   noindex={articles.length === 0}
 >
+  {articles.length > 0 && <JsonLd slot="head" data={collection} />}
+  {articles.length > 0 && <JsonLd slot="head" data={breadcrumbs} />}
   <NewsPage />
 </LocaleLayout>

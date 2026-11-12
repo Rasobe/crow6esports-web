@@ -112,11 +112,11 @@ test("keeps the store visible and indexable with an out of stock notice", async 
   await expect(notice.getByText("Próximamente")).toBeVisible();
   await expect(notice.getByRole("link", { name: /Discord/ })).toHaveAttribute(
     "href",
-    /discord\.gg/,
+    /discord\.com\/invite\//,
   );
   await expect(notice.getByRole("link", { name: /Instagram/ })).toHaveAttribute(
     "href",
-    "https://instagram.com/crow6esports",
+    "https://www.instagram.com/crow6esports",
   );
 
   // Vídeo y presentación de la camiseta siguen ahí, sin compra ni carrito
@@ -146,14 +146,18 @@ test("shows the news empty state and keeps it out of search engines", async ({ p
 
 test("describes the club and the coaching service for search engines", async ({ page }) => {
   const structuredTypes = async () =>
-    page
-      .locator('script[type="application/ld+json"]')
-      .evaluateAll((scripts) =>
-        scripts.map((script) => JSON.parse(script.textContent ?? "")["@type"]),
-      );
+    page.locator('script[type="application/ld+json"]').evaluateAll((scripts) =>
+      scripts.flatMap((script) => {
+        const data = JSON.parse(script.textContent ?? "");
+        // Un bloque puede ser un grafo con varios nodos
+        return (data["@graph"] ?? [data]).map((node: { "@type": string }) => node["@type"]);
+      }),
+    );
 
   await page.goto("/es");
-  expect(await structuredTypes()).toEqual(expect.arrayContaining(["SportsTeam", "WebSite"]));
+  expect(await structuredTypes()).toEqual(
+    expect.arrayContaining(["Organization", "SportsTeam", "WebSite"]),
+  );
 
   await page.goto("/es/coaching");
   expect(await structuredTypes()).toContain("Service");

@@ -1,7 +1,12 @@
-import { expect, test } from "@playwright/test";
+import { expect, test, type Page } from "@playwright/test";
 import { CLUB } from "../config/club";
 
 const ROUTES = ["", "/team", "/coaching", "/news", "/store", "/about-us", "/tryouts"];
+
+// Cuenta en el DOM de la página: los locators de Playwright entran también en el shadow DOM
+// de la barra de desarrollo de Astro, que trae sus propios h1 e imágenes
+const countInPage = (page: Page, selector: string) =>
+  page.evaluate((css) => document.querySelectorAll(css).length, selector);
 
 for (const locale of ["es", "en"]) {
   for (const route of ROUTES) {
@@ -10,8 +15,8 @@ for (const locale of ["es", "en"]) {
     test(`${path} has a single h1 and an alt on every image`, async ({ page }) => {
       await page.goto(path);
 
-      await expect(page.locator("h1")).toHaveCount(1);
-      await expect(page.locator("img:not([alt])")).toHaveCount(0);
+      expect(await countInPage(page, "h1")).toBe(1);
+      expect(await countInPage(page, "img:not([alt])")).toBe(0);
     });
   }
 }
@@ -19,14 +24,14 @@ for (const locale of ["es", "en"]) {
 test("the home h1 and an h2 name Rocket League and coaching", async ({ page }) => {
   await page.goto("/es");
 
-  await expect(page.locator("h1")).toContainText("Rocket League");
+  await expect(page.locator("main h1")).toContainText("Rocket League");
   await expect(page.locator("h2", { hasText: /coaching/i }).first()).toBeVisible();
 });
 
 test("the coaching h1 names Rocket League", async ({ page }) => {
   await page.goto("/en/coaching");
 
-  await expect(page.locator("h1")).toHaveText("Rocket League Coaching");
+  await expect(page.locator("main h1")).toHaveText("Rocket League Coaching");
 });
 
 const CLUB_LINKS = {

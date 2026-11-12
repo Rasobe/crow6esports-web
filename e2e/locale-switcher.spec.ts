@@ -84,7 +84,7 @@ test.describe("language switcher on news articles", () => {
         () => page.request.get(expected),
       );
       expect(response.status()).toBe(200);
-      if (translation) await expect(page.locator("h1")).toHaveText(translation.title);
+      if (translation) await expect(page.locator("main h1")).toHaveText(translation.title);
     });
   }
 });
