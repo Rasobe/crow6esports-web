@@ -1,7 +1,8 @@
 {
   "site": {
     "image_alt": "Coches amarillos y negros de Crow 6 eSports con el escudo del cuervo en un estadio de Rocket League, bajo la pelota",
-    "description": "Organización competitiva de Rocket League."
+    "description": "Organización competitiva de Rocket League.",
+    "logo_alt": "Logo de Crow 6 eSports"
   },
   "nav": {
     "team": "Plantilla",
@@ -70,7 +71,8 @@
       "figure_hours": "Horas de juego",
       "figure_mmr": "MMR de sus alumnos",
       "price_from": "Individual desde",
-      "cta_more": "Ver servicios y precios"
+      "cta_more": "Ver servicios y precios",
+      "photo_alt": "{name}, Head Coach de Crow 6 eSports"
     },
     "storeHighlight": {
       "eyebrow": "Tienda oficial",
@@ -86,7 +88,8 @@
       "role_manager": "Manager",
       "status_substitute": "Suplente",
       "status_retired": "Retirado",
-      "status_former": "Ex-miembro"
+      "status_former": "Ex-miembro",
+      "photo_alt": "{nickname}, {role} de Crow 6 eSports"
     },
     "productCard": {
       "category_jersey": "Camiseta",
@@ -484,7 +487,8 @@
         "years": "Años como coach",
         "max_mmr": "MMR alcanzado por sus alumnos",
         "recent_case": "Caso reciente (MMR)"
-      }
+      },
+      "photo_alt": "{name}, Head Coach de Crow 6 eSports"
     },
     "services": {
       "title": "Servicios",

@@ -14,6 +14,7 @@ interface Props {
 const { localePaths } = Astro.props;
 const { locale } = Astro.locals;
 const t = createTranslator(locale, "nav");
+const tSite = createTranslator(locale, "site");
 const currentPath = stripLocale(Astro.originPathname);
 
 const links = navigationConfig.mainNav.map(({ href, labelKey }) => ({
@@ -28,7 +29,7 @@ const links = navigationConfig.mainNav.map(({ href, labelKey }) => ({
       <img
         class="navbar__logo"
         src="/images/brand/crow6-wordmark.svg"
-        alt="Crow 6 eSports"
+        alt={tSite("logo_alt")}
         width="92"
         height="32"
       />

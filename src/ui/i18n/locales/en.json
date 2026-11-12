@@ -1,7 +1,8 @@
 {
   "site": {
     "image_alt": "Yellow and black Crow 6 eSports cars with the crow emblem in a Rocket League stadium, beneath the ball",
-    "description": "Competitive Rocket League organization."
+    "description": "Competitive Rocket League organization.",
+    "logo_alt": "Crow 6 eSports logo"
   },
   "nav": {
     "team": "Team",
@@ -70,7 +71,8 @@
       "figure_hours": "Hours played",
       "figure_mmr": "Students' MMR",
       "price_from": "Individual from",
-      "cta_more": "See services and prices"
+      "cta_more": "See services and prices",
+      "photo_alt": "{name}, Head Coach of Crow 6 eSports"
     },
     "storeHighlight": {
       "eyebrow": "Official store",
@@ -86,7 +88,8 @@
       "role_manager": "Manager",
       "status_substitute": "Substitute",
       "status_retired": "Retired",
-      "status_former": "Former"
+      "status_former": "Former",
+      "photo_alt": "{nickname}, {role} of Crow 6 eSports"
     },
     "productCard": {
       "category_jersey": "Jersey",
@@ -484,7 +487,8 @@
         "years": "Years as a coach",
         "max_mmr": "MMR reached by his students",
         "recent_case": "Recent case (MMR)"
-      }
+      },
+      "photo_alt": "{name}, Head Coach of Crow 6 eSports"
     },
     "services": {
       "title": "Services",
