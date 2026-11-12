@@ -31,6 +31,21 @@ describe("buildSitemap", () => {
     expect(xml).toContain("<lastmod>2026-10-01</lastmod>");
   });
 
+  it("omits lastmod for a page without a reliable date", () => {
+    const undated = build([
+      {
+        priority: "0.8",
+        versions: [
+          { locale: "es", path: "/team" },
+          { locale: "en", path: "/team" },
+        ],
+      },
+    ]);
+
+    expect(undated).toContain("<loc>https://crow6esports.com/es/team</loc>");
+    expect(undated).not.toContain("<lastmod>");
+  });
+
   it("links every language version and the x-default from each URL", () => {
     const home = xml.split("<url>")[1];
     expect(home).toContain(

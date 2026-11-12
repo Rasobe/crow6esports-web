@@ -2,7 +2,8 @@ export interface SitemapVersion<L extends string> {
   locale: L;
   /** Ruta sin prefijo de idioma ("/" para la home). */
   path: string;
-  lastmod: Date;
+  /** Se omite cuando no hay una fecha fiable de último cambio. */
+  lastmod?: Date;
 }
 
 /**
@@ -58,9 +59,12 @@ export function buildSitemap<L extends string>({
               : []),
           ].join("\n")}`;
 
+    const lastmodOf = ({ lastmod }: SitemapVersion<L>) =>
+      lastmod ? `\n    <lastmod>${formatDay(lastmod)}</lastmod>` : "";
+
     return versions.map(
       (version) =>
-        `  <url>\n    <loc>${urlOf(version)}</loc>\n    <lastmod>${formatDay(version.lastmod)}</lastmod>\n    <changefreq>${CHANGE_FREQUENCY}</changefreq>\n    <priority>${priority}</priority>${alternates}\n  </url>`,
+        `  <url>\n    <loc>${urlOf(version)}</loc>${lastmodOf(version)}\n    <changefreq>${CHANGE_FREQUENCY}</changefreq>\n    <priority>${priority}</priority>${alternates}\n  </url>`,
     );
   });
 

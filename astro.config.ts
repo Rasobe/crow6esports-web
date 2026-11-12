@@ -105,8 +105,6 @@ export default defineConfig({
   ],
   vite: {
     plugins: [stubBuildOnlyRolldown],
-    // Momento del build (o del arranque en desarrollo): es el lastmod del sitemap
-    define: { __BUILD_DATE__: JSON.stringify(new Date().toISOString()) },
     css: {
       preprocessorOptions: {
         scss: { loadPaths: ["src"], silenceDeprecations: ["import"] },

@@ -155,14 +155,22 @@ test("the coaching JSON-LD and home banner use the current prices from the confi
   );
 });
 
-test("serves a sitemap with lastmod, hreflang alternates and the public domain only", async ({
+test("serves a sitemap with real lastmod dates, hreflang alternates and the public domain only", async ({
   request,
 }) => {
   const response = await request.get("/sitemap.xml");
   const xml = await response.text();
+  const entries = [...xml.matchAll(/<url>([\s\S]*?)<\/url>/g)].map(([, entry]) => ({
+    loc: /<loc>([^<]+)<\/loc>/.exec(entry)![1],
+    lastmod: /<lastmod>([^<]+)<\/lastmod>/.exec(entry)?.[1],
+  }));
 
   expect(response.status()).toBe(200);
-  expect(xml).toContain("<lastmod>");
+  // Solo las noticias tienen una fecha fiable; las páginas fijas no declaran lastmod
+  for (const { loc, lastmod } of entries) {
+    if (loc.includes("/news")) expect(lastmod, loc).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+    else expect(lastmod, loc).toBeUndefined();
+  }
   expect(xml).toContain('hreflang="es"');
   expect(xml).toContain('hreflang="en"');
   expect(xml).toContain('hreflang="x-default"');
