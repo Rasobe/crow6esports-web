@@ -7,6 +7,7 @@ import { Icon } from "@/ui/shared/components";
 
 const { locale } = Astro.locals;
 const t = createTranslator(locale, "comingSoon");
+const tSite = createTranslator(locale, "site");
 ---
 
 <main class="coming-soon" id="main">
@@ -21,7 +22,7 @@ const t = createTranslator(locale, "comingSoon");
     <img
       class="coming-soon__logo"
       src="/images/brand/crow6-mascot-full.svg"
-      alt="Crow 6 eSports"
+      alt={tSite("logo_alt")}
       width="160"
       height="48"
     />
