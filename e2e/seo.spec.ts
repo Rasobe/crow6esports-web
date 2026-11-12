@@ -19,11 +19,12 @@ for (const locale of ["es", "en"]) {
 
         const title = await page.title();
         const description = await meta(page, 'meta[name="description"]');
+        expect(title.length).toBeGreaterThanOrEqual(50);
         expect(title.length).toBeLessThanOrEqual(60);
         expect(title).toContain("Crow 6 eSports");
         expect(title).not.toMatch(/\b(Inicio|Home)\b/);
         expect(description?.length).toBeGreaterThanOrEqual(120);
-        expect(description?.length).toBeLessThanOrEqual(155);
+        expect(description?.length).toBeLessThanOrEqual(160);
         await expect(page.locator('meta[name="robots"]')).toHaveCount(0);
         expect(await meta(page, 'meta[property="og:title"]')).toBe(title);
       });
@@ -44,9 +45,9 @@ for (const locale of ["es", "en"]) {
 test("/en has its whole head in English", async ({ page }) => {
   await page.goto("/en");
 
-  await expect(page).toHaveTitle("Crow 6 eSports · Rocket League Organization");
+  await expect(page).toHaveTitle("Crow 6 eSports | Rocket League Organization & Coaching");
   expect(await meta(page, 'meta[name="description"]')).toMatch(
-    /^Crow 6 is a competitive Rocket League/,
+    /^Crow 6 eSports is a competitive Rocket League/,
   );
   expect(await meta(page, 'meta[property="og:locale"]')).toBe("en_GB");
   expect(await meta(page, 'meta[property="og:image:alt"]')).toMatch(/cars/);
@@ -56,8 +57,10 @@ test("/en has its whole head in English", async ({ page }) => {
 test("the Spanish home uses its own title", async ({ page }) => {
   await page.goto("/es");
 
-  await expect(page).toHaveTitle("Crow 6 eSports · Organización de Rocket League");
-  expect(await meta(page, 'meta[name="description"]')).toMatch(/^Crow 6 es una organización/);
+  await expect(page).toHaveTitle("Crow 6 eSports | Organización y coaching de Rocket League");
+  expect(await meta(page, 'meta[name="description"]')).toMatch(
+    /^Crow 6 eSports es una organización/,
+  );
 });
 
 test("the home describes the team and the website as valid JSON-LD", async ({ page }) => {

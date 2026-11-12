@@ -5,6 +5,7 @@ import { getAnnouncementKeys } from "@/application/site/get-announcements";
 import { ROUTES } from "@config/routes";
 import { createTranslator, localizePath } from "@/ui/i18n";
 import { NewsTicker, Testimonials } from "@/ui/shared/components";
+import { AboutClub } from "./about-club";
 import { CoachingBanner } from "./coaching-banner";
 import { HeroSection } from "./hero-section";
 import { NewsHighlight } from "./news-highlight";
@@ -33,4 +34,5 @@ const tickerItems = getAnnouncementKeys(ANNOUNCEMENTS, { tryoutsOpen: TRYOUTS_OP
 </Testimonials>
 <StoreHighlight />
 <NewsHighlight />
+<AboutClub />
 <TryoutsBanner />
