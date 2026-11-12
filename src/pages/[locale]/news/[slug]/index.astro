@@ -8,8 +8,9 @@ import { renderArticleContent } from "@/infrastructure/news/article-content";
 import { ArticleDetail } from "@/ui/features/news/components";
 import { articleLocalePaths } from "@/ui/features/news/lib/article-locale-paths";
 import { LocaleLayout } from "@/ui/layouts";
+import { createTranslator } from "@/ui/i18n";
 import { JsonLd } from "@/ui/shared/components";
-import { articleData } from "@/ui/shared/lib/structured-data";
+import { articleData, breadcrumbData } from "@/ui/shared/lib/structured-data";
 
 const { slug = "" } = Astro.params;
 const { locale } = Astro.locals;
@@ -43,6 +44,12 @@ const structuredData = articleData({
     logo: `${siteConfig.url}/icon-512.png`,
   },
 });
+const localeUrl = `${siteConfig.url}/${locale}`;
+const breadcrumbs = breadcrumbData([
+  { name: siteConfig.name, url: localeUrl },
+  { name: createTranslator(locale, "nav")("news"), url: `${localeUrl}${ROUTES.news}` },
+  { name: article.title, url: `${localeUrl}${path}` },
+]);
 ---
 
 <LocaleLayout
@@ -58,6 +65,7 @@ const structuredData = articleData({
   modifiedTime={modified}
 >
   <JsonLd slot="head" data={structuredData} />
+  <JsonLd slot="head" data={breadcrumbs} />
   <ArticleDetail article={article}>
     <Content />
   </ArticleDetail>
