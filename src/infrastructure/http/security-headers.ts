@@ -1,3 +1,5 @@
+import { AHREFS_ANALYTICS } from "@config/analytics";
+
 // En producción Vercel sirve sus scripts de analítica desde el propio dominio; en
 // desarrollo las versiones de depuración llegan desde estos.
 // El panel de Keystatic habla con la API de GitHub desde el navegador, muestra avatares e
@@ -9,6 +11,9 @@ const KEYSTATIC_STYLE_HOSTS = "https://fonts.googleapis.com";
 const KEYSTATIC_FONT_HOSTS = "https://fonts.gstatic.com";
 const KEYSTATIC_FORM_HOSTS = "https://github.com";
 const KEYSTATIC_IMAGE_HOSTS = `https://avatars.githubusercontent.com ${GITHUB_RAW_HOST}`;
+
+// Solo la web pública carga la analítica; el panel de Keystatic no la necesita
+const ANALYTICS_HOSTS = AHREFS_ANALYTICS.origin;
 
 const VERCEL_DEV_SCRIPT_HOSTS = "https://cdn.vercel-insights.com https://va.vercel-scripts.com";
 
@@ -22,13 +27,17 @@ function contentSecurityPolicy(isDev: boolean, panel: boolean): string {
   const devHosts = isDev ? ` ${VERCEL_DEV_SCRIPT_HOSTS}` : "";
   return [
     "default-src 'self'",
-    `script-src 'self' 'unsafe-inline'${devHosts}`,
+    panel
+      ? `script-src 'self' 'unsafe-inline'${devHosts}`
+      : `script-src 'self' 'unsafe-inline' ${ANALYTICS_HOSTS}${devHosts}`,
     panel
       ? `style-src 'self' 'unsafe-inline' ${KEYSTATIC_STYLE_HOSTS}`
       : "style-src 'self' 'unsafe-inline'",
     panel ? `img-src 'self' data: blob: ${KEYSTATIC_IMAGE_HOSTS}` : "img-src 'self' data:",
     panel ? `font-src 'self' ${KEYSTATIC_FONT_HOSTS}` : "font-src 'self'",
-    panel ? `connect-src 'self' ${KEYSTATIC_CONNECT_HOSTS}` : `connect-src 'self'${devHosts}`,
+    panel
+      ? `connect-src 'self' ${KEYSTATIC_CONNECT_HOSTS}`
+      : `connect-src 'self' ${ANALYTICS_HOSTS}${devHosts}`,
     "frame-src https://www.youtube-nocookie.com",
     "object-src 'none'",
     "base-uri 'self'",

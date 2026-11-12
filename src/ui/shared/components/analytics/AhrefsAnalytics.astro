@@ -1,0 +1,24 @@
+---
+import { AHREFS_ANALYTICS } from "@config/analytics";
+import { shouldLoadAnalytics } from "@/domain/site/analytics-scope";
+
+interface Props {
+  /** El valor de ANALYTICS_ENABLED (solo `true` en producción). */
+  enabled: boolean;
+}
+
+// originPathname: la ruta pedida, también cuando el middleware ha hecho un rewrite
+const load = shouldLoadAnalytics({
+  enabled: Astro.props.enabled,
+  pathname: Astro.originPathname,
+});
+---
+
+{/*
+  Idéntico en todas las páginas: el ClientRouter lo conserva en el <head> al navegar y no lo
+  vuelve a ejecutar. El propio script cuenta esas navegaciones, porque envuelve
+  history.pushState y escucha popstate (que es lo que usa el ClientRouter).
+*/}
+{load && (
+  <script is:inline src={AHREFS_ANALYTICS.src} data-key={AHREFS_ANALYTICS.key} async></script>
+)}
