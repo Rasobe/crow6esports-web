@@ -22,11 +22,12 @@ describe("applySecurityHeaders", () => {
 describe("Content-Security-Policy", () => {
   const policyFor = (isDev: boolean) => createSecurityHeaders(isDev)["Content-Security-Policy"];
 
-  it("only allows the site itself and the YouTube player in production", () => {
+  it("only allows the site itself, the YouTube player and the analytics in production", () => {
     const policy = policyFor(false);
 
     expect(policy).toContain("default-src 'self'");
-    expect(policy).toContain("script-src 'self' 'unsafe-inline';");
+    expect(policy).toContain("script-src 'self' 'unsafe-inline' https://analytics.ahrefs.com;");
+    expect(policy).toContain("connect-src 'self' https://analytics.ahrefs.com;");
     expect(policy).toContain("frame-src https://www.youtube-nocookie.com");
     expect(policy).toContain("object-src 'none'");
     expect(policy).toContain("frame-ancestors 'none'");
@@ -64,6 +65,10 @@ describe("Content-Security-Policy of the Keystatic panel", () => {
 
   it("lets the setup wizard submit its form to github.com to create the GitHub App", () => {
     expect(panelPolicy).toContain("form-action 'self' https://github.com");
+  });
+
+  it("keeps the analytics out of the panel", () => {
+    expect(panelPolicy).not.toContain("analytics.ahrefs.com");
   });
 
   it("keeps the public site locked to its own origin", () => {

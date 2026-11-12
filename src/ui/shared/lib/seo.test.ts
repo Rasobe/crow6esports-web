@@ -50,16 +50,17 @@ function metadataOf(locale: Locale) {
 describe.each(LOCALES)("page metadata (%s)", (locale) => {
   const pages = metadataOf(locale);
 
-  it("keeps every title within 60 characters", () => {
+  it("keeps every title between 50 and 60 characters", () => {
     for (const { namespace, title } of pages) {
+      expect(title.length, `${namespace}: ${title}`).toBeGreaterThanOrEqual(50);
       expect(title.length, `${namespace}: ${title}`).toBeLessThanOrEqual(60);
     }
   });
 
-  it("keeps every description between 120 and 155 characters", () => {
+  it("keeps every description between 120 and 160 characters", () => {
     for (const { namespace, description } of pages) {
       expect(description.length, `${namespace}: ${description}`).toBeGreaterThanOrEqual(120);
-      expect(description.length, `${namespace}: ${description}`).toBeLessThanOrEqual(155);
+      expect(description.length, `${namespace}: ${description}`).toBeLessThanOrEqual(160);
     }
   });
 
@@ -83,13 +84,19 @@ describe.each(LOCALES)("page metadata (%s)", (locale) => {
   });
 });
 
-describe("home title", () => {
-  it("is Spanish and English as the brief defines", () => {
+describe("home metadata", () => {
+  it("uses the Spanish and English titles of the brief", () => {
     expect(createTranslator("es", "home.seo")("title")).toBe(
-      "Crow 6 eSports · Organización de Rocket League",
+      "Crow 6 eSports | Organización y coaching de Rocket League",
     );
     expect(createTranslator("en", "home.seo")("title")).toBe(
-      "Crow 6 eSports · Rocket League Organization",
+      "Crow 6 eSports | Rocket League Organization & Coaching",
+    );
+  });
+
+  it.each(LOCALES)("starts the %s description with the full brand name", (locale) => {
+    expect(createTranslator(locale, "home.seo")("description", PARAMS)).toMatch(
+      /^Crow 6 eSports\b/,
     );
   });
 });

@@ -29,5 +29,11 @@ export const GET: APIRoute = async () => {
     }),
   });
 
-  return new Response(xml, { headers: { "Content-Type": "application/xml; charset=utf-8" } });
+  return new Response(xml, {
+    headers: {
+      "Content-Type": "application/xml; charset=utf-8",
+      // Solo cambia con cada despliegue, y Vercel purga su caché al desplegar
+      "Cache-Control": "public, max-age=3600, s-maxage=86400",
+    },
+  });
 };

@@ -1,10 +1,11 @@
 ---
 import "./contact-email.scss";
 import { CLUB } from "@config/club";
-import { createTranslator } from "@/ui/i18n";
+import { ROUTES } from "@config/routes";
+import { createTranslator, localizePath } from "@/ui/i18n";
 import { Button } from "../button";
 import { Icon } from "../icons";
-import { getGmailComposeUrl } from "./gmail-compose-url";
+import { encodeEmail } from "./email-obfuscation";
 
 interface Props {
   /** `button` ofrece un botón principal con alternativas; `compact` es una línea para el pie. */
@@ -14,28 +15,39 @@ interface Props {
 }
 
 const { variant = "button", label } = Astro.props;
-const t = createTranslator(Astro.locals.locale, "contactEmail");
-const { email } = CLUB;
+const { locale } = Astro.locals;
+const t = createTranslator(locale, "contactEmail");
+// El email no va en claro en el HTML: el script lo decodifica y monta el texto y los enlaces.
+// Sin JavaScript, los enlaces llevan a la sección de contacto de "Sobre nosotros".
+const CONTACT_SECTION = `${ROUTES.aboutUs}#about-contact-title`;
 ---
 
-<contact-email class:list={["contact-email", `contact-email--${variant}`]} data-email={email}>
+<contact-email
+  class:list={["contact-email", `contact-email--${variant}`]}
+  data-email-encoded={encodeEmail(CLUB.email)}
+>
   {variant === "button" ? (
-    <Button href={`mailto:${email}`} variant="outline" size="lg">
+    <Button href={CONTACT_SECTION} variant="outline" size="lg" data-mail-link>
       {label ?? t("write")}
     </Button>
   ) : (
     <p class="contact-email__line">
       <Icon name="mail" size={16} />
-      <a class="contact-email__address" href={`mailto:${email}`}>
-        {email}
+      <a
+        class="contact-email__address"
+        href={localizePath(locale, CONTACT_SECTION)}
+        data-mail-link
+        data-mail-text
+      >
+        {t("fallback")}
       </a>
     </p>
   )}
 
-  <div class="contact-email__alternatives" aria-live="polite">
+  <div class="contact-email__alternatives" aria-live="polite" hidden>
     {variant === "button" && (
       <p class="contact-email__hint">
-        {t("hint")} <span class="contact-email__address">{email}</span>
+        {t("hint")} <span class="contact-email__address" data-mail-text></span>
       </p>
     )}
     <div class="contact-email__actions">
@@ -49,7 +61,7 @@ const { email } = CLUB;
       </button>
       <a
         class="contact-email__gmail"
-        href={getGmailComposeUrl(email)}
+        href={localizePath(locale, CONTACT_SECTION)}
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -62,6 +74,9 @@ const { email } = CLUB;
 </contact-email>
 
 <script>
+  import { decodeEmail } from "./email-obfuscation";
+  import { getGmailComposeUrl } from "./gmail-compose-url";
+
   const FEEDBACK_MS = 2000;
 
   async function writeToClipboard(text: string): Promise<boolean> {
@@ -86,12 +101,15 @@ const { email } = CLUB;
     private resetTimer = 0;
 
     connectedCallback() {
+      const { emailEncoded } = this.dataset;
+      if (!emailEncoded) return;
+      const email = decodeEmail(emailEncoded);
+      this.revealEmail(email);
       this.revealAlternativesOnClick();
 
       const button = this.querySelector<HTMLButtonElement>(".contact-email__copy");
       const status = this.querySelector<HTMLElement>(".contact-email__status");
-      const email = this.dataset.email;
-      if (!button || !status || !email) return;
+      if (!button || !status) return;
 
       button.addEventListener("click", async () => {
         const copied = await writeToClipboard(email);
@@ -111,17 +129,33 @@ const { email } = CLUB;
       });
     }
 
+    /** Monta el email, el mailto y el enlace de Gmail, que el HTML no lleva en claro. */
+    private revealEmail(email: string) {
+      for (const link of this.querySelectorAll<HTMLAnchorElement>("[data-mail-link]")) {
+        link.href = `mailto:${email}`;
+      }
+      for (const text of this.querySelectorAll<HTMLElement>("[data-mail-text]")) {
+        text.textContent = email;
+      }
+      const gmail = this.querySelector<HTMLAnchorElement>(".contact-email__gmail");
+      if (gmail) gmail.href = getGmailComposeUrl(email);
+    }
+
     /**
      * Con el botón principal, la ayuda "¿No se abre tu app de correo?" aparece al pulsarlo: quien
      * tiene app de correo no la necesita y quien no la tiene la ve justo cuando no pasa nada.
-     * Sin JavaScript se queda visible. La versión compacta (pie) la muestra siempre.
+     * La versión compacta (pie) la muestra siempre. Sin JavaScript sigue oculta: copiar y Gmail
+     * necesitan el email decodificado.
      */
     private revealAlternativesOnClick() {
       const alternatives = this.querySelector<HTMLElement>(".contact-email__alternatives");
-      const mailLink = this.querySelector<HTMLAnchorElement>('a[href^="mailto:"].btn');
-      if (!alternatives || !mailLink) return;
+      if (!alternatives) return;
+      const mailLink = this.querySelector<HTMLAnchorElement>("a[data-mail-link].btn");
+      if (!mailLink) {
+        alternatives.hidden = false;
+        return;
+      }
 
-      alternatives.hidden = true;
       mailLink.addEventListener("click", () => {
         alternatives.hidden = false;
         alternatives.setAttribute("data-revealed", "");

@@ -1,0 +1,60 @@
+---
+import "./about-club.scss";
+import { CLUB } from "@config/club";
+import { ROUTES } from "@config/routes";
+import { createTranslator, localizePath } from "@/ui/i18n";
+import { Icon } from "@/ui/shared/components";
+
+const { locale } = Astro.locals;
+const t = createTranslator(locale, "home.aboutClub");
+
+const CARDS = [
+  { key: "team", links: [{ label: "link", route: ROUTES.team }] },
+  { key: "coaching", links: [{ label: "link", route: ROUTES.coaching }] },
+  {
+    key: "tryouts",
+    links: [
+      { label: "link", route: ROUTES.tryouts },
+      { label: "link_news", route: ROUTES.news },
+    ],
+  },
+] as const;
+---
+
+<section class="about-club" aria-labelledby="about-club-title">
+  <div class="about-club__inner">
+    <div class="about-club__header" data-reveal>
+      <div class="about-club__heading">
+        <span class="section-label">{t("eyebrow")}</span>
+        <h2 id="about-club-title" class="about-club__title">
+          {t("title")}
+        </h2>
+      </div>
+      <p class="about-club__intro">
+        {t("intro", { year: CLUB.foundedYear, city: CLUB.location.city })}
+      </p>
+    </div>
+
+    <ul class="about-club__cards">
+      {CARDS.map(({ key, links }, index) => (
+        <li class="about-club__item" data-reveal>
+          <article class="club-card">
+            <span class="club-card__index" aria-hidden="true">
+              {String(index + 1).padStart(2, "0")}
+            </span>
+            <h3 class="club-card__title">{t(`cards.${key}.title`)}</h3>
+            <p class="club-card__text">{t(`cards.${key}.text`)}</p>
+            <div class="club-card__links">
+              {links.map(({ label, route }) => (
+                <a class="club-card__link" href={localizePath(locale, route)}>
+                  {t(`cards.${key}.${label}`)}
+                  <Icon name="arrow-right" size={16} />
+                </a>
+              ))}
+            </div>
+          </article>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

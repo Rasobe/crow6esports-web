@@ -3,8 +3,11 @@ import "./video-highlight.scss";
 import { HIGHLIGHTS_VIDEO_ID } from "@config/media";
 import { createTranslator } from "@/ui/i18n";
 
-const POSTER_SRC = "/images/highlights-poster.webp";
-const POSTER_SMALL_SRC = "/images/highlights-poster-800.webp";
+// Variantes generadas con sharp: AVIF q45 y WebP q72
+const POSTER_WIDTHS = [800, 1200, 1600];
+const POSTER_SIZES = "(min-width: 80rem) 75rem, 100vw";
+const posterSrcset = (format: "avif" | "webp") =>
+  POSTER_WIDTHS.map((width) => `/images/highlights-poster-${width}.${format} ${width}w`).join(", ");
 
 const t = createTranslator(Astro.locals.locale, "home.videoHighlight");
 ---
@@ -25,17 +28,20 @@ const t = createTranslator(Astro.locals.locale, "home.videoHighlight");
       data-label={t("video_label")}
       data-reveal
     >
-      <img
-        class="video-highlight__poster"
-        src={POSTER_SRC}
-        srcset={`${POSTER_SMALL_SRC} 800w, ${POSTER_SRC} 1600w`}
-        sizes="(min-width: 80rem) 75rem, 100vw"
-        width="1600"
-        height="800"
-        alt=""
-        loading="lazy"
-        decoding="async"
-      />
+      <picture>
+        <source type="image/avif" srcset={posterSrcset("avif")} sizes={POSTER_SIZES} />
+        <img
+          class="video-highlight__poster"
+          src="/images/highlights-poster-1200.webp"
+          srcset={posterSrcset("webp")}
+          sizes={POSTER_SIZES}
+          width="1600"
+          height="900"
+          alt={t("poster_alt")}
+          loading="lazy"
+          decoding="async"
+        />
+      </picture>
       <button type="button" class="video-highlight__play" aria-label={t("play")}>
         <span class="video-highlight__play-icon" aria-hidden="true">
           <svg width="28" height="28" viewBox="0 0 14 14" fill="currentColor">
