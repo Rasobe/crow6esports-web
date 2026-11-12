@@ -1,7 +1,16 @@
 ---
 import "./locale-switcher.scss";
-import { LOCALES, createTranslator, localizePath, stripLocale } from "@/ui/i18n";
+import { LOCALES, createTranslator, localizePath, stripLocale, type Locale } from "@/ui/i18n";
 
+interface Props {
+  /**
+   * Ruta sin idioma a la que lleva cada idioma. Por defecto, la misma ruta que la actual; los
+   * artículos la indican porque su slug cambia con el idioma.
+   */
+  paths?: Partial<Record<Locale, string>>;
+}
+
+const { paths } = Astro.props;
 const { locale } = Astro.locals;
 const t = createTranslator(locale, "nav");
 const currentPath = stripLocale(Astro.originPathname);
@@ -11,7 +20,7 @@ const currentPath = stripLocale(Astro.originPathname);
   {LOCALES.map((code, index) => (
     <span class="locale-switcher__item">
       <a
-        href={localizePath(code, currentPath)}
+        href={localizePath(code, paths?.[code] ?? currentPath)}
         hreflang={code}
         lang={code}
         aria-current={code === locale ? "true" : undefined}
