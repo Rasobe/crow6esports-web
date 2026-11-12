@@ -180,3 +180,23 @@ export function articleData(article: ArticleInput): StructuredData {
     },
   };
 }
+
+interface Breadcrumb {
+  name: string;
+  /** URL absoluta de la página. */
+  url: string;
+}
+
+/** La ruta de una página desde la portada, de la más general a la propia página. */
+export function breadcrumbData(crumbs: readonly Breadcrumb[]): StructuredData {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: crumbs.map((crumb, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: crumb.name,
+      item: crumb.url,
+    })),
+  };
+}

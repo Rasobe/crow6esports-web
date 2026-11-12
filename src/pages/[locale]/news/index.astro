@@ -7,10 +7,11 @@ import { NewsPage } from "@/ui/features/news/components";
 import { LocaleLayout } from "@/ui/layouts";
 import { createTranslator } from "@/ui/i18n";
 import { JsonLd } from "@/ui/shared/components";
-import { newsCollectionData } from "@/ui/shared/lib/structured-data";
+import { breadcrumbData, newsCollectionData } from "@/ui/shared/lib/structured-data";
 
 const { locale } = Astro.locals;
 const t = createTranslator(locale, "news.seo");
+const tNav = createTranslator(locale, "nav");
 // Sin artículos la página solo muestra el aviso: se deja fuera del buscador hasta que haya
 const articles = await getArticles(container.articleRepository, locale);
 const listUrl = `${siteConfig.url}/${locale}${ROUTES.news}`;
@@ -26,6 +27,10 @@ const collection = newsCollectionData({
     url: `${listUrl}/${article.slug}`,
   })),
 });
+const breadcrumbs = breadcrumbData([
+  { name: siteConfig.name, url: `${siteConfig.url}/${locale}` },
+  { name: tNav("news"), url: listUrl },
+]);
 ---
 
 <LocaleLayout
@@ -35,5 +40,6 @@ const collection = newsCollectionData({
   noindex={articles.length === 0}
 >
   {articles.length > 0 && <JsonLd slot="head" data={collection} />}
+  {articles.length > 0 && <JsonLd slot="head" data={breadcrumbs} />}
   <NewsPage />
 </LocaleLayout>

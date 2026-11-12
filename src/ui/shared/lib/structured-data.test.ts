@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   articleData,
+  breadcrumbData,
   clubGraphData,
   coachingServiceData,
   newsCollectionData,
@@ -171,5 +172,40 @@ describe("articleData", () => {
 
     expect(parsed.datePublished).toBe("2026-11-07T00:00:00.000Z");
     expect(parsed.dateModified).toBe("2026-11-09T00:00:00.000Z");
+  });
+});
+
+describe("breadcrumbData", () => {
+  it("lists the path from the home to the page with position, name and absolute url", () => {
+    const data = breadcrumbData([
+      { name: "Crow 6 eSports", url: "https://crow6esports.com/es" },
+      { name: "Noticias", url: "https://crow6esports.com/es/news" },
+      { name: "Artículo", url: "https://crow6esports.com/es/news/articulo" },
+    ]);
+
+    expect(data).toEqual({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Crow 6 eSports",
+          item: "https://crow6esports.com/es",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Noticias",
+          item: "https://crow6esports.com/es/news",
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: "Artículo",
+          item: "https://crow6esports.com/es/news/articulo",
+        },
+      ],
+    });
   });
 });
