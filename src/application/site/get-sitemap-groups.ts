@@ -3,7 +3,8 @@ import { findTranslation, lastModified, type Article } from "@/domain/news/artic
 interface GroupVersion<L extends string> {
   locale: L;
   path: string;
-  lastmod: Date;
+  /** Solo cuando hay una fecha fiable de cambio: si no, el sitemap no la declara. */
+  lastmod?: Date;
 }
 
 export interface SitemapPageGroup<L extends string> {
@@ -17,8 +18,6 @@ interface SitemapInput<L extends string> {
   newsRoute: string;
   homeRoute: string;
   articles: readonly Article[];
-  /** Fecha de las páginas fijas: la del despliegue. */
-  buildDate: Date;
 }
 
 const HOME_PRIORITY = "1.0";
@@ -27,9 +26,11 @@ const ARTICLE_PRIORITY = "0.6";
 
 /**
  * Qué páginas publica el sitemap, agrupando las versiones de cada una.
- * - Las páginas fijas salen en todos los idiomas, con la fecha del despliegue.
+ * - Las páginas fijas salen en todos los idiomas sin lastmod: no hay una fecha fiable de su
+ *   último cambio, y la del despliegue cambiaría en cada publicación aunque la página no
+ *   cambie (Google deja de fiarse del lastmod de un sitio si no es exacto).
  * - El listado de noticias de un idioma solo sale si hay artículos en ese idioma (vacío se
- *   queda en noindex y fuera).
+ *   queda en noindex y fuera), con la fecha de su artículo más reciente.
  * - Cada artículo sale con su fecha real (actualización o publicación). Solo se enlaza con su
  *   traducción cuando existe; sin ella es una página suelta, sin hreflang.
  */
@@ -39,15 +40,17 @@ export function getSitemapGroups<L extends string>({
   newsRoute,
   homeRoute,
   articles,
-  buildDate,
 }: SitemapInput<L>): SitemapPageGroup<L>[] {
-  const hasArticles = (locale: L) => articles.some((article) => article.locale === locale);
+  const articlesIn = (locale: L) => articles.filter((article) => article.locale === locale);
+  const newestIn = (locale: L) =>
+    new Date(Math.max(...articlesIn(locale).map((article) => lastModified(article).getTime())));
   const newsLive = liveRoutes.includes(newsRoute);
 
   const pages = liveRoutes.flatMap((route) => {
+    const isNews = route === newsRoute;
     const versions = locales
-      .filter((locale) => route !== newsRoute || hasArticles(locale))
-      .map((locale) => ({ locale, path: route, lastmod: buildDate }));
+      .filter((locale) => !isNews || articlesIn(locale).length > 0)
+      .map((locale) => ({ locale, path: route, ...(isNews ? { lastmod: newestIn(locale) } : {}) }));
 
     return versions.length === 0
       ? []

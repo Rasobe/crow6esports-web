@@ -5,11 +5,11 @@ export const siteConfig = {
 
 export const socialLinks = [
   { platform: "x", href: "https://x.com/crow6esports", label: "X" },
-  { platform: "instagram", href: "https://instagram.com/crow6esports", label: "Instagram" },
-  { platform: "discord", href: "https://discord.gg/jEpNsWaMP3", label: "Discord" },
-  { platform: "twitch", href: "https://twitch.tv/crow6esports", label: "Twitch" },
-  { platform: "tiktok", href: "https://tiktok.com/@crow6esports", label: "TikTok" },
-  { platform: "youtube", href: "https://youtube.com/@crow6esports", label: "YouTube" },
+  { platform: "instagram", href: "https://www.instagram.com/crow6esports", label: "Instagram" },
+  { platform: "discord", href: "https://discord.com/invite/jEpNsWaMP3", label: "Discord" },
+  { platform: "twitch", href: "https://www.twitch.tv/crow6esports", label: "Twitch" },
+  { platform: "tiktok", href: "https://www.tiktok.com/@crow6esports", label: "TikTok" },
+  { platform: "youtube", href: "https://www.youtube.com/@crow6esports", label: "YouTube" },
 ] as const;
 
 export const socialUrls: readonly string[] = socialLinks.map(({ href }) => href);

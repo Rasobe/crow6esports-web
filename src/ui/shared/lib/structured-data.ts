@@ -3,6 +3,7 @@ export type StructuredData = Record<string, unknown>;
 interface Club {
   name: string;
   url: string;
+  /** URL absoluta del logotipo. */
   logo: string;
   sport: string;
   email: string;
@@ -13,42 +14,97 @@ interface Club {
   sameAs: readonly string[];
 }
 
-export function sportsTeamData(club: Club): StructuredData {
+/** Identificadores estables de los nodos, para enlazarlos entre sí sin repetir datos. */
+export const clubNodeIds = (url: string) => ({
+  organization: `${url}/#organization`,
+  team: `${url}/#team`,
+  website: `${url}/#website`,
+});
+
+/**
+ * El club en un solo grafo: la organización lleva todos los datos (logo, dirección, perfiles),
+ * el equipo de Rocket League forma parte de ella y la web la tiene como editora.
+ */
+export function clubGraphData(club: Club): StructuredData {
+  const ids = clubNodeIds(club.url);
+  const organizationRef = { "@id": ids.organization };
+
   return {
     "@context": "https://schema.org",
-    "@type": "SportsTeam",
-    name: club.name,
-    url: club.url,
-    logo: club.logo,
-    sport: club.sport,
-    email: club.email,
-    foundingDate: String(club.foundingYear),
-    description: club.description,
-    alternateName: [...club.alternateName],
-    location: {
-      "@type": "PostalAddress",
-      addressLocality: club.location.city,
-      addressCountry: club.location.country,
-    },
-    sameAs: [...club.sameAs],
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": ids.organization,
+        name: club.name,
+        alternateName: [...club.alternateName],
+        url: club.url,
+        logo: { "@type": "ImageObject", url: club.logo },
+        description: club.description,
+        foundingDate: String(club.foundingYear),
+        email: club.email,
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: club.location.city,
+          addressCountry: club.location.country,
+        },
+        sameAs: [...club.sameAs],
+      },
+      {
+        "@type": "SportsTeam",
+        "@id": ids.team,
+        name: club.name,
+        url: club.url,
+        sport: club.sport,
+        parentOrganization: organizationRef,
+      },
+      {
+        "@type": "WebSite",
+        "@id": ids.website,
+        name: club.name,
+        alternateName: [...club.alternateName],
+        url: club.url,
+        publisher: organizationRef,
+      },
+    ],
   };
 }
 
-interface Website {
+interface NewsCollection {
   name: string;
+  description: string;
+  /** URL absoluta del listado. */
   url: string;
-  alternateName: readonly string[];
-  sameAs?: readonly string[];
+  inLanguage: string;
+  siteUrl: string;
+  /** Artículos en el orden del listado (el más reciente primero). */
+  articles: readonly { name: string; url: string }[];
 }
 
-export function websiteData(site: Website): StructuredData {
+/** El listado de noticias como colección, con sus artículos en orden. */
+export function newsCollectionData(collection: NewsCollection): StructuredData {
   return {
     "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: site.name,
-    alternateName: [...site.alternateName],
-    url: site.url,
-    ...(site.sameAs?.length ? { sameAs: [...site.sameAs] } : {}),
+    "@type": "CollectionPage",
+    "@id": collection.url,
+    url: collection.url,
+    name: collection.name,
+    description: collection.description,
+    inLanguage: collection.inLanguage,
+    isPartOf: {
+      "@type": "WebSite",
+      "@id": clubNodeIds(collection.siteUrl).website,
+      url: collection.siteUrl,
+    },
+    mainEntity: {
+      "@type": "ItemList",
+      numberOfItems: collection.articles.length,
+      itemListElement: collection.articles.map((article, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        url: article.url,
+        name: article.name,
+      })),
+    },
   };
 }
 

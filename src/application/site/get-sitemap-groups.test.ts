@@ -2,7 +2,6 @@ import { describe, expect, it } from "vitest";
 import type { Article } from "@/domain/news/article";
 import { getSitemapGroups } from "./get-sitemap-groups";
 
-const buildDate = new Date("2026-11-06T00:00:00Z");
 const liveRoutes = ["/", "/team", "/news"];
 
 const article = (overrides: Partial<Article>): Article => ({
@@ -24,7 +23,6 @@ const groupsFor = (articles: Article[], routes = liveRoutes) =>
     newsRoute: "/news",
     homeRoute: "/",
     articles,
-    buildDate,
   });
 
 const paths = (articles: Article[], routes?: string[]) =>
@@ -37,12 +35,14 @@ describe("getSitemapGroups without articles", () => {
     expect(paths([])).toEqual(["es:/", "en:/", "es:/team", "en:/team"]);
   });
 
-  it("dates the fixed pages with the build and gives the home top priority", () => {
+  it("gives the home top priority and no lastmod to the fixed pages", () => {
     const [home, team] = groupsFor([]);
 
     expect(home.priority).toBe("1.0");
     expect(team.priority).toBe("0.8");
-    expect(home.versions.every(({ lastmod }) => lastmod === buildDate)).toBe(true);
+    for (const { lastmod } of [...home.versions, ...team.versions]) {
+      expect(lastmod).toBeUndefined();
+    }
   });
 });
 
@@ -82,6 +82,26 @@ describe("getSitemapGroups with articles", () => {
 
     expect(lastmod("/news/viejo")).toEqual(new Date("2026-10-01T00:00:00Z"));
     expect(lastmod("/news/retocado")).toEqual(new Date("2026-11-03T00:00:00Z"));
+  });
+
+  it("dates each news list with the newest article of its language", () => {
+    const groups = groupsFor([
+      article({ slug: "viejo", date: new Date("2026-10-01T00:00:00Z") }),
+      article({
+        slug: "retocado",
+        date: new Date("2026-10-05T00:00:00Z"),
+        updated: new Date("2026-11-03T00:00:00Z"),
+      }),
+      article({ slug: "hello", locale: "en", date: new Date("2026-09-01T00:00:00Z") }),
+    ]);
+    const news = groups.find(({ versions }) => versions[0].path === "/news")!.versions;
+
+    expect(news.find(({ locale }) => locale === "es")?.lastmod).toEqual(
+      new Date("2026-11-03T00:00:00Z"),
+    );
+    expect(news.find(({ locale }) => locale === "en")?.lastmod).toEqual(
+      new Date("2026-09-01T00:00:00Z"),
+    );
   });
 
   it("keeps an article without translation as a single version", () => {
