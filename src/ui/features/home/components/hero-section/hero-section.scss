@@ -4,7 +4,7 @@
 @layer components {
   .hero {
     position: relative;
-    min-height: calc(100dvh - var(--navbar-h));
+    min-height: calc(100svh - var(--navbar-h));
     display: flex;
     overflow: hidden;
     background: var(--bg-base);
@@ -20,9 +20,16 @@
     transform-origin: 60% 50%;
 
     @media (prefers-reduced-motion: no-preference) {
-      animation:
-        hero-bg-enter 1.6s var(--ease-out) backwards,
-        hero-bg-drift 32s ease-in-out 1.6s infinite alternate;
+      animation: hero-bg-enter 1.6s var(--ease-out) backwards;
+
+      // En móvil el zoom continuo bajo la barra con backdrop-filter obliga a redibujar el
+      // desenfoque en cada fotograma y provoca parpadeo al hacer scroll; solo se anima en pantallas
+      // grandes.
+      @include above(md) {
+        animation:
+          hero-bg-enter 1.6s var(--ease-out) backwards,
+          hero-bg-drift 32s ease-in-out 1.6s infinite alternate;
+      }
     }
   }
 
@@ -184,10 +191,10 @@
   .hero-title {
     // En vertical "ESPORTS" cabe en el ancho útil hasta ~19vw; en horizontal el título comparte
     // sitio con la imagen y se contiene.
-    font-size: clamp(3.5rem, min(19vw, 14dvh), 5.5rem);
+    font-size: clamp(3.5rem, min(19vw, 14svh), 5.5rem);
 
     @include above(md) {
-      font-size: clamp(3.5rem, min(10.5vw, 19dvh), 10rem);
+      font-size: clamp(3.5rem, min(10.5vw, 19svh), 10rem);
     }
     text-transform: uppercase;
     line-height: 0.95;

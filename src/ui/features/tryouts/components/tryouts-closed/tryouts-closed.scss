@@ -2,7 +2,7 @@
 @layer components {
   .tryouts-closed {
     position: relative;
-    min-height: calc(100dvh - var(--navbar-h));
+    min-height: calc(100svh - var(--navbar-h));
     display: flex;
     align-items: center;
     justify-content: center;
