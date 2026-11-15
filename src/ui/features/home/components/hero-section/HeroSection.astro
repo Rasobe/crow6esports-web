@@ -1,16 +1,16 @@
 ---
 import "./hero-section.scss";
+import { CLUB } from "@config/club";
 import { ROUTES } from "@config/routes";
 import { getArticles } from "@/application/news/get-articles";
-import { getRosterStats } from "@/application/team/get-roster-stats";
+import { getActivePlayers } from "@/application/team/get-players";
 import { container } from "@/infrastructure/container";
 import { createTranslator, localizePath } from "@/ui/i18n";
 import { Button } from "@/ui/shared/components";
-import { getClubYears } from "@/ui/shared/lib/club-info";
 
 const { locale } = Astro.locals;
 const t = createTranslator(locale, "home.hero");
-const { playerCount, peakMmr } = getRosterStats(container.playerRepository);
+const lineup = getActivePlayers(container.playerRepository);
 const [latestArticle] = await getArticles(container.articleRepository, locale);
 const latestDate =
   latestArticle &&
@@ -22,12 +22,6 @@ const latestDate =
 const HERO_WIDTHS = [640, 960, 1280, 1731];
 const heroSrcset = (format: "avif" | "webp") =>
   HERO_WIDTHS.map((width) => `/images/hero-bg-${width}.${format} ${width}w`).join(", ");
-
-const stats = [
-  { key: "years", value: getClubYears() },
-  { key: "players", value: playerCount },
-  { key: "peak", value: peakMmr },
-];
 ---
 
 <section class="hero" aria-labelledby="hero-heading">
@@ -50,6 +44,10 @@ const stats = [
   <div class="hero__sweep" aria-hidden="true"></div>
 
   <div class="hero__inner">
+    <p class="hero__rail" data-hero style="--hero-step: 5">
+      {t("rail", { game: CLUB.game, city: CLUB.location.city, year: CLUB.foundedYear })}
+    </p>
+
     <div class="hero__content">
       {latestArticle && (
         <a
@@ -66,12 +64,18 @@ const stats = [
           <span class="hero__latest-title">{latestArticle.title}</span>
         </a>
       )}
+
       <h1 id="hero-heading" class="hero-title">
-        <span class="hero-title__line" data-hero style="--hero-step: 1">
-          {t("title.name")} <span class="hero-title__plate">{t("title.number")}</span>
-        </span>{" "}
-        <span class="hero-title__line" data-hero style="--hero-step: 2">
-          {t("title.sector")}
+        <span class="hero-title__lockup">
+          <span class="hero-title__part hero-title__crow" data-hero style="--hero-step: 1">
+            {t("title.name")}
+          </span>
+          <span class="hero-title__part hero-title__plate" data-hero style="--hero-step: 2">
+            {t("title.number")}
+          </span>
+          <span class="hero-title__part hero-title__sector" data-hero style="--hero-step: 2">
+            {t("title.sector")}
+          </span>
         </span>
         <span class="hero-title__sr-only">{t("title_separator")} </span>
         <span class="hero-subtitle" data-hero style="--hero-step: 3">
@@ -83,21 +87,34 @@ const stats = [
         <Button href={ROUTES.tryouts} size="lg">
           {t("cta_join")}
         </Button>
-        <Button href={ROUTES.team} variant="brand-outline" size="lg" class="hero__cta-secondary">
-          {t("cta_team")}
-        </Button>
       </div>
     </div>
 
-    <dl class="hero__stats" data-hero style="--hero-step: 5" aria-label={t("stats.label")}>
-      {stats.map(({ key, value }, index) => (
-        <div class:list={["hero__stat", { "hero__stat--brand": index === 0 }]}>
-          <dt class="hero__stat-label">{t(`stats.${key}`)}</dt>
-          <dd class="hero__stat-value" data-count-to={value}>
-            {value.toLocaleString(locale)}
-          </dd>
-        </div>
-      ))}
-    </dl>
+    <div class="hero__lineup" data-hero style="--hero-step: 5">
+      <h2 class="hero__lineup-title">{t("lineup.title")}</h2>
+      <ul class="hero__lineup-list">
+        {lineup.map((player, index) => (
+          <li class="hero__player">
+            <span class="hero__player-index" aria-hidden="true">
+              {String(index + 1).padStart(2, "0")}
+            </span>
+            <span class="hero__player-name">{player.nickname}</span>
+            <span class="hero__player-rank">{player.stats.rank}</span>
+            <span class="hero__player-peak">
+              <span class="hero__player-peak-value" data-count-to={player.stats.peak}>
+                {player.stats.peak.toLocaleString(locale)}
+              </span>
+              <span class="hero__player-peak-label">{t("lineup.peak")}</span>
+            </span>
+          </li>
+        ))}
+      </ul>
+      <a class="hero__lineup-link" href={localizePath(locale, ROUTES.team)}>
+        {t("lineup.cta")}
+        <span class="hero__lineup-arrow" aria-hidden="true">
+          →
+        </span>
+      </a>
+    </div>
   </div>
 </section>

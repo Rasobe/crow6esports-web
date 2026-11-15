@@ -31,13 +31,12 @@
       },
       "latest": "Latest news",
       "subtitle": "Competitive Rocket League organization",
-      "cta_team": "Meet the team",
       "cta_join": "Join the team",
-      "stats": {
-        "label": "Team figures",
-        "years": "Years of history",
-        "players": "Players on the roster",
-        "peak": "Roster peak MMR"
+      "rail": "{game} · {city}, Spain · Since {year}",
+      "lineup": {
+        "title": "Starting lineup",
+        "peak": "Peak",
+        "cta": "Meet the team"
       },
       "title_separator": ",",
       "image_alt": "Three yellow and black Crow 6 eSports cars seen from behind at the entrance of a Rocket League stadium at night, with a crow made of smoke above them"

@@ -71,11 +71,52 @@
     position: relative;
     width: 100%;
     @include container-bounds;
-    padding: var(--space-8) var(--space-6);
+    padding: var(--space-8) var(--space-6) 0;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     gap: var(--space-12);
+
+    @include above(md) {
+      display: grid;
+      grid-template-columns: 2.5rem minmax(0, 1fr);
+      grid-template-rows: 1fr auto;
+      grid-template-areas:
+        "rail content"
+        "lineup lineup";
+      column-gap: var(--space-6);
+      row-gap: var(--space-8);
+      padding-bottom: var(--space-8);
+    }
+  }
+
+  // Riel vertical: se lee de abajo arriba y termina en una línea de marca
+  .hero__rail {
+    display: none;
+
+    @include above(md) {
+      grid-area: rail;
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      margin: 0;
+      writing-mode: vertical-rl;
+      rotate: 180deg;
+      font-family: var(--ff-ui);
+      font-size: var(--fs-xs);
+      font-weight: 700;
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      white-space: nowrap;
+      color: var(--text-secondary);
+
+      &::after {
+        content: "";
+        width: 2px;
+        height: 4rem;
+        background: var(--brand);
+      }
+    }
   }
 
   .hero__content {
@@ -84,7 +125,11 @@
     gap: var(--space-6);
     margin-block: auto;
 
-    // En vertical el texto va arriba y deja ver el coche entre el título y las cifras
+    @include above(md) {
+      grid-area: content;
+    }
+
+    // En vertical el texto va arriba y deja ver el coche entre el título y la alineación
     @include below(md) {
       margin-block: var(--space-4) auto;
     }
@@ -172,7 +217,7 @@
     font-size: clamp(3.5rem, min(19vw, 14dvh), 5.5rem);
 
     @include above(md) {
-      font-size: clamp(3.5rem, min(9vw, 16dvh), 8.5rem);
+      font-size: clamp(3.5rem, min(10.5vw, 19dvh), 10rem);
     }
     text-transform: uppercase;
     line-height: 0.95;
@@ -180,7 +225,19 @@
     color: var(--text-primary);
   }
 
-  .hero-title__line {
+  // Logotipo: "CROW 6" grande con el 6 como placa, y ESPORTS debajo con tracking ancho para
+  // ocupar el mismo ancho. Todo en em, así la proporción se mantiene en cualquier tamaño.
+  .hero-title__lockup {
+    display: inline-grid;
+    grid-template-columns: auto auto;
+    grid-template-areas:
+      "crow six"
+      "sector sector";
+    column-gap: 0.06em;
+    justify-content: start;
+  }
+
+  .hero-title__part {
     display: block;
 
     // El título es el LCP: entra deslizándose, sin partir de opacidad 0, para pintarse ya
@@ -190,14 +247,28 @@
     }
   }
 
-  // El 6 como dorsal: placa amarilla con corte diagonal y número oscuro
+  .hero-title__crow {
+    grid-area: crow;
+  }
+
   .hero-title__plate {
-    @include angular-cut(0.14em);
-    display: inline-block;
-    padding: 0 0.16em 0 0.2em;
-    margin-left: 0.04em;
+    @include angular-cut(0.16em);
+    grid-area: six;
+    display: grid;
+    place-items: center;
+    padding-inline: 0.16em 0.2em;
     background: var(--brand);
     color: var(--brand-fg);
+  }
+
+  .hero-title__sector {
+    grid-area: sector;
+    margin-top: 0.14em;
+    margin-right: -0.34em;
+    font-size: 0.58em;
+    line-height: 1;
+    letter-spacing: 0.34em;
+    white-space: nowrap;
   }
 
   .hero-title__sr-only {
@@ -237,55 +308,205 @@
     gap: var(--space-3);
   }
 
-  .hero__cta-secondary {
-    background: rgb(var(--bg-base-rgb) / 0.7);
-  }
-
-  .hero__stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    background: rgb(var(--bg-base-rgb) / 0.86);
-    border-top: 3px solid var(--brand);
-  }
-
-  .hero__stat {
+  // Alineación: los tres titulares a modo de presentación de partido
+  .hero__lineup {
     display: flex;
-    flex-direction: column-reverse;
-    gap: var(--space-1);
-    padding: var(--space-5) var(--space-4);
+    flex-wrap: wrap;
+    align-items: stretch;
+    background: rgb(var(--bg-base-rgb) / 0.88);
+    border-top: 3px solid var(--brand);
 
     @include above(md) {
+      grid-area: lineup;
+      flex-wrap: nowrap;
+    }
+
+    @include below(md) {
+      margin-inline: calc(var(--space-6) * -1);
+    }
+  }
+
+  .hero__lineup-title {
+    display: flex;
+    align-items: center;
+    flex-basis: 100%;
+    margin: 0;
+    padding: var(--space-3) var(--space-4);
+    font-family: var(--ff-ui);
+    font-size: var(--fs-xs);
+    font-weight: 700;
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    color: var(--brand);
+    border-bottom: var(--line);
+
+    @include above(md) {
+      flex-basis: auto;
       padding: var(--space-6) var(--space-8);
+      border-bottom: 0;
+      border-right: var(--line);
+    }
+  }
+
+  .hero__lineup-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    flex: 1;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .hero__player {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas:
+      "index name peak"
+      "index rank peak";
+    align-items: center;
+    column-gap: var(--space-3);
+    min-width: 0;
+    padding: var(--space-4) var(--space-3);
+
+    @include above(md) {
+      padding: var(--space-5) var(--space-6);
     }
 
     & + & {
       border-left: var(--line);
     }
+
+    @include below(md) {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "name"
+        "peak";
+      row-gap: var(--space-1);
+    }
   }
 
-  .hero__stat-value {
+  .hero__player-index {
+    grid-area: index;
     font-family: var(--ff-display);
-    font-size: clamp(1.75rem, 7vw, 3.5rem);
+    font-size: var(--fs-xl);
+    color: var(--border-strong);
+
+    @include below(md) {
+      display: none;
+    }
+  }
+
+  .hero__player-name {
+    grid-area: name;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-family: var(--ff-display);
+    font-size: clamp(1.25rem, 3.4vw, 2.25rem);
     line-height: 1;
-    font-weight: 700;
+    text-transform: uppercase;
     color: var(--text-primary);
   }
 
-  .hero__stat--brand .hero__stat-value {
-    color: var(--brand);
-  }
-
-  .hero__stat-label {
-    font-size: var(--fs-xs);
-
-    @include above(md) {
-      font-size: var(--fs-md);
-    }
-
+  .hero__player-rank {
+    grid-area: rank;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-family: var(--ff-ui);
+    font-size: var(--fs-2xs);
     font-weight: 700;
     letter-spacing: var(--tracking-normal);
     text-transform: uppercase;
     color: var(--text-secondary);
+
+    @include below(md) {
+      display: none;
+    }
+  }
+
+  .hero__player-peak {
+    grid-area: peak;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: var(--space-1);
+
+    @include below(md) {
+      align-items: flex-start;
+      flex-direction: row;
+      align-items: baseline;
+      gap: var(--space-2);
+    }
+  }
+
+  .hero__player-peak-value {
+    font-family: var(--ff-display);
+    font-size: clamp(1.125rem, 2.4vw, 1.75rem);
+    line-height: 1;
+    color: var(--brand);
+  }
+
+  .hero__player-peak-label {
+    font-family: var(--ff-ui);
+    font-size: var(--fs-2xs);
+    font-weight: 700;
+    letter-spacing: var(--tracking-normal);
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .hero__lineup-link {
+    display: flex;
+    flex-basis: 100%;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding: var(--space-4);
+    border-top: var(--line);
+    font-family: var(--ff-ui);
+    font-size: var(--fs-md);
+    font-weight: 700;
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--brand);
+    transition:
+      background var(--duration-base) var(--ease-standard),
+      color var(--duration-base) var(--ease-standard);
+
+    @include above(md) {
+      flex-basis: auto;
+      padding: var(--space-6) var(--space-8);
+      border-top: 0;
+      border-left: var(--line);
+    }
+
+    &:hover,
+    &:focus-visible {
+      background: var(--brand);
+      color: var(--brand-fg);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--brand);
+      outline-offset: -4px;
+    }
+  }
+
+  .hero__lineup-arrow {
+    transition: transform var(--duration-base) var(--ease-standard);
+
+    .hero__lineup-link:hover &,
+    .hero__lineup-link:focus-visible & {
+      transform: translateX(0.35rem);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero__lineup-arrow {
+      transition: none;
+    }
   }
 
   @media (prefers-contrast: more) {
