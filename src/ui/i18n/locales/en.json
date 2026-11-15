@@ -29,18 +29,16 @@
         "number": "6",
         "sector": "eSports"
       },
+      "latest": "Latest news",
       "subtitle": "Competitive Rocket League organization",
-      "cta_team": "Meet the team",
-      "cta_join": "Join the team",
-      "stats": {
-        "label": "Team figures",
-        "years": "Years of history",
-        "players": "Players on the roster",
-        "peak": "Roster peak MMR",
-        "game": "Game"
+      "cta_join": "Try out with us",
+      "lineup": {
+        "title": "Starting lineup",
+        "peak": "Peak MMR",
+        "cta": "Meet the team"
       },
       "title_separator": ",",
-      "image_alt": "Three yellow and black Crow 6 eSports cars with the crow crest in a Rocket League stadium at night, under the ball"
+      "image_alt": "Three yellow and black Crow 6 eSports cars seen from behind at the entrance of a Rocket League stadium at night, with a crow made of smoke above them"
     },
     "ticker": {
       "label": "Team news",

@@ -3,6 +3,7 @@
 @layer components {
   .player-card {
     position: relative;
+    scroll-margin-top: calc(var(--navbar-h) + var(--space-6));
     transition:
       transform var(--duration-slower) var(--ease-out),
       box-shadow var(--duration-slower) var(--ease-standard);
