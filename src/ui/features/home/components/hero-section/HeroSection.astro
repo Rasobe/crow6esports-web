@@ -1,6 +1,5 @@
 ---
 import "./hero-section.scss";
-import { CLUB } from "@config/club";
 import { ROUTES } from "@config/routes";
 import { getArticles } from "@/application/news/get-articles";
 import { getActivePlayers } from "@/application/team/get-players";
@@ -44,10 +43,6 @@ const heroSrcset = (format: "avif" | "webp") =>
   <div class="hero__sweep" aria-hidden="true"></div>
 
   <div class="hero__inner">
-    <p class="hero__rail" data-hero style="--hero-step: 5">
-      {t("rail", { game: CLUB.game, city: CLUB.location.city, year: CLUB.foundedYear })}
-    </p>
-
     <div class="hero__content">
       {latestArticle && (
         <a

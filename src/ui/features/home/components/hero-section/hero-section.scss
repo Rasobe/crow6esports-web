@@ -79,43 +79,13 @@
 
     @include above(md) {
       display: grid;
-      grid-template-columns: 2.5rem minmax(0, 1fr);
+      grid-template-columns: minmax(0, 1fr);
       grid-template-rows: 1fr auto;
       grid-template-areas:
-        "rail content"
-        "lineup lineup";
-      column-gap: var(--space-6);
+        "content"
+        "lineup";
       row-gap: var(--space-8);
       padding-bottom: var(--space-8);
-    }
-  }
-
-  // Riel vertical: se lee de abajo arriba y termina en una línea de marca
-  .hero__rail {
-    display: none;
-
-    @include above(md) {
-      grid-area: rail;
-      display: flex;
-      align-items: center;
-      gap: var(--space-4);
-      margin: 0;
-      writing-mode: vertical-rl;
-      rotate: 180deg;
-      font-family: var(--ff-ui);
-      font-size: var(--fs-xs);
-      font-weight: 700;
-      letter-spacing: var(--tracking-widest);
-      text-transform: uppercase;
-      white-space: nowrap;
-      color: var(--text-secondary);
-
-      &::after {
-        content: "";
-        width: 2px;
-        height: 4rem;
-        background: var(--brand);
-      }
     }
   }
 
@@ -145,7 +115,6 @@
     max-width: 100%;
     padding: var(--space-2) var(--space-6) var(--space-2) var(--space-4);
     background: rgb(var(--bg-base-rgb) / 0.82);
-    border-left: 3px solid var(--brand);
     font-family: var(--ff-ui);
     font-size: var(--fs-sm);
     font-weight: 700;
@@ -285,8 +254,6 @@
   .hero-subtitle {
     display: block;
     margin-top: var(--space-6);
-    padding-left: var(--space-4);
-    border-left: 3px solid var(--brand);
     font-family: var(--ff-body);
     font-weight: 500;
     letter-spacing: normal;
