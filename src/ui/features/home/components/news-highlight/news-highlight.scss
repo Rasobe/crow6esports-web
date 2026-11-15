@@ -20,6 +20,10 @@
     margin: 0;
     padding: 0;
     list-style: none;
+
+    @include above(lg) {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
 
   .news-highlight__item {
