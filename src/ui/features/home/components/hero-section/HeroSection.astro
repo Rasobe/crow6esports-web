@@ -19,7 +19,7 @@ const latestDate =
   );
 
 // Variantes generadas con sharp: AVIF q45 y WebP q72
-const HERO_WIDTHS = [640, 960, 1280, 1774];
+const HERO_WIDTHS = [640, 960, 1280, 1731];
 const heroSrcset = (format: "avif" | "webp") =>
   HERO_WIDTHS.map((width) => `/images/hero-bg-${width}.${format} ${width}w`).join(", ");
 
@@ -39,8 +39,8 @@ const stats = [
       srcset={heroSrcset("webp")}
       sizes="100vw"
       alt={t("image_alt")}
-      width="1774"
-      height="887"
+      width="1731"
+      height="909"
       loading="eager"
       fetchpriority="high"
       decoding="async"
