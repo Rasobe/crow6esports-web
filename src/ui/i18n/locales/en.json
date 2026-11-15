@@ -31,10 +31,10 @@
       },
       "latest": "Latest news",
       "subtitle": "Competitive Rocket League organization",
-      "cta_join": "Join the team",
+      "cta_join": "Try out with us",
       "lineup": {
         "title": "Starting lineup",
-        "peak": "Peak",
+        "peak": "Peak MMR",
         "cta": "Meet the team"
       },
       "title_separator": ",",

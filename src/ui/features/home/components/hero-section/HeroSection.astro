@@ -89,18 +89,20 @@ const heroSrcset = (format: "avif" | "webp") =>
       <h2 class="hero__lineup-title">{t("lineup.title")}</h2>
       <ul class="hero__lineup-list">
         {lineup.map((player, index) => (
-          <li class="hero__player">
-            <span class="hero__player-index" aria-hidden="true">
-              {String(index + 1).padStart(2, "0")}
-            </span>
-            <span class="hero__player-name">{player.nickname}</span>
-            <span class="hero__player-rank">{player.stats.rank}</span>
-            <span class="hero__player-peak">
-              <span class="hero__player-peak-value" data-count-to={player.stats.peak}>
-                {player.stats.peak.toLocaleString(locale)}
+          <li class="hero__lineup-item">
+            <a class="hero__player" href={`${localizePath(locale, ROUTES.team)}#${player.id}`}>
+              <span class="hero__player-index" aria-hidden="true">
+                {String(index + 1).padStart(2, "0")}
               </span>
-              <span class="hero__player-peak-label">{t("lineup.peak")}</span>
-            </span>
+              <span class="hero__player-name">{player.nickname}</span>
+              <span class="hero__player-rank">{player.stats.rank}</span>
+              <span class="hero__player-peak">
+                <span class="hero__player-peak-value" data-count-to={player.stats.peak}>
+                  {player.stats.peak.toLocaleString(locale)}
+                </span>
+                <span class="hero__player-peak-label">{t("lineup.peak")}</span>
+              </span>
+            </a>
           </li>
         ))}
       </ul>

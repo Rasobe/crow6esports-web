@@ -31,7 +31,7 @@ const roleLabel = isSubstitute ? t("status_substitute") : t(ROLE_KEY[player.type
 const socialLinks = getActiveSocialLinks(player.socials);
 ---
 
-<article class="player-card">
+<article class="player-card" id={player.id}>
   <div class="player-card__media">
     {player.image ? (
       <img

@@ -108,6 +108,7 @@
   .hero__latest {
     clip-path: polygon(0 0, 100% 0, calc(100% - 0.6rem) 100%, 0 100%);
     align-self: flex-start;
+    margin-bottom: var(--space-4);
     display: inline-flex;
     flex-wrap: wrap;
     align-items: center;
@@ -233,10 +234,10 @@
   .hero-title__sector {
     grid-area: sector;
     margin-top: 0.14em;
-    margin-right: -0.34em;
-    font-size: 0.58em;
+    margin-right: -0.235em;
+    font-size: 0.66em;
     line-height: 1;
-    letter-spacing: 0.34em;
+    letter-spacing: 0.235em;
     white-space: nowrap;
   }
 
@@ -324,8 +325,20 @@
     list-style: none;
   }
 
+  .hero__lineup-item {
+    min-width: 0;
+
+    & + & {
+      border-left: var(--line);
+    }
+  }
+
   .hero__player {
     display: grid;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+    transition: background var(--duration-base) var(--ease-standard);
     grid-template-columns: auto 1fr auto;
     grid-template-areas:
       "index name peak"
@@ -339,8 +352,14 @@
       padding: var(--space-5) var(--space-6);
     }
 
-    & + & {
-      border-left: var(--line);
+    &:hover,
+    &:focus-visible {
+      background: var(--brand-tint);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--brand);
+      outline-offset: -4px;
     }
 
     @include below(md) {
@@ -355,7 +374,7 @@
   .hero__player-index {
     grid-area: index;
     font-family: var(--ff-display);
-    font-size: var(--fs-xl);
+    font-size: var(--fs-2xl);
     color: var(--border-strong);
 
     @include below(md) {
@@ -369,10 +388,16 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     font-family: var(--ff-display);
-    font-size: clamp(1.25rem, 3.4vw, 2.25rem);
+    font-size: clamp(1.25rem, 3.4vw, 2.75rem);
     line-height: 1;
     text-transform: uppercase;
     color: var(--text-primary);
+    transition: color var(--duration-base) var(--ease-standard);
+
+    .hero__player:hover &,
+    .hero__player:focus-visible & {
+      color: var(--brand);
+    }
   }
 
   .hero__player-rank {
@@ -409,7 +434,7 @@
 
   .hero__player-peak-value {
     font-family: var(--ff-display);
-    font-size: clamp(1.125rem, 2.4vw, 1.75rem);
+    font-size: clamp(1.125rem, 2.6vw, 2.125rem);
     line-height: 1;
     color: var(--brand);
   }
@@ -471,7 +496,9 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .hero__lineup-arrow {
+    .hero__lineup-arrow,
+    .hero__player,
+    .hero__player-name {
       transition: none;
     }
   }
