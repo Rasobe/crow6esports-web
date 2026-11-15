@@ -339,10 +339,10 @@
     text-decoration: none;
     color: inherit;
     transition: background var(--duration-base) var(--ease-standard);
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: 1fr auto;
     grid-template-areas:
-      "index name peak"
-      "index rank peak";
+      "name peak"
+      "rank peak";
     align-items: center;
     column-gap: var(--space-3);
     min-width: 0;
@@ -368,17 +368,6 @@
         "name"
         "peak";
       row-gap: var(--space-1);
-    }
-  }
-
-  .hero__player-index {
-    grid-area: index;
-    font-family: var(--ff-display);
-    font-size: var(--fs-2xl);
-    color: var(--border-strong);
-
-    @include below(md) {
-      display: none;
     }
   }
 

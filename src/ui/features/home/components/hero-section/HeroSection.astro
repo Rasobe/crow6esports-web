@@ -88,12 +88,9 @@ const heroSrcset = (format: "avif" | "webp") =>
     <div class="hero__lineup" data-hero style="--hero-step: 5">
       <h2 class="hero__lineup-title">{t("lineup.title")}</h2>
       <ul class="hero__lineup-list">
-        {lineup.map((player, index) => (
+        {lineup.map((player) => (
           <li class="hero__lineup-item">
             <a class="hero__player" href={`${localizePath(locale, ROUTES.team)}#${player.id}`}>
-              <span class="hero__player-index" aria-hidden="true">
-                {String(index + 1).padStart(2, "0")}
-              </span>
               <span class="hero__player-name">{player.nickname}</span>
               <span class="hero__player-rank">{player.stats.rank}</span>
               <span class="hero__player-peak">
