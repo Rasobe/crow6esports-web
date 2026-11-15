@@ -29,6 +29,7 @@
         "number": "6",
         "sector": "eSports"
       },
+      "latest": "Latest news",
       "subtitle": "Competitive Rocket League organization",
       "cta_team": "Meet the team",
       "cta_join": "Join the team",
@@ -36,8 +37,7 @@
         "label": "Team figures",
         "years": "Years of history",
         "players": "Players on the roster",
-        "peak": "Roster peak MMR",
-        "game": "Game"
+        "peak": "Roster peak MMR"
       },
       "title_separator": ",",
       "image_alt": "Three yellow and black Crow 6 eSports cars with the crow crest in a Rocket League stadium at night, under the ball"

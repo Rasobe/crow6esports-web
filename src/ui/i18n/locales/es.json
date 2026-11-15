@@ -29,6 +29,7 @@
         "number": "6",
         "sector": "eSports"
       },
+      "latest": "Última noticia",
       "subtitle": "Organización competitiva de Rocket League",
       "cta_team": "Ver equipo",
       "cta_join": "Únete al equipo",
@@ -36,8 +37,7 @@
         "label": "Cifras del equipo",
         "years": "Años de trayectoria",
         "players": "Jugadores en plantilla",
-        "peak": "Peak MMR del roster",
-        "game": "Juego"
+        "peak": "Peak MMR del roster"
       },
       "title_separator": ",",
       "image_alt": "Tres coches amarillos y negros de Crow 6 eSports con el escudo del cuervo en un estadio nocturno de Rocket League, bajo la pelota"
