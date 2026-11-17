@@ -1,3 +1,8 @@
 title = "gitleaks config"
+
 [extend]
 useDefault = true
+
+[allowlist]
+description = "Ficheros que generan falsos positivos"
+paths = ['''pnpm-lock\.yaml''']
