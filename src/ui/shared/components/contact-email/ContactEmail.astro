@@ -80,20 +80,12 @@ const CONTACT_SECTION = `${ROUTES.aboutUs}#about-contact-title`;
   const FEEDBACK_MS = 2000;
 
   async function writeToClipboard(text: string): Promise<boolean> {
+    if (!navigator.clipboard?.writeText) return false;
     try {
       await navigator.clipboard.writeText(text);
       return true;
     } catch {
-      const field = document.createElement("textarea");
-      field.value = text;
-      field.setAttribute("readonly", "");
-      field.style.position = "fixed";
-      field.style.opacity = "0";
-      document.body.append(field);
-      field.select();
-      const copied = document.execCommand("copy");
-      field.remove();
-      return copied;
+      return false;
     }
   }
 
