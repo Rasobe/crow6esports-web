@@ -4,7 +4,7 @@
 @layer components {
   .hero {
     position: relative;
-    min-height: calc(100dvh - var(--navbar-h));
+    min-height: calc(100svh - var(--navbar-h));
     display: flex;
     overflow: hidden;
     background: var(--bg-base);
@@ -16,13 +16,20 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: 30% center;
+    object-position: 70% center;
     transform-origin: 60% 50%;
 
     @media (prefers-reduced-motion: no-preference) {
-      animation:
-        hero-bg-enter 1.6s var(--ease-out) backwards,
-        hero-bg-drift 32s ease-in-out 1.6s infinite alternate;
+      animation: hero-bg-enter 1.6s var(--ease-out) backwards;
+
+      // En móvil el zoom continuo bajo la barra con backdrop-filter obliga a redibujar el
+      // desenfoque en cada fotograma y provoca parpadeo al hacer scroll; solo se anima en pantallas
+      // grandes.
+      @include above(md) {
+        animation:
+          hero-bg-enter 1.6s var(--ease-out) backwards,
+          hero-bg-drift 32s ease-in-out 1.6s infinite alternate;
+      }
     }
   }
 
@@ -45,6 +52,7 @@
     position: absolute;
     inset: 0;
     background:
+      radial-gradient(ellipse 55% 45% at 72% 78%, rgb(var(--brand-rgb) / 0.16), transparent 70%),
       linear-gradient(to top, var(--bg-base) 0%, transparent 32%),
       linear-gradient(
         to bottom,
@@ -55,12 +63,13 @@
 
     @include above(md) {
       background:
+        radial-gradient(ellipse 50% 50% at 70% 74%, rgb(var(--brand-rgb) / 0.16), transparent 70%),
         linear-gradient(to top, var(--bg-base) 0%, transparent 28%),
         linear-gradient(
           to right,
-          color-mix(in srgb, var(--bg-base) 94%, transparent) 0%,
-          color-mix(in srgb, var(--bg-base) 70%, transparent) 38%,
-          transparent 66%
+          color-mix(in srgb, var(--bg-base) 96%, transparent) 0%,
+          color-mix(in srgb, var(--bg-base) 82%, transparent) 34%,
+          transparent 64%
         );
     }
   }
@@ -69,11 +78,22 @@
     position: relative;
     width: 100%;
     @include container-bounds;
-    padding: var(--space-8) var(--space-6);
+    padding: var(--space-8) var(--space-6) 0;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     gap: var(--space-12);
+
+    @include above(md) {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-rows: 1fr auto;
+      grid-template-areas:
+        "content"
+        "lineup";
+      row-gap: var(--space-8);
+      padding-bottom: var(--space-8);
+    }
   }
 
   .hero__content {
@@ -82,19 +102,99 @@
     gap: var(--space-6);
     margin-block: auto;
 
-    // En vertical el texto va arriba y deja ver el coche entre el título y las cifras
+    @include above(md) {
+      grid-area: content;
+    }
+
+    // En vertical el texto va arriba y deja ver el coche entre el título y la alineación
     @include below(md) {
       margin-block: var(--space-4) auto;
+    }
+  }
+
+  .hero__latest {
+    clip-path: polygon(0 0, 100% 0, calc(100% - 0.6rem) 100%, 0 100%);
+    align-self: flex-start;
+    margin-bottom: var(--space-4);
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-1) var(--space-3);
+    max-width: 100%;
+    padding: var(--space-2) var(--space-6) var(--space-2) var(--space-4);
+    background: rgb(var(--bg-base-rgb) / 0.82);
+    font-family: var(--ff-ui);
+    font-size: var(--fs-sm);
+    font-weight: 700;
+    letter-spacing: var(--tracking-normal);
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: background var(--duration-base) var(--ease-standard);
+
+    &:hover,
+    &:focus-visible {
+      background: var(--brand);
+      color: var(--brand-fg);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--brand);
+      outline-offset: 2px;
+    }
+  }
+
+  .hero__latest-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    background: var(--brand);
+
+    @media (prefers-reduced-motion: no-preference) {
+      animation: hero-pulse 1.8s ease-in-out infinite;
+    }
+
+    .hero__latest:hover &,
+    .hero__latest:focus-visible & {
+      background: var(--brand-fg);
+    }
+  }
+
+  .hero__latest-label {
+    color: var(--brand);
+
+    .hero__latest:hover &,
+    .hero__latest:focus-visible & {
+      color: inherit;
+    }
+  }
+
+  .hero__latest-date {
+    color: var(--text-secondary);
+
+    .hero__latest:hover &,
+    .hero__latest:focus-visible & {
+      color: inherit;
+    }
+  }
+
+  .hero__latest-title {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    @include below(md) {
+      flex-basis: 100%;
     }
   }
 
   .hero-title {
     // En vertical "ESPORTS" cabe en el ancho útil hasta ~19vw; en horizontal el título comparte
     // sitio con la imagen y se contiene.
-    font-size: clamp(3.5rem, min(19vw, 14dvh), 5.5rem);
+    font-size: clamp(3.5rem, min(19vw, 14svh), 5.5rem);
 
     @include above(md) {
-      font-size: clamp(3.5rem, min(9vw, 16dvh), 8.5rem);
+      font-size: clamp(3.5rem, min(10.5vw, 19svh), 10rem);
     }
     text-transform: uppercase;
     line-height: 0.95;
@@ -102,7 +202,19 @@
     color: var(--text-primary);
   }
 
-  .hero-title__line {
+  // Logotipo: "CROW 6" grande con el 6 como placa, y ESPORTS debajo con tracking ancho para
+  // ocupar el mismo ancho. Todo en em, así la proporción se mantiene en cualquier tamaño.
+  .hero-title__lockup {
+    display: inline-grid;
+    grid-template-columns: auto auto;
+    grid-template-areas:
+      "crow six"
+      "sector sector";
+    column-gap: 0.06em;
+    justify-content: start;
+  }
+
+  .hero-title__part {
     display: block;
 
     // El título es el LCP: entra deslizándose, sin partir de opacidad 0, para pintarse ya
@@ -112,12 +224,28 @@
     }
   }
 
-  .hero-title__accent {
-    color: var(--brand);
+  .hero-title__crow {
+    grid-area: crow;
   }
 
-  .hero-title .text-stroke-brand {
-    -webkit-text-stroke: clamp(1.5px, 0.02em, 3px) var(--brand);
+  .hero-title__plate {
+    @include angular-cut(0.16em);
+    grid-area: six;
+    display: grid;
+    place-items: center;
+    padding-inline: 0.16em 0.2em;
+    background: var(--brand);
+    color: var(--brand-fg);
+  }
+
+  .hero-title__sector {
+    grid-area: sector;
+    margin-top: 0.14em;
+    margin-right: -0.07em;
+    font-size: 0.82em;
+    line-height: 1;
+    letter-spacing: 0.07em;
+    white-space: nowrap;
   }
 
   .hero-title__sr-only {
@@ -135,7 +263,7 @@
     display: block;
     margin-top: var(--space-6);
     font-family: var(--ff-body);
-    font-weight: 400;
+    font-weight: 500;
     letter-spacing: normal;
     text-transform: none;
     font-size: 1rem;
@@ -155,47 +283,220 @@
     gap: var(--space-3);
   }
 
-  .hero__stats {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-6);
-    border-top: var(--line-strong);
-    padding-top: var(--space-8);
+  // Alineación: los tres titulares a modo de presentación de partido
+  .hero__lineup {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    background: rgb(var(--bg-base-rgb) / 0.88);
+    border-top: 3px solid var(--brand);
 
     @include above(md) {
-      grid-template-columns: repeat(4, 1fr);
+      grid-area: lineup;
+      flex-wrap: nowrap;
+    }
+
+    @include below(md) {
+      margin-inline: calc(var(--space-6) * -1);
     }
   }
 
-  .hero__stat {
+  .hero__lineup-title {
     display: flex;
-    flex-direction: column-reverse;
-    gap: var(--space-1);
-  }
-
-  .hero__stat-value {
-    font-family: var(--ff-display);
-    font-size: clamp(2.5rem, 6vw, 3.5rem);
-    line-height: 1;
+    align-items: center;
+    flex-basis: 100%;
+    margin: 0;
+    padding: var(--space-3) var(--space-4);
+    font-family: var(--ff-ui);
+    font-size: var(--fs-xs);
     font-weight: 700;
-    color: var(--text-primary);
-  }
-
-  .hero__stat--text .hero__stat-value {
-    font-size: clamp(1.5rem, 3.4vw, 2rem);
-    line-height: 1.15;
-  }
-
-  .hero__stat--brand .hero__stat-value {
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
     color: var(--brand);
+    border-bottom: var(--line);
+
+    @include above(md) {
+      flex-basis: auto;
+      padding: var(--space-6) var(--space-8);
+      border-bottom: 0;
+      border-right: var(--line);
+    }
   }
 
-  .hero__stat-label {
-    font-size: var(--fs-md);
+  .hero__lineup-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    flex: 1;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .hero__lineup-item {
+    min-width: 0;
+
+    & + & {
+      border-left: var(--line);
+    }
+  }
+
+  .hero__player {
+    display: grid;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+    transition: background var(--duration-base) var(--ease-standard);
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "name peak"
+      "rank peak";
+    align-items: center;
+    column-gap: var(--space-3);
+    min-width: 0;
+    padding: var(--space-4) var(--space-3);
+
+    @include above(md) {
+      padding: var(--space-5) var(--space-6);
+    }
+
+    &:hover,
+    &:focus-visible {
+      background: var(--brand-tint);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--brand);
+      outline-offset: -4px;
+    }
+
+    @include below(md) {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "name"
+        "peak";
+      row-gap: var(--space-1);
+    }
+  }
+
+  .hero__player-name {
+    grid-area: name;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-family: var(--ff-display);
+    font-size: clamp(1.25rem, 3.4vw, 2.75rem);
+    line-height: 1;
+    text-transform: uppercase;
+    color: var(--text-primary);
+    transition: color var(--duration-base) var(--ease-standard);
+
+    .hero__player:hover &,
+    .hero__player:focus-visible & {
+      color: var(--brand);
+    }
+  }
+
+  .hero__player-rank {
+    grid-area: rank;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-family: var(--ff-ui);
+    font-size: var(--fs-2xs);
     font-weight: 700;
     letter-spacing: var(--tracking-normal);
     text-transform: uppercase;
     color: var(--text-secondary);
+
+    @include below(md) {
+      display: none;
+    }
+  }
+
+  .hero__player-peak {
+    grid-area: peak;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: var(--space-1);
+
+    @include below(md) {
+      align-items: flex-start;
+      flex-direction: row;
+      align-items: baseline;
+      gap: var(--space-2);
+    }
+  }
+
+  .hero__player-peak-value {
+    font-family: var(--ff-display);
+    font-size: clamp(1.125rem, 2.6vw, 2.125rem);
+    line-height: 1;
+    color: var(--brand);
+  }
+
+  .hero__player-peak-label {
+    font-family: var(--ff-ui);
+    font-size: var(--fs-2xs);
+    font-weight: 700;
+    letter-spacing: var(--tracking-normal);
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .hero__lineup-link {
+    display: flex;
+    flex-basis: 100%;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding: var(--space-4);
+    border-top: var(--line);
+    font-family: var(--ff-ui);
+    font-size: var(--fs-md);
+    font-weight: 700;
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--brand);
+    transition:
+      background var(--duration-base) var(--ease-standard),
+      color var(--duration-base) var(--ease-standard);
+
+    @include above(md) {
+      flex-basis: auto;
+      padding: var(--space-6) var(--space-8);
+      border-top: 0;
+      border-left: var(--line);
+    }
+
+    &:hover,
+    &:focus-visible {
+      background: var(--brand);
+      color: var(--brand-fg);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--brand);
+      outline-offset: -4px;
+    }
+  }
+
+  .hero__lineup-arrow {
+    transition: transform var(--duration-base) var(--ease-standard);
+
+    .hero__lineup-link:hover &,
+    .hero__lineup-link:focus-visible & {
+      transform: translateX(0.35rem);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero__lineup-arrow,
+    .hero__player,
+    .hero__player-name {
+      transition: none;
+    }
   }
 
   @media (prefers-contrast: more) {
@@ -210,9 +511,9 @@
       display: none;
     }
 
-    .hero-title .text-stroke-brand {
-      -webkit-text-stroke: 0;
-      color: CanvasText;
+    .hero-title__plate {
+      forced-color-adjust: auto;
+      border: 2px solid CanvasText;
     }
   }
 
@@ -233,6 +534,12 @@
   @keyframes hero-slide {
     from {
       transform: translateY(var(--hero-distance));
+    }
+  }
+
+  @keyframes hero-pulse {
+    50% {
+      opacity: 0.25;
     }
   }
 

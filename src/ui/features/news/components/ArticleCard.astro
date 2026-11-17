@@ -12,7 +12,7 @@ const { article } = Astro.props;
 const { locale } = Astro.locals;
 const t = createTranslator(locale, "news");
 const href = localizePath(locale, `${ROUTES.news}/${article.slug}`);
-const date = new Intl.DateTimeFormat(locale, { dateStyle: "long", timeZone: "UTC" }).format(
+const date = new Intl.DateTimeFormat(locale, { dateStyle: "medium", timeZone: "UTC" }).format(
   article.date,
 );
 ---
@@ -23,7 +23,7 @@ const date = new Intl.DateTimeFormat(locale, { dateStyle: "long", timeZone: "UTC
       <img
         class="article-card__image"
         src={article.cover}
-        alt=""
+        alt={article.coverAlt}
         width="640"
         height="360"
         loading="lazy"

@@ -30,7 +30,7 @@ const figures = [
           <img
             class="coaching-banner__image"
             src={coach.photo}
-            alt={coach.name}
+            alt={t("photo_alt", { name: coach.name })}
             loading="lazy"
             decoding="async"
           />
