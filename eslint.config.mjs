@@ -2,6 +2,7 @@ import js from "@eslint/js";
 import { defineConfig, globalIgnores } from "eslint/config";
 import astro from "eslint-plugin-astro";
 import tseslint from "typescript-eslint";
+import globals from "globals";
 
 export default defineConfig([
   globalIgnores([".astro/**", ".vercel/**", "dist/**"]),
@@ -11,5 +12,9 @@ export default defineConfig([
   {
     files: ["src/env.d.ts"],
     rules: { "@typescript-eslint/triple-slash-reference": "off" },
+  },
+  {
+    files: ["scripts/**/*.{js,mjs}"],
+    languageOptions: { globals: globals.node },
   },
 ]);

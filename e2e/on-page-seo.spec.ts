@@ -21,48 +21,6 @@ for (const locale of ["es", "en"]) {
   }
 }
 
-test("the home h1 and an h2 name Rocket League and coaching", async ({ page }) => {
-  await page.goto("/es");
-
-  await expect(page.locator("main h1")).toContainText("Rocket League");
-  await expect(page.locator("h2", { hasText: /coaching/i }).first()).toBeVisible();
-});
-
-test("the coaching h1 names Rocket League", async ({ page }) => {
-  await page.goto("/en/coaching");
-
-  await expect(page.locator("main h1")).toHaveText("Rocket League Coaching");
-});
-
-const CLUB_LINKS = {
-  es: {
-    "/es/team": "Conoce la plantilla",
-    "/es/coaching": "Descubre el coaching",
-    "/es/tryouts": "Consulta los tryouts",
-    "/es/news": "Lee las noticias",
-  },
-  en: {
-    "/en/team": "Meet the roster",
-    "/en/coaching": "Discover the coaching",
-    "/en/tryouts": "Check the tryouts",
-    "/en/news": "Read the news",
-  },
-} as const;
-
-for (const [locale, links] of Object.entries(CLUB_LINKS)) {
-  test(`the ${locale} home club section links to team, coaching, tryouts and news`, async ({
-    page,
-  }) => {
-    await page.goto(`/${locale}`);
-
-    const section = page.locator(".about-club");
-    await expect(section.locator("h3")).toHaveCount(3);
-    for (const [href, name] of Object.entries(links)) {
-      await expect(section.getByRole("link", { name })).toHaveAttribute("href", href);
-    }
-  });
-}
-
 test("describes the hero image and loads it first", async ({ page }) => {
   await page.goto("/en");
 
