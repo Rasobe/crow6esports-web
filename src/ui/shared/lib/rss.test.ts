@@ -55,7 +55,7 @@ describe("buildRssFeed", () => {
   });
 
   it("leaves the enclosure out when an article has no cover", () => {
-    const { image: _image, ...withoutCover } = article("una", new Date());
+    const withoutCover = { ...article("una", new Date()), image: undefined };
 
     expect(feed([withoutCover])).not.toContain("<enclosure");
   });
