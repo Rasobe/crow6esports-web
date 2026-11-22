@@ -192,3 +192,30 @@ test("keeps the real figures in the page until their counters scroll into view",
   await expect(figure).not.toBeInViewport();
   await expect(figure).not.toHaveText("0");
 });
+
+test.describe("rss", () => {
+  test("serves a feed per locale with the articles of that language", async ({ request }) => {
+    for (const [path, locale] of [
+      ["/rss.xml", "es"],
+      ["/en/rss.xml", "en"],
+    ] as const) {
+      const response = await request.get(path);
+
+      expect(response.status(), path).toBe(200);
+      expect(response.headers()["content-type"], path).toContain("application/rss+xml");
+
+      const xml = await response.text();
+      expect(xml, path).toContain(`<language>${locale}</language>`);
+      expect(xml, path).toContain(`rel="self"`);
+      expect(xml.match(/<item>/g)?.length ?? 0, path).toBeGreaterThan(0);
+    }
+  });
+
+  test("links the feed from the page head", async ({ page }) => {
+    await page.goto("/es/news");
+
+    await expect(
+      page.locator('link[rel="alternate"][type="application/rss+xml"]'),
+    ).toHaveAttribute("href", "https://crow6esports.com/rss.xml");
+  });
+});

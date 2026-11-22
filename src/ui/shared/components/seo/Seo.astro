@@ -69,6 +69,12 @@ const altText = imageAlt ?? createTranslator(locale, "site")("image_alt");
   <link rel="alternate" hreflang={version.locale} href={version.href} />
 ))}
 {defaultVersion && <link rel="alternate" hreflang="x-default" href={defaultVersion.href} />}
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  title={`${siteConfig.name} · RSS`}
+  href={`${siteConfig.url}${locale === DEFAULT_LOCALE ? "" : `/${locale}`}/rss.xml`}
+/>
 
 <meta property="og:type" content={ogType} />
 <meta property="og:site_name" content={siteConfig.name} />
