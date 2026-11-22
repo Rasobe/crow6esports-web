@@ -1,4 +1,5 @@
 ---
+import { TRYOUTS_OPEN } from "astro:env/server";
 import { TryoutsPage } from "@/ui/features/tryouts/components";
 import { LocaleLayout } from "@/ui/layouts";
 import { createTranslator } from "@/ui/i18n";
@@ -7,6 +8,10 @@ import { ROUTES } from "@config/routes";
 const t = createTranslator(Astro.locals.locale, "tryouts.seo");
 ---
 
-<LocaleLayout title={t("title")} description={t("description")} path={ROUTES.tryouts}>
+<LocaleLayout
+  title={t(TRYOUTS_OPEN ? "title" : "title_closed")}
+  description={t("description")}
+  path={ROUTES.tryouts}
+>
   <TryoutsPage />
 </LocaleLayout>

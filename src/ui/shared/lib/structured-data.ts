@@ -69,6 +69,59 @@ export function clubGraphData(club: Club): StructuredData {
   };
 }
 
+interface RosterTeam {
+  name: string;
+  /** URL absoluta de la página de plantilla. */
+  url: string;
+  sport: string;
+  siteUrl: string;
+  /** Solo el nombre competitivo: lo que ya es público en la ficha de cada uno. */
+  athletes: readonly string[];
+  coaches: readonly string[];
+}
+
+/**
+ * La plantilla como equipo deportivo. Comparte el `@id` del equipo de la home,
+ * así que Google lo lee como la misma entidad con más detalle.
+ */
+export function rosterTeamData(team: RosterTeam): StructuredData {
+  const ids = clubNodeIds(team.siteUrl);
+  const person = (name: string) => ({ "@type": "Person", name });
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "SportsTeam",
+    "@id": ids.team,
+    name: team.name,
+    url: team.url,
+    sport: team.sport,
+    parentOrganization: { "@id": ids.organization },
+    athlete: team.athletes.map(person),
+    coach: team.coaches.map(person),
+  };
+}
+
+/** La página que presenta al club, atada a la organización de la home. */
+export function aboutPageData(page: {
+  name: string;
+  description: string;
+  url: string;
+  inLanguage: string;
+  siteUrl: string;
+}): StructuredData {
+  const ids = clubNodeIds(page.siteUrl);
+  return {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    url: page.url,
+    name: page.name,
+    description: page.description,
+    inLanguage: page.inLanguage,
+    isPartOf: { "@id": ids.website },
+    mainEntity: { "@id": ids.organization },
+  };
+}
+
 interface NewsCollection {
   name: string;
   description: string;

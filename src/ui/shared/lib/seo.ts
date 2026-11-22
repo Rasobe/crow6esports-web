@@ -6,5 +6,8 @@ export const TITLE_SEPARATOR = " · ";
  */
 export function buildPageTitle(title: string | undefined, brand: string, absolute = false): string {
   if (!title) return brand;
-  return absolute ? title : `${title}${TITLE_SEPARATOR}${brand}`;
+  // Los titulares de noticias ya nombran al club: repetirlo pasaba de los 60 caracteres
+  // que muestra Google y la marca quedaba cortada.
+  if (absolute || title.includes(brand)) return title;
+  return `${title}${TITLE_SEPARATOR}${brand}`;
 }

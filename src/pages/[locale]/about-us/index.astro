@@ -1,14 +1,28 @@
 ---
-import { AboutPage } from "@/ui/features/about/components";
-import { LocaleLayout } from "@/ui/layouts";
-import { createTranslator } from "@/ui/i18n";
 import { CLUB } from "@config/club";
 import { ROUTES } from "@config/routes";
+import { siteConfig } from "@config/site";
+import { AboutPage } from "@/ui/features/about/components";
+import { LocaleLayout } from "@/ui/layouts";
+import { createTranslator, localizePath } from "@/ui/i18n";
+import { JsonLd } from "@/ui/shared/components";
+import { aboutPageData } from "@/ui/shared/lib/structured-data";
 
-const t = createTranslator(Astro.locals.locale, "about.seo");
+const { locale } = Astro.locals;
+const t = createTranslator(locale, "about.seo");
 const params = { year: CLUB.foundedYear, city: CLUB.location.city };
+const description = t("description", params);
+
+const about = aboutPageData({
+  name: t("title"),
+  description,
+  url: `${siteConfig.url}${localizePath(locale, ROUTES.aboutUs)}`,
+  inLanguage: locale,
+  siteUrl: siteConfig.url,
+});
 ---
 
-<LocaleLayout title={t("title")} description={t("description", params)} path={ROUTES.aboutUs}>
+<LocaleLayout title={t("title")} description={description} path={ROUTES.aboutUs}>
+  <JsonLd slot="head" data={about} />
   <AboutPage />
 </LocaleLayout>

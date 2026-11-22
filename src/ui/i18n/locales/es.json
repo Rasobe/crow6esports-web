@@ -240,6 +240,7 @@
   "tryouts": {
     "seo": {
       "title": "Tryouts de Rocket League: únete al equipo",
+      "title_closed": "Tryouts de Rocket League: cuándo abren",
       "description": "Consulta cómo es el proceso de selección de jugadores de Rocket League de Crow 6 y entra en el Discord para saber cuándo abren los tryouts."
     },
     "open": {

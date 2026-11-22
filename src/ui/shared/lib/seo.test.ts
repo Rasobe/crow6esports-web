@@ -18,6 +18,11 @@ describe("buildPageTitle", () => {
   it("falls back to the brand alone", () => {
     expect(buildPageTitle(undefined, "Crow 6 eSports")).toBe("Crow 6 eSports");
   });
+
+  it("does not repeat the brand when the title already names it", () => {
+    const headline = "Crow 6 eSports cae en el día 2 de la RLCS Club Kick-Off Open";
+    expect(buildPageTitle(headline, "Crow 6 eSports")).toBe(headline);
+  });
 });
 
 const PAGES = [
@@ -32,20 +37,33 @@ const PAGES = [
 
 const PARAMS = { year: CLUB.foundedYear, city: CLUB.location.city, years: 6, price: "40 €" };
 
+// Tryouts cambia de título según estén abiertos o cerrados, y la tienda de descripción
+// según haya stock: las dos variantes tienen que cumplir los mismos límites.
+const TITLE_KEYS: Record<string, readonly string[]> = { tryouts: ["title", "title_closed"] };
+const DESCRIPTION_KEYS: Record<string, readonly string[]> = {
+  store: ["description", "description_in_stock"],
+};
+
 function metadataOf(locale: Locale) {
   return PAGES.flatMap(({ namespace, absolute }) => {
     const t = createTranslator(locale, `${namespace}.seo`);
-    const descriptions =
-      namespace === "store"
-        ? [t("description"), t("description_in_stock")]
-        : [t("description", PARAMS)];
-    return descriptions.map((description) => ({
-      namespace,
-      title: buildPageTitle(t("title"), siteConfig.name, absolute),
-      description,
-    }));
+    const titles = (TITLE_KEYS[namespace] ?? ["title"]).map((key) =>
+      buildPageTitle(t(key), siteConfig.name, absolute),
+    );
+    const descriptions = (DESCRIPTION_KEYS[namespace] ?? ["description"]).map((key) =>
+      t(key, PARAMS),
+    );
+    return titles.flatMap((title) =>
+      descriptions.map((description) => ({ namespace, title, description })),
+    );
   });
 }
+
+const countKeys = (keys: Record<string, readonly string[]>) =>
+  PAGES.reduce((total, { namespace }) => total + (keys[namespace]?.length ?? 1), 0);
+
+const TITLE_COUNT = countKeys(TITLE_KEYS);
+const DESCRIPTION_COUNT = countKeys(DESCRIPTION_KEYS);
 
 describe.each(LOCALES)("page metadata (%s)", (locale) => {
   const pages = metadataOf(locale);
@@ -67,8 +85,8 @@ describe.each(LOCALES)("page metadata (%s)", (locale) => {
   it("gives each page its own title and description", () => {
     const titles = new Set(pages.map((page) => page.title));
     const descriptions = new Set(pages.map((page) => page.description));
-    expect(titles.size).toBe(PAGES.length);
-    expect(descriptions.size).toBe(pages.length);
+    expect(titles.size).toBe(TITLE_COUNT);
+    expect(descriptions.size).toBe(DESCRIPTION_COUNT);
   });
 
   it("does not use Inicio or Home as a title and always names the brand", () => {

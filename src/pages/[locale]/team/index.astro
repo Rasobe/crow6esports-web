@@ -1,12 +1,41 @@
 ---
+import { CLUB } from "@config/club";
+import { ROUTES } from "@config/routes";
+import { siteConfig } from "@config/site";
+import {
+  getActivePlayers,
+  getStaffMembers,
+  getSubstitutePlayers,
+} from "@/application/team/get-players";
+import { container } from "@/infrastructure/container";
 import { TeamPage } from "@/ui/features/team/components";
 import { LocaleLayout } from "@/ui/layouts";
-import { createTranslator } from "@/ui/i18n";
-import { ROUTES } from "@config/routes";
+import { createTranslator, localizePath } from "@/ui/i18n";
+import { JsonLd } from "@/ui/shared/components";
+import { rosterTeamData } from "@/ui/shared/lib/structured-data";
 
-const t = createTranslator(Astro.locals.locale, "team.seo");
+const { locale } = Astro.locals;
+const t = createTranslator(locale, "team.seo");
+const { playerRepository } = container;
+
+// Quien pidió anonimato no entra en los datos estructurados
+const named = (players: readonly { nickname: string; anonymous: boolean }[]) =>
+  players.filter((player) => !player.anonymous).map((player) => player.nickname);
+
+const roster = rosterTeamData({
+  name: siteConfig.name,
+  url: `${siteConfig.url}${localizePath(locale, ROUTES.team)}`,
+  sport: CLUB.game,
+  siteUrl: siteConfig.url,
+  athletes: [
+    ...named(getActivePlayers(playerRepository)),
+    ...named(getSubstitutePlayers(playerRepository)),
+  ],
+  coaches: named(getStaffMembers(playerRepository)),
+});
 ---
 
 <LocaleLayout title={t("title")} description={t("description")} path={ROUTES.team}>
+  <JsonLd slot="head" data={roster} />
   <TeamPage />
 </LocaleLayout>
