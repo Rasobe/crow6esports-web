@@ -1,11 +1,17 @@
 ---
+import { ROUTES } from "@config/routes";
+import { STORE_ENABLED } from "@config/store";
 import { StorePage } from "@/ui/features/store/components";
 import { LocaleLayout } from "@/ui/layouts";
 import { createTranslator } from "@/ui/i18n";
-import { ROUTES } from "@config/routes";
-import { STORE_ENABLED } from "@config/store";
+import { JsonLd } from "@/ui/shared/components";
+import { pageBreadcrumbs } from "@/ui/shared/lib/page-breadcrumbs";
 
-const t = createTranslator(Astro.locals.locale, "store.seo");
+const { locale } = Astro.locals;
+const t = createTranslator(locale, "store.seo");
+const breadcrumbs = pageBreadcrumbs(locale, [
+  { name: createTranslator(locale, "nav")("store"), path: ROUTES.store },
+]);
 ---
 
 <LocaleLayout
@@ -13,5 +19,6 @@ const t = createTranslator(Astro.locals.locale, "store.seo");
   description={t(STORE_ENABLED ? "description_in_stock" : "description")}
   path={ROUTES.store}
 >
+  <JsonLd slot="head" data={breadcrumbs} />
   <StorePage />
 </LocaleLayout>

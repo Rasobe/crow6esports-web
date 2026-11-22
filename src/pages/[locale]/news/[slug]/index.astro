@@ -10,7 +10,8 @@ import { articleLocalePaths } from "@/ui/features/news/lib/article-locale-paths"
 import { LocaleLayout } from "@/ui/layouts";
 import { createTranslator } from "@/ui/i18n";
 import { JsonLd } from "@/ui/shared/components";
-import { articleData, breadcrumbData } from "@/ui/shared/lib/structured-data";
+import { pageBreadcrumbs } from "@/ui/shared/lib/page-breadcrumbs";
+import { articleData } from "@/ui/shared/lib/structured-data";
 
 const { slug = "" } = Astro.params;
 const { locale } = Astro.locals;
@@ -44,11 +45,9 @@ const structuredData = articleData({
     logo: `${siteConfig.url}/icon-512.png`,
   },
 });
-const localeUrl = `${siteConfig.url}/${locale}`;
-const breadcrumbs = breadcrumbData([
-  { name: siteConfig.name, url: localeUrl },
-  { name: createTranslator(locale, "nav")("news"), url: `${localeUrl}${ROUTES.news}` },
-  { name: article.title, url: `${localeUrl}${path}` },
+const breadcrumbs = pageBreadcrumbs(locale, [
+  { name: createTranslator(locale, "nav")("news"), path: ROUTES.news },
+  { name: article.title, path },
 ]);
 ---
 

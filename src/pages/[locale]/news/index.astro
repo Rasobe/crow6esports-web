@@ -7,7 +7,8 @@ import { NewsPage } from "@/ui/features/news/components";
 import { LocaleLayout } from "@/ui/layouts";
 import { createTranslator } from "@/ui/i18n";
 import { JsonLd } from "@/ui/shared/components";
-import { breadcrumbData, newsCollectionData } from "@/ui/shared/lib/structured-data";
+import { pageBreadcrumbs } from "@/ui/shared/lib/page-breadcrumbs";
+import { newsCollectionData } from "@/ui/shared/lib/structured-data";
 
 const { locale } = Astro.locals;
 const t = createTranslator(locale, "news.seo");
@@ -27,10 +28,7 @@ const collection = newsCollectionData({
     url: `${listUrl}/${article.slug}`,
   })),
 });
-const breadcrumbs = breadcrumbData([
-  { name: siteConfig.name, url: `${siteConfig.url}/${locale}` },
-  { name: tNav("news"), url: listUrl },
-]);
+const breadcrumbs = pageBreadcrumbs(locale, [{ name: tNav("news"), path: ROUTES.news }]);
 ---
 
 <LocaleLayout
