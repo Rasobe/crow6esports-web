@@ -12,6 +12,7 @@ import { TeamPage } from "@/ui/features/team/components";
 import { LocaleLayout } from "@/ui/layouts";
 import { createTranslator, localizePath } from "@/ui/i18n";
 import { JsonLd } from "@/ui/shared/components";
+import { pageBreadcrumbs } from "@/ui/shared/lib/page-breadcrumbs";
 import { rosterTeamData } from "@/ui/shared/lib/structured-data";
 
 const { locale } = Astro.locals;
@@ -33,9 +34,14 @@ const roster = rosterTeamData({
   ],
   coaches: named(getStaffMembers(playerRepository)),
 });
+
+const breadcrumbs = pageBreadcrumbs(locale, [
+  { name: createTranslator(locale, "nav")("team"), path: ROUTES.team },
+]);
 ---
 
 <LocaleLayout title={t("title")} description={t("description")} path={ROUTES.team}>
   <JsonLd slot="head" data={roster} />
+  <JsonLd slot="head" data={breadcrumbs} />
   <TeamPage />
 </LocaleLayout>

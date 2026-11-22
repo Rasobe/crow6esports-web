@@ -8,6 +8,7 @@ import { CoachingPage } from "@/ui/features/coaching/components";
 import { LocaleLayout } from "@/ui/layouts";
 import { createTranslator, formatCurrency, localizePath } from "@/ui/i18n";
 import { JsonLd } from "@/ui/shared/components";
+import { pageBreadcrumbs } from "@/ui/shared/lib/page-breadcrumbs";
 import { coachingServiceData } from "@/ui/shared/lib/structured-data";
 
 const { locale } = Astro.locals;
@@ -26,9 +27,13 @@ const service = coachingServiceData({
   currency: COACHING.currency,
   prices: currentPrices,
 });
+const breadcrumbs = pageBreadcrumbs(locale, [
+  { name: createTranslator(locale, "nav")("coaching"), path: ROUTES.coaching },
+]);
 ---
 
 <LocaleLayout title={t("title")} description={description} path={ROUTES.coaching}>
   <JsonLd slot="head" data={service} />
+  <JsonLd slot="head" data={breadcrumbs} />
   <CoachingPage />
 </LocaleLayout>

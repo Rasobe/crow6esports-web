@@ -1,11 +1,17 @@
 ---
 import { TRYOUTS_OPEN } from "astro:env/server";
+import { ROUTES } from "@config/routes";
 import { TryoutsPage } from "@/ui/features/tryouts/components";
 import { LocaleLayout } from "@/ui/layouts";
 import { createTranslator } from "@/ui/i18n";
-import { ROUTES } from "@config/routes";
+import { JsonLd } from "@/ui/shared/components";
+import { pageBreadcrumbs } from "@/ui/shared/lib/page-breadcrumbs";
 
-const t = createTranslator(Astro.locals.locale, "tryouts.seo");
+const { locale } = Astro.locals;
+const t = createTranslator(locale, "tryouts.seo");
+const breadcrumbs = pageBreadcrumbs(locale, [
+  { name: createTranslator(locale, "nav")("tryouts"), path: ROUTES.tryouts },
+]);
 ---
 
 <LocaleLayout
@@ -13,5 +19,6 @@ const t = createTranslator(Astro.locals.locale, "tryouts.seo");
   description={t("description")}
   path={ROUTES.tryouts}
 >
+  <JsonLd slot="head" data={breadcrumbs} />
   <TryoutsPage />
 </LocaleLayout>

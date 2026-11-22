@@ -47,8 +47,31 @@ test.describe("article breadcrumbs", () => {
   }
 });
 
-test("pages without a meaningful path keep no breadcrumb", async ({ page }) => {
-  for (const path of ["/es", "/es/team", "/en/coaching"]) {
+// Las rutas son en inglés y buena parte del público lee en español: sin el rastro,
+// Google enseña "es \u203a team" en vez de "Plantilla".
+const SECTIONS = [
+  { route: "/team", label: { es: "Plantilla", en: "Team" } },
+  { route: "/coaching", label: { es: "Coaching", en: "Coaching" } },
+  { route: "/store", label: { es: "Tienda", en: "Store" } },
+  { route: "/about-us", label: { es: "Sobre nosotros", en: "About us" } },
+  { route: "/tryouts", label: { es: "Tryouts", en: "Tryouts" } },
+] as const;
+
+for (const locale of ["es", "en"] as const) {
+  for (const { route, label } of SECTIONS) {
+    test(`${locale}${route} names its section in the breadcrumb`, async ({ page }) => {
+      await page.goto(`/${locale}${route}`);
+
+      expect(await breadcrumbsOf(page)).toMatchObject([
+        { position: 1, name: "Crow 6 eSports", item: `${ORIGIN}/${locale}` },
+        { position: 2, name: label[locale], item: `${ORIGIN}/${locale}${route}` },
+      ]);
+    });
+  }
+}
+
+test("the home is the root, so it carries no breadcrumb", async ({ page }) => {
+  for (const path of ["/es", "/en"]) {
     await page.goto(path);
     expect(await breadcrumbsOf(page), path).toBeUndefined();
   }
