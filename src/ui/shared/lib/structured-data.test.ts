@@ -1,10 +1,13 @@
 import { describe, expect, it } from "vitest";
 import {
+  aboutPageData,
   articleData,
   breadcrumbData,
   clubGraphData,
+  clubNodeIds,
   coachingServiceData,
   newsCollectionData,
+  rosterTeamData,
 } from "./structured-data";
 
 const CLUB = {
@@ -207,5 +210,49 @@ describe("breadcrumbData", () => {
         },
       ],
     });
+  });
+});
+
+describe("rosterTeamData", () => {
+  const data = rosterTeamData({
+    name: "Crow 6 eSports",
+    url: "https://crow6esports.com/es/team",
+    sport: "Rocket League",
+    siteUrl: "https://crow6esports.com",
+    athletes: ["Diaxz", "Gato"],
+    coaches: ["Rasobe"],
+  });
+
+  it("is the same team node as the home page", () => {
+    expect(data["@type"]).toBe("SportsTeam");
+    expect(data["@id"]).toBe(clubNodeIds("https://crow6esports.com").team);
+    expect(data.parentOrganization).toEqual({
+      "@id": clubNodeIds("https://crow6esports.com").organization,
+    });
+  });
+
+  it("lists players and staff as people", () => {
+    expect(data.athlete).toEqual([
+      { "@type": "Person", name: "Diaxz" },
+      { "@type": "Person", name: "Gato" },
+    ]);
+    expect(data.coach).toEqual([{ "@type": "Person", name: "Rasobe" }]);
+  });
+});
+
+describe("aboutPageData", () => {
+  const data = aboutPageData({
+    name: "Sobre nosotros",
+    description: "Historia y valores del club.",
+    url: "https://crow6esports.com/es/about-us",
+    inLanguage: "es",
+    siteUrl: "https://crow6esports.com",
+  });
+
+  it("points at the organization of the home instead of repeating it", () => {
+    const ids = clubNodeIds("https://crow6esports.com");
+    expect(data["@type"]).toBe("AboutPage");
+    expect(data.mainEntity).toEqual({ "@id": ids.organization });
+    expect(data.isPartOf).toEqual({ "@id": ids.website });
   });
 });
